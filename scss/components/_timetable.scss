@@ -58,6 +58,7 @@ section#timetable {
                 top: 0px;
                 margin: 5px 0px;
                 z-index: 700;
+                transition: width 1s;
                 
                 .inner-item {
                     background: $primary-color;
