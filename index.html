@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="cs">
+    <head>
+        <title>fittable</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="fittable, cvut fit, timetable">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <link type="text/css" rel="stylesheet" href="css/main.css">
+        <link type="image/x-icon" rel="shortcut icon" href="favicon.ico"> 
+    </head>
+    <body>
+        
+        <fittable-server data-url="http://fittable-majko.openshift.com"></fittable-server>
+        
+        <div class="wrap">
+            <div class="info-line">
+                <div class="row">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            <div class="container">
+            
+                <header>
+                
+                    <div class="row collapse">
+                        <div class="column medium-3 small-12 week" id="heading">
+                            <div class="primary-head"><strong>Týden 3</strong> Lichý</div>
+                            <a href="#" class="prev-week"><i class="fa fa-chevron-left"></i></a>
+                            <a href="#" class="next-week"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                        <div class="column medium-3 medium-offset-4 hide-for-small-only" id="user-profile">
+                            <a href="#" class="user">
+                                <i class="fa fa-user"></i>
+                                Marián Hlaváč
+                            </a>
+                        </div>
+                        <div class="column medium-2 hide-for-small-only" id="flags-selector">
+                            <div class="title">Příznaky</div>
+                            <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-bookmark"></i></a>
+                            <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-exclamation-circle"></i></a>
+                            <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-smile-o"></i></a>
+                            <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-meh-o"></i></a>
+                        </div>
+                    </div>
+                    
+                </header>
+                
+                <section id="timetable">
+                    <div class="row collapse">
+                        <div class="row day tt-row">
+                            <div class="column medium-1 day-name">
+                                pondělí
+                            </div>
+                            <div class="column medium-11 day-parallels" role="list">
+                            </div>
+                        </div>
+                        <div class="row day tt-row">
+                            <div class="column medium-1 day-name">
+                                úterý
+                            </div>
+                            <div class="column medium-11 day-parallels" role="list">
+                                <div class="parallel parallel-double parallel-offset-0 parallel-secondary parallel-extended" role="listitem">
+                                    <div class="inner-item has-public">
+                                        <h1>BI-PA1</h1>
+                                        <div class="place">T2:D2-256 </div>
+                                        <div class="time">7:30 - 9:00</div>
+                                        <div class="public-stats">
+                                            <i class="fa fa-circle-o"></i>
+                                        </div>
+                                        <div class="flag">
+                                            <i class="fa fa-bookmark"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parallel parallel-double parallel-offset-6" role="listitem">
+                                    <div class="inner-item">
+                                        <h1>BI-CAO</h1>
+                                        <div class="place">T9:349</div>
+                                        <div class="time">12:45 - 14:15</div>
+                                    </div>
+                                </div>
+                                <div class="parallel parallel-double parallel-offset-8" role="listitem">
+                                    <div class="inner-item">
+                                        <h1>BI-PS1</h1>
+                                        <div class="place">TK:PU1</div>
+                                        <div class="time">14:30 - 16:00</div>
+                                        <div class="flag">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row day tt-row">
+                            <div class="column medium-1 day-name">
+                                středa
+                            </div>
+                            <div class="column medium-11 day-parallels" role="list">
+                                <div class="parallel parallel-double parallel-offset-2 parallel-secondary" role="listitem">
+                                    <div class="inner-item">
+                                        <h1>BI-MLO</h1>
+                                        <div class="place">T9:105</div>
+                                        <div class="time">9:15 - 10:45</div>
+                                    </div>
+                                </div>
+                                <div class="parallel parallel-double parallel-offset-6" role="listitem">
+                                    <div class="inner-item">
+                                        <h1>BI-ZMA</h1>
+                                        <div class="place">TH:A-1342</div>
+                                        <div class="time">12:45 - 14:15</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row day tt-row shown-on-mobile">
+                            <div class="column medium-1 day-name">
+                                čtvrtek
+                            </div>
+                            <div class="column medium-11 day-parallels" role="list">
+                                <div class="parallel parallel-5 parallel-offset-4" role="listitem">
+                                    <div class="inner-item has-public">
+                                        <h1>BI-SMTHLNG</h1>
+                                        <div class="place">T2:D2-256-1024</div>
+                                        <div class="time">23:59 - 23:59</div>
+                                        <div class="flag">
+                                            <i class="fa fa-smile-o"></i>
+                                        </div>
+                                        <div class="public-stats">
+                                            <i class="fa fa-circle-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parallel parallel-double parallel-offset-9" role="listitem">
+                                    <div class="inner-item">
+                                        <h1>BI-CAO</h1>
+                                        <div class="place">TP:349</div>
+                                        <div class="time">12:45 - 14:15</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row day tt-row">
+                            <div class="column medium-1 day-name">
+                                pátek
+                            </div>
+                            <div class="column medium-11 day-parallels" role="list">
+                                <div class="parallel parallel-double parallel-offset-12 parallel-secondary" role="listitem">
+                                    <div class="inner-item">
+                                        <h1>BI-PA1</h1>
+                                        <div class="place">T2:D2-256-1024</div>
+                                        <div class="time">23:59 - 23:59</div>
+                                        <div class="public-stats">
+                                            <i class="fa fa-circle-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row hours-labels">
+                            <div class="column medium-11 medium-offset-1" role="list">
+                                <div class="parallel-hour-label">1</div>
+                                <div class="parallel-hour-label">2</div>
+                                <div class="parallel-hour-label">3</div>
+                                <div class="parallel-hour-label">4</div>
+                                <div class="parallel-hour-label">5</div>
+                                <div class="parallel-hour-label">6</div>
+                                <div class="parallel-hour-label">7</div>
+                                <div class="parallel-hour-label">8</div>
+                                <div class="parallel-hour-label">9</div>
+                                <div class="parallel-hour-label">10</div>
+                                <div class="parallel-hour-label">11</div>
+                                <div class="parallel-hour-label">12</div>
+                                <div class="parallel-hour-label">13</div>
+                                <div class="parallel-hour-label">14</div>
+                                <div class="parallel-hour-label">15</div>
+                            </div>
+                        </div>
+
+                        <div class="time-indicator">
+                            <div class="triangle"></div>
+                            <div class="line"></div>
+                            <strong>12:33</strong>
+                            <span class="coming">BI-SMTHLNG -0:33</span>
+                        </div>
+                        
+                        <div class="parallel-details">
+                            <div class="info-section general-info">
+                                <div class="row collapse">
+                                    <div class="column small-4"><a href="#"><i class="fa fa-fw fa-thumb-tack"></i> č. 208</a></div>
+                                    <div class="column small-8 text-right"><a href="#">Ing. Miroslav Balík Ph.D. <i class="fa fa-fw fa-male"></i> </a></div>
+                                </div>
+                                <div class="row collapse">
+                                    <div class="column small-6"><a href="#"><i class="fa fa-fw fa-group"></i> 326 studentů</a></div>
+                                    <div class="column small-6 text-right">3+2 / 6C</div>
+                                </div>
+                            </div>
+                            <div class="info-section flag">
+                                <div class="row collapse">
+                                    <div class="column small-1"><i class="fa fa-bookmark"></i></div>
+                                    <div class="column small-8">Domácí úkol - příklady 9-11</div>
+                                    <div class="column small-3 date">9.12</div>
+                                </div>
+                            </div>
+                            <div class="info-section public">
+                                <div class="row collapse item">
+                                    <div class="column small-1 voting">
+                                        <a href="#"><i class="fa fa-chevron-up"></i></a>
+                                        <a href="#"><i class="fa fa-chevron-down"></i></a>
+                                    </div>
+                                    <div class="column small-1 votenum">+6</div>
+                                    <div class="column small-10 content">
+                                        <p>V paralelce se budou vybírat domácí úkoly zadané z 9.12!!!</p>
+                                        <small class="user">Marián Hlaváč (hlavam30), 10.12</small>
+                                    </div>
+                                </div>
+                                <div class="row collapse item invalid">
+                                    <div class="column small-1 voting">
+                                        <a href="#"><i class="fa fa-chevron-up"></i></a>
+                                        <a href="#"><i class="fa fa-chevron-down"></i></a>
+                                    </div>
+                                    <div class="column small-1 votenum">-32</div>
+                                    <div class="column small-10 content">
+                                        <p>blablabla jsem kokot</p>
+                                        <small class="user">Marián Hlaváč (hlavam30), 10.12</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </section>
+                
+            </div>
+        </div>
+        
+                
+        <!--(if target dev)><!-->
+        <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+        <script src="bower_components/foundation/js/foundation.min.js" type="text/javascript"></script>
+        <script src="js/main.js" type="text/javascript"></script>
+        <!--<!(endif)-->
+            
+        <!--(if target dist)>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="js/foundation.min.js" type="text/javascript"></script>
+        <script src="js/main.min.js" type="text/javascript"></script>
+        <!(endif)-->
+    </body>
+</html>
