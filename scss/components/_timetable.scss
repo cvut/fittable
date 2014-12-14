@@ -3,18 +3,31 @@ section#timetable {
     
     & > .row.collapse {
         position: relative;
+        
+        @media #{$medium-up} {
+            background: linear-gradient(
+              to bottom,
+              $light-color,
+              $light-color 50%,
+              #fff 50%,
+              #fff
+            );
+
+            background-size: 100% 160px;
+        }
     }
  
     .row.day.tt-row {
         min-height: 80px;
+        position: relative;
+        overflow: hidden;
         
         @media #{$medium-only} {
             min-height: 70px;
         }
         
         &:nth-child(odd)  {
-            background: $light-color;
-            
+        
             .day-parallels .parallel .public-stats {
                 color: $light-color;
             }
@@ -58,7 +71,7 @@ section#timetable {
                 top: 0px;
                 margin: 5px 0px;
                 z-index: 700;
-                transition: width 1s;
+                transition: width 0.4s, opacity 0.4s;
                 
                 .inner-item {
                     background: $primary-color;
@@ -158,6 +171,7 @@ section#timetable {
                 
                 .parallel.parallel-extended {
                     width: 300px;
+                    z-index: 900;
                 }
             }
 
@@ -423,6 +437,26 @@ section#timetable {
                     color: $primary-color;
                 }
             }
+        }
+    }
+
+    &.fade-inactive {
+     
+        .parallel:not(.parallel-extended) {
+            opacity: .4;
+        }
+        
+    }
+
+    &.animate-left {
+        .row.day .day-parallels {
+            animation: week-move-left 0.8s;
+        }
+    }
+
+    &.animate-right {
+        .row.day .day-parallels {
+            animation: week-move-right 0.8s;
         }
     }
 }

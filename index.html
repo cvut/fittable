@@ -27,15 +27,20 @@
                 
                     <div class="row collapse">
                         <div class="column medium-3 small-12 week" id="heading">
-                            <div class="primary-head"><strong>Týden 3</strong> Lichý</div>
+                            <div class="primary-head"><strong>Týden 2</strong> <span>Sudý</span></div>
                             <a href="#" class="prev-week"><i class="fa fa-chevron-left"></i></a>
                             <a href="#" class="next-week"><i class="fa fa-chevron-right"></i></a>
                         </div>
                         <div class="column medium-6 hide-for-small-only" id="user-and-flags">
-                            <a href="#" class="user">
+                            <a href="#" class="user" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
                                 <i class="fa fa-user"></i>
                                 Marián Hlaváč
                             </a>
+                            <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+                                <li><a href="#">Nastavení</a></li>
+                                <li><a href="#">O aplikaci</a></li>
+                                <li><a href="#">Odhlásit se</a></li>
+                            </ul>
                             <div class="title">Příznaky</div>
                             <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-bookmark"></i></a>
                             <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-exclamation-circle"></i></a>
@@ -46,7 +51,7 @@
                     
                 </header>
                 
-                <section id="timetable">
+                <section id="timetable" class="animate-left" data-week="2">
                     <div class="row collapse">
                         <div class="row day tt-row">
                             <div class="column medium-1 day-name">
@@ -234,6 +239,8 @@
                 
             </div>
         </div>
+        
+        <div class="gap"></div>
         
                 
         <!--(if target dev)><!-->

@@ -1,6 +1,7 @@
 .column.week {
 
     .primary-head {
+        min-width: 140px;
         display: inline-block;
         background: $primary-color;
         color: white;
@@ -53,7 +54,12 @@
         }
     }
     
-    
+    ul.f-dropdown {
+        margin: 5px;
+        width: 130px;
+        li a { font-size: 9pt; }
+        text-align: left;
+    }
     
     a.flag:not(:first-child) {
         margin-left: 15px;
