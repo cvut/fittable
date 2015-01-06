@@ -37,7 +37,7 @@
                                 Marián Hlaváč
                             </a>
                             <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-                                <li><a href="#">Nastavení</a></li>
+                                <li><a href="#" data-reveal-id="settings-modal">Nastavení</a></li>
                                 <li><a href="#">O aplikaci</a></li>
                                 <li><a href="#">Odhlásit se</a></li>
                             </ul>
@@ -241,6 +241,59 @@
         </div>
         
         <div class="gap"></div>
+        
+        <div id="settings-modal" class="reveal-modal" data-reveal>
+            <div class="modal-heading">
+                <a class="close-reveal-modal"><i class="fa fa-times"></i></a>
+                <i class="fa fa-cogs modal-icon"></i>
+                nastavení fittable
+            </div>
+            
+            <div class="row">
+                <div class="column small-6">
+                    
+                    <div class="row setting">
+                        <div class="column small-4">
+                            <div class="switch tiny">
+                                <input id="exampleSetting" type="radio">
+                                <label for="exampleSetting"></label>
+                            </div>
+                        </div>
+                        <div class="column small-8">
+                            Example setting
+                        </div>
+                    </div>
+                    
+                    <div class="row setting">
+                        <div class="column small-4">
+                            <div class="switch tiny">
+                                <input id="exampleSetting" type="radio">
+                                <label for="exampleSetting"></label>
+                            </div>
+                        </div>
+                        <div class="column small-8">
+                            Example setting
+                        </div>
+                    </div>
+                    
+                    <div class="row setting">
+                        <div class="column small-4">
+                            <div class="switch tiny">
+                                <input id="exampleSetting" type="radio">
+                                <label for="exampleSetting"></label>
+                            </div>
+                        </div>
+                        <div class="column small-8">
+                            Example setting
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="column small-6">
+                    Barva rozhraní
+                </div>
+            </div>
+        </div>
         
                 
         <!--(if target dev)><!-->
