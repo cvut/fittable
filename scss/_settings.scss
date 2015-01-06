@@ -113,14 +113,15 @@ $body-font-style: normal;
 // $last-child-float: $opposite-direction;
 
 // We use these as default colors throughout
-$primary-color: #a52e4f;
-$secondary-color: #3b182e;
+$primary-color: #187699;
+$secondary-color: #134865;
 $alert-color: $primary-color;
 $success-color: $primary-color;
 $warning-color: $primary-color;
 $info-color: $primary-color;
 
-$light-color: #f2e9ee;
+$light-color: #e8f3fa;
+$second-type-color: $secondary-color;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
