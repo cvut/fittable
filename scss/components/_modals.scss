@@ -1,0 +1,35 @@
+#settings-modal {
+    max-width: 560px;
+    width: auto;
+    padding: 0px;
+    
+    & > .row {
+        margin: 20px 10px;
+        font-size: 9pt;
+    }
+}
+
+.modal-heading {
+    height: 70px;
+    background: $primary-color;
+    padding: 0px 20px;
+    color: white;
+    font-size: 16pt;
+    line-height: 70px;
+    vertical-align: middle;
+    
+    .modal-icon {
+        font-size: 32px;
+        vertical-align: middle;
+        margin-right: 20px;
+    }
+    
+    a.close-reveal-modal {
+        float: right;
+        top: 0px;
+        right: 20px;
+        line-height: 70px;
+        font-size: 24px;
+        color: white;
+    }
+}

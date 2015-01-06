@@ -1,0 +1,25 @@
+@keyframes week-move-left {
+    
+    0% {
+        left: 70px;
+        opacity: 0;
+    }
+    
+    100% {
+        left: 0px;
+        opacity: 1;
+    }
+}
+
+@keyframes week-move-right {
+    
+    0% {
+        left: -70px;
+        opacity: 0;
+    }
+    
+    100% {
+        left: 0px;
+        opacity: 1;
+    }
+}
