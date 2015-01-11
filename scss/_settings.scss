@@ -516,9 +516,9 @@ $xxlarge-range: (1920px, 99999999em);
 // $f-dropdown-bg: $white;
 
 // We use this to set the border styles for dropdowns.
-// $f-dropdown-border-style: solid;
-// $f-dropdown-border-width: 1px;
-// $f-dropdown-border-color: scale-color($white, $lightness: -20%);
+$f-dropdown-border-style: solid;
+$f-dropdown-border-width: 1px;
+$f-dropdown-border-color: $light-color;
 
 // We use these to style the triangle pip.
 // $f-dropdown-triangle-size: 6px;
