@@ -79,5 +79,11 @@ $(document).ready(function () {
     }
     
     
+    /** Dočasně zavírat ajax loaderovátko */
+    setTimeout(function() {
+        $(".info-line .spinner").fadeOut(500);
+    },2000);
+    
+    
     
 });
