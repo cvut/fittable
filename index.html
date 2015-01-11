@@ -33,14 +33,10 @@
                         </div>
                         <div class="column medium-6 hide-for-small-only" id="user-and-flags">
                             <a href="#" class="user" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
-                                <i class="fa fa-user"></i>
                                 Marián Hlaváč
                             </a>
-                            <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-                                <li><a href="#" data-reveal-id="settings-modal">Nastavení</a></li>
-                                <li><a href="#">O aplikaci</a></li>
-                                <li><a href="#">Odhlásit se</a></li>
-                            </ul>
+                            <a href="#" class="settings" title="Nastavení" data-reveal-id="settings-modal"><i class="fa fa-cog"></i></a>
+                            <a href="#" class="logout" title="Odhlásit se"><i class="fa fa-power-off"></i></a>
                             <div class="title">Příznaky</div>
                             <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-bookmark"></i></a>
                             <a href="#" class="flag" data-flag="bookmark"><i class="fa fa-exclamation-circle"></i></a>
@@ -246,7 +242,7 @@
             <div class="modal-heading">
                 <a class="close-reveal-modal"><i class="fa fa-times"></i></a>
                 <i class="fa fa-cogs modal-icon"></i>
-                nastavení fittable
+                Nastavení <strong>fittable</strong>
             </div>
             
             <div class="modal-tabs">
