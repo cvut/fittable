@@ -232,34 +232,6 @@ section#timetable {
         }
     }
 
-    .row.hours-labels {
-
-        .parallel-hour-label {
-            width: percentage(1/($cols-width));
-            text-align: center;
-            font-size: 8pt;
-            color: $primary-color;
-            margin: 5px 0px;
-            float: left;
-            opacity: .5;
-        }
-        
-        @media #{$small-only} {
-            position: absolute;
-            top: 65px;
-            left: 0px;
-            
-            .parallel-hour-label {
-                width: 100%;
-                text-align: left;
-                line-height: 70px;
-                margin: 0px;
-                float: none;
-                opacity: .5;
-            }
-        }
-    }
-
     
 
     .time-indicator {
