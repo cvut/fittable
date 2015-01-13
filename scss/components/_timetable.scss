@@ -15,6 +15,12 @@ section#timetable {
 
             background-size: 100% 160px;
         }
+    
+        @media #{$medium-only} {
+            background-size: 100% 140px;
+        }
+
+        transition: background-size .5s;
     }
  
     .row.day.tt-row {
@@ -143,38 +149,6 @@ section#timetable {
                 }
             }
 
-            @media #{$medium-up} {
-            
-                .parallel.parallel-single { 
-                    width: percentage(1/($cols-width));
-                    h1 { font-size: 8pt; font-weight: $font-weight-bold; }
-                }
-
-                .parallel.parallel-double { width: percentage(1/($cols-width/2)); }
-                .parallel.parallel-3 { width: percentage(1/($cols-width/3)); }
-                .parallel.parallel-4 { width: percentage(1/($cols-width/4)); }
-                .parallel.parallel-5 { width: percentage(1/($cols-width/5)); }
-
-                .parallel.parallel-offset-1 { left: percentage((1/$cols-width)*1); }
-                .parallel.parallel-offset-2 { left: percentage((1/$cols-width)*2); }
-                .parallel.parallel-offset-3 { left: percentage((1/$cols-width)*3); }
-                .parallel.parallel-offset-4 { left: percentage((1/$cols-width)*4); }
-                .parallel.parallel-offset-5 { left: percentage((1/$cols-width)*5); }
-                .parallel.parallel-offset-6 { left: percentage((1/$cols-width)*6); }
-                .parallel.parallel-offset-7 { left: percentage((1/$cols-width)*7); }
-                .parallel.parallel-offset-8 { left: percentage((1/$cols-width)*8); }
-                .parallel.parallel-offset-9 { left: percentage((1/$cols-width)*9); }
-                .parallel.parallel-offset-10 { left: percentage((1/$cols-width)*10); }
-                .parallel.parallel-offset-11 { left: percentage((1/$cols-width)*11); }
-                .parallel.parallel-offset-12 { left: percentage((1/$cols-width)*12); }
-                .parallel.parallel-offset-13 { left: percentage((1/$cols-width)*13); }
-                
-                .parallel.parallel-extended {
-                    width: 300px;
-                    z-index: 900;
-                }
-            }
-
             @media #{$small-only} {
                 
                 .parallel {
@@ -196,28 +170,6 @@ section#timetable {
 
                     }
                 }
-                
-                .parallel.parallel-single { 
-                    height: 60px;
-                }
-                
-                .parallel.parallel-double { height: 70*2px; }
-                .parallel.parallel-3 { height: 70*3px; }
-                .parallel.parallel-4 { height: 70*4px; }
-                .parallel.parallel-5 { height: 70*5px; }
-                
-                .parallel.parallel-offset-1 { top: 70*1px; }
-                .parallel.parallel-offset-2 { top: 70*2px; }
-                .parallel.parallel-offset-3 { top: 70*3px; }
-                .parallel.parallel-offset-4 { top: 70*4px; }
-                .parallel.parallel-offset-5 { top: 70*5px; }
-                .parallel.parallel-offset-6 { top: 70*6px; }
-                .parallel.parallel-offset-7 { top: 70*7px; }
-                .parallel.parallel-offset-8 { top: 70*8px; }
-                .parallel.parallel-offset-9 { top: 70*9px; }
-                .parallel.parallel-offset-10 { top: 70*10px; }
-                .parallel.parallel-offset-11 { top: 70*11px; }
-                .parallel.parallel-offset-12 { top: 70*12px; }
                 
             }
             
@@ -317,7 +269,7 @@ section#timetable {
 
     .parallel-details {
         width: 295px;
-        height: 400px;
+        min-height: 140px;
         background: white;
         position: absolute;
         left: 102px;
