@@ -1,0 +1,134 @@
+---
+author: Jakub Jirůtka
+---
+= Požadavky
+
+== Funkční požadavky
+
+[.decimal-nested]
+. bude poskytovat náhled na události (tj. kalendáře) z pohledu:
+  .. osoby,
+  .. předmětu,
+  .. místnosti,
+  .. ? místnosti na den ? [TODO zeptat se O. Gutha]
+
+. bude poskytovat různé módy zobrazení:
+  .. rozvrhový (horizontální):
+     ... s přepínáním mezi zobrazení 5/7 dní (např. dálkoví studenti mívají výuku i o víkendu),
+     ... s časovou osou podle harmonogramu dané fakulty (_časové_ rozsahy) sloužící jako _pomocné_ vodítko.
+  .. kalendářní:
+     ... týdenní (výchozí),
+     ... měsíční,
+     ... denní.
+
+. bude zobrazovat paritu (sudý/lichý) aktuálně vybraného období.
+
+. bude zobrazovat označení semestru aktuálně vybraného období.
+
+. okénko události bude obsahovat:
+  .. kód předmětu,
+  .. místnost (KOSí kód),
+  .. čas začátku a konce události,
+  .. typ události (barevným rozlišením),
+  .. příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).
+
+. detail události bude obsahovat:
+  .. celý název předmětu nebo události,
+  .. odkaz na kalendář předmětu (jen pro P/C/L/J/Z),
+  .. pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),
+  .. číslo paralelky (jen pro P/C/L/J),
+  .. odkaz na kalendář místnosti,
+  .. vyučující/zkoušející/organizátoři události (jeden nebo více lidí):
+     ... celé jméno,
+     ... e-mail,
+     ... odkaz na kalendář,
+     ... (odkaz na Usermap).
+  .. seznam studentů v paralelce (jen pro P/C/L):
+     ... celé jméno,
+     ... uživatelské jméno,
+     ... zobrazovat ve „fancy pop-up.“
+  .. seznam výjimek, které událost ovlivnily.
+
+. na původním místě zrušené či přesunuté události bude zobrazovat zástupné okýnko:
+  .. v případě přesunuté události s odkazem na novou událost.
+
+. bude umožňovat navigaci v kalendáři po týdnech/měsících/semestrech.
+
+. bude poskytovat filtr zobrazených událostí:
+  .. podle typu události.
+
+. bude poskytovat jednotný vyhledávač kalendářů:
+  .. osoby (podle uživatelského i občanského jména),
+  .. předmětu (podle kódu a názvu),
+  .. místnosti (podle KOSího kódu).
+
+. kalendářní data bude získávat ze služby Sirius:
+  .. přes jeho RESTful API, ve formátu JSON,
+  .. _on-demand_.
+
+. bude poskytovat JS API pro:
+  .. přidání položek zobrazených v okénku události,
+  .. přidání položek zobrazených v detailu události (textových i akcí),
+  .. odchytávání akcí nad kalendářem [TODO].
+
+
+== Nefunkční požadavky
+
+[.decimal-nested]
+. Uživatelské rozhraní:
+  .. bude lokalizované do češtiny a angličtiny,
+  .. bude responzivní (od desktopu po mobilní telefon s WVGA),
+  .. bude přizpůsobené i pro ovládání na dotykovém displeji,
+  .. vizuálně bude vycházet z grafiky vytvořené pro „nový web“ od Josefa Lobotky (fonty, barvy, příp. ikony).
+
+. Přizpůsobitelnost a konfigurovatelnost:
+  .. widget bude možné přizpůsobit pro různá použití:
+     ... na fakultním webu pro studenty a vyučující,
+     ... v rámci administračního rozhraní pro rozvrháře,
+     ... v módu omezené funkčnosti, např. na osobní stránce vyučujícího, studenta atp.
+  .. widget bude počítat s nasazením i na dalších fakultách.
+
+. Dokumentace:
+  .. bude obsahovat kompletní postup pro sestavení (build),
+  .. bude obsahovat popis konfigurace a JS API pro přizpůsobení widgetu,
+  .. veškerá dokumentace by měla být v angličtině.
+
+. Kvalita kódu:
+  .. kód bude srozumitelný, dobře strukturovaný a potenciálně nejasné části okomentované,
+  .. kód bude pokrytý jednotkovými a integračními testy,
+  .. kód i další textové soubory budou v UTF-8 a s unixovým způsobem ukončování řádek (řídící znak LF / 0x0A),
+  .. názvy všech identifikátorů použitých v kódu budou v angličtině.
+
+. Verzování:
+  .. projekt bude verzovaný systémem Git na GitHubu.
+
+. Technologie:
+  .. bude implementovaný v jazyce kompilovaném do JavaScriptu, preferovaný je CoffeeScript.
+
+. Běhové prostředí:
+  .. bude fungovat _client-side_, ve webovém prohlížeči s podporou JavaScriptu:
+     ... Chrome/Chromium 35+,
+     ... Firefox 31+,
+     ... Internet Explorer 10+ (9 alespoň omezeně),
+     ... Safari 6+.
+
+. Licence:
+  .. bude využívat výhradně _open-source_ knihovny.
+
+
+== TODO
+
+* Navrhnout způsob zabezpečení.
+
+
+== Zkratky
+
+Typy událostí:
+
+* přednáška [P]
+* cvičení [C]
+* laboratoř [L]
+* jednorázová akce předmětu [J]
+* zkouška (i zápočtová) [Z]
+* omezení vyučujícího [V]
+* obecná událost [O]
