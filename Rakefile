@@ -35,6 +35,8 @@ task :deploy do
 
   repo_url = `git config remote.#{REMOTE_NAME}.url`.gsub(/^git:/, 'https:').strip
   deploy_url = repo_url.gsub %r{https://}, "https://#{ENV['GH_TOKEN']}@"
+  commiter_name = `git log -n 1 --format="%cN"`.strip
+  commiter_email = `git log -n 1 --format="%cE"`.strip
   rev = `git rev-parse HEAD`.strip
 
   Dir.mktmpdir do |temp|
@@ -44,8 +46,8 @@ task :deploy do
     Dir.chdir temp do
       # Configure git if this is run in Travis CI
       if ENV['TRAVIS']
-        sh "git config --global user.name '#{ENV['GIT_NAME']}'"
-        sh "git config --global user.email '#{ENV['GIT_EMAIL']}'"
+        sh "git config --global user.name '#{commiter_name}'"
+        sh "git config --global user.email '#{commiter_email}'"
         sh "git config --global push.default simple"
       end
 
