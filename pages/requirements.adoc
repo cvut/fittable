@@ -1,5 +1,6 @@
 ---
 author: Jakub Jirůtka
+layout: page
 ---
 = Požadavky
 
