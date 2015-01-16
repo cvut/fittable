@@ -33,7 +33,7 @@ layout: page
   .. typ události (barevným rozlišením),
   .. příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).
 
-. detail události bude obsahovat:
+. po kliknutí na okénko události se zobrazí detail události obsahující:
   .. celý název předmětu nebo události,
   .. odkaz na kalendář předmětu (jen pro P/C/L/J/Z),
   .. pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),
