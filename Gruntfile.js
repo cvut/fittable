@@ -6,27 +6,10 @@ module.exports = function (grunt) {
 
 	// Project configuration
 	grunt.initConfig({
-
-		// Watches files for changes and runs tasks based on the changed files
-		watch: {
-			compass: {
-				files: ['scss/**/*.scss'],
-				tasks: ['compass', 'autoprefixer:dev']
-			},
-			livereload: {
-				options: {
-					livereload: true
-				},
-				files: [
-					'*.html',
-					'scss/**/*.scss',
-					'img/**/*.{gif,jpeg,jpg,png,svg}',
-					'js/**/*.js'
-				]
-			}
-		},
-
-		// Empties folders to start fresh
+        
+        pkg: grunt.file.readJSON("package.json"),
+        
+        // Empties folders to start fresh
 		clean: {
 			dist: {
 				files: [{
@@ -38,24 +21,33 @@ module.exports = function (grunt) {
 					]
 				}]
 			},
-			server: '.tmp'
+			dev: '.tmp'
 		},
-
-		// Compiles Sass to CSS and generates necessary files if requested
+        
+        // Compiles Sass to CSS and generates necessary files if requested
 		compass: {
             dev: {
 				options: {
-					sassDir: 'scss',
-					cssDir: 'css',
+					sassDir: 'src/scss',
+					cssDir: 'src/css',
 					noLineComments: true
 				}
 			},
 			dist: {
 				options: {
-					sassDir: 'scss',
-					cssDir: 'dist/css',
-					noLineComments: true
+					sassDir: 'src/scss',
+					cssDir: 'dist/',
+					noLineComments: true,
+                    outputStyle: 'compressed'
 				}
+			}
+		},
+
+		// Watches files for changes and runs tasks based on the changed files
+		watch: {
+			compass: {
+				files: ['scss/**/*.scss'],
+				tasks: ['compass', 'autoprefixer:dev']
 			}
 		},
 
@@ -66,64 +58,15 @@ module.exports = function (grunt) {
 			},
 			dev: {
 				files: [{
-					expand: true,
-					cwd: '.tmp',
-					src: '**/*.css',
-					dest: 'css'
+					src: 'src/css/*.css'
 				}]
 			},
 			dist: {
 				files: [{
-					expand: true,
-					cwd: '.tmp',
-					src: '**/*.css',
-					dest: '.tmp/prefixed'
+					src: 'dist/*.css'
 				}]
 			}
-		},
-
-		uglify: {
-            dist: {
-                files: {
-                    'dist/js/jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
-                    'dist/js/foundation.min.js': ['bower_components/foundation/js/foundation.min.js'],
-                    'dist/js/main.min.js': ['js/main.js']
-                }
-            }
-		},
-
-		htmlmin: {
-			dist: {
-				options: {
-					removeComments: true,
-					removeCommentsFromCDATA: true,
-					removeCDATASectionsFromCDATA: true,
-					collapseWhitespace: true,
-					collapseBooleanAttributes: true,
-					removeAttributeQuotes: true,
-					removeRedundantAttributes: true,
-					useShortDoctype: true,
-					removeEmptyAttributes: true,
-					removeOptionalTags: true,
-					minifyJS: true,
-					minifyCSS: true
-				},
-				files: [{
-					expand: true,
-					cwd: 'dist',
-					src: '*.html',
-					dest: 'dist'
-				}]
-			}
-		},    
-                
-        targethtml: {
-          dist: {
-            files: {
-              'dist/index.html': 'index.html'
-            }
-          }
-        },
+		},  
 
 		// Copies remaining files to places other tasks can use
 		copy: {
@@ -134,37 +77,61 @@ module.exports = function (grunt) {
 					cwd: '.',
 					dest: 'dist',
 					src: [
-                        '**.{ico,png,txt,xml}',
-						'img/**',
-                        'font/**',
-                        '.htaccess'
+                        'src/**.{ico,png,txt,xml}',
+                        'src/.htaccess'
 					]
 				}]
 			}
-		}
+		},
+        
+        // 6to5 js build
+        '6to5': {
+            options: {
+                sourceMap: true
+            },
+            dev: {
+                files: {
+                    'src/js/app.js': 'src/js/*.{es,js}'
+                }
+            },
+            dist: {
+                files: {
+                    'dist/fittable.js': 'src/js/*.{es,js}'
+                }
+            }
+        },
+        
+        // Uglify
+        uglify: {
+            options: {
+                compress: true,
+                preserveComments: false,
+                banner: '/** Fittable <%= pkg.version %> */'
+            },
+            dist: {
+                'dist/fittable.min.js': ['dist/fittable.js']
+            }
+        }
+        
 	});
 
 	// Load grunt tasks automaticly
 	require('load-grunt-tasks')(grunt);
 
 	grunt.registerTask('default', [
-		'clean:server',
+		'clean:dev',
 		'compass:dev',
 		'autoprefixer:dev',
+        '6to5:dev',
 		'watch'
-	]);
-
-	grunt.registerTask('serve', [
-		'build'
 	]);
 
 	grunt.registerTask('build', [
 		'clean:dist',
         'compass:dist',
-        'targethtml:dist',
-        'copy:dist',
-		'autoprefixer:dist',
-		'uglify:dist'/*,
-		'htmlmin'*/
+        'autoprefixer:dist',
+        '6to5:dist',
+        'uglify:dist',
+        'copy:dist'
 	]);
 };

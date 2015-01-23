@@ -1,21 +1,18 @@
 {
-  "name": "gg",
+  "name": "fittable",
   "version": "1.0.0",
-  "description": "",
+  "description": "More fittable timetable & calendar widget",
   "main": "index.html",
-  "author": "gg",
+  "author": "Marián Hlaváč",
   "dependencies": {
     "grunt": "^0.4.5",
+    "grunt-6to5": "^2.0.0",
     "grunt-autoprefixer": "^1.0.1",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compass": "^0.7.2",
-    "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-contrib-htmlmin": "^0.3.0",
-    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-targethtml": "^0.2.6",
     "load-grunt-tasks": "^0.6.0"
   }
 }

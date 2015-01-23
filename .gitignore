@@ -16,6 +16,7 @@ logs
 results
 .sass-cache
 .tmp
-dist
 
-css
+src/css
+src/js/app.js
+src/js/app.js.map

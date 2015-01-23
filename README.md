@@ -1,42 +1,26 @@
-![fittable logo](http://goo.gl/u0Mmwa)
+![fittable logo](http://i.imgur.com/9ddpDA4.png)
 
-![dev status](https://img.shields.io/badge/status-in dev-orange.svg?style=flat-square)
+[![Travis branch master](https://img.shields.io/travis/cvut/fittable/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable)
+[![Code climate](https://img.shields.io/codeclimate/github/cvut/fittable.svg?style=flat-square)](https://codeclimate.com/github/cvut/fittable)
 
-Fittable is lightweight client used for displaying weekly schedule on FIT CTU. Offers subtle, flat and intuitive user interface. In words - **more fittable timetable**
+Fittable is lightweight JavaScript widget used for displaying timetables and calendars for various applications based on project [Sirius](http://github.com/cvut/sirius). Offers subtle, flat and intuitive user interface. And it should be **more fittable** than any other timetable widget :blush:
 
-The project will be soon transferred under the [Sirius](http://github.com/cvut/sirius) project, and it's API will provide useful data for displaying very detailed timetable.
+Using JavaScript ES6+ code (converting to ES5 using [https://github.com/6to5/6to5](6to5)) makes the widget ready for new technologies and development trends in JavaScript language.
 
-## Getting started
+Offers quick implementation into another applications through simple Javascript API layer. For more information how to use this widget, visit [our wiki](#).
 
-To build project, make sure you have installed Ruby, Node.js.
-
-If you don't have installed Compass and it's components, run:
-
-```
-gem install compass sass sass-globbing
-```
-
-If you don't have installed Grunt and bower, install it with these commands:
+## Install
 
 ```
-npm install -g grunt-cli
-npm install -g bower
+$ bower install cvut/fittable --save
 ```
 
-Then build the project...
+*... TODO* :grin:
 
-```
-npm install
-bower install 
-grunt
-```
+## Quick start
+
+*TODO*
+
+## Documentation
   
-After successfull installation, open the *index.html* file in your browser.
-
-## Screenshot
-
-![Screenshot fittable](http://i.imgur.com/CEb8clG.png)
-
-## Live version
-
-![](https://img.shields.io/badge/%20-fe554e5ace-lightgrey.svg) http://majkovo.eu/fittable/
+*TODO*

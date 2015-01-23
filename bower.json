@@ -1,17 +1,20 @@
 {
-  "name": "gg",
+  "name": "fittable",
   "version": "1.0.0",
   "authors": [
-    "ggg"
+    "Marián Hlaváč"
   ],
-  "main": "index.html",
+  "main": "dist/fittable.js",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "Gruntfile.js",
+    "config.rb",
+    "src"
   ],
   "dependencies": {
     "foundation": "~5.4.3",

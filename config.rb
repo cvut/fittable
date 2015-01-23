@@ -4,8 +4,8 @@ add_import_path "bower_components/foundation/scss"
 add_import_path "bower_components"
 
 # Sass Directories
-javascripts_dir = 'js'
-css_dir = 'css'
-sass_dir = 'scss'
-images_dir = 'img'
-fonts_dir = 'font'
+javascripts_dir = 'src/js'
+css_dir = 'src/css'
+sass_dir = 'src/scss'
+images_dir = 'src/img'
+fonts_dir = 'src/fonts'
