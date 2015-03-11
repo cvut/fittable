@@ -1,4 +1,4 @@
-![fittable logo](http://i.imgur.com/9ddpDA4.png)
+![fittable logo](http://i.imgur.com/qPv0VRS.png)
 
 [![Travis branch master](https://img.shields.io/travis/cvut/fittable/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable)
 [![Code climate](https://img.shields.io/codeclimate/github/cvut/fittable.svg?style=flat-square)](https://codeclimate.com/github/cvut/fittable)
