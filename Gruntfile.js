@@ -84,19 +84,19 @@ module.exports = function (grunt) {
 			}
 		},
         
-        // 6to5 js build
-        '6to5': {
+        // babel (6to5 before) js build
+        'babel': {
             options: {
                 sourceMap: true
             },
             dev: {
                 files: {
-                    'src/js/app.js': 'src/js/*.{es,js}'
+                    'src/js/app.js': 'src/js/app.es'
                 }
             },
             dist: {
                 files: {
-                    'dist/fittable.js': 'src/js/*.{es,js}'
+                    'dist/fittable.js': 'src/js/app.es'
                 }
             }
         },
@@ -122,7 +122,7 @@ module.exports = function (grunt) {
 		'clean:dev',
 		'compass:dev',
 		'autoprefixer:dev',
-        '6to5:dev',
+        'babel:dev',
 		'watch'
 	]);
 
@@ -130,7 +130,7 @@ module.exports = function (grunt) {
 		'clean:dist',
         'compass:dist',
         'autoprefixer:dist',
-        '6to5:dist',
+        'babel:dist',
         'uglify:dist',
         'copy:dist'
 	]);
