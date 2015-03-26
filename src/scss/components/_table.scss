@@ -1,0 +1,126 @@
+#fittable {
+
+  div.table {
+    $day-row-height: 85px;
+    $day-row-padding: 12px;
+
+    clear: both;
+    position: relative;
+
+    div.day {
+      height: $day-row-height;
+      background: white;
+      padding: $day-row-padding 10px;
+      color: $primary-color;
+
+      &:nth-child(even) {
+        background: $secondary-color;
+      }
+
+      div.label {
+        display: block;
+        background: none;
+        width: 10%;
+        float: left;
+        line-height: $day-row-height - ($day-row-padding * 2);
+        font-size: 12px;
+        text-align: left;
+        color: $primary-color;
+
+        span {
+          padding: 5px 0px 5px 20px;
+          margin-left: -18px;
+        }
+      }
+
+      &.active {
+        div.label span {
+          font-weight: 700;
+          border-left: 4px solid $primary-color;
+          margin-left: -14px;
+          padding-left: 14px;
+        }
+      }
+
+      div.events {
+        width: 90%;
+        float: left;
+        height: $day-row-height - ($day-row-padding * 2);
+        position: relative;
+        z-index: 80;
+        animation: week-move-left ease 0.8s;
+
+        div.event {
+          height: 100%;
+          position: absolute;
+          padding: 0px 5px;
+          //border: 1px dashed $warning-color;
+
+          div.inner {
+            background: $primary-color;
+            color: white;
+            height: 100%;
+            @include background-hover-effect( $primary-color );
+            cursor: pointer;
+            padding: 5px 10px;
+          }
+
+          div.name {
+            font-size: 17px;
+            font-weight: 300;
+            text-align: right;
+            margin-top: 5px;
+          }
+
+          div.time {
+            font-size: 11px;
+            text-align: right;
+          }
+
+          div.type {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            border-left: 2px solid white;
+            padding-left: 5px;
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+
+    .grid-overlay {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      padding: $day-row-padding 0px $day-row-padding 10%;
+      z-index: 40;
+      opacity: .5;
+      transition: opacity .6s;
+
+      .grid {
+        background-color: transparent;
+        background-image: linear-gradient(90deg, rgba(0,0,0,.09) .1em, transparent .1em);
+        background-size: 8.33% 100%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &:hover {
+
+      .grid-overlay {
+        opacity: 1;
+      }
+
+    }
+
+  }
+
+
+
+}

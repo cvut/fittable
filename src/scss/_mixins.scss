@@ -1,0 +1,12 @@
+@mixin bold-up-text {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@mixin background-hover-effect($color) {
+  transition: background .2s;
+
+  &:hover {
+    background-color: lighten( $color, 4% );
+  }
+}

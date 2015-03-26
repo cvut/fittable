@@ -1,0 +1,48 @@
+#fittable {
+
+  div.footer {
+    line-height: 16px;
+    padding: 30px 18px;
+    font-size: 11px;
+    color: #444;
+
+    img {
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    i.fa {
+      margin-right: 5px;
+    }
+
+    ul {
+      display: inline;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      vertical-align: middle;
+      line-height: 16px;
+
+      li {
+        margin: 0px 8px;
+        padding: 0;
+        display: inline-block;
+        font-size: 11px;
+
+        a {
+          color: #444;
+          text-decoration: underline;
+          font-weight: 700;
+          line-height: 16px;
+        }
+
+      }
+    }
+
+    .build-info {
+      margin-top: 6px;
+    }
+
+  }
+
+}

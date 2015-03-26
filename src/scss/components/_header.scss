@@ -1,107 +1,108 @@
-.column.week {
+#fittable {
 
-    .primary-head {
-        min-width: 140px;
-        display: inline-block;
-        background: $primary-color;
+  div.header {
+
+    div.flags {
+      float: right;
+      display: inline-block;
+      height: $header-elements-weight;
+      background: $primary-color;
+      color: white;
+      @include bold-up-text;
+      @include background-hover-effect( $primary-color );
+
+      a {
         color: white;
-        font-size: 10pt;
-        padding: 5px 15px;
-        text-transform: uppercase;
-    }
-    
-    a.prev-week, a.next-week {
-        font-size: 14px;
-        margin-left: 10px;
-    }
-    
-    @media #{$small-only} {
-        .primary-head {
-            width: 70%;
-            display: block;
-            float: left;
-            line-height: 40px;
-        }
-        
-        a.prev-week, a.next-week {
-            width: 10%;
-            display: block;
-            float: left;
-            margin: 0px;
-            text-align: center;
-            line-height: 50px;
-        }
-    }
-}
+        padding: 0px 10px;
+        line-height: $header-elements-weight;
+        display: inline-block;
+      }
 
-.column#user-and-flags {
-    position: relative;
-    text-align: right;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 25px;
-    
-    a.user {
-        display: inline-block;
-        padding: 0px 10px 0px 15px;
-        text-transform: uppercase;
-        font-size: 10pt;
-        text-align: right;
-        font-weight: $font-weight-bold;
+      i.fa {
+        margin: 0px 5px;
+      }
     }
-    
-    a.settings {
-        margin: 0px 6px;
+
+    div.search {
+      width: 200px;
+      height: $header-elements-weight;
+      padding: 4px 0px;
+      float: right;
+      transition: width .4s;
+
+      &:focus {
+        width: 250px;
+      }
+
+      form {
+        display: block;
+        width: 100%;
+        height: 100%;
         position: relative;
-        top: 1px;
-    }
-    
-    a.logout {
-        margin: 0px 20px 0px 6px;
-        position: relative;
-        top: 1px;
-    }
-    
-    ul.f-dropdown {
-        margin: 5px;
-        width: 130px;
-        li a { font-size: 9pt; }
-        text-align: left;
-    }
-    
-    a.flag:not(:first-child) {
-        margin-left: 15px;
-    }
-    
-    a.flag i {
-        transition: all .1s ease-in-out;
-        transform: scale(1.001);
-        -webkit-transform: scale(1.001);
-    }
-    
-    a.flag:hover i {
-        transform: scale(1.3);
-        -webkit-transform: scale(1.3);
-    }
-    
-    .title {
-        position: absolute;
-        display: inline-block;
-        border-bottom: 1px solid $primary-color;
+      }
+
+      label.icon {
+        display: block;
+        width: $header-elements-weight;
+        height: $header-elements-weight - 8px;
+        line-height: $header-elements-weight - 8px;
         color: $primary-color;
-        text-transform: uppercase;
-        font-size: 8pt;
-        text-align: right;
-        padding: 5px 5px 0px 5px;
-        top: -32px;
-        right: 15px;
-        opacity: .5;
+        text-align: center;
+        font-size: 11px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 60;
+      }
+
+      input {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0px;
+        box-shadow: none;
+        padding: 0px 0px 0px $header-elements-weight;
+        margin: 0px;
+        background: $secondary-color;
+        color: $primary-color;
+        border: 1px solid $primary-color;
+      }
     }
-       
-    
-    @media #{$medium-only} {
-        a.flag:not(:first-child) {
-            margin-left: 5px;
-        }
+
+    div.week {
+      float: left;
+      display: inline-block;
+      height: $header-elements-weight;
+      background: $primary-color;
+      color: white;
+      @include bold-up-text;
+      @include background-hover-effect( $primary-color );
+      font-weight: 400;
+
+      a {
+        color: white;
+        padding: 0px 18px;
+        line-height: $header-elements-weight;
+        display: inline-block;
+      }
+
+      i.fa {
+        margin: 0px 5px;
+      }
     }
+
+    div.week-switching {
+      float: left;
+      margin-left: 15px;
+
+      a {
+        display: inline-block;
+        width: $header-elements-weight / 1.5;
+        line-height:  $header-elements-weight;
+      }
+
+    }
+
+  }
+
 }

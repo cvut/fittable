@@ -1,40 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700&subset=latin,latin-ext);
 
-.info-line {
-    height: 0px;
+$header-elements-weight: 35px;
+
+@media #{$large-up} {
+  .row {
+    max-width: rem-calc(1700);
+  }
 }
 
-@media #{$medium-up} {
-    .info-line {
-        height: 72px;
-    }
-}
-
-.info-line {
-    .alert {
-        overflow: hidden;
-        color: $primary-color;
-        padding: 5px 15px;
-        font-size: 10pt;
-        text-transform: uppercase;
-        line-height: 20px;
-        vertical-align: middle;
-        margin-top: 15px;
-    }
-    
-    .spinner {
-        margin: 20px 10px;
-    }
-    
-    @media #{$small-only} {
-        text-align: right;
-        
-        .spinner {
-            margin: 17px 5% 0px 0px;
-        }
-    }
-}
-
-.gap {
-    height: 300px;
+@media #{$xlarge-up} {
+  .row {
+    max-width: rem-calc(1900);
+  }
 }
