@@ -15,5 +15,10 @@
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
     "load-grunt-tasks": "^0.6.0"
+  },
+  "devDependencies": {
+    "babelify": "^5.0.4",
+    "grunt-babel": "^4.0.0",
+    "grunt-browserify": "^3.5.1"
   }
 }

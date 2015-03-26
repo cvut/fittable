@@ -46,9 +46,13 @@ module.exports = function (grunt) {
 		// Watches files for changes and runs tasks based on the changed files
 		watch: {
 			compass: {
-				files: ['scss/**/*.scss'],
+				files: ['src/scss/**/*.scss'],
 				tasks: ['compass', 'autoprefixer:dev']
-			}
+			},
+            browserify: {
+                files: ['src/js/*.es'],
+                tasks: ['browserify']
+            }
 		},
 
 		// Add vendor prefixed styles
@@ -57,7 +61,7 @@ module.exports = function (grunt) {
 				browsers: ['last 2 version', 'ie >= 8', 'Android 3'] // add Android 3 for Android 4.3- gradients
 			},
 			dev: {
-				files: [{
+				files:  [{
 					src: 'src/css/*.css'
 				}]
 			},
@@ -83,12 +87,9 @@ module.exports = function (grunt) {
 				}]
 			}
 		},
-        
-        // babel (6to5 before) js build
-        'babel': {
-            options: {
-                sourceMap: true
-            },
+
+        // Browserify
+        browserify: {
             dev: {
                 files: {
                     'src/js/app.js': 'src/js/app.es'
@@ -98,9 +99,12 @@ module.exports = function (grunt) {
                 files: {
                     'dist/fittable.js': 'src/js/app.es'
                 }
+            },
+            options: {
+                transform: [ 'babelify' ]
             }
         },
-        
+
         // Uglify
         uglify: {
             options: {
@@ -122,7 +126,7 @@ module.exports = function (grunt) {
 		'clean:dev',
 		'compass:dev',
 		'autoprefixer:dev',
-        'babel:dev',
+        'browserify:dev',
 		'watch'
 	]);
 
@@ -130,7 +134,7 @@ module.exports = function (grunt) {
 		'clean:dist',
         'compass:dist',
         'autoprefixer:dist',
-        'babel:dist',
+        'browserify:dist',
         'uglify:dist',
         'copy:dist'
 	]);
