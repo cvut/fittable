@@ -101,7 +101,10 @@ module.exports = function (grunt) {
                 }
             },
             options: {
-                transform: [ 'babelify' ]
+                transform: [ 'babelify' ],
+                browserifyOptions: {
+                    debug: true
+                }
             }
         },
 
