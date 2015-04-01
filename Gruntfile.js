@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 				tasks: ['compass', 'autoprefixer:dev']
 			},
             browserify: {
-                files: ['src/js/*.es'],
+                files: ['src/js/*.js'],
                 tasks: ['browserify']
             }
 		},
@@ -92,12 +92,12 @@ module.exports = function (grunt) {
         browserify: {
             dev: {
                 files: {
-                    'src/js/app.js': 'src/js/app.es'
+                    'src/js/app.es5.js': 'src/js/app.js'
                 }
             },
             dist: {
                 files: {
-                    'dist/fittable.js': 'src/js/app.es'
+                    'dist/fittable.js': 'src/js/app.js'
                 }
             },
             options: {
