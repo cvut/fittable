@@ -3,11 +3,19 @@
 <head>
     <title>fittable :: developement environment</title>
     <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="css/fittable.css">
 </head>
 <body>
 
-    <h1>fittable DE</h1>
+    <div id="fittable" data-fittable></div>
 
-    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/app.es5.js"></script>
+    <script type="text/javascript">
+
+        var myfittable = new fittable( 'fittable' );
+
+        // myfittable.loadSiriusData( siriusJSONstring );
+
+    </script>
 </body>
 </html>
