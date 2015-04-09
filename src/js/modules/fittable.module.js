@@ -12,6 +12,7 @@ export default class fittable
         this.defaultElementName = elementName;
         this.DOMelement;
         this.renderer = new renderer();
+        this.dataSource = null;
 
         window.addEventListener( 'load', () =>
             {
@@ -23,6 +24,11 @@ export default class fittable
     getDOMelement()
     {
         return this.DOMelement;
+    }
+
+    setDataSource( dataSource )
+    {
+        this.dataSource = dataSource;
     }
 }
 
