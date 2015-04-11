@@ -21,7 +21,15 @@ module.exports = function (grunt) {
 					]
 				}]
 			},
-			dev: '.tmp'
+            dev: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        'src/build/*'
+                    ]
+                }]
+            },
 		},
         
         // Compiles Sass to CSS and generates necessary files if requested
@@ -29,7 +37,7 @@ module.exports = function (grunt) {
             dev: {
 				options: {
 					sassDir: 'src/scss',
-					cssDir: 'src/css',
+					cssDir: 'src/build/',
 					noLineComments: true
 				}
 			},
@@ -52,6 +60,10 @@ module.exports = function (grunt) {
             browserify: {
                 files: ['src/js/**/*.js'],
                 tasks: ['browserify']
+            },
+            copy: {
+                files: ['src/*.html'],
+                tasks: ['copy']
             }
 		},
 
@@ -62,7 +74,7 @@ module.exports = function (grunt) {
 			},
 			dev: {
 				files:  [{
-					src: 'src/css/*.css'
+					src: 'src/build/*.css'
 				}]
 			},
 			dist: {
@@ -74,25 +86,37 @@ module.exports = function (grunt) {
 
 		// Copies remaining files to places other tasks can use
 		copy: {
-			dist: {
-				files: [{
-					expand: true,
-					dot: true,
-					cwd: '.',
-					dest: 'dist',
-					src: [
-                        'src/**.{ico,png,txt,xml}',
-                        'src/.htaccess'
-					]
-				}]
-			}
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '.',
+                    dest: 'dist',
+                    flatten: true,
+                    src: [
+                        'src/*.html'
+                    ]
+                }]
+            },
+            dev: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '.',
+                    dest: 'src/build',
+                    flatten: true,
+                    src: [
+                        'src/*.html'
+                    ]
+                }]
+            }
 		},
 
         // Browserify
         browserify: {
             dev: {
                 files: {
-                    'src/js/app.es5.js': 'src/js/app.js'
+                    'src/build/fittable.js': 'src/js/app.js'
                 }
             },
             dist: {
@@ -130,6 +154,7 @@ module.exports = function (grunt) {
 		'compass:dev',
 		'autoprefixer:dev',
         'browserify:dev',
+        'copy:dev',
 		'watch'
 	]);
 

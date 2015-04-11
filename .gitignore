@@ -18,8 +18,7 @@ results
 .tmp
 
 src/css
-src/js/app.js
-src/js/app.js.map
+src/build
 .idea/
 
 dist/

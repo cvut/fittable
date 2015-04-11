@@ -4,6 +4,13 @@
   "description": "More fittable timetable & calendar widget",
   "main": "index.html",
   "author": "Marián Hlaváč",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cvut/fittable"
+  },
+  "bugs": {
+    "url": "https://github.com/cvut/fittable/issues"
+  },
   "dependencies": {
     "babel": "^4.7.8",
     "grunt": "^0.4.5",
@@ -22,6 +29,9 @@
     "grunt-browserify": "^3.5.1"
   },
   "scripts": {
-    "build": "node -e \"require('grunt').tasks(['build']);\""
+    "grunt": "node -e \"require('grunt').tasks(['build']);\"",
+    "bower": "bower install",
+    "build": "npm run bower && npm run grunt",
+    "postinstall": "npm run build"
   }
 }

@@ -15,10 +15,10 @@ First, make sure you're equipped with [Node.JS](http://www.nodejs.org) and [npm]
 
 *In future you'll be able to install fittable via bower.*
 
-When you're ready with all these tools, compile the project with command:
+When you're ready with all these tools, install it all with one command:
 
 ```
-$ npm build
+$ npm install
 ```
 
 The compiled files will appear in directory **dist/**
