@@ -9,13 +9,19 @@ Using JavaScript ES6+ code (converting to ES5 using [https://github.com/6to5/6to
 
 Offers quick implementation into another applications through simple Javascript API layer. For more information how to use this widget, visit [our wiki](#).
 
-## Install
+## Installation
+
+First, make sure you're equipped with [Node.JS](http://www.nodejs.org) and [npm](http://www.npmjs.com).
+
+*In future you'll be able to install fittable via bower.*
+
+When you're ready with all these tools, compile the project with command:
 
 ```
-$ bower install cvut/fittable --save
+$ npm build
 ```
 
-*... TODO* :grin:
+The compiled files will appear in directory **dist/**
 
 ## Quick start
 
