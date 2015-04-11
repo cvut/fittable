@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                         'src/build/*'
                     ]
                 }]
-            },
+            }
 		},
         
         // Compiles Sass to CSS and generates necessary files if requested

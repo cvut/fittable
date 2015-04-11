@@ -1,0 +1,7 @@
+{
+  "undef": true,
+  "unused": true,
+  "esnext": true,
+  "maxparams": 5,
+  "browserify": true
+}
