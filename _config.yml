@@ -18,3 +18,4 @@ asciidoctor:
     - _vendor/asciidoctor-html5/data/templates
   attributes:
     - hardbreaks!
+    - sectanchors
