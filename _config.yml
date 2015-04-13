@@ -14,5 +14,7 @@ exclude:
   - vendor
 
 asciidoctor:
+  template_dirs:
+    - _vendor/asciidoctor-html5/data/templates
   attributes:
     - hardbreaks!
