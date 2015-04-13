@@ -11,9 +11,9 @@
 }
 
 .site-title {
-    font-size: 26px;
-    line-height: 56px;
-    letter-spacing: -1px;
+    font-size: 1.625rem;
+    line-height: 3.5rem;
+    letter-spacing: -0.03rem;
     margin-bottom: 0;
     float: left;
 
@@ -97,7 +97,7 @@
 }
 
 .footer-heading {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-bottom: $spacing-unit / 2;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .footer-col-wrapper {
-    font-size: 15px;
+    font-size: 0.9rem;
     color: $grey-color;
     margin-left: -$spacing-unit / 2;
     @extend %clearfix;
@@ -166,7 +166,7 @@
 }
 
 .page-heading {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .post-list {
@@ -185,7 +185,7 @@
 
 .post-link {
     display: block;
-    font-size: 24px;
+    font-size: 1.563rem;
 }
 
 
@@ -198,8 +198,7 @@
 }
 
 .post-title {
-    font-size: 42px;
-    letter-spacing: -1px;
+    font-size: 3.052rem;
     line-height: 1;
 
     @include media-query($on-laptop) {
@@ -211,7 +210,7 @@
     margin-bottom: $spacing-unit;
 
     h2 {
-        font-size: 32px;
+        font-size: 2.441rem;
 
         @include media-query($on-laptop) {
             font-size: 28px;
@@ -219,7 +218,7 @@
     }
 
     h3 {
-        font-size: 26px;
+        font-size: 1.953rem;
 
         @include media-query($on-laptop) {
             font-size: 22px;
@@ -227,7 +226,7 @@
     }
 
     h4 {
-        font-size: 20px;
+        font-size: 1.563rem;
 
         @include media-query($on-laptop) {
             font-size: 18px;

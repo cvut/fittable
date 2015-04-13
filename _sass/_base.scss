@@ -74,6 +74,10 @@ li {
     }
 }
 
+dl dt {
+    font-weight: bold;
+}
+
 
 
 /**
@@ -112,7 +116,7 @@ blockquote {
     color: $grey-color;
     border-left: 4px solid $grey-color-light;
     padding-left: $spacing-unit / 2;
-    font-size: 18px;
+    font-size: 1.125rem;
     letter-spacing: -1px;
     font-style: italic;
 
@@ -243,5 +247,67 @@ pre {
 
     li p {
        display: inline;
+    }
+}
+
+
+/**
+ * Admonition blocks
+ */
+.admonitionblock {
+    padding: 0.7em 1em;
+    margin: 1em 0;
+    border: 1px dotted;
+    border-left: 0.5em solid;
+
+    &.note {
+        border-left: 0.5em solid #0063a6;
+    }
+
+    &.tip {
+        border-color: #47ad09;
+    }
+
+    &.important {
+        border-color: #d4af37;
+    }
+
+    &.caution {
+        border-color: #c11100;
+    }
+
+    &.warning {
+        background-color: #ffebeb;
+        border-color: #c11100;
+    }
+
+    & > h6 {
+        display: none;
+    }
+}
+
+
+/**
+ * Header anchor
+ */
+a.anchor {
+    display: block;
+    position: absolute;
+    z-index: 1001;
+    width: 1.5ex;
+    margin-left: -1.5ex;
+    text-decoration: none;
+    text-align: center;
+    visibility: hidden;
+
+    &:before {
+        content: "§";
+        font-size: 0.9em;
+    }
+}
+
+@for $lvl from 1 through 6 {
+    h#{$lvl}:hover > a.anchor {
+        visibility: visible;
     }
 }
