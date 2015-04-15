@@ -38,7 +38,9 @@ Odkazy::
 TIP: Hlavní stránkou v novém rozhraní bude přímo kalendář přihlášeného uživatele otevřený na aktuálním týdnu.
 
 TIP: Všechny rozvrhové výjimky i blokovou výuku budou rozvrháři zadávat do Siria a promítnou se do výsledných kalendářů.
-      Zároveň bude existovat přehledová stránka všech zadaných výjimek.
+     Zároveň bude existovat přehledová stránka všech zadaných výjimek.
+
+TIP: Přehled počítačových a seminárních učeben je také na https://ict.fit.cvut.cz/~web/current/web/classrooms/ucebny/ucebny.shtml[webu ICT].
 
 
 === Seznam předmětů
@@ -224,7 +226,7 @@ Odkazy::
     ** <<Seznam studentů zapsaných na paralelku>>
 
 
-CAUTION: Aktuálně nepočítáme se zobrazováním hodinové dotace předmětu, neb v kontextu již sestaveného rozvrhu jde o redundantní informaci.
+CAUTION: Aktuálně nepočítáme se zobrazováním hodinové dotace předmětu, neb v kontextu již sestaveného rozvrhu jde o redundantní informaci a navíc je dostupná v Bílé knize.
 
 
 ==== Rozvrh učitele
@@ -253,8 +255,8 @@ Odkazy::
     ** <<Seznam studentů zapsaných na paralelku>>
 
 
-WARNING: S agregací e-mailových adres studentů napříč více paralelkami konkrétního vyučujícího momentálně nepočítáme.
-         Je potřeba zjistit, zda tuto funkcionalitu někdo využívá a případně vymyslet vhodnou náhradu.
+CAUTION: S agregací e-mailových adres studentů napříč více paralelkami konkrétního vyučujícího momentálně nepočítáme.
+         Stejnou funkcionalitu poskytuje webové rozhraní KOSu, pro vyučující dostupné přes Předměty → Prezenční seznamy → Email → Všechny moje paralelky.
 
 
 ==== Rozvrh studenta
@@ -343,8 +345,8 @@ Odkazy::
   * <<Rozvrh studenta>>
 
 
-WARNING: Někteří vyučující údajně tuto stránku tisknou a používají jako záznamový arch pro docházku.
-         Je potřeba zjistit, kolik vyučujících to takto používá a případně připravit vhodnou náhradu.
+CAUTION: Někteří vyučující si tuto stránku tisknou a používají jako záznamový arch pro docházku.
+         S touto funkcionalitou zde nepočítáme, vyučující si mohou prezenční seznam vytisknout z webového rozhraní KOSu: Předměty → Prezenční seznamy → Tisk (link:../images/kos-attendance-list.png[ukázka]).
 
 
 ==== Seznam studentů zapsaných na předmět
@@ -354,7 +356,8 @@ _(rozšiřuje <<Seznam zapsaných studentů>>)_
 Tento seznam zahrnuje i studenty, kteří nejsou zapsaní na žádnou paralelku.
 
 
-CAUTION: Toto nespadá do kompetence Siria a ve fittable se s tím momentálně nepočítá.
+CAUTION: Toto nespadá do kompetence Siria a v novém rozhraní s tím momentálně nepočítáme.
+         Vyučující si mohou zobrazit seznam všech studentů ve webovém rozhraní KOSu: Předměty → Prezenční seznamy, ve filtru „Paralelka“ zvolit „Všechny moje paralelky.“
 
 
 ==== Seznam studentů zapsaných na paralelku
