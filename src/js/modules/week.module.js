@@ -54,14 +54,14 @@ export default class Week
             lbEl.className = 'label';
             var lbEl2 = document.createElement( 'span' );
             lbEl2.className = 'day-name';
-            lbEl2.appendChild( document.createTextNode( '#dayname#' ) ); // todo: support translations, get these strings from somewhere else
+            lbEl2.appendChild( document.createTextNode( '#dayname#' + day + '#' ) ); // todo: support translations, get these strings from somewhere else
             lbEl.appendChild( lbEl2 );
 
             dyEl.appendChild( lbEl );
 
             // Render all events from this day
             var evsEl = document.createElement( 'div' );
-            evsEl.className = 'elements';
+            evsEl.className = 'events';
             for ( var event in this.days[ day ] )
                 evsEl.appendChild( this.days[ day ][ event ].render() );
 

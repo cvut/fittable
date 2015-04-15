@@ -5,6 +5,7 @@
 
 import Renderer from './renderer.module.js';
 import Week from './week.module.js';
+import Controls from './controls.module.js';
 
 export default class Fittable
 {
@@ -15,18 +16,24 @@ export default class Fittable
         this.renderer = new Renderer( this );
         this.activeWeek = 42; // todo: get actual week
         this.weeks = [];
+        this.controls = null;
 
         window.addEventListener( 'load', () =>
             {
-                // Render on document load
+                // Set DOMelement of fittable
                 this.DOMelement = document.getElementById( this.defaultElementName );
-                this.render();
-            });
-    }
 
-    getDOMelement()
-    {
-        return this.DOMelement;
+                // Render controls after render
+                this.renderer.afterRender = ( ftbl ) =>
+                {
+                    ftbl.controls = new Controls( ftbl );
+                    ftbl.controls.refresh();
+                };
+
+                // Render it!
+                this.renderer.render( this.DOMelement );
+            }
+        );
     }
 
     resetWeek( index )
@@ -51,11 +58,6 @@ export default class Fittable
     {
         if ( index < 0 || index > 53 ) throw "Week index out of range.";
 
-    }
-
-    render()
-    {
-        this.renderer.render( this.DOMelement );
     }
 }
 

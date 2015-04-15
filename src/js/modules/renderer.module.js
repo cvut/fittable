@@ -9,6 +9,8 @@ export default class Renderer
     {
         this.templateFile = 'tpl.html';
         this.fittable = fittable;
+        this.beforeRender = null;
+        this.afterRender = null;
     }
 
     /**
@@ -26,12 +28,14 @@ export default class Renderer
         tplReq.send();
     }
 
-
     /**
      * Renders fittable
      */
     render()
     {
+        // --- Before render
+        if ( typeof this.beforeRender == "function" ) this.beforeRender( this.fittable );
+
         // Render basic HTML template
         this.loadTemplate( ( template ) =>
             {
@@ -50,6 +54,9 @@ export default class Renderer
 
                 for ( var week in weeksElements )
                     tableElement.appendChild( weeksElements[ week ] );
+
+                // --- After render
+                if (typeof this.afterRender == "function") this.afterRender(this.fittable);
             }
         );
     }
