@@ -4,6 +4,7 @@
  */
 
 import TimetableEvent from './timetableevent.module.js';
+import Locale from './locale.module.js';
 
 export default class Week
 {
@@ -54,7 +55,7 @@ export default class Week
             lbEl.className = 'label';
             var lbEl2 = document.createElement( 'span' );
             lbEl2.className = 'day-name';
-            lbEl2.appendChild( document.createTextNode( '#dayname#' + day + '#' ) ); // todo: support translations, get these strings from somewhere else
+            lbEl2.appendChild( document.createTextNode( Locale.ll( 'day' + day ) ) );
             lbEl.appendChild( lbEl2 );
 
             dyEl.appendChild( lbEl );

@@ -3,6 +3,8 @@
  * @brief Class for manipulation with controls elements at top
  */
 
+import Locale from './locale.module.js';
+
 export default class Controls
 {
     constructor( fittable )
@@ -26,8 +28,10 @@ export default class Controls
     refresh()
     {
         // Refresh week number
-        this.week.getElementsByClassName( 'week-text' )[0].innerHTML = 'Týden ' + this.fittable.activeWeek;
-        this.week.getElementsByClassName( 'week-parity-text' )[0].innerHTML = ( this.fittable.activeWeek % 2 == 1 ? 'Lichý' : 'Sudý' );
+        this.week.getElementsByClassName( 'week-text' )[0].innerHTML = Locale.l( 'week' ) + ' ' + this.fittable.activeWeek;
+        this.week.getElementsByClassName( 'week-parity-text' )[0].innerHTML = (
+            this.fittable.activeWeek % 2 == 1 ? Locale.l( 'odd' ) : Locale.l( 'even' )
+        );
     }
 
 }
