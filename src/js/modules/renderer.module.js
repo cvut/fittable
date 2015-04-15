@@ -3,13 +3,13 @@
  * @brief nah
  */
 
-export default class renderer
+export default class Renderer
 {
-    constructor()
+    constructor( fittable )
     {
-        this.templateFile = 'template/template.html';
+        this.templateFile = 'tpl.html';
+        this.fittable = fittable;
     }
-
 
     /**
      * Makes HTTP request and returns main HTML template
@@ -26,17 +26,30 @@ export default class renderer
         tplReq.send();
     }
 
+
     /**
      * Renders fittable
      */
-    render( element )
+    render()
     {
+        // Render basic HTML template
         this.loadTemplate( ( template ) =>
             {
-                if ( element != null )
-                    element.outerHTML = template;
+                if ( this.fittable.DOMelement != null )
+                {
+                    this.fittable.DOMelement.innerHTML = template;
+                    this.fittable.DOMelement.setAttribute( 'data-js-generated', '' );
+                    this.fittable.DOMelement.className = 'fittable-container horizontal one-colored';
+                }
                 else
                     throw 'Element for rendering not found. Render aborted.';
+
+                // Render week
+                var tableElement = this.fittable.DOMelement.getElementsByClassName( 'table' )[0];
+                var weeksElements = this.fittable.getActiveWeek().render();
+
+                for ( var week in weeksElements )
+                    tableElement.appendChild( weeksElements[ week ] );
             }
         );
     }

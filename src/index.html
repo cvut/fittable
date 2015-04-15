@@ -7,13 +7,18 @@
 </head>
 <body>
 
-    <div id="fittable" data-fittable></div>
+    <div class="row container">
+        <div id="fittable" data-fittable></div>
+    </div>
 
     <script type="text/javascript" src="fittable.js"></script>
     <script type="text/javascript">
 
-        var myfittable = new fittable( 'fittable' );
-        myfittable.setDataSource( new siriusData( 'https://sirius.fit.cvut.cz/api/v1/', 'd4940cf6-68e2-4476-9558-3ebe6ef2c570' ) );
+        var myfittable = new Fittable( 'fittable' );
+
+        var event = new TimetableEvent( 46, 'BI-LIN', 'Lineární algebra', new Date(), new Date() );
+        var event2 = new TimetableEvent( 48, 'BI-ZUM', 'Základy umělé inteligence', new Date(), new Date() );
+        myfittable.week( 42 ).addEvent( event, 0).addEvent( event2, 1 );
 
     </script>
 </body>
