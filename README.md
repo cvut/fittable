@@ -23,6 +23,10 @@ $ npm install
 
 The compiled files will appear in directory **dist/**
 
+## Screenshot
+
+[![Fittable screenshot, Imgur](http://i.imgur.com/GQ3S0Ko.png)](http://i.imgur.com/GQ3S0Ko.png)
+
 ## Quick start
 
 *TODO*
