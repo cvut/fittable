@@ -94,7 +94,8 @@ module.exports = function (grunt) {
                     dest: 'dist',
                     flatten: true,
                     src: [
-                        'src/*.html'
+                        'src/*.html',
+                        'bower_components/react/react.js'
                     ]
                 }]
             },
@@ -106,7 +107,8 @@ module.exports = function (grunt) {
                     dest: 'src/build',
                     flatten: true,
                     src: [
-                        'src/*.html'
+                        'src/*.html',
+                        'bower_components/react/react.js'
                     ]
                 }]
             }
@@ -134,13 +136,8 @@ module.exports = function (grunt) {
 
         // Uglify
         uglify: {
-            options: {
-                compress: true,
-                preserveComments: false,
-                banner: '/** Fittable <%= pkg.version %> */'
-            },
             dist: {
-                'dist/fittable.min.js': ['dist/fittable.js']
+                'dist/fittable.min.js': ['./dist/fittable.js', './dist/react.js']
             }
         }
         

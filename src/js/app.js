@@ -1,5 +1,11 @@
-import Fittable from './modules/fittable.module.js';
-import TimetableEvent from './modules/timetableevent.module.js';
+/**
+ * Main application file of Fittable
+ *  - Requires React.js to be loaded before loading this
+ *
+ *  @author Marián Hlaváč
+ */
 
+import Fittable from './modules/fittable.module';
+
+// Propagate fittable class globally
 global.Fittable = Fittable;
-global.TimetableEvent = TimetableEvent;
