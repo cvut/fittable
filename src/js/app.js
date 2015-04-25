@@ -5,7 +5,10 @@
  *  @author Marián Hlaváč
  */
 
-import Fittable from './modules/fittable.module';
+import Fittable from './components/fittable.component';
 
-// Propagate fittable class globally
-global.Fittable = Fittable;
+// Container element id ( used for drawing fittable )
+var containerElId = "fittable";
+
+// Render Fittable!
+React.render( React.createElement( Fittable ), document.getElementById( containerElId ) );
