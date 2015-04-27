@@ -7,8 +7,8 @@
 
 import Fittable from './components/fittable.component';
 
-// Container element id ( used for drawing fittable )
-var containerElId = "fittable";
-
-// Render Fittable!
-React.render( React.createElement( Fittable ), document.getElementById( containerElId ) );
+global.fittable = function ( containerElId )
+{
+    // Render Fittable!
+    React.render( React.createElement( Fittable ), document.getElementById( containerElId ) );
+}
