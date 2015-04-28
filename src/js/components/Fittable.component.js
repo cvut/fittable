@@ -92,6 +92,9 @@ export default class Fittable extends React.Component
         {
             this.setState( { selectedWeek: week } );
         }
+
+        // Refresh week
+        this.weekEvents = this.getWeekEvents( this.state.selectedWeek, this.state.selectedYear );
     }
 
     /**

@@ -48,7 +48,14 @@
         height: $day-row-height - ($day-row-padding * 2);
         position: relative;
         z-index: 80;
-        animation: week-move-left ease 0.8s;
+
+        &.a-left {
+          animation: week-move-left ease 0.8s;
+        }
+
+        &.a-right {
+          animation: week-move-right ease 0.8s;
+        }
 
         div.event {
           height: 100%;
