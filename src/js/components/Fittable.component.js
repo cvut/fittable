@@ -24,8 +24,6 @@ export default class Fittable extends React.Component
         };
 
         this.weekEvents = null;
-
-        console.log( this.state );
     }
 
     getWeekEvents( weekNum, year )
@@ -69,6 +67,7 @@ export default class Fittable extends React.Component
         var d = new Date(yr, 0, 1);
         var isLeap = (yr%400)?((yr%100)?((yr%4)?false:true):false):true;
         var weeksInYear = d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52;
+        var animDirection = null;
 
         // Going to previous year
         if ( week < 1 )
@@ -81,20 +80,27 @@ export default class Fittable extends React.Component
             isLeap = (yr%400)?((yr%100)?((yr%4)?false:true):false):true;
 
             this.setState( { selectedWeek: d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52 } );
+            animDirection = -1;
         }
         // Going to next year
         else if ( week > weeksInYear )
         {
             this.setState( { selectedWeek: 1, selectedYear: this.state.selectedYear + 1 } );
+            animDirection = 1;
         }
         // Same year
         else
         {
+            animDirection = week > this.state.selectedWeek ? 1 : -1;
             this.setState( { selectedWeek: week } );
+
         }
 
         // Refresh week
         this.weekEvents = this.getWeekEvents( this.state.selectedWeek, this.state.selectedYear );
+
+        // Do the animation
+        if ( animDirection == 1 ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
     }
 
     /**
@@ -104,7 +110,7 @@ export default class Fittable extends React.Component
     {
         return <div className="fittable-container">
             <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} />
-            <Timetable weekEvents={this.weekEvents} />
+            <Timetable weekEvents={this.weekEvents} ref="timetable" />
         </div>;
     }
 }

@@ -48,14 +48,7 @@
         height: $day-row-height - ($day-row-padding * 2);
         position: relative;
         z-index: 80;
-
-        &.a-left {
-          animation: week-move-left ease 0.8s;
-        }
-
-        &.a-right {
-          animation: week-move-right ease 0.8s;
-        }
+        visibility: hidden;
 
         div.event {
           height: 100%;
@@ -107,9 +100,11 @@
           }
 
           &.detail-shown {
-            width: 230px !important;
+            width: 270px !important;
             height: auto;
             z-index: 999;
+
+            .inner { box-shadow: 0px 2px 9px rgba( 70, 70, 70, .2 ); }
 
             div.detail {
               display: block;
@@ -117,6 +112,16 @@
           }
         }
       }
+    }
+
+    &.a-left div.day div.events {
+      visibility: visible;
+      animation: week-move-left ease 0.4s;
+    }
+
+    &.a-right div.day div.events {
+      visibility: visible;
+      animation: week-move-right ease 0.4s;
     }
 
     .grid-overlay {
