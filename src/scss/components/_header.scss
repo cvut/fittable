@@ -87,6 +87,7 @@
       @include bold-up-text;
       @include background-hover-effect( $primary-color );
       font-weight: 400;
+      width: 160px;
 
       a {
         color: white;
@@ -102,12 +103,13 @@
 
     div.week-nav {
       float: left;
-      margin-left: 15px;
+      margin-left: 10px;
 
       a {
         display: inline-block;
         width: $header-elements-weight / 1.5;
         line-height:  $header-elements-weight;
+        text-align: center;
       }
 
     }
