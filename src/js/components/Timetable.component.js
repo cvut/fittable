@@ -40,8 +40,9 @@ export default class Timetable extends React.Component
         var weekEvents = [ [], [], [], [], [], [], [] ];
 
         // Timeline length
-        var timelineFrom = 8 * 3600 * 1000;
-        var timelineTo = 18 * 3600 * 1000;
+        // todo: temp statically, need to be dynamic
+        var timelineFrom = 7 * 3600 * 1000;
+        var timelineTo = 20 * 3600 * 1000;
 
         // Parse each event, do
         for ( var event of this.props.weekEvents )
