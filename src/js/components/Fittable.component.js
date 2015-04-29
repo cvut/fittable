@@ -29,10 +29,10 @@ export default class Fittable extends React.Component
         this.weekEvents = null;
     }
 
-    getWeekEvents( weekNum, year )
+    getWeekEvents( timeFrom, timeTo )
     {
         // todo: tohle bude nejspíš blbě, tak zatím jenom dočasně, ať mám s čím dělat
-        return this.props.dataCallback( new Date( this.state.timeFrom ), new Date( this.state.timeTo ) );
+        return this.props.dataCallback( new Date( timeFrom ), new Date( timeTo ) );
     }
 
     componentWillMount()
@@ -49,52 +49,58 @@ export default class Fittable extends React.Component
         var isLeap = ( yr % 400 ) ? ( ( yr % 100 ) ? ( ( yr % 4 ) ? false : true ) : false ) : true;
         var weeksInYear = d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52;
         var animDirection = null;
+        var update = {};
 
         // Going to previous year
         if ( week < 1 )
         {
-            this.setState( { selectedYear: this.state.selectedYear - 1 } );
+            update.selectedYear = this.state.selectedYear - 1;
             yr--;
 
             // Cacluclate num of weeks in prev year first
             d = new Date(yr, 0, 1);
             isLeap = ( yr % 400 ) ? ( ( yr % 100 ) ? ( ( yr % 4 ) ? false : true ) : false ) : true;
 
-            this.setState( { selectedWeek: d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52 } );
+            update.selectedWeek = d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52;
             animDirection = -1;
         }
         // Going to next year
         else if ( week > weeksInYear )
         {
-            this.setState( { selectedWeek: 1, selectedYear: this.state.selectedYear + 1 } );
+            update.selectedWeek = 1;
+            update.selectedYear = this.state.selectedYear + 1;
             animDirection = 1;
         }
         // Same year
         else
         {
             animDirection = week > this.state.selectedWeek ? 1 : -1;
-            this.setState( { selectedWeek: week } );
-
+            update.selectedWeek = week;
+            update.selectedYear = this.state.selectedYear;
         }
 
-        // Refresh week
-        this.weekEvents = this.getWeekEvents( this.state.selectedWeek, this.state.selectedYear );
-
         // Recalculate ranges
-        this.setState( this.calculateWeekTimeRange() );
+        var timerange = this.calculateWeekTimeRange( update.selectedYear, update.selectedWeek );
+        update.timeFrom = timerange.timeFrom;
+        update.timeTo = timerange.timeTo;
+
+        this.weekEvents = this.getWeekEvents( timerange.timeFrom , timerange.timeTo );
+
+        // Set states
+        this.setState( update );
 
         // Do the animation
         if ( animDirection == 1 ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
     }
 
-    calculateWeekTimeRange()
+    calculateWeekTimeRange( year = this.state.selectedYear, week = this.state.selectedWeek )
     {
-        var yearTimestamp = Date.UTC( this.state.selectedYear, 0 );
-        var firstDayOffset = ( new Date( this.state.selectedYear, 0 ).getDay() - 1 ) * 3600 * 24 * 1000;
+        var yearTimestamp = Date.UTC( year, 0 );
+        var firstDayOffset = ( new Date( year, 0 ).getDay() - 1 ) * 3600 * 24 * 1000;
 
         return {
-            timeFrom: yearTimestamp + ( ( this.state.selectedWeek - 1 ) * 3600 * 24 * 7 * 1000 - firstDayOffset ),
-            timeTo: yearTimestamp + ( ( this.state.selectedWeek ) * 3600 * 24 * 7 * 1000 - firstDayOffset - 1 )
+            timeFrom: yearTimestamp + ( ( week - 1 ) * 3600 * 24 * 7 * 1000 - firstDayOffset ),
+            timeTo: yearTimestamp + ( ( week ) * 3600 * 24 * 7 * 1000 - firstDayOffset - 1 )
         };
     }
 

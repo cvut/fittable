@@ -17,11 +17,13 @@
 
         var dataCallback = function ( from, to ) {
 
+            console.log( "callback called" );
+            console.log( from );
             var data = [];
 
             for ( var i = 0; i < 6; i++ )
             {
-                var randomStart = new Date( from.getTime() + Math.round( Math.random() * 6 ) * 24 * 3600 * 1000 );
+                var randomStart = new Date( from.getTime() + Math.round( Math.random() * 4 ) * 24 * 3600 * 1000 );
                 randomStart.setUTCHours( Math.round( Math.random() * 8 ) + 8 );
                 randomStart.setUTCMinutes( 0 );
                 randomStart.setUTCSeconds( 0 );
