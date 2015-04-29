@@ -36,7 +36,7 @@ export default class EventBox extends React.Component
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{this.props.data.room}</div>
                 <div className="type">{this.props.data.type}</div>
-                <EventDetail ref="detail" />
+                <EventDetail ref="detail" details={this.props.data.details} />
             </div>
         </div>;
     }
