@@ -1,3 +1,5 @@
+$event-rollout-anim-speed: .2s;
+
 #fittable {
 
   div.table {
@@ -54,7 +56,7 @@
         div.event {
           position: absolute;
           padding: 0px 5px;
-          transition: width .5s;
+          transition: width $event-rollout-anim-speed;
           z-index: 99;
           height: 100%;
 
@@ -101,7 +103,7 @@
             height: 0px;
             color: #222;
             width: 270px;
-            transition: opacity .7s, min-height .5s, height .5s;
+            transition: opacity $event-rollout-anim-speed*2, min-height $event-rollout-anim-speed, height $event-rollout-anim-speed;
             opacity: 0;
           }
 
@@ -142,7 +144,6 @@
       padding: $day-row-padding 0px $day-row-padding 10%;
       z-index: 40;
       opacity: .5;
-      transition: opacity .6s;
 
       .grid {
         background-color: transparent;
@@ -151,14 +152,6 @@
         width: 100%;
         height: 100%;
       }
-    }
-
-    &:hover {
-
-      .grid-overlay {
-        opacity: 1;
-      }
-
     }
 
   }
