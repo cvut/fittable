@@ -32,6 +32,11 @@ export default class Controls extends React.Component
         this.props.onWeekChange( this.props.week + 1 );
     }
 
+    onRefresh( e )
+    {
+        this.props.onRefresh( this.props.week );
+    }
+
     /**
      * Renders the component
      */
@@ -40,7 +45,7 @@ export default class Controls extends React.Component
         return <div className="header">
             <Week week={this.props.week} />
             <WeekNav onPrevClick={this.onPrevClick.bind(this)} onNextClick={this.onNextClick.bind(this)} />
-            <FunctionsBar />
+            <FunctionsBar onRefresh={this.onRefresh.bind(this)} />
         </div>;
     }
 }

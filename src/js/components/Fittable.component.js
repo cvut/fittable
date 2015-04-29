@@ -139,7 +139,7 @@ export default class Fittable extends React.Component
     render()
     {
         return <div className="fittable-container">
-            <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} />
+            <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} onRefresh={this.changeWeek.bind(this)} />
             <Timetable weekEvents={this.weekEvents} from={this.state.timeFrom} to={this.state.timeTo} ref="timetable" />
         </div>;
     }
