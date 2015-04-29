@@ -114,8 +114,14 @@ export default class Fittable extends React.Component
      * @param {integer} week
      * @returns {{timeFrom: number, timeTo: number}}
      */
-    calculateWeekTimeRange( year = this.state.selectedYear, week = this.state.selectedWeek )
+    calculateWeekTimeRange( year = null, week = null )
     {
+        if( typeof this.state !== "undefined" )
+        {
+            if (year == null && typeof this.state.selectedYear !== "undefined") year = this.state.selectedYear;
+            if (week == null && typeof this.state.selectedWeek !== "undefined") week = this.state.selectedWeek;
+        }
+
         var yearTimestamp = Date.UTC( year, 0 );
         var firstDayOffset = ( new Date( year, 0 ).getDay() - 1 ) * 3600 * 24 * 1000;
 
