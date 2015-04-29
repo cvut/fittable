@@ -17,6 +17,7 @@ export default class Day extends React.Component
      */
     render()
     {
+        // Temporarily keeping day names here. In future, we'll have separated location strings elsewhere
         var dayNames = [ "pondělí", "úterý", "středa", "čtvrtek", "pátek" ];
 
         return <div className="day" data-day="{this.props.id}">

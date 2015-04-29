@@ -39,8 +39,6 @@ export default class Timetable extends React.Component
     {
         var weekEvents = [ [], [], [], [], [], [], [] ];
 
-        console.log( this.props );
-
         // Timeline length
         var timelineFrom = 8 * 3600 * 1000;
         var timelineTo = 18 * 3600 * 1000;
@@ -56,8 +54,6 @@ export default class Timetable extends React.Component
             // Add drawing properties to events
             event._draw_position = (startTime - timelineFrom) / ( timelineTo - timelineFrom );
             event._draw_length = lengthTime / ( timelineTo - timelineFrom );
-
-            console.log( event.startsAt );
 
             // Sort events by day of week
             weekEvents[ Math.floor( ( event.startsAt.getTime() - this.props.from ) / (24 * 3600 * 1000) ) ].push( event );

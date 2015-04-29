@@ -15,6 +15,11 @@ export default class EventBox extends React.Component
         };
     }
 
+    /**
+     * Handler for events, when event box is clicked, and the
+     * EventDetail component should be displayed
+     * @param e event
+     */
     handleShowDetail( e )
     {
         this.setState( { detailShown: !this.state.detailShown } );

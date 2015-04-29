@@ -5,11 +5,19 @@
 
 export default class WeekNav extends React.Component
 {
+    /**
+     * Handler for events, when the previous button is clicked ( bubbles to parent )
+     * @param e event
+     */
     handlePrevClick( e )
     {
         this.props.onPrevClick( e );
     }
 
+    /**
+     * Handler for events, when the next button is clicked ( bubbles to parent )
+     * @param e
+     */
     handleNextClick( e )
     {
         this.props.onNextClick( e );

@@ -15,20 +15,22 @@
     <script type="text/javascript" src="fittable.js"></script>
     <script type="text/javascript">
 
+        /*
+            This is temporary example callback function, which
+            generates random events. It's very dumb. Trust me.
+         */
         var dataCallback = function ( from, to ) {
 
-            console.log( "callback called" );
-            console.log( from );
             var data = [];
 
+            // Create 6 events...
             for ( var i = 0; i < 6; i++ )
             {
+                // Generate random start
                 var randomStart = new Date( from.getTime() + Math.round( Math.random() * 4 ) * 24 * 3600 * 1000 );
-                randomStart.setUTCHours( Math.round( Math.random() * 8 ) + 8 );
-                randomStart.setUTCMinutes( 0 );
-                randomStart.setUTCSeconds( 0 );
-                randomStart.setUTCMilliseconds( 0 );
+                randomStart.setUTCHours( Math.round( Math.random() * 8 ) + 8 ).setUTCMinutes( 0 ).setUTCSeconds( 0 ).setUTCMilliseconds( 0 );
 
+                // And add new event to array
                 data[i] = {
                     id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
                     name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
@@ -48,9 +50,11 @@
                 };
             }
 
+            // Return to fittable
             return data;
         };
 
+        // Initialize fittable
         fittable( 'fittable', dataCallback );
 
     </script>

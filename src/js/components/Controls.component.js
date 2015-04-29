@@ -14,12 +14,20 @@ export default class Controls extends React.Component
         super.constructor( props );
     }
 
+    /**
+     * Handler for events, when previous button in WeekNav is clicked ( bubbles from there to parent )
+     * @param e event
+     */
     onPrevClick( e )
     {
         this.props.onWeekChange( this.props.week - 1 );
     }
 
-    onNextClick( th )
+    /**
+     * Handler for events, when next button in WeekNav is clicked ( bubbles form there to parent )
+     * @param e event
+     */
+    onNextClick( e )
     {
         this.props.onWeekChange( this.props.week + 1 );
     }
