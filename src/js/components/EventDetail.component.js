@@ -16,13 +16,13 @@ export default class EventDetail extends React.Component
     render()
     {
         return <div className="detail">
-            <div className="row">
-                <div className="column small-6"><i className="fa fa-thumb-tack"></i> č. {this.props.details.parallel}</div>
-                <div className="column small-6 text-right">{this.props.details.teacher} <i className="fa fa-male"></i></div>
+            <div className="row properties">
+                <div className="column small-6"><i className="fa fa-thumb-tack fa-fw"></i> č. {this.props.details.parallel}</div>
+                <div className="column small-6 text-right">{this.props.details.teacher} <i className="fa fa-male fa-fw"></i></div>
             </div>
-            <div className="row">
-                <div className="column small-6"><i className="fa fa-group"></i> <a href="#"> {this.props.details.students.length} studentů </a></div>
-                <div className="column small-6 text-right">{this.props.details.capacity} <i className="fa fa-pie-chart"></i></div>
+            <div className="row properties">
+                <div className="column small-6"><i className="fa fa-group fa-fw"></i> <a href="#"> {this.props.details.students.length} studentů </a></div>
+                <div className="column small-6 text-right">{this.props.details.capacity} <i className="fa fa-pie-chart fa-fw"></i></div>
             </div>
             <hr />
             <div className="row">

@@ -13,6 +13,25 @@ export default class EventBox extends React.Component
         this.state = {
             detailShown: false
         };
+
+    }
+
+    /**
+     * Returns short name of event type, if transformation exists, otherwise
+     * returns original type string.
+     * @param {string} type
+     * @returns {string} shorter event type name
+     */
+    getEventTypeName( type )
+    {
+        var eventTypes = {
+            "laboratory": "lab",
+            "tutorial": "cvi",
+            "lecture": "pře",
+            "exam": "zk"
+        };
+
+        return type in eventTypes ? eventTypes[ type ] : type;
     }
 
     /**
@@ -35,7 +54,7 @@ export default class EventBox extends React.Component
             <div className="inner" onClick={this.handleShowDetail.bind( this )}>
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{this.props.data.room}</div>
-                <div className="type">{this.props.data.type}</div>
+                <div className="type">{this.getEventTypeName( this.props.data.type )}</div>
                 <EventDetail ref="detail" details={this.props.data.details} />
             </div>
         </div>;
