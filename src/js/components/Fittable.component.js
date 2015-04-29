@@ -21,10 +21,12 @@ export default class Fittable extends React.Component
         // Set initial states ( actual week and actual year )
         this.state = {
             selectedWeek: weekno,
-            selectedYear: d.getFullYear(),
-            timeFrom: this.calculateWeekTimeRange().timeFrom,
-            timeTo: this.calculateWeekTimeRange().timeTo
+            selectedYear: d.getFullYear()
         };
+
+        // After setting selection, add another states - timeFrom and timeTo
+        this.state.timeFrom = this.calculateWeekTimeRange().timeFrom;
+        this.state.timeTo = this.calculateWeekTimeRange().timeTo;
 
         this.weekEvents = null;
     }
