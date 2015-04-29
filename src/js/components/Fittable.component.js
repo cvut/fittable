@@ -14,50 +14,31 @@ export default class Fittable extends React.Component
 
         // Temporary actual week getting (this is just a wrong place)
         var d = new Date();
-        d.setHours(0,0,0);
-        d.setDate(d.getDate()+4-(d.getDay()||7));
-        var weekno = Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
+        d.setHours( 0, 0, 0 );
+        d.setDate( d.getDate() + 4 - ( d.getDay() || 7 ) );
+        var weekno = Math.ceil( ( ( ( d - new Date( d.getFullYear(), 0, 1) ) / 8.64e7 ) + 1 ) / 7 );
 
         this.state = {
             selectedWeek: weekno,
             selectedYear: d.getFullYear()
         };
 
+        this.state.timeFrom = this.calculateWeekTimeRange().timeFrom;
+        this.state.timeTo = this.calculateWeekTimeRange().timeTo;
+
         this.weekEvents = null;
     }
 
     getWeekEvents( weekNum, year )
     {
-        var data = [];
-
-        for ( var i = 0; i < 6; i++ )
-        {
-            data[i] = {
-                id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
-                name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
-                note: "Placeholder event",
-                day: Math.floor( Math.random() * 6 ),
-                starts: Math.floor( Math.random() * 76400 ),
-                ends: Math.floor( Math.random() * 76400 ),
-                type: "laboratory",
-                room: "T9:303",
-                teacher: "Ing. Josef Nováček",
-                teacherlogin: "novacjo7",
-                studentsCount: 221,
-                flag: null,
-                notification: false,
-                details: {
-                    todo: true // todo: very to-do, many unfinished
-                }
-            };
-        }
-
-        return data;
+        // todo: tohle bude nejspíš blbě, tak zatím jenom dočasně, ať mám s čím dělat
+        return this.props.dataCallback( new Date( this.state.timeFrom ), new Date( this.state.timeTo ) );
     }
 
     componentWillMount()
     {
-        this.weekEvents = this.getWeekEvents( this.state.selectedWeek, this.state.selectedYear );
+        // Get week events
+        this.weekEvents = this.getWeekEvents( new Date( this.state.timeFrom ), new Date( this.state.timeTo ) );
     }
 
     changeWeek( week )
@@ -65,7 +46,7 @@ export default class Fittable extends React.Component
         // Cacluclate num of weeks in year
         var yr = this.state.selectedYear;
         var d = new Date(yr, 0, 1);
-        var isLeap = (yr%400)?((yr%100)?((yr%4)?false:true):false):true;
+        var isLeap = ( yr % 400 ) ? ( ( yr % 100 ) ? ( ( yr % 4 ) ? false : true ) : false ) : true;
         var weeksInYear = d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52;
         var animDirection = null;
 
@@ -77,7 +58,7 @@ export default class Fittable extends React.Component
 
             // Cacluclate num of weeks in prev year first
             d = new Date(yr, 0, 1);
-            isLeap = (yr%400)?((yr%100)?((yr%4)?false:true):false):true;
+            isLeap = ( yr % 400 ) ? ( ( yr % 100 ) ? ( ( yr % 4 ) ? false : true ) : false ) : true;
 
             this.setState( { selectedWeek: d.getDay() === 4 || isLeap && d.getDay() === 3 ? 53 : 52 } );
             animDirection = -1;
@@ -99,8 +80,22 @@ export default class Fittable extends React.Component
         // Refresh week
         this.weekEvents = this.getWeekEvents( this.state.selectedWeek, this.state.selectedYear );
 
+        // Recalculate ranges
+        this.setState( this.calculateWeekTimeRange() );
+
         // Do the animation
         if ( animDirection == 1 ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
+    }
+
+    calculateWeekTimeRange()
+    {
+        var yearTimestamp = Date.UTC( this.state.selectedYear, 0 );
+        var firstDayOffset = ( new Date( this.state.selectedYear, 0 ).getDay() - 1 ) * 3600 * 24 * 1000;
+
+        return {
+            timeFrom: yearTimestamp + ( ( this.state.selectedWeek - 1 ) * 3600 * 24 * 7 * 1000 - firstDayOffset ),
+            timeTo: yearTimestamp + ( ( this.state.selectedWeek ) * 3600 * 24 * 7 * 1000 - firstDayOffset - 1 )
+        };
     }
 
     /**
@@ -108,9 +103,10 @@ export default class Fittable extends React.Component
      */
     render()
     {
+        console.log( this.state );
         return <div className="fittable-container">
             <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} />
-            <Timetable weekEvents={this.weekEvents} ref="timetable" />
+            <Timetable weekEvents={this.weekEvents} from={this.state.timeFrom} to={this.state.timeTo} ref="timetable" />
         </div>;
     }
 }

@@ -7,8 +7,10 @@
 
 import Fittable from './components/fittable.component';
 
-global.fittable = function ( containerElId )
+global.fittable = function ( containerElId, dataCallback )
 {
     // Render Fittable!
-    React.render( React.createElement( Fittable ), document.getElementById( containerElId ) );
-}
+    var element = React.createElement( Fittable, { dataCallback: dataCallback } );
+    React.render( element, document.getElementById( containerElId ) );
+    return element;
+};

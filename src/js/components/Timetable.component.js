@@ -38,8 +38,27 @@ export default class Timetable extends React.Component
     render()
     {
         var weekEvents = [ [], [], [], [], [], [], [] ];
+
+        // Timeline length
+        var timelineFrom = 8 * 3600 * 1000;
+        var timelineTo = 18 * 3600 * 1000;
+
+        // Parse each event, do
         for ( var event of this.props.weekEvents )
-            weekEvents[ event.day ].push( event );
+        {
+            console.log( event );
+            // Calculate event position, related to timeline
+            var startTime = ( event.startsAt.getUTCHours() * 3600 + event.startsAt.getUTCMinutes() * 60 + event.startsAt.getUTCSeconds() ) * 1000;
+            var endTime = ( event.endsAt.getUTCHours() * 3600 + event.endsAt.getUTCMinutes() * 60 + event.endsAt.getUTCSeconds() ) * 1000;
+            var lengthTime = endTime - startTime;
+
+            // Add drawing properties to events
+            event._draw_position = (startTime - timelineFrom) / ( timelineTo - timelineFrom );
+            event._draw_length = lengthTime / ( timelineTo - timelineFrom );
+
+            // Sort events by day of week
+            weekEvents[ Math.floor( ( event.startsAt.getTime() - this.props.from ) / (24 * 3600 * 1000) ) ].push( event );
+        }
 
         return <div className="table a-left" ref="rootEl">
             <div className="grid-overlay"><div className="grid"></div></div>

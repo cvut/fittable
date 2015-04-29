@@ -25,7 +25,8 @@ export default class EventBox extends React.Component
      */
     render()
     {
-        return <div className={ 'event ' + ( this.state.detailShown ? 'detail-shown' : '' ) } data-event="{this.props.data.id}" style={{width:"14.63%", left: Math.floor( this.props.data.starts / 864 ) + "%"}}>
+        return <div className={ 'event ' + ( this.state.detailShown ? 'detail-shown' : '' ) } data-event="{this.props.data.id}"
+            style={{ width: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%" }}>
             <div className="inner" onClick={this.handleShowDetail.bind( this )}>
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{this.props.data.room}</div>

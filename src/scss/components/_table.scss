@@ -10,7 +10,6 @@
     div.day {
       height: $day-row-height;
       background: white;
-      padding: $day-row-padding 10px;
       color: $primary-color;
 
       &:nth-child(even) {
@@ -26,6 +25,7 @@
         font-size: 12px;
         text-align: left;
         color: $primary-color;
+        padding: $day-row-padding 10px;
 
         span {
           padding: 5px 0px 5px 20px;
@@ -49,12 +49,14 @@
         position: relative;
         z-index: 80;
         visibility: hidden;
+        padding: $day-row-padding 0px;
 
         div.event {
-          height: 100%;
           position: absolute;
           padding: 0px 5px;
-          //border: 1px dashed $warning-color;
+          transition: width .5s;
+          z-index: 99;
+          height: 100%;
 
           div.inner {
             background: $primary-color;
@@ -63,6 +65,7 @@
             @include background-hover-effect( $primary-color );
             cursor: pointer;
             padding: 5px 10px;
+            overflow: hidden;
           }
 
           div.name {
@@ -89,14 +92,17 @@
           }
 
           div.detail {
-            display: none;
-            width: auto;
+            visibility: hidden;
             background: white;
             padding: 20px;
             margin: 10px -10px 30px -10px;
             clear: both;
-            min-height: 150px;
+            min-height: 0px;
+            height: 0px;
             color: #222;
+            width: 270px;
+            transition: opacity .7s, min-height .5s, height .5s;
+            opacity: 0;
           }
 
           &.detail-shown {
@@ -107,7 +113,10 @@
             .inner { box-shadow: 0px 2px 9px rgba( 70, 70, 70, .2 ); }
 
             div.detail {
-              display: block;
+              visibility: visible;
+              opacity: 1;
+              min-height: 180px;
+              height: 180px;
             }
           }
         }
@@ -138,7 +147,7 @@
       .grid {
         background-color: transparent;
         background-image: linear-gradient(90deg, rgba(0,0,0,.09) .1em, transparent .1em);
-        background-size: 8.33% 100%;
+        background-size: 10% 100%;
         width: 100%;
         height: 100%;
       }

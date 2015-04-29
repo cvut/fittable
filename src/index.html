@@ -15,7 +15,41 @@
     <script type="text/javascript" src="fittable.js"></script>
     <script type="text/javascript">
 
-        fittable( 'fittable' );
+        var dataCallback = function ( from, to ) {
+
+            var data = [];
+
+            for ( var i = 0; i < 6; i++ )
+            {
+                var randomStart = new Date( from.getTime() + Math.round( Math.random() * 6 ) * 24 * 3600 * 1000 );
+                randomStart.setUTCHours( Math.round( Math.random() * 8 ) + 8 );
+                randomStart.setUTCMinutes( 0 );
+                randomStart.setUTCSeconds( 0 );
+                randomStart.setUTCMilliseconds( 0 );
+
+                data[i] = {
+                    id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
+                    name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
+                    note: "Placeholder event",
+                    startsAt: new Date( randomStart.getTime() ),
+                    endsAt: new Date( randomStart.getTime() + 3600 * 1.5 * 1000 ),
+                    type: "laboratory",
+                    room: "T9:303",
+                    teacher: "Ing. Josef Nováček",
+                    teacherlogin: "novacjo7",
+                    studentsCount: 221,
+                    flag: null,
+                    notification: false,
+                    details: {
+                        todo: true // todo: very to-do, many unfinished
+                    }
+                };
+            }
+
+            return data;
+        };
+
+        fittable( 'fittable', dataCallback );
 
     </script>
 </body>
