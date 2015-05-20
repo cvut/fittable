@@ -3,6 +3,7 @@
 #fittable {
 
   div.header {
+    position: relative;
 
     div.function-controls {
       float: right;
@@ -43,8 +44,9 @@
       display: inline-block;
       height: $header-elements-weight;
       padding-right: 8px;
+      position: relative;
 
-      a {
+      & > a {
         display: inline-block;
         padding: 0px 8px;
         height: $header-elements-weight;
