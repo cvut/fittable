@@ -26,7 +26,6 @@ export default class Day extends React.Component
             {
                 overlayed.push( event );
                 if ( overlayed.indexOf( prev ) == -1 ) overlayed.push( prev );
-                console.log( event.id + " is ouvrlejd" );
             }
             else
             {

@@ -1,22 +1,7 @@
 #fittable .header .functions-bar {
   div.functions {
 
-    .function-settings {
-      width: 300px;
-      background: white;
-      padding: 0px 20px 30px 20px;
-      color: #333;
-      font-size: 9pt;
-      opacity: 1;
-      transition: opacity .2s, height .2s;
-
-      &.hide {
-        display: block !important;
-        visibility: hidden;
-        opacity: 0;
-        height: 0px;
-        overflow: hidden;
-      }
+    div.function.function-settings {
 
       a {
         line-height: 2.4;

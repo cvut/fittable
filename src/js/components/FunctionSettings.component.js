@@ -3,19 +3,13 @@
  * @author Marián
  */
 
-export default class FunctionSettings extends React.Component
+import Toggleable from './Toggleable.component';
+
+export default class FunctionSettings extends Toggleable
 {
     constructor( props )
     {
         super.constructor( props );
-    }
-
-    toggle()
-    {
-        if ( ! this.refs.rootEl.getDOMNode().classList.contains( 'hide' ) )
-            this.refs.rootEl.getDOMNode().classList.add( 'hide' );
-        else
-            this.refs.rootEl.getDOMNode().classList.remove( 'hide' );
     }
 
     /**
@@ -23,7 +17,7 @@ export default class FunctionSettings extends React.Component
      */
     render()
     {
-        return <div className="function-settings hide" ref="rootEl">
+        return <div className="function function-settings hide" ref="rootEl">
             <h2>rozložení</h2>
             <div className="row">
                 <div className="column large-6">

@@ -1,49 +1,96 @@
 #fittable .header .functions-bar {
   div.functions {
 
-    .function-settings {
-      width: 300px;
-      background: white;
-      padding: 0px 20px 30px 20px;
-      color: #333;
-      font-size: 9pt;
-      opacity: 1;
-      transition: opacity .2s, height .2s;
+    div.function.function-search {
+      padding-right: 0px;
 
-      &.hide {
-        display: block !important;
-        visibility: hidden;
-        opacity: 0;
-        height: 0px;
-        overflow: hidden;
-      }
+      div.search-form {
+        background: $secondary-color;
+        height: 32px;
+        color: white;
+        margin: 20px 0px;
 
-      a {
-        line-height: 2.4;
-      }
-
-      a.layout-selector {
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-        text-align: center;
-        padding: 5px 0px;
-        color: $secondary-color;
-
-        i.fa {
-          display: block;
-          font-size: 32px;
-        }
-
-        &.active {
+        input {
+          width: 80%;
+          float: left;
+          margin: 0px;
+          background: transparent;
           color: $primary-color;
-          cursor: default;
+          line-height: 32px;
+          height: 32px;
+          border: 0;
+          padding: 0px 5%;
         }
 
-        &:not(.active):hover {
-          color: #aaa;
+        button {
+          width: 20%;
+          float: right;
+          margin: 0px;
+          padding: 0px;
+          text-align: center;
+          line-height: 32px;
+          color: $primary-color;
+          background: transparent;
+
+          &:hover {
+            background: $primary-color;
+            color: white;
+          }
         }
       }
+
+      div.search-results {
+
+        div.result-category {
+          color: $primary-color;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+
+        ul.results {
+          list-style: none;
+          margin: 0px 0px 20px 0px;
+          padding: 0px;
+
+          li {
+            display: block;
+            background: #f8f8f8;
+            color: $primary-color;
+            font-size: 11pt;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 2px;
+            transition: color .2s, background .2s;
+
+            a {
+              display: block;
+              width: 100%;
+              height: 100%;
+              padding: 6px 5%;
+            }
+
+            .subtext {
+              font-size: 8pt;
+              color: #333;
+            }
+
+            &:hover {
+              background: $primary-color;
+              color: white;
+
+              a {
+                color: white;
+              }
+
+              .subtext {
+                color: white;
+              }
+            }
+          }
+        }
+
+      }
+
     }
 
   }

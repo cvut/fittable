@@ -12,5 +12,24 @@
       margin: 0px 0px 15px;
     }
 
+    div.function {
+      width: 300px;
+      background: white;
+      padding: 0px 20px;
+      color: #333;
+      font-size: 9pt;
+      opacity: 1;
+      transition: opacity .2s, height .2s;
+
+      &.hide {
+        display: block !important;
+        visibility: hidden;
+        opacity: 0;
+        height: 0px;
+        padding: 0;
+        overflow: hidden;
+      }
+    }
+
   }
 }
