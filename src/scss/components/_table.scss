@@ -27,7 +27,8 @@ $event-rollout-anim-speed: .2s;
         font-size: 12px;
         text-align: left;
         color: $primary-color;
-        padding: $day-row-padding 10px;
+        padding: 0px 10px;
+        margin: $day-row-padding 0px;
 
         span {
           padding: 5px 0px 5px 20px;
@@ -50,7 +51,7 @@ $event-rollout-anim-speed: .2s;
         height: $day-row-height - ($day-row-padding * 2);
         position: relative;
         visibility: hidden;
-        padding: $day-row-padding 0px;
+        margin: $day-row-padding 0px;
 
         div.event {
           position: absolute;
@@ -135,6 +136,46 @@ $event-rollout-anim-speed: .2s;
               height: 180px;
             }
           }
+
+          &:not(.detail-shown).half {
+            height: 45%;
+
+            div.type, div.time {
+              display: none;
+            }
+
+            div.name {
+              margin-top: 0px;
+              font-size: 10pt;
+            }
+          }
+
+          &.half + div.event:not(.detail-shown).half {
+              bottom: 0px;
+          }
+
+          &:not(.detail-shown).third {
+            height: 30%;
+
+            div.type, div.time {
+              display: none;
+            }
+
+            div.name {
+              margin-top: -5px;
+              font-size: 8pt;
+            }
+          }
+
+          &.third + div.event:not(.detail-shown).third {
+              top: 35%;
+          }
+
+          &.third + div.event.third + div.event:not(.detail-shown).third {
+              top: unset;
+              bottom: 0;
+          }
+
         }
       }
 

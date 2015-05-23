@@ -55,16 +55,17 @@ export default class EventBox extends React.Component
             return s;
         };
 
+        var appear = this.props.data.appear;
         var startTime = this.props.data.startsAt.getHours() + ":" + this.props.data.startsAt.getMinutes().pad(2);
         var endTime = this.props.data.endsAt.getHours() + ":" + this.props.data.endsAt.getMinutes().pad(2);
 
-        return <div className={ 'event ' + ( this.state.detailShown ? 'detail-shown' : '' ) } data-event="{this.props.data.id}"
+        return <div className={ 'event' + ( this.state.detailShown ? ' detail-shown' : '' ) + ' ' + appear } data-event="{this.props.data.id}"
             style={{ width: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%" }}>
             <div className="inner" onClick={this.handleShowDetail.bind( this )}>
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{startTime} - {endTime}</div>
                 <div className="type">{this.getEventTypeName( this.props.data.type )}</div>
-                <EventDetail ref="detail" details={this.props.data.details} />
+                <EventDetail ref="detail" data={this.props.data} />
             </div>
         </div>;
     }
