@@ -55,8 +55,7 @@
         z-index: 199;
       }
 
-      .flags-function::before, .search-function::before {
-        content: 'Příznaky';
+      a[class*="function"]::before {
         @include bold-up-text();
         display: inline-block;
         position: absolute;
@@ -70,11 +69,19 @@
         z-index: 99;
       }
 
+      .flags-function::before {
+        content: 'Příznaky';
+      }
+
       .search-function::before {
         content: 'Vyhledávání';
       }
 
-      .flags-function:hover::before, .search-function:hover::before {
+      .settings-function::before {
+        content: 'Nastavení';
+      }
+
+      a[class*="function"]:hover::before {
         opacity: 1;
         top: -15px;
       }
