@@ -1,0 +1,74 @@
+div#fittable div.header div.week-switcher {
+  position: absolute;
+  top: 35px;
+  background: $primary-color;
+  width: 200px;
+  height: 200px;
+  z-index: 90;
+  padding: 20px 10px;
+  opacity: 1;
+  transition: opacity .2s, height .2s;
+
+  &.hide {
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    height: 0px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .selector a {
+    color: white;
+  }
+
+  .semester-selector, .month-selector {
+    .column {
+      text-align: center;
+    }
+
+    .active-item {
+      color: white;
+      font-weight: bold;
+    }
+
+    .gr-go a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .week-selector {
+    .day {
+      width: 14.285%;
+      float: left;
+      text-align: center;
+    }
+
+    .day.in-other {
+      opacity: .5;
+    }
+
+    &:not(.active-week):hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    &.active-week {
+      background: white;
+
+      a {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .selector:nth-child(2) {
+    margin-top: 5px;
+  }
+
+  .selector:nth-child(3) {
+    margin-top: 10px;
+  }
+}

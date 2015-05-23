@@ -6,6 +6,7 @@
 import Week from './Week.component';
 import WeekNav from './WeekNav.component';
 import FunctionsBar from './FunctionsBar.component';
+import WeekSwitcher from './WeekSwitcher.component';
 
 export default class Controls extends React.Component
 {
@@ -37,14 +38,20 @@ export default class Controls extends React.Component
         this.props.onRefresh( this.props.week );
     }
 
+    onWeekClick( e )
+    {
+        this.refs.weekSwitcher.toggle();
+    }
+
     /**
      * Renders the component
      */
     render()
     {
         return <div className="header">
-            <Week week={this.props.week} />
+            <Week week={this.props.week} onClick={this.onWeekClick.bind(this)} />
             <WeekNav onPrevClick={this.onPrevClick.bind(this)} onNextClick={this.onNextClick.bind(this)} />
+            <WeekSwitcher ref="weekSwitcher" />
             <FunctionsBar onRefresh={this.onRefresh.bind(this)} />
         </div>;
     }
