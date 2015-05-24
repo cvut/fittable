@@ -14,9 +14,7 @@ export default class Fittable extends React.Component
 
         // Temporary actual week getting (this is just a wrong place)
         var d = new Date();
-        d.setHours( 0, 0, 0 );
-        d.setDate( d.getDate() + 4 - ( d.getDay() || 7 ) );
-        var weekno = Math.ceil( ( ( ( d - new Date( d.getFullYear(), 0, 1) ) / 8.64e7 ) + 1 ) / 7 );
+        var weekno = d.getWeekNumber();
 
         // Set initial states ( actual week and actual year )
         this.state = {
@@ -111,6 +109,35 @@ export default class Fittable extends React.Component
     }
 
     /**
+     * Changes the week to specific year's week
+     * @param {integer} week
+     * @param {integer} year
+     */
+    changeWeekYear( week, year )
+    {
+        var update = [];
+
+        // Determine the animation direction
+        var diff = this.state.selectedYear - year + this.state.selectedWeek - week;
+        var animDirection = diff > 0 ? 1 : -1;
+
+        // Recalculate ranges
+        var timerange = this.calculateWeekTimeRange( year, week );
+        update.timeFrom = timerange.timeFrom;
+        update.timeTo = timerange.timeTo;
+        update.selectedWeek = week;
+        update.selectedYear = year;
+
+        this.weekEvents = this.getWeekEvents( timerange.timeFrom , timerange.timeTo );
+
+        // Set states
+        this.setState( update );
+
+        // Do the animation
+        if ( animDirection == 1 ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
+    }
+
+    /**
      * Calculates new ranges of time. Returns number of milliseconds from day beginning ( 0 - 86400000 ).
      * If no arguments specified, the default values are actual selected week and year from component state.
      * @param {integer} year
@@ -139,13 +166,23 @@ export default class Fittable extends React.Component
         this.setState( { layout: to } );
     }
 
+    changeDate( week, year, e )
+    {
+        console.log( [ week, year ] );
+        if ( year === null )
+            this.changeWeek( week );
+        else
+            this.changeWeekYear( week, year );
+    }
+
     /**
      * Renders the component
      */
     render()
     {
         return <div className="fittable-container">
-            <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} onRefresh={this.changeWeek.bind(this)} onLayoutChange={this.changeLayout.bind(this)} />
+            <Controls week={this.state.selectedWeek} year={this.state.selectedYear} onWeekChange={this.changeWeek.bind(this)}
+                onRefresh={this.changeWeek.bind(this)} onLayoutChange={this.changeLayout.bind(this)} onDateChange={this.changeDate.bind(this)} />
             <Timetable weekEvents={this.weekEvents} from={this.state.timeFrom} to={this.state.timeTo} ref="timetable" layout={this.state.layout} />
         </div>;
     }

@@ -51,7 +51,7 @@ export default class Controls extends React.Component
         return <div className="header">
             <Week week={this.props.week} onClick={this.onWeekClick.bind(this)} />
             <WeekNav onPrevClick={this.onPrevClick.bind(this)} onNextClick={this.onNextClick.bind(this)} />
-            <WeekSwitcher ref="weekSwitcher" />
+            <WeekSwitcher ref="weekSwitcher" week={this.props.week} year={this.props.year} onDateChange={this.props.onDateChange} />
             <FunctionsBar onRefresh={this.onRefresh.bind(this)} onLayoutChange={this.props.onLayoutChange} />
         </div>;
     }

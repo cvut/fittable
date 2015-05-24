@@ -51,12 +51,12 @@
 
     &.a-left div.day div.events {
       visibility: visible;
-      animation: week-move-left ease 0.4s;
+      animation: week-move-left ease $events-move-anim-speed;
     }
 
     &.a-right div.day div.events {
       visibility: visible;
-      animation: week-move-right ease 0.4s;
+      animation: week-move-right ease $events-move-anim-speed;
     }
 
     .grid-overlay {
