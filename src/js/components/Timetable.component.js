@@ -60,13 +60,14 @@ export default class Timetable extends React.Component
             weekEvents[ Math.floor( ( event.startsAt.getTime() - this.props.from ) / (24 * 3600 * 1000) ) ].push( event );
         }
 
-        return <div className="table a-left" ref="rootEl">
+        return <div className={'table a-left ' + this.props.layout} ref="rootEl">
             <div className="grid-overlay"><div className="grid"></div></div>
-            <Day id="0" events={weekEvents[0]} />
-            <Day id="1" events={weekEvents[1]} />
-            <Day id="2" events={weekEvents[2]} />
-            <Day id="3" events={weekEvents[3]} />
-            <Day id="4" events={weekEvents[4]} />
+            <Day id="0" dayNum="18" events={weekEvents[0]} />
+            <Day id="1" dayNum="19" events={weekEvents[1]} />
+            <Day id="2" dayNum="20" events={weekEvents[2]} />
+            <Day id="3" dayNum="21" events={weekEvents[3]} />
+            <Day id="4" dayNum="22" events={weekEvents[4]} />
+            <div className="clearfix"></div>
         </div>;
     }
 }

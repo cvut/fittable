@@ -61,7 +61,7 @@ export default class Day extends React.Component
         var dayNames = [ "pondělí", "úterý", "středa", "čtvrtek", "pátek" ];
 
         return <div className="day" data-day="{this.props.id}">
-            <div className="label"><span className="day-name">{dayNames[this.props.id]}</span></div>
+            <div className="label"><span className="day-num">{this.props.dayNum}</span><span className="day-name">{dayNames[this.props.id]}</span></div>
             <div className="events">
                 {events.map( function( event ) {
                     return <EventBox key={event.id} data={event} />;

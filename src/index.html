@@ -23,8 +23,8 @@
 
             var data = [];
 
-            // Create 6 events...
-            for ( var i = 0; i < 6; i++ )
+            // Create 12 events...
+            for ( var i = 0; i < 12; i++ )
             {
                 // Generate random start
                 var randomStart = new Date( from.getTime() + Math.round( Math.random() * 4 ) * 24 * 3600 * 1000 );
@@ -39,7 +39,7 @@
                     name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
                     note: "Placeholder event",
                     startsAt: new Date( randomStart.getTime() ),
-                    endsAt: new Date( randomStart.getTime() + 3600 * 1.5 * 1000 ),
+                    endsAt: new Date( randomStart.getTime() + 3600 * ( ( Math.round( Math.random() * 4 ) + 1 ) * 0.5 ) * 1000 ),
                     type: "laboratory",
                     room: "T9:303",
                     teacher: "Ing. Josef Nováček",

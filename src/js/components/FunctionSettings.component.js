@@ -10,6 +10,15 @@ export default class FunctionSettings extends Toggleable
     constructor( props )
     {
         super.constructor( props );
+        this.state = {
+            activeLayout: 'horizontal'
+        };
+    }
+
+    layoutSelection( to, e )
+    {
+        this.props.onLayoutChange( to );
+        this.setState( { activeLayout: to } );
     }
 
     /**
@@ -20,14 +29,14 @@ export default class FunctionSettings extends Toggleable
         return <div className="function function-settings hide" ref="rootEl">
             <h2>rozložení</h2>
             <div className="row">
-                <div className="column large-6">
-                    <a href="#" className="layout-selector active">
+                <div className="column small-6">
+                    <a href="#" className={ "layout-selector"  + ( this.state.activeLayout == 'horizontal' ? ' active' : '' )} ref="horizontallayout" onClick={this.layoutSelection.bind( this, 'horizontal' )} >
                         <i className="fa fa-th-list"></i>
                         řádkové
                     </a>
                 </div>
-                <div className="column large-6">
-                    <a href="#" className="layout-selector">
+                <div className="column small-6">
+                    <a href="#" className={ "layout-selector"  + ( this.state.activeLayout == 'vertical' ? ' active' : '' )} ref="verticallayout" onClick={this.layoutSelection.bind( this, 'vertical' )}>
                         <i className="fa fa-th"></i>
                         sloupcové
                     </a>
@@ -35,35 +44,35 @@ export default class FunctionSettings extends Toggleable
             </div>
             <h2>nastavení</h2>
             <div className="row">
-                <div className="column large-3">
+                <div className="column small-3">
                     <div className="switch small">
                         <input id="exampleRadioSwitch1" type="radio" checked name="testGroup" />
                         <label for="exampleRadioSwitch1"></label>
                     </div>
                 </div>
-                <div className="column large-9 switch-label">
+                <div className="column small-9 switch-label">
                     Rozlišovat typy barevně
                 </div>
             </div>
             <div className="row">
-                <div className="column large-3">
+                <div className="column small-3">
                     <div className="switch small">
                         <input id="exampleRadioSwitch1" type="radio" checked name="testGroup" />
                         <label for="exampleRadioSwitch1"></label>
                     </div>
                 </div>
-                <div className="column large-9 switch-label">
+                <div className="column small-9 switch-label">
                     Lorem ipsum
                 </div>
             </div>
             <div className="row">
-                <div className="column large-3">
+                <div className="column small-3">
                     <div className="switch small">
                         <input id="exampleRadioSwitch1" type="radio" checked name="testGroup" />
                         <label for="exampleRadioSwitch1"></label>
                     </div>
                 </div>
-                <div className="column large-9 switch-label">
+                <div className="column small-9 switch-label">
                     Dolor sit
                 </div>
             </div>

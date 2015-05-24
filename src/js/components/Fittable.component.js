@@ -21,7 +21,8 @@ export default class Fittable extends React.Component
         // Set initial states ( actual week and actual year )
         this.state = {
             selectedWeek: weekno,
-            selectedYear: d.getFullYear()
+            selectedYear: d.getFullYear(),
+            layout: 'horizontal'
         };
 
         // After setting selection, add another states - timeFrom and timeTo
@@ -133,14 +134,19 @@ export default class Fittable extends React.Component
         };
     }
 
+    changeLayout( to, e )
+    {
+        this.setState( { layout: to } );
+    }
+
     /**
      * Renders the component
      */
     render()
     {
         return <div className="fittable-container">
-            <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} onRefresh={this.changeWeek.bind(this)} />
-            <Timetable weekEvents={this.weekEvents} from={this.state.timeFrom} to={this.state.timeTo} ref="timetable" />
+            <Controls week={this.state.selectedWeek} onWeekChange={this.changeWeek.bind(this)} onRefresh={this.changeWeek.bind(this)} onLayoutChange={this.changeLayout.bind(this)} />
+            <Timetable weekEvents={this.weekEvents} from={this.state.timeFrom} to={this.state.timeTo} ref="timetable" layout={this.state.layout} />
         </div>;
     }
 }

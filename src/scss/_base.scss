@@ -3,6 +3,12 @@
 
 $header-elements-weight: 35px;
 
+$event-rollout-anim-speed: .2s;
+$day-row-height: 85px;
+$day-row-padding: 12px;
+
+$vertical-layout-day-height: 720px;
+
 @media #{$large-up} {
   .row {
     max-width: rem-calc(1700);

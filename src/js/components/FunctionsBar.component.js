@@ -43,10 +43,10 @@ export default class FunctionsBar extends React.Component
         return <div className="functions-bar">
             <a href="#" className="refresh-function" onClick={this.onRefresh.bind(this)}><i className="fa fa-refresh"></i></a>
             <a href="#" className="flags-function"><i className="fa fa-flag"></i></a>
-            <a href="#" className="settings-function" onClick={this.onSettingsClick.bind(this)}><i className="fa fa-cog"></i></a>
+            <a href="#" className="settings-function" onClick={this.onSettingsClick.bind(this)} onLayoutSelect><i className="fa fa-cog"></i></a>
             <a href="#" className="search-function" onClick={this.onSearchClick.bind(this)}><i className="fa fa-search"></i></a>
             <div className="functions" ref="functions">
-                <FunctionSettings ref="functionSettings" />
+                <FunctionSettings ref="functionSettings" onLayoutChange={this.props.onLayoutChange} />
                 <FunctionSearch ref="functionSearch" />
             </div>
         </div>;

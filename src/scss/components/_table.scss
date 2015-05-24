@@ -1,18 +1,17 @@
-$event-rollout-anim-speed: .2s;
 
 #fittable {
 
   div.table {
-    $day-row-height: 85px;
-    $day-row-padding: 12px;
-
     clear: both;
     position: relative;
 
     div.day {
+      width: 100%;
       height: $day-row-height;
+      max-height: $vertical-layout-day-height;
       background: white;
       color: $primary-color;
+      transition: width .5s;
 
       &:nth-child(even) {
         background: $secondary-color;
@@ -34,6 +33,10 @@ $event-rollout-anim-speed: .2s;
           padding: 5px 0px 5px 20px;
           margin-left: -18px;
         }
+
+        span.day-num {
+          display: none;
+        }
       }
 
       &.active {
@@ -44,14 +47,6 @@ $event-rollout-anim-speed: .2s;
           padding-left: 14px;
         }
       }
-
-      &:nth-child(1) .events { z-index: 16; }
-      &:nth-child(2) .events { z-index: 15; }
-      &:nth-child(3) .events { z-index: 14; }
-      &:nth-child(4) .events { z-index: 13; }
-      &:nth-child(5) .events { z-index: 12; }
-      &:nth-child(6) .events { z-index: 11; }
-      &:nth-child(7) .events { z-index: 10; }
     }
 
     &.a-left div.day div.events {
@@ -75,8 +70,9 @@ $event-rollout-anim-speed: .2s;
       opacity: .5;
 
       .grid {
+        $grid-color: rgba( 0, 0, 0, .05 );
         background-color: transparent;
-        background-image: linear-gradient(90deg, rgba(0,0,0,.09) .1em, transparent .1em);
+        background-image: linear-gradient(90deg, $grid-color 0px, transparent 2px);
         background-size: 7.69% 100%;
         width: 100%;
         height: 100%;
@@ -85,6 +81,11 @@ $event-rollout-anim-speed: .2s;
 
   }
 
-
-
+  div.table:not(.vertical) div.day div.events
+  {
+    div.event {
+      top: 0px !important;
+      &:not(.detail-shown) { height: 100% !important; }
+    }
+  }
 }

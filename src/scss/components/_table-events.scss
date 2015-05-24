@@ -1,4 +1,3 @@
-$event-rollout-anim-speed: .2s;
 
 #fittable div.table div.day div.events {
   width: 90%;
@@ -52,14 +51,19 @@ $event-rollout-anim-speed: .2s;
       visibility: hidden;
       background: white;
       padding: 20px;
-      margin: 10px -10px 30px -10px;
       clear: both;
       min-height: 0px;
+      margin: 0px -10px 0px -10px;
       height: 0px;
       color: #222;
-      width: 260px;
-      transition: opacity $event-rollout-anim-speed*2, min-height $event-rollout-anim-speed, height $event-rollout-anim-speed;
+      width: inherit;
+      transition: opacity $event-rollout-anim-speed*2,
+              min-height $event-rollout-anim-speed,
+              height $event-rollout-anim-speed,
+              margin $event-rollout-anim-speed,
+              top $event-rollout-anim-speed;
       opacity: 0;
+      overflow: hidden;
 
       .properties {
         color: #777;
@@ -78,9 +82,10 @@ $event-rollout-anim-speed: .2s;
     }
 
     &.detail-shown {
-      width: 270px !important;
-      height: auto;
-      z-index: 999;
+      width: 300px !important;
+      height: auto !important;
+      position: relative;
+      z-index: 199;
 
       .inner { box-shadow: 0px 2px 9px rgba( 70, 70, 70, .2 ); }
 
@@ -89,11 +94,18 @@ $event-rollout-anim-speed: .2s;
         opacity: 1;
         min-height: 180px;
         height: 180px;
+        margin: 10px -10px 30px -10px;
       }
     }
+  }
+}
 
+// Horizontal overlays
+
+#fittable div.table:not(.vertical) div.day div.events {
+  div.event {
     &:not(.detail-shown).half {
-      height: 45%;
+      height: 45% !important;
 
       div.type, div.time {
         display: none;
@@ -106,11 +118,12 @@ $event-rollout-anim-speed: .2s;
     }
 
     &.half + div.event:not(.detail-shown).half {
+      top: unset !important;
       bottom: 0px;
     }
 
     &:not(.detail-shown).third {
-      height: 30%;
+      height: 30% !important;
 
       div.type, div.time {
         display: none;
@@ -123,13 +136,37 @@ $event-rollout-anim-speed: .2s;
     }
 
     &.third + div.event:not(.detail-shown).third {
-      top: 35%;
+      top: 35% !important;
     }
 
     &.third + div.event.third + div.event:not(.detail-shown).third {
-      top: unset;
+      top: unset !important;
       bottom: 0;
     }
+  }
+}
 
+// Horizontal inner elements minimalization
+#fittable div.table:not(.vertical) div.day div.events {
+  div.event:not(.detail-shown) {
+    &.min-light {
+
+    }
+
+    &.min-hard {
+      .type {
+        display: none !important;
+      }
+
+      .time {
+        font-size: 7pt !important;
+      }
+    }
+
+    &.min-all {
+      .type, .time, .name {
+        display: none !important;
+      }
+    }
   }
 }
