@@ -2,8 +2,8 @@ div#fittable div.header div.week-switcher {
   position: absolute;
   top: 35px;
   background: $primary-color;
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   z-index: 90;
   padding: 20px 10px;
   opacity: 1;
@@ -51,12 +51,14 @@ div#fittable div.header div.week-switcher {
       opacity: .5;
     }
 
-    &:not(.active-week):hover {
+    &:not(.active-week):hover .day {
       background: rgba(255,255,255,.1);
     }
 
     &.active-week {
-      background: white;
+      .day {
+        background: white;
+      }
 
       a {
         color: $primary-color;

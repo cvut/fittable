@@ -116,9 +116,10 @@
 
       a {
         display: inline-block;
-        width: $header-elements-weight / 1.5;
+        width: $header-elements-weight / 1.25;
         line-height:  $header-elements-weight;
         text-align: center;
+        font-size: 14px;
       }
 
     }

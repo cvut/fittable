@@ -27,6 +27,7 @@ export default class FunctionSettings extends Toggleable
     render()
     {
         return <div className="function function-settings hide" ref="rootEl">
+            <div className="clearfix"></div>
             <h2>rozložení</h2>
             <div className="row">
                 <div className="column small-6">

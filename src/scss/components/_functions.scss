@@ -9,15 +9,14 @@
       color: $primary-color;
       font-weight: 300;
       font-size: 14pt;
-      margin: 0px 0px 15px;
+      margin: 15px 0px;
     }
 
     div.function {
       width: 300px;
       background: white;
-      padding: 0px 20px;
+      padding: 0 0 0 20px;
       color: #333;
-      font-size: 9pt;
       opacity: 1;
       transition: opacity .2s, height .2s;
 
