@@ -33,13 +33,22 @@
                 randomStart.setUTCSeconds( 0 );
                 randomStart.setUTCMilliseconds( 0 );
 
+                var randomDescs = [
+                    "Nunquam experientia buxum. Pol, a bene fermium.",
+                    "When one follows mind and meditation, one is able to witness density.",
+                    "Peanuts combines greatly with nutty truffels. Bitter, salted pudding is best blended with aromatic bourbon.",
+                    "Arrr, never fight a jack. Wow, fine cannon. you won't drink the fortress.",
+                    "Fantastic collision courses lead to the nuclear flux. View wihtout sonic shower, and we won’t dissolve a kahless.",
+                    "Nunquam imperium silva. Boreass sunt valebats de primus abactus. Voxs unda, tanquam camerarius tabes.",
+                    "This one is extra long. Nunquam imperium silva. Boreass sunt valebats de primus abactus. Voxs unda, tanquam camerarius tabes. Fantastic collision courses lead to the nuclear flux. View wihtout sonic shower, and we won’t dissolve a kahless. Peanuts combines greatly with nutty truffels. Bitter, salted pudding is best blended with aromatic bourbon."
+                ];
                 // And add new event to array
                 data[i] = {
                     id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
                     name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
                     note: "Placeholder event",
                     startsAt: new Date( randomStart.getTime() ),
-                    endsAt: new Date( randomStart.getTime() + 3600 * ( ( Math.round( Math.random() * 4 ) + 1 ) * 0.5 ) * 1000 ),
+                    endsAt: new Date( randomStart.getTime() + 3600 * ( ( Math.floor( Math.random() * 4 ) + 1 ) * 0.5 ) * 1000 ),
                     type: "laboratory",
                     room: "T9:303",
                     teacher: "Ing. Josef Nováček",
@@ -56,7 +65,8 @@
                         ],
                         capacity: 140,
                         teacher: "novacjo7",
-                        parallel: "201"
+                        parallel: "201",
+                        description: randomDescs[ Math.round( Math.random() * randomDescs.length ) ]
                     }
                 };
             }

@@ -35,8 +35,14 @@ export default class EventDetail extends React.Component
             </div>
             <hr />
             <div className="row">
-                <div className="column small-12"><em>Info about this parallel goes here.</em></div>
+                <div className="column small-12">
+                    <strong>{this.props.data.note}</strong>
+                    <div className="description">
+                        {this.props.data.details.description}
+                    </div>
+                </div>
             </div>
+            <div className="clearfix"></div>
         </div>;
     }
 }

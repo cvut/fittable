@@ -53,12 +53,14 @@
       padding: 20px;
       clear: both;
       min-height: 0px;
+      max-height: 0px;
       margin: 0px -10px 0px -10px;
       height: 0px;
       color: #222;
       width: inherit;
       transition: opacity $event-rollout-anim-speed*2,
               min-height $event-rollout-anim-speed,
+              max-height $event-rollout-anim-speed*2,
               height $event-rollout-anim-speed,
               margin $event-rollout-anim-speed,
               top $event-rollout-anim-speed;
@@ -93,8 +95,9 @@
         visibility: visible;
         opacity: 1;
         min-height: 180px;
-        height: 180px;
+        height: auto;
         margin: 10px -10px 30px -10px;
+        max-height: 360px;
       }
     }
   }
