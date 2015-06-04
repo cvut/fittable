@@ -69,7 +69,7 @@ export default class Timetable extends React.Component
         var timelineFrom = new Moment( firstDayStart ).diff( firstDayStart.hour( timelineHourFrom ) );
         var timelineLength = new Moment( firstDayStart ).hour( timelineHourTo ).diff( new Moment( firstDayStart ).hour( timelineHourFrom ) );
 
-        if ( this.props.weekEvents !== null )
+        if ( this.props.weekEvents !== undefined && this.props.weekEvents !== null )
         {
             for ( var event of this.props.weekEvents )
             {
