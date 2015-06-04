@@ -14,14 +14,23 @@
     z-index: 99;
     height: 100%;
 
+    &.hide, &:not(.detail-shown).hide {
+      display: block;
+      opacity: 0 !important;
+    }
+
     div.inner {
       background: $primary-color;
       color: white;
       height: 100%;
       @include background-hover-effect( $primary-color );
-      cursor: pointer;
       padding: 5px 10px;
       overflow: hidden;
+      position: relative;
+    }
+
+    &:not(.hide) div.inner {
+      cursor: pointer;
     }
 
     div.name {
@@ -83,6 +92,18 @@
       }
     }
 
+    &:not(.cancelled) {
+      .cancelflag {
+        display: none;
+      }
+    }
+
+    &:not(.replacement) {
+      .replaceflag {
+        display: none;
+      }
+    }
+
     &.detail-shown {
       width: 300px !important;
       height: auto !important;
@@ -97,6 +118,28 @@
         margin: 10px -10px 30px -10px;
         max-height: 360px;
       }
+    }
+
+    &.cancelled {
+      .inner {
+        border-top: 3px dashed rgba(white, .5);
+        background: #888;
+      }
+    }
+
+    &.replacement {
+      .inner {
+        border-top: 3px dashed rgba(white, .5);
+      }
+    }
+
+    .cancelflag, .replaceflag {
+      color: white;
+      opacity: .5;
+      font-size: 48px;
+      position: absolute;
+      top: -10px;
+      left: -10px;
     }
   }
 }

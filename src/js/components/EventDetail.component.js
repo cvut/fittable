@@ -25,6 +25,18 @@ export default class EventDetail extends React.Component
                 <div className="column small-6 text-right">{this.props.data.details.capacity} <i className="fa fa-pie-chart fa-fw"></i></div>
             </div>
             <hr />
+            <div className={'row cancellation' + ( this.props.data.cancelled ? '' : ' hide')}>
+                <div className="column small-12">
+                    <strong><i className="fa fa-ban fa-fw"></i> Paralelka bude nahrazena <a href="#">7.8 13:00</a></strong>
+                    <hr />
+                </div>
+            </div>
+            <div className={'row replacement' + ( this.props.data.replacement ? '' : ' hide')}>
+                <div className="column small-12">
+                    <strong><i className="fa fa-umbrella fa-fw"></i> Tato paralelka nahrazuje zrušenou</strong>
+                    <hr />
+                </div>
+            </div>
             <div className="row">
                 <div className="column small-12">
                     <strong>{this.props.data.note}</strong>

@@ -45,7 +45,7 @@ export default class Controls extends React.Component
             <Week viewDate={this.props.viewDate} onClick={this.handleWeekClick.bind(this)} />
             <WeekNav onPrevClick={this.handlePrevClick.bind(this)} onNextClick={this.handleNextClick.bind(this)} />
             <WeekSwitcher viewDate={this.props.viewDate} ref="weekSwitcher" onDateChange={this.props.onDateChange} />
-            <FunctionsBar onLayoutChange={this.props.onLayoutChange} />
+            <FunctionsBar onLayoutChange={this.props.onLayoutChange} displayFilter={this.props.displayFilter} onFilterChange={this.props.onFilterChange} />
         </div>;
     }
 }

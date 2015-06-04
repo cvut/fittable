@@ -18,7 +18,16 @@ export default class Fittable extends React.Component
         // todo: layout initialization should be loaded from some kind of localstorage data
         this.state = {
             viewDate: new Moment().startOf( 'isoweek' ),
-            layout: 'horizontal'
+            layout: 'horizontal',
+            displayFilter: {
+                'laboratory': true,
+                'tutorial': true,
+                'lecture': true,
+                'exam': true,
+                'assessment': true,
+                'onetime': true,
+                'other': true
+            }
         };
 
         // Declare weekEvents variable
@@ -117,6 +126,11 @@ export default class Fittable extends React.Component
         this.setState( { layout: to } );
     }
 
+    handleChangeFilter( to )
+    {
+        this.setState( { displayFilter: to } );
+    }
+
     /**
      * Renders the component
      */
@@ -124,8 +138,10 @@ export default class Fittable extends React.Component
     {
         return <div className="fittable-container">
             <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind(this)}
-                onLayoutChange={this.handleChangeLayout.bind(this)} onDateChange={this.handleChangeViewDate.bind(this)} />
-            <Timetable weekEvents={this.state.weekEvents} viewDate={this.state.viewDate} layout={this.state.layout} ref="timetable" />
+                onLayoutChange={this.handleChangeLayout.bind(this)} onDateChange={this.handleChangeViewDate.bind(this)}
+                displayFilter={this.state.displayFilter} onFilterChange={this.handleChangeFilter.bind(this)} />
+            <Timetable weekEvents={this.state.weekEvents} viewDate={this.state.viewDate} layout={this.state.layout}
+                displayFilter={this.state.displayFilter} ref="timetable" />
         </div>;
     }
 }

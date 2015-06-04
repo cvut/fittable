@@ -12,7 +12,7 @@ export default class FunctionSearch extends Toggleable
         super.constructor( props );
     }
 
-    onSearch( e )
+    handleSearch( e )
     {
         this.refs.searchResults.getDOMNode().classList.remove( 'hide' );
         return false;
@@ -26,7 +26,7 @@ export default class FunctionSearch extends Toggleable
         return <div className="function function-search hide" ref="rootEl">
             <div className="clearfix"></div>
             <div className="search-form">
-                <form name="search" onSubmit={this.onSearch.bind(this)}>
+                <form name="search" onSubmit={this.handleSearch.bind(this)}>
                     <input type="text" name="search" placeholder="Hledat" />
                     <button type="submit" className="search" name="search"><i className="fa fa-search"></i></button>
                 </form>

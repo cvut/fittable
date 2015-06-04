@@ -63,6 +63,7 @@ export default class Day extends React.Component
             </div>
             <div className="events" ref="events">
                 {events.map( function( event ) {
+                    if ( this.props.displayFilter[event.type] == false ) event.appear = 'hide';
                     return <EventBox key={event.id} data={event} detailShown={event.id == this.props.showDetailOn} onClick={this.props.onDetailShow} />;
                 }.bind(this) ) }
             </div>

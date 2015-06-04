@@ -1,0 +1,42 @@
+#fittable .header .functions-bar div.functions {
+  div.function.function-filter {
+    ul.filtering {
+      list-style: none;
+      margin: 0px 0px 20px 0px;
+
+      li {
+        display: block;
+        background: #f8f8f8;
+        color: #333;
+        font-size: 11pt;
+        font-weight: 300;
+        line-height: 1.5;
+        margin-bottom: 2px;
+        transition: color .2s, background .2s;
+        padding: 7px;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba( #f8f8f8, 0.7 );
+        }
+
+        i.fa {
+          margin-right: 15px;
+        }
+
+        &:not(.active) i.fa {
+          visibility: hidden;
+        }
+
+        &.active {
+          background: $primary-color;
+          color: white;
+
+          &:hover {
+            background: rgba( $primary-color, 0.7 );
+          }
+        }
+      }
+    }
+  }
+}

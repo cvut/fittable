@@ -90,11 +90,16 @@ export default class Timetable extends React.Component
         return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout} ref="rootEl">
             <div className="grid-overlay"><div className="grid"></div></div>
             <div className="days" ref="days">
-                <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
-                <Day id="1" dayNum="19" events={weekEvents[1]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
-                <Day id="2" dayNum="20" events={weekEvents[2]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
-                <Day id="3" dayNum="21" events={weekEvents[3]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
-                <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
+                <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} />
+                <Day id="1" dayNum="19" events={weekEvents[1]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                <Day id="2" dayNum="20" events={weekEvents[2]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                <Day id="3" dayNum="21" events={weekEvents[3]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
             </div>
             <div className="clearfix"></div>
         </div>;
