@@ -6,10 +6,10 @@ module.exports = function (grunt) {
 
 	// Project configuration
 	grunt.initConfig({
-        
-        pkg: grunt.file.readJSON("package.json"),
-        
-        // Empties folders to start fresh
+
+		pkg: grunt.file.readJSON('package.json'),
+
+		// Empties folders to start fresh
 		clean: {
 			dist: {
 				files: [{
@@ -21,23 +21,23 @@ module.exports = function (grunt) {
 					]
 				}]
 			},
-            dev: {
-                files: [{
-                    dot: true,
-                    src: [
-                        '.tmp',
-                        'index.html',
-                        'fittable.js',
-                        'fittable.css',
-                        'react.js'
-                    ]
-                }]
-            }
+			dev: {
+				files: [{
+					dot: true,
+					src: [
+						'.tmp',
+						'index.html',
+						'fittable.js',
+						'fittable.css',
+						'react.js'
+					]
+				}]
+			}
 		},
-        
-        // Compiles Sass to CSS and generates necessary files if requested
+
+		// Compiles Sass to CSS and generates necessary files if requested
 		compass: {
-            dev: {
+			dev: {
 				options: {
 					sassDir: 'src/scss',
 					cssDir: './',
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
 					sassDir: 'src/scss',
 					cssDir: 'dist/',
 					noLineComments: true,
-                    outputStyle: 'compressed'
+					outputStyle: 'compressed'
 				}
 			}
 		},
@@ -60,14 +60,14 @@ module.exports = function (grunt) {
 				files: ['src/scss/**/*.scss'],
 				tasks: ['compass', 'autoprefixer:dev']
 			},
-            browserify: {
-                files: ['src/js/**/*.js'],
-                tasks: ['browserify']
-            },
-            copy: {
-                files: ['src/*.html'],
-                tasks: ['copy']
-            }
+			browserify: {
+				files: ['src/js/**/*.js'],
+				tasks: ['browserify']
+			},
+			copy: {
+				files: ['src/*.html'],
+				tasks: ['copy']
+			}
 		},
 
 		// Add vendor prefixed styles
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
 				browsers: ['last 2 version', 'ie >= 8', 'Android 3'] // add Android 3 for Android 4.3- gradients
 			},
 			dev: {
-				files:  [{
+				files: [{
 					src: '*.css'
 				}]
 			},
@@ -85,65 +85,65 @@ module.exports = function (grunt) {
 					src: 'dist/*.css'
 				}]
 			}
-		},  
+		},
 
 		// Copies remaining files to places other tasks can use
 		copy: {
-            dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '.',
-                    dest: 'dist',
-                    flatten: true,
-                    src: [
-                        'src/*.html',
-                        'bower_components/react/react.js'
-                    ]
-                }]
-            },
-            dev: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '.',
-                    dest: './',
-                    flatten: true,
-                    src: [
-                        'src/index.html',
-                        'bower_components/react/react.js'
-                    ]
-                }]
-            }
+			dist: {
+				files: [{
+					expand: true,
+					dot: true,
+					cwd: '.',
+					dest: 'dist',
+					flatten: true,
+					src: [
+						'src/*.html',
+						'bower_components/react/react.js'
+					]
+				}]
+			},
+			dev: {
+				files: [{
+					expand: true,
+					dot: true,
+					cwd: '.',
+					dest: './',
+					flatten: true,
+					src: [
+						'src/index.html',
+						'bower_components/react/react.js'
+					]
+				}]
+			}
 		},
 
-        // Browserify
-        browserify: {
-            dev: {
-                files: {
-                    './fittable.js': 'src/js/app.js'
-                }
-            },
-            dist: {
-                files: {
-                    'dist/fittable.js': 'src/js/app.js'
-                }
-            },
-            options: {
-                transform: [ "babelify" ],
-                browserifyOptions: {
-                    debug: true
-                }
-            }
-        },
+		// Browserify
+		browserify: {
+			dev: {
+				files: {
+					'./fittable.js': 'src/js/app.js'
+				}
+			},
+			dist: {
+				files: {
+					'dist/fittable.js': 'src/js/app.js'
+				}
+			},
+			options: {
+				transform: [ 'babelify' ],
+				browserifyOptions: {
+					debug: true
+				}
+			}
+		},
 
-        // Uglify
-        uglify: {
-            dist: {
-                'dist/fittable.min.js': ['./dist/fittable.js', './dist/react.js']
-            }
-        }
-        
+		// Uglify
+		uglify: {
+			dist: {
+				'dist/fittable.min.js': ['./dist/fittable.js', './dist/react.js']
+			}
+		}
+
 	});
 
 	// Load grunt tasks automaticly
@@ -153,17 +153,17 @@ module.exports = function (grunt) {
 		'clean:dev',
 		'compass:dev',
 		'autoprefixer:dev',
-        'browserify:dev',
-        'copy:dev',
+		'browserify:dev',
+		'copy:dev',
 		'watch'
 	]);
 
 	grunt.registerTask('build', [
 		'clean:dist',
-        'compass:dist',
-        'autoprefixer:dist',
-        'browserify:dist',
-        'uglify:dist',
-        'copy:dist'
+		'compass:dist',
+		'autoprefixer:dist',
+		'browserify:dist',
+		'uglify:dist',
+		'copy:dist'
 	]);
 };
