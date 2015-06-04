@@ -18,7 +18,11 @@ results
 .tmp
 
 src/css
-src/build
 .idea/
 
 dist/
+
+/index.html
+/fittable.js
+/fittable.css
+/react.js

@@ -4,6 +4,7 @@
  */
 
 import EventBox from './EventBox.component';
+import Moment from '../../../bower_components/moment/moment.js';
 
 export default class Day extends React.Component
 {
@@ -49,6 +50,14 @@ export default class Day extends React.Component
         return props.events;
     }
 
+    hideAllEventDetails( except )
+    {
+        for ( var child in this.refs.events.props.children)
+        {
+            child.hideDetail();
+        }
+    }
+
 
     /**
      * Renders the component
@@ -57,15 +66,14 @@ export default class Day extends React.Component
     {
         var events = this.findOverlayedEvents( this.props );
 
-        // Temporarily keeping day names here. In future, we'll have separated location strings elsewhere
-        var dayNames = [ "pondělí", "úterý", "středa", "čtvrtek", "pátek" ];
-
         return <div className="day" data-day="{this.props.id}">
-            <div className="label"><span className="day-num">{this.props.dayNum}</span><span className="day-name">{dayNames[this.props.id]}</span></div>
-            <div className="events">
+                <div className="label"><span className="day-num">{this.props.dayNum}</span>
+                <span className="day-name">{new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' )}</span>
+            </div>
+            <div className="events" ref="events">
                 {events.map( function( event ) {
-                    return <EventBox key={event.id} data={event} />;
-                } ) }
+                    return <EventBox key={event.id} data={event} onDetailShow={this.props.onDetailShow} />;
+                }.bind(this) ) }
             </div>
         </div>;
     }

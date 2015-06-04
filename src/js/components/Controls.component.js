@@ -17,28 +17,21 @@ export default class Controls extends React.Component
 
     /**
      * Handler for events, when previous button in WeekNav is clicked ( bubbles from there to parent )
-     * @param e event
      */
-    onPrevClick( e )
+    handlePrevClick()
     {
-        this.props.onWeekChange( this.props.week - 1 );
+        this.props.onWeekChange( this.props.viewDate.subtract( 1, 'week' ) );
     }
 
     /**
      * Handler for events, when next button in WeekNav is clicked ( bubbles form there to parent )
-     * @param e event
      */
-    onNextClick( e )
+    handleNextClick()
     {
-        this.props.onWeekChange( this.props.week + 1 );
+        this.props.onWeekChange( this.props.viewDate.add( 1, 'week' ) );
     }
 
-    onRefresh( e )
-    {
-        this.props.onRefresh( this.props.week );
-    }
-
-    onWeekClick( e )
+    handleWeekClick()
     {
         this.refs.weekSwitcher.toggle();
     }
@@ -49,10 +42,10 @@ export default class Controls extends React.Component
     render()
     {
         return <div className="header">
-            <Week week={this.props.week} onClick={this.onWeekClick.bind(this)} />
-            <WeekNav onPrevClick={this.onPrevClick.bind(this)} onNextClick={this.onNextClick.bind(this)} />
-            <WeekSwitcher ref="weekSwitcher" week={this.props.week} year={this.props.year} onDateChange={this.props.onDateChange} />
-            <FunctionsBar onRefresh={this.onRefresh.bind(this)} onLayoutChange={this.props.onLayoutChange} />
+            <Week viewDate={this.props.viewDate} onClick={this.handleWeekClick.bind(this)} />
+            <WeekNav onPrevClick={this.handlePrevClick.bind(this)} onNextClick={this.handleNextClick.bind(this)} />
+            <WeekSwitcher viewDate={this.props.viewDate} ref="weekSwitcher" onDateChange={this.props.onDateChange} />
+            <FunctionsBar onLayoutChange={this.props.onLayoutChange} />
         </div>;
     }
 }

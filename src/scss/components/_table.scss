@@ -13,10 +13,6 @@
       color: $primary-color;
       transition: width .5s;
 
-      &:nth-child(even) {
-        background: $secondary-color;
-      }
-
       div.label {
         display: block;
         background: none;
@@ -46,6 +42,10 @@
           padding-left: 14px;
         }
       }
+    }
+
+    div.days div.day:nth-child(odd) {
+      background: $secondary-color;
     }
 
     &.a-left div.day div.events {

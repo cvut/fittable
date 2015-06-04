@@ -15,15 +15,6 @@ export default class EventDetail extends React.Component
      */
     render()
     {
-        Number.prototype.pad = function(size) {
-            var s = String(this);
-            while (s.length < (size || 2)) {s = "0" + s;}
-            return s;
-        };
-
-        var startTime = this.props.data.startsAt.getHours() + ":" + this.props.data.startsAt.getMinutes().pad(2);
-        var endTime = this.props.data.endsAt.getHours() + ":" + this.props.data.endsAt.getMinutes().pad(2);
-
         return <div className="detail">
             <div className="row properties">
                 <div className="column small-6"><i className="fa fa-thumb-tack fa-fw"></i> č. {this.props.data.details.parallel}</div>

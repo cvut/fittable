@@ -4,6 +4,7 @@
  */
 
 import EventDetail from './EventDetail.component';
+import Moment from '../../../bower_components/moment/moment.js';
 
 export default class EventBox extends React.Component
 {
@@ -39,9 +40,15 @@ export default class EventBox extends React.Component
      * EventDetail component should be displayed
      * @param e event
      */
-    handleShowDetail( e )
+    handleToggleDetail( e )
     {
+        this.props.onDetailShow( e );
         this.setState( { detailShown: !this.state.detailShown } );
+    }
+
+    hideDetail( e )
+    {
+        this.setState( { detailShown: false } );
     }
 
     /**
@@ -49,15 +56,10 @@ export default class EventBox extends React.Component
      */
     render()
     {
-        Number.prototype.pad = function(size) {
-            var s = String(this);
-            while (s.length < (size || 2)) {s = "0" + s;}
-            return s;
-        };
+        var startsAt = new Moment( this.props.data.startsAt ).format( 'LT' ),
+            endsAt = new Moment( this.props.data.endsAt ).format( 'LT' );
 
         var appear = this.props.data.appear;
-        var startTime = this.props.data.startsAt.getHours() + ":" + this.props.data.startsAt.getMinutes().pad(2);
-        var endTime = this.props.data.endsAt.getHours() + ":" + this.props.data.endsAt.getMinutes().pad(2);
 
         // Determine amount of needed minimalization of text elements in box
         var minimalization = "";
@@ -67,9 +69,9 @@ export default class EventBox extends React.Component
 
         return <div className={ 'event' + ( this.state.detailShown ? ' detail-shown' : '' ) + ' ' + appear + minimalization } data-event="{this.props.data.id}"
             style={{ width: this.props.data._draw_length*100 + "%", height: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%", top: this.props.data._draw_position*100 + "%" }}>
-            <div className="inner" onClick={this.handleShowDetail.bind( this )}>
+            <div className="inner" onClick={this.handleToggleDetail.bind( this )}>
                 <div className="name">{this.props.data.name}</div>
-                <div className="time">{startTime} - {endTime}</div>
+                <div className="time">{startsAt} - {endsAt}</div>
                 <div className="type">{this.getEventTypeName( this.props.data.type )}</div>
                 <EventDetail ref="detail" data={this.props.data} />
             </div>

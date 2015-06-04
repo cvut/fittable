@@ -26,7 +26,10 @@ module.exports = function (grunt) {
                     dot: true,
                     src: [
                         '.tmp',
-                        'src/build/*'
+                        'index.html',
+                        'fittable.js',
+                        'fittable.css',
+                        'react.js'
                     ]
                 }]
             }
@@ -37,7 +40,7 @@ module.exports = function (grunt) {
             dev: {
 				options: {
 					sassDir: 'src/scss',
-					cssDir: 'src/build/',
+					cssDir: './',
 					noLineComments: true
 				}
 			},
@@ -74,7 +77,7 @@ module.exports = function (grunt) {
 			},
 			dev: {
 				files:  [{
-					src: 'src/build/*.css'
+					src: '*.css'
 				}]
 			},
 			dist: {
@@ -104,10 +107,10 @@ module.exports = function (grunt) {
                     expand: true,
                     dot: true,
                     cwd: '.',
-                    dest: 'src/build',
+                    dest: './',
                     flatten: true,
                     src: [
-                        'src/*.html',
+                        'src/index.html',
                         'bower_components/react/react.js'
                     ]
                 }]
@@ -118,7 +121,7 @@ module.exports = function (grunt) {
         browserify: {
             dev: {
                 files: {
-                    'src/build/fittable.js': 'src/js/app.js'
+                    './fittable.js': 'src/js/app.js'
                 }
             },
             dist: {
@@ -127,7 +130,7 @@ module.exports = function (grunt) {
                 }
             },
             options: {
-                transform: [ 'babelify' ],
+                transform: [ "babelify" ],
                 browserifyOptions: {
                     debug: true
                 }
