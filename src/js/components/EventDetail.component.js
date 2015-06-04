@@ -1,5 +1,5 @@
 /**
- * Child component od EventBox, showing more information that won't fit into
+ * Child component of EventBox, showing more information that won't fit into
  * EventBox. Shows after clicking on EventBox.
  * @author Marián Hlaváč
  */
