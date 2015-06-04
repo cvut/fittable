@@ -11,6 +11,10 @@ export default class Timetable extends React.Component
     constructor( props )
     {
         super.constructor( props );
+
+        this.state = {
+            detailShownOn: -1
+        };
     }
 
     animateLeft()
@@ -33,9 +37,12 @@ export default class Timetable extends React.Component
         setTimeout( () => { rootEl.classList.add("a-right"); }, 50 );
     }
 
-    hideAllEventDetails( except )
+    showDetailOn( key )
     {
+        // If it's called on the same event, close all.
+        if ( key == this.state.detailShownOn ) key = -1;
 
+        this.setState( { detailShownOn: key } );
     }
 
     /**
@@ -75,11 +82,11 @@ export default class Timetable extends React.Component
         return <div className={'table a-left ' + this.props.layout} ref="rootEl">
             <div className="grid-overlay"><div className="grid"></div></div>
             <div className="days" ref="days">
-                <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.hideAllEventDetails.bind(this)} />
-                <Day id="1" dayNum="19" events={weekEvents[1]} onDetailShow={this.hideAllEventDetails.bind(this)} />
-                <Day id="2" dayNum="20" events={weekEvents[2]} onDetailShow={this.hideAllEventDetails.bind(this)} />
-                <Day id="3" dayNum="21" events={weekEvents[3]} onDetailShow={this.hideAllEventDetails.bind(this)} />
-                <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.hideAllEventDetails.bind(this)} />
+                <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
+                <Day id="1" dayNum="19" events={weekEvents[1]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
+                <Day id="2" dayNum="20" events={weekEvents[2]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
+                <Day id="3" dayNum="21" events={weekEvents[3]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
+                <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />
             </div>
             <div className="clearfix"></div>
         </div>;

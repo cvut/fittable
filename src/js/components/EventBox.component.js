@@ -36,22 +36,6 @@ export default class EventBox extends React.Component
     }
 
     /**
-     * Handler for events, when event box is clicked, and the
-     * EventDetail component should be displayed
-     * @param e event
-     */
-    handleToggleDetail( e )
-    {
-        this.props.onDetailShow( e );
-        this.setState( { detailShown: !this.state.detailShown } );
-    }
-
-    hideDetail( e )
-    {
-        this.setState( { detailShown: false } );
-    }
-
-    /**
      * Renders the component
      */
     render()
@@ -67,9 +51,9 @@ export default class EventBox extends React.Component
         if ( this.props.data._draw_length <= 0.10 ) minimalization = " min-hard";
         if ( this.props.data._draw_length <= 0.07 ) minimalization = " min-all";
 
-        return <div className={ 'event' + ( this.state.detailShown ? ' detail-shown' : '' ) + ' ' + appear + minimalization } data-event="{this.props.data.id}"
+        return <div className={ 'event' + ( this.props.detailShown ? ' detail-shown' : '' ) + ' ' + appear + minimalization } data-event="{this.props.data.id}"
             style={{ width: this.props.data._draw_length*100 + "%", height: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%", top: this.props.data._draw_position*100 + "%" }}>
-            <div className="inner" onClick={this.handleToggleDetail.bind( this )}>
+            <div className="inner" onClick={this.props.onClick.bind(null, this.props.data.id)}>
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{startsAt} - {endsAt}</div>
                 <div className="type">{this.getEventTypeName( this.props.data.type )}</div>
@@ -78,3 +62,5 @@ export default class EventBox extends React.Component
         </div>;
     }
 }
+
+EventBox.defaultProps = { detailShown: false };

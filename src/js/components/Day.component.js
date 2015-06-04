@@ -50,15 +50,6 @@ export default class Day extends React.Component
         return props.events;
     }
 
-    hideAllEventDetails( except )
-    {
-        for ( var child in this.refs.events.props.children)
-        {
-            child.hideDetail();
-        }
-    }
-
-
     /**
      * Renders the component
      */
@@ -72,7 +63,7 @@ export default class Day extends React.Component
             </div>
             <div className="events" ref="events">
                 {events.map( function( event ) {
-                    return <EventBox key={event.id} data={event} onDetailShow={this.props.onDetailShow} />;
+                    return <EventBox key={event.id} data={event} detailShown={event.id == this.props.showDetailOn} onClick={this.props.onDetailShow} />;
                 }.bind(this) ) }
             </div>
         </div>;
