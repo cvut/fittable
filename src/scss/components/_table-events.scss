@@ -10,7 +10,7 @@
   div.event {
     position: absolute;
     padding: 0px 5px;
-    transition: width $event-rollout-anim-speed;
+    transition: width $event-rollout-anim-speed, opacity $events-move-anim-speed;
     z-index: 99;
     height: 100%;
 
@@ -88,8 +88,6 @@
       height: auto !important;
       position: relative;
       z-index: 199;
-
-      .inner { box-shadow: 0px 2px 9px rgba( 70, 70, 70, .2 ); }
 
       div.detail {
         visibility: visible;

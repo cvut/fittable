@@ -1,0 +1,21 @@
+#fittable {
+
+  div.table.muted {
+
+    div.day {
+      div.label {
+        opacity: .3;
+      }
+
+      div.events div.event:not(.detail-shown) {
+        opacity: .3;
+      }
+    }
+
+    div.days div.day:nth-child(odd) {
+      background: rgba($secondary-color, 0.3);
+    }
+
+  }
+
+}

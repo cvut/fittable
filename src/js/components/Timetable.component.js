@@ -13,7 +13,8 @@ export default class Timetable extends React.Component
         super.constructor( props );
 
         this.state = {
-            detailShownOn: -1
+            detailShownOn: -1,
+            popupsOpened : 0
         };
     }
 
@@ -39,10 +40,17 @@ export default class Timetable extends React.Component
 
     showDetailOn( key )
     {
+        var prevkey = this.state.detailShownOn;
+
         // If it's called on the same event, close all.
         if ( key == this.state.detailShownOn ) key = -1;
 
-        this.setState( { detailShownOn: key } );
+        // Calculate num of shown popups
+        var popups = this.state.popupsOpened;
+        if ( prevkey == -1 && key != -1 ) popups++;
+        if ( prevkey != -1 && key == -1 ) popups--;
+
+        this.setState( { detailShownOn: key, popupsOpened: popups } );
     }
 
     /**
@@ -79,7 +87,7 @@ export default class Timetable extends React.Component
             }
         }
 
-        return <div className={'table a-left ' + this.props.layout} ref="rootEl">
+        return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout} ref="rootEl">
             <div className="grid-overlay"><div className="grid"></div></div>
             <div className="days" ref="days">
                 <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)} showDetailOn={this.state.detailShownOn} />

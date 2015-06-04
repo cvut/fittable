@@ -23,6 +23,7 @@
         color: $primary-color;
         padding: 0px 10px;
         margin: $day-row-padding 0px;
+        transition: opacity $events-move-anim-speed;
 
         span {
           padding: 5px 0px 5px 20px;
@@ -46,6 +47,7 @@
 
     div.days div.day:nth-child(odd) {
       background: $secondary-color;
+      transition: background $events-move-anim-speed;
     }
 
     &.a-left div.day div.events {
