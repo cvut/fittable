@@ -23,7 +23,7 @@ export default class WeekSwitcher extends Toggleable
             weeks[ weeki ].push( i.date() );
             if ( i.isoWeekday() == 7 )
             {
-                moments[ weeki ].push( i.startOf( 'week' ) );
+                moments[ weeki ] = new Moment( i ).startOf( 'isoWeek' );
                 weeki++;
             }
             if ( i.isSame( this.props.viewDate, 'week' ) ) activeWeekIdx = weeki;
