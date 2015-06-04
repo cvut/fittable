@@ -1,8 +1,8 @@
 footer {
   line-height: 16px;
-  padding: 30px 18px;
-  font-size: 12px;
-  color: #444;
+  padding: 30px 20px;
+  font-size: $base-font-size;
+  color: $darkgraytext-color;
 
   img {
     margin-right: 10px;
@@ -25,10 +25,10 @@ footer {
       margin: 0px 8px;
       padding: 0;
       display: inline-block;
-      font-size: 12px;
+      font-size: $base-font-size;
 
       a {
-        color: #444;
+        color: $darkgraytext-color;
         text-decoration: underline;
         font-weight: 700;
         line-height: 16px;

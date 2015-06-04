@@ -1,6 +1,8 @@
 header {
 
-  &.row { margin: 60px auto 30px auto; }
+  &.row {
+    margin: 60px auto 30px auto;
+  }
 
   .user-menu {
     float: right;
@@ -18,13 +20,13 @@ header {
         color: $primary-color;
         text-decoration: none;
         line-height: $header-elements-weight;
-        padding: 0px 10px;
+        padding: 0 10px;
         display: inline-block;
         width: 100%;
         height: 100%;
 
         i.fa {
-          margin: 0px 5px;
+          margin: 0 5px;
         }
       }
     }
@@ -46,12 +48,12 @@ header {
   h1 {
     color: $primary-color;
     font-weight: 300;
-    margin: -10px 0px 0px 0px;
+    margin: -10px 0 0 0;
   }
 
   h1 + .sub-header {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: $small-font-size;
     margin-top: -7px;
     color: $primary-color;
     font-weight: 400;

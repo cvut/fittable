@@ -1,6 +1,8 @@
 /**
- * React component
- * @author Marián
+ * Week switcher is displayed after clicking on Week component. It contains three ways of
+ * changing the displayed week. You can move it by one semester, one month or choose
+ * exact week from calendar displayed in this dropdown.
+ * @author Marián Hlaváč
  */
 
 import Toggleable from './Toggleable.component';
@@ -64,15 +66,11 @@ export default class WeekSwitcher extends Toggleable
             {weeks.map( function( week ) {
                 return <div className={'row selector week-selector' + ( activeWeekIdx == weeks.indexOf( week ) ? ' active-week' : '' ) } key={weeks.indexOf( week )}>
                     <div className="column small-12">
-                        <a href="#" onClick={this.props.onDateChange.bind( this, moments[ weeks.indexOf( week ) ] )}>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[0] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[0] < 7) ? ' in-other' : '')}>{week[0]}</div>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[1] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[1] < 7) ? ' in-other' : '')}>{week[1]}</div>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[2] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[2] < 7) ? ' in-other' : '')}>{week[2]}</div>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[3] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[3] < 7) ? ' in-other' : '')}>{week[3]}</div>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[4] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[4] < 7) ? ' in-other' : '')}>{week[4]}</div>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[5] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[5] < 7) ? ' in-other' : '')}>{week[5]}</div>
-                            <div className={'day' + ((weeks.indexOf( week ) == 0 && week[6] > 7 )||(weeks.indexOf( week ) == weeki-1 && week[6] < 7) ? ' in-other' : '')}>{week[6]}</div>
-                        </a>
+                        {week.map( function( day ) {
+                            return <a href="#" onClick={this.props.onDateChange.bind( this, moments[ weeks.indexOf( week ) ] )}>
+                                    <div className={'day' + ((weeks.indexOf( week ) == 0 && day > 7 )||(weeks.indexOf( week ) == weeki-1 && day < 7) ? ' in-other' : '')}>{day}</div>
+                                </a>;
+                        }.bind( this ) ) }
                     </div>
                 </div>;
             }.bind( this ) ) }

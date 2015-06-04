@@ -4,14 +4,14 @@ div#fittable div.table.vertical {
     height: $vertical-layout-day-height;
     width: 20%;
     float: left;
-    transition: height .5s;
+    transition: height $layoutchange-anim-speed;
 
     div.label {
       float: none;
       width: 100%;
       line-height: 1.7;
       height: 7%;
-      margin: 0px;
+      margin: 0;
       padding: 10px;
 
       span.day-num {
@@ -24,10 +24,10 @@ div#fittable div.table.vertical {
     div.events {
       height: 93%;
       width: 100%;
-      margin: 0px;
+      margin: 0;
 
       div.event {
-        left: 0px !important;
+        left: 0 !important;
         width: 100% !important;
         padding: 5px 10px;
 
@@ -46,7 +46,7 @@ div#fittable div.table.vertical {
 
   div.grid-overlay {
     // todo: tohle neni uplne koser, zjistit proc se blbe pocita vyska!
-    padding: 4.5% 12px 0px 12px;
+    padding: 4.5% 12px 0 12px;
 
     .grid {
       $grid-color: rgba( 0, 0, 0, .1 );
@@ -69,7 +69,7 @@ div#fittable div.table.vertical {
 
     &.half + div.event:not(.detail-shown).half {
       left: unset !important;
-      right: 0px;
+      right: 0;
       padding-left: 5px;
     }
 
@@ -78,7 +78,7 @@ div#fittable div.table.vertical {
       padding-right: 5px;
 
       .time {
-        font-size: 7pt;
+        font-size: $small-font-size;
       }
     }
 
@@ -111,7 +111,7 @@ div#fittable div.table.vertical {
       }
 
       .name {
-        font-size: 10pt !important;
+        font-size: $small-font-size !important;
       }
     }
 

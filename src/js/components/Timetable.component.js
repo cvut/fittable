@@ -1,6 +1,6 @@
 /**
- * React component
- * @author Marián
+ * Component rendering whole timetable, containing hierarchy of week, day and events components.
+ * @author Marián Hlaváč
  */
 
 import Day from './Day.component';
@@ -18,6 +18,9 @@ export default class Timetable extends React.Component
         };
     }
 
+    /**
+     * Replays the CSS animation of all events from right side to the left.
+     */
     animateLeft()
     {
         var rootEl = this.refs.rootEl.getDOMNode();
@@ -28,6 +31,9 @@ export default class Timetable extends React.Component
         setTimeout( () => { rootEl.classList.add("a-left"); }, 50 );
     }
 
+    /**
+     * Replays the CSS animation of all events from left side to the right.
+     */
     animateRight()
     {
         var rootEl = this.refs.rootEl.getDOMNode();
@@ -38,6 +44,10 @@ export default class Timetable extends React.Component
         setTimeout( () => { rootEl.classList.add("a-right"); }, 50 );
     }
 
+    /**
+     * Changes the ID of currently displayed EventDetail.
+     * @param key EventDetail to display
+     */
     showDetailOn( key )
     {
         var prevkey = this.state.detailShownOn;
@@ -65,10 +75,10 @@ export default class Timetable extends React.Component
         var timelineHourFrom = 7;
         var timelineHourTo = 20;
 
-        // Timeline lengths in milliseconds
-        var timelineFrom = new Moment( firstDayStart ).diff( firstDayStart.hour( timelineHourFrom ) );
+        // Timeline length in milliseconds
         var timelineLength = new Moment( firstDayStart ).hour( timelineHourTo ).diff( new Moment( firstDayStart ).hour( timelineHourFrom ) );
 
+        // Make sure the weekEvents data are available...
         if ( this.props.weekEvents !== undefined && this.props.weekEvents !== null )
         {
             for ( var event of this.props.weekEvents )

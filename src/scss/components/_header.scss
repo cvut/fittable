@@ -8,13 +8,13 @@
     div.function-controls {
       float: right;
       height: $header-elements-weight;
-      width: 0px;
+      width: 0;
       overflow: hidden;
       position: relative;
-      transition: width .2s, padding .2s;
-      padding-left: 0px;
+      transition: width $default-anim-speed, padding $default-anim-speed;
+      padding-left: 0;
       box-sizing: border-box;
-      margin: 0px;
+      margin: 0;
 
       &.open {
         width: 200px;
@@ -32,10 +32,10 @@
       color: $primary-color;
       height: $header-elements-weight - 8px;
       line-height: $header-elements-weight - 8px;
-      margin: 4px 0px;
-      padding: 0px 8px;
+      margin: 4px 0;
+      padding: 0 8px;
       width: 100%;
-      border: 0px;
+      border: 0;
       box-shadow: none;
     }
 
@@ -48,7 +48,7 @@
 
       & > a {
         display: inline-block;
-        padding: 0px 8px;
+        padding: 0 8px;
         height: $header-elements-weight;
         line-height: $header-elements-weight;
         position: relative;
@@ -62,15 +62,19 @@
         top: -5px;
         text-align: right;
         line-height: 1;
-        right: 0px;
+        right: 0;
         opacity: 0;
-        transition: top 0.2s, opacity 0.2s;
+        transition: top $default-anim-speed, opacity $default-anim-speed;
         height: 5px;
         z-index: 99;
       }
 
       .flags-function::before {
         content: 'Příznaky';
+      }
+
+      .filter-function::before {
+        content: 'Filtrovat';
       }
 
       .search-function::before {
@@ -100,13 +104,13 @@
 
       a {
         color: white;
-        padding: 0px 18px;
+        padding: 0 18px;
         line-height: $header-elements-weight;
         display: inline-block;
       }
 
       i.fa {
-        margin: 0px 5px;
+        margin: 0 5px;
       }
     }
 
@@ -119,11 +123,8 @@
         width: $header-elements-weight / 1.25;
         line-height:  $header-elements-weight;
         text-align: center;
-        font-size: 14px;
+        font-size: $large-font-size;
       }
-
     }
-
   }
-
 }

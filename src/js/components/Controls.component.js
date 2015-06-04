@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Wraps all controls displayed in the heading of widget.
+ * Contains week controllers and functions tools.
+ * @author Marián Hlaváč
  */
 
 import Week from './Week.component';
@@ -16,7 +17,7 @@ export default class Controls extends React.Component
     }
 
     /**
-     * Handler for events, when previous button in WeekNav is clicked ( bubbles from there to parent )
+     * Handles WeekNav's previous button click event
      */
     handlePrevClick()
     {
@@ -24,13 +25,16 @@ export default class Controls extends React.Component
     }
 
     /**
-     * Handler for events, when next button in WeekNav is clicked ( bubbles form there to parent )
+     * Handles WeekNav's next button click event
      */
     handleNextClick()
     {
         this.props.onWeekChange( this.props.viewDate.add( 1, 'week' ) );
     }
 
+    /**
+     * Handles a click on a week row in the WeekSelector
+     */
     handleWeekClick()
     {
         this.refs.weekSwitcher.toggle();

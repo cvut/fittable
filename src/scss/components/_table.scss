@@ -1,4 +1,3 @@
-
 #fittable {
 
   div.table {
@@ -11,7 +10,7 @@
       max-height: $vertical-layout-day-height;
       background: white;
       color: $primary-color;
-      transition: width .5s;
+      transition: width $layoutchange-anim-speed;
 
       div.label {
         display: block;
@@ -21,12 +20,12 @@
         line-height: $day-row-height - ($day-row-padding * 2);
         text-align: left;
         color: $primary-color;
-        padding: 0px 10px;
-        margin: $day-row-padding 0px;
+        padding: 0 10px;
+        margin: $day-row-padding 0;
         transition: opacity $events-move-anim-speed;
 
         span {
-          padding: 5px 0px 5px 20px;
+          padding: 5px 0 5px 20px;
           margin-left: -18px;
         }
 
@@ -62,8 +61,8 @@
 
     .grid-overlay {
       position: absolute;
-      left: 0px;
-      top: 0px;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
       padding: $day-row-padding 0px $day-row-padding 10%;

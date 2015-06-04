@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Child component od EventBox, showing more information that won't fit into
+ * EventBox. Shows after clicking on EventBox.
+ * @author Marián Hlaváč
  */
 
 export default class EventDetail extends React.Component

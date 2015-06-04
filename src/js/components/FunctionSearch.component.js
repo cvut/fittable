@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Function component, search function
+ * Provides ability to search events, teachers etc.
+ * @author Marián Hlaváč
  */
 
 import Toggleable from './Toggleable.component';
@@ -12,7 +13,11 @@ export default class FunctionSearch extends Toggleable
         super.constructor( props );
     }
 
-    handleSearch( e )
+    /**
+     * Handles a form submit, making the search
+     * @returns {boolean}
+     */
+    handleSearch( )
     {
         this.refs.searchResults.getDOMNode().classList.remove( 'hide' );
         return false;

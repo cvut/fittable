@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Week navigator components consists of two buttons, one for navigation to the left and second for navigation to the
+ * right.
+ * @author Marián Hlaváč
  */
 
 export default class WeekNav extends React.Component

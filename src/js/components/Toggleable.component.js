@@ -1,6 +1,6 @@
 /**
- * React component
- * @author Marián
+ * Base class (component) for all toggleable components. Used primarily for functions dialogs
+ * @author Marián Hlaváč
  */
 
 export default class Toggleable extends React.Component
@@ -10,6 +10,9 @@ export default class Toggleable extends React.Component
         super.constructor( props );
     }
 
+    /**
+     * Toggles this component
+     */
     toggle()
     {
         if ( ! this.refs.rootEl.getDOMNode().classList.contains( 'hide' ) )
@@ -18,11 +21,17 @@ export default class Toggleable extends React.Component
             this.refs.rootEl.getDOMNode().classList.remove( 'hide' );
     }
 
+    /**
+     * Shows this component
+     */
     show()
     {
         this.refs.rootEl.getDOMNode().classList.remove( 'hide' );
     }
 
+    /**
+     * Hides this component
+     */
     hide()
     {
         if ( ! this.refs.rootEl.getDOMNode().classList.contains( 'hide' ) )

@@ -7,13 +7,13 @@ div#fittable div.header div.week-switcher {
   z-index: 90;
   padding: 20px 10px;
   opacity: 1;
-  transition: opacity .2s, height .2s;
+  transition: opacity $default-anim-speed, height $default-anim-speed;
 
   &.hide {
     display: block !important;
     visibility: hidden;
     opacity: 0;
-    height: 0px;
+    height: 0;
     padding: 0;
     overflow: hidden;
   }

@@ -1,6 +1,6 @@
 /**
- * React component
- * @author Marián
+ * Component representing the event.
+ * @author Marián Hlaváč
  */
 
 import EventDetail from './EventDetail.component';
@@ -14,7 +14,6 @@ export default class EventBox extends React.Component
         this.state = {
             detailShown: false
         };
-
     }
 
     /**
@@ -29,7 +28,8 @@ export default class EventBox extends React.Component
             'laboratory': 'lab',
             'tutorial': 'cvi',
             'lecture': 'pře',
-            'exam': 'zk'
+            'exam': 'zk',
+            'assessment': 'obh'
         };
 
         return type in eventTypes ? eventTypes[ type ] : type;
@@ -40,19 +40,20 @@ export default class EventBox extends React.Component
      */
     render()
     {
+        // Generate time strings
         var startsAt = new Moment( this.props.data.startsAt ).format( 'LT' ),
             endsAt = new Moment( this.props.data.endsAt ).format( 'LT' );
 
         var appear = this.props.data.appear;
 
-        // Determine amount of needed minimalization of text elements in box
+        // Determine amount of needed minimalization of text elements in box by its length
         var minimalization = "";
         if ( this.props.data._draw_length <= 0.12 ) minimalization = " min-light";
         if ( this.props.data._draw_length <= 0.10 ) minimalization = " min-hard";
         if ( this.props.data._draw_length <= 0.07 ) minimalization = " min-all";
 
         return <div className={ 'event' + ( this.props.detailShown ? ' detail-shown' : '' ) + ( this.props.data.cancelled ? ' cancelled' : '' )
-        + ( this.props.data.replacement ? ' replacement' : '' ) + ' ' + appear + minimalization } data-event="{this.props.data.id}"
+        + ( this.props.data.replacement ? ' replacement ' : ' ' ) + appear + minimalization } data-event="{this.props.data.id}"
             style={{ width: this.props.data._draw_length*100 + "%", height: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%", top: this.props.data._draw_position*100 + "%" }}>
             <div className="inner" onClick={this.props.onClick.bind(null, appear == 'hide' ? -1 : this.props.data.id)}>
                 <div className="name">{this.props.data.name}</div>

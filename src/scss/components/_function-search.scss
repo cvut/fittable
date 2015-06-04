@@ -1,96 +1,91 @@
-#fittable .header .functions-bar {
-  div.functions {
+#fittable .header .functions-bar div.functions {
 
-    div.function.function-search {
+  div.function.function-search {
 
-      div.search-form {
-        background: $secondary-color;
+    div.search-form {
+      background: $secondary-color;
+      height: 32px;
+      color: white;
+      margin: 20px 0;
+
+      input {
+        width: 80%;
+        float: left;
+        margin: 0;
+        background: transparent;
+        color: $primary-color;
+        line-height: 32px;
         height: 32px;
-        color: white;
-        margin: 20px 0px;
+        border: 0;
+        padding: 0 5%;
+      }
 
-        input {
-          width: 80%;
-          float: left;
-          margin: 0px;
-          background: transparent;
-          color: $primary-color;
-          line-height: 32px;
-          height: 32px;
-          border: 0;
-          padding: 0px 5%;
+      button {
+        width: 20%;
+        float: right;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        line-height: 32px;
+        color: $primary-color;
+        background: transparent;
+
+        &:hover {
+          background: $primary-color;
+          color: white;
         }
+      }
+    }
 
-        button {
-          width: 20%;
-          float: right;
-          margin: 0px;
-          padding: 0px;
-          text-align: center;
-          line-height: 32px;
+    div.search-results {
+
+      div.result-category {
+        color: $primary-color;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      ul.results {
+        list-style: none;
+        margin: 0 0 20px 0;
+        padding: 0;
+
+        li {
+          display: block;
+          background: $lightgrayback-color;
           color: $primary-color;
-          background: transparent;
+          font-size: $large-font-size;
+          font-weight: 300;
+          line-height: 1.5;
+          margin-bottom: 2px;
+          transition: color $default-anim-speed, background $default-anim-speed;
+
+          a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 6px 5%;
+          }
+
+          .subtext {
+            font-size: $small-font-size;
+            color: #333;
+          }
 
           &:hover {
             background: $primary-color;
             color: white;
-          }
-        }
-      }
-
-      div.search-results {
-
-        div.result-category {
-          color: $primary-color;
-          font-weight: bold;
-          text-transform: uppercase;
-        }
-
-        ul.results {
-          list-style: none;
-          margin: 0px 0px 20px 0px;
-          padding: 0px;
-
-          li {
-            display: block;
-            background: #f8f8f8;
-            color: $primary-color;
-            font-size: 11pt;
-            font-weight: 300;
-            line-height: 1.5;
-            margin-bottom: 2px;
-            transition: color .2s, background .2s;
 
             a {
-              display: block;
-              width: 100%;
-              height: 100%;
-              padding: 6px 5%;
+              color: white;
             }
 
             .subtext {
-              font-size: 8pt;
-              color: #333;
-            }
-
-            &:hover {
-              background: $primary-color;
               color: white;
-
-              a {
-                color: white;
-              }
-
-              .subtext {
-                color: white;
-              }
             }
           }
         }
-
       }
-
     }
-
   }
 }

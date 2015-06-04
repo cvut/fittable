@@ -1,6 +1,6 @@
 /**
- * React component
- * @author Marián
+ * Root component drawing whole widget.
+ * @author Marián Hlaváč
  */
 
 import Controls from './Controls.component';
@@ -35,11 +35,8 @@ export default class Fittable extends React.Component
     }
 
     /**
-     * Calls external callback, receives new data used for displaying actual week.
-     * todo: It doesn't check, if the incoming array is valid. This is IMPORTANT
-     * @param {integer} timeFrom range value used for filtering incoming data, number of milliseconds since unix epoch
-     * @param {integer} timeTo range value used for filtering incoming data, number of milliseconds since unix epoch
-     * @returns {*} incoming data from external data source
+     * Calls external data callback, telling that new data should be grabbed from source. If the required data are
+     * present in cache, use them instead of calling data callback.
      */
     getWeekEvents( )
     {
@@ -60,9 +57,10 @@ export default class Fittable extends React.Component
     }
 
     /**
-     * Callback used to save loaded data.
-     * @param data
-     * @param alreadyCached
+     * Callback saving received data from source / cache to weekEvents variable.
+     * If the data are from cache, the second argument should be true.
+     * @param {Array} data Data array
+     * @param {boolean} alreadyCached The data come from cache and shouldn't be cached again
      */
     setWeekEvents( data, alreadyCached = false )
     {
@@ -81,17 +79,29 @@ export default class Fittable extends React.Component
             alert( 'Data invalid!' ); // todo: alert through UI
     }
 
+    /**
+     * Tests if data are valid.
+     * @param data Incoming data
+     * @returns {boolean} Data are valid
+     */
     static areDataValid( data )
     {
         if ( data !== null )
         {
             for ( var event of data )
             {
+                // Test if dates are valid ( using Moment.js validation )
                 if ( ! new Moment( event.startsAt ).isValid() ) return false;
                 if ( ! new Moment( event.endsAt ).isValid() ) return false;
+
+                // todo: Tests missing!
             }
+
+            // Everything seems correct
             return true;
-        } else return false;
+        }
+        else
+            return false;
     }
 
     componentWillMount()
@@ -101,15 +111,13 @@ export default class Fittable extends React.Component
     }
 
     /**
-     * Changes week to specified number. Don't have to be in the range of actual selected week,
-     * if it's out of boundary, the year will be changed automatically.
-     * After changing the week, all appropriate refresh methods are called.
-     * @param {integer} week new week
+     * Changes view date to specified moment. The moment should be the beginning of the week.
+     * @param {Moment} viewDate New view date
      */
-    handleChangeViewDate( week )
+    handleChangeViewDate( viewDate )
     {
         // Update viewDate
-        var newdate = new Moment( week );
+        var newdate = new Moment( viewDate );
 
         // Animate in correct direction
         if ( newdate.isAfter( this.state.viewDate ) ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
@@ -121,11 +129,19 @@ export default class Fittable extends React.Component
         this.getWeekEvents();
     }
 
+    /**
+     * Handler for layout changing event.
+     * @param {string} to New layout setting
+     */
     handleChangeLayout( to )
     {
         this.setState( { layout: to } );
     }
 
+    /**
+     * Handler for filter changing event.
+     * @param {Array} to New filter setting
+     */
     handleChangeFilter( to )
     {
         this.setState( { displayFilter: to } );

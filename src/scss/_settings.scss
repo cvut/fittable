@@ -51,19 +51,13 @@
 // a. Base
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
+$base-font-size: 13px;
+
 // This is the default html and body font-size for the base rem value.
 // $rem-base: 16px;
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
-
-// The default font-size is set to 100% of the browser style sheet (usually 16px)
-// for compatibility with browser-based text zoom or user-set defaults.
-
-// Since the typical default browser font-size is 16px, that makes the calculation for grid size.
-// If you want your base font-size to be different and not have it affect the grid breakpoints,
-// set $rem-base to $base-font-size and make sure $base-font-size is a px value.
-$base-font-size: 12px;
 
 // The $base-font-size is 100% while $base-line-height is 150%
 $base-line-height: 160%;
@@ -118,7 +112,6 @@ $alert-color: #ed2b16;
 $success-color: $primary-color;
 $warning-color: #ed8016;
 $info-color: $primary-color;
-
 $light-color: #e8f3fa;
 $second-type-color: $secondary-color;
 

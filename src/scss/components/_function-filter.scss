@@ -1,23 +1,25 @@
 #fittable .header .functions-bar div.functions {
+
   div.function.function-filter {
+
     ul.filtering {
       list-style: none;
-      margin: 0px 0px 20px 0px;
+      margin: 0 0 20px 0;
 
       li {
         display: block;
-        background: #f8f8f8;
-        color: #333;
-        font-size: 11pt;
+        background: $lightgrayback-color;
+        color: $darkgraytext-color;
+        font-size: $large-font-size;
         font-weight: 300;
         line-height: 1.5;
         margin-bottom: 2px;
-        transition: color .2s, background .2s;
+        transition: color $default-anim-speed, background $default-anim-speed;
         padding: 7px;
         cursor: pointer;
 
         &:hover {
-          background: rgba( #f8f8f8, 0.7 );
+          background: rgba( $lightgrayback-color, .75 );
         }
 
         i.fa {
@@ -33,7 +35,7 @@
           color: white;
 
           &:hover {
-            background: rgba( $primary-color, 0.7 );
+            background: rgba( $primary-color, .75 );
           }
         }
       }

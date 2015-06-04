@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Function component, settings function
+ * Main dialog containing all important options to customize look and behaviour of fittable
+ * @author Marián Hlaváč
  */
 
 import Toggleable from './Toggleable.component';
@@ -10,14 +11,23 @@ export default class FunctionSettings extends Toggleable
     constructor( props )
     {
         super.constructor( props );
+
+        // Default layout is horizontal
         this.state = {
             activeLayout: 'horizontal'
         };
     }
 
-    layoutSelection( to, e )
+    /**
+     * Handles layout selection
+     * @param to Selected layout
+     */
+    handleLayoutSelect( to )
     {
+        // Delegate to parent
         this.props.onLayoutChange( to );
+
+        // Set the state
         this.setState( { activeLayout: to } );
     }
 
@@ -31,13 +41,13 @@ export default class FunctionSettings extends Toggleable
             <h2>rozložení</h2>
             <div className="row">
                 <div className="column small-6">
-                    <a href="#" className={ "layout-selector"  + ( this.state.activeLayout == 'horizontal' ? ' active' : '' )} ref="horizontallayout" onClick={this.layoutSelection.bind( this, 'horizontal' )} >
+                    <a href="#" className={ "layout-selector"  + ( this.state.activeLayout == 'horizontal' ? ' active' : '' )} ref="horizontallayout" onClick={this.handleLayoutSelect.bind( this, 'horizontal' )} >
                         <i className="fa fa-th-list"></i>
                         řádkové
                     </a>
                 </div>
                 <div className="column small-6">
-                    <a href="#" className={ "layout-selector"  + ( this.state.activeLayout == 'vertical' ? ' active' : '' )} ref="verticallayout" onClick={this.layoutSelection.bind( this, 'vertical' )}>
+                    <a href="#" className={ "layout-selector"  + ( this.state.activeLayout == 'vertical' ? ' active' : '' )} ref="verticallayout" onClick={this.handleLayoutSelect.bind( this, 'vertical' )}>
                         <i className="fa fa-th"></i>
                         sloupcové
                     </a>

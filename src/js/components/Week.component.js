@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Week controller located in upper left corner, displaying actual week.
+ * On click it toggles the WeekSwitcher component
+ * @author Marián Hlaváč
  */
 
 export default class Week extends React.Component
@@ -14,7 +15,10 @@ export default class Week extends React.Component
         };
     }
 
-    handleClick( e )
+    /**
+     * Handles the click, togging the WeekSwitcher (delegating signal to parent) and changing the icon
+     */
+    handleClick()
     {
         this.props.onClick();
         this.setState( { icon: ( this.state.icon == 'fa fa-caret-down' ? 'fa fa-caret-up': 'fa fa-caret-down' ) } );

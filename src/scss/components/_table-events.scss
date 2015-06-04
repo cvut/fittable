@@ -1,4 +1,3 @@
-
 #fittable div.table div.day div.events {
   width: 90%;
   float: left;
@@ -9,7 +8,7 @@
 
   div.event {
     position: absolute;
-    padding: 0px 5px;
+    padding: 0 5px;
     transition: width $event-rollout-anim-speed, opacity $events-move-anim-speed;
     z-index: 99;
     height: 100%;
@@ -34,14 +33,14 @@
     }
 
     div.name {
-      font-size: 18px;
+      font-size: $xlarge-font-size;
       font-weight: 300;
       text-align: right;
       margin-top: 5px;
     }
 
     div.time {
-      font-size: 11px;
+      font-size: $xsmall-font-size;
       text-align: right;
     }
 
@@ -49,7 +48,7 @@
       position: absolute;
       bottom: 10px;
       left: 15px;
-      font-size: 12px;
+      font-size: $small-font-size;
       font-weight: 700;
       border-left: 2px solid white;
       padding-left: 5px;
@@ -61,10 +60,10 @@
       background: white;
       padding: 20px;
       clear: both;
-      min-height: 0px;
-      max-height: 0px;
+      min-height: 0;
+      max-height: 0;
       margin: 0px -10px 0px -10px;
-      height: 0px;
+      height: 0;
       color: #222;
       width: inherit;
       transition: opacity $event-rollout-anim-speed*2,
@@ -79,7 +78,7 @@
       .properties {
         color: #777;
         line-height: 1.9;
-        font-size: 12px;
+        font-size: $small-font-size;
 
         i.fa {
           margin-right: 7px;
@@ -92,17 +91,14 @@
       }
     }
 
-    &:not(.cancelled) {
-      .cancelflag {
-        display: none;
-      }
+    &:not(.cancelled) .cancelflag {
+      display: none;
     }
 
-    &:not(.replacement) {
-      .replaceflag {
-        display: none;
-      }
+    &:not(.replacement) .replaceflag {
+      display: none;
     }
+
 
     &.detail-shown {
       width: 300px !important;
@@ -120,17 +116,13 @@
       }
     }
 
-    &.cancelled {
-      .inner {
-        border-top: 3px dashed rgba(white, .5);
-        background: #888;
-      }
+    &.cancelled .inner {
+      border-top: 3px dashed rgba(white, .5);
+      background: #888;
     }
 
-    &.replacement {
-      .inner {
-        border-top: 3px dashed rgba(white, .5);
-      }
+    &.replacement .inner {
+      border-top: 3px dashed rgba(white, .5);
     }
 
     .cancelflag, .replaceflag {
@@ -156,14 +148,14 @@
       }
 
       div.name {
-        margin-top: 0px;
-        font-size: 10pt;
+        margin-top: 0;
+        font-size: $small-font-size;
       }
     }
 
     &.half + div.event:not(.detail-shown).half {
       top: unset !important;
-      bottom: 0px;
+      bottom: 0;
     }
 
     &:not(.detail-shown).third {
@@ -175,7 +167,7 @@
 
       div.name {
         margin-top: -5px;
-        font-size: 8pt;
+        font-size: $xsmall-font-size;
       }
     }
 
@@ -191,6 +183,7 @@
 }
 
 // Horizontal inner elements minimalization
+
 #fittable div.table:not(.vertical) div.day div.events {
   div.event:not(.detail-shown) {
     &.min-light {
@@ -203,7 +196,7 @@
       }
 
       .time {
-        font-size: 7pt !important;
+        font-size: $xsmall-font-size !important;
       }
     }
 

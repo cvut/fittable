@@ -1,6 +1,7 @@
 /**
- * React component
- * @author Marián
+ * Function component, filtering function
+ * Provides ability to filter out some types of events from timetable
+ * @author Marián Hlaváč
  */
 
 import Toggleable from './Toggleable.component';
@@ -12,10 +13,14 @@ export default class FunctionFilter extends Toggleable
         super.constructor( props );
     }
 
+    /**
+     * Handles clicking on one filter item
+     * @param {string} filter Clicked filter item
+     */
     handleToggleFilter( filter )
     {
         var newfilters = this.props.displayFilter;
-        newfilters[filter] = ! newfilters[filter];
+        newfilters[ filter ] = ! newfilters[ filter ];
 
         this.props.onFilterChange( newfilters );
     }
