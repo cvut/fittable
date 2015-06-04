@@ -76,7 +76,7 @@ export default class Day extends React.Component
     {
         var events = this.findOverlayedEvents( this.props );
 
-        return <div className="day" data-day="{this.props.id}">
+        return <div className={'day' + ( this.props.active ? ' active' : '')} data-day="{this.props.id}">
                 <div className="label"><span className="day-num">{this.props.dayNum}</span>
                 <span className="day-name">{new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' )}</span>
             </div>

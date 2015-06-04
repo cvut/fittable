@@ -79,6 +79,37 @@
       }
     }
 
+    .now-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 102%;
+      z-index: 7;
+      border-right: 1px solid $primary-color;
+      opacity: .5;
+
+      .next {
+        position: absolute;
+        bottom: -14px;
+        font-size: $small-font-size;
+        color: $primary-color;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: right;
+        line-height: 16px;
+        width: 100%;
+        padding-right: 10px;
+      }
+
+      i.fa {
+        position: absolute;
+        bottom: -14px;
+        right: -8px;
+        font-size: 16px;
+        color: $primary-color;
+      }
+    }
+
   }
 
   div.table:not(.vertical) div.day div.events

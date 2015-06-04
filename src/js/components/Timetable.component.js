@@ -4,6 +4,7 @@
  */
 
 import Day from './Day.component';
+import NowIndicator from './NowIndicator.component';
 import Moment from '../../../bower_components/moment/moment.js';
 
 export default class Timetable extends React.Component
@@ -70,6 +71,8 @@ export default class Timetable extends React.Component
     {
         var weekEvents = [ [], [], [], [], [], [], [] ];
         var firstDayStart = new Moment( this.props.viewDate ).startOf( 'day' );
+        var minClosestDiff = Infinity;
+        var closestEvent = null;
 
         // Timeline hours from - to
         var timelineHourFrom = 7;
@@ -90,26 +93,44 @@ export default class Timetable extends React.Component
                 var eventLength = dateEnd.diff( dateStart );
                 event._draw_length = eventLength / timelineLength;
                 var eventStart = dateStart.diff( dayStart );
-                event._draw_position = ( eventStart ) / ( timelineLength );
+                event._draw_position = eventStart / timelineLength;
 
                 // Sort events by day of week
                 weekEvents[ dateStart.isoWeekday() - 1 ].push( event );
+
+                // Search for closest event from now
+                var diffwithnow = dateStart.diff( new Moment() );
+                if ( diffwithnow < minClosestDiff && diffwithnow > 0 )
+                {
+                    minClosestDiff = diffwithnow;
+                    closestEvent = event;
+                }
             }
+        }
+
+        // Today
+        var todayId = -1;
+        var today = new Moment();
+        if ( this.props.viewDate.isSame( today, 'week' ) )
+        {
+            todayId = today.isoWeekday() - 1;
         }
 
         return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout} ref="rootEl">
             <div className="grid-overlay"><div className="grid"></div></div>
+            <NowIndicator timelineStartHour={timelineHourFrom} timelineLength={timelineLength} viewDate={this.props.viewDate}
+                closestEvent={closestEvent} />
             <div className="days" ref="days">
                 <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} />
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 0} />
                 <Day id="1" dayNum="19" events={weekEvents[1]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 1} />
                 <Day id="2" dayNum="20" events={weekEvents[2]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 2} />
                 <Day id="3" dayNum="21" events={weekEvents[3]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 3} />
                 <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}  />
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 4} />
             </div>
             <div className="clearfix"></div>
         </div>;
