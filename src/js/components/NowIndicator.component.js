@@ -17,7 +17,9 @@ export default class Timetable extends React.Component
      */
     render()
     {
-        var nowpoint = new Moment().diff( new Moment().hour( this.props.timelineStartHour ) );
+        var nowpoint = new Moment().diff( new Moment().hour( this.props.timelineStartHour )
+                                                    .minutes( this.props.timelineStartMins) );
+
         var length = nowpoint / this.props.timelineLength;
 
         var shown = this.props.viewDate.isSame( new Moment(), 'week' ) && length > 0;

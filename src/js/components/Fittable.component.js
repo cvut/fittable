@@ -27,6 +27,11 @@ export default class Fittable extends React.Component
                 'assessment': true,
                 'onetime': true,
                 'other': true
+            },
+            grid: {
+                starts: 7.5,
+                ends: 21.25,
+                lessonDuration: 0.9165
             }
         };
 
@@ -156,8 +161,8 @@ export default class Fittable extends React.Component
             <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind(this)}
                 onLayoutChange={this.handleChangeLayout.bind(this)} onDateChange={this.handleChangeViewDate.bind(this)}
                 displayFilter={this.state.displayFilter} onFilterChange={this.handleChangeFilter.bind(this)} />
-            <Timetable weekEvents={this.state.weekEvents} viewDate={this.state.viewDate} layout={this.state.layout}
-                displayFilter={this.state.displayFilter} ref="timetable" />
+            <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.layout}
+                weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter} ref="timetable" />
         </div>;
     }
 }

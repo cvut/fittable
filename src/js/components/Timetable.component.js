@@ -69,17 +69,23 @@ export default class Timetable extends React.Component
      */
     render()
     {
-        var weekEvents = [ [], [], [], [], [], [], [] ];
-        var firstDayStart = new Moment( this.props.viewDate ).startOf( 'day' );
-        var minClosestDiff = Infinity;
-        var closestEvent = null;
+        var weekEvents = [ [], [], [], [], [], [], [] ],
+            firstDayStart = new Moment( this.props.viewDate ).startOf( 'day' ),
+            minClosestDiff = Infinity,
+            closestEvent = null;
 
         // Timeline hours from - to
-        var timelineHourFrom = 7;
-        var timelineHourTo = 20;
+        var timelineHoursFrom = Math.floor( this.props.grid.starts ),
+            timelineHoursTo = Math.floor( this.props.grid.ends ),
+            timelineMinutesFrom = Math.floor( ( this.props.grid.starts - timelineHoursFrom ) * 60 ),
+            timelineMinutesTo = Math.floor( ( this.props.grid.ends - timelineHoursTo ) * 60 );
 
         // Timeline length in milliseconds
-        var timelineLength = new Moment( firstDayStart ).hour( timelineHourTo ).diff( new Moment( firstDayStart ).hour( timelineHourFrom ) );
+        var timelineLength = new Moment( firstDayStart ).hour( timelineHoursTo ).minutes( timelineMinutesTo )
+                        .diff( new Moment( firstDayStart ).hour( timelineHoursFrom ).minutes( timelineMinutesFrom ) );
+
+        // Timeline grid length
+        var timelineGridLength = this.props.grid.lessonDuration * 3600000 / timelineLength;
 
         // Make sure the weekEvents data are available...
         if ( this.props.weekEvents !== undefined && this.props.weekEvents !== null )
@@ -87,7 +93,8 @@ export default class Timetable extends React.Component
             for ( var event of this.props.weekEvents )
             {
                 var dateStart = new Moment( event.startsAt ), dateEnd = new Moment( event.endsAt );
-                var dayStart = new Moment( event.startsAt ).startOf( 'day' ).hour( timelineHourFrom );
+                var dayStart = new Moment( event.startsAt ).startOf( 'day' )
+                                            .hour( timelineHoursFrom ).minutes( timelineMinutesFrom );
 
                 // Calculate event length and position, relative to timeline
                 var eventLength = dateEnd.diff( dateStart );
@@ -116,10 +123,19 @@ export default class Timetable extends React.Component
             todayId = today.isoWeekday() - 1;
         }
 
+        // Create array of hour labels
+        var hourlabels = [];
+        for ( var i = 0; i < 1 / timelineGridLength - 1; i++ )
+        {
+            hourlabels.push( <div className="hour-label" style={{ width: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%' }} >
+                                    {i+1}
+                                </div> );
+        }
+
         return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout} ref="rootEl">
-            <div className="grid-overlay"><div className="grid"></div></div>
-            <NowIndicator timelineStartHour={timelineHourFrom} timelineLength={timelineLength} viewDate={this.props.viewDate}
-                closestEvent={closestEvent} />
+            <div className="grid-overlay"><div className="grid" style={{ 'background-size': ( timelineGridLength * 100 ) + '% 100%' }}></div></div>
+            <NowIndicator timelineStartHour={timelineHoursFrom} timelineStartMins={timelineMinutesFrom}
+                timelineLength={timelineLength} viewDate={this.props.viewDate} closestEvent={closestEvent} />
             <div className="days" ref="days">
                 <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)}
                     showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 0} />
@@ -133,6 +149,9 @@ export default class Timetable extends React.Component
                     showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 4} />
             </div>
             <div className="clearfix"></div>
+            <div className="hour-labels">
+                {hourlabels.map( function( label ) { return label; } )}
+            </div>
         </div>;
     }
 }
