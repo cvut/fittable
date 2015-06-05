@@ -25,12 +25,12 @@ export default class Timetable extends React.Component
         var shown = this.props.viewDate.isSame( new Moment(), 'week' ) && length > 0;
 
         if ( this.props.closestEvent !== null )
-            return <div className={'now-indicator' + ( shown ? '' : ' hide')} ref="rootEl" style={{ width: length + '%' }}>
+            return <div className={'now-indicator' + ( shown ? '' : ' hide')} ref="rootEl" style={{ width: (length * 90 + 10) + '%' }}>
                 <div className="next">{this.props.closestEvent.name} {new Moment( this.props.closestEvent.startsAt ).fromNow()}</div>
                 <i className="fa fa-chevron-circle-right"></i>
             </div>;
         else
-            return <div className={'now-indicator' + ( shown ? '' : ' hide')} ref="rootEl" style={{ width: length + '%' }}>
+            return <div className={'now-indicator' + ( shown ? '' : ' hide')} ref="rootEl" style={{ width: (length * 90 + 10) + '%' }}>
                 <div className="next"></div>
                 <i className="fa fa-chevron-circle-right"></i>
             </div>;
