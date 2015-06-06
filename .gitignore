@@ -26,3 +26,4 @@ dist/
 /fittable.js
 /fittable.css
 /react.js
+/browser-polyfill.js
