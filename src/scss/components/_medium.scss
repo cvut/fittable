@@ -1,0 +1,137 @@
+
+/* This file has redundancy please keep this file in sync with contents of _medium-verticality.scss for now.
+    Will be fixed soon.   */
+
+$mobile-heading-height: 50px;
+
+@media #{$medium-down} {
+
+  #fittable {
+
+    div.header {
+
+      div.week {
+        height: $mobile-heading-height + 10px;
+        text-align: center;
+
+        a.date-selection {
+          line-height: 1;
+
+          i.fa {
+            display: none;
+          }
+        }
+
+        strong.today {
+          display: block;
+          font-size: 18px;
+          line-height: 1.3;
+          text-transform: lowercase;
+          margin-top: 8px;
+        }
+
+        strong.week-text {
+          line-height: 0.9;
+        }
+      }
+
+      div.week-nav {
+        height: 0;
+        width: 100%;
+        margin: 0;
+
+        a {
+          position: relative;
+          top: - $mobile-heading-height - 10px;
+          color: white;
+          font-size: 24px;
+          line-height: $mobile-heading-height + 10px;
+          padding: 0 20px;
+          width: auto;
+        }
+
+        a:nth-child(2) {
+          float: right;
+        }
+      }
+
+      div.functions-bar {
+        height: $mobile-heading-height;
+        background: $secondary-color;
+
+        & > a {
+          font-size: 18px;
+          line-height: $mobile-heading-height;
+          padding: 0 18px;
+        }
+
+        a[class*="function"]::before {
+          display: none;
+        }
+      }
+    }
+
+    div.days {
+
+      div.day:not(.active) {
+        display: none;
+      }
+
+      div.day.active {
+        display: block !important;
+        background: transparent !important;
+
+        div.label {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media #{$medium-only} {
+
+  #fittable {
+
+    div.header {
+      div.week {
+        float: left;
+        width: 60%;
+      }
+
+      div.week-nav {
+        width: 55%;
+      }
+
+      div.functions-bar {
+        width: 45%;
+        float: right;
+        text-align: center;
+        position: relative;
+        top: - $mobile-heading-height - 10px;
+        height: $mobile-heading-height + 10px;
+        margin-bottom: - $mobile-heading-height - 10px;
+
+        & > a {
+          line-height: $mobile-heading-height + 10px;
+        }
+      }
+    }
+  }
+}
+
+@media #{$large-up} {
+
+  #fittable {
+
+    div.header {
+
+      div.week {
+
+        strong.today {
+          display: none;
+        }
+      }
+    }
+  }
+}

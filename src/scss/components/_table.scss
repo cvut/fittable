@@ -125,15 +125,20 @@
 
   }
 
-  div.table:not(.vertical) div.day div.events
-  {
-    div.event {
-      top: 0px !important;
-      &:not(.detail-shown) { height: 100% !important; }
+  @media #{$large-up} {
 
-      &.hide, &:not(.detail-shown).hide {
-        display: block;
-        opacity: 0 !important;
+    div.table:not(.vertical) div.day div.events {
+
+      div.event {
+        top: 0px !important;
+        &:not(.detail-shown) {
+          height: 100% !important;
+        }
+
+        &.hide, &:not(.detail-shown).hide {
+          display: block;
+          opacity: 0 !important;
+        }
       }
     }
   }

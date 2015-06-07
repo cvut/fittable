@@ -29,7 +29,7 @@
             for ( var i = 0; i < 12; i++ )
             {
                 var date = new Date( from );
-                var dayrel = Math.random() * 5, hourstart = Math.random() * 11 + 8, len = Math.random() + 1;
+                var dayrel = Math.random() * 5 + 2, hourstart = Math.random() * 11 + 8, len = Math.random() + 1;
                 var startDate = new Date( date );
                 startDate.setDate( date.getDate() + dayrel );
                 startDate.setHours( hourstart );

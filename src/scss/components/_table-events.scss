@@ -136,73 +136,76 @@
   }
 }
 
-// Horizontal overlays
+@media #{$large-up} {
 
-#fittable div.table:not(.vertical) div.day div.events {
-  div.event {
-    &:not(.detail-shown).half {
-      height: 45% !important;
+  // Horizontal overlays
 
-      div.type, div.time {
-        display: none;
+  #fittable div.table:not(.vertical) div.day div.events {
+    div.event {
+      &:not(.detail-shown).half {
+        height: 45% !important;
+
+        div.type, div.time {
+          display: none;
+        }
+
+        div.name {
+          margin-top: 0;
+          font-size: $small-font-size;
+        }
       }
 
-      div.name {
-        margin-top: 0;
-        font-size: $small-font-size;
-      }
-    }
-
-    &.half + div.event:not(.detail-shown).half {
-      top: unset !important;
-      bottom: 0;
-    }
-
-    &:not(.detail-shown).third {
-      height: 30% !important;
-
-      div.type, div.time {
-        display: none;
+      &.half + div.event:not(.detail-shown).half {
+        top: unset !important;
+        bottom: 0;
       }
 
-      div.name {
-        margin-top: -5px;
-        font-size: $xsmall-font-size;
+      &:not(.detail-shown).third {
+        height: 30% !important;
+
+        div.type, div.time {
+          display: none;
+        }
+
+        div.name {
+          margin-top: -5px;
+          font-size: $xsmall-font-size;
+        }
       }
-    }
 
-    &.third + div.event:not(.detail-shown).third {
-      top: 35% !important;
-    }
+      &.third + div.event:not(.detail-shown).third {
+        top: 35% !important;
+      }
 
-    &.third + div.event.third + div.event:not(.detail-shown).third {
-      top: unset !important;
-      bottom: 0;
+      &.third + div.event.third + div.event:not(.detail-shown).third {
+        top: unset !important;
+        bottom: 0;
+      }
     }
   }
-}
 
-// Horizontal inner elements minimalization
+  // Horizontal inner elements minimalization
 
-#fittable div.table:not(.vertical) div.day div.events {
-  div.event:not(.detail-shown) {
-    &.min-light {
+  #fittable div.table:not(.vertical) div.day div.events {
+    div.event:not(.detail-shown) {
+      &.min-light {
 
-    }
-
-    &.min-hard {
-      .type {
-        display: none !important;
       }
 
-      .time {
-        font-size: $xsmall-font-size !important;
-      }
-    }
+      &.min-hard {
+        .type {
+          display: none !important;
+        }
 
-    &.min-all {
-      .type, .time, .name {
-        display: none !important;
+        .time {
+          font-size: $xsmall-font-size !important;
+        }
+      }
+
+      &.min-all {
+        .type, .time, .name {
+          display: none !important;
+        }
       }
     }
   }

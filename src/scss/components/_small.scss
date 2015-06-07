@@ -1,0 +1,18 @@
+@media #{$small-down} {
+
+  #fittable {
+
+    div.header {
+      div.week {
+        float: none;
+        width: 100%;
+      }
+
+      div.functions-bar {
+        width: 100%;
+        float: none;
+        text-align: center;
+      }
+    }
+  }
+}

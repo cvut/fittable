@@ -28,13 +28,19 @@ $vertical-layout-day-height: 720px;
 // Other
 
 @media #{$large-up} {
-  .row {
-    max-width: rem-calc(1700);
+  .row.container {
+    padding: 0 20px;
+  }
+
+  .row.container.compact {
+    max-width: 1850px !important
   }
 }
 
-@media #{$xlarge-up} {
+@media #{$xxlarge-up} {
   .row {
-    max-width: rem-calc(1900);
+    max-width: 1500px;
   }
 }
+
+

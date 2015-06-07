@@ -31,6 +31,7 @@ export default class Week extends React.Component
     {
         return <div className="week">
             <a href="#" className="date-selection" onClick={this.handleClick.bind(this)}>
+                <strong className="today">{this.props.viewDate.format('dddd')}</strong>
                 <strong className="week-text">Týden {this.props.viewDate.isoWeek()}&nbsp;&nbsp;</strong>
                 <span className="week-parity-text">{this.props.viewDate.isoWeek() % 2 == 0 ? 'sudý' : 'lichý'}</span>
                 <i className={this.state.icon}></i>
