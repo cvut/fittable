@@ -45,7 +45,7 @@
     }
 
     div.days div.day:nth-child(odd) {
-      background: $secondary-color;
+      background: $light-secondary-color;
       transition: background $events-move-anim-speed;
     }
 

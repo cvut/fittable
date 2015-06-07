@@ -107,8 +107,11 @@ $body-font-style: normal;
 // $last-child-float: $opposite-direction;
 
 // We use these as default colors throughout
-$primary-color: #007ac2;
-$secondary-color: #e0ecf3;
+$primary-color: #0079c1;
+$secondary-color: #ccd5dd;
+$light-secondary-color: lighten( #ccd5dd, 10% );
+$third-color: #264c6f;
+$dark-color: #002d56;
 $alert-color: #ed2b16;
 $success-color: $primary-color;
 $warning-color: #ed8016;

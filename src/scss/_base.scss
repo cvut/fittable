@@ -5,6 +5,7 @@
 $darkgraytext-color: #444;
 $lightgraytext-color: #aaa;
 $lightgrayback-color: #f8f8f8;
+$grid-color: rgba( $secondary-color, 0.75 );
 
 // Font properties
 $xlarge-font-size: 18px;
@@ -26,10 +27,11 @@ $day-row-padding: 12px;
 $vertical-layout-day-height: 720px;
 
 // Other
+$grid-line-width: 1px;
 
 @media #{$large-up} {
   .row.container {
-    padding: 0 20px;
+    padding: 0 30px;
   }
 
   .row.container.compact {

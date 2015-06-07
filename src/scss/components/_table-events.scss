@@ -118,7 +118,7 @@
 
     &.cancelled .inner {
       border-top: 3px dashed rgba(white, .5);
-      background: #888;
+      background: $third-color;
     }
 
     &.replacement .inner {
