@@ -88,7 +88,7 @@ export default class Timetable extends React.Component
         var timelineGridLength = this.props.grid.lessonDuration * 3600000 / timelineLength;
 
         // Make sure the weekEvents data are available...
-        if ( this.props.weekEvents !== undefined && this.props.weekEvents !== null )
+        if ( typeof this.props.weekEvents !== 'undefined' && this.props.weekEvents !== null )
         {
             for ( var event of this.props.weekEvents )
             {

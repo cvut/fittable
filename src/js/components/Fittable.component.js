@@ -91,7 +91,7 @@ export default class Fittable extends React.Component
      */
     static areDataValid( data )
     {
-        if ( data !== null )
+        if ( typeof data !== 'undefined' && data !== null )
         {
             for ( var event of data )
             {
