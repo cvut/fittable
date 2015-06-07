@@ -118,7 +118,7 @@ export default class Timetable extends React.Component
         // Today
         var todayId = -1;
         var today = new Moment();
-        if ( this.props.viewDate.isSame( today, 'week' ) )
+        if ( this.props.viewDate.isSame( today, 'isoWeek' ) )
         {
             todayId = today.isoWeekday() - 1;
         }
@@ -147,6 +147,10 @@ export default class Timetable extends React.Component
                     showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 3} />
                 <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.showDetailOn.bind(this)}
                     showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 4} />
+                <Day id="5" dayNum="22" events={weekEvents[5]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 5} />
+                <Day id="6" dayNum="22" events={weekEvents[6]} onDetailShow={this.showDetailOn.bind(this)}
+                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 6} />
             </div>
             <div className="clearfix"></div>
             <div className="hour-labels">
