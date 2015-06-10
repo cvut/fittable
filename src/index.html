@@ -101,8 +101,13 @@
             callback( data );
         };
 
+        var options = {
+            dataCallback: dataCallback,
+            locale: 'en'
+        };
+
         // Initialize fittable
-        fittable( 'fittable', dataCallback );
+        var fittable = fittable( 'fittable', options );
 
     </script>
 </body>

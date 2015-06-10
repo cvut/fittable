@@ -132,7 +132,7 @@ export default class Timetable extends React.Component
                                 </div> );
         }
 
-        return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout} ref="rootEl">
+        return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout + ( this.props.functionsOpened !== null ? ' cut' : '' )} ref="rootEl">
             <div className="grid-overlay">
                 <div className="grid-wrapper">
                     <div className="grid hor" style={{ 'background-size': ( timelineGridLength * 100 ) + '% 100%' }}></div>

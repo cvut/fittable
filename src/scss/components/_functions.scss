@@ -1,34 +1,12 @@
-#fittable .header .functions-bar {
+#fittable .functions-sidebar {
+  width: 20%;
+  float: right;
+  padding: 0 0 0 25px;
 
-  div.functions {
-    position: absolute;
-    right: 0;
-    top: 35px;
-    z-index: 290;
-
-    h2 {
-      color: $primary-color;
-      font-weight: 300;
-      font-size: $xlarge-font-size;
-      margin: 15px 0;
-    }
-
-    div.function {
-      width: 300px;
-      background: white;
-      padding: 0 0 0 20px;
-      color: $darkgraytext-color;
-      opacity: 1;
-      transition: opacity $default-anim-speed, height $default-anim-speed;
-
-      &.hide {
-        display: block !important;
-        visibility: hidden;
-        opacity: 0;
-        height: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-    }
+  h2 {
+    color: $primary-color;
+    font-weight: 300;
+    font-size: $xlarge-font-size;
+    margin: 0 0 15px 0;
   }
 }

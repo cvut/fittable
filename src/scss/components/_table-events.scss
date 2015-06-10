@@ -114,6 +114,16 @@
         margin: 10px -10px 30px -10px;
         max-height: 360px;
       }
+
+      div.type span.short {
+        display: none;
+      }
+    }
+
+    &:not(.detail-shown) {
+      div.type span.long {
+        display: none;
+      }
     }
 
     &.cancelled .inner {

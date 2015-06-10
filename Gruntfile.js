@@ -58,15 +58,15 @@ module.exports = function (grunt) {
 		watch: {
 			compass: {
 				files: ['src/scss/**/*.scss'],
-				tasks: ['compass', 'autoprefixer:dev']
+				tasks: ['compass:dev', 'autoprefixer:dev']
 			},
 			browserify: {
 				files: ['src/js/**/*.js'],
-				tasks: ['browserify']
+				tasks: ['browserify:dev']
 			},
 			copy: {
 				files: ['src/*.html'],
-				tasks: ['copy']
+				tasks: ['copy:dev']
 			}
 		},
 

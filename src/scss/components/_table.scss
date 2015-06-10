@@ -1,7 +1,6 @@
 #fittable {
 
   div.table {
-    clear: both;
     position: relative;
 
     div.day {
@@ -23,6 +22,8 @@
         padding: 0 10px;
         margin: $day-row-padding 0;
         transition: opacity $events-move-anim-speed;
+        position: relative;
+        z-index: 12;
 
         span {
           padding: 5px 0 5px 20px;
@@ -144,6 +145,13 @@
   }
 
   @media #{$large-up} {
+
+    div.table {
+
+      &.cut {
+        width: 80%;
+      }
+    }
 
     div.table:not(.vertical) {
 

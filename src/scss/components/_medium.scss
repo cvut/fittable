@@ -86,6 +86,20 @@ $mobile-heading-height: 50px;
         }
       }
     }
+
+    .functions-sidebar {
+      padding: 30px;
+      float: none;
+      width: 100%;
+      clear: both;
+      border-bottom: 2px solid $primary-color;
+      background: $light-secondary-color;
+
+      div.function.function-search div.search-form {
+        background: white;
+        margin: 0;
+      }
+    }
   }
 }
 

@@ -5,8 +5,10 @@
  * @author Marián Hlaváč
  */
 
-import Toggleable from './Toggleable.component';
 import Moment from '../../../bower_components/moment/moment.js';
+import CP from '../../../node_modules/counterpart/index.js';
+
+import Toggleable from './Toggleable.component';
 
 export default class WeekSwitcher extends Toggleable
 {
@@ -34,14 +36,14 @@ export default class WeekSwitcher extends Toggleable
         // Set a semester name
         var semestername;
         if ( this.props.viewDate.month() < 2 )
-            semestername = ( parseInt( this.props.viewDate.format( 'YYYY' ) ) - 1 ) + '/' + this.props.viewDate.format( 'YY' ) + ' Zimní';
+            semestername = CP.translate( 'winter_sem', { year: ( parseInt( this.props.viewDate.format( 'YYYY' ) ) - 1 ) + '/' + this.props.viewDate.format( 'YY' ) } );
         else if ( this.props.viewDate.month() < 10 )
-            semestername = ( parseInt( this.props.viewDate.format( 'YYYY' ) ) - 1 ) + '/' + this.props.viewDate.format( 'YY' ) + ' Letní';
+            semestername = CP.translate( 'summer_sem', { year: ( parseInt( this.props.viewDate.format( 'YYYY' ) ) - 1 ) + '/' + this.props.viewDate.format( 'YY' ) } );
         else
-            semestername = ( this.props.viewDate.format( 'YYYY' ) ) + '/' + new Moment( this.props.viewDate ).add( 1, 'year' ).format( 'YY' ) + ' Zimní';
+            semestername = CP.translate( 'winter_sem', { year: ( this.props.viewDate.format( 'YYYY' ) ) + '/' + new Moment( this.props.viewDate ).add( 1, 'year' ).format( 'YY' ) } );
 
         return <div className="week-switcher hide" ref="rootEl">
-            <div className="row selector semester-selector">
+            <div className="row selector semester-selector collapse">
                 <div className="column small-3 gr-go">
                     <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).subtract( 6, 'months' ), null )}><i className="fa fa-chevron-left"></i></a>
                 </div>
@@ -52,7 +54,7 @@ export default class WeekSwitcher extends Toggleable
                     <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).add( 6, 'months' ), null )}><i className="fa fa-chevron-right"></i></a>
                 </div>
             </div>
-            <div className="row selector month-selector">
+            <div className="row selector month-selector collapse">
                 <div className="column small-3 gr-go">
                     <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).subtract( 1, 'months' ), null )}><i className="fa fa-chevron-left"></i></a>
                 </div>

@@ -3,8 +3,10 @@
  * @author Marián Hlaváč
  */
 
-import EventDetail from './EventDetail.component';
+import CP from '../../../node_modules/counterpart/index.js';
 import Moment from '../../../bower_components/moment/moment.js';
+
+import EventDetail from './EventDetail.component';
 
 export default class EventBox extends React.Component
 {
@@ -14,25 +16,6 @@ export default class EventBox extends React.Component
         this.state = {
             detailShown: false
         };
-    }
-
-    /**
-     * Returns short name of event type, if transformation exists, otherwise
-     * returns original type string.
-     * @param {string} type
-     * @returns {string} shorter event type name
-     */
-    getEventTypeName( type )
-    {
-        var eventTypes = {
-            'laboratory': 'lab',
-            'tutorial': 'cvi',
-            'lecture': 'pře',
-            'exam': 'zk',
-            'assessment': 'obh'
-        };
-
-        return type in eventTypes ? eventTypes[ type ] : type;
     }
 
     /**
@@ -58,7 +41,10 @@ export default class EventBox extends React.Component
             <div className="inner" onClick={this.props.onClick.bind(null, appear == 'hide' ? -1 : this.props.data.id)}>
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{startsAt} - {endsAt}</div>
-                <div className="type">{this.getEventTypeName( this.props.data.type )}</div>
+                <div className="type">
+                    <span className="short">{CP.translate( 'event_type_short.' + this.props.data.type )}</span>
+                    <span className="long">{CP.translate( 'event_type.' + this.props.data.type )}</span>
+                </div>
                 <EventDetail ref="detail" data={this.props.data} />
                 <div className="cancelflag"><i className="fa fa-ban"></i></div>
                 <div className="replaceflag"><i className="fa fa-umbrella"></i></div>

@@ -4,9 +4,9 @@
  * @author Marián Hlaváč
  */
 
-import Toggleable from './Toggleable.component';
+import CP from '../../../node_modules/counterpart/index.js';
 
-export default class FunctionSearch extends Toggleable
+export default class FunctionSearch extends React.Component
 {
     constructor( props )
     {
@@ -28,11 +28,11 @@ export default class FunctionSearch extends Toggleable
      */
     render()
     {
-        return <div className="function function-search hide" ref="rootEl">
+        return <div className="function function-search" ref="rootEl">
             <div className="clearfix"></div>
             <div className="search-form">
                 <form name="search" onSubmit={this.handleSearch.bind(this)}>
-                    <input type="text" name="search" placeholder="Hledat" />
+                    <input type="text" name="search" placeholder={CP.translate('functions.search.placeholder')} />
                     <button type="submit" className="search" name="search"><i className="fa fa-search"></i></button>
                 </form>
             </div>

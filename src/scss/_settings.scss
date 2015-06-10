@@ -109,14 +109,13 @@ $body-font-style: normal;
 // We use these as default colors throughout
 $primary-color: #0079c1;
 $secondary-color: #ccd5dd;
-$light-secondary-color: lighten( #ccd5dd, 10% );
+$light-secondary-color: lighten( $secondary-color, 10% );
 $third-color: #264c6f;
 $dark-color: #002d56;
 $alert-color: #ed2b16;
 $success-color: $primary-color;
 $warning-color: #ed8016;
 $info-color: $primary-color;
-$light-color: #e8f3fa;
 $second-type-color: $secondary-color;
 
 // We use these to make sure border radius matches unless we want it different.
@@ -515,9 +514,9 @@ $h6-font-reduction: 0 !default;
 // $f-dropdown-bg: $white;
 
 // We use this to set the border styles for dropdowns.
-$f-dropdown-border-style: solid;
-$f-dropdown-border-width: 1px;
-$f-dropdown-border-color: $light-color;
+//$f-dropdown-border-style: solid;
+//$f-dropdown-border-width: 1px;
+//$f-dropdown-border-color: $light-color;
 
 // We use these to style the triangle pip.
 // $f-dropdown-triangle-size: 6px;

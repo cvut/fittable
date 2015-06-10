@@ -1,32 +1,29 @@
-#fittable .header .functions-bar div.functions {
+#fittable .functions-sidebar {
 
   div.function.function-settings {
     padding-bottom: 30px;
 
-    a {
-      line-height: 2.4;
-    }
+    div.toggleable-h {
+      margin-bottom: 20px;
 
-    a.layout-selector {
-      width: 100%;
-      height: 100%;
-      display: inline-block;
-      text-align: center;
-      padding: 5px 0;
-      color: $secondary-color;
-
-      i.fa {
+      a {
         display: block;
-        font-size: 32px;
-      }
+        background: $light-secondary-color;
+        padding: 4px 8px;
+        margin-bottom: 1px;
 
-      &.active {
-        color: $primary-color;
-        cursor: default;
-      }
+        &.active {
+          background: $primary-color;
+          color: white;
+        }
 
-      &:not(.active):hover {
-        color: $lightgraytext-color;
+        &:not(.active):hover {
+          background: $secondary-color;
+        }
+
+        i.fa {
+          margin-right: 13px;
+        }
       }
     }
   }

@@ -3,8 +3,10 @@
  * @author Marián Hlaváč
  */
 
-import EventBox from './EventBox.component';
+import CP from '../../../node_modules/counterpart/index.js';
 import Moment from '../../../bower_components/moment/moment.js';
+
+import EventBox from './EventBox.component';
 
 export default class Day extends React.Component
 {
@@ -77,9 +79,10 @@ export default class Day extends React.Component
         var events = this.findOverlayedEvents( this.props );
 
         return <div className={'day' + ( this.props.active ? ' active' : '')} data-day="{this.props.id}">
-                <div className="label"><span className="day-num">{this.props.dayNum}</span>
-                <span className="day-name">{new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' )}</span>
-            </div>
+                <div className="label" title={ this.props.active ? CP.translate( 'timetable.actual_day', { day: new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' ) } ) : '' }>
+                    <span className="day-num">{this.props.dayNum}</span>
+                    <span className="day-name">{new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' )}</span>
+                </div>
             <div className="events" ref="events">
                 {events.map( function( event ) {
                     if ( this.props.displayFilter[event.type] == false ) event.appear = 'hide';

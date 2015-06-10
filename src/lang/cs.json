@@ -1,0 +1,91 @@
+{
+  "week": "Týden %(num)s",
+  "even": "Sudý",
+  "odd": "Lichý",
+  "summer_sem": "%(year)s Letní",
+  "winter_sem": "%(year)s Zimní",
+
+  "event_type": {
+    "lecture": "Přednáška",
+    "tutorial": "Cvičení",
+    "laboratory": "Laboratoř",
+    "exam": "Zkouška",
+    "assessment": "Obhajoba",
+    "onetime": "Jednorázová akce",
+    "other": "Ostatní"
+  },
+
+  "event_type_short": {
+    "lecture": "Pře",
+    "tutorial": "Cvi",
+    "laboratory": "Lab",
+    "exam": "Zk",
+    "assessment": "Obh",
+    "onetime": "Akc",
+    "other": "Jiné"
+  },
+
+  "weekNav": {
+    "prev": "Předchozí týden",
+    "next": "Následující týden"
+  },
+
+  "functions": {
+    "flags": {
+      "name": "Příznaky",
+      "desc": "Tyto příznaky můžete umístit k jednotlivým událostem. Přetáhněte některou z ikonek na samotnou událost v rozvrhu, pro její umístění.",
+      "beta": "Tato feature není v betaverzi zatím dostupná."
+    },
+    "filter": {
+      "name": "Filtrování",
+      "heading": "Filtrovat podle"
+    },
+    "settings": {
+      "name": "Nastavení",
+      "layout": "Rozložení",
+      "layout_horizontal": "Řádkové",
+      "layout_vertical": "Sloupcové",
+      "language": "Jazyk",
+      "language_czech": "Čeština",
+      "language_english": "Angličtina",
+      "settings": "Nastavení",
+      "settings_colors": "Rozlišovat typy barvou",
+      "settings_7day": "Sedmidenní rozvrh",
+      "settings_facgridd": "Výchozí je fakultní grid",
+      "about": {
+        "title": "O fittable",
+        "description": "Fittable je volares, tanquam fortis solem. Resistentia congregabos, tanquam bi-color nomen. Sunt fermiumes promissio dexter, rusticus diatriaes.",
+        "usage": "Použito Lorem ipsum (c) 2015, Dolor sit (c) 2011, Amet v2.0 GPL 2013",
+        "faq": "Nejčastěji kladné dotazy (FAQ)",
+        "help": "Nápověda"
+      }
+    },
+    "search": {
+      "name": "Vyhledávání",
+      "placeholder": "Hledat...",
+      "subject": "Předmět",
+      "person": "Osoba",
+      "room": "Místnost"
+    }
+  },
+
+  "timetable": {
+    "actual": "Aktuální týden",
+    "actual_day": "Dnes je %(day)s"
+  },
+
+  "detail": {
+    "parallel": "Paralelka",
+    "teacher": "Vyučující",
+    "students": "Počet přihlášených studentů",
+    "room": "Místnost",
+    "number": "č. %(num)s",
+    "students_count": {
+      "zero": "Bez studentů",
+      "one": "1 student",
+      "other": "%(count)s studentů"
+    },
+    "cancelled": "Tato událost byla zrušena",
+    "replacement": "Tato událost nahrazuje zrušenou událost z %(date)s"
+  }
+}

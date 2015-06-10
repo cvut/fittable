@@ -3,10 +3,12 @@
  * @author Marián Hlaváč
  */
 
+import Moment from '../../../bower_components/moment/moment.js';
+
 import Controls from './Controls.component';
 import Timetable from './Timetable.component';
-import Moment from '../../../bower_components/moment/moment.js';
 import DataCache from '../modules/DataCache.module';
+import FunctionsSidebar from './FunctionsSidebar.component';
 
 export default class Fittable extends React.Component
 {
@@ -32,11 +34,15 @@ export default class Fittable extends React.Component
                 starts: 7.5,
                 ends: 21.5,
                 lessonDuration: 1.75
-            }
+            },
+            functionOpened: null
         };
 
         // Declare weekEvents variable
         this.weekEvents = null;
+
+        // Force a refresh every one minute
+        setInterval( this.handleRefreshNeed, 60000 );
     }
 
     /**
@@ -153,16 +159,45 @@ export default class Fittable extends React.Component
     }
 
     /**
+     * Opens different / closes settings panel in FunctionsSidebar component.
+     * @param to Panel to change
+     */
+    handleChangeSettingsPanel( to )
+    {
+        this.setState( { functionOpened: ( this.state.functionOpened == to ? null : to ) } );
+    }
+
+    /**
+     * Force a refresh by calling setState with no state update
+     */
+    handleRefreshNeed()
+    {
+        this.setState( {} );
+    }
+
+    /**
      * Renders the component
      */
     render()
     {
         return <div className="fittable-container">
+
             <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind(this)}
-                onLayoutChange={this.handleChangeLayout.bind(this)} onDateChange={this.handleChangeViewDate.bind(this)}
-                displayFilter={this.state.displayFilter} onFilterChange={this.handleChangeFilter.bind(this)} />
+                onDateChange={this.handleChangeViewDate.bind(this)}
+                onSettingsPanelChange={this.handleChangeSettingsPanel.bind(this)} />
+
+            <div className="clearfix"></div>
+
+            <FunctionsSidebar opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
+                onFilterChange={this.handleChangeFilter.bind(this)} onLayoutChange={this.handleChangeLayout.bind(this)}
+                onRefreshNeed={this.handleRefreshNeed.bind(this)} />
+
             <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.layout}
-                weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter} ref="timetable" />
+                weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
+                functionsOpened={this.state.functionOpened} ref="timetable" />
+
         </div>;
     }
 }
+
+Fittable.defaultProps = { dataCallback: null, locale: 'cs' };

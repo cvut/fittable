@@ -4,6 +4,8 @@
  * @author Marián Hlaváč
  */
 
+import CP from '../../../node_modules/counterpart/index.js';
+
 export default class EventDetail extends React.Component
 {
     constructor( props )
@@ -18,23 +20,23 @@ export default class EventDetail extends React.Component
     {
         return <div className="detail">
             <div className="row properties">
-                <div className="column small-6"><i className="fa fa-thumb-tack fa-fw"></i> č. {this.props.data.details.parallel}</div>
-                <div className="column small-6 text-right">{this.props.data.details.teacher} <i className="fa fa-male fa-fw"></i></div>
+                <div className="column small-6" title={CP.translate( 'detail.parallel' )}><i className="fa fa-thumb-tack fa-fw"></i> {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}</div>
+                <div className="column small-6 text-right" title={CP.translate( 'detail.teacher' )}>{this.props.data.details.teacher} <i className="fa fa-male fa-fw"></i></div>
             </div>
             <div className="row properties">
-                <div className="column small-6"><i className="fa fa-group fa-fw"></i> <a href="#"> {this.props.data.details.students.length} studentů </a></div>
-                <div className="column small-6 text-right">{this.props.data.details.capacity} <i className="fa fa-pie-chart fa-fw"></i></div>
+                <div className="column small-6" title={CP.translate( 'detail.students' )}><i className="fa fa-group fa-fw"></i> {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}</div>
+                <div className="column small-6 text-right" title={CP.translate( 'detail.room' )}>{this.props.data.room} <i className="fa fa-map-marker fa-fw"></i></div>
             </div>
             <hr />
             <div className={'row cancellation' + ( this.props.data.cancelled ? '' : ' hide')}>
                 <div className="column small-12">
-                    <strong><i className="fa fa-ban fa-fw"></i> Paralelka bude nahrazena <a href="#">7.8 13:00</a></strong>
+                    <strong><i className="fa fa-ban fa-fw"></i> {CP.translate( 'detail.cancelled' )}</strong>
                     <hr />
                 </div>
             </div>
             <div className={'row replacement' + ( this.props.data.replacement ? '' : ' hide')}>
                 <div className="column small-12">
-                    <strong><i className="fa fa-umbrella fa-fw"></i> Tato paralelka nahrazuje zrušenou</strong>
+                    <strong><i className="fa fa-umbrella fa-fw"></i> {CP.translate( 'detail.replacement', { date: 'N/A' } )} </strong>
                     <hr />
                 </div>
             </div>
