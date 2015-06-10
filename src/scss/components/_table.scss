@@ -65,16 +65,27 @@
       top: 0;
       width: 100%;
       height: 100%;
-      padding: $day-row-padding 0px $day-row-padding 10%;
       z-index: 8;
-      opacity: .5;
+
+      .grid-wrapper {
+        width: 90%;
+        height: 100%;
+        position: relative;
+        left: 10%;
+        top: 0;
+        padding: $day-row-padding 0;
+      }
 
       .grid {
-        $grid-color: rgba( 0, 0, 0, .05 );
         background-color: transparent;
-        background-image: linear-gradient(90deg, $grid-color 0px, transparent 2px);
+        background-image: linear-gradient(90deg, $grid-color 0px, $grid-color $grid-line-width, transparent $grid-line-width );
+        background-position: top left;
         width: 100%;
         height: 100%;
+      }
+
+      .grid.ver {
+        display: none;
       }
     }
 
@@ -123,21 +134,44 @@
       }
     }
 
+    &:not(.sevendays) {
+
+      .days .day:nth-child(6), .days .day:nth-child(7) {
+        display: none;
+      }
+    }
+
   }
 
   @media #{$large-up} {
 
-    div.table:not(.vertical) div.day div.events {
+    div.table:not(.vertical) {
 
-      div.event {
-        top: 0px !important;
-        &:not(.detail-shown) {
-          height: 100% !important;
+      div.day div.events {
+
+        div.event {
+          top: 0 !important;
+          &:not(.detail-shown) {
+            height: 100% !important;
+          }
+
+          &.hide, &:not(.detail-shown).hide {
+            display: block;
+            opacity: 0 !important;
+          }
         }
+      }
 
-        &.hide, &:not(.detail-shown).hide {
-          display: block;
-          opacity: 0 !important;
+      .hour-labels .hour-label {
+        top: auto !important;
+        height: auto !important;
+      }
+
+      .now-indicator {
+        height: 107% !important;
+
+        i.fa.fa-chevron-circle-down {
+          display: none;
         }
       }
     }

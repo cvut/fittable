@@ -127,13 +127,18 @@ export default class Timetable extends React.Component
         var hourlabels = [];
         for ( var i = 0; i < 1 / timelineGridLength - 1; i++ )
         {
-            hourlabels.push( <div className="hour-label" style={{ width: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%' }} >
+            hourlabels.push( <div className="hour-label" style={{ width: timelineGridLength * 100 + '%', height: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%', top: i * timelineGridLength * 100 + '%' }} >
                                     {i+1}
                                 </div> );
         }
 
         return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout} ref="rootEl">
-            <div className="grid-overlay"><div className="grid" style={{ 'background-size': ( timelineGridLength * 100 ) + '% 100%' }}></div></div>
+            <div className="grid-overlay">
+                <div className="grid-wrapper">
+                    <div className="grid hor" style={{ 'background-size': ( timelineGridLength * 100 ) + '% 100%' }}></div>
+                    <div className="grid ver" style={{ 'background-size': '100% ' + ( timelineGridLength * 100 ) + '%' }}></div>
+                </div>
+            </div>
             <NowIndicator timelineStartHour={timelineHoursFrom} timelineStartMins={timelineMinutesFrom}
                 timelineLength={timelineLength} viewDate={this.props.viewDate} closestEvent={closestEvent} />
             <div className="days" ref="days">

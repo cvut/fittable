@@ -12,13 +12,17 @@ div#fittable div.table.vertical {
       line-height: 1.7;
       height: 7%;
       margin: 0;
-      padding: 10px;
+      padding: $day-row-padding;
 
       span.day-num {
         display: inline;
         font-weight: bold;
         margin-right: 5px;
       }
+    }
+
+    &.active div.label span.day-name {
+      border: 0;
     }
 
     div.events {
@@ -45,15 +49,69 @@ div#fittable div.table.vertical {
   }
 
   div.grid-overlay {
-    // todo: tohle neni uplne koser, zjistit proc se blbe pocita vyska!
-    padding: 4.5% 12px 0 12px;
+    height: 720px;
+
+    .grid-wrapper {
+      width: 100%;
+      height: 93%;
+      left: 0;
+      top: 7%;
+      padding: 0 $day-row-padding;
+    }
 
     .grid {
       $grid-color: rgba( 0, 0, 0, .1 );
       background-color: transparent;
-      background-image: linear-gradient(180deg, $grid-color 0px, transparent 2px);
+      background-image: linear-gradient(180deg, $grid-color 0px, $grid-color $grid-line-width, transparent $grid-line-width);
       width: 100%;
       height: 100%;
+    }
+
+    .grid.hor {
+      display: none;
+    }
+
+    .grid.ver {
+      display: block;
+    }
+  }
+
+  .now-indicator {
+    width: 100% !important;
+    border-right: none;
+    border-bottom: 1px solid $primary-color;
+
+    .next {
+      bottom: 0px;
+      text-align: left;
+      padding-left: 8px;
+    }
+
+    i.fa {
+      right: auto !important;
+      bottom: -6px;
+      left: -14px;
+    }
+
+    i.fa.fa-chevron-circle-right {
+      display: none;
+    }
+  }
+
+  .hour-labels {
+    float: none;
+    width: 1%;
+    position: absolute;
+    left: -1%;
+    top: 7%;
+    padding: 0;
+    height: 93%;
+
+    .hour-label {
+      left: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

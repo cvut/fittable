@@ -30,8 +30,8 @@ export default class Fittable extends React.Component
             },
             grid: {
                 starts: 7.5,
-                ends: 21.25,
-                lessonDuration: 0.9165
+                ends: 21.5,
+                lessonDuration: 1.75
             }
         };
 
