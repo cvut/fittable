@@ -73,11 +73,11 @@ $mobile-heading-height: 50px;
 
     div.days {
 
-      div.day:not(.active) {
+      div.day:not(.selected) {
         display: none;
       }
 
-      div.day.active {
+      div.day.selected {
         display: block !important;
         background: transparent !important;
 

@@ -45,4 +45,9 @@ $grid-line-width: 1px;
   }
 }
 
+// WP history swipe hack ( disable swiping right and left handling )
+* {
+  touch-action: pan-y;
+}
+
 

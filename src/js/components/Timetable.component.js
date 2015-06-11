@@ -127,9 +127,18 @@ export default class Timetable extends React.Component
         var hourlabels = [];
         for ( var i = 0; i < 1 / timelineGridLength - 1; i++ )
         {
-            hourlabels.push( <div className="hour-label" style={{ width: timelineGridLength * 100 + '%', height: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%', top: i * timelineGridLength * 100 + '%' }} >
-                                    {i+1}
-                                </div> );
+            hourlabels.push( <div className="hour-label" style={{ width: timelineGridLength * 100 + '%',
+                height: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%',
+                top: i * timelineGridLength * 100 + '%' }} > {i+1} </div> );
+        }
+
+        // Create days
+        var days = [];
+        for ( i = 0; i < 6; i++ )
+        {
+            days.push( <Day id={i} dayNum={new Moment( this.props.viewDate ).isoWeekday( i + 1 ).date()} events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
+                showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}
+                active={todayId == i} selected={this.props.selectedDay == i} /> );
         }
 
         return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout + ( this.props.functionsOpened !== null ? ' cut' : '' )} ref="rootEl">
@@ -142,20 +151,7 @@ export default class Timetable extends React.Component
             <NowIndicator timelineStartHour={timelineHoursFrom} timelineStartMins={timelineMinutesFrom}
                 timelineLength={timelineLength} viewDate={this.props.viewDate} closestEvent={closestEvent} />
             <div className="days" ref="days">
-                <Day id="0" dayNum="18" events={weekEvents[0]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 0} />
-                <Day id="1" dayNum="19" events={weekEvents[1]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 1} />
-                <Day id="2" dayNum="20" events={weekEvents[2]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 2} />
-                <Day id="3" dayNum="21" events={weekEvents[3]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 3} />
-                <Day id="4" dayNum="22" events={weekEvents[4]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 4} />
-                <Day id="5" dayNum="22" events={weekEvents[5]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 5} />
-                <Day id="6" dayNum="22" events={weekEvents[6]} onDetailShow={this.showDetailOn.bind(this)}
-                    showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter} active={todayId == 6} />
+                {days.map( function( day ) { return day; } )}
             </div>
             <div className="clearfix"></div>
             <div className="hour-labels">

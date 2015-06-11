@@ -4,6 +4,7 @@
  * @author Marián Hlaváč
  */
 
+import Moment from '../../../node_modules/moment/moment.js';
 import CP from '../../../node_modules/counterpart/index.js';
 
 export default class Week extends React.Component
@@ -33,7 +34,7 @@ export default class Week extends React.Component
     {
         return <div className="week" title={CP.translate('timetable.actual')}>
             <a href="#" className="date-selection" onClick={this.handleClick.bind(this)}>
-                <strong className="today">{this.props.viewDate.format('dddd')}</strong>
+                <strong className="today">{new Moment( this.props.viewDate ).isoWeekday( this.props.selectedDay + 1).format('dddd')}</strong>
                 <strong className="week-text">{CP.translate( 'week', { num: this.props.viewDate.isoWeek() } )}&nbsp;&nbsp;</strong>
                 <span className="week-parity-text">{CP.translate( this.props.viewDate.isoWeek() % 2 == 0 ? 'even' : 'odd' )}</span>
                 <i className={this.state.icon}></i>

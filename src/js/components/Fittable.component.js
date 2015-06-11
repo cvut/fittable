@@ -4,6 +4,7 @@
  */
 
 import Moment from '../../../node_modules/moment/moment.js';
+import Hammer from '../../../node_modules/hammerjs/hammer.js';
 
 import Controls from './Controls.component';
 import Timetable from './Timetable.component';
@@ -21,6 +22,7 @@ export default class Fittable extends React.Component
         this.state = {
             viewDate: new Moment().startOf( 'isoweek' ),
             layout: 'horizontal',
+            selectedDay: new Moment().isoWeekday() - 1,
             displayFilter: {
                 'laboratory': true,
                 'tutorial': true,
@@ -38,11 +40,12 @@ export default class Fittable extends React.Component
             functionOpened: null
         };
 
-        // Declare weekEvents variable
+        // Declare variables
         this.weekEvents = null;
+        this.hammer = null;
 
         // Force a refresh every one minute
-        setInterval( this.handleRefreshNeed, 60000 );
+        setInterval( this.handleRefreshNeed.bind( this ), 60000 );
     }
 
     /**
@@ -141,6 +144,29 @@ export default class Fittable extends React.Component
     }
 
     /**
+     * Change active selected day relatively by argument. Used for displaying single day on mobile devices.
+     * @param {int} by relative change
+     */
+    handleChangeSelectedDay( by )
+    {
+        var selection = this.state.selectedDay + by;
+
+        if ( selection > 6 )
+        {
+            selection -= 7;
+            this.handleChangeViewDate( this.state.viewDate.add( 1, 'week' ) );
+        }
+
+        if ( selection < 0 )
+        {
+            selection += 7;
+            this.handleChangeViewDate( this.state.viewDate.subtract( 1, 'week' ) );
+        }
+
+        this.setState( { selectedDay : selection } );
+    }
+
+    /**
      * Handler for layout changing event.
      * @param {string} to New layout setting
      */
@@ -176,15 +202,54 @@ export default class Fittable extends React.Component
     }
 
     /**
+     * Hangs a listener on whole fittable element, that listens to swipe touch events.
+     * @param el Element to be listened on
+     */
+    registerSwipeListener( el )
+    {
+        this.hammer = new Hammer( el );
+
+        this.hammer.on( 'swipe', function( e )
+        {
+            if ( window.innerWidth <= 768 ) this.handleChangeSelectedDay( e.velocityX > 0 ? 1 : -1 );
+        }.bind( this ) );
+    }
+
+    /**
+     * Cancel all hammer listeners
+     */
+    unregisterSwipeListener()
+    {
+        this.hammer.destroy();
+    }
+
+    /**
+     * Component mounting
+     */
+    componentDidMount()
+    {
+        this.registerSwipeListener( this.refs.rootEl.getDOMNode() );
+    }
+
+    /**
+     * Component unmounting
+     */
+    componentWillUnmount()
+    {
+        this.unregisterSwipeListener();
+    }
+
+    /**
      * Renders the component
      */
     render()
     {
-        return <div className="fittable-container">
+        return <div className="fittable-container" ref="rootEl">
 
             <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind(this)}
                 onDateChange={this.handleChangeViewDate.bind(this)}
-                onSettingsPanelChange={this.handleChangeSettingsPanel.bind(this)} />
+                onSettingsPanelChange={this.handleChangeSettingsPanel.bind(this)}
+                onSelDayChange={this.handleChangeSelectedDay.bind(this)} selectedDay={this.state.selectedDay} />
 
             <div className="clearfix"></div>
 
@@ -194,7 +259,7 @@ export default class Fittable extends React.Component
 
             <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.layout}
                 weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
-                functionsOpened={this.state.functionOpened} ref="timetable" />
+                functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay} ref="timetable" />
 
         </div>;
     }

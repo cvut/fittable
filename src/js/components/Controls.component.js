@@ -21,7 +21,11 @@ export default class Controls extends React.Component
      */
     handlePrevClick()
     {
-        this.props.onWeekChange( this.props.viewDate.subtract( 1, 'week' ) );
+        // Different behaviour on different screens. Large up changes weeks, medium down changes active day
+        if ( window.innerWidth > 768 )
+            this.props.onWeekChange( this.props.viewDate.subtract( 1, 'week' ) );
+        else
+            this.props.onSelDayChange( -1 );
     }
 
     /**
@@ -29,7 +33,11 @@ export default class Controls extends React.Component
      */
     handleNextClick()
     {
-        this.props.onWeekChange( this.props.viewDate.add( 1, 'week' ) );
+        // Different behaviour on different screens. Large up changes weeks, medium down changes active day
+        if ( window.innerWidth > 768 )
+            this.props.onWeekChange( this.props.viewDate.add( 1, 'week' ) );
+        else
+            this.props.onSelDayChange( 1 );
     }
 
     /**
@@ -46,7 +54,7 @@ export default class Controls extends React.Component
     render()
     {
         return <div className="header">
-            <Week viewDate={this.props.viewDate} onClick={this.handleWeekClick.bind(this)} />
+            <Week viewDate={this.props.viewDate} onClick={this.handleWeekClick.bind(this)} selectedDay={this.props.selectedDay} />
             <WeekNav onPrevClick={this.handlePrevClick.bind(this)} onNextClick={this.handleNextClick.bind(this)} />
             <WeekSwitcher viewDate={this.props.viewDate} ref="weekSwitcher" onDateChange={this.props.onDateChange} />
             <FunctionsBar onPanelToggle={this.props.onSettingsPanelChange} />
