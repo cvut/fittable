@@ -1,15 +1,15 @@
 {
-  "name": "fittable",
+  "name": "fittable-widget",
   "version": "0.4.0",
-  "description": "More fittable timetable & calendar widget",
+  "description": "More fittable calendar widget",
   "main": "index.html",
   "author": "Marián Hlaváč",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cvut/fittable"
+    "url": "https://github.com/cvut/fittable-widget"
   },
   "bugs": {
-    "url": "https://github.com/cvut/fittable/issues"
+    "url": "https://github.com/cvut/fittable-widget/issues"
   },
   "dependencies": {
     "babel": "^4.7.8",
