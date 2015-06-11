@@ -96,7 +96,7 @@ module.exports = function (grunt) {
           flatten: true,
           src: [
             'src/*.html',
-            'bower_components/react/react.js',
+            'node_modules/react/dist/react.js',
             'node_modules/babel/browser-polyfill.js'
           ]
         }]
@@ -110,7 +110,7 @@ module.exports = function (grunt) {
           flatten: true,
           src: [
             'src/index.html',
-            'bower_components/react/react.js',
+            'node_modules/react/dist/react.js',
             'node_modules/babel/browser-polyfill.js'
           ]
         }]

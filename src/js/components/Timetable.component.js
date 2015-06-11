@@ -5,7 +5,7 @@
 
 import Day from './Day.component';
 import NowIndicator from './NowIndicator.component';
-import Moment from '../../../bower_components/moment/moment.js';
+import Moment from '../../../node_modules/moment/moment.js';
 
 export default class Timetable extends React.Component
 {

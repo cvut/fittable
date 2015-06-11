@@ -3,7 +3,7 @@
  * @author Marián Hlaváč
  */
 
-import Moment from '../../../bower_components/moment/moment.js';
+import Moment from '../../../node_modules/moment/moment.js';
 
 import Controls from './Controls.component';
 import Timetable from './Timetable.component';

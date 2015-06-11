@@ -8,8 +8,8 @@
 import Fittable from './components/fittable.component';
 
 import Counterpart from '../../node_modules/counterpart/index.js';
-import Moment from '../../bower_components/moment/moment.js';
-import Momentcslocale from '../../bower_components/moment/locale/cs.js';
+import Moment from '../../node_modules/moment/moment.js';
+import Momentcslocale from '../../node_modules/moment/locale/cs.js';
 
 import LocaleCS from '../lang/cs.json';
 import LocaleEN from '../lang/en.json';

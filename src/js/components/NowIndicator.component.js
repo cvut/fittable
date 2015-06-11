@@ -3,7 +3,7 @@
  * @author Marián Hlaváč
  */
 
-import Moment from '../../../bower_components/moment/moment.js';
+import Moment from '../../../node_modules/moment/moment.js';
 
 export default class Timetable extends React.Component
 {

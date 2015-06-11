@@ -1,7 +1,7 @@
 require 'sass-globbing'
 
-add_import_path "bower_components/foundation/scss"
-add_import_path "bower_components"
+add_import_path "node_modules/foundation-sites/scss"
+add_import_path "node_modules"
 
 # Sass Directories
 javascripts_dir = 'src/js'
