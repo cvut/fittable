@@ -29,6 +29,10 @@ $vertical-layout-day-height: 720px;
 // Other
 $grid-line-width: 1px;
 
+#fittable {
+  position: relative;
+}
+
 @media #{$large-up} {
   .row.container {
     padding: 0 30px;

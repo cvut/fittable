@@ -10,6 +10,7 @@ import Controls from './Controls.component';
 import Timetable from './Timetable.component';
 import DataCache from '../modules/DataCache.module';
 import FunctionsSidebar from './FunctionsSidebar.component';
+import Spinner from './Spinner.component';
 
 export default class Fittable extends React.Component
 {
@@ -37,7 +38,8 @@ export default class Fittable extends React.Component
                 ends: 21.5,
                 lessonDuration: 1.75
             },
-            functionOpened: null
+            functionOpened: null,
+            waiting: false
         };
 
         // Declare variables
@@ -88,9 +90,12 @@ export default class Fittable extends React.Component
 
         // Set the data into state
         if ( Fittable.areDataValid( data ) )
-            this.setState( { weekEvents: data } );
+            this.setState( { weekEvents: data, waiting: false } );
         else
-            alert( 'Data invalid!' ); // todo: alert through UI
+        {
+            alert( 'Data invalid!' );
+            this.setState( { waiting: false } );
+        } // todo: alert through UI
     }
 
     /**
@@ -137,7 +142,7 @@ export default class Fittable extends React.Component
         if ( newdate.isAfter( this.state.viewDate ) ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
 
         // Update the viewDate state
-        this.setState( { viewDate: newdate } );
+        this.setState( { viewDate: newdate, waiting: true } );
 
         // Update the data
         this.getWeekEvents();
@@ -261,6 +266,7 @@ export default class Fittable extends React.Component
                 weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
                 functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay} ref="timetable" />
 
+            <Spinner show={this.state.waiting} />
         </div>;
     }
 }
