@@ -37,31 +37,31 @@ export default class FunctionFilter extends React.Component
             <ul className="filtering">
                 <li className={ this.props.displayFilter['lecture'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'lecture')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.lecture' )}
+                    {CP.translate( 'event_type.lecture' )}
                 </li>
                 <li className={ this.props.displayFilter['tutorial'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'tutorial')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.tutorial' )}
+                    {CP.translate( 'event_type.tutorial' )}
                 </li>
                 <li className={ this.props.displayFilter['laboratory'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'laboratory')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.laboratory' )}
+                    {CP.translate( 'event_type.laboratory' )}
                 </li>
                 <li className={ this.props.displayFilter['exam'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'exam')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.exam' )}
+                    {CP.translate( 'event_type.exam' )}
                 </li>
                 <li className={ this.props.displayFilter['assessment'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'assessment')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.assessment' )}
+                    {CP.translate( 'event_type.assessment' )}
                 </li>
                 <li className={ this.props.displayFilter['onetime'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'onetime')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.onetime' )}
+                    {CP.translate( 'event_type.onetime' )}
                 </li>
                 <li className={ this.props.displayFilter['other'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'other')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'functions.event_type.other' )}
+                    {CP.translate( 'event_type.other' )}
                 </li>
             </ul>
             <div className="clearfix"></div>
