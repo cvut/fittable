@@ -22,6 +22,7 @@ export default class Fittable extends React.Component
         // todo: layout initialization should be loaded from some kind of localstorage data
         this.state = {
             viewDate: new Moment().startOf( 'isoweek' ),
+            prevViewDate: new Moment().startOf( 'isoweek' ),
             layout: 'horizontal',
             selectedDay: new Moment().isoWeekday() - 1,
             displayFilter: {
@@ -80,6 +81,13 @@ export default class Fittable extends React.Component
      */
     setWeekEvents( data, alreadyCached = false )
     {
+        // Animate in correct direction
+        if ( 'timetable' in this.refs )
+            if ( this.state.prevViewDate.isAfter( this.state.viewDate ) )
+                this.refs.timetable.animateRight();
+            else
+                this.refs.timetable.animateLeft();
+
         // Cache data if needed
         if ( ! alreadyCached )
         {
@@ -90,12 +98,13 @@ export default class Fittable extends React.Component
 
         // Set the data into state
         if ( Fittable.areDataValid( data ) )
-            this.setState( { weekEvents: data, waiting: false } );
+            this.setState( { weekEvents: data, waiting: false, prevViewDate: this.state.viewDate } );
         else
         {
             alert( 'Data invalid!' );
-            this.setState( { waiting: false } );
+            this.setState( { waiting: false, prevViewDate: this.state.viewDate } );
         } // todo: alert through UI
+
     }
 
     /**
@@ -138,8 +147,8 @@ export default class Fittable extends React.Component
         // Update viewDate
         var newdate = new Moment( viewDate );
 
-        // Animate in correct direction
-        if ( newdate.isAfter( this.state.viewDate ) ) this.refs.timetable.animateLeft(); else this.refs.timetable.animateRight();
+        // Hide until the request isn't done
+        this.refs.timetable.hide();
 
         // Update the viewDate state
         this.setState( { viewDate: newdate, waiting: true } );

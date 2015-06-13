@@ -48,15 +48,14 @@
 
     div.days div.day:nth-child(odd) {
       background: $light-secondary-color;
-      transition: background $events-move-anim-speed;
     }
 
-    &.a-left div.day div.events {
+    div.days.a-left div.day div.events {
       visibility: visible;
       animation: week-move-left ease $events-move-anim-speed;
     }
 
-    &.a-right div.day div.events {
+    div.days.a-right div.day div.events {
       visibility: visible;
       animation: week-move-right ease $events-move-anim-speed;
     }

@@ -20,16 +20,28 @@ export default class Timetable extends React.Component
     }
 
     /**
+     * Hides the days element by removing its animation property class
+     */
+    hide()
+    {
+        var el = this.refs.days.getDOMNode();
+
+        // Replay CSS animation
+        el.classList.remove("a-left");
+        el.classList.remove("a-right");
+    }
+
+    /**
      * Replays the CSS animation of all events from right side to the left.
      */
     animateLeft()
     {
-        var rootEl = this.refs.rootEl.getDOMNode();
+        var el = this.refs.days.getDOMNode();
 
         // Replay CSS animation
-        rootEl.classList.remove("a-left");
-        rootEl.classList.remove("a-right");
-        setTimeout( () => { rootEl.classList.add("a-left"); }, 50 );
+        el.classList.remove("a-left");
+        el.classList.remove("a-right");
+        setTimeout( () => { el.classList.add("a-left"); }, 50 );
     }
 
     /**
@@ -37,12 +49,12 @@ export default class Timetable extends React.Component
      */
     animateRight()
     {
-        var rootEl = this.refs.rootEl.getDOMNode();
+        var el = this.refs.days.getDOMNode();
 
         // Replay CSS animation
-        rootEl.classList.remove("a-left");
-        rootEl.classList.remove("a-right");
-        setTimeout( () => { rootEl.classList.add("a-right"); }, 50 );
+        el.classList.remove("a-left");
+        el.classList.remove("a-right");
+        setTimeout( () => { el.classList.add("a-right"); }, 50 );
     }
 
     /**
@@ -141,7 +153,7 @@ export default class Timetable extends React.Component
                 active={todayId == i} selected={this.props.selectedDay == i} /> );
         }
 
-        return <div className={'table a-left ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout + ( this.props.functionsOpened !== null ? ' cut' : '' )} ref="rootEl">
+        return <div className={'table ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout + ( this.props.functionsOpened !== null ? ' cut' : '' )} ref="rootEl">
             <div className="grid-overlay">
                 <div className="grid-wrapper">
                     <div className="grid hor" style={{ 'background-size': ( timelineGridLength * 100 ) + '% 100%' }}></div>
@@ -150,7 +162,7 @@ export default class Timetable extends React.Component
             </div>
             <NowIndicator timelineStartHour={timelineHoursFrom} timelineStartMins={timelineMinutesFrom}
                 timelineLength={timelineLength} viewDate={this.props.viewDate} closestEvent={closestEvent} />
-            <div className="days" ref="days">
+            <div className="days a-right" ref="days">
                 {days.map( function( day ) { return day; } )}
             </div>
             <div className="clearfix"></div>
