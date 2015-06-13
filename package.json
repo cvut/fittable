@@ -1,7 +1,7 @@
 {
   "name": "fittable-widget",
-  "version": "0.4.0",
-  "description": "More fittable calendar widget",
+  "version": "0.6.0",
+  "description": "Flexible calendar widget for fittable written in JavaScript",
   "main": "index.html",
   "author": "Marián Hlaváč",
   "repository": {
