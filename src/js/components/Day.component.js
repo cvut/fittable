@@ -78,7 +78,7 @@ export default class Day extends React.Component
     {
         var events = this.findOverlayedEvents( this.props );
 
-        return <div className={'day' + ( this.props.active ? ' active' : '') + ( this.props.selected ? ' selected' : '')} data-day="{this.props.id}">
+        return <div className={'day' + ( this.props.active ? ' active' : '') + ( this.props.selected ? ' selected' : '')} data-day={this.props.id}>
                 <div className="label" title={ this.props.active ? CP.translate( 'timetable.actual_day', { day: new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' ) } ) : '' }>
                     <span className="day-num">{this.props.dayNum}</span>
                     <span className="day-name">{new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' )}</span>
@@ -86,7 +86,8 @@ export default class Day extends React.Component
             <div className="events" ref="events">
                 {events.map( function( event ) {
                     if ( this.props.displayFilter[event.type] == false ) event.appear = 'hide';
-                    return <EventBox key={event.id} data={event} detailShown={event.id == this.props.showDetailOn} onClick={this.props.onDetailShow} />;
+                    return <EventBox key={event.id} data={event} detailShown={event.id == this.props.showDetailOn}
+                        onClick={this.props.onDetailShow} openFromBottom={this.props.id >= 3} />;
                 }.bind(this) ) }
             </div>
         </div>;

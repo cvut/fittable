@@ -35,8 +35,9 @@ export default class EventBox extends React.Component
         if ( this.props.data._draw_length <= 0.10 ) minimalization = " min-hard";
         if ( this.props.data._draw_length <= 0.07 ) minimalization = " min-all";
 
-        return <div className={ 'event' + ( this.props.detailShown ? ' detail-shown' : '' ) + ( this.props.data.cancelled ? ' cancelled' : '' )
-        + ( this.props.data.replacement ? ' replacement ' : ' ' ) + appear + minimalization } data-event="{this.props.data.id}"
+        return <div className={ 'event' + ( this.props.detailShown ? ' detail-shown' : '' ) +
+        ( this.props.data.cancelled ? ' cancelled' : '' ) + ( this.props.openFromBottom ? ' from-bottom' : '' )
+        + ( this.props.data.replacement ? ' replacement ' : ' ' ) + appear + minimalization } data-event={this.props.data.id}
             style={{ width: this.props.data._draw_length*100 + "%", height: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%", top: this.props.data._draw_position*100 + "%" }}>
             <div className="inner">
                 <div className="head-space" onClick={this.props.onClick.bind(null, appear == 'hide' ? -1 : this.props.data.id)}></div>
