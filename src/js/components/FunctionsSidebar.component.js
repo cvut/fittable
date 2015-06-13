@@ -33,7 +33,9 @@ export default class FunctionsSidebar
             functionToRender = <FunctionFilter ref="functionFilter" displayFilter={this.props.displayFilter} onFilterChange={this.props.onFilterChange} />;
 
         return <div className={'functions-sidebar' + ( this.props.opened !== null ? '' : ' hide' )}>
-            {functionToRender}
+                <div className="wrap">
+                    {functionToRender}
+                </div>
             </div>;
     }
 }

@@ -2,6 +2,7 @@
 
   div.table {
     position: relative;
+    clear: left;
 
     div.day {
       width: 100%;
@@ -149,6 +150,8 @@
   @media #{$large-up} {
 
     div.table {
+      transition: width $default-anim-speed;
+      width: 100%;
 
       &.cut {
         width: 62%;
