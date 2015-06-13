@@ -8,6 +8,7 @@ div#fittable div.header div.week-switcher {
   padding: 20px 10px;
   opacity: 1;
   transition: opacity $default-anim-speed, height $default-anim-speed;
+  @include disable-selection();
 
   &.hide {
     display: block !important;

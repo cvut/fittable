@@ -24,6 +24,7 @@
         transition: opacity $events-move-anim-speed;
         position: relative;
         z-index: 12;
+        @include disable-selection();
 
         span {
           padding: 5px 0 5px 20px;
@@ -98,6 +99,7 @@
       z-index: 7;
       border-right: 1px solid $primary-color;
       opacity: .5;
+      @include disable-selection();
 
       .next {
         position: absolute;
@@ -126,6 +128,7 @@
       width: 90%;
       position: relative;
       padding: 8px 0;
+      @include disable-selection();
 
       .hour-label {
         position: absolute;

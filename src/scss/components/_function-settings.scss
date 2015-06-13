@@ -5,6 +5,7 @@
 
     div.toggleable-h {
       margin-bottom: 20px;
+      @include disable-selection();
 
       a {
         display: block;

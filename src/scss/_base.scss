@@ -50,4 +50,9 @@ $grid-line-width: 1px;
   touch-action: pan-y;
 }
 
+// Highlight color
+::selection, ::-moz-selection {
+  background: $primary-color;
+  color: white;
+}
 

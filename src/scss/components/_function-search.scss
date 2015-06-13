@@ -38,6 +38,7 @@
     }
 
     div.search-results {
+      @include disable-selection();
 
       div.result-category {
         color: $primary-color;

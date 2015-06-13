@@ -45,6 +45,7 @@
       height: $header-elements-weight;
       padding-right: 8px;
       position: relative;
+      @include disable-selection();
 
       & > a {
         display: inline-block;

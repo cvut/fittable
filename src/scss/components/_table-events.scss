@@ -37,11 +37,13 @@
       font-weight: 300;
       text-align: right;
       margin-top: 5px;
+      @include disable-selection();
     }
 
     div.time {
       font-size: $xsmall-font-size;
       text-align: right;
+      @include disable-selection();
     }
 
     div.type {
@@ -53,6 +55,7 @@
       border-left: 2px solid white;
       padding-left: 5px;
       line-height: 1.2;
+      @include disable-selection();
     }
 
     div.detail {
