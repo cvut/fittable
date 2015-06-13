@@ -102,6 +102,8 @@
       @include background-hover-effect( $primary-color );
       font-weight: 400;
       width: 160px;
+      position: relative;
+      z-index: 420;
 
       a {
         color: white;
@@ -118,6 +120,8 @@
     div.week-nav {
       float: left;
       margin-left: 10px;
+      position: relative;
+      z-index: 420;
 
       a {
         display: inline-block;

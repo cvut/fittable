@@ -4,11 +4,12 @@ div#fittable div.header div.week-switcher {
   background: $primary-color;
   width: 240px;
   height: 240px;
-  z-index: 90;
-  padding: 20px 10px;
+  z-index: 390;
+  padding: 20px $column-gutter/2;
   opacity: 1;
   transition: opacity $default-anim-speed, height $default-anim-speed;
   @include disable-selection();
+  outline: 1px solid white;
 
   &.hide {
     display: block !important;
