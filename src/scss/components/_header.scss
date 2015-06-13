@@ -101,7 +101,6 @@
       @include bold-up-text;
       @include background-hover-effect( $primary-color );
       font-weight: 400;
-      width: 160px;
       position: relative;
       z-index: 420;
 
@@ -110,6 +109,7 @@
         padding: 0 18px;
         line-height: $header-elements-weight;
         display: inline-block;
+        width: 160px;
       }
 
       i.fa {
