@@ -139,7 +139,7 @@ export default class Timetable extends React.Component
         var hourlabels = [];
         for ( var i = 0; i < 1 / timelineGridLength - 1; i++ )
         {
-            hourlabels.push( <div className="hour-label" style={{ width: timelineGridLength * 100 + '%',
+            hourlabels.push( <div className="hour-label" key={i} style={{ width: timelineGridLength * 100 + '%',
                 height: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%',
                 top: i * timelineGridLength * 100 + '%' }} > {i+1} </div> );
         }
@@ -148,7 +148,8 @@ export default class Timetable extends React.Component
         var days = [];
         for ( i = 0; i < 6; i++ )
         {
-            days.push( <Day id={i} dayNum={new Moment( this.props.viewDate ).isoWeekday( i + 1 ).date()} events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
+            days.push( <Day id={i} key={i} dayNum={new Moment( this.props.viewDate ).isoWeekday( i + 1 ).date()}
+                events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
                 showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}
                 active={todayId == i} selected={this.props.selectedDay == i} /> );
         }
@@ -156,8 +157,8 @@ export default class Timetable extends React.Component
         return <div className={'table ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout + ( this.props.functionsOpened !== null ? ' cut' : '' )} ref="rootEl">
             <div className="grid-overlay">
                 <div className="grid-wrapper">
-                    <div className="grid hor" style={{ 'background-size': ( timelineGridLength * 100 ) + '% 100%' }}></div>
-                    <div className="grid ver" style={{ 'background-size': '100% ' + ( timelineGridLength * 100 ) + '%' }}></div>
+                    <div className="grid hor" style={{ backgroundSize: ( timelineGridLength * 100 ) + '% 100%' }}></div>
+                    <div className="grid ver" style={{ backgroundSize: '100% ' + ( timelineGridLength * 100 ) + '%' }}></div>
                 </div>
             </div>
             <NowIndicator timelineStartHour={timelineHoursFrom} timelineStartMins={timelineMinutesFrom}

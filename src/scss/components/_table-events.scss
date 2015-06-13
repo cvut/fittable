@@ -28,10 +28,6 @@
       position: relative;
     }
 
-    &:not(.hide) div.inner {
-      cursor: pointer;
-    }
-
     div.name {
       font-size: $xlarge-font-size;
       font-weight: 300;
@@ -146,6 +142,29 @@
       position: absolute;
       top: -10px;
       left: -10px;
+    }
+
+    &:not(.hide) div.inner div.head-space {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+
+    &:not(.detail-shown) div.inner div.head-space {
+      height: 100%;
+    }
+
+    &.detail-shown div.inner div.head-space {
+      height: $day-row-height - ($day-row-padding * 2);
+      background: transparent;
+      transition: background $default-anim-speed;
+
+      &:hover {
+        background: rgba( white, 0.1 );
+
+      }
     }
   }
 }
