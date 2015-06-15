@@ -18,8 +18,7 @@ export default class Fittable extends React.Component
     {
         super.constructor( props );
 
-        // Set initial states ( today's week and layout )
-        // todo: layout initialization should be loaded from some kind of localstorage data
+        // Set initial states
         this.state = {
             viewDate: new Moment().startOf( 'isoweek' ),
             prevViewDate: new Moment().startOf( 'isoweek' ),
@@ -41,12 +40,17 @@ export default class Fittable extends React.Component
             },
             functionOpened: null,
             waiting: false,
+            options: this.props,
             searchResults: []
         };
 
         // Declare variables
         this.weekEvents = null;
         this.hammer = null;
+
+        // Checks if required callbacks are set
+        if ( typeof this.props.callbacks.data == 'undefined' )
+            alert( 'You haven\'t set the data callback!' );
 
         // Force a refresh every one minute
         setInterval( this.handleRefreshNeed.bind( this ), 60000 );
@@ -70,7 +74,7 @@ export default class Fittable extends React.Component
         }
         else {
             // Require new data
-            this.props.dataCallback( dateFrom, dateTo, this.setWeekEvents.bind( this ) );
+            this.props.callbacks.data( dateFrom, dateTo, this.setWeekEvents.bind( this ) );
         }
     }
 
@@ -197,12 +201,16 @@ export default class Fittable extends React.Component
     }
 
     /**
-     * Handler for layout changing event.
-     * @param {string} to New layout setting
+     * Handler for settings changing event.
+     * @param {string} key option key
+     * @param {string} to new setting
      */
-    handleChangeLayout( to )
+    handleChangeSetting( key, to )
     {
-        this.setState( { layout: to } );
+        var newOptions = this.state.options;
+        newOptions[key] = to;
+
+        this.setState( { options: newOptions } );
     }
 
     /**
@@ -290,17 +298,18 @@ export default class Fittable extends React.Component
             <div className="clearfix"></div>
 
             <FunctionsSidebar ref="sidebar" opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
-                onFilterChange={this.handleChangeFilter.bind(this)} onLayoutChange={this.handleChangeLayout.bind(this)}
-                onRefreshNeed={this.handleRefreshNeed.bind(this)} onSearch={this.search.bind(this)}
-                searchResults={this.state.searchResults} />
+                onFilterChange={this.handleChangeFilter.bind(this)} onSettingChange={this.handleChangeSetting.bind(this)}
+                onRefreshNeed={this.handleRefreshNeed.bind(this)} options={this.state.options}
+                onSearch={this.search.bind(this)} searchResults={this.state.searchResults} />
 
-            <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.layout}
+            <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}
                 weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
-                functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay} ref="timetable" />
+                functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
+                colored={this.state.options.colors} days7={this.state.options.days7} ref="timetable" />
 
             <Spinner show={this.state.waiting} />
         </div>;
     }
 }
 
-Fittable.defaultProps = { dataCallback: null, locale: 'cs' };
+Fittable.defaultProps = { callbacks: null, locale: 'en', layout: 'horizontal', colors: false, days7: false };

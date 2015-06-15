@@ -12,24 +12,17 @@ export default class FunctionSettings extends React.Component
     constructor( props )
     {
         super.constructor( props );
-
-        // Default layout is horizontal
-        this.state = {
-            activeLayout: 'horizontal'
-        };
     }
 
     /**
-     * Handles layout selection
-     * @param sel Selected layout
+     * Handles setting selection change
+     * @param key Setting key
+     * @param sel Selected
      */
-    handleLayoutSelect( sel )
+    handleSettingSelect( key, sel )
     {
         // Delegate to parent
-        this.props.onLayoutChange( sel );
-
-        // Set the state
-        this.setState( { activeLayout: sel } );
+        this.props.onSettingChange( key, sel );
     }
 
     /**
@@ -58,11 +51,11 @@ export default class FunctionSettings extends React.Component
                 <div className="column medium-6">
                     <h2>{CP.translate( 'functions.settings.layout' )}</h2>
                     <div className="toggleable-h">
-                        <a href="#" className={ ( this.state.activeLayout == 'horizontal' ? ' active' : '' )} onClick={this.handleLayoutSelect.bind( this, 'horizontal' )} >
+                        <a href="#" className={ ( this.props.options.layout == 'horizontal' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'horizontal' )} >
                             <i className="fa fa-fw fa-th-list"></i>
                             {CP.translate( 'functions.settings.layout_horizontal' )}
                         </a>
-                        <a href="#" className={ ( this.state.activeLayout == 'vertical' ? ' active' : '' )} onClick={this.handleLayoutSelect.bind( this, 'vertical' )}>
+                        <a href="#" className={ ( this.props.options.layout  == 'vertical' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'vertical' )}>
                             <i className="fa fa-fw fa-th"></i>
                             {CP.translate( 'functions.settings.layout_vertical' )}
                         </a>
@@ -84,8 +77,8 @@ export default class FunctionSettings extends React.Component
             <div className="row">
                 <div className="column small-3">
                     <div className="switch small">
-                        <input id="exampleRadioSwitch1" type="radio" checked name="testGroup" />
-                        <label for="exampleRadioSwitch1"></label>
+                        <input id="setting-colors" type="checkbox" checked={this.props.options.colors} />
+                        <label for="setting-colors" onClick={this.handleSettingSelect.bind( this, 'colors', ! this.props.options.colors )}></label>
                     </div>
                 </div>
                 <div className="column small-9 switch-label">
@@ -95,8 +88,8 @@ export default class FunctionSettings extends React.Component
             <div className="row">
                 <div className="column small-3">
                     <div className="switch small">
-                        <input id="exampleRadioSwitch1" type="radio" checked name="testGroup" />
-                        <label for="exampleRadioSwitch1"></label>
+                        <input id="setting-days7" type="checkbox" checked={this.props.options.days7} />
+                        <label for="setting-days7" onClick={this.handleSettingSelect.bind( this, 'days7', ! this.props.options.days7 )}></label>
                     </div>
                 </div>
                 <div className="column small-9 switch-label">

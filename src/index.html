@@ -136,11 +136,14 @@
         };
 
         var options = {
-            dataCallback: dataCallback,
             callbacks: {
-                search: searchCallback
+                search: searchCallback,
+                data: dataCallback
             },
-            locale: 'en'
+            locale: 'en',
+            layout: 'vertical',
+            colors: true,
+            days7: false
         };
 
         // Initialize fittable

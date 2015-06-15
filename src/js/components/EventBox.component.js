@@ -43,7 +43,7 @@ export default class EventBox extends React.Component
                 <div className="head-space" onClick={this.props.onClick.bind(null, appear == 'hide' ? -1 : this.props.data.id)}></div>
                 <div className="name">{this.props.data.name}</div>
                 <div className="time">{startsAt} - {endsAt}</div>
-                <div className="type">
+                <div className={'type' + ( this.props.colored ? ' hide' : '')}>
                     <span className="short">{CP.translate( 'event_type_short.' + this.props.data.type )}</span>
                     <span className="long">{CP.translate( 'event_type.' + this.props.data.type )}</span>
                 </div>

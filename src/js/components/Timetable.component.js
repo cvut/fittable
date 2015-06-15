@@ -151,10 +151,11 @@ export default class Timetable extends React.Component
             days.push( <Day id={i} key={i} dayNum={new Moment( this.props.viewDate ).isoWeekday( i + 1 ).date()}
                 events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
                 showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}
-                active={todayId == i} selected={this.props.selectedDay == i} /> );
+                active={todayId == i} selected={this.props.selectedDay == i} colored={this.props.colored} /> );
         }
 
-        return <div className={'table ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout + ( this.props.functionsOpened !== null ? ' cut' : '' )} ref="rootEl">
+        return <div className={'table ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout +
+        ( this.props.functionsOpened !== null ? ' cut' : '' ) + ( this.props.days7 ? ' 7days' : '' )} ref="rootEl">
             <div className="grid-overlay">
                 <div className="grid-wrapper">
                     <div className="grid hor" style={{ backgroundSize: ( timelineGridLength * 100 ) + '% 100%' }}></div>
