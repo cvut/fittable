@@ -40,7 +40,8 @@ export default class Fittable extends React.Component
                 lessonDuration: 1.75
             },
             functionOpened: null,
-            waiting: false
+            waiting: false,
+            searchResults: []
         };
 
         // Declare variables
@@ -132,10 +133,25 @@ export default class Fittable extends React.Component
             return false;
     }
 
-    componentWillMount()
+    search( query )
     {
-        // Get week events
-        this.getWeekEvents();
+        this.setState( { waiting: true } );
+        console.log("set wait on" );
+
+        if ( 'search' in this.props.callbacks )
+        {
+            this.props.callbacks.search( query, this.receiveSearchResults.bind( this ) );
+        }
+        else
+        {
+            alert( 'Search callback hasn\'t been defined.' );
+            // todo: do not alert, show UI error
+        }
+    }
+
+    receiveSearchResults( data )
+    {
+        this.setState( { searchResults: data, waiting: false } );
     }
 
     /**
@@ -237,6 +253,12 @@ export default class Fittable extends React.Component
         this.hammer.destroy();
     }
 
+    componentWillMount()
+    {
+        // Get week events
+        this.getWeekEvents();
+    }
+
     /**
      * Component mounting
      */
@@ -267,9 +289,10 @@ export default class Fittable extends React.Component
 
             <div className="clearfix"></div>
 
-            <FunctionsSidebar opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
+            <FunctionsSidebar ref="sidebar" opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
                 onFilterChange={this.handleChangeFilter.bind(this)} onLayoutChange={this.handleChangeLayout.bind(this)}
-                onRefreshNeed={this.handleRefreshNeed.bind(this)} />
+                onRefreshNeed={this.handleRefreshNeed.bind(this)} onSearch={this.search.bind(this)}
+                searchResults={this.state.searchResults} />
 
             <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.layout}
                 weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}

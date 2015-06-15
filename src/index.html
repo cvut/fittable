@@ -21,93 +21,125 @@
     -->
 
     <script type="text/javascript">
-
         /*
             This is temporary example callback function, which
             generates random events. It's very dumb. Trust me.
          */
         var dataCallback = function ( from, to, callback ) {
 
-            var data = [];
+                setTimeout( function() {
+                var data = [];
 
-            // Create 12 events...
-            for ( var i = 0; i < 12; i++ )
-            {
-                var date = new Date( from );
-                var dayrel = Math.random() * 7, hourstart = Math.random() * 11 + 8, len = Math.random() + 1;
-                var startDate = new Date( date );
-                startDate.setDate( date.getDate() + dayrel );
-                startDate.setHours( hourstart );
-                startDate.setMinutes( 0 );
-                startDate.setSeconds( 0 );
-                var endDate = new Date( date );
-                endDate.setDate( date.getDate() + dayrel );
-                endDate.setHours( hourstart + len );
-                endDate.setMinutes( 0 );
-                endDate.setSeconds( 0 );
-                var replaceDate = new Date( startDate );
-                replaceDate.setMonth( startDate.getDate() + Math.floor( Math.random() * 10 ) );
-
-                var randomDescs = [
-                    "Nunquam experientia buxum. Pol, a bene fermium.",
-                    "When one follows mind and meditation, one is able to witness density.",
-                    "Peanuts combines greatly with nutty truffels. Bitter, salted pudding is best blended with aromatic bourbon.",
-                    "Arrr, never fight a jack. Wow, fine cannon. you won't drink the fortress.",
-                    "Fantastic collision courses lead to the nuclear flux. View wihtout sonic shower, and we won’t dissolve a kahless.",
-                    "Nunquam imperium silva. Boreass sunt valebats de primus abactus. Voxs unda, tanquam camerarius tabes.",
-                    "This one is extra long. Nunquam imperium silva. Boreass sunt valebats de primus abactus. Voxs unda, tanquam camerarius tabes. Fantastic collision courses lead to the nuclear flux. View wihtout sonic shower, and we won’t dissolve a kahless. Peanuts combines greatly with nutty truffels. Bitter, salted pudding is best blended with aromatic bourbon."
-                ];
-
-                var cancreplrandomness = Math.random();
-
-                var types = [ "laboratory", "tutorial", "lecture", "exam" ];
-
-
-                // And add new event to array
-                data[i] = {
-                    id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
-                    name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
-                    note: "Placeholder event",
-                    startsAt: startDate.toISOString(),
-                    endsAt: endDate.toISOString(),
-                    type: types[ Math.round( Math.random() * (types.length -1)) ],
-                    room: "T9:303",
-                    teacher: "Ing. Josef Nováček",
-                    teacherlogin: "novacjo7",
-                    flag: null,
-                    notification: false,
-                    cancelled: cancreplrandomness > 0.8,
-                    replacement: cancreplrandomness < 0.1,
-                    details: {
-                        students: [
-                            { id: 1 },
-                            { id: 11 },
-                            { id: 111 },
-                            { id: 1111 },
-                            { id: 11111 }
-                        ],
-                        capacity: 140,
-                        teacher: "novacjo7",
-                        parallel: "201",
-                        description: randomDescs[ Math.round( Math.random() * (randomDescs.length - 1) ) ]
-                    }
-                };
-
-                if ( data[ i ].cancelled )
+                // Create 12 events...
+                for ( var i = 0; i < 12; i++ )
                 {
-                    data[ i ].replacedBy = {
-                            eventId: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
-                            startsAt: replaceDate.toISOString()
-                        };
-                }
-            }
+                    var date = new Date( from );
+                    var dayrel = Math.random() * 7, hourstart = Math.random() * 11 + 8, len = Math.random() + 1;
+                    var startDate = new Date( date );
+                    startDate.setDate( date.getDate() + dayrel );
+                    startDate.setHours( hourstart );
+                    startDate.setMinutes( 0 );
+                    startDate.setSeconds( 0 );
+                    var endDate = new Date( date );
+                    endDate.setDate( date.getDate() + dayrel );
+                    endDate.setHours( hourstart + len );
+                    endDate.setMinutes( 0 );
+                    endDate.setSeconds( 0 );
+                    var replaceDate = new Date( startDate );
+                    replaceDate.setMonth( startDate.getDate() + Math.floor( Math.random() * 10 ) );
 
-            // Return to fittable
-            callback( data );
+                    var randomDescs = [
+                        "Nunquam experientia buxum. Pol, a bene fermium.",
+                        "When one follows mind and meditation, one is able to witness density.",
+                        "Peanuts combines greatly with nutty truffels. Bitter, salted pudding is best blended with aromatic bourbon.",
+                        "Arrr, never fight a jack. Wow, fine cannon. you won't drink the fortress.",
+                        "Fantastic collision courses lead to the nuclear flux. View wihtout sonic shower, and we won’t dissolve a kahless.",
+                        "Nunquam imperium silva. Boreass sunt valebats de primus abactus. Voxs unda, tanquam camerarius tabes.",
+                        "This one is extra long. Nunquam imperium silva. Boreass sunt valebats de primus abactus. Voxs unda, tanquam camerarius tabes. Fantastic collision courses lead to the nuclear flux. View wihtout sonic shower, and we won’t dissolve a kahless. Peanuts combines greatly with nutty truffels. Bitter, salted pudding is best blended with aromatic bourbon."
+                    ];
+
+                    var cancreplrandomness = Math.random();
+
+                    var types = [ "laboratory", "tutorial", "lecture", "exam" ];
+
+
+                    // And add new event to array
+                    data[i] = {
+                        id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
+                        name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
+                        note: "Placeholder event",
+                        startsAt: startDate.toISOString(),
+                        endsAt: endDate.toISOString(),
+                        type: types[ Math.round( Math.random() * (types.length -1)) ],
+                        room: "T9:303",
+                        teacher: "Ing. Josef Nováček",
+                        teacherlogin: "novacjo7",
+                        flag: null,
+                        notification: false,
+                        cancelled: cancreplrandomness > 0.8,
+                        replacement: cancreplrandomness < 0.1,
+                        details: {
+                            students: [
+                                { id: 1 },
+                                { id: 11 },
+                                { id: 111 },
+                                { id: 1111 },
+                                { id: 11111 }
+                            ],
+                            capacity: 140,
+                            teacher: "novacjo7",
+                            parallel: "201",
+                            description: randomDescs[ Math.round( Math.random() * (randomDescs.length - 1) ) ]
+                        }
+                    };
+
+                    if ( data[ i ].cancelled )
+                    {
+                        data[ i ].replacedBy = {
+                                eventId: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
+                                startsAt: replaceDate.toISOString()
+                            };
+                    }
+                }
+
+                // Return to fittable
+                callback( data );
+            }, Math.random() * 1000 );
+        };
+
+        var searchCallback = function ( query, callback ) {
+
+            console.log("being called");
+
+            setTimeout( function() {
+
+                callback( [
+                    {
+                        id: Math.random().toString(36).substring(10).toUpperCase() + query,
+                        title: 'Blah blah ' + query,
+                        type: 'course'
+                    },
+                    {
+                        id: Math.random().toString(36).substring(10).toUpperCase() + query,
+                        title: 'Hodge-podge',
+                        type: 'room'
+                    },
+                    {
+                        id: Math.random().toString(36).substring(10).toUpperCase() + query,
+                        title: 'Flim flam',
+                        type: 'person'
+                    }
+                ] );
+
+            }, Math.random() * 2000 );
+
         };
 
         var options = {
             dataCallback: dataCallback,
+            callbacks: {
+                search: searchCallback
+            },
             locale: 'en'
         };
 
