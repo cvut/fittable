@@ -1,7 +1,7 @@
 # Site settings
 title: Sirius – calendar widget
 url: "https://cvut.github.io/" # the base hostname & protocol for your site
-baseurl: "/sirius-widget" # the subpath of your site, e.g. /blog/
+baseurl: "/fittable" # the subpath of your site, e.g. /blog/
 timezone: Europe/Prague
 
 footer_text: "&copy; FIT ČVUT v Praze, 2015"

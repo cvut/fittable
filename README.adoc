@@ -1,3 +1,3 @@
-image:https://travis-ci.org/cvut/sirius-widget.svg?branch=pages-src["Build Status", link="https://travis-ci.org/cvut/sirius-widget"]
+image:https://travis-ci.org/cvut/fittable.svg?branch=pages-src["Build Status", link="https://travis-ci.org/cvut/fittable"]
 
-Go to https://cvut.github.io/sirius-widget/.
+Go to https://cvut.github.io/fittable/.
