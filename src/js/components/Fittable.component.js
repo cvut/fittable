@@ -153,6 +153,11 @@ export default class Fittable extends React.Component
         }
     }
 
+    refresh()
+    {
+        this.getWeekEvents();
+    }
+
     receiveSearchResults( data )
     {
         this.setState( { searchResults: data, waiting: false } );
