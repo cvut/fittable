@@ -151,6 +151,7 @@ export default class Timetable extends React.Component
             days.push( <Day id={i} key={i} dayNum={new Moment( this.props.viewDate ).isoWeekday( i + 1 ).date()}
                 events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
                 showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}
+                onViewChange={this.props.onViewChange}
                 active={todayId == i} selected={this.props.selectedDay == i} colored={this.props.colored} /> );
         }
 

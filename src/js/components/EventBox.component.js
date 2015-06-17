@@ -47,7 +47,7 @@ export default class EventBox extends React.Component
                     <span className="short">{CP.translate( 'event_type_short.' + this.props.data.type )}</span>
                     <span className="long">{CP.translate( 'event_type.' + this.props.data.type )}</span>
                 </div>
-                <EventDetail ref="detail" data={this.props.data} />
+                <EventDetail ref="detail" data={this.props.data} onViewChange={this.props.onViewChange} />
                 <div className="cancelflag"><i className="fa fa-ban"></i></div>
                 <div className="replaceflag"><i className="fa fa-umbrella"></i></div>
             </div>

@@ -140,7 +140,6 @@ export default class Fittable extends React.Component
     search( query )
     {
         this.setState( { waiting: true } );
-        console.log("set wait on" );
 
         if ( 'search' in this.props.callbacks )
         {
@@ -244,6 +243,14 @@ export default class Fittable extends React.Component
         this.setState( {} );
     }
 
+    handleChangeView( to, param )
+    {
+        if ( typeof this.props.callbacks.viewChange == 'undefined' )
+            alert( 'You haven\'t set the view changing callback!' );
+
+        this.props.callbacks.viewChange( to, param );
+    }
+
     /**
      * Hangs a listener on whole fittable element, that listens to swipe touch events.
      * @param el Element to be listened on
@@ -310,6 +317,7 @@ export default class Fittable extends React.Component
             <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}
                 weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
                 functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
+                onViewChange={this.handleChangeView.bind(this)}
                 colored={this.state.options.colors} days7={this.state.options.days7} ref="timetable" />
 
             <Spinner show={this.state.waiting} />
