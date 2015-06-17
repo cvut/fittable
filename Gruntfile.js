@@ -147,7 +147,7 @@ module.exports = function (grunt) {
     }
   });
 
-  // Load grunt tasks automaticly
+  // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
   grunt.registerTask('default', [
@@ -164,7 +164,7 @@ module.exports = function (grunt) {
     'compass:dist',
     'autoprefixer:dist',
     'browserify:dist',
-    'uglify:dist',
-    'copy:dist'
+    'copy:dist',
+    'uglify:dist'
   ]);
 };
