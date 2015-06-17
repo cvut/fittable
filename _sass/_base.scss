@@ -311,3 +311,18 @@ a.anchor {
         visibility: visible;
     }
 }
+
+.p1, .p2, .p3 {
+    padding: 0.15em 0.3em;
+    margin-left: -0.3em;
+    margin-bottom: -0.15em;
+}
+.p1 {
+    background-color: #FF7373;
+}
+.p2 {
+    background-color: #FFBD7A;
+}
+.p3 {
+    background-color: #FFE786;
+}

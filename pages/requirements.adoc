@@ -9,16 +9,16 @@ layout: page
 [.decimal-nested]
 . bude poskytovat náhled na události (tj. kalendáře) z pohledu:
   .. osoby,
-  .. předmětu,
-  .. místnosti.
+  .. [p1]#předmětu,#
+  .. [p1]#místnosti.#
 
 . bude poskytovat různé módy zobrazení:
   .. rozvrhový (horizontální):
-     ... s přepínáním mezi zobrazení 5/7 dní (např. dálkoví studenti mívají výuku i o víkendu),
-     ... s časovou osou podle harmonogramu dané fakulty (_časové_ rozsahy) sloužící jako _pomocné_ vodítko.
+     ... [p3]#s přepínáním mezi zobrazení 5/7 dní (např. dálkoví studenti mívají výuku i o víkendu),#
+     ... [p2]#s časovou osou podle harmonogramu dané fakulty (_časové_ rozsahy) sloužící jako _pomocné_ vodítko.#
   .. kalendářní:
      ... týdenní (výchozí),
-     ... měsíční,
+     ... [p2]#měsíční,#
      ... denní.
 
 . bude zobrazovat paritu (sudý/lichý) aktuálně vybraného období.
@@ -29,27 +29,27 @@ layout: page
   .. kód předmětu,
   .. místnost (KOSí kód),
   .. čas začátku a konce události,
-  .. typ události (barevným rozlišením),
-  .. příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).
+  .. typ události ([p3]#barevným rozlišením#),
+  .. [p2]#příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).#
 
 . po kliknutí na okénko události se zobrazí detail události obsahující:
-  .. celý název předmětu nebo události,
-  .. odkaz na kalendář předmětu (jen pro P/C/L/J/Z),
-  .. pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),
+  .. [p1]#celý název předmětu nebo události,#
+  .. [p1]#odkaz na kalendář předmětu (jen pro P/C/L/J/Z),#
+  .. [p2]#pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),#
   .. číslo paralelky (jen pro P/C/L/J),
-  .. odkaz na kalendář místnosti,
-  .. vyučující/zkoušející/organizátoři události (jeden nebo více lidí):
-     ... celé jméno,
-     ... e-mail,
-     ... odkaz na kalendář,
-     ... (odkaz na Usermap).
-  .. seznam studentů v paralelce (jen pro P/C/L):
-     ... celé jméno,
-     ... uživatelské jméno,
-     ... zobrazovat ve „fancy pop-up.“
-  .. seznam výjimek, které událost ovlivnily.
+  .. [p1]#odkaz na kalendář místnosti,#
+  .. vyučující/zkoušející/organizátoři události (jeden nebo [p1]#více lidí#):
+     ... [p1]#celé jméno,#
+     ... [p2]#e-mail,#
+     ... [p1]#odkaz na kalendář,#
+     ... [p3]#(odkaz na Usermap).#
+  .. [p3]#seznam studentů v paralelce (jen pro P/C/L):#
+     ... [p3]#celé jméno,#
+     ... [p3]#uživatelské jméno,#
+     ... [p3]#zobrazovat ve „fancy pop-up.“#
+  .. [p2]#seznam výjimek, které událost ovlivnily.#
 
-. na původním místě zrušené či přesunuté události bude zobrazovat zástupné okýnko:
+. [p2]#na původním místě zrušené či přesunuté události bude zobrazovat zástupné okýnko:#
   .. v případě přesunuté události s odkazem na novou událost.
 
 . bude umožňovat navigaci v kalendáři po týdnech/měsících/semestrech.
