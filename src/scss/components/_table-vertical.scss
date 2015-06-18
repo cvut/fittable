@@ -124,7 +124,7 @@ div#fittable div.table.vertical {
     }
 
     &.half + div.event:not(.detail-shown).half {
-      left: unset !important;
+      left: auto !important;
       right: 0;
       padding-left: 5px;
     }
@@ -145,7 +145,7 @@ div#fittable div.table.vertical {
     }
 
     &.third + div.event.third + div.event:not(.detail-shown).third {
-      left: unset !important;
+      left: auto !important;
       right: 0;
       padding-left: 5px;
     }

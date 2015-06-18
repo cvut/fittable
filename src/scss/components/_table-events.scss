@@ -193,7 +193,7 @@
         }
 
         &.half + div.event:not(.detail-shown).half {
-          top: unset !important;
+          top: auto !important;
           bottom: 0;
         }
 
@@ -215,12 +215,12 @@
         }
 
         &.third + div.event.third + div.event:not(.detail-shown).third {
-          top: unset !important;
+          top: auto !important;
           bottom: 0;
         }
 
         &.from-bottom.detail-shown {
-          top: unset !important;
+          top: auto !important;
           bottom: 0 !important;
           position: absolute;
         }
