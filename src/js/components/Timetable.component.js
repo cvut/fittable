@@ -146,7 +146,7 @@ export default class Timetable extends React.Component
 
         // Create days
         var days = [];
-        for ( i = 0; i < 6; i++ )
+        for ( i = 0; i < 7; i++ )
         {
             days.push( <Day id={i} key={i} dayNum={new Moment( this.props.viewDate ).isoWeekday( i + 1 ).date()}
                 events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
@@ -156,7 +156,7 @@ export default class Timetable extends React.Component
         }
 
         return <div className={'table ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout +
-        ( this.props.functionsOpened !== null ? ' cut' : '' ) + ( this.props.days7 ? ' 7days' : '' )} ref="rootEl">
+        ( this.props.functionsOpened !== null ? ' cut' : '' ) + ( this.props.days7 ? ' days7' : '' )} ref="rootEl">
             <div className="grid-overlay">
                 <div className="grid-wrapper">
                     <div className="grid hor" style={{ backgroundSize: ( timelineGridLength * 100 ) + '% 100%' }}></div>

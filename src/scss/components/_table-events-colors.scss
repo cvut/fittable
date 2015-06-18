@@ -1,0 +1,56 @@
+#fittable div.table div.day {
+
+  $lecture: #F7C93F;
+  $tutorial: #64AA47;
+  $laboratory: #DE5543;
+  $exam: #9169B5;
+
+  div.events div.event {
+
+    &.color-lecture {
+
+      .inner {
+        background: $lecture;
+        color: #444;
+      }
+
+      &:hover .inner {
+        background: lighten( $lecture, 10% );
+      }
+    }
+
+    &.color-tutorial {
+
+      .inner {
+        background: $tutorial;
+      }
+
+      &:hover .inner {
+        background: lighten( $tutorial, 10% );
+      }
+    }
+
+    &.color-laboratory {
+
+      .inner {
+        background: $laboratory;
+      }
+
+      &:hover .inner {
+        background: lighten( $laboratory, 10% );
+      }
+    }
+
+    &.color-exam {
+
+      .inner {
+        background: $exam;
+      }
+
+      &:hover .inner {
+        background: lighten( $exam, 10% );
+      }
+    }
+
+  }
+}

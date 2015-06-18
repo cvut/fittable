@@ -138,13 +138,6 @@
       }
     }
 
-    &:not(.sevendays) {
-
-      .days .day:nth-child(6), .days .day:nth-child(7) {
-        display: none;
-      }
-    }
-
   }
 
   @media #{$large-up} {
@@ -152,6 +145,17 @@
     div.table {
       transition: width $default-anim-speed;
       width: 100%;
+
+      &:not(.days7) {
+        .days .day:nth-child(6), .days .day:nth-child(7) {
+          display: none;
+        }
+      }
+
+      &.days7.vertical div.day {
+        width: 14.28%;
+      }
+
 
       &.cut {
         width: 62%;
