@@ -34,13 +34,7 @@ export default class WeekSwitcher extends Toggleable
         }
 
         // Set a semester name
-        var semestername;
-        if ( this.props.viewDate.month() < 2 )
-            semestername = CP.translate( 'winter_sem', { year: ( parseInt( this.props.viewDate.format( 'YYYY' ) ) - 1 ) + '/' + this.props.viewDate.format( 'YY' ) } );
-        else if ( this.props.viewDate.month() < 10 )
-            semestername = CP.translate( 'summer_sem', { year: ( parseInt( this.props.viewDate.format( 'YYYY' ) ) - 1 ) + '/' + this.props.viewDate.format( 'YY' ) } );
-        else
-            semestername = CP.translate( 'winter_sem', { year: ( this.props.viewDate.format( 'YYYY' ) ) + '/' + new Moment( this.props.viewDate ).add( 1, 'year' ).format( 'YY' ) } );
+        var semestername = this.props.semester;
 
         return <div className="week-switcher hide" ref="rootEl">
             <div className="row selector semester-selector collapse">

@@ -4,6 +4,7 @@
  */
 
 import Moment from '../../../node_modules/moment/moment.js';
+import CP from '../../../node_modules/counterpart/index.js';
 import Hammer from '../../../node_modules/hammerjs/hammer.js';
 
 import Controls from './Controls.component';
@@ -58,6 +59,12 @@ export default class Fittable extends React.Component
 
         // Force a refresh every one minute
         setInterval( this.handleRefreshNeed.bind( this ), 60000 );
+
+        // Initial call of dateChange callback
+        if ( 'dateChange' in this.props.callbacks )
+        {
+            this.props.callbacks.dateChange( this.state.viewDate.toISOString(), this.getSemester( this.state.viewDate ) );
+        }
     }
 
     /**
@@ -191,6 +198,23 @@ export default class Fittable extends React.Component
     }
 
     /**
+     * Gets actual semester name, determined from actual viewDate state.
+     * @returns {string} Semester name
+     */
+    getSemester( viewDate )
+    {
+        var semestername;
+        if ( viewDate.month() < 2 )
+            semestername = CP.translate( 'winter_sem', { year: ( parseInt( viewDate.format( 'YYYY' ) ) - 1 ) + '/' + viewDate.format( 'YY' ) } );
+        else if ( viewDate.month() < 10 )
+            semestername = CP.translate( 'summer_sem', { year: ( parseInt( viewDate.format( 'YYYY' ) ) - 1 ) + '/' + viewDate.format( 'YY' ) } );
+        else
+            semestername = CP.translate( 'winter_sem', { year: ( viewDate.format( 'YYYY' ) ) + '/' + new Moment( viewDate ).add( 1, 'year' ).format( 'YY' ) } );
+
+        return semestername;
+    }
+
+    /**
      * Changes view date to specified moment. The moment should be the beginning of the week.
      * @param {Moment} viewDate New view date
      */
@@ -204,6 +228,12 @@ export default class Fittable extends React.Component
 
         // Update the viewDate state
         this.setState( { viewDate: newdate, waiting: true } );
+
+        // Send new date through callback
+        if ( 'dateChange' in this.props.callbacks )
+        {
+            this.props.callbacks.dateChange( newdate.toISOString(), this.getSemester( newdate ) );
+        }
 
         // Update the data
         this.getWeekEvents();
@@ -335,7 +365,7 @@ export default class Fittable extends React.Component
                 <Error muted={true} shown={this.state.mutedError} type={this.state.errorType} />
 
                 <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind( this )}
-                    onDateChange={this.handleChangeViewDate.bind( this )}
+                    onDateChange={this.handleChangeViewDate.bind( this )} semester={this.getSemester( this.state.viewDate )}
                     onSettingsPanelChange={this.handleChangeSettingsPanel.bind( this )}
                     onSelDayChange={this.handleChangeSelectedDay.bind( this )} selectedDay={this.state.selectedDay} />
 

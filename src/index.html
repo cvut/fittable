@@ -39,7 +39,7 @@
                 for ( var i = 0; i < 12; i++ )
                 {
                     var date = new Date( from );
-                    var dayrel = Math.random() * 7, hourstart = Math.random() * 11 + 8, len = Math.random() + 1;
+                    var dayrel = Math.random() * 7, hourstart = Math.random() * 11 + 8, len = Math.random() + 2;
                     var startDate = new Date( date );
                     startDate.setDate( date.getDate() + dayrel );
                     startDate.setHours( hourstart );
@@ -143,7 +143,8 @@
         var options = {
             callbacks: {
                 search: searchCallback,
-                data: dataCallback
+                data: dataCallback,
+                dateChange: function( newdate, semester ) { console.log( [ newdate, semester ] ); }
             },
             locale: 'en',
             layout: 'vertical',
