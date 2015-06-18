@@ -1,8 +1,5 @@
 ![fittable widget](http://i.imgur.com/8arGA7B.png)
 
-[![Travis branch master](https://img.shields.io/travis/cvut/fittable-widget/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable-widget)
-[![Code climate](https://img.shields.io/codeclimate/github/cvut/fittable-widget.svg?style=flat-square)](https://codeclimate.com/github/cvut/fittable-widget)
-
 **Fittable widget** is lightweight JavaScript widget used for displaying timetables and calendars for various applications. Offers subtle, flat and intuitive user interface. And it should be **more fittable** than any other timetable widget :blush:
 
 Using JavaScript ES6+ code (converting to ES5 using [https://github.com/6to5/6to5](6to5)) makes the widget ready for new technologies and development trends in JavaScript language.
@@ -38,7 +35,7 @@ $ grunt build
 
 After a successful installation of the widget, include **fittable.min.js** from the dist folder into your project.
 
-```
+```html
 <script type="text/javascript" src="fittable.min.js"></script>
 ```
 
