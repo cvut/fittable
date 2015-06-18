@@ -87,5 +87,26 @@
     },
     "cancelled": "Tato událost byla zrušena",
     "replacement": "Tato událost nahrazuje zrušenou událost z %(date)s"
+  },
+
+  "errors": {
+    "generic_title": "Kalendář nemohl být zobrazen",
+    "generic_desc": "Nastala chyba '%(type)s error' při jeho zobrazování. Omlouváme se za způsobené potíže.",
+    "generic_try": "Zkuste ",
+    "generic_refreshpage": "obnovit stránku",
+    "help_please": "Jsme fakulta plná vývojářů. Nebojte se otevřít JavaScriptovou konzoli a nahlásit nám chybu do ",
+    "help_thanks": " Díky za pomoc.",
+    "access_title": "K tomuto zobrazení nemáte přístup",
+    "access_desc": "Omlouváme se, ale pro zobrazení tohoto pohledu kalendáře nemá váš účet dostatečná oprávnění.",
+    "access_try": "Zkuste se ",
+    "access_trygoback": "vrátit zpět",
+    "connection_title": "Problém s připojením",
+    "connection_desc": "Omlouváme se, ale nedaří se nám stáhnout aktuální data ze serveru. Nebylo ztraceno připojení k Internetu?",
+    "connection_try": "Zkuste ",
+    "connection_refresh": "obnovit stránku",
+    "connection_part_or": ", nebo ",
+    "connection_mutelink": "skryjte chybovou hlášku",
+    "connection_mutelink_partafter": " a pracujte bez připojení.",
+    "connection_muted_message": "Pracujete bez připojení."
   }
 }

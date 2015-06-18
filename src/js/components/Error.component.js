@@ -23,53 +23,46 @@ export default class Error extends React.Component
             {
                 return <div className="error-message">
                     <i className={ 'icon fa ' + 'fa-lock'}></i>
-                    <h2>K tomuto zobrazení nemáte přístup</h2>
-                    <p>Omlouváme se, ale pro zobrazení tohoto pohledu kalendáře nemá váš účet dostatečná oprávnění.
-                        <br />
-                        Zkuste se
-                        <a href="javascript:window.history.back()">vrátit zpět</a>
-                        .</p>
+                    <h2>{CP.translate( 'errors.access_title' )}</h2>
+                    <p>{CP.translate( 'errors.access_desc' )}<br />
+                        {CP.translate( 'errors.access_try' )}
+                        <a href='javascript:window.history.back()'>{CP.translate( 'errors.access_trygoback' )}</a>.
+                    </p>
                 </div>;
             }
             else if ( this.props.type == 'connection' && this.props.muted )
             {
-                return <div className="muted-error-message"> <i className={ 'icon fa ' + 'fa-plug' }></i> Pracujete bez připojení </div>;
+                return <div className="muted-error-message"> <i className={ 'icon fa ' + 'fa-plug' }></i> {CP.translate( 'errors.connection_muted_message' )} </div>;
             }
             else if ( this.props.type == 'connection' )
             {
                 return <div className="error-message">
                     <i className={ 'icon fa ' + 'fa-plug'}></i>
-                    <h2>Problém s připojením</h2>
-                    <p>Omlouváme se, ale nedaří se nám stáhnout aktuální data ze serveru. Nebylo ztraceno připojení k Internetu?
+                    <h2>{CP.translate( 'errors.connection_title' )}</h2>
+                    <p>
+                        {CP.translate( 'errors.connection_desc' )}
                         <br />
-                        Zkuste
-                        <a href="javascript:window.location.reload()">obnovit stránku</a>
-                        ,
-                        nebo
-                        <a href="#error-muted" onClick={this.props.onMute}>skryjte chybovou hlášku</a>
-                        pokud potřebujete dále pracovat bez připojení.</p>
+                        {CP.translate( 'errors.connection_try' )}
+                        <a href='javascript:window.location.reload()'>{CP.translate( 'errors.connection_refresh' )}</a>
+                        {CP.translate( 'errors.connection_part_or' )}
+                        <a href='#error-muted' onClick={this.props.onMute}>{CP.translate( 'errors.connection_mutelink' )}</a>.
+                        {CP.translate( 'errors.connection_mutelink_partafter' )}
+                    </p>
                 </div>;
             }
             else
             {
                 return <div className="error-message">
                     <i className={ 'icon fa ' + 'fa-exclamation-triangle'}></i>
-                    <h2>Kalendář nemohl být zobrazen</h2>
-                    <p>Nastala chyba
-                        <strong>'{this.props.type} error'</strong>
-                        při jeho zobrazování.
-                        Omlouváme se za způsobené potíže.
-                        <br />
-                        Zkuste
-                        <a href="javascript:window.location.reload()">obnovit stránku</a>
-                        .</p>
+                    <h2>{CP.translate( 'errors.generic_title' )}</h2>
+                    <p>{CP.translate( 'errors.generic_desc', { type: this.props.type } )}<br />
+                    {CP.translate( 'errors.generic_try' )}
+                        <a href='javascript:window.location.reload()'>{CP.translate( 'errors.generic_refreshpage' )}</a>
+                    </p>
                     <p className="please">
-                        Jsme fakulta plná vývojářů. Nebojte se otevřít JavaScriptovou konzoli a nahlásit nám chybu do &nbsp;
-                        <a href="https://github.com/cvut/fittable/issues">
-                            <i className="fa fa-github"></i>
-                            issue trackeru</a>
-                        .
-                        Díky za ochotu.
+                        {CP.translate( 'errors.help_please' )}
+                        <a href='https://github.com/cvut/fittable/issues'> <i className='fa fa-github'></i> issue tracker</a>.
+                        {CP.translate( 'errors.help_thanks' )}
                     </p>
                 </div>;
             }
