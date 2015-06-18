@@ -25,9 +25,11 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             'index.html',
+            'landing.html',
             'fittable.js',
             'fittable.css',
-            'react.js'
+            'react.js',
+            './img/'
           ]
         }]
       }
@@ -101,6 +103,18 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      distImgs: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.',
+          dest: 'dist/img',
+          flatten: true,
+          src: [
+            'src/img/*'
+          ]
+        }]
+      },
       dev: {
         files: [{
           expand: true,
@@ -110,8 +124,21 @@ module.exports = function (grunt) {
           flatten: true,
           src: [
             'src/index.html',
+            'src/landing.html',
             'node_modules/react/dist/react.js',
             'node_modules/babel/browser-polyfill.js'
+          ]
+        }]
+      },
+      devImgs: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.',
+          dest: './img/',
+          flatten: true,
+          src: [
+            'src/img/*'
           ]
         }]
       }
@@ -156,6 +183,7 @@ module.exports = function (grunt) {
     'autoprefixer:dev',
     'browserify:dev',
     'copy:dev',
+    'copy:devImgs',
     'watch'
   ]);
 
@@ -165,6 +193,7 @@ module.exports = function (grunt) {
     'autoprefixer:dist',
     'browserify:dist',
     'copy:dist',
+    'copy:distImgs',
     'uglify:dist'
   ]);
 };
