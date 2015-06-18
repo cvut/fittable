@@ -5,7 +5,7 @@
  *  @author Marián Hlaváč
  */
 
-import Fittable from './components/fittable.component';
+import Fittable from './components/Fittable.component';
 
 import Counterpart from '../../node_modules/counterpart/index.js';
 import Moment from '../../node_modules/moment/moment.js';
