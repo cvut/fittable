@@ -129,10 +129,12 @@
     &.cancelled .inner {
       border-top: 3px dashed rgba(white, .5);
       background: $third-color;
+      color: white;
     }
 
     &.replacement .inner {
       border-top: 3px dashed rgba(white, .5);
+      color: white;
     }
 
     .cancelflag, .replaceflag {

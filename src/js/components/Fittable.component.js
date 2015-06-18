@@ -11,6 +11,7 @@ import Timetable from './Timetable.component';
 import DataCache from '../modules/DataCache.module';
 import FunctionsSidebar from './FunctionsSidebar.component';
 import Spinner from './Spinner.component';
+import Error from './Error.component';
 
 export default class Fittable extends React.Component
 {
@@ -41,7 +42,10 @@ export default class Fittable extends React.Component
             functionOpened: null,
             waiting: false,
             options: this.props,
-            searchResults: []
+            searchResults: [],
+            error: false,
+            errorType: null,
+            mutedError: false
         };
 
         // Declare variables
@@ -155,6 +159,30 @@ export default class Fittable extends React.Component
     refresh()
     {
         this.getWeekEvents();
+    }
+
+    /**
+     * Sets error flag and displays error message. The widget will not work anymore, needs reload or calling
+     * the muteError method
+     * @param errorType Type of error. Default is 'generic'
+     */
+    onError( errorType )
+    {
+        this.setState( {
+            error: true,
+            errorType: errorType
+        } );
+    }
+
+    /**
+     * Mutes displayed error
+     */
+    muteError()
+    {
+        this.setState( {
+            error: false,
+            mutedError: true
+        } );
     }
 
     receiveSearchResults( data )
@@ -300,28 +328,40 @@ export default class Fittable extends React.Component
      */
     render()
     {
-        return <div className="fittable-container" ref="rootEl">
+        if ( ! this.state.error )
+        {
+            return <div className="fittable-container" ref="rootEl">
 
-            <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind(this)}
-                onDateChange={this.handleChangeViewDate.bind(this)}
-                onSettingsPanelChange={this.handleChangeSettingsPanel.bind(this)}
-                onSelDayChange={this.handleChangeSelectedDay.bind(this)} selectedDay={this.state.selectedDay} />
+                <Error muted={true} shown={this.state.mutedError} type={this.state.errorType} />
 
-            <div className="clearfix"></div>
+                <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind( this )}
+                    onDateChange={this.handleChangeViewDate.bind( this )}
+                    onSettingsPanelChange={this.handleChangeSettingsPanel.bind( this )}
+                    onSelDayChange={this.handleChangeSelectedDay.bind( this )} selectedDay={this.state.selectedDay} />
 
-            <FunctionsSidebar ref="sidebar" opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
-                onFilterChange={this.handleChangeFilter.bind(this)} onSettingChange={this.handleChangeSetting.bind(this)}
-                onRefreshNeed={this.handleRefreshNeed.bind(this)} options={this.state.options}
-                onSearch={this.search.bind(this)} searchResults={this.state.searchResults} />
+                <div className="clearfix"></div>
 
-            <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}
-                weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
-                functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
-                onViewChange={this.handleChangeView.bind(this)}
-                colored={this.state.options.colors} days7={this.state.options.days7} ref="timetable" />
+                <FunctionsSidebar ref="sidebar" opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
+                    onFilterChange={this.handleChangeFilter.bind( this )} onSettingChange={this.handleChangeSetting.bind( this )}
+                    onRefreshNeed={this.handleRefreshNeed.bind( this )} options={this.state.options}
+                    onSearch={this.search.bind( this )} searchResults={this.state.searchResults} />
 
-            <Spinner show={this.state.waiting} />
-        </div>;
+                <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}
+                    weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
+                    functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
+                    onViewChange={this.handleChangeView.bind( this )}
+                    colored={this.state.options.colors} days7={this.state.options.days7} ref="timetable" />
+
+                <Spinner show={this.state.waiting} />
+
+            </div>;
+        }
+        else
+        {
+            return <div className="fittable-container" ref="rootEl">
+                <Error type={this.state.errorType} onMute={this.muteError.bind(this)} />
+            </div>;
+        }
     }
 }
 

@@ -1,0 +1,46 @@
+#fittable {
+
+  .error-message {
+    width: 60%;
+    margin: 10px auto 60px auto;
+    border-top: 3px solid $primary-color;
+    text-align: center;
+    line-height: 1.85;
+
+    i.icon {
+      margin: 40px 0 20px 0;
+      font-size: 36px;
+      color: $primary-color;
+    }
+
+    h2 {
+      font-size: 25px;
+      color: $primary-color;
+    }
+
+    p.please {
+      margin: 80px auto 0 auto;
+      padding: 25px;
+      display: block;
+      border-top: 1px solid #ccc;
+      width: 60%;
+      font-size: 12px;
+    }
+  }
+
+  .muted-error-message {
+    text-align: center;
+    font-size: 11px;
+    color: white;
+    background: $primary-color;
+    padding: 5px 20px;
+    width: 50%;
+    min-width: 200px;
+    margin: 0 auto;
+
+    i.fa {
+      margin-right: 15px;
+    }
+  }
+
+}
