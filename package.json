@@ -14,9 +14,9 @@
   "scripts": {
     "grunt": "node -e \"require('grunt').tasks(['build']);\"",
     "build": "npm run grunt",
-    "prepublish": "grunt build:npm"
+    "postinstall": "grunt build:npm"
   },
-    "dependencies": {
+  "dependencies": {
     "counterpart": "^0.16.7",
     "font-awesome": "^4.3.0",
     "hammerjs": "^2.0.4",
