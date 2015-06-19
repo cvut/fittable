@@ -374,6 +374,7 @@ export default class Fittable extends React.Component
                 <FunctionsSidebar ref="sidebar" opened={this.state.functionOpened} displayFilter={this.state.displayFilter}
                     onFilterChange={this.handleChangeFilter.bind( this )} onSettingChange={this.handleChangeSetting.bind( this )}
                     onRefreshNeed={this.handleRefreshNeed.bind( this )} options={this.state.options}
+                    onViewChange={this.handleChangeView.bind( this )}
                     onSearch={this.search.bind( this )} searchResults={this.state.searchResults} />
 
                 <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}

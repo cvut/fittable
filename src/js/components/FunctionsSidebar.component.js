@@ -28,7 +28,8 @@ export default class FunctionsSidebar
                                     onLanguageChange={this.props.onRefreshNeed} options={this.props.options} />;
 
         if ( this.props.opened == 'search' )
-            functionToRender = <FunctionSearch ref="functionSearch" onSearch={this.props.onSearch} searchResults={this.props.searchResults} />;
+            functionToRender = <FunctionSearch ref="functionSearch" onSearch={this.props.onSearch}
+                searchResults={this.props.searchResults} onViewChange={this.props.onViewChange} />;
 
         if ( this.props.opened == 'filter' )
             functionToRender = <FunctionFilter ref="functionFilter" displayFilter={this.props.displayFilter} onFilterChange={this.props.onFilterChange} />;
