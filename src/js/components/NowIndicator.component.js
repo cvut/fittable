@@ -3,6 +3,7 @@
  * @author Marián Hlaváč
  */
 
+import React from 'react';
 import Moment from 'moment';
 
 export default class Timetable extends React.Component

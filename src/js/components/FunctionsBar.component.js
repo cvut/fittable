@@ -3,7 +3,7 @@
  * @author Marián Hlaváč
  */
 
-
+import React from 'react';
 
 export default class FunctionsBar extends React.Component
 {

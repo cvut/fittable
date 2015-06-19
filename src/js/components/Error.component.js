@@ -3,6 +3,7 @@
  * @author Marián Hlaváč
  */
 
+import React from 'react';
 import CP from 'counterpart';
 
 export default class Error extends React.Component

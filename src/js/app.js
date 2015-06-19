@@ -5,6 +5,7 @@
  *  @author Marián Hlaváč
  */
 
+import React from 'react';
 import Fittable from './components/Fittable.component';
 
 import Counterpart from 'counterpart';

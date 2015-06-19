@@ -3,6 +3,7 @@
  * @author Marián Hlaváč
  */
 
+import React from 'react';
 import FunctionSettings from './FunctionSettings.component';
 import FunctionSearch from './FunctionSearch.component';
 import FunctionFilter from './FunctionFilter.component';

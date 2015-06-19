@@ -4,6 +4,7 @@
  * @author Marián Hlaváč
  */
 
+import React from 'react';
 import CP from 'counterpart';
 
 export default class FunctionFilter extends React.Component

@@ -7,6 +7,8 @@
  * @author tobiasahlin.com/spinkit
  */
 
+import React from 'react';
+
 export default class Week extends React.Component
 {
     constructor( props )

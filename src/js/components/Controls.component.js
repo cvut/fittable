@@ -4,6 +4,7 @@
  * @author Marián Hlaváč
  */
 
+import React from 'react';
 import Week from './Week.component';
 import WeekNav from './WeekNav.component';
 import FunctionsBar from './FunctionsBar.component';

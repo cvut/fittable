@@ -3,6 +3,8 @@
  * @author Marián Hlaváč
  */
 
+import React from 'react';
+
 export default class Toggleable extends React.Component
 {
     constructor( props )
