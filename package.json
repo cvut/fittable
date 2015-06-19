@@ -14,7 +14,7 @@
   "scripts": {
     "grunt": "node -e \"require('grunt').tasks(['build']);\"",
     "build": "npm run grunt",
-    "prepublish": "npm run build"
+    "prepublish": "grunt build:npm"
   },
     "dependencies": {
     "counterpart": "^0.16.7",
