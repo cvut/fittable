@@ -30,7 +30,6 @@ module.exports = function (grunt) {
             'landing.html',
             'fittable.js',
             'fittable.css',
-            'react.js',
             './img/'
           ]
         }]
@@ -135,8 +134,6 @@ module.exports = function (grunt) {
           src: [
             'src/index.html',
             'src/landing.html',
-            'node_modules/react/dist/react.js',
-            'node_modules/babel/browser-polyfill.js'
           ]
         }]
       },
@@ -159,7 +156,8 @@ module.exports = function (grunt) {
       options: {
         transform: [ 'babelify' ],
         browserifyOptions: {
-          debug: true
+          debug: true,
+          standalone: 'fittable'
         }
       },
       dev: {
