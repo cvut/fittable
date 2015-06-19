@@ -2,7 +2,7 @@
   "name": "fittable-widget",
   "version": "0.6.0",
   "description": "Flexible calendar widget for fittable written in JavaScript",
-  "main": "dist/fittable.js",
+  "main": "src/js-compiled/app",
   "author": "Marián Hlaváč",
   "repository": {
     "type": "git",
@@ -34,6 +34,11 @@
   "scripts": {
     "grunt": "node -e \"require('grunt').tasks(['build']);\"",
     "build": "npm run grunt",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "grunt-babel": "^4.0.0",
+    "minifyify": "^7.0.1",
+    "uglifyify": "^3.0.1"
   }
 }

@@ -1,7 +1,9 @@
 'use strict';
 
-module.exports = function (grunt) {
+var npmDest = 'dist';
+var entryJS = 'src/js/app.js';
 
+module.exports = function (grunt) {
   // Project configuration
   grunt.initConfig({
 
@@ -97,9 +99,7 @@ module.exports = function (grunt) {
           dest: 'dist',
           flatten: true,
           src: [
-            'src/*.html',
-            'node_modules/react/dist/react.js',
-            'node_modules/babel/browser-polyfill.js'
+            'src/*.html'
           ]
         }]
       },
@@ -112,6 +112,16 @@ module.exports = function (grunt) {
           flatten: true,
           src: [
             'src/img/*'
+          ]
+        }]
+      },
+      npm: {
+        files: [{
+          expand: true,
+          dest: npmDest,
+          cwd: './src',
+          src: [
+            'lang/*'
           ]
         }]
       },
@@ -146,21 +156,46 @@ module.exports = function (grunt) {
 
     // Browserify
     browserify: {
-      dev: {
-        files: {
-          './fittable.js': 'src/js/app.js'
-        }
-      },
-      dist: {
-        files: {
-          'dist/fittable.js': 'src/js/app.js'
-        }
-      },
       options: {
         transform: [ 'babelify' ],
         browserifyOptions: {
           debug: true
         }
+      },
+      dev: {
+        files: {
+          './fittable.js': entryJS
+        }
+      },
+      dist: {
+        files: {
+          'dist/fittable.js': entryJS
+        }
+      },
+      min: {
+        options: {
+          transform: [ 'babelify' ],
+          plugin: [ 'minifyify' ]
+        },
+        files: {
+          'dist/fittable.min.js': entryJS
+        }
+      }
+    },
+
+    // Babel: Used for npm prepublishing, otherwise see browserify
+    babel: {
+      options: {
+        sourceMap: false
+      },
+      npm: {
+        files: [{
+            expand: true,
+            cwd: 'src/js',
+            src: ['**/*.js'],
+            dest: npmDest + '/js',
+            ext: '.js'
+        }]
       }
     },
 
@@ -172,6 +207,7 @@ module.exports = function (grunt) {
         }
       }
     }
+
   });
 
   // Load grunt tasks automatically
@@ -192,8 +228,14 @@ module.exports = function (grunt) {
     'compass:dist',
     'autoprefixer:dist',
     'browserify:dist',
+    'browserify:min',
     'copy:dist',
-    'copy:distImgs',
-    'uglify:dist'
+    'copy:distImgs'
+  ]);
+
+  grunt.registerTask('build:npm', [
+    'build',
+    'babel:npm',
+    'copy:npm'
   ]);
 };
