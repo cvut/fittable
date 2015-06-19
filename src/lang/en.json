@@ -101,7 +101,7 @@
     "access_try": "Try to ",
     "access_trygoback": "go back",
     "connection_title": "Connection problem",
-    "connection_desc": "We are sorry, but we are unable to connect to our server. Are you connected to the Internet?",
+    "connection_desc": "We are sorry, but we are unable to connect to our server. Please check, if you're still connected to the Internet.",
     "connection_try": "Try to ",
     "connection_refresh": "refresh the page",
     "connection_part_or": " or ",

@@ -101,7 +101,7 @@
     "access_try": "Zkuste se ",
     "access_trygoback": "vrátit zpět",
     "connection_title": "Problém s připojením",
-    "connection_desc": "Omlouváme se, ale nedaří se nám stáhnout aktuální data ze serveru. Nebylo ztraceno připojení k Internetu?",
+    "connection_desc": "Omlouváme se, ale nedaří se nám stáhnout aktuální data ze serveru. Zkontrolujte, zdali jste stále připojeni k Internetu.",
     "connection_try": "Zkuste ",
     "connection_refresh": "obnovit stránku",
     "connection_part_or": ", nebo ",
