@@ -6,7 +6,7 @@
  */
 
 // https://babeljs.io/docs/usage/polyfill/
-require('babel/polyfill');
+require('babelify/polyfill');
 
 import React from 'react';
 import Fittable from './components/Fittable.component';
