@@ -14,7 +14,7 @@ import Momentcslocale from 'moment/locale/cs';
 import LocaleCS from '../lang/cs.json';
 import LocaleEN from '../lang/en.json';
 
-global.fittable = function ( containerElId, options )
+function fittable ( containerElId, options )
 {
     // Register translations
     Counterpart.registerTranslations( 'en', LocaleEN );
@@ -33,4 +33,6 @@ global.fittable = function ( containerElId, options )
     // Return fittable instance
     return rendered;
 
-};
+}
+global.fittable = fittable;
+export default fittable;
