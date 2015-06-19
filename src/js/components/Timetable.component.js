@@ -3,9 +3,10 @@
  * @author Marián Hlaváč
  */
 
+import Moment from 'moment';
+
 import Day from './Day.component';
 import NowIndicator from './NowIndicator.component';
-import Moment from '../../../node_modules/moment/moment.js';
 
 export default class Timetable extends React.Component
 {

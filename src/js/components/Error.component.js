@@ -3,7 +3,7 @@
  * @author Marián Hlaváč
  */
 
-import CP from '../../../node_modules/counterpart/index.js';
+import CP from 'counterpart';
 
 export default class Error extends React.Component
 {

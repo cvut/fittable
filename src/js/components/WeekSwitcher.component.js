@@ -5,8 +5,8 @@
  * @author Marián Hlaváč
  */
 
-import Moment from '../../../node_modules/moment/moment.js';
-import CP from '../../../node_modules/counterpart/index.js';
+import Moment from 'moment';
+import CP from 'counterpart';
 
 import Toggleable from './Toggleable.component';
 

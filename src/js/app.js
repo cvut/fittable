@@ -7,9 +7,9 @@
 
 import Fittable from './components/Fittable.component';
 
-import Counterpart from '../../node_modules/counterpart/index.js';
-import Moment from '../../node_modules/moment/moment.js';
-import Momentcslocale from '../../node_modules/moment/locale/cs.js';
+import Counterpart from 'counterpart';
+import Moment from 'moment';
+import Momentcslocale from 'moment/locale/cs';
 
 import LocaleCS from '../lang/cs.json';
 import LocaleEN from '../lang/en.json';

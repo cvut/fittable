@@ -4,8 +4,8 @@
  * @author Marián Hlaváč
  */
 
-import CP from '../../../node_modules/counterpart/index.js';
-import Moment from '../../../node_modules/moment/moment.js';
+import CP from 'counterpart';
+import Moment from 'moment';
 
 export default class FunctionSettings extends React.Component
 {

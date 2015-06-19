@@ -3,9 +3,9 @@
  * @author Marián Hlaváč
  */
 
-import Moment from '../../../node_modules/moment/moment.js';
-import CP from '../../../node_modules/counterpart/index.js';
-import Hammer from '../../../node_modules/hammerjs/hammer.js';
+import Moment from 'moment';
+import CP from 'counterpart';
+import Hammer from 'hammerjs';
 
 import Controls from './Controls.component';
 import Timetable from './Timetable.component';
