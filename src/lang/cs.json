@@ -79,14 +79,15 @@
     "teacher": "Vyučující",
     "students": "Počet přihlášených studentů",
     "room": "Místnost",
-    "number": "č. %(num)s",
+    "number": "paralelka č. %(num)s",
     "students_count": {
       "zero": "Bez studentů",
       "one": "1 student",
       "other": "%(count)s studentů"
     },
     "cancelled": "Tato událost byla zrušena",
-    "replacement": "Tato událost nahrazuje zrušenou událost z %(date)s"
+    "replacement": "Tato událost nahrazuje zrušenou událost z %(date)s",
+    "sequence": "Pořadové číslo"
   },
 
   "errors": {

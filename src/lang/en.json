@@ -79,14 +79,15 @@
     "teacher": "Teacher",
     "students": "Number of signed students",
     "room": "Room",
-    "number": "no. %(num)s",
+    "number": "parallel # %(num)s",
     "students_count": {
       "zero": "No students",
       "one": "One student",
       "other": "%(count)s students"
     },
     "cancelled": "This event has been canceled",
-    "replacement": "This event is replacement for event at %(date)s"
+    "replacement": "This event is replacement for event at %(date)s",
+    "sequence": "Sequence number"
   },
 
   "errors": {

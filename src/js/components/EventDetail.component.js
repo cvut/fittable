@@ -39,29 +39,27 @@ export default class EventDetail extends React.Component
     {
         return <div className="detail">
             <div className="row properties">
-                <div className="column small-6" title={CP.translate( 'detail.parallel' )}>
-                    <i className="fa fa-thumb-tack fa-fw"></i>
-                    <a href="#" onClick={this.handleParallelClick.bind(this, this.props.data.name)}>
-                        {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
-                    </a>
-                </div>
-                <div className="column small-6 text-right" title={CP.translate( 'detail.teacher' )}>
-                    <a href="#" onClick={this.handleTeacherClick.bind(this, this.props.data.details.teacher)}>
-                        {this.props.data.details.teacher}
-                    </a>
-                    <i className="fa fa-male fa-fw"></i>
-                </div>
-            </div>
-            <div className="row properties">
-                <div className="column small-6" title={CP.translate( 'detail.students' )}>
-                    <i className="fa fa-group fa-fw"></i>
-                    {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
+                <div className="column small-6" title={CP.translate( 'detail.sequence' )}>
+                    <i className="fa fa-calendar fa-fw"></i>
+                    {this.props.data.sequenceNumber}. {CP.translate( 'event_type.' + this.props.data.type ).toLowerCase()}
                 </div>
                 <div className="column small-6 text-right" title={CP.translate( 'detail.room' )}>
                     <a href="#" onClick={this.handleRoomClick.bind(this, this.props.data.room)}>
                         {this.props.data.room}
                     </a>
                     <i className="fa fa-map-marker fa-fw"></i>
+                </div>
+            </div>
+            <div className="row properties">
+                <div className="column small-6" title={CP.translate( 'detail.parallel' )}>
+                    <i className="fa fa-thumb-tack fa-fw"></i>
+                    <a href="#" onClick={this.handleParallelClick.bind(this, this.props.data.name)}>
+                        {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
+                    </a>
+                </div>
+                <div className="column small-6 text-right" title={CP.translate( 'detail.students' )}>
+                    {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
+                    <i className="fa fa-group fa-fw"></i>
                 </div>
             </div>
             <hr />
@@ -83,10 +81,27 @@ export default class EventDetail extends React.Component
             </div>
             <div className="row">
                 <div className="column small-12">
-                    <strong>{this.props.data.note}</strong>
+                    <strong>{this.props.data.note.length == 0 ? this.props.data.name : this.props.data.note}</strong>
                     <div className="description">
                         {this.props.data.details.description}
                     </div>
+                </div>
+            </div>
+            <hr />
+            <div className="row teachers" title={CP.translate( 'detail.teacher' )}>
+                <div className="column small-3 text-center">
+                    <i className="fa fa-fw fa-street-view"></i>
+                </div>
+                <div className="column small-9">
+                    {this.props.data.teachers.map( function( teacher ) {
+                        return <div className="teacher" key={teacher}>
+                            <div className="full-name">{teacher}'s full name</div>
+                            <div className="contact">
+                                <a href={'mailto:' + teacher + '@fit.cvut.cz'}>{teacher}@fit.cvut.cz</a><br />
+                                <a href={'http://usermap.fit.cvut.cz/' + teacher }>usermap - {teacher}</a>
+                            </div>
+                        </div>;
+                    }.bind(this) ) }
                 </div>
             </div>
             <div className="clearfix"></div>
