@@ -12,6 +12,8 @@ export default class FunctionSearch extends React.Component
     constructor( props )
     {
         super.constructor( props );
+
+        this.autoSearchTimeout = null;
     }
 
     /**
@@ -27,6 +29,28 @@ export default class FunctionSearch extends React.Component
     handleResultClick( type, id )
     {
         this.props.onViewChange( type, id );
+    }
+
+    handleInputKeyup( e )
+    {
+        if ( e.target.value.length >= 3 )
+        {
+            if ( this.autoSearchTimeout !== null ) clearTimeout( this.autoSearchTimeout );
+
+            this.autoSearchTimeout = setTimeout( () => {
+                this.props.onSearch( this.refs.searchquery.getDOMNode().value );
+            } , 500 );
+        }
+    }
+
+    componentDidMount()
+    {
+        this.refs.searchquery.getDOMNode().addEventListener( 'keyup', this.handleInputKeyup.bind( this ) );
+    }
+
+    componentWillUnmount()
+    {
+        this.refs.searchquery.getDOMNode().removeEventListener( 'keyup', this.handleInputKeyup.bind( this ) );
     }
 
     /**
