@@ -1,5 +1,8 @@
 ![fittable widget](http://i.imgur.com/8arGA7B.png)
 
+[![Travis](https://img.shields.io/travis/cvut/fittable-widget/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable-widget)
+![David](https://img.shields.io/david/cvut/fittable-widget.svg?style=flat-square)
+
 **Fittable widget** is lightweight JavaScript widget used for displaying timetables and calendars for various applications. Offers subtle, flat and intuitive user interface. And it should be **more fittable** than any other timetable widget :blush:
 
 Using JavaScript ES6+ code (converting to ES5 using [https://github.com/6to5/6to5](6to5)) makes the widget ready for new technologies and development trends in JavaScript language.
