@@ -39,5 +39,8 @@
     "load-grunt-tasks": "^0.6.0",
     "minifyify": "^7.0.1",
     "uglifyify": "^3.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://repository.fit.cvut.cz/npm"
   }
 }
