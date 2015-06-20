@@ -10,7 +10,7 @@ pkg-repo-slug() {
 
 is-released() {
     res="$(npm view $1@$2 version 2>/dev/null | head -n 1)"
-    [ $? == 0 ] && [ "$res" == "$2" ]; return 0
+    [ $? == 0 ] && [ "$res" == "$2" ]; return $?
 }
 
 
