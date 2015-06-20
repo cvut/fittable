@@ -42,5 +42,6 @@
   },
   "publishConfig": {
     "registry": "https://repository.fit.cvut.cz/npm"
-  }
+  },
+  "license": "MIT"
 }
