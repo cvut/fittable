@@ -18,3 +18,21 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+@mixin active-light {
+  color: $primary-color;
+  background-color: $body-bg;
+}
+
+@mixin active-dark {
+  color: $body-bg;
+  background-color: $primary-color;
+}
+
+%btn-light {
+  @include active-light;
+}
+
+%btn-dark {
+  @include active-dark;
+}
