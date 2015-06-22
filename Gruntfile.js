@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     concurrent: {
       dev: {
         tasks: [
-          // 'nodemon',               // start server
+          'browserSync',              // start static files server
           'compass:dev',              // start compass watch
           'browserify:dev',           // start watchify
           'shell:bundleMonitoring',   // start monitoring bundle changes
@@ -197,6 +197,21 @@ module.exports = function (grunt) {
       bundleMonitoring: {
         command: 'node_modules/.bin/livereactload monitor ' + devBundle
       }
+    },
+
+    // browserSync: Provides static server and assets reloading
+    browserSync: {
+      bsFiles: {
+          src: [
+            devDest + '/*.css',
+            devDest + '/*.html'
+          ]
+      },
+      options: {
+        server: {
+            baseDir: devDest
+        }
+      }
     }
 
 
@@ -224,4 +239,6 @@ module.exports = function (grunt) {
     'babel:npm',
     'copy:npm'
   ]);
+
+  grunt.registerTask('default', ['dev']);
 };
