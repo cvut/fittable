@@ -2,8 +2,9 @@ language: node_js
 sudo: false
 before_install:
   - npm install -g npm@2.11
+  - gem install bundler
 install:
-  - gem install compass sass-globbing
+  - bundle install
   - npm install
 script:
   - true  # do nothing
