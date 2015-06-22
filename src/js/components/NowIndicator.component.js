@@ -23,7 +23,7 @@ export default class Timetable extends React.Component
 
         var length = nowpoint / this.props.timelineLength;
 
-        var shown = this.props.viewDate.isSame( new Moment(), 'isoWeek' ) && length > 0;
+        var shown = this.props.viewDate.isSame( new Moment(), 'isoWeek' ) && length > 0 && length < 1;
 
         if ( this.props.closestEvent !== null )
             return <div className={'now-indicator' + ( shown ? '' : ' hide')} ref="rootEl" style={{ width: (length * 90 + 10) + '%', height: (length * 90 + 10) + '%' }}>
