@@ -1,0 +1,37 @@
+#fittable {
+  .week-toggle {
+    @extend %btn-dark;
+    @include upcase;
+    float: left;
+    height: $header-elements-weight;
+    position: relative;
+    z-index: 420;
+
+    line-height: $header-elements-weight;
+    padding: 0 18px;
+
+    i.fa {
+      margin: 0 5px;
+    }
+  }
+
+  .week-toggle-inner {
+    display: inline-block;
+    width: 160px;
+  }
+
+  .week-nav {
+    float: left;
+    margin-left: 10px;
+    position: relative;
+    z-index: 420;
+
+    a {
+      display: inline-block;
+      width: $header-elements-weight / 1.25;
+      line-height:  $header-elements-weight;
+      text-align: center;
+      font-size: $large-font-size;
+    }
+  }
+}
