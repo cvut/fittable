@@ -1,0 +1,7 @@
+#fittable {
+  button {
+    @include reset-box-model;
+    @include reset-font;
+    background: none;
+  }
+}
