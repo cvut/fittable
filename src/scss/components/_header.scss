@@ -56,7 +56,7 @@
         z-index: 199;
       }
 
-      a[class*="function"]::before {
+      a[class*="function"] .tooltip {
         @include bold-up-text();
         display: inline-block;
         position: absolute;
@@ -70,23 +70,7 @@
         z-index: 99;
       }
 
-      .flags-function::before {
-        content: 'Příznaky';
-      }
-
-      .filter-function::before {
-        content: 'Filtrovat';
-      }
-
-      .search-function::before {
-        content: 'Vyhledávání';
-      }
-
-      .settings-function::before {
-        content: 'Nastavení';
-      }
-
-      a[class*="function"]:hover::before {
+      a[class*="function"]:hover .tooltip {
         opacity: 1;
         top: -15px;
       }
