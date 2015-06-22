@@ -309,6 +309,9 @@ export default class Fittable extends React.Component
         if ( typeof this.props.callbacks.viewChange == 'undefined' )
             alert( 'You haven\'t set the view changing callback!' );
 
+        // Close all opened functions
+        this.setState( { functionOpened: null } );
+
         this.props.callbacks.viewChange( to, param );
     }
 
