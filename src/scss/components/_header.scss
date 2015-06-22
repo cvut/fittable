@@ -1,9 +1,9 @@
 #fittable {
 
-  div.header {
+  .header {
     position: relative;
 
-    div.function-controls {
+    .function-controls {
       float: right;
       height: $header-elements-weight;
       width: 0;
@@ -37,44 +37,5 @@
       box-shadow: none;
     }
 
-    div.week {
-      float: left;
-      display: inline-block;
-      height: $header-elements-weight;
-      background: $primary-color;
-      color: white;
-      @include bold-up-text;
-      @include background-hover-effect( $primary-color );
-      font-weight: 400;
-      position: relative;
-      z-index: 420;
-
-      a {
-        color: white;
-        padding: 0 18px;
-        line-height: $header-elements-weight;
-        display: inline-block;
-        width: 160px;
-      }
-
-      i.fa {
-        margin: 0 5px;
-      }
-    }
-
-    div.week-nav {
-      float: left;
-      margin-left: 10px;
-      position: relative;
-      z-index: 420;
-
-      a {
-        display: inline-block;
-        width: $header-elements-weight / 1.25;
-        line-height:  $header-elements-weight;
-        text-align: center;
-        font-size: $large-font-size;
-      }
-    }
   }
 }

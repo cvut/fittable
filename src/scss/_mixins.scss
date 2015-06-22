@@ -1,3 +1,7 @@
+@mixin upcase {
+  text-transform: uppercase;
+}
+
 @mixin bold-up-text {
   font-weight: 700;
   text-transform: uppercase;
@@ -27,6 +31,7 @@
 @mixin active-dark {
   color: $body-bg;
   background-color: $primary-color;
+  @include background-hover-effect( $primary-color );
 }
 
 %btn-light {
