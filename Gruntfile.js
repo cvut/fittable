@@ -77,6 +77,7 @@ module.exports = function (grunt) {
           sassDir: 'src/scss',
           cssDir: devDest,
           noLineComments: true,
+          sourcemap: true,
           watch: true
         }
       },
