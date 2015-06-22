@@ -32,6 +32,7 @@
 
                 setTimeout( function() {
                 var data = [];
+                var linknames = { teachers: [ { id: 'novacjo4', name: { cs: 'Josef Novák', en: 'Josef Novák' } } ], courses: [] };
 
                 // Create 12 events...
                 for ( var i = 0; i < 12; i++ )
@@ -64,12 +65,13 @@
                     var cancreplrandomness = Math.random();
 
                     var types = [ "laboratory", "tutorial", "lecture", "exam" ];
-
+                    var coursename = "BI-" + Math.random().toString(36).substring(10).toUpperCase();
 
                     // And add new event to array
                     data[i] = {
                         id: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
-                        name: "BI-" + Math.random().toString(36).substring(10).toUpperCase(),
+                        name: null,
+                        course: coursename,
                         note: "Placeholder event",
                         startsAt: startDate.toISOString(),
                         endsAt: endDate.toISOString(),
@@ -90,11 +92,13 @@
                                 { id: 11111 }
                             ],
                             capacity: 140,
-                            teacher: "novacjo7",
                             parallel: "201",
                             description: randomDescs[ Math.round( Math.random() * (randomDescs.length - 1) ) ]
                         }
                     };
+
+                    // Add link name to course
+                    linknames.courses.push( { id: coursename, name: { cs: 'Český celý název ' + coursename, en: 'English full name of ' + coursename } } );
 
                     if ( data[ i ].cancelled )
                     {
@@ -106,7 +110,7 @@
                 }
 
                 // Return to fittable
-                callback( data );
+                callback( data, linknames );
             }, Math.random() * 1000 );
         };
 

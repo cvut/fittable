@@ -43,13 +43,13 @@ export default class EventBox extends React.Component
             style={{ width: this.props.data._draw_length*100 + "%", height: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%", top: this.props.data._draw_position*100 + "%" }}>
             <div className="inner">
                 <div className="head-space" onClick={this.props.onClick.bind(null, appear == 'hide' ? -1 : this.props.data.id)}></div>
-                <div className="name">{this.props.data.name}</div>
+                <div className="name">{this.props.data.course}</div>
                 <div className="time">{startsAt} - {endsAt}</div>
                 <div className="type">
                     <span className={'short' + ( this.props.colored ? ' hide' : '')}>{CP.translate( 'event_type_short.' + this.props.data.type )}</span>
                     <span className="long">{CP.translate( 'event_type.' + this.props.data.type )}</span>
                 </div>
-                <EventDetail ref="detail" data={this.props.data} onViewChange={this.props.onViewChange} />
+                <EventDetail ref="detail" data={this.props.data} onViewChange={this.props.onViewChange} linkNames={this.props.linkNames} />
                 <div className="cancelflag"><i className="fa fa-ban"></i></div>
                 <div className="replaceflag"><i className="fa fa-umbrella"></i></div>
             </div>

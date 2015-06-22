@@ -37,6 +37,9 @@ export default class EventDetail extends React.Component
      */
     render()
     {
+        var courseName = this.props.linkNames[CP.getLocale()]['courses'][this.props.data.course];
+        if ( typeof courseName == 'undefined' ) courseName = this.props.data.course;
+
         return <div className="detail">
             <div className="row properties">
                 <div className="column small-6" title={CP.translate( 'detail.sequence' )}>
@@ -81,7 +84,7 @@ export default class EventDetail extends React.Component
             </div>
             <div className="row">
                 <div className="column small-12">
-                    <strong>{this.props.data.name.length == 0 ? this.props.data.links.course : this.props.data.name}</strong>
+                    <strong>{this.props.data.name !== null ? this.props.data.name : courseName}</strong>
                     <div className="description">
                         {this.props.data.details.description}
                     </div>
@@ -94,8 +97,11 @@ export default class EventDetail extends React.Component
                 </div>
                 <div className="column small-9">
                     {this.props.data.teachers.map( function( teacher ) {
+                        var teacherName = this.props.linkNames[CP.getLocale()]['teachers'][teacher];
+                        if ( typeof teacherName == 'undefined' ) teacherName = teacher;
+
                         return <div className="teacher" key={teacher}>
-                            <div className="full-name">{teacher}'s full name</div>
+                            <div className="full-name">{teacherName}</div>
                             <div className="contact">
                                 <a href={'mailto:' + teacher + '@fit.cvut.cz'}>{teacher}@fit.cvut.cz</a><br />
                                 <a href={'http://usermap.fit.cvut.cz/' + teacher }>usermap - {teacher}</a>

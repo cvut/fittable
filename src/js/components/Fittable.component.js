@@ -53,6 +53,7 @@ export default class Fittable extends React.Component
         // Declare variables
         this.weekEvents = null;
         this.hammer = null;
+        this.linkNames = { cs: { courses: {}, teachers: {} }, en: { courses: {}, teachers: {} } };
 
         // Checks if required callbacks are set
         if ( typeof this.props.callbacks.data == 'undefined' )
@@ -96,9 +97,10 @@ export default class Fittable extends React.Component
      * Callback saving received data from source / cache to weekEvents variable.
      * If the data are from cache, the second argument should be true.
      * @param {Array} data Data array
+     * @param {Array} linksNames Array with full length names for links
      * @param {boolean} alreadyCached The data come from cache and shouldn't be cached again
      */
-    setWeekEvents( data, alreadyCached = false )
+    setWeekEvents( data, linksNames = null, alreadyCached = false )
     {
         // Animate in correct direction
         if ( 'timetable' in this.refs )
@@ -115,6 +117,26 @@ export default class Fittable extends React.Component
             DataCache.cacheData( dateFrom, dateTo, data );
         }
 
+        // Save teachers link names
+        if ( 'teachers' in linksNames )
+        {
+            for ( var tlinkname of linksNames.teachers )
+            {
+                this.addNewLinkName( tlinkname.id, tlinkname.name.cs, 'teachers', 'cs');
+                this.addNewLinkName( tlinkname.id, tlinkname.name.en, 'teachers', 'en');
+            }
+        }
+
+        // Save courses link names
+        if ( 'courses' in linksNames )
+        {
+            for ( var clinkname of linksNames.courses )
+            {
+                this.addNewLinkName( clinkname.id, clinkname.name.cs, 'courses', 'cs');
+                this.addNewLinkName( clinkname.id, clinkname.name.en, 'courses', 'en');
+            }
+        }
+
         // Set the data into state
         if ( Fittable.areDataValid( data ) )
             this.setState( { weekEvents: data, waiting: false, prevViewDate: this.state.viewDate } );
@@ -123,7 +145,6 @@ export default class Fittable extends React.Component
             alert( 'Data invalid!' );
             this.setState( { waiting: false, prevViewDate: this.state.viewDate } );
         } // todo: alert through UI
-
     }
 
     /**
@@ -215,6 +236,11 @@ export default class Fittable extends React.Component
             semestername = CP.translate( 'winter_sem', { year: ( viewDate.format( 'YYYY' ) ) + '/' + new Moment( viewDate ).add( 1, 'year' ).format( 'YY' ) } );
 
         return semestername;
+    }
+
+    addNewLinkName( key, name, type, locale )
+    {
+        this.linkNames[locale][type][key] = name;
     }
 
     /**
@@ -386,7 +412,7 @@ export default class Fittable extends React.Component
                 <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}
                     weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
                     functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
-                    onViewChange={this.handleChangeView.bind( this )}
+                    onViewChange={this.handleChangeView.bind( this )} linkNames={this.linkNames}
                     colored={this.state.options.colors} days7={this.state.options.days7} ref="timetable" />
 
                 <Spinner show={this.state.waiting} />
