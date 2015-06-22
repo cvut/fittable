@@ -1,13 +1,30 @@
 'use strict';
 
 var npmDest = 'dist';
+var buildDest = 'dist';
 var entryJS = 'src/js/app.js';
+var devDest = '.tmp';
+var devBundle = devDest + '/fittable.js';
 
 module.exports = function (grunt) {
   // Project configuration
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
+
+    concurrent: {
+      dev: {
+        tasks: [
+          // 'nodemon',               // start server
+          'compass:dev',              // start compass watch
+          'browserify:dev',           // start watchify
+          'shell:bundleMonitoring',   // start monitoring bundle changes
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
+    },
 
     // Empties folders to start fresh
     clean: {
@@ -25,12 +42,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
-            'index.html',
-            'landing.html',
-            'fittable.js',
-            'fittable.css',
-            './img/'
+            devDest,
           ]
         }]
       }
@@ -41,16 +53,16 @@ module.exports = function (grunt) {
       dev: {
         options: {
           sassDir: 'src/scss',
-          cssDir: './',
-          noLineComments: true
+          cssDir: devDest,
+          noLineComments: true,
+          watch: true
         }
       },
       dist: {
         options: {
           sassDir: 'src/scss',
-          cssDir: 'dist/',
-          noLineComments: true,
-          outputStyle: 'compressed'
+          cssDir: buildDest,
+          environment: 'production'
         }
       }
     },
@@ -78,12 +90,12 @@ module.exports = function (grunt) {
       },
       dev: {
         files: [{
-          src: '*.css'
+          src: devDest + '/*.css'
         }]
       },
       dist: {
         files: [{
-          src: 'dist/*.css'
+          src: buildDest + '/*.css'
         }]
       }
     },
@@ -138,8 +150,16 @@ module.exports = function (grunt) {
         }
       },
       dev: {
-        files: {
-          './fittable.js': entryJS
+        src: entryJS,
+        dest: devBundle,
+        options: {
+          watch: true,
+          keepAlive: true,
+          transform: [[{}, 'babelify'], [{global: true, preventCache: false}, 'livereactload']],
+          browserifyOptions: {
+            debug: true,
+            standalone: 'fittable'
+          }
         }
       },
       dist: {
@@ -173,28 +193,20 @@ module.exports = function (grunt) {
       }
     },
 
-    // Uglify
-    uglify: {
-      dist: {
-        files: {
-          'dist/fittable.min.js': [ 'dist/react.js', 'dist/browser-polyfill.js', 'dist/fittable.js' ]
-        }
+    shell: {
+      bundleMonitoring: {
+        command: 'node_modules/.bin/livereactload monitor ' + devBundle
       }
     }
+
 
   });
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', [
-    'clean:dev',
-    'compass:dev',
-    'autoprefixer:dev',
-    'browserify:dev',
-    'copy:dev',
-    'copy:devImgs',
-    'watch'
+  grunt.registerTask('dev', [
+    'concurrent:dev'
   ]);
 
   grunt.registerTask('build', [
