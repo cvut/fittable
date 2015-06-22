@@ -37,43 +37,6 @@
       box-shadow: none;
     }
 
-    div.functions-bar {
-      float: right;
-      display: inline-block;
-      height: $header-elements-weight;
-      padding-right: 8px;
-      position: relative;
-      @include disable-selection();
-
-      & > a {
-        display: inline-block;
-        padding: 0 8px;
-        height: $header-elements-weight;
-        line-height: $header-elements-weight;
-        position: relative;
-        z-index: 199;
-      }
-
-      a[class*="function"] .tooltip {
-        @include bold-up-text();
-        display: inline-block;
-        position: absolute;
-        top: -5px;
-        text-align: right;
-        line-height: 1;
-        right: 0;
-        opacity: 0;
-        transition: top $default-anim-speed, opacity $default-anim-speed;
-        height: 5px;
-        z-index: 99;
-      }
-
-      a[class*="function"]:hover .tooltip {
-        opacity: 1;
-        top: -15px;
-      }
-    }
-
     div.week {
       float: left;
       display: inline-block;
