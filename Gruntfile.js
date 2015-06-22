@@ -3,7 +3,8 @@
 var npmDest = 'dist';
 var buildDest = 'dist';
 var entryJS = 'src/js/app.js';
-var devDest = '.tmp';
+var devDest = 'dev/';
+var tmpDir = '.tmp';
 var devBundle = devDest + '/fittable.js';
 
 module.exports = function (grunt) {
@@ -13,16 +14,20 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     concurrent: {
+      options: {
+        logConcurrentOutput: true
+      },
       dev: {
         tasks: [
           'browserSync',              // start static files server
           'compass:dev',              // start compass watch
+          'watch:copy:dev',           // copy HTML files
           'browserify:dev',           // start watchify
           'shell:bundleMonitoring',   // start monitoring bundle changes
         ],
-        options: {
-          logConcurrentOutput: true
-        }
+      },
+      dist: {
+
       }
     },
 
@@ -32,7 +37,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            tmpDir,
             'dist/*',
             '!dist/.git*'
           ]
@@ -43,12 +48,14 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             devDest,
+            tmpDir
           ]
         }]
       }
     },
 
     // Compiles Sass to CSS and generates necessary files if requested
+    // autoprefixer is invoked from compass, see config.rb
     compass: {
       dev: {
         options: {
@@ -69,34 +76,9 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      compass: {
-        files: ['src/scss/**/*.scss'],
-        tasks: ['compass:dev', 'autoprefixer:dev']
-      },
-      browserify: {
-        files: ['src/js/**/*.js'],
-        tasks: ['browserify:dev']
-      },
-      copy: {
+      'copy:dev': {
         files: ['src/*.html'],
         tasks: ['copy:dev']
-      }
-    },
-
-    // Add vendor prefixed styles
-    autoprefixer: {
-      options: {
-        browsers: ['last 2 version', 'ie >= 8', 'Android 3'] // add Android 3 for Android 4.3- gradients
-      },
-      dev: {
-        files: [{
-          src: devDest + '/*.css'
-        }]
-      },
-      dist: {
-        files: [{
-          src: buildDest + '/*.css'
-        }]
       }
     },
 
@@ -209,7 +191,7 @@ module.exports = function (grunt) {
       },
       options: {
         server: {
-            baseDir: devDest
+          baseDir: devDest
         }
       }
     }
