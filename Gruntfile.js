@@ -178,7 +178,7 @@ module.exports = function (grunt) {
     // Babel: Used for npm prepublishing, otherwise see browserify
     babel: {
       options: {
-        sourceMap: false
+        sourceMap: true
       },
       npm: {
         files: [{
