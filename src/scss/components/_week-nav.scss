@@ -25,13 +25,13 @@
     margin-left: 10px;
     position: relative;
     z-index: 420;
+  }
 
-    a {
-      display: inline-block;
-      width: $header-elements-weight / 1.25;
-      line-height:  $header-elements-weight;
-      text-align: center;
-      font-size: $large-font-size;
-    }
+  .week-nav-btn {
+    @extend %btn-light;
+    text-align: center;
+    width: $header-elements-weight / 1.25;
+    line-height:  $header-elements-weight;
+    font-size: $large-font-size;
   }
 }
