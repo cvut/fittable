@@ -3,3 +3,5 @@ dist/fittable.js
 dist/fittable.min.js
 script/
 src/
+.tmp/
+docs/
