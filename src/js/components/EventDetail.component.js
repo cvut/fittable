@@ -48,18 +48,18 @@ export default class EventDetail extends React.Component
                         {this.props.data.sequenceNumber}. {CP.translate( 'event_type.' + this.props.data.type ).toLowerCase()}
                     </div>
                     <div className="column small-6 text-right" title={CP.translate( 'detail.room' )}>
-                        <a href="#" onClick={this.handleRoomClick.bind(this, this.props.data.room)}>
+                        <button type="button" onClick={this.handleRoomClick.bind(this, this.props.data.room)}>
                             {this.props.data.room}
-                        </a>
+                        </button>
                         <i className="fa fa-map-marker fa-fw"></i>
                     </div>
                 </div>
                 <div className="row properties">
                     <div className="column small-6" title={CP.translate( 'detail.parallel' )}>
                         <i className="fa fa-thumb-tack fa-fw"></i>
-                        <a href="#" onClick={this.handleParallelClick.bind(this, this.props.data.name)}>
+                        <button type="button" onClick={this.handleParallelClick.bind(this, this.props.data.name)}>
                             {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
-                        </a>
+                        </button>
                     </div>
                     <div className="column small-6 text-right" title={CP.translate( 'detail.students' )}>
                         {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
