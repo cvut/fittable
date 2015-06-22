@@ -3,7 +3,7 @@
 var npmDest = 'dist';
 var buildDest = 'dist';
 var entryJS = 'src/js/app.js';
-var devDest = 'dev/';
+var devDest = 'dev';
 var tmpDir = '.tmp';
 var devBundle = devDest + '/fittable.js';
 
@@ -22,6 +22,7 @@ module.exports = function (grunt) {
           'browserify:dev',           // start watchify
           'compass:dev',              // start compass watch
           'copy:dev',                 // copy HTML files
+          'watch:autoprefixerDev',
           'watch:copyDev',            // watch src files
           'livereactload',            // start monitoring bundle changes
           'browserSync',              // start static files server
@@ -33,7 +34,7 @@ module.exports = function (grunt) {
       },
       dist: {
         tasks: [
-          'compass:dist',
+          'css:dist',
           'browserify:dist',
           'browserify:min',
           'copy:dist',
@@ -76,7 +77,7 @@ module.exports = function (grunt) {
       dev: {
         options: {
           sassDir: 'src/scss',
-          cssDir: devDest,
+          cssDir: tmpDir,
           noLineComments: true,
           sourcemap: true,
           watch: true
@@ -96,6 +97,27 @@ module.exports = function (grunt) {
       'copyDev': {
         files: ['src/*.html'],
         tasks: ['copy:dev']
+      },
+      'autoprefixerDev': {
+        files: [tmpDir + '/*.css'],
+        tasks: ['autoprefixer:dev']
+      }
+    },
+
+    autoprefixer: {
+      dev: {
+        options: {
+          map: true
+        },
+        files: [{
+          src: [tmpDir + '/*.css'],
+          dest: devDest + '/fittable.css'
+        }]
+      },
+      dist: {
+        files: [{
+          src: 'dist/*.css'
+        }]
       }
     },
 
@@ -230,6 +252,11 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dev', [
     'concurrent:dev',
+  ]);
+
+  grunt.registerTask('css:dist', [
+    'compass:dist',
+    'autoprefixer:dist'
   ]);
 
   grunt.registerTask('build', [
