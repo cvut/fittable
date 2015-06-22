@@ -53,25 +53,25 @@ export default class FunctionSettings extends React.Component
                 <div className="column medium-6">
                     <h2>{CP.translate( 'functions.settings.layout' )}</h2>
                     <div className="toggleable-h">
-                        <a href="#" className={ ( this.props.options.layout == 'horizontal' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'horizontal' )} >
+                        <button type="button" className={ ( this.props.options.layout == 'horizontal' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'horizontal' )} >
                             <i className="fa fa-fw fa-th-list"></i>
                             {CP.translate( 'functions.settings.layout_horizontal' )}
-                        </a>
-                        <a href="#" className={ ( this.props.options.layout  == 'vertical' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'vertical' )}>
+                        </button>
+                        <button type="button" className={ ( this.props.options.layout  == 'vertical' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'vertical' )}>
                             <i className="fa fa-fw fa-th"></i>
                             {CP.translate( 'functions.settings.layout_vertical' )}
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div className="column medium-6">
                     <h2>{CP.translate( 'functions.settings.language' )}</h2>
                     <div className="toggleable-h">
-                        <a href="#" className={ ( CP.getLocale() == 'cs' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'cs' )} >
+                        <button type="button" className={ ( CP.getLocale() == 'cs' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'cs' )} >
                             {CP.translate( 'functions.settings.language_czech' )}
-                        </a>
-                        <a href="#" className={ ( CP.getLocale() == 'en' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'en' )}>
+                        </button>
+                        <button type="button" className={ ( CP.getLocale() == 'en' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'en' )}>
                             {CP.translate( 'functions.settings.language_english' )}
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

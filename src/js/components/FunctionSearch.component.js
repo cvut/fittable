@@ -71,10 +71,10 @@ export default class FunctionSearch extends React.Component
                 <ul className="results">
                     {this.props.searchResults.map( function( result ) {
                         return <li key={ 'result-' + result.id }>
-                                <a href="#" onClick={this.handleResultClick.bind( this, result.type, result.id )}>
+                                <button type="button" onClick={this.handleResultClick.bind( this, result.type, result.id )}>
                                     { 'title' in result ? result.title  : result.id }
                                     <div className="subtext">{ 'title' in result ? result.id : '' }</div>
-                                </a>
+                                </button>
                             </li>;
                     }.bind(this) ) }
                 </ul>

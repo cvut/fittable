@@ -32,8 +32,8 @@ export default class WeekNav extends React.Component
     render()
     {
         return <div className="week-nav">
-            <a href="#" className="previous-week" onClick={this.handlePrevClick.bind( this )} title={CP.translate('weekNav.prev')}><i className="fa fa-chevron-left"></i></a>
-            <a href="#" className="next-week" onClick={this.handleNextClick.bind( this )} title={CP.translate('weekNav.next')}><i className="fa fa-chevron-right"></i></a>
+            <button type="button" className="previous-week" onClick={this.handlePrevClick.bind( this )} title={CP.translate('weekNav.prev')}><i className="fa fa-chevron-left"></i></button>
+            <button type="button" className="next-week" onClick={this.handleNextClick.bind( this )} title={CP.translate('weekNav.next')}><i className="fa fa-chevron-right"></i></button>
         </div>;
     }
 }
