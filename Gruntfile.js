@@ -93,24 +93,13 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          dot: true,
-          cwd: '.',
-          dest: 'dist',
-          flatten: true,
+          cwd: 'src/',
+          dest: buildDest,
+          flatten: false,
           src: [
-            'src/*.html'
-          ]
-        }]
-      },
-      distImgs: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '.',
-          dest: 'dist/img',
-          flatten: true,
-          src: [
-            'src/img/*'
+            'index.html',
+            'landing.html',
+            'img/**',
           ]
         }]
       },
@@ -127,28 +116,16 @@ module.exports = function (grunt) {
       dev: {
         files: [{
           expand: true,
-          dot: true,
-          cwd: '.',
-          dest: './',
-          flatten: true,
+          cwd: 'src/',
+          dest: devDest,
+          flatten: false,
           src: [
-            'src/index.html',
-            'src/landing.html',
+            'index.html',
+            'landing.html',
+            'img/**',
           ]
         }]
       },
-      devImgs: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '.',
-          dest: './img/',
-          flatten: true,
-          src: [
-            'src/img/*'
-          ]
-        }]
-      }
     },
 
     // Browserify
