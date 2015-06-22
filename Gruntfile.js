@@ -27,7 +27,18 @@ module.exports = function (grunt) {
         ],
       },
       dist: {
-
+        tasks: [
+          'compass:dist',
+          'browserify:dist',
+          'browserify:min',
+          'copy:dist',
+        ]
+      },
+      npm: {
+        tasks: [
+          'babel:npm',
+          'copy:npm'
+        ]
       }
     },
 
@@ -208,18 +219,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'compass:dist',
-    'autoprefixer:dist',
-    'browserify:dist',
-    'browserify:min',
-    'copy:dist',
-    'copy:distImgs'
+    'concurrent:dist',
   ]);
 
   grunt.registerTask('build:npm', [
     'build',
-    'babel:npm',
-    'copy:npm'
+    'concurrent:npm'
   ]);
 
   grunt.registerTask('default', ['dev']);
