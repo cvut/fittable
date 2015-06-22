@@ -21,7 +21,8 @@ module.exports = function (grunt) {
         tasks: [
           'browserify:dev',           // start watchify
           'compass:dev',              // start compass watch
-          'watch:copyDev',            // copy HTML files
+          'copy:dev',                 // copy HTML files
+          'watch:copyDev',            // watch src files
           'livereactload',            // start monitoring bundle changes
           'browserSync',              // start static files server
         ],
