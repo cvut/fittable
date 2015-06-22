@@ -8,7 +8,7 @@
     @include disable-selection();
 
     .function-btn {
-      display: inline-block;
+      @extend %btn-light;
       padding: 0 8px;
       height: $header-elements-weight;
       line-height: $header-elements-weight;
