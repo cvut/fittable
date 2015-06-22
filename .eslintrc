@@ -1,0 +1,21 @@
+{
+  parser: 'babel-eslint',
+  env: {
+    browser: true,
+    es6: true,
+    node: true //browserify
+  },
+  ecmaFeatures: {
+    modules: true,
+    blockBindings: true,
+    forOf: true,
+    jsx: true,
+    classes: true,
+    arrowFunctions,
+  },
+  rules: {
+    strict: 0,
+    quotes: [1, 'single', 'avoid-escape'],
+    'comma-dangle': 0
+  }
+}

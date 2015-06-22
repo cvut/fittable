@@ -23,7 +23,9 @@ function fittable ( containerElId, options )
     // Register translations
     Counterpart.registerTranslations( 'en', LocaleEN );
     Counterpart.registerTranslations( 'cs', Object.assign( LocaleCS, {
-        counterpart: { pluralize: ( entry, count ) => entry[ (count === 0 && 'zero' in entry) ? 'zero' : (count === 1) ? 'one' : 'other' ] }
+        counterpart: {
+            pluralize: ( entry, count ) => { entry[ (count === 0 && 'zero' in entry) ? 'zero' : (count === 1) ? 'one' : 'other' ] }
+        }
     } ) );
 
     // Set locale
