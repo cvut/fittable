@@ -81,7 +81,7 @@ export default class EventDetail extends React.Component
             </div>
             <div className="row">
                 <div className="column small-12">
-                    <strong>{this.props.data.note.length == 0 ? this.props.data.name : this.props.data.note}</strong>
+                    <strong>{this.props.data.name.length == 0 ? this.props.data.links.course : this.props.data.name}</strong>
                     <div className="description">
                         {this.props.data.details.description}
                     </div>
