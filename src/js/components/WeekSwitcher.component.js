@@ -61,7 +61,7 @@ export default class WeekSwitcher extends Toggleable
                 </div>
             </div>
             {weeks.map( function( week ) {
-                return <div className={'row selector week-selector' + ( activeWeekIdx == weeks.indexOf( week ) ? ' active-week' : '' ) } key={weeks.indexOf( week )}>
+                return <div className={'row selector week-selector' + ( activeWeekIdx == weeks.indexOf( week ) + 1 ? ' active-week' : '' ) } key={weeks.indexOf( week )}>
                     <div className="column small-12">
                         {week.map( function( day ) {
                             return <a href="#" onClick={this.props.onDateChange.bind( this, moments[ weeks.indexOf( week ) ] )} key={weeks.indexOf( week ) + '-' + day}>

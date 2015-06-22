@@ -72,10 +72,12 @@ export default class Fittable extends React.Component
      * Calls external data callback, telling that new data should be grabbed from source. If the required data are
      * present in cache, use them instead of calling data callback.
      */
-    getWeekEvents( )
+    getWeekEvents( viewDate = null )
     {
-        var dateFrom = this.state.viewDate.toISOString();
-        var dateTo = new Moment( this.state.viewDate ).endOf('isoweek').toISOString();
+        var newDate = viewDate == null ? this.state.viewDate : viewDate;
+
+        var dateFrom = newDate.toISOString();
+        var dateTo = new Moment( newDate ).endOf('isoweek').toISOString();
 
         // Try to load data from the cache
         var cacheData = DataCache.lookupCache( dateFrom, dateTo );
@@ -237,7 +239,7 @@ export default class Fittable extends React.Component
         }
 
         // Update the data
-        this.getWeekEvents();
+        this.getWeekEvents( newdate );
     }
 
     /**
