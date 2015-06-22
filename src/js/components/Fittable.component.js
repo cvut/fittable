@@ -243,6 +243,27 @@ export default class Fittable extends React.Component
         this.linkNames[locale][type][key] = name;
     }
 
+    isTargetNodeEvent( target )
+    {
+        var node = target.parentNode;
+        while ( node != null ) {
+            if ( 'classList' in node && node.classList.contains('event') )
+                return true;
+            node = node.parentNode;
+        }
+        return false;
+    }
+
+    handleClick( e )
+    {
+        // Check if user clicked outside of any event
+        if ( ! this.isTargetNodeEvent( e.target ) )
+        {
+            // Close all opened events
+            this.refs.timetable.showDetailOn( -1 );
+        }
+    }
+
     /**
      * Changes view date to specified moment. The moment should be the beginning of the week.
      * @param {Moment} viewDate New view date
@@ -375,6 +396,7 @@ export default class Fittable extends React.Component
     componentDidMount()
     {
         this.registerSwipeListener( this.refs.rootEl.getDOMNode() );
+        this.refs.rootEl.getDOMNode().addEventListener( 'click', this.handleClick.bind( this ) );
     }
 
     /**
@@ -383,6 +405,7 @@ export default class Fittable extends React.Component
     componentWillUnmount()
     {
         this.unregisterSwipeListener();
+        this.refs.rootEl.getDOMNode().removeEventListener( 'click', this.handleClick.bind( this ) );
     }
 
     /**
