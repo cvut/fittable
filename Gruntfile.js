@@ -19,12 +19,16 @@ module.exports = function (grunt) {
       },
       dev: {
         tasks: [
-          'browserSync',              // start static files server
-          'compass:dev',              // start compass watch
-          'watch:copy:dev',           // copy HTML files
           'browserify:dev',           // start watchify
-          'shell:bundleMonitoring',   // start monitoring bundle changes
+          'compass:dev',              // start compass watch
+          'watch:copyDev',            // copy HTML files
+          'livereactload',            // start monitoring bundle changes
+          'browserSync',              // start static files server
         ],
+        options: {
+          logConcurrentOutput: true,
+          limit: Infinity
+        },
       },
       dist: {
         tasks: [
@@ -87,7 +91,7 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      'copy:dev': {
+      'copyDev': {
         files: ['src/*.html'],
         tasks: ['copy:dev']
       }
@@ -186,12 +190,6 @@ module.exports = function (grunt) {
       }
     },
 
-    shell: {
-      bundleMonitoring: {
-        command: 'node_modules/.bin/livereactload monitor ' + devBundle
-      }
-    },
-
     // browserSync: Provides static server and assets reloading
     browserSync: {
       bsFiles: {
@@ -205,7 +203,13 @@ module.exports = function (grunt) {
           baseDir: devDest
         }
       }
-    }
+    },
+
+    shell: {
+      bundleMonitoring: {
+        command: 'node_modules/.bin/livereactload monitor ' + devBundle
+      }
+    },
 
 
   });
@@ -213,8 +217,17 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
+  grunt.registerTask('livereactload', 'Runs LiveReactload monitor.', function() {
+    var lrld = require('livereactload');
+    // var done = this.async();
+    this.async();
+
+    // grunt.log.writeln('Running LiveReactload monitor server...');
+    lrld.monitor(devBundle);
+  });
+
   grunt.registerTask('dev', [
-    'concurrent:dev'
+    'concurrent:dev',
   ]);
 
   grunt.registerTask('build', [
