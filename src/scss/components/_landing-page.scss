@@ -1,4 +1,4 @@
-div#fittable-landing {
+#fittable-landing {
   margin-bottom: 60px;
 
   & > .row {
@@ -19,6 +19,7 @@ div#fittable-landing {
     }
 
     a.button.login {
+      @include button;
       background: #333;
       font-weight: bold;
       margin-bottom: 7px;
