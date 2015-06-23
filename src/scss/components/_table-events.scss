@@ -124,8 +124,9 @@
       width: 300px !important;
       height: auto !important;
       position: relative;
-      z-index: 199;
+      z-index: 999;
       transition: width $event-rollout-anim-speed;
+      overflow: hidden;
 
       div.detail {
         visibility: visible;
@@ -133,10 +134,18 @@
         min-height: 180px;
         height: auto;
         margin: 10px -10px 30px -10px;
+
+        .wrap {
+          width: 240px;
+        }
       }
 
       div.type span.short {
         display: none;
+      }
+
+      div.type {
+        bottom: 10px !important;
       }
     }
 
