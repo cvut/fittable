@@ -230,7 +230,8 @@ module.exports = function (grunt) {
       options: {
         server: {
           baseDir: devDir
-        }
+        },
+        open: false
       }
     },
 
