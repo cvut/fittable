@@ -86,7 +86,8 @@
       "other": "%(count)s students"
     },
     "cancelled": "This event has been canceled",
-    "replacement": "This event is replacement for event at %(date)s",
+    "replaces": "This event is replacement for event at",
+    "replacement": "This cancelled event will be replaced at",
     "sequence": "Sequence number"
   },
 

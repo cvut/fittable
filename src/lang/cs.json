@@ -86,7 +86,8 @@
       "other": "%(count)s studentů"
     },
     "cancelled": "Tato událost byla zrušena",
-    "replacement": "Tato událost nahrazuje zrušenou událost z %(date)s",
+    "replaces": "Tato událost nahrazuje zrušenou událost z",
+    "replacement": "Tato zrušená událost bude nahrazena",
     "sequence": "Pořadové číslo"
   },
 

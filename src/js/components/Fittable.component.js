@@ -468,7 +468,8 @@ export default class Fittable extends React.Component
                     weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
                     functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
                     onViewChange={this.handleChangeView.bind( this )} linkNames={this.linkNames}
-                    colored={this.state.options.colors} days7={this.state.options.days7} ref="timetable" />
+                    colored={this.state.options.colors} days7={this.state.options.days7}
+                    onDateChange={this.handleChangeViewDate.bind( this )} ref="timetable" />
 
                 <Spinner show={this.state.waiting} />
 

@@ -6,6 +6,7 @@
 
 import React from 'react';
 import CP from 'counterpart';
+import Moment from 'moment';
 
 export default class EventDetail extends React.Component
 {
@@ -30,6 +31,13 @@ export default class EventDetail extends React.Component
     {
         e.preventDefault();
         this.props.onViewChange( 'room', room );
+    }
+
+    gotoDate( date, e )
+    {
+        e.preventDefault();
+        this.props.showDetailOn( -1 );
+        this.props.onDateChange( new Moment( date ) );
     }
 
     /**
@@ -71,14 +79,15 @@ export default class EventDetail extends React.Component
                     <div className="column small-12">
                         <strong>
                             <i className="fa fa-ban fa-fw"></i> {CP.translate( 'detail.cancelled' )}
-                        </strong>
+                        </strong><br />
+                            {CP.translate( 'detail.replacement' )} <br /> <a href="#" onClick={this.gotoDate.bind(this, this.props.data.replacedBy)}>{new Moment(this.props.data.replacedBy).format('LLL')}</a>
                         <hr />
                     </div>
                 </div>
                 <div className={'row replacement' + ( this.props.data.replacement ? '' : ' hide')}>
                     <div className="column small-12">
                         <strong>
-                            <i className="fa fa-umbrella fa-fw"></i> {CP.translate( 'detail.replacement', { date: 'N/A' } )}
+                            <i className="fa fa-umbrella fa-fw"></i> {CP.translate( 'detail.replaces' )} <a href="#" onClick={this.gotoDate.bind(this, this.props.data.replaces)}>{new Moment(this.props.data.replaces).format('LLL')}</a>
                         </strong>
                         <hr />
                     </div>

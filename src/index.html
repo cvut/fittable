@@ -107,6 +107,11 @@
                                 startsAt: replaceDate.toISOString()
                             };
                     }
+
+                    if ( data[i].replacement )
+                    {
+                        data[i].replaces = startDate.toISOString();
+                    }
                 }
 
                 // Return to fittable

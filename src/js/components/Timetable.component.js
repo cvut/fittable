@@ -156,7 +156,8 @@ export default class Timetable extends React.Component
                 events={weekEvents[i]} onDetailShow={this.showDetailOn.bind(this)}
                 showDetailOn={this.state.detailShownOn} displayFilter={this.props.displayFilter}
                 onViewChange={this.props.onViewChange} linkNames={this.props.linkNames}
-                active={todayId == i} selected={this.props.selectedDay == i} colored={this.props.colored} /> );
+                active={todayId == i} selected={this.props.selectedDay == i} colored={this.props.colored}
+                onDateChange={this.props.onDateChange} /> );
         }
 
         return <div className={'table ' + (this.state.popupsOpened > 0 ? 'muted ' : '' ) + this.props.layout +

@@ -89,7 +89,7 @@ export default class Day extends React.Component
                     if ( this.props.displayFilter[event.type] == false ) event.appear = 'hide';
                     return <EventBox key={event.id} data={event} detailShown={event.id == this.props.showDetailOn}
                         onClick={this.props.onDetailShow} openFromBottom={this.props.id >= 3} colored={this.props.colored}
-                        onViewChange={this.props.onViewChange} linkNames={this.props.linkNames} />;
+                        onViewChange={this.props.onViewChange} onDateChange={this.props.onDateChange} linkNames={this.props.linkNames} />;
                 }.bind(this) ) }
             </div>
         </div>;
