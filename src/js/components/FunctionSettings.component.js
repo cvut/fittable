@@ -36,6 +36,7 @@ export default class FunctionSettings extends React.Component
 
         CP.setLocale( sel );
         Moment.locale( sel );
+        this.props.onSettingChange( 'locale', sel );
 
         // Force refresh
         this.setState( { } );
