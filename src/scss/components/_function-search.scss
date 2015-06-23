@@ -1,91 +1,78 @@
-#fittable .functions-sidebar {
+#fittable {
 
-  div.function.function-search {
+  .search-form {
+    background: $light-secondary-color;
+    height: 32px;
+    color: white;
+    margin: 20px 0;
 
-    div.search-form {
-      background: $light-secondary-color;
+    input {
+      width: 80%;
+      float: left;
+      margin: 0;
+      background: transparent;
+      color: $primary-color;
+      line-height: 32px;
       height: 32px;
-      color: white;
-      margin: 20px 0;
-
-      input {
-        width: 80%;
-        float: left;
-        margin: 0;
-        background: transparent;
-        color: $primary-color;
-        line-height: 32px;
-        height: 32px;
-        border: 0;
-        padding: 0 5%;
-      }
-
-      button {
-        width: 20%;
-        float: right;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        line-height: 32px;
-        color: $primary-color;
-        background: transparent;
-
-        &:hover {
-          background: $primary-color;
-          color: white;
-        }
-      }
+      border: 0;
+      padding: 0 5%;
     }
 
-    div.search-results {
-      @include disable-selection();
+    button {
+      width: 20%;
+      float: right;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      line-height: 32px;
+      color: $primary-color;
+      background: transparent;
 
-      div.result-category {
-        color: $primary-color;
-        font-weight: bold;
-        text-transform: uppercase;
+      &:hover {
+        background: $primary-color;
+        color: white;
       }
+    }
+  }
 
-      ul.results {
-        list-style: none;
-        margin: 0 0 20px 0;
-        padding: 0;
+  .search-results {
+    @include disable-selection();
+  }
 
-        li {
-          display: block;
-          background: $light-secondary-color;
-          color: $primary-color;
-          font-size: $large-font-size;
-          font-weight: 300;
-          line-height: 1.5;
-          margin-bottom: 2px;
-          transition: color $default-anim-speed, background $default-anim-speed;
+  .search-results-category {
+    color: $primary-color;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 
-          a {
-            display: block;
-            width: 100%;
-            height: 100%;
-            padding: 6px 5%;
-          }
+  .search-results-list {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
 
-          .subtext {
-            font-size: $small-font-size;
-            color: #333;
-          }
+  .search-results-item {
+    display: block;
+    width: 100%;
+    background: $light-secondary-color;
+    color: $primary-color;
+    font-size: $large-font-size;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 2px;
+    transition: color $default-anim-speed, background $default-anim-speed;
+    padding: 6px 5%;
 
-          &:hover {
-            background: $primary-color;
-            color: white;
+    .subtext {
+      font-size: $small-font-size;
+      color: #333;
+    }
 
-            a {
-              color: white;
-            }
+    &:hover {
+      background: $primary-color;
 
-            .subtext {
-              color: white;
-            }
-          }
-        }
+      &, .subtext {
+        color: white;
       }
     }
   }
