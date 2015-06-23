@@ -42,7 +42,7 @@ export default class Fittable extends React.Component
                 lessonDuration: 1.75
             },
             functionOpened: null,
-            waiting: false,
+            waiting: true,
             options: this.props,
             searchResults: [],
             error: false,
@@ -54,19 +54,17 @@ export default class Fittable extends React.Component
         this.weekEvents = null;
         this.hammer = null;
         this.linkNames = { cs: { courses: {}, teachers: {} }, en: { courses: {}, teachers: {} } };
-
-        // Checks if required callbacks are set
-        if ( typeof this.props.callbacks.data == 'undefined' )
-            alert( 'You haven\'t set the data callback!' );
+        this.semesters = null;
 
         // Force a refresh every one minute
         setInterval( this.handleRefreshNeed.bind( this ), 60000 );
 
-        // Initial call of dateChange callback
-        if ( 'dateChange' in this.props.callbacks )
+        // Call for semester data, after finishing, setSemesterData will call for init data
+        if ( 'semesterData' in this.props.callbacks )
         {
-            this.props.callbacks.dateChange( this.state.viewDate.toISOString(), this.getSemester( this.state.viewDate ) );
+            this.props.callbacks.semesterData( this.setSemesterData.bind( this ) );
         }
+        else console.error( 'You forgot to implement the semesterData callback!' );
     }
 
     /**
@@ -170,6 +168,30 @@ export default class Fittable extends React.Component
         }
         else
             return false;
+    }
+
+    setSemesterData( semesters )
+    {
+        this.semesters = semesters;
+        // todo: feed the grid settings with data from semester
+        // todo: create method for determining the semester name from the data
+        this.initialize();
+    }
+
+    initialize()
+    {
+        // Initial call of dateChange callback
+        if ( 'data' in this.props.callbacks )
+        {
+            this.getWeekEvents();
+        }
+        else console.error( 'You forgot to implement the data callback!' );
+
+        // Initial call of dateChange callback
+        if ( 'dateChange' in this.props.callbacks )
+        {
+            this.props.callbacks.dateChange( this.state.viewDate.toISOString(), this.getSemester( this.state.viewDate ) );
+        }
     }
 
     search( query )
@@ -384,12 +406,6 @@ export default class Fittable extends React.Component
         this.hammer.destroy();
     }
 
-    componentWillMount()
-    {
-        // Get week events
-        this.getWeekEvents();
-    }
-
     /**
      * Component mounting
      */
@@ -413,6 +429,14 @@ export default class Fittable extends React.Component
      */
     render()
     {
+        // Grid settings
+        var gridsettings = {
+            starts: this.state.grid.starts,
+            ends: this.state.grid.ends,
+            lessonDuration: ( ! this.state.options.facultygrid ? 1 : this.state.grid.lessonDuration ),
+            hoursStartsAt1: this.state.options.facultygrid
+        };
+
         if ( ! this.state.error )
         {
             return <div className="fittable-container" ref="rootEl">
@@ -432,7 +456,7 @@ export default class Fittable extends React.Component
                     onViewChange={this.handleChangeView.bind( this )}
                     onSearch={this.search.bind( this )} searchResults={this.state.searchResults} />
 
-                <Timetable grid={this.state.grid} viewDate={this.state.viewDate} layout={this.state.options.layout}
+                <Timetable grid={gridsettings} viewDate={this.state.viewDate} layout={this.state.options.layout}
                     weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
                     functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}
                     onViewChange={this.handleChangeView.bind( this )} linkNames={this.linkNames}
@@ -451,4 +475,4 @@ export default class Fittable extends React.Component
     }
 }
 
-Fittable.defaultProps = { callbacks: null, locale: 'en', layout: 'horizontal', colors: false, days7: false };
+Fittable.defaultProps = { callbacks: null, locale: 'en', layout: 'horizontal', colors: false, days7: false, facultygrid: true };

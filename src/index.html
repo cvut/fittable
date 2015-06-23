@@ -114,6 +114,43 @@
             }, Math.random() * 1000 );
         };
 
+        var semesterDataCallback = function( callback ) {
+
+            setTimeout( function() {
+
+                callback( [
+                    {
+                        id: "18000-B142",
+                        semester: "B142",
+                        faculty: 18000,
+                        startsAt: "2015-02-16",
+                        endsAt: "2015-09-21",
+                        examsStartsAt: "2015-05-18",
+                        examsEndsAt: "2015-06-27",
+                        hourDuration: 45,
+                        breakDuration: 15,
+                        dayStartsAtHour: 7.5,
+                        dayEndsAtHour: 21.25
+                    },
+                    {
+                        id: "18000-B151",
+                        semester: "B151",
+                        faculty: 18000,
+                        startsAt: "2015-02-16",
+                        endsAt: "2015-09-21",
+                        examsStartsAt: "2015-05-18",
+                        examsEndsAt: "2015-06-27",
+                        hourDuration: 45,
+                        breakDuration: 15,
+                        dayStartsAtHour: 7.5,
+                        dayEndsAtHour: 21.25
+                    }
+                ] );
+
+            }, Math.random() * 2000 );
+
+        };
+
         var searchCallback = function ( query, callback ) {
 
             setTimeout( function() {
@@ -144,12 +181,14 @@
             callbacks: {
                 search: searchCallback,
                 data: dataCallback,
+                semesterData: semesterDataCallback,
                 dateChange: function( newdate, semester ) { console.log( [ newdate, semester ] ); }
             },
             locale: 'en',
             layout: 'vertical',
             colors: true,
-            days7: false
+            days7: false,
+            facultygrid: false
         };
 
         // Initialize fittable

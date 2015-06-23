@@ -97,6 +97,17 @@ export default class FunctionSettings extends React.Component
                     {CP.translate( 'functions.settings.settings_7day' )}
                 </div>
             </div>
+            <div className="row">
+                <div className="column small-3">
+                    <div className="switch small">
+                        <input id="setting-facultygrid" type="checkbox" checked={this.props.options.facultygrid} />
+                        <label for="setting-facultygrid" onClick={this.handleSettingSelect.bind( this, 'facultygrid', ! this.props.options.facultygrid )}></label>
+                    </div>
+                </div>
+                <div className="column small-9 switch-label">
+                    {CP.translate( 'functions.settings.settings_facultygrid' )}
+                </div>
+            </div>
             <h2>{CP.translate( 'functions.settings.about.title' )}</h2>
             <p>
                 {CP.translate( 'functions.settings.about.description' )}

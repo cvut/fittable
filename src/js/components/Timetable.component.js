@@ -143,7 +143,9 @@ export default class Timetable extends React.Component
         {
             hourlabels.push( <div className="hour-label" key={i} style={{ width: timelineGridLength * 100 + '%',
                 height: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%',
-                top: i * timelineGridLength * 100 + '%' }} > {i+1} </div> );
+                top: i * timelineGridLength * 100 + '%' }} >
+            { this.props.grid.hoursStartsAt1 ? i+1 : i + Math.floor( this.props.grid.starts )}
+            </div> );
         }
 
         // Create days
