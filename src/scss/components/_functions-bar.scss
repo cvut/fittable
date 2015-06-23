@@ -9,7 +9,7 @@
   }
 
   .function-btn {
-    @extend %btn-light;
+    @include active-light-hover;
     padding: 0 8px;
     height: $header-elements-weight;
     line-height: $header-elements-weight;
@@ -49,10 +49,9 @@
       top: - $mobile-heading-height - 10px;
       height: $mobile-heading-height + 10px;
       margin-bottom: - $mobile-heading-height - 10px;
-
-      .function-btn {
-        line-height: $mobile-heading-height + 10px;
-      }
+    }
+    .function-btn {
+      line-height: $mobile-heading-height + 10px;
     }
   }
 
@@ -64,6 +63,7 @@
 
     .function-btn {
       font-size: 18px;
+      background: $light-secondary-color;
       line-height: $mobile-heading-height;
       padding: 0 18px;
     }
