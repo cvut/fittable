@@ -25,7 +25,7 @@ export default class Week extends React.Component
     handleClick()
     {
         this.props.onClick();
-        this.setState( !this.state.open );
+        this.setState( {open: !this.state.open} );
     }
 
     dayOfWeek() {
