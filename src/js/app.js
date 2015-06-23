@@ -5,8 +5,11 @@
  *  @author Marián Hlaváč
  */
 
+try {
 // https://babeljs.io/docs/usage/polyfill/
 require('babel/polyfill');
+}
+catch(e) { console.warn(e); }
 
 import React from 'react';
 import Fittable from './components/Fittable.component';
