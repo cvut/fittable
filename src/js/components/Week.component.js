@@ -50,7 +50,7 @@ export default class Week extends React.Component
     render()
     {
         return <button type="button" className="week-toggle date-selection" onClick={this.handleClick.bind(this)}>
-                <span class="week-toggle-inner">
+                <span className="week-toggle-inner">
                 <strong className="week-toggle-dow">{this.dayOfWeek()}</strong>{' '}
                 <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
                 <span className="week-toggle-parity">{this.weekParity()}</span>
