@@ -22,7 +22,7 @@ export default class WeekSwitcher extends Toggleable
         };
     }
 
-    renderSemesterControl() {
+    renderSemesterSelector() {
         // Set a semester name
         let semesterName = this.props.semester;
         let viewMoment = this.viewDateMoment();
@@ -44,7 +44,7 @@ export default class WeekSwitcher extends Toggleable
                </div>;
     }
 
-    renderWeekControl() {
+    renderMonthSelector() {
         let viewMoment = this.viewDateMoment();
 
         return <div className="row selector month-selector collapse">
@@ -113,8 +113,8 @@ export default class WeekSwitcher extends Toggleable
         }
 
         return <div className="week-switcher hide" ref="rootEl">
-            {this.renderSemesterControl()}
-            {this.renderWeekControl()}
+            {this.renderSemesterSelector()}
+            {this.renderMonthSelector()}
             {weeks.map( function( week ) {
                 return <div className={'row selector week-selector ' + activeWeekClass(week) } key={weeks.indexOf( week )}>
                     <div className="column small-12">
