@@ -91,7 +91,8 @@ export default class WeekSwitcher extends Toggleable
         }
 
         function activeWeekClass(week) {
-            if( activeWeekIdx === (weeks.indexOf( week )) ) {
+            // FIXME: this behaves differently in development and with Sirius; who's to blame?
+            if( activeWeekIdx === (weeks.indexOf( week ) + 1) ) {
                 return 'active-week';
             }
             else {
