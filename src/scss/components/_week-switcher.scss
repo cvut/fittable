@@ -42,9 +42,17 @@
     }
   }
 
+  .weeksw-semester-selector {
+    margin-bottom: 5px;
+  }
+
+  .weeksw-month-selector {
+    margin-bottom: 17px;
+  }
+
   .weeksw-week-selector {
-    margin-top: 2px;
     @extend %btn-dark;
+    margin-bottom: 2px;
   }
   .weeksw-week-selector.active-week {
     @include active-light;
@@ -67,12 +75,4 @@
     background: rgba(255,255,255,.1);
   }
 
-
-  .selector:nth-child(2) {
-    margin-top: 5px;
-  }
-
-  .selector:nth-child(3) {
-    margin-top: 17px;
-  }
 }
