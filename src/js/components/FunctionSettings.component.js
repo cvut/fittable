@@ -104,10 +104,6 @@ export default class FunctionSettings extends React.Component
             <p>
                 {CP.translate( 'functions.settings.about.usage' )}
             </p>
-            <p>
-                <a href="#">{CP.translate( 'functions.settings.about.faq' )}</a><br />
-                <a href="#">{CP.translate( 'functions.settings.about.help' )}</a>
-            </p>
 
         </div>;
     }
