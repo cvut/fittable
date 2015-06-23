@@ -23,6 +23,20 @@
   user-select: none;
 }
 
+@mixin link {
+  color: $anchor-font-color;
+  line-height: inherit;
+  text-decoration: $anchor-text-decoration;
+
+  &:hover,
+  &:focus {
+    color: $anchor-font-color-hover;
+    @if $anchor-text-decoration-hover != $anchor-text-decoration {
+      text-decoration: $anchor-text-decoration-hover;
+    }
+  }
+}
+
 @mixin active-light {
   color: $primary-color;
   background-color: $body-bg;
@@ -40,4 +54,8 @@
 %btn-dark {
   @include active-dark;
   @include background-hover-effect( $primary-color );
+}
+
+%btn-link {
+  @include link;
 }
