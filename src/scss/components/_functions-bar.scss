@@ -30,7 +30,7 @@
       z-index: 99;
     }
 
-    .function-btn .tooltip {
+    .function-btn:hover .tooltip {
       opacity: 1;
       top: -15px;
     }
