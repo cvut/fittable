@@ -1,17 +1,21 @@
-div#fittable .week-switcher {
-  position: absolute;
-  top: 35px;
-  background: $primary-color;
-  width: 240px;
-  height: 240px;
-  z-index: 390;
-  padding: 20px $column-gutter/2;
-  opacity: 1;
-  transition: opacity $default-anim-speed, height $default-anim-speed;
-  @include disable-selection();
-  outline: 1px solid white;
+#fittable {
 
-  &.hide {
+  .weeksw {
+    @include active-dark;
+    @include disable-selection();
+    position: absolute;
+    top: 35px;
+    width: 240px;
+    height: 240px;
+    z-index: 390;
+    padding: 20px $column-gutter/2;
+    opacity: 1;
+    transition: opacity $default-anim-speed, height $default-anim-speed;
+    outline: 1px solid white;
+  }
+
+  // FIXME: this overrides foundation class; perhaps use a better class name?
+  .weeksw.hide {
     display: block !important;
     visibility: hidden;
     opacity: 0;
@@ -20,21 +24,17 @@ div#fittable .week-switcher {
     overflow: hidden;
   }
 
-  .selector a {
-    color: white;
-  }
-
-  .semester-selector, .month-selector {
-    .column {
-      text-align: center;
-    }
+  .weeksw-semester-selector,
+  .weeksw-month-selector {
+    text-align: center;
 
     .active-item {
       color: white;
       font-weight: bold;
     }
 
-    .gr-go a {
+    .gr-go-btn {
+      @extend %btn-dark;
       width: 100%;
       height: 100%;
       display: block;
@@ -42,35 +42,31 @@ div#fittable .week-switcher {
     }
   }
 
-  .week-selector {
+  .weeksw-week-selector {
     margin-top: 2px;
-
-    .day {
-      width: 14.285%;
-      float: left;
-      text-align: center;
-      color: white;
-    }
-
-    .day.in-other {
-      color: rgba(255,255,255,.3);
-    }
-
-    &:not(.active-week):hover .day {
-      background: rgba(255,255,255,.1);
-    }
-
-    &.active-week {
-      .day {
-        background: white;
-        color: $primary-color;
-
-        &.in-other {
-          color: rgba( $primary-color ,.3);
-        }
-      }
+    @extend %btn-dark;
+  }
+  .weeksw-week-selector.active-week {
+    @include active-light;
+    .weeksw-day.in-other {
+      color: rgba( $primary-color ,.3);
     }
   }
+
+  .weeksw-day {
+    display: inline-block;
+    width: 14.285%; // ~ 100 / 7
+    text-align: center;
+  }
+
+  .weeksw-day.in-other {
+    color: rgba(255,255,255,.3);
+  }
+
+  &:not(.active-week):hover .day {
+    background: rgba(255,255,255,.1);
+  }
+
 
   .selector:nth-child(2) {
     margin-top: 5px;

@@ -31,7 +31,6 @@
 @mixin active-dark {
   color: $body-bg;
   background-color: $primary-color;
-  @include background-hover-effect( $primary-color );
 }
 
 %btn-light {
@@ -40,4 +39,5 @@
 
 %btn-dark {
   @include active-dark;
+  @include background-hover-effect( $primary-color );
 }
