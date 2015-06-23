@@ -345,6 +345,12 @@ export default class Fittable extends React.Component
         newOptions[key] = to;
 
         this.setState( { options: newOptions } );
+
+        // Ask for saving the settings through callback
+        if ( 'settingsChange' in this.props.callbacks )
+        {
+            this.props.callbacks.settingsChange( newOptions );
+        }
     }
 
     /**
