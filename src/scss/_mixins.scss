@@ -7,10 +7,18 @@
   text-transform: uppercase;
 }
 
+@mixin color-hover-effect($color) {
+  transition: background .2s;
+
+  &:hover, &:focus {
+    color: lighten( $color, 10% );
+  }
+}
+
 @mixin background-hover-effect($color) {
   transition: background .2s;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: lighten( $color, 4% );
   }
 }
@@ -45,6 +53,11 @@
 @mixin active-dark {
   color: $body-bg;
   background-color: $primary-color;
+}
+
+@mixin active-light-hover {
+  @include active-light;
+  @include color-hover-effect( $primary-color );
 }
 
 @mixin active-dark-hover {
