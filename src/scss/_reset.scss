@@ -5,5 +5,9 @@
     background: none;
     text-align: left;
     -webkit-appearance: none;
+
+    &:focus {
+      outline: 0;
+    }
   }
 }
