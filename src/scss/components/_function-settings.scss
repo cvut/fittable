@@ -1,33 +1,34 @@
-#fittable .functions-sidebar {
-
-  div.function.function-settings {
+#fittable {
+  .function-settings {
     padding-bottom: 30px;
+  }
 
-    div.toggleable-h {
-      margin-bottom: 20px;
-      @include disable-selection();
+  .settings-toggle {
+    margin-bottom: 20px;
+    @include disable-selection();
+  }
 
-      a {
-        display: block;
-        background: $light-secondary-color;
-        padding: 4px 8px;
-        margin-bottom: 1px;
+  .settings-toggle-btn {
+    display: block;
+    width: 100%;
+    background: $light-secondary-color;
+    padding: 4px 8px;
+    margin-bottom: 1px;
 
-        &.active {
-          background: $primary-color;
-          color: white;
-        }
+    &:not(.active):hover {
+      background: $secondary-color;
+    }
 
-        &:not(.active):hover {
-          background: $secondary-color;
-        }
+    &.active {
+      background: $primary-color;
+      color: white;
+    }
 
-        i.fa {
-          margin-right: 13px;
-          font-size: 14px;
-        }
-      }
+
+    i.fa {
+      margin-right: 13px;
+      font-size: 14px;
     }
   }
-}
 
+}
