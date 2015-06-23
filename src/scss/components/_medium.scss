@@ -2,8 +2,6 @@
 /* This file has redundancy please keep this file in sync with contents of _medium-verticality.scss for now.
     Will be fixed soon.   */
 
-$mobile-heading-height: 50px;
-
 @media #{$medium-down} {
 
   #fittable {
@@ -33,14 +31,6 @@ $mobile-heading-height: 50px;
       background: $light-secondary-color;
       position: static;
 
-      div.function.function-search div.search-form {
-        background: white;
-        margin: 0;
-      }
-
-      &.hide {
-        display: none;
-      }
     }
   }
 }

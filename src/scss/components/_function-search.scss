@@ -76,4 +76,12 @@
       }
     }
   }
+
+  @media #{$medium-down} {
+    .search-form {
+      background: white;
+      margin: 0;
+    }
+  }
+
 }
