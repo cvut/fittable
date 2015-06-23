@@ -1,4 +1,4 @@
-footer {
+.fittable-footer {
   line-height: 16px;
   padding: 30px 20px;
   font-size: $base-font-size;
@@ -20,24 +20,23 @@ footer {
     padding: 0;
     vertical-align: middle;
     line-height: 16px;
+  }
 
-    li {
-      margin: 0px 8px;
-      padding: 0;
-      display: inline-block;
-      font-size: $base-font-size;
+  li {
+    margin: 0 8px;
+    padding: 0;
+    display: inline-block;
+    font-size: $base-font-size;
+  }
 
-      a {
-        color: $darkgraytext-color;
-        text-decoration: underline;
-        font-weight: 700;
-        line-height: 16px;
-      }
-
-    }
+  a {
+    color: $darkgraytext-color;
+    font-weight: 700;
+    line-height: 16px;
   }
 
   .build-info {
     margin-top: 6px;
   }
+
 }
