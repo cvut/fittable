@@ -1,12 +1,24 @@
+@mixin upcase {
+  text-transform: uppercase;
+}
+
 @mixin bold-up-text {
   font-weight: 700;
   text-transform: uppercase;
 }
 
+@mixin color-hover-effect($color) {
+  transition: background .2s;
+
+  &:hover, &:focus {
+    color: lighten( $color, 10% );
+  }
+}
+
 @mixin background-hover-effect($color) {
   transition: background .2s;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: lighten( $color, 4% );
   }
 }
@@ -17,4 +29,50 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@mixin link {
+  color: $anchor-font-color;
+  line-height: inherit;
+  text-decoration: $anchor-text-decoration;
+
+  &:hover,
+  &:focus {
+    color: $anchor-font-color-hover;
+    @if $anchor-text-decoration-hover != $anchor-text-decoration {
+      text-decoration: $anchor-text-decoration-hover;
+    }
+  }
+}
+
+@mixin active-light {
+  color: $primary-color;
+  background-color: $body-bg;
+}
+
+@mixin active-dark {
+  color: $body-bg;
+  background-color: $primary-color;
+}
+
+@mixin active-light-hover {
+  @include active-light;
+  @include color-hover-effect( $primary-color );
+}
+
+@mixin active-dark-hover {
+  @include active-dark;
+  @include background-hover-effect( $primary-color );
+}
+
+%btn-light {
+  @include active-light;
+}
+
+%btn-dark {
+  @include active-dark-hover;
+}
+
+%btn-link {
+  @include link;
 }

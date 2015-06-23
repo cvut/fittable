@@ -1,9 +1,9 @@
 #fittable {
 
-  div.header {
+  .header {
     position: relative;
 
-    div.function-controls {
+    .function-controls {
       float: right;
       height: $header-elements-weight;
       width: 0;
@@ -24,94 +24,7 @@
       }
     }
 
-    input.search-input {
-      background: $secondary-color;
-      font-family: $body-font-family;
-      color: $primary-color;
-      height: $header-elements-weight - 8px;
-      line-height: $header-elements-weight - 8px;
-      margin: 4px 0;
-      padding: 0 8px;
-      width: 100%;
-      border: 0;
-      box-shadow: none;
-    }
-
-    div.functions-bar {
-      float: right;
-      display: inline-block;
-      height: $header-elements-weight;
-      padding-right: 8px;
-      position: relative;
-      @include disable-selection();
-
-      & > a {
-        display: inline-block;
-        padding: 0 8px;
-        height: $header-elements-weight;
-        line-height: $header-elements-weight;
-        position: relative;
-        z-index: 199;
-      }
-
-      a[class*="function"] .tooltip {
-        @include bold-up-text();
-        display: inline-block;
-        position: absolute;
-        top: -5px;
-        text-align: right;
-        line-height: 1;
-        right: 0;
-        opacity: 0;
-        transition: top $default-anim-speed, opacity $default-anim-speed;
-        height: 5px;
-        z-index: 99;
-      }
-
-      a[class*="function"]:hover .tooltip {
-        opacity: 1;
-        top: -15px;
-      }
-    }
-
-    div.week {
-      float: left;
-      display: inline-block;
-      height: $header-elements-weight;
-      background: $primary-color;
-      color: white;
-      @include bold-up-text;
-      @include background-hover-effect( $primary-color );
-      font-weight: 400;
-      position: relative;
-      z-index: 420;
-
-      a {
-        color: white;
-        padding: 0 18px;
-        line-height: $header-elements-weight;
-        display: inline-block;
-        width: 160px;
-      }
-
-      i.fa {
-        margin: 0 5px;
-      }
-    }
-
-    div.week-nav {
-      float: left;
-      margin-left: 10px;
-      position: relative;
-      z-index: 420;
-
-      a {
-        display: inline-block;
-        width: $header-elements-weight / 1.25;
-        line-height:  $header-elements-weight;
-        text-align: center;
-        font-size: $large-font-size;
-      }
-    }
   }
+
+
 }

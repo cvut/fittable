@@ -13,65 +13,129 @@ import Toggleable from './Toggleable.component';
 
 export default class WeekSwitcher extends Toggleable
 {
+
+    /** Returns a Moment factory constructed from this.props.viewDate */
+    viewDateMoment() {
+        let moment = new Moment( this.props.viewDate );
+        return function() {
+            return moment.clone();
+        };
+    }
+
+    renderSemesterSelector() {
+        // Set a semester name
+        let semesterName = this.props.semester;
+        let viewMoment = this.viewDateMoment();
+
+        return <div className="row weeksw-selector weeksw-semester-selector collapse">
+                    <div className="column small-3 gr-go">
+                        <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().subtract( 6, 'months' ), null )}>
+                        <i className="fa fa-chevron-left"></i>
+                        </button>
+                    </div>
+                    <div className="column small-6 active-item">
+                        {semesterName}
+                    </div>
+                    <div className="column small-3 gr-go">
+                        <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().add( 6, 'months' ), null )}>
+                        <i className="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+               </div>;
+    }
+
+    renderMonthSelector() {
+        let viewMoment = this.viewDateMoment();
+
+        return <div className="row weeksw-selector weeksw-month-selector collapse">
+                <div className="column small-3 gr-go">
+                    <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().subtract( 1, 'months' ), null )}>
+                    <i className="fa fa-chevron-left"></i>
+                    </button>
+                </div>
+                <div className="column small-6 active-item">
+                    {viewMoment().format( 'MMMM' )}
+                </div>
+                <div className="column small-3 gr-go">
+                    <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().add( 1, 'months' ), null )}>
+                    <i className="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>;
+    }
+
     /**
      * Renders the component
      */
     render()
     {
+        let viewMoment = this.viewDateMoment();
         var weeks = [ [], [], [], [], [], [], [] ], moments = [ [], [], [], [], [], [], [] ];
-        var monthEnd = new Moment( this.props.viewDate ).endOf( 'month' ).endOf( 'isoWeek' );
-        var weeki = 0, activeWeekIdx = -1;
+        var monthEnd = viewMoment().endOf( 'month' ).endOf( 'isoWeek' );
+        var lastWeekIndex = 0, activeWeekIdx = -1;
 
         // Create weeks of month array
-        for ( var i = new Moment( this.props.viewDate ).startOf( 'month' ).startOf( 'isoWeek' ); i.isBefore( monthEnd ); i.add( 1, 'day' ) )
+        for ( var i = viewMoment().startOf( 'month' ).startOf( 'isoWeek' ), weeki = 0; i.isBefore( monthEnd ); i.add( 1, 'day' ) )
         {
             weeks[ weeki ].push( i.date() );
-            if ( i.isoWeekday() == 7 )
+            if ( i.isoWeekday() === 7 )
             {
                 moments[ weeki ] = new Moment( i ).startOf( 'isoWeek' );
                 weeki++;
             }
-            if ( i.isSame( this.props.viewDate, 'week' ) ) activeWeekIdx = weeki;
+
+            if ( i.isSame( this.props.viewDate, 'week' ) ) {
+                activeWeekIdx = weeki;
+            }
+            lastWeekIndex = weeki;
         }
 
-        // Set a semester name
-        var semestername = this.props.semester;
+        function activeWeekClass(week) {
+            if( activeWeekIdx === (weeks.indexOf( week )) ) {
+                return 'active-week';
+            }
+            else {
+                return '';
+            }
+        }
 
-        return <div className="week-switcher hide" ref="rootEl">
-            <div className="row selector semester-selector collapse">
-                <div className="column small-3 gr-go">
-                    <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).subtract( 6, 'months' ), null )}><i className="fa fa-chevron-left"></i></a>
-                </div>
-                <div className="column small-6 active-item">
-                    {semestername}
-                </div>
-                <div className="column small-3 gr-go">
-                    <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).add( 6, 'months' ), null )}><i className="fa fa-chevron-right"></i></a>
-                </div>
-            </div>
-            <div className="row selector month-selector collapse">
-                <div className="column small-3 gr-go">
-                    <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).subtract( 1, 'months' ), null )}><i className="fa fa-chevron-left"></i></a>
-                </div>
-                <div className="column small-6 active-item">
-                    {this.props.viewDate.format( 'MMMM' )}
-                </div>
-                <div className="column small-3 gr-go">
-                    <a href="#" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).add( 1, 'months' ), null )}><i className="fa fa-chevron-right"></i></a>
-                </div>
-            </div>
+        /**
+         * Whether the given day is within the month of beginning of a given week.
+         * Returns a class if yes.
+         */
+        function dayClass(week, day) {
+            let weekIndex = weeks.indexOf( week );
+
+            // if the day is in first week AND larger than > 7 OR last week AND smaller than 7
+            if( (weekIndex === 0 && day > 7) || ( (weekIndex === (lastWeekIndex - 1)) && day < 7 ) ) {
+                return 'in-other';
+            }
+            else {
+                return '';
+            }
+        }
+
+        function switchWeek(week) {
+            var weekIndex = weeks.indexOf( week );
+            var moment = moments[weekIndex];
+            this.props.onDateChange.call(this, moment);
+        }
+
+        return <div className="weeksw hide" ref="rootEl">
+            {this.renderSemesterSelector()}
+            {this.renderMonthSelector()}
             {weeks.map( function( week ) {
-                return <div className={'row selector week-selector' + ( activeWeekIdx == weeks.indexOf( week ) + 1 ? ' active-week' : '' ) } key={weeks.indexOf( week )}>
+                return <div className={'row weeksw-selector weeksw-week-selector ' + activeWeekClass(week) } key={weeks.indexOf( week )}>
                     <div className="column small-12">
                         {week.map( function( day ) {
-                            return <a href="#" onClick={this.props.onDateChange.bind( this, moments[ weeks.indexOf( week ) ] )} key={weeks.indexOf( week ) + '-' + day}>
-                                    <div className={'day' + ((weeks.indexOf( week ) == 0 && day > 7 )||(weeks.indexOf( week ) == weeki-1 && day < 7) ? ' in-other' : '')}>{day}</div>
-                                </a>;
+                            return <button type="button" className={'weeksw-day ' + dayClass(week, day)}
+                                           onClick={switchWeek.bind(this, week)} key={weeks.indexOf( week ) + '-' + day}>
+                                    {day}
+                                    </button>;
                         }.bind( this ) ) }
                     </div>
                 </div>;
             }.bind( this ) ) }
-
         </div>;
     }
 }

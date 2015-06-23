@@ -42,22 +42,22 @@ export default class FunctionsBar extends React.Component
     render()
     {
         return <div className="functions-bar">
-            <a href="#" className="flags-function">
+            <button type="button" className="function-btn flags-function">
                 <span className="tooltip">{CP.translate( 'functions.flags.name' )}</span>
                 <i className="fa fa-flag"></i>
-            </a>
-            <a href="#" className="filter-function" onClick={this.handleFilterClick.bind(this)}>
+            </button>
+            <button type="button" className="function-btn filter-function" onClick={this.handleFilterClick.bind(this)}>
                 <span className="tooltip">{CP.translate( 'functions.filter.name' )}</span>
                 <i className="fa fa-filter"></i>
-            </a>
-            <a href="#" className="settings-function" onClick={this.handleSettingsClick.bind(this)} onLayoutSelect>
+            </button>
+            <button type="button" className="function-btn settings-function" onClick={this.handleSettingsClick.bind(this)} onLayoutSelect>
                 <span className="tooltip">{CP.translate( 'functions.settings.name' )}</span>
                 <i className="fa fa-cog"></i>
-            </a>
-            <a href="#" className="search-function" onClick={this.handleSearchClick.bind(this)}>
+            </button>
+            <button type="button" className="function-btn search-function" onClick={this.handleSearchClick.bind(this)}>
                 <span className="tooltip">{CP.translate( 'functions.search.name' )}</span>
                 <i className="fa fa-search"></i>
-            </a>
+            </button>
         </div>;
     }
 }

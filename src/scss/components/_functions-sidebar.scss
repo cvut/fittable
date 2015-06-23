@@ -1,0 +1,56 @@
+#fittable {
+  .functions-sidebar {
+    width: 38%;
+    position: absolute;
+    right: 0;
+    padding: 0 0 0 25px;
+    overflow: hidden;
+  }
+
+  .functions-sidebar .wrap {
+    opacity: 1;
+    position: relative;
+    left: 0;
+    transition: left $default-anim-speed, opacity $default-anim-speed;
+    transition-delay: $default-anim-speed / 2;
+  }
+
+
+  .functions-sidebar.hide {
+    display: block;
+    width: 0;
+
+    .wrap {
+      opacity: 0;
+      left: 100px;
+    }
+  }
+
+  .functions-sidebar h2 {
+    color: $primary-color;
+    font-weight: 300;
+    font-size: $xlarge-font-size;
+    margin: 0 0 15px;
+    text-transform: lowercase;
+  }
+
+  .functions-sidebar {
+    @media (min-width: 1100px) {
+      width: 30%;
+    }
+
+    @media #{$xxlarge-up} {
+      width: 25%;
+    }
+
+    @media #{$medium-down} {
+      padding: 30px;
+      float: none;
+      width: 100%;
+      clear: both;
+      border-bottom: 2px solid $primary-color;
+      background: $light-secondary-color;
+      position: static;
+    }
+  }
+}

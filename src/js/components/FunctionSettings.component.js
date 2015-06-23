@@ -52,26 +52,26 @@ export default class FunctionSettings extends React.Component
             <div className="row">
                 <div className="column medium-6">
                     <h2>{CP.translate( 'functions.settings.layout' )}</h2>
-                    <div className="toggleable-h">
-                        <a href="#" className={ ( this.props.options.layout == 'horizontal' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'horizontal' )} >
+                    <div className="settings-toggle toggleable-h">
+                        <button type="button" className={'settings-toggle-btn ' + ( this.props.options.layout == 'horizontal' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'horizontal' )} >
                             <i className="fa fa-fw fa-th-list"></i>
                             {CP.translate( 'functions.settings.layout_horizontal' )}
-                        </a>
-                        <a href="#" className={ ( this.props.options.layout  == 'vertical' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'vertical' )}>
+                        </button>
+                        <button type="button" className={'settings-toggle-btn ' + ( this.props.options.layout  == 'vertical' ? ' active' : '' )} onClick={this.handleSettingSelect.bind( this, 'layout', 'vertical' )}>
                             <i className="fa fa-fw fa-th"></i>
                             {CP.translate( 'functions.settings.layout_vertical' )}
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div className="column medium-6">
                     <h2>{CP.translate( 'functions.settings.language' )}</h2>
-                    <div className="toggleable-h">
-                        <a href="#" className={ ( CP.getLocale() == 'cs' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'cs' )} >
+                    <div className="settings-toggle toggleable-h">
+                        <button type="button" className={'settings-toggle-btn ' + ( CP.getLocale() == 'cs' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'cs' )} >
                             {CP.translate( 'functions.settings.language_czech' )}
-                        </a>
-                        <a href="#" className={ ( CP.getLocale() == 'en' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'en' )}>
+                        </button>
+                        <button type="button" className={'settings-toggle-btn ' + ( CP.getLocale() == 'en' ? ' active' : '' )} onClick={this.handleLanguageSelect.bind( this, 'en' )}>
                             {CP.translate( 'functions.settings.language_english' )}
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@ export default class FunctionSettings extends React.Component
                 <div className="column small-3">
                     <div className="switch small">
                         <input id="setting-colors" type="checkbox" checked={this.props.options.colors} />
-                        <label for="setting-colors" onClick={this.handleSettingSelect.bind( this, 'colors', ! this.props.options.colors )}></label>
+                        <label for="setting-colors" onClick={this.handleSettingSelect.bind( this, 'colors', !this.props.options.colors )}></label>
                     </div>
                 </div>
                 <div className="column small-9 switch-label">
@@ -91,7 +91,7 @@ export default class FunctionSettings extends React.Component
                 <div className="column small-3">
                     <div className="switch small">
                         <input id="setting-days7" type="checkbox" checked={this.props.options.days7} />
-                        <label for="setting-days7" onClick={this.handleSettingSelect.bind( this, 'days7', ! this.props.options.days7 )}></label>
+                        <label for="setting-days7" onClick={this.handleSettingSelect.bind( this, 'days7', !this.props.options.days7 )}></label>
                     </div>
                 </div>
                 <div className="column small-9 switch-label">

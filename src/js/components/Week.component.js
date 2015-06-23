@@ -15,7 +15,7 @@ export default class Week extends React.Component
         super.constructor( props );
 
         this.state = {
-            icon: 'fa fa-caret-down'
+            open: false
         };
     }
 
@@ -25,7 +25,23 @@ export default class Week extends React.Component
     handleClick()
     {
         this.props.onClick();
-        this.setState( { icon: ( this.state.icon == 'fa fa-caret-down' ? 'fa fa-caret-up': 'fa fa-caret-down' ) } );
+        this.setState( {open: !this.state.open} );
+    }
+
+    dayOfWeek() {
+        return new Moment( this.props.viewDate ).isoWeekday( this.props.selectedDay + 1).format('dddd');
+    }
+
+    weekNum() {
+        return CP.translate( 'week', { num: this.props.viewDate.isoWeek() } );
+    }
+
+    weekParity() {
+        return CP.translate( this.props.viewDate.isoWeek() % 2 === 0 ? 'even' : 'odd' );
+    }
+
+    icon() {
+        return this.state.icon ? 'fa fa-caret-up' : 'fa fa-caret-down';
     }
 
     /**
@@ -33,13 +49,13 @@ export default class Week extends React.Component
      */
     render()
     {
-        return <div className="week" title={CP.translate('timetable.actual')}>
-            <a href="#" className="date-selection" onClick={this.handleClick.bind(this)}>
-                <strong className="today">{new Moment( this.props.viewDate ).isoWeekday( this.props.selectedDay + 1).format('dddd')}</strong>
-                <strong className="week-text">{CP.translate( 'week', { num: this.props.viewDate.isoWeek() } )}&nbsp;&nbsp;</strong>
-                <span className="week-parity-text">{CP.translate( this.props.viewDate.isoWeek() % 2 == 0 ? 'even' : 'odd' )}</span>
-                <i className={this.state.icon}></i>
-            </a>
-        </div>;
+        return <button type="button" className="week-toggle date-selection" onClick={this.handleClick.bind(this)}>
+                <span className="week-toggle-inner">
+                <strong className="week-toggle-dow">{this.dayOfWeek()}</strong>{' '}
+                <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
+                <span className="week-toggle-parity">{this.weekParity()}</span>
+                <i className={this.icon()}></i>
+                </span>
+               </button>;
     }
 }

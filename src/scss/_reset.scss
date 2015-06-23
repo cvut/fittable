@@ -1,0 +1,13 @@
+#fittable {
+  button {
+    @include reset-box-model;
+    @include reset-font;
+    background: none;
+    text-align: left;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
