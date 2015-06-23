@@ -13,59 +13,114 @@ import Toggleable from './Toggleable.component';
 
 export default class WeekSwitcher extends Toggleable
 {
+
+    /** Returns a Moment factory constructed from this.props.viewDate */
+    viewDateMoment() {
+        let moment = new Moment( this.props.viewDate );
+        return function() {
+            return moment.clone();
+        };
+    }
+
+    renderSemesterControl() {
+        // Set a semester name
+        let semesterName = this.props.semester;
+        let viewMoment = this.viewDateMoment();
+
+        return <div className="row selector semester-selector collapse">
+                    <div className="column small-3 gr-go">
+                        <button type="button" onClick={this.props.onDateChange.bind( this, viewMoment().subtract( 6, 'months' ), null )}>
+                        <i className="fa fa-chevron-left"></i>
+                        </button>
+                    </div>
+                    <div className="column small-6 active-item">
+                        {semesterName}
+                    </div>
+                    <div className="column small-3 gr-go">
+                        <button type="button" onClick={this.props.onDateChange.bind( this, viewMoment().add( 6, 'months' ), null )}>
+                        <i className="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+               </div>;
+    }
+
+    renderWeekControl() {
+        let viewMoment = this.viewDateMoment();
+
+        return <div className="row selector month-selector collapse">
+                <div className="column small-3 gr-go">
+                    <button type="button" onClick={this.props.onDateChange.bind( this, viewMoment().subtract( 1, 'months' ), null )}>
+                    <i className="fa fa-chevron-left"></i>
+                    </button>
+                </div>
+                <div className="column small-6 active-item">
+                    {viewMoment().format( 'MMMM' )}
+                </div>
+                <div className="column small-3 gr-go">
+                    <button type="button" onClick={this.props.onDateChange.bind( this, viewMoment().add( 1, 'months' ), null )}>
+                    <i className="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>;
+    }
+
     /**
      * Renders the component
      */
     render()
     {
+        let viewMoment = this.viewDateMoment();
         var weeks = [ [], [], [], [], [], [], [] ], moments = [ [], [], [], [], [], [], [] ];
-        var monthEnd = new Moment( this.props.viewDate ).endOf( 'month' ).endOf( 'isoWeek' );
+        var monthEnd = viewMoment().endOf( 'month' ).endOf( 'isoWeek' );
         var weeki = 0, activeWeekIdx = -1;
 
         // Create weeks of month array
-        for ( var i = new Moment( this.props.viewDate ).startOf( 'month' ).startOf( 'isoWeek' ); i.isBefore( monthEnd ); i.add( 1, 'day' ) )
+        for ( var i = viewMoment().startOf( 'month' ).startOf( 'isoWeek' ); i.isBefore( monthEnd ); i.add( 1, 'day' ) )
         {
             weeks[ weeki ].push( i.date() );
-            if ( i.isoWeekday() == 7 )
+            if ( i.isoWeekday() === 7 )
             {
                 moments[ weeki ] = new Moment( i ).startOf( 'isoWeek' );
                 weeki++;
             }
-            if ( i.isSame( this.props.viewDate, 'week' ) ) activeWeekIdx = weeki;
+
+            if ( i.isSame( this.props.viewDate, 'week' ) ) {
+                activeWeekIdx = weeki;
+            }
         }
 
-        // Set a semester name
-        var semestername = this.props.semester;
+        function activeWeekClass(week) {
+            if( activeWeekIdx === (weeks.indexOf( week ) + 1) ) {
+                return 'active-week';
+            }
+            else {
+                return '';
+            }
+        }
+
+        /**
+         * Whether the given day is within the month of beginning of a given week.
+         * Returns a class if yes.
+         */
+        function dayClass(week, day) {
+            let weekIndex = weeks.indexOf( week );
+            if( (day > 7 && weekIndex === 0) || (day < 7 && weekIndex === (week - 1)) ) {
+                return 'in-other';
+            }
+            else {
+                return '';
+            }
+        }
 
         return <div className="week-switcher hide" ref="rootEl">
-            <div className="row selector semester-selector collapse">
-                <div className="column small-3 gr-go">
-                    <button type="button" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).subtract( 6, 'months' ), null )}><i className="fa fa-chevron-left"></i></button>
-                </div>
-                <div className="column small-6 active-item">
-                    {semestername}
-                </div>
-                <div className="column small-3 gr-go">
-                    <button type="button" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).add( 6, 'months' ), null )}><i className="fa fa-chevron-right"></i></button>
-                </div>
-            </div>
-            <div className="row selector month-selector collapse">
-                <div className="column small-3 gr-go">
-                    <button type="button" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).subtract( 1, 'months' ), null )}><i className="fa fa-chevron-left"></i></button>
-                </div>
-                <div className="column small-6 active-item">
-                    {this.props.viewDate.format( 'MMMM' )}
-                </div>
-                <div className="column small-3 gr-go">
-                    <button type="button" onClick={this.props.onDateChange.bind( this, new Moment( this.props.viewDate ).add( 1, 'months' ), null )}><i className="fa fa-chevron-right"></i></button>
-                </div>
-            </div>
+            {this.renderSemesterControl()}
+            {this.renderWeekControl()}
             {weeks.map( function( week ) {
-                return <div className={'row selector week-selector' + ( activeWeekIdx == weeks.indexOf( week ) + 1 ? ' active-week' : '' ) } key={weeks.indexOf( week )}>
+                return <div className={'row selector week-selector ' + activeWeekClass(week) } key={weeks.indexOf( week )}>
                     <div className="column small-12">
                         {week.map( function( day ) {
                             return <button type="button" onClick={this.props.onDateChange.bind( this, moments[ weeks.indexOf( week ) ] )} key={weeks.indexOf( week ) + '-' + day}>
-                                    <div className={'day' + ((weeks.indexOf( week ) == 0 && day > 7 )||(weeks.indexOf( week ) == weeki-1 && day < 7) ? ' in-other' : '')}>{day}</div>
+                                    <div className={'day' + dayClass(week, day)}>{day}</div>
                                 </button>;
                         }.bind( this ) ) }
                     </div>
