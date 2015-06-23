@@ -65,7 +65,7 @@ $mobile-heading-height: 50px;
           padding: 0 18px;
         }
 
-        a[class*="function"]::before {
+        a[class*="function"] .tooltip {
           display: none;
         }
       }
@@ -94,10 +94,15 @@ $mobile-heading-height: 50px;
       clear: both;
       border-bottom: 2px solid $primary-color;
       background: $light-secondary-color;
+      position: static;
 
       div.function.function-search div.search-form {
         background: white;
         margin: 0;
+      }
+
+      &.hide {
+        display: none;
       }
     }
   }
@@ -110,7 +115,7 @@ $mobile-heading-height: 50px;
     div.header {
       div.week {
         float: left;
-        width: 60%;
+        width: 55%;
       }
 
       div.week-nav {

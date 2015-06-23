@@ -456,6 +456,8 @@ export default class Fittable extends React.Component
                     onViewChange={this.handleChangeView.bind( this )}
                     onSearch={this.search.bind( this )} searchResults={this.state.searchResults} />
 
+                <div className="clearfix"></div>
+
                 <Timetable grid={gridsettings} viewDate={this.state.viewDate} layout={this.state.options.layout}
                     weekEvents={this.state.weekEvents} displayFilter={this.state.displayFilter}
                     functionsOpened={this.state.functionOpened} selectedDay={this.state.selectedDay}

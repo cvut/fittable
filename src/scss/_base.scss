@@ -29,10 +29,6 @@ $vertical-layout-day-height: 720px;
 // Other
 $grid-line-width: 1px;
 
-body.with-line {
-  border-top: 3px solid $primary-color;
-}
-
 #fittable {
   position: relative;
 }
@@ -44,6 +40,10 @@ body.with-line {
 
   .row.container.compact {
     max-width: 1850px !important
+  }
+
+  body.with-line {
+    border-top: 3px solid $primary-color;
   }
 }
 
