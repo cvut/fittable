@@ -1,6 +1,6 @@
 #fittable {
   .week-toggle {
-    @extend %btn-dark;
+    @include active-dark-hover;
     @include upcase;
     float: left;
     height: $header-elements-weight;

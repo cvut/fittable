@@ -10,7 +10,7 @@
 @mixin color-hover-effect($color) {
   transition: background .2s;
 
-  &:hover, &:focus {
+  &:hover { // XXX: focus was intentionally omitted so buttons don't keep the color; perhaps we should do sth else
     color: lighten( $color, 10% );
   }
 }
@@ -18,7 +18,7 @@
 @mixin background-hover-effect($color) {
   transition: background .2s;
 
-  &:hover, &:focus {
+  &:hover {
     background-color: lighten( $color, 4% );
   }
 }
