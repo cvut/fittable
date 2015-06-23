@@ -68,10 +68,10 @@ export default class FunctionSearch extends React.Component
             </div>
             <div className="clearfix"></div>
             <div className="search-results" ref="searchResults">
-                <ul className="results">
+                <ul className="search-results-list">
                     {this.props.searchResults.map( function( result ) {
                         return <li key={ 'result-' + result.id }>
-                                <button type="button" onClick={this.handleResultClick.bind( this, result.type, result.id )}>
+                                <button type="button" onClick={this.handleResultClick.bind( this, result.type, result.id )} className="search-results-item">
                                     { 'title' in result ? result.title  : result.id }
                                     <div className="subtext">{ 'title' in result ? result.id : '' }</div>
                                 </button>
