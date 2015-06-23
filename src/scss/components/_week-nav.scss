@@ -42,6 +42,7 @@
       height: $mobile-heading-height + 10px;
       text-align: center;
       line-height: 1;
+      width: 100%;
 
       i.fa {
         display: none;
@@ -53,7 +54,6 @@
       font-size: 18px;
       line-height: 1.3;
       text-transform: lowercase;
-      margin-top: 8px;
     }
 
     .week-toggle-num {
@@ -67,9 +67,9 @@
     }
 
     .week-nav-btn {
+      @include active-dark-hover;
       position: relative;
       top: - $mobile-heading-height - 10px;
-      color: white;
       font-size: 24px;
       line-height: $mobile-heading-height + 10px;
       padding: 0 20px;

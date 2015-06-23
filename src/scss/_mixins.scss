@@ -47,13 +47,17 @@
   background-color: $primary-color;
 }
 
+@mixin active-dark-hover {
+  @include active-dark;
+  @include background-hover-effect( $primary-color );
+}
+
 %btn-light {
   @include active-light;
 }
 
 %btn-dark {
-  @include active-dark;
-  @include background-hover-effect( $primary-color );
+  @include active-dark-hover;
 }
 
 %btn-link {
