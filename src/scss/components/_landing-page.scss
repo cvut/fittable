@@ -20,14 +20,9 @@
 
     a.button.login {
       @include button;
-      background: #333;
       font-weight: bold;
       margin-bottom: 7px;
       display: block;
-
-      &:hover {
-        background: lighten( #333, 20% );
-      }
 
       i.fa {
         margin-right: 15px;
