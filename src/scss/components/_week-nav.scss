@@ -8,7 +8,6 @@
     z-index: 420;
 
     line-height: $header-elements-weight;
-    padding: 0 18px;
 
     i.fa {
       margin: 0 5px;
@@ -18,6 +17,7 @@
   .week-toggle-inner {
     display: inline-block;
     width: 160px;
+    padding: 0 18px;
   }
 
   .week-nav {
@@ -33,5 +33,22 @@
     width: $header-elements-weight / 1.25;
     line-height:  $header-elements-weight;
     font-size: $large-font-size;
+  }
+
+  @media #{$medium-only} {
+    .week-toggle {
+      float: left;
+      width: 60%;
+    }
+    .week-nav {
+        width: 55%;
+    }
+  }
+
+  @media #{$large-up} {
+    .week-toggle-dow {
+      display: none;
+    }
+
   }
 }
