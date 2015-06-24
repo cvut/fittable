@@ -111,8 +111,7 @@ export default class EventDetail extends React.Component
                             return <div className="teacher" key={teacher}>
                                 <div className="full-name">{teacherName}</div>
                                 <div className="contact">
-                                    <a href={'mailto:' + teacher + '@fit.cvut.cz'}>{teacher}@fit.cvut.cz</a><br />
-                                    <a href={'https://usermap.cvut.cz/' + teacher }>usermap - {teacher}</a>
+                                    <a href={'https://usermap.cvut.cz/profile/' + teacher }>{teacher}</a>
                                 </div>
                             </div>;
                         }.bind(this) ) }
