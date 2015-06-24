@@ -9,13 +9,13 @@ layout: page
 [.decimal-nested]
 . bude poskytovat náhled na události (tj. kalendáře) z pohledu:
   .. osoby,
-  .. [p1]#předmětu,#
-  .. [p1]#místnosti.#
+  .. předmětu,
+  .. místnosti.
 
 . bude poskytovat různé módy zobrazení:
   .. rozvrhový (horizontální):
-     ... [p3]#s přepínáním mezi zobrazení 5/7 dní (např. dálkoví studenti mívají výuku i o víkendu),#
-     ... [p2]#s časovou osou podle harmonogramu dané fakulty (_časové_ rozsahy) sloužící jako _pomocné_ vodítko.#
+     ... s přepínáním mezi zobrazení 5/7 dní (např. dálkoví studenti mívají výuku i o víkendu),
+     ... s časovou osou podle harmonogramu dané fakulty (_časové_ rozsahy) sloužící jako _pomocné_ vodítko.
   .. kalendářní:
      ... týdenní (výchozí),
      ... [p2]#měsíční,#
@@ -29,20 +29,20 @@ layout: page
   .. kód předmětu,
   .. místnost (KOSí kód),
   .. čas začátku a konce události,
-  .. typ události ([p3]#barevným rozlišením#),
+  .. typ události (barevným rozlišením),
   .. [p2]#příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).#
 
 . po kliknutí na okénko události se zobrazí detail události obsahující:
-  .. [p1]#celý název předmětu nebo události,#
+  .. celý název předmětu nebo události,
   .. [p1]#odkaz na kalendář předmětu (jen pro P/C/L/J/Z),#
-  .. [p2]#pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),#
+  .. ořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),
   .. číslo paralelky (jen pro P/C/L/J),
-  .. [p1]#odkaz na kalendář místnosti,#
-  .. vyučující/zkoušející/organizátoři události (jeden nebo [p1]#více lidí#):
-     ... [p1]#celé jméno,#
-     ... [p2]#e-mail,#
+  .. odkaz na kalendář místnosti,
+  .. vyučující/zkoušející/organizátoři události (jeden nebo více lidí):
+     ... celé jméno,
+     ... [line-through]#e-mail# (je na Usermapu),
      ... [p1]#odkaz na kalendář,#
-     ... [p3]#(odkaz na Usermap).#
+     ... odkaz na Usermap.
   .. [p3]#seznam studentů v paralelce (jen pro P/C/L):#
      ... [p3]#celé jméno,#
      ... [p3]#uživatelské jméno,#
