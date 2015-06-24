@@ -5,7 +5,7 @@
 
 **Fittable widget** is lightweight JavaScript widget used for displaying timetables and calendars for various applications. Offers subtle, flat and intuitive user interface. And it should be **more fittable** than any other timetable widget :blush:
 
-Using JavaScript ES6+ code (converting to ES5 using [https://github.com/6to5/6to5](6to5)) makes the widget ready for new technologies and development trends in JavaScript language.
+Using JavaScript ES6+ code (converting to ES5 using [babel](https://github.com/babel/babel)) makes the widget ready for new technologies and development trends in+ JavaScript language.
 
 Offers quick implementation into another applications through simple Javascript API layer. For more information how to use this widget, visit [our wiki](https://github.com/cvut/fittable-widget/wiki).
 
