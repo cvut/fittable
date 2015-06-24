@@ -39,7 +39,7 @@ export default class FunctionSearch extends React.Component
 
             this.autoSearchTimeout = setTimeout( () => {
                 this.props.onSearch( this.refs.searchquery.getDOMNode().value );
-            } , 500 );
+            } , 100 );
         }
     }
 
