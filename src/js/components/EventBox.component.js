@@ -65,21 +65,32 @@ export default class EventBox extends React.Component
         return cls.join(' ');
     }
 
+    displayTime(props) {
+        var startsAt = new Moment( this.props.data.startsAt ).format( 'LT' ),
+            endsAt = new Moment( this.props.data.endsAt ).format( 'LT' );
+
+        if(props.detailShown) {
+            return `${startsAt}—${endsAt}`;
+        }
+        else {
+            return `${startsAt}`;
+        }
+    }
+
     /**
      * Renders the component
      */
     render()
     {
         // Generate time strings
-        var startsAt = new Moment( this.props.data.startsAt ).format( 'LT' ),
-            endsAt = new Moment( this.props.data.endsAt ).format( 'LT' );
+
         var appear = this.props.data.appear;
 
         return <div className={this.classNames(this.props)} data-event={this.props.data.id} style={this.style(this.props)}>
             <div className="inner">
                 <div className="head-space" onClick={this.props.onClick.bind(null, appear === 'hide' ? -1 : this.props.data.id)}></div>
                 <div className="name">{this.props.data.course}</div>
-                <div className="time">{startsAt}&mdash;{endsAt}</div>
+                <div className="time">{this.displayTime(this.props)}</div>
                 <div className="type">
                     <span className={'short' + ( this.props.colored ? ' hide' : '')}>{CP.translate( 'event_type_short.' + this.props.data.type )}</span>
                     <span className="long">{CP.translate( 'event_type.' + this.props.data.type )}</span>
