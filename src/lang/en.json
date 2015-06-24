@@ -11,7 +11,7 @@
     "laboratory": "Laboratory",
     "exam": "Exam",
     "assessment": "Assessment",
-    "onetime": "One time event",
+    "course_event": "One-off event",
     "other": "Other"
   },
 
@@ -21,7 +21,7 @@
     "laboratory": "Lab",
     "exam": "Exam",
     "assessment": "As.",
-    "onetime": "Event",
+    "course_event": "Event",
     "other": "Other"
   },
 

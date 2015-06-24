@@ -11,7 +11,7 @@
     "laboratory": "Laboratoř",
     "exam": "Zkouška",
     "assessment": "Obhajoba",
-    "onetime": "Jednorázová akce",
+    "course_event": "Jednorázová akce",
     "other": "Ostatní"
   },
 
@@ -21,7 +21,7 @@
     "laboratory": "Lab",
     "exam": "Zk",
     "assessment": "Obh",
-    "onetime": "Akc",
+    "course_event": "Akc",
     "other": "Jiné"
   },
 

@@ -56,9 +56,9 @@ export default class FunctionFilter extends React.Component
                     <i className="fa fa-check"></i>
                     {CP.translate( 'event_type.assessment' )}
                 </li>
-                <li className={ this.props.displayFilter['onetime'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'onetime')}>
+                <li className={ this.props.displayFilter['course_event'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'course_event')}>
                     <i className="fa fa-check"></i>
-                    {CP.translate( 'event_type.onetime' )}
+                    {CP.translate( 'event_type.course_event' )}
                 </li>
                 <li className={ this.props.displayFilter['other'] ? 'active' : '' } onClick={this.handleToggleFilter.bind(this, 'other')}>
                     <i className="fa fa-check"></i>

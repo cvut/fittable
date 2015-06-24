@@ -33,7 +33,7 @@ export default class Fittable extends React.Component
                 'lecture': true,
                 'exam': true,
                 'assessment': true,
-                'onetime': true,
+                'course_event': true,
                 'other': true
             },
             grid: {
