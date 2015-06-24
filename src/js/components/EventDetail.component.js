@@ -15,7 +15,7 @@ export default class EventDetail extends React.Component
         super.constructor( props );
     }
 
-    handleParallelClick( course, e )
+    handleCourseClick( course, e )
     {
         e.preventDefault();
         this.props.onViewChange( 'course', course );
