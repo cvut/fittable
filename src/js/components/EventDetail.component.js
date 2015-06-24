@@ -65,9 +65,7 @@ export default class EventDetail extends React.Component
                 <div className="row properties">
                     <div className="column small-6" title={CP.translate( 'detail.parallel' )}>
                         <i className="fa fa-thumb-tack fa-fw"></i>
-                        <button type="button" onClick={this.handleParallelClick.bind(this, this.props.data.name)}>
-                            {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
-                        </button>
+                        {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
                     </div>
                     <div className="column small-6 text-right" title={CP.translate( 'detail.students' )}>
                         {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
