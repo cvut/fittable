@@ -238,6 +238,14 @@ export default class Fittable extends React.Component
         } );
     }
 
+    dismissError()
+    {
+        this.setState( {
+            error: false,
+            mutedError: false
+        } );
+    }
+
     receiveSearchResults( data )
     {
         this.setState( { searchResults: data, waiting: false } );
