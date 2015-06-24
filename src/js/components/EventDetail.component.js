@@ -40,6 +40,19 @@ export default class EventDetail extends React.Component
         this.props.onDateChange( new Moment( date ) );
     }
 
+    displayTeacher( props, username )
+    {
+        var teacherName = props.linkNames[CP.getLocale()]['teachers'][username];
+        if ( typeof teacherName == 'undefined' ) teacherName = username;
+
+        return <div className="teacher" key={username}>
+            <div className="full-name">{teacherName}</div>
+            <div className="contact">
+                <a href={'https://usermap.cvut.cz/profile/' + username }>{username}</a>
+            </div>
+        </div>;
+    }
+
     /**
      * Renders the component
      */
@@ -104,17 +117,7 @@ export default class EventDetail extends React.Component
                         <i className="fa fa-fw fa-street-view"></i>
                     </div>
                     <div className="column small-9">
-                        {this.props.data.teachers.map( function( teacher ) {
-                            var teacherName = this.props.linkNames[CP.getLocale()]['teachers'][teacher];
-                            if ( typeof teacherName == 'undefined' ) teacherName = teacher;
-
-                            return <div className="teacher" key={teacher}>
-                                <div className="full-name">{teacherName}</div>
-                                <div className="contact">
-                                    <a href={'https://usermap.cvut.cz/profile/' + teacher }>{teacher}</a>
-                                </div>
-                            </div>;
-                        }.bind(this) ) }
+                        { this.props.data.teachers.map( uname => this.displayTeacher(this.props, uname) ) }
                     </div>
                 </div>
                 <div className="clearfix"></div>
