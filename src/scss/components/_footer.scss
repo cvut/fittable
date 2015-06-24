@@ -1,6 +1,7 @@
 .fittable-footer {
   line-height: 16px;
-  padding: 30px 20px;
+  padding: 0 20px;
+  margin-top: 4em;
   font-size: $base-font-size;
   color: $darkgraytext-color;
 
@@ -33,10 +34,14 @@
     color: $darkgraytext-color;
     font-weight: 700;
     line-height: 16px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .build-info {
-    margin-top: 6px;
+    float: right;
   }
 
 }
