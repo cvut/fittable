@@ -7,6 +7,7 @@
 import React from 'react';
 import CP from 'counterpart';
 import Moment from 'moment';
+import { curry } from 'curry-d';
 
 export default class EventDetail extends React.Component
 {
@@ -21,10 +22,10 @@ export default class EventDetail extends React.Component
         this.props.onViewChange( 'course', course );
     }
 
-    handleTeacherClick( teacher, e )
+    handleTeacherClick( props, teacher, e )
     {
         e.preventDefault();
-        this.props.onViewChange( 'person', teacher );
+        props.onViewChange( 'person', teacher );
     }
 
     handleRoomClick( room, e )
@@ -45,8 +46,11 @@ export default class EventDetail extends React.Component
         var teacherName = props.linkNames[CP.getLocale()]['teachers'][username];
         if ( typeof teacherName == 'undefined' ) teacherName = username;
 
+        // FIXME: button should be a calendar icon, not teacher's name
         return <div className="teacher" key={username}>
-            <div className="full-name">{teacherName}</div>
+            <button type="button" onClick={ curry(this.handleTeacherClick, 3)(props, username) }>
+                <div className="full-name">{teacherName}</div>
+            </button>
             <div className="contact">
                 <a href={'https://usermap.cvut.cz/profile/' + username }>{username}</a>
             </div>
