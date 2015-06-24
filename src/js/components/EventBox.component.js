@@ -19,6 +19,52 @@ export default class EventBox extends React.Component
         };
     }
 
+    style(props) {
+        var length = `${props.data._draw_length*100}%`;
+        var position = `${props.data._draw_position*100}%`;
+        return {
+            width: length,
+            height: length,
+            left: position,
+            top: position,
+        };
+    }
+
+    minimalization(drawLength) {
+        // Determine amount of needed minimalization of text elements in box by its length
+        if ( drawLength <= 0.12 ) {
+            return 'min-light';
+        }
+        if ( drawLength <= 0.10 ) {
+            return 'min-hard';
+        }
+        if ( drawLength <= 0.07 ) {
+            return 'min-all';
+        }
+    }
+
+    classNames(props) {
+        let cls = ['event', props.data.appear, this.minimalization(props.data._draw_length)];
+        if (props.detailShown) {
+            cls.push('detail-shown');
+        }
+        if (props.data.cancelled) {
+            cls.push('cancelled');
+        }
+        if (props.openFromBottom) {
+            cls.push('from-bottom');
+        }
+        if (props.data.replacement) {
+            cls.push('replacement');
+        }
+
+        if(props.colored) {
+            cls.push(`color-${props.data.type}`);
+        }
+
+        return cls.join(' ');
+    }
+
     /**
      * Renders the component
      */
@@ -27,22 +73,11 @@ export default class EventBox extends React.Component
         // Generate time strings
         var startsAt = new Moment( this.props.data.startsAt ).format( 'LT' ),
             endsAt = new Moment( this.props.data.endsAt ).format( 'LT' );
-
         var appear = this.props.data.appear;
 
-        // Determine amount of needed minimalization of text elements in box by its length
-        var minimalization = "";
-        if ( this.props.data._draw_length <= 0.12 ) minimalization = " min-light";
-        if ( this.props.data._draw_length <= 0.10 ) minimalization = " min-hard";
-        if ( this.props.data._draw_length <= 0.07 ) minimalization = " min-all";
-
-        return <div className={ 'event' + ( this.props.detailShown ? ' detail-shown' : '' ) +
-        ( this.props.data.cancelled ? ' cancelled' : '' ) + ( this.props.openFromBottom ? ' from-bottom' : '' )
-        + ( this.props.data.replacement ? ' replacement ' : ' ' ) + appear + minimalization
-        + ( this.props.colored ? ' color-' + this.props.data.type : '' )} data-event={this.props.data.id}
-            style={{ width: this.props.data._draw_length*100 + "%", height: this.props.data._draw_length*100 + "%", left: this.props.data._draw_position*100 + "%", top: this.props.data._draw_position*100 + "%" }}>
+        return <div className={this.classNames(this.props)} data-event={this.props.data.id} style={this.style(this.props)}>
             <div className="inner">
-                <div className="head-space" onClick={this.props.onClick.bind(null, appear == 'hide' ? -1 : this.props.data.id)}></div>
+                <div className="head-space" onClick={this.props.onClick.bind(null, appear === 'hide' ? -1 : this.props.data.id)}></div>
                 <div className="name">{this.props.data.course}</div>
                 <div className="time">{startsAt}&mdash;{endsAt}</div>
                 <div className="type">
