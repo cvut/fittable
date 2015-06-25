@@ -36,10 +36,11 @@ export default class Fittable extends React.Component
                 'course_event': true,
                 'other': true
             },
+            // FIXME: this should be loaded dynamically from Sirius!
             grid: {
                 starts: 7.5,
                 ends: 21.5,
-                lessonDuration: 1.75
+                lessonDuration: 0.875
             },
             functionOpened: null,
             waiting: true,
