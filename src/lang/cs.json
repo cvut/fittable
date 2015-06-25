@@ -53,11 +53,9 @@
       "settings_7day": "Sedmidenní rozvrh",
       "settings_facultygrid": "Mřížka podle času fakulty",
       "about": {
-        "title": "O fittable",
-        "description": "Fittable je volares, tanquam fortis solem. Resistentia congregabos, tanquam bi-color nomen. Sunt fermiumes promissio dexter, rusticus diatriaes.",
-        "usage": "Použito Lorem ipsum (c) 2015, Dolor sit (c) 2011, Amet v2.0 GPL 2013",
-        "faq": "Nejčastěji kladné dotazy (FAQ)",
-        "help": "Nápověda"
+        "title": "",
+        "description": "",
+        "usage": ""
       }
     },
     "search": {

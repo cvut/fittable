@@ -53,11 +53,9 @@
       "settings_7day": "7-day timetable",
       "settings_facultygrid": "Faculty time grid",
       "about": {
-        "title": "About",
-        "description": "Fittable is volares, tanquam fortis solem. Resistentia congregabos, tanquam bi-color nomen. Sunt fermiumes promissio dexter, rusticus diatriaes.",
-        "usage": "Using Lorem ipsum (c) 2015, Dolor sit (c) 2011, Amet v2.0 GPL 2013",
-        "faq": "Frequently asked questions",
-        "help": "Help"
+        "title": "",
+        "description": "",
+        "usage": ""
       }
     },
     "search": {
