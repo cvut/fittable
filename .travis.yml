@@ -9,7 +9,7 @@ install:
 script:
   - true  # do nothing
 after_success:
-  - script/travis-npm-publish.sh
+  - script/travis-npm-publish
 notifications:
   email: false
   slack: rozvoj-fit:oIJm1tjEXhiJLDHvp2ATCZIT
