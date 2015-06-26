@@ -38,8 +38,7 @@ export default class EventDetail extends React.Component
 
     displayTeacher( props, username )
     {
-        var teacherName = props.linkNames[CP.getLocale()]['teachers'][username];
-        if ( typeof teacherName == 'undefined' ) teacherName = username;
+        var teacherName = this.getLinkName('teachers', username);
 
         // FIXME: button should be a calendar icon, not teacher's name
         return <div className="teacher" key={username}>
@@ -52,13 +51,16 @@ export default class EventDetail extends React.Component
         </div>;
     }
 
+    getLinkName(type, key) {
+        return this.props.linkNames[CP.getLocale()][type][key] || key;
+    }
+
     /**
      * Renders the component
      */
     render()
     {
-        var courseName = this.props.linkNames[CP.getLocale()]['courses'][this.props.data.course];
-        if ( typeof courseName == 'undefined' ) courseName = this.props.data.course;
+        var courseName = this.getLinkName('courses', this.props.data.course);
 
         return <div className="detail">
                 <div className="wrap">
