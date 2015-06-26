@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# This script triggers (re)build of the specified repository on Travis CI.
+#
+# Usage:
+#   travis-build-dependent <REPO_SLUG> [<BRANCH>]
+#
+#   REPO_SLUG  the repository to build, typically username/project-name.
+#   BRANCH     the branch to build (default is 'master').
+
+message="Triggered by successful build of $TRAVIS_REPO_SLUG"
+
+repo_slug=$1
+branch=${2:-master}
+
+body="{
+  'request': {
+    'message': '$message',
+    'branch': '$branch'
+  }
+}"
+
+echo "Triggering build of $repo_slug branch $branch on Travis."
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Travis-API-Version: 3" \
+    -H "Authorization: token $TRAVIS_TOKEN" \
+    -d "${body//\'/\"}" \
+    https://api.travis-ci.org/repo/${repo_slug/\//%2F}/requests

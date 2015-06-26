@@ -1,19 +1,19 @@
 #!/bin/bash
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-    echo "This is a pull request, skipping deploy."; exit 0
+    echo "This is a pull request, skipping deploy."; exit 1
 fi
 
 if [ -z "$NPM_TOKEN" ]; then
-    echo "NPM_TOKEN is not set, skipping deploy."; exit 0
+    echo "NPM_TOKEN is not set, skipping deploy."; exit 1
 fi
 
 if [ "$TRAVIS_BRANCH" != "master" ]; then
-    echo "This is not the master branch, skipping deploy."; exit 0
+    echo "This is not the master branch, skipping deploy."; exit 1
 fi
 
 if [ "$TRAVIS_BUILD_NUMBER.1" != "$TRAVIS_JOB_NUMBER" ]; then
-    echo "This is not a first job of the build, skipping deploy."; exit 0
+    echo "This is not a first job of the build, skipping deploy."; exit 1
 fi
 
 

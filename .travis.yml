@@ -8,11 +8,13 @@ install:
   - npm install
 script:
   - true  # do nothing
-after_success:
-  - script/travis-npm-publish
+after_success: |
+  script/travis-npm-publish && \
+  script/travis-trigger-build cvut/fittable master
 notifications:
   email: false
   slack: rozvoj-fit:oIJm1tjEXhiJLDHvp2ATCZIT
 env:
   global:
-    secure: UgTXgzJc9W9Ya3xH6N1jmRD7ojUOnWze5sNrr/7elAfC6asmERQJj9vK3A7Oby0DQekEB1WTH4iBA1uh8/cO/6G5GZqfoDq21acJVW5OtouPWwZSNc7/YUvMHiin7WlhBh9iGZBaZ0fzkaqrOv5daxhVApPwV3uFwECPey4HytA=  # NPM_TOKEN
+    - secure: UgTXgzJc9W9Ya3xH6N1jmRD7ojUOnWze5sNrr/7elAfC6asmERQJj9vK3A7Oby0DQekEB1WTH4iBA1uh8/cO/6G5GZqfoDq21acJVW5OtouPWwZSNc7/YUvMHiin7WlhBh9iGZBaZ0fzkaqrOv5daxhVApPwV3uFwECPey4HytA=  # NPM_TOKEN
+    - secure: SxxazkZH7nRNwUgu+JtQCu41MJkwZYtIz8bgwMRceUudNS/u44qXtBuz64rExoV8NHska0ISls6JlB9ReqiwlGi5nbbW37OkSZ+CcbVAsPQ9+KKCngmgJlVXKkdPZ9tD1av2M1w681tNnRGAiMJTwSyjPm8C7VkPdcL8hLRgBOU=  # TRAVIS_TOKEN
