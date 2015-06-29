@@ -8,7 +8,7 @@ if [ -z "$NPM_TOKEN" ]; then
     echo "NPM_TOKEN is not set, skipping deploy."; exit 1
 fi
 
-if [ "$TRAVIS_BRANCH" != "master" ]; then
+if [ "$TRAVIS_BRANCH" != "master" && "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ]; then
     echo "This is not the master branch, skipping deploy."; exit 1
 fi
 
