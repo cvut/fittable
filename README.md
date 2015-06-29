@@ -13,12 +13,19 @@ Offers quick implementation into another applications through simple Javascript 
 
 ### npm
 
-First, make sure you're equipped with [Node.JS](http://www.nodejs.org) and [npm](http://www.npmjs.com).
+First, make sure you’re equipped with [Node.js](http://www.nodejs.org) and [npm](http://www.npmjs.com).
 
-The widget *will be* published to npm. All you need to do is running this command:
+The widget is currently published only in the CTU’s npm registry at https://repository.fit.cvut.cz/npm.
+This registry is publicly accessible, so you only need to associate it with the `@cvut` scope:
+
+```sh
+$ npm config set @cvut:registry https://repository.fit.cvut.cz/npm
+```
+
+Then you can install the widget:
 
 ```
-$ npm install fittable-widget
+$ npm install @cvut/fittable-widget
 ```
 
 ### from source code
