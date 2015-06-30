@@ -92,25 +92,27 @@
         }
       }
 
-      .teachers {
-
-        .teacher {
-          margin-left: -10px;
+      .object {
+        .column:first-of-type {
+          i.fa {
+            font-size: 24px;
+          }
         }
 
-        i.fa {
-          font-size: 24px;
-          color: #666;
-        }
+        .button.secondary.tiny {
+          background: $light-secondary-color;
+          display: inline-block;
+          padding: 3px 6px;
+          line-height: 17px;
+          margin: 4px 2px 4px 0px;
 
-        .full-name {
-          font-size: 16px;
-          margin-bottom: 4px;
-        }
+          &:hover {
+            background: $secondary-color;
+          }
 
-        .contact {
-          font-size: 12px;
-          line-height: 1.5;
+          i.fa {
+            font-size: 12px;
+          }
         }
       }
     }

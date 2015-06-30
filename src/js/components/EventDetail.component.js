@@ -20,9 +20,9 @@ export default class EventDetail extends React.Component
         this.props.onViewChange( 'course', course );
     }
 
-    handleTeacherClick( props, teacher )
+    handleTeacherClick( teacher )
     {
-        props.onViewChange( 'person', teacher );
+        this.props.onViewChange( 'person', teacher );
     }
 
     handleRoomClick( room )
@@ -36,21 +36,6 @@ export default class EventDetail extends React.Component
         this.props.onDateChange( new Moment( date ) );
     }
 
-    displayTeacher( props, username )
-    {
-        var teacherName = this.getLinkName('teachers', username);
-
-        // FIXME: button should be a calendar icon, not teacher's name
-        return <div className="teacher" key={username}>
-            <button type="button" onClick={ this.handleTeacherClick.bind(this, props, username) }>
-                <div className="full-name">{teacherName}</div>
-            </button>
-            <div className="contact">
-                <a href={'https://usermap.cvut.cz/profile/' + username }>{username}</a>
-            </div>
-        </div>;
-    }
-
     getLinkName(type, key) {
         return this.props.linkNames[CP.getLocale()][type][key] || key;
     }
@@ -62,28 +47,47 @@ export default class EventDetail extends React.Component
     {
         var courseName = this.getLinkName('courses', this.props.data.course);
 
+        // Teachers objects
+        var teachers = [];
+
+        for ( var teacher of this.props.data.teachers )
+        {
+            teachers.push( <div className="row object course">
+                <div className="column small-3 text-center">
+                    <i className="fa fa-fw fa-street-view"></i>
+                </div>
+                <div className="column small-9">
+                    <strong>{this.getLinkName('teachers', teacher)}</strong>
+                    <div className="links">
+                        <button className="button secondary tiny" onClick={this.handleTeacherClick.bind(this, teacher)}><i className="fa fa-calendar"></i> kalendář</button>
+                        <a className="button secondary tiny" href={'https://usermap.cvut.cz/profile/' + teacher }><i className="fa fa-male"></i> usermap</a>
+                    </div>
+                </div>
+            </div> );
+        }
+
         return <div className="detail">
                 <div className="wrap">
                 <div className="row properties">
-                    <div className="column small-6" title={CP.translate( 'detail.sequence' )}>
-                        <i className="fa fa-calendar fa-fw"></i>
-                        {this.props.data.sequenceNumber}. {CP.translate( 'event_type.' + this.props.data.type ).toLowerCase()}
-                    </div>
-                    <div className="column small-6 text-right" title={CP.translate( 'detail.room' )}>
+                    <div className="column small-5" title={CP.translate( 'detail.room' )}>
+                        <i className="fa fa-map-marker fa-fw"></i>
                         <button type="button" onClick={this.handleRoomClick.bind(this, this.props.data.room)}>
                             {this.props.data.room}
                         </button>
-                        <i className="fa fa-map-marker fa-fw"></i>
+                    </div>
+                    <div className="column small-7 text-right" title={CP.translate( 'detail.sequence' )}>
+                        {this.props.data.sequenceNumber}. {CP.translate( 'event_type.' + this.props.data.type ).toLowerCase()}
+                        <i className="fa fa-question-circle fa-fw"></i>
                     </div>
                 </div>
                 <div className="row properties">
-                    <div className="column small-6" title={CP.translate( 'detail.parallel' )}>
-                        <i className="fa fa-thumb-tack fa-fw"></i>
-                        {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
-                    </div>
-                    <div className="column small-6 text-right" title={CP.translate( 'detail.students' )}>
-                        {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
+                    <div className="column small-6" title={CP.translate( 'detail.students' )}>
                         <i className="fa fa-group fa-fw"></i>
+                        {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
+                    </div>
+                    <div className="column small-6 text-right" title={CP.translate( 'detail.parallel' )}>
+                        {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
+                        <i className="fa fa-question-circle fa-fw"></i>
                     </div>
                 </div>
                 <hr />
@@ -104,23 +108,24 @@ export default class EventDetail extends React.Component
                         <hr />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="column small-12">
-                        <strong>{this.props.data.name !== null ? this.props.data.name : courseName}</strong>
-                        <div className="description">
-                            {this.props.data.details.description}
+                <div className="row object course">
+                    <div className="column small-3 text-center">
+                        <i className="fa fa-fw fa-question-circle"></i>
+                    </div>
+                    <div className="column small-9">
+                        <strong>{courseName}</strong>
+
+                        <div className="links">
+                            <button className="button secondary tiny" onClick={this.handleCourseClick.bind(this, this.props.data.course)}><i className="fa fa-calendar"></i> kalendář</button>
                         </div>
+
+                        <p className="description">
+                            {this.props.data.details.description}
+                        </p>
                     </div>
                 </div>
                 <hr />
-                <div className="row teachers" title={CP.translate( 'detail.teacher' )}>
-                    <div className="column small-3 text-center">
-                        <i className="fa fa-fw fa-street-view"></i>
-                    </div>
-                    <div className="column small-9">
-                        { this.props.data.teachers.map( uname => this.displayTeacher(this.props, uname) ) }
-                    </div>
-                </div>
+                {teachers.map( function( teacher ) { return teacher; } )}
                 <div className="clearfix"></div>
             </div>
         </div>;
