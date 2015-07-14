@@ -56,7 +56,8 @@ export default class EventDetail extends React.Component
         for ( var teacher of this.props.data.teachers )
         {
             teachers.push( <div className="row object course">
-                <div className="column small-3 text-center">
+                <div className="column small-3 text-center type-icon">
+                    <span className="type">Vyučující</span>
                     <i className="fa fa-fw fa-street-view"></i>
                 </div>
                 <div className="column small-9">
@@ -74,7 +75,8 @@ export default class EventDetail extends React.Component
             for ( var exception of this.props.data.details.appliedExceptions )
             {
                 exceptions.push( <div className="row object exception">
-                    <div className="column small-3 text-center">
+                    <div className="column small-3 text-center type-icon">
+                        <span className="type">Výjimka</span>
                         <i className="fa fa-fw fa-bullhorn"></i>
                     </div>
                     <div className="column small-9">
@@ -132,7 +134,8 @@ export default class EventDetail extends React.Component
                 </div>
                 {exceptions.map( function( exception ) { return exception; } )}
                 <div className="row object course">
-                    <div className="column small-3 text-center">
+                    <div className="column small-3 text-center type-icon">
+                        <span className="type">Předmět</span>
                         <i className="fa fa-fw fa-question-circle"></i>
                     </div>
                     <div className="column small-9">
