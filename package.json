@@ -41,7 +41,6 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-shell-spawn": "^0.3.8",
-    "livereactload": "^0.6.0",
     "load-grunt-tasks": "^0.6.0",
     "minifyify": "^7.0.1",
     "uglifyify": "^3.0.1"
