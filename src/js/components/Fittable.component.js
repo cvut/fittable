@@ -450,7 +450,9 @@ export default class Fittable extends React.Component
             starts: this.state.grid.starts,
             ends: this.state.grid.ends,
             lessonDuration: ( ! this.state.options.facultygrid ? 1 : this.state.grid.lessonDuration ),
-            hoursStartsAt1: this.state.options.facultygrid
+            hoursStartsAt1: this.state.options.facultygrid,
+            facultyHours: ( this.state.grid.ends - this.state.grid.starts ) /  this.state.grid.lessonDuration,
+            facultyGrid: this.state.options.facultygrid
         };
 
         if ( ! this.state.error )

@@ -139,13 +139,16 @@ export default class Timetable extends React.Component
 
         // Create array of hour labels
         var hourlabels = [];
-        for ( var i = 0; i < 1 / timelineGridLength - 1; i++ )
+        var idx = 0;
+        var gridoffset = this.props.grid.facultyGrid ? 0 : this.props.grid.starts % 1;
+        for ( var i = Math.ceil( this.props.grid.starts ); i < ( this.props.grid.facultyGrid ? Math.ceil( this.props.grid.starts ) + this.props.grid.facultyHours : this.props.grid.ends ); i++ )
         {
-            hourlabels.push( <div className="hour-label" key={i} style={{ width: timelineGridLength * 100 + '%',
-                height: timelineGridLength * 100 + '%', left: i * timelineGridLength * 100 + '%',
-                top: i * timelineGridLength * 100 + '%' }} >
-            { this.props.grid.hoursStartsAt1 ? i+1 : i + Math.floor( this.props.grid.starts )}
+            hourlabels.push( <div className="hour-label" key={idx} style={{ width: timelineGridLength * 100 + '%',
+                height: timelineGridLength * 100 + '%', left: ( idx + gridoffset ) * timelineGridLength * 100 + '%',
+                top: ( idx + gridoffset ) * timelineGridLength * 100 + '%' }} >
+            { this.props.grid.hoursStartsAt1 ? idx + 1 : i }
             </div> );
+            idx++;
         }
 
         // Create days
@@ -164,8 +167,12 @@ export default class Timetable extends React.Component
         ( this.props.functionsOpened !== null ? ' cut' : '' ) + ( this.props.days7 ? ' days7' : '' )} ref="rootEl">
             <div className="grid-overlay">
                 <div className="grid-wrapper">
-                    <div className="grid hor" style={{ backgroundSize: ( timelineGridLength * 100 ) + '% 100%' }}></div>
-                    <div className="grid ver" style={{ backgroundSize: '100% ' + ( timelineGridLength * 100 ) + '%' }}></div>
+                    <div className="grid hor" style={{
+                        backgroundSize: ( timelineGridLength * 100 ) + '% 100%',
+                        backgroundPosition: ( gridoffset * -100 ) + '% 0%' }}></div>
+                    <div className="grid ver" style={{
+                        backgroundSize: '100% ' + ( timelineGridLength * 100 ) + '%',
+                        backgroundPosition: '0% ' + ( gridoffset * -100 ) + '%' }}></div>
                 </div>
             </div>
             <NowIndicator timelineStartHour={timelineHoursFrom} timelineStartMins={timelineMinutesFrom}

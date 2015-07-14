@@ -107,10 +107,8 @@ div#fittable div.table.vertical {
     height: 93%;
 
     .hour-label {
-      left: 0 !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      left: -10px !important;
+      margin-top: -10px;
     }
   }
 }
