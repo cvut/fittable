@@ -50,6 +50,9 @@ export default class EventDetail extends React.Component
         // Teachers objects
         var teachers = [];
 
+        // Exceptions objects
+        var exceptions = [];
+
         for ( var teacher of this.props.data.teachers )
         {
             teachers.push( <div className="row object course">
@@ -64,6 +67,25 @@ export default class EventDetail extends React.Component
                     </div>
                 </div>
             </div> );
+        }
+
+        if ( 'appliedExceptions' in this.props.data.details )
+        {
+            for ( var exception of this.props.data.details.appliedExceptions )
+            {
+                exceptions.push( <div className="row object exception">
+                    <div className="column small-3 text-center">
+                        <i className="fa fa-fw fa-bullhorn"></i>
+                    </div>
+                    <div className="column small-9">
+                        <strong>{exception.name}</strong><br />
+                        <span className="note">{'note' in exception ? exception.note : ''}</span>
+                    </div>
+                </div> );
+            }
+
+            if ( this.props.data.details.appliedExceptions.length > 0 )
+                exceptions.push( <hr /> );
         }
 
         return <div className="detail">
@@ -108,6 +130,7 @@ export default class EventDetail extends React.Component
                         <hr />
                     </div>
                 </div>
+                {exceptions.map( function( exception ) { return exception; } )}
                 <div className="row object course">
                     <div className="column small-3 text-center">
                         <i className="fa fa-fw fa-question-circle"></i>

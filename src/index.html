@@ -93,7 +93,8 @@
                             ],
                             capacity: 140,
                             parallel: "201",
-                            description: randomDescs[ Math.round( Math.random() * (randomDescs.length - 1) ) ]
+                            description: randomDescs[ Math.round( Math.random() * (randomDescs.length - 1) ) ],
+                            appliedExceptions: []
                         }
                     };
 
@@ -106,6 +107,12 @@
                                 eventId: Math.floor( Math.random() * (9999 - 1000) ) + 1000,
                                 startsAt: replaceDate.toISOString()
                             };
+
+                        data[i].details.appliedExceptions = [ {
+                            id: 0,
+                            type: 'CANCEL',
+                            name: 'Exception name'
+                        } ];
                     }
 
                     if ( data[i].replacement )

@@ -56,6 +56,7 @@ export default class Fittable extends React.Component
         this.hammer = null;
         this.linkNames = { cs: { courses: {}, teachers: {} }, en: { courses: {}, teachers: {} } };
         this.semesters = null;
+        this.exceptions = {};
 
         // Force a refresh every one minute
         setInterval( this.handleRefreshNeed.bind( this ), 60000 );
