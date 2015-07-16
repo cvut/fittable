@@ -49,7 +49,7 @@ export default class WeekSwitcher extends Toggleable
 
         return <div className="row weeksw-selector weeksw-month-selector collapse">
                 <div className="column small-3 gr-go">
-                    <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().subtract( 1, 'months' ), null )}>
+                    <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().subtract( 1, 'months' ).startOf( 'isoWeek' ), null )}>
                     <i className="fa fa-chevron-left"></i>
                     </button>
                 </div>
@@ -57,7 +57,7 @@ export default class WeekSwitcher extends Toggleable
                     {viewMoment().format( 'MMMM' )}
                 </div>
                 <div className="column small-3 gr-go">
-                    <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().add( 1, 'months' ), null )}>
+                    <button type="button" className="gr-go-btn" onClick={this.props.onDateChange.bind( this, viewMoment().add( 1, 'months' ).startOf( 'isoWeek' ), null )}>
                     <i className="fa fa-chevron-right"></i>
                     </button>
                 </div>
