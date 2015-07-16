@@ -89,7 +89,8 @@
     "sequence": "Sequence number",
     "teachers": "Teachers",
     "exception": "Exception",
-    "course": "Course"
+    "course": "Course",
+    "teachers_show": "Show %(count)s teachers"
   },
 
   "errors": {

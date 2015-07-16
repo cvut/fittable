@@ -32,7 +32,9 @@
 
                 setTimeout( function() {
                 var data = [];
-                var linknames = { teachers: [ { id: 'novacjo4', name: { cs: 'Josef Novák', en: 'Josef Novák' } } ], courses: [] };
+                var linknames = { teachers: [
+                    { id: 'novacjo4', name: { cs: 'Josef Novák', en: 'Josef Novák' } }, { id: 'novacjin', name: { cs: 'Jindřich Novák', en: 'Jindřich Novák' } }
+                ], courses: [] };
 
                 // Create 12 events...
                 for ( var i = 0; i < 12; i++ )
@@ -78,7 +80,7 @@
                         sequenceNumber: Math.floor(Math.random() * 16),
                         type: types[ Math.round( Math.random() * (types.length -1)) ],
                         room: "T9:303",
-                        teachers: [ "novacjo4" ],
+                        teachers: [ "novacjo4", "novacjin" ],
                         flag: null,
                         notification: false,
                         cancelled: cancreplrandomness > 0.8,

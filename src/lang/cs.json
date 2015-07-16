@@ -89,7 +89,8 @@
     "sequence": "Pořadové číslo",
     "teachers": "Vyučující",
     "exception": "Výjimka",
-    "course": "Předmět"
+    "course": "Předmět",
+    "teachers_show": "Zobrazit %(count)s vyučujících"
   },
 
   "errors": {

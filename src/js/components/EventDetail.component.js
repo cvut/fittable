@@ -40,6 +40,12 @@ export default class EventDetail extends React.Component
         return this.props.linkNames[CP.getLocale()][type][key] || key;
     }
 
+    revealTeachers( e )
+    {
+        var el = e.target.parentNode.getElementsByClassName( 'reveal' )[0];
+        if ( el.classList.contains( 'hide' ) ) el.classList.remove( 'hide' ); else el.classList.add( 'hide' );
+    }
+
     /**
      * Renders the component
      */
@@ -49,25 +55,52 @@ export default class EventDetail extends React.Component
 
         // Teachers objects
         var teachers = [];
+        var teachersblock;
 
         // Exceptions objects
         var exceptions = [];
 
-        for ( var teacher of this.props.data.teachers )
+        // Teachers
+        if ( this.props.data.teachers.length >= 3 )
         {
-            teachers.push( <div className="row object course">
+            teachersblock = <div className="row object course">
                 <div className="column small-3 text-center type-icon">
                     <span className="type">{CP.translate( 'detail.teachers' )}</span>
                     <i className="fa fa-fw fa-street-view"></i>
                 </div>
                 <div className="column small-9">
-                    <strong>{this.getLinkName('teachers', teacher)}</strong>
-                    <div className="links">
-                        <button className="button secondary tiny" onClick={this.handleTeacherClick.bind(this, teacher)}><i className="fa fa-calendar"></i> kalendář</button>
-                        <a className="button secondary tiny" href={'https://usermap.cvut.cz/profile/' + teacher }><i className="fa fa-male"></i> usermap</a>
+                    <button className="button secondary tiny reveal-teachers" onClick={this.revealTeachers}><i className="fa fa-plus"></i> {CP.translate('detail.teachers_show', { count: this.props.data.teachers.length } )}</button>
+                    <div className="reveal hide">
+                    {this.props.data.teachers.map( function( teacher ) { return <div className="teacher">
+                            <strong>{this.getLinkName('teachers', teacher)}</strong>
+                            <div className="links">
+                                <button className="button secondary tiny" onClick={this.handleTeacherClick.bind(this, teacher)}><i className="fa fa-calendar"></i> kalendář</button>
+                                <a className="button secondary tiny" href={'https://usermap.cvut.cz/profile/' + teacher }><i className="fa fa-male"></i> usermap</a>
+                            </div>
+                        </div>; }.bind( this )
+                    )}
                     </div>
                 </div>
-            </div> );
+            </div>;
+        }
+        else if ( this.props.data.teachers.length > 0 )
+        {
+            teachersblock = <div className="row object course">
+                <div className="column small-3 text-center type-icon">
+                    <span className="type">{CP.translate( 'detail.teachers' )}</span>
+                    <i className="fa fa-fw fa-street-view"></i>
+                </div>
+                <div className="column small-9">
+                {this.props.data.teachers.map( function( teacher ) { return <div className="teacher">
+                        <strong>{this.getLinkName('teachers', teacher)}</strong>
+                        <div className="links">
+                            <button className="button secondary tiny" onClick={this.handleTeacherClick.bind(this, teacher)}><i className="fa fa-calendar"></i> kalendář</button>
+                            <a className="button secondary tiny" href={'https://usermap.cvut.cz/profile/' + teacher }><i className="fa fa-male"></i> usermap</a>
+                        </div>
+                    </div>; }.bind( this )
+                )}
+                </div>
+            </div>;
         }
 
         if ( 'appliedExceptions' in this.props.data.details )
@@ -153,7 +186,7 @@ export default class EventDetail extends React.Component
                     </div>
                 </div>
                 <hr />
-                {teachers.map( function( teacher ) { return teacher; } )}
+                {teachersblock}
                 <div className="clearfix"></div>
             </div>
         </div>;
