@@ -11,35 +11,64 @@ Offers quick implementation into another applications through simple Javascript 
 
 ## Installation
 
-### npm
+### Requirements
 
-First, make sure you’re equipped with [Node.js](http://www.nodejs.org) and [npm](http://www.npmjs.com).
+You will need [Node.JS](http://www.nodejs.org) or [io.js](https://iojs.org/).
 
-The widget is currently published only in the CTU’s npm registry at https://repository.fit.cvut.cz/npm.
+You need [npm](http://www.npmjs.com) **version 2.11** or newer for package scopes support. You can verify this by running
+
+```
+npm --version
+```
+
+You can update npm by running
+
+```
+npm install npm -g
+```
+
+### Downloading from npm
+
+The widget is currently published in the [CTU’s npm registry](https://repository.fit.cvut.cz/npm).
 This registry is publicly accessible, so you only need to associate it with the `@cvut` scope:
 
-```sh
-$ npm config set @cvut:registry https://repository.fit.cvut.cz/npm
+```
+npm config set @cvut:registry https://repository.fit.cvut.cz/npm
 ```
 
 Then you can install the widget:
 
 ```
-$ npm install @cvut/fittable-widget
+npm install @cvut/fittable-widget
 ```
 
-### from source code
+### Building from source code
 
-Alternatively you can clone this repository and build it by yourself. For that you'll need to have Grunt CLI installed.
+Besides Node, you will also need Ruby and [Bundler](http://bundler.io/) for [Compass](http://compass-style.org/) stylesheets preprocessor.
 
-Running this command will build fittable widget into dist/ folder.
+Clone the repository and install all dependencies with:
 
 ```
-$ grunt build
+script/setup
 ```
 
-## Screenshot
-[![fittable screenshot](http://i.imgur.com/CTv21ks.png)](http://i.imgur.com/CTv21ks.png)
+To build this project, you need [Grunt CLI](http://gruntjs.com/getting-started). Run the main build task with:
+
+```
+grunt build
+```
+
+You can also transpile ES6 files for consumption in other projects with `build:npm` task (this will also run the `build` task):
+
+```
+grunt build:npm
+```
+
+The resulting build is located in `dist/` directory:
+
+- `fittable.js` and `fittable.min.js` respectively are bundles for usage in web browsers,
+- `js` directory contains transpiled code for use in other projects,
+- `index.html` is an example project with mock-up data.
 
 ## Quick start
 
@@ -65,3 +94,6 @@ var fittable = fittable( 'fittable', options );
 ```
 
 This is basic configuration needed for running the widget. The next important step is to correctly implement the callbacks. For more information visit [our wiki](https://github.com/cvut/fittable-widget/wiki).
+
+## Screenshot
+[![fittable screenshot](http://i.imgur.com/CTv21ks.png)](http://i.imgur.com/CTv21ks.png)
