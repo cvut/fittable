@@ -57,7 +57,7 @@ export default class EventDetail extends React.Component
         {
             teachers.push( <div className="row object course">
                 <div className="column small-3 text-center type-icon">
-                    <span className="type">Vyučující</span>
+                    <span className="type">{CP.translate( 'detail.teachers' )}</span>
                     <i className="fa fa-fw fa-street-view"></i>
                 </div>
                 <div className="column small-9">
@@ -76,7 +76,7 @@ export default class EventDetail extends React.Component
             {
                 exceptions.push( <div className="row object exception">
                     <div className="column small-3 text-center type-icon">
-                        <span className="type">Výjimka</span>
+                        <span className="type">{CP.translate( 'detail.exception' )}</span>
                         <i className="fa fa-fw fa-bullhorn"></i>
                     </div>
                     <div className="column small-9">
@@ -135,7 +135,7 @@ export default class EventDetail extends React.Component
                 {exceptions.map( function( exception ) { return exception; } )}
                 <div className="row object course">
                     <div className="column small-3 text-center type-icon">
-                        <span className="type">Předmět</span>
+                        <span className="type">{CP.translate( 'detail.course' )}</span>
                         <i className="fa fa-fw fa-question-circle"></i>
                     </div>
                     <div className="column small-9">
