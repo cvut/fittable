@@ -27,6 +27,9 @@ export default class FunctionsBar extends React.Component
     handleSearchClick()
     {
         this.props.onPanelToggle( 'search' );
+
+        // Focus the search input
+        setTimeout( () => { document.getElementById( 'searchinput' ).focus(); }, 1000 );
     }
 
     /**

@@ -62,7 +62,7 @@ export default class FunctionSearch extends React.Component
             <div className="clearfix"></div>
             <div className="search-form">
                 <form name="search" onSubmit={this.handleSearch.bind(this)}>
-                    <input type="text" name="search" ref="searchquery" placeholder={CP.translate('functions.search.placeholder')} />
+                    <input type="text" id="searchinput" name="search" ref="searchquery" placeholder={CP.translate('functions.search.placeholder')} />
                     <button type="submit" className="search" name="search"><i className="fa fa-search"></i></button>
                 </form>
             </div>
