@@ -103,7 +103,7 @@ export default class EventDetail extends React.Component
             </div>;
         }
 
-        if ( 'appliedExceptions' in this.props.data.details )
+        if ( typeof this.props.data.details.appliedExceptions !== 'undefined' )
         {
             for ( var exception of this.props.data.details.appliedExceptions )
             {

@@ -54,7 +54,7 @@ export default class Fittable extends React.Component
         // Declare variables
         this.weekEvents = null;
         this.hammer = null;
-        this.linkNames = { cs: { courses: {}, teachers: {} }, en: { courses: {}, teachers: {} } };
+        this.linkNames = { cs: { courses: {}, teachers: {}, exceptions: {} }, en: { courses: {}, teachers: {}, exceptions: {} } };
         this.semesters = null;
         this.exceptions = {};
 
@@ -134,6 +134,16 @@ export default class Fittable extends React.Component
             {
                 this.addNewLinkName( clinkname.id, clinkname.name.cs, 'courses', 'cs');
                 this.addNewLinkName( clinkname.id, clinkname.name.en, 'courses', 'en');
+            }
+        }
+
+        // Save exceptions link names
+        if ( 'exceptions' in linksNames )
+        {
+            for ( var clinkname of linksNames.exceptions )
+            {
+                this.addNewLinkName( clinkname.id, clinkname.name, 'exceptions', 'cs');
+                this.addNewLinkName( clinkname.id, clinkname.name, 'exceptions', 'en');
             }
         }
 
