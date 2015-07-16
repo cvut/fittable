@@ -113,8 +113,7 @@ export default class EventDetail extends React.Component
                         <i className="fa fa-fw fa-bullhorn"></i>
                     </div>
                     <div className="column small-9">
-                        <strong>{exception.name}</strong><br />
-                        <span className="note">{'note' in exception ? exception.note : ''}</span>
+                        <strong>{this.getLinkName('exceptions', exception)}</strong>
                     </div>
                 </div> );
             }
