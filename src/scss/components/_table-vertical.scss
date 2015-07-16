@@ -13,16 +13,6 @@ div#fittable div.table.vertical {
       height: 7%;
       margin: 0;
       padding: $day-row-padding;
-
-      span.day-num {
-        display: inline;
-        font-weight: bold;
-        margin-right: 5px;
-      }
-    }
-
-    &.active div.label span.day-name {
-      border: 0;
     }
 
     div.events {

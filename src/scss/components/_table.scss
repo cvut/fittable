@@ -33,16 +33,22 @@
         }
 
         span.day-num {
-          display: none;
+          display: inline;
+          font-weight: bold;
+          margin-right: 5px;
         }
       }
 
       &.active {
-        div.label span {
+        div.label span.day-num {
           font-weight: 700;
           border-left: 4px solid $primary-color;
           margin-left: -14px;
           padding-left: 14px;
+        }
+
+        div.label span.day-num {
+          font-weight: 700;
         }
       }
     }
