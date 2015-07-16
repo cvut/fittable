@@ -120,7 +120,9 @@ export default class EventDetail extends React.Component
                         <strong>
                             <i className="fa fa-ban fa-fw"></i> {CP.translate( 'detail.cancelled' )}
                         </strong><br />
+                        <div className={ 'replacedBy' in this.props.data ? '' : 'hide' }>
                             {CP.translate( 'detail.replacement' )} <br /> <a href="#" onClick={this.gotoDate.bind(this, this.props.data.replacedBy)}>{new Moment(this.props.data.replacedBy).format('LLL')}</a>
+                        </div>
                         <hr />
                     </div>
                 </div>
