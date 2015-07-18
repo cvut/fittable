@@ -102,8 +102,7 @@ export default class EventDetail extends React.Component
                 </div>
             </div>;
         }
-
-        if ( typeof this.props.data.details.appliedExceptions !== 'undefined' )
+        if ( this.props.data.details.appliedExceptions )
         {
             for ( var exception of this.props.data.details.appliedExceptions )
             {
@@ -118,8 +117,9 @@ export default class EventDetail extends React.Component
                 </div> );
             }
 
-            if ( this.props.data.details.appliedExceptions.length > 0 )
+            if ( this.props.data.details.appliedExceptions.length > 0 ) {
                 exceptions.push( <hr /> );
+            }
         }
 
         return <div className="detail">
