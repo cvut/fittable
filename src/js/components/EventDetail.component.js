@@ -43,7 +43,11 @@ export default class EventDetail extends React.Component
     revealTeachers( e )
     {
         var el = e.target.parentNode.getElementsByClassName( 'reveal' )[0];
-        if ( el.classList.contains( 'hide' ) ) el.classList.remove( 'hide' ); else el.classList.add( 'hide' );
+        if ( el.classList.contains( 'hide' ) ) {
+            el.classList.remove( 'hide' );
+        } else {
+            el.classList.add( 'hide' );
+        }
     }
 
     /**
