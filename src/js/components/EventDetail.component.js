@@ -122,6 +122,12 @@ export default class EventDetail extends React.Component
             }
         }
 
+        var studentsCount = 0;
+        if(this.props.data.details.students) {
+            studentsCount = this.props.data.details.students.length;
+        }
+
+
         return <div className="detail">
                 <div className="wrap">
                 <div className="row properties">
@@ -139,7 +145,7 @@ export default class EventDetail extends React.Component
                 <div className="row properties">
                     <div className="column small-6" title={CP.translate( 'detail.students' )}>
                         <i className="fa fa-group fa-fw"></i>
-                        {CP.translate( 'detail.students_count', { count: this.props.data.details.students.length } )}
+                        {CP.translate( 'detail.students_count', { count: studentsCount } )}
                     </div>
                     <div className="column small-6 text-right" title={CP.translate( 'detail.parallel' )}>
                         {CP.translate( 'detail.number', { num: this.props.data.details.parallel} )}
