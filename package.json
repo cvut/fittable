@@ -13,7 +13,8 @@
   },
   "scripts": {
     "prepublish": "grunt build:npm",
-    "build": "grunt build"
+    "build": "grunt build",
+    "start": "grunt dev"
   },
   "dependencies": {
     "babel": "^5.5.8",
