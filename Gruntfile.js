@@ -32,6 +32,14 @@ module.exports = function (grunt) {
           limit: Infinity
         },
       },
+      devNpm: {
+        tasks: [
+          'compass:dev',
+          'watch:copyDev',
+          'watch:autoprefixerDev',
+          'watch:npm'
+        ]
+      },
       dist: {
         tasks: [
           'css:dist',
@@ -105,6 +113,10 @@ module.exports = function (grunt) {
         options: {
           verbose: true
         },
+      },
+      npm: {
+        files: ['src/js/**/*.js'],
+        tasks: ['babel:npm']
       }
     },
 
@@ -247,6 +259,13 @@ module.exports = function (grunt) {
   grunt.registerTask('dev', [
     'touchCSS',
     'concurrent:dev',
+  ]);
+
+  grunt.registerTask('devNpm', [
+    'touchCSS',
+    'copy:dev',
+    'copy:npm',
+    'concurrent:devNpm',
   ]);
 
   grunt.registerTask('css:dist', [
