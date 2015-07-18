@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit if any statement returns a non-true return value.
+set -e
+
 if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
     echo "This is a pull request, skipping deploy."; exit 1
 fi

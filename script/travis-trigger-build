@@ -8,6 +8,9 @@
 #   REPO_SLUG  the repository to build, typically username/project-name.
 #   BRANCH     the branch to build (default is 'master').
 
+# Exit if any statement returns a non-true return value.
+set -e
+
 message="Triggered by successful build of $TRAVIS_REPO_SLUG"
 
 repo_slug=$1
