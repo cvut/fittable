@@ -25,6 +25,16 @@
     "other": "Other"
   },
 
+  "event_type_num": {
+    "lecture": "Lecture no. %(seqnumber)s",
+    "tutorial": "Tutorial no. %(seqnumber)s",
+    "laboratory": "Laboratory no. %(seqnumber)s",
+    "exam": "Exam no. %(seqnumber)s",
+    "assessment": "Assessment no. %(seqnumber)s",
+    "course_event": "One-off event no. %(seqnumber)s",
+    "other": "Other event no. %(seqnumber)s"
+  },
+
   "weekNav": {
     "prev": "Previous week",
     "next": "Next week",
@@ -74,11 +84,12 @@
   },
 
   "detail": {
-    "parallel": "Parallel number",
+    "parallel": "Parallel",
     "teacher": "Teacher",
-    "students": "Number of signed students",
+    "students": "Students",
+    "capacity": "Capacity",
     "room": "Room",
-    "number": "parallel # %(num)s",
+    "number": "# %(num)s",
     "students_count": {
       "zero": "No students",
       "one": "One student",
@@ -91,7 +102,10 @@
     "teachers": "Teachers",
     "exception": "Exception",
     "course": "Course",
-    "teachers_show": "Show %(count)s teachers"
+    "teachers_show": "Show %(count)s teachers",
+    "becauseof": "Because of:",
+    "usermap_profile": "usermap.cvut.cz profile",
+    "personal_calendar": "Personal calendar"
   },
 
   "errors": {

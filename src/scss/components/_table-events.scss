@@ -1,4 +1,4 @@
-#fittable div.table div.day div.events {
+#fittable .table .events {
   width: 90%;
   float: left;
   height: $day-row-height - ($day-row-padding * 2);
@@ -6,7 +6,7 @@
   visibility: hidden;
   margin: $day-row-padding 0px;
 
-  div.event {
+  .event {
     position: absolute;
     padding: 0 5px;
     transition: opacity $events-move-anim-speed;
@@ -26,113 +26,32 @@
       padding: 5px 10px;
       overflow: hidden;
       position: relative;
-    }
 
-    div.name {
-      font-size: $xlarge-font-size;
-      font-weight: 300;
-      text-align: right;
-      margin-top: 5px;
-      @include disable-selection();
-    }
+      & > .name {
+        font-size: $xlarge-font-size;
+        font-weight: 300;
+        text-align: right;
+        margin-top: 5px;
+        @include disable-selection();
+      }
 
-    div.time {
-      font-size: $xsmall-font-size;
-      text-align: right;
-      @include disable-selection();
-    }
+      & > .time {
+        font-size: $xsmall-font-size;
+        text-align: right;
+        @include disable-selection();
+      }
 
-    div.type {
-      position: absolute;
-      bottom: 10px;
-      left: 15px;
-      font-size: $small-font-size;
-      font-weight: 700;
-      border-left: 2px solid white;
-      padding-left: 5px;
-      line-height: 1.2;
-      @include disable-selection();
-    }
-
-    .detail button {
-      @extend %btn-link;
-    }
-
-    div.detail {
-      visibility: hidden;
-      background: white;
-      padding: 20px;
-      clear: both;
-      min-height: 0;
-      margin: 0px -10px 0px -10px;
-      height: 0;
-      color: #222;
-      width: inherit;
-      transition: opacity $event-rollout-anim-speed*2,
-              min-height $event-rollout-anim-speed,
-              max-height $event-rollout-anim-speed*2,
-              height $event-rollout-anim-speed,
-              margin $event-rollout-anim-speed,
-              top $event-rollout-anim-speed;
-      opacity: 0;
-      overflow: hidden;
-
-      .properties {
-        color: #777;
-        line-height: 1.9;
+      & > .type {
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
         font-size: $small-font-size;
-
-        i.fa {
-          margin-right: 7px;
-        }
-
-        .text-right i.fa {
-          margin-right: 0px;
-          margin-left: 7px;
-        }
+        font-weight: 700;
+        border-left: 2px solid white;
+        padding-left: 5px;
+        line-height: 1.2;
+        @include disable-selection();
       }
-
-      .object {
-        .column:first-of-type {
-          i.fa {
-            font-size: 24px;
-          }
-        }
-
-        .button.secondary.tiny {
-          background: $light-secondary-color;
-          display: inline-block;
-          padding: 3px 6px;
-          line-height: 17px;
-          margin: 4px 2px 4px 0px;
-
-          &:hover {
-            background: $secondary-color;
-          }
-
-          i.fa {
-            font-size: 12px;
-          }
-        }
-
-        .column.type-icon {
-          margin: 0;
-          padding-right: 0;
-
-          .type {
-            display: block;
-            font-size: 8pt;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            opacity: .7;
-            text-align: center !important;
-          }
-        }
-      }
-    }
-
-    div.teacher {
-      margin-bottom: 7px;
     }
 
     &:not(.cancelled) .cancelflag {
@@ -141,42 +60,6 @@
 
     &:not(.replacement) .replaceflag {
       display: none;
-    }
-
-
-    &.detail-shown {
-      width: 300px !important;
-      height: auto !important;
-      position: relative;
-      z-index: 999;
-      transition: width $event-rollout-anim-speed;
-      overflow: hidden;
-
-      div.detail {
-        visibility: visible;
-        opacity: 1;
-        min-height: 180px;
-        height: auto;
-        margin: 10px -10px 30px -10px;
-
-        .wrap {
-          width: 250px;
-        }
-      }
-
-      div.type span.short {
-        display: none;
-      }
-
-      div.type {
-        bottom: 10px !important;
-      }
-    }
-
-    &:not(.detail-shown) {
-      div.type span.long {
-        display: none;
-      }
     }
 
     &.cancelled .inner {
@@ -209,6 +92,12 @@
 
     &:not(.detail-shown) div.inner div.head-space {
       height: 100%;
+    }
+
+    &:not(.detail-shown) {
+      div.type span.long {
+        display: none;
+      }
     }
 
     &.detail-shown div.inner div.head-space {

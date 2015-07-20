@@ -10,7 +10,7 @@
     "tutorial": "Cvičení",
     "laboratory": "Laboratoř",
     "exam": "Zkouška",
-    "assessment": "Obhajoba",
+    "assessment": "Hodnocení",
     "course_event": "Jednorázová akce",
     "other": "Ostatní"
   },
@@ -20,9 +20,19 @@
     "tutorial": "Cvi",
     "laboratory": "Lab",
     "exam": "Zk",
-    "assessment": "Obh",
+    "assessment": "Hod",
     "course_event": "Akc",
     "other": "Jiné"
+  },
+
+  "event_type_num": {
+    "lecture": "%(seqnumber)s. přednáška",
+    "tutorial": "%(seqnumber)s. cvičení",
+    "laboratory": "%(seqnumber)s. laboratoř",
+    "exam": "%(seqnumber)s. zkouška",
+    "assessment": "%(seqnumber)s. hodnocení",
+    "course_event": "%(seqnumber)s. jednorázová akce",
+    "other": "%(seqnumber)s. jiná událost"
   },
 
   "weekNav": {
@@ -76,9 +86,10 @@
   "detail": {
     "parallel": "Paralelka",
     "teacher": "Vyučující",
-    "students": "Počet přihlášených studentů",
+    "students": "Studentů",
+    "capacity": "Kapacita",
     "room": "Místnost",
-    "number": "paralelka č. %(num)s",
+    "number": "č. %(num)s",
     "students_count": {
       "zero": "Bez studentů",
       "one": "1 student",
@@ -91,7 +102,10 @@
     "teachers": "Vyučující",
     "exception": "Výjimka",
     "course": "Předmět",
-    "teachers_show": "Zobrazit %(count)s vyučujících"
+    "teachers_show": "Zobrazit %(count)s vyučujících",
+    "becauseof": "Kvůli:",
+    "usermap_profile": "Profil na usermap.cvut.cz",
+    "personal_calendar": "Osobní kalendář"
   },
 
   "errors": {

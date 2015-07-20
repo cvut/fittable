@@ -34,7 +34,7 @@
                     console.log( [ from, to ] );
                 var data = [];
                 var linknames = { teachers: [
-                    { id: 'novacjo4', name: { cs: 'Josef Novák', en: 'Josef Novák' } }, { id: 'novacjin', name: { cs: 'Jindřich Novák', en: 'Jindřich Novák' } }
+                    { id: 'novacjo4', name: { cs: 'Josef Novák', en: 'Josef Novák' } }, { id: 'novacjin', name: { cs: 'Jindřich Novák', en: 'Jindřich Novák' } }, { id: 'skocdopo', name: { cs: 'Ing. Alexandra Skočdopolová, Ph.D.', en: 'Ing. Alexandra Skočdopolová, Ph.D.' } }
                 ], courses: [] };
 
                 // Create 12 events...
@@ -81,7 +81,7 @@
                         sequenceNumber: Math.floor(Math.random() * 16),
                         type: types[ Math.round( Math.random() * (types.length -1)) ],
                         room: "T9:303",
-                        teachers: [ "novacjo4", "novacjin" ],
+                        teachers: [ "novacjo4", "novacjin", "skocdopo" ],
                         flag: null,
                         notification: false,
                         cancelled: cancreplrandomness > 0.8,

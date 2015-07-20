@@ -93,12 +93,11 @@ export default class EventBox extends React.Component
                 <div className="time">{this.displayTime(this.props)}</div>
                 <div className="type">
                     <span className={'short' + ( this.props.colored ? ' hide' : '')}>{CP.translate( 'event_type_short.' + this.props.data.type )}</span>
-                    <span className="long">{CP.translate( 'event_type.' + this.props.data.type )}</span>
                 </div>
                 <EventDetail ref="detail" data={this.props.data} onViewChange={this.props.onViewChange}
                     onDateChange={this.props.onDateChange} showDetailOn={this.props.onClick} linkNames={this.props.linkNames} />
                 <div className="cancelflag"><i className="fa fa-ban"></i></div>
-                <div className="replaceflag"><i className="fa fa-umbrella"></i></div>
+                <div className="replaceflag"><i className="fa fa-plus"></i></div>
             </div>
         </div>;
     }

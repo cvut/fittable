@@ -1,0 +1,164 @@
+#fittable .table .events .event {
+
+  .detail {
+    visibility: hidden;
+    background: white;
+    padding: 20px;
+    clear: both;
+    min-height: 0;
+    margin: 0px -10px 0px -10px;
+    height: 0;
+    color: #222;
+    width: inherit;
+    transition: opacity $event-rollout-anim-speed*2,
+                min-height $event-rollout-anim-speed,
+                max-height $event-rollout-anim-speed*2,
+                height $event-rollout-anim-speed,
+                margin $event-rollout-anim-speed,
+                top $event-rollout-anim-speed;
+    opacity: 0;
+    overflow: hidden;
+
+    $value-font-size: 15px;
+
+    button {
+      @extend %btn-link;
+    }
+
+    .prop-section {
+
+      &:not(.teachers) {
+        margin-bottom: 13px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .prop-title {
+        color: $dark-secondary-text-color;
+        text-transform: lowercase;
+      }
+    }
+
+    .basic-props {
+      .type-num {
+        color: $dark-secondary-text-color;
+      }
+
+      .name {
+        font-size: 15px;
+      }
+
+      .location button {
+        color: $body-font-color;
+
+        i.fa {
+          margin-right: 3px;
+        }
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
+
+    .exceptions {
+      .reveal {
+        color: $body-font-color;
+
+        i.fa {
+          margin-right: 5px;
+        }
+
+        i.fa.ex-icon {
+          color: #cd8f47;
+        }
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
+
+    .num-props {
+      position: relative;
+
+      .num-prop {
+        float: none !important;
+        top: 0;
+
+        .value {
+          font-size: $value-font-size;
+        }
+
+        &.left {
+          width: 33%;
+          position: absolute;
+          left: 0;
+        }
+
+        &.center {
+          width: 33%;
+          margin: auto;
+          text-align: center;
+        }
+
+        &.right {
+          width: 33%;
+          position: absolute;
+          right: 0;
+          text-align: right;
+        }
+      }
+    }
+
+    .teachers {
+
+      .reveal {
+        color: $body-font-color;
+        font-size: $value-font-size;
+        margin-left: 32px;
+
+        i.fa {
+          margin-right: 8px;
+        }
+
+        i.fa:first-of-type {
+          margin-left: -32px;
+        }
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+
+      .hideable {
+        margin: 3px 0px 7px 34px;
+      }
+    }
+  }
+
+  &.detail-shown {
+    width: 300px !important;
+    height: auto !important;
+    position: relative;
+    z-index: 999;
+    transition: width $event-rollout-anim-speed;
+    overflow: hidden;
+
+    div.detail {
+      visibility: visible;
+      opacity: 1;
+      min-height: 180px;
+      height: auto;
+      margin: 10px -10px 5px -10px;
+
+      .wrap {
+        width: 240px;
+      }
+    }
+
+    div.type {
+      display: none;
+    }
+  }
+}
