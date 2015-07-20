@@ -1,6 +1,6 @@
 #fittable {
   .week-toggle {
-    @include active-dark-hover;
+    background: $light-secondary-color;
     @include upcase;
     float: left;
     height: $header-elements-weight;
@@ -10,29 +10,30 @@
     line-height: $header-elements-weight;
 
     i.fa {
-      margin: 0 5px;
+      margin: 0 15px 0px 5px;
     }
   }
 
   .week-toggle-inner {
     display: inline-block;
-    width: 160px;
-    padding: 0 18px;
+    padding: 0 18px 0 14px;
+    color: $primary-color;
   }
 
   .week-nav {
     float: left;
-    margin-left: 10px;
     position: relative;
     z-index: 420;
   }
 
   .week-nav-btn {
-    @extend %btn-light;
+    background: $primary-color;
+    width: 35px;
+    color: white;
     text-align: center;
-    width: $header-elements-weight / 1.25;
     line-height:  $header-elements-weight;
     font-size: $large-font-size;
+    @include background-hover-effect($primary-color);
   }
 
 

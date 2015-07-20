@@ -27,7 +27,8 @@
 
   "weekNav": {
     "prev": "Předchozí týden",
-    "next": "Následující týden"
+    "next": "Následující týden",
+    "selector": "Výběr data"
   },
 
   "functions": {

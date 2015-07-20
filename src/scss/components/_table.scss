@@ -135,6 +135,8 @@
       position: relative;
       padding: 8px 0;
       @include disable-selection();
+      overflow: hidden;
+      height: 25px;
 
       .hour-label {
         position: absolute;

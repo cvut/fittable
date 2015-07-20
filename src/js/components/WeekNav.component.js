@@ -10,6 +10,14 @@ import CP from 'counterpart';
 export default class WeekNav extends React.Component
 {
     /**
+     * Handler for events, when the calendar button is clicked ( bubbles to parent )
+     * @param e event
+     */
+    handleCalClick( e )
+    {
+        this.props.onCalClick( e );
+    }
+    /**
      * Handler for events, when the previous button is clicked ( bubbles to parent )
      * @param e event
      */
@@ -33,10 +41,13 @@ export default class WeekNav extends React.Component
     {
         return <div className="week-nav">
             <button type="button" className="week-nav-btn week-nav-prev" onClick={this.handlePrevClick.bind( this )} title={CP.translate('weekNav.prev')}>
-              <i className="fa fa-chevron-left"></i>
+                <i className="fa fa-chevron-left"></i>
             </button>
             <button type="button" className="week-nav-btn week-nav-next" onClick={this.handleNextClick.bind( this )} title={CP.translate('weekNav.next')}>
               <i className="fa fa-chevron-right"></i>
+            </button>
+            <button type="button" className="week-nav-btn week-nav-prev" onClick={this.handleCalClick.bind( this )} title={CP.translate('weekNav.selector')}>
+                <i className="fa fa-caret-down"></i>
             </button>
         </div>;
     }

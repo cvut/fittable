@@ -27,7 +27,8 @@
 
   "weekNav": {
     "prev": "Previous week",
-    "next": "Next week"
+    "next": "Next week",
+    "selector": "Date selector"
   },
 
   "functions": {

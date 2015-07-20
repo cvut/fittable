@@ -55,8 +55,8 @@ export default class Controls extends React.Component
     render()
     {
         return <div className="header">
-            <Week viewDate={this.props.viewDate} onClick={this.handleWeekClick.bind(this)} selectedDay={this.props.selectedDay} />
-            <WeekNav onPrevClick={this.handlePrevClick.bind(this)} onNextClick={this.handleNextClick.bind(this)} />
+            <WeekNav onCalClick={this.handleWeekClick.bind(this)} onPrevClick={this.handlePrevClick.bind(this)} onNextClick={this.handleNextClick.bind(this)} />
+            <Week viewDate={this.props.viewDate} selectedDay={this.props.selectedDay} />
             <WeekSwitcher viewDate={this.props.viewDate} ref="weekSwitcher" onDateChange={this.props.onDateChange}
                             semester={this.props.semester} />
             <FunctionsBar onPanelToggle={this.props.onSettingsPanelChange} />
