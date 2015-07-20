@@ -1,0 +1,113 @@
+#fittable {
+
+  // Horizontal
+
+  div.table:not(.vertical) div.day div.events {
+    div.event {
+      &:not(.detail-shown).half {
+        height: 45% !important;
+
+        div.type, div.time {
+          display: none;
+        }
+
+        div.name {
+          margin-top: 0;
+          font-size: $small-font-size;
+        }
+      }
+
+      &.half + .event:not(.detail-shown).half:nth-of-type(even) {
+        top: auto !important;
+        bottom: 0;
+      }
+
+      &:not(.detail-shown).third {
+        height: 30% !important;
+
+        div.type, div.time {
+          display: none;
+        }
+
+        div.name {
+          margin-top: -5px;
+          font-size: $xsmall-font-size;
+        }
+      }
+
+      &.third + .event:not(.detail-shown).third {
+        top: 35% !important;
+      }
+
+      &.third + .third + .event:not(.detail-shown).third {
+        top: auto !important;
+        bottom: 0;
+      }
+
+      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-m {
+        height: 20% !important;
+
+        div.type, div.time, div.name {
+          display: none;
+        }
+      }
+
+      &.quarter-m + .event:not(.detail-shown).quarter {
+        top: 27% !important;
+      }
+
+      &.quarter-m + .quarter + .event:not(.detail-shown).quarter {
+        top: 54% !important;
+      }
+
+      &.quarter-m + .quarter + .quarter + .event:not(.detail-shown).quarter {
+        top: auto !important;
+        bottom: 0 !important;
+      }
+
+      &.from-bottom.detail-shown {
+        top: auto !important;
+        bottom: 0 !important;
+        position: absolute;
+      }
+    }
+  }
+
+  // Vertical
+
+  div.table.vertical div.day div.events {
+    div.event {
+      &:not(.detail-shown).half {
+        width: 50% !important;
+        padding-right: 5px;
+      }
+
+      &.half + div.event:not(.detail-shown).half {
+        left: auto !important;
+        right: 0;
+        padding-left: 5px;
+      }
+
+      &:not(.detail-shown).third {
+        width: 33% !important;
+        padding-right: 5px;
+
+        .time {
+          font-size: $small-font-size;
+        }
+      }
+
+      &.third + div.event:not(.detail-shown).third {
+        left: 33% !important;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      &.third + div.event.third + div.event:not(.detail-shown).third {
+        left: auto !important;
+        right: 0;
+        padding-left: 5px;
+      }
+    }
+  }
+}

@@ -230,56 +230,6 @@
 
   #fittable {
 
-    div.table:not(.vertical) div.day div.events {
-      div.event {
-        &:not(.detail-shown).half {
-          height: 45% !important;
-
-          div.type, div.time {
-            display: none;
-          }
-
-          div.name {
-            margin-top: 0;
-            font-size: $small-font-size;
-          }
-        }
-
-        &.half + div.event:not(.detail-shown).half {
-          top: auto !important;
-          bottom: 0;
-        }
-
-        &:not(.detail-shown).third {
-          height: 30% !important;
-
-          div.type, div.time {
-            display: none;
-          }
-
-          div.name {
-            margin-top: -5px;
-            font-size: $xsmall-font-size;
-          }
-        }
-
-        &.third + div.event:not(.detail-shown).third {
-          top: 35% !important;
-        }
-
-        &.third + div.event.third + div.event:not(.detail-shown).third {
-          top: auto !important;
-          bottom: 0;
-        }
-
-        &.from-bottom.detail-shown {
-          top: auto !important;
-          bottom: 0 !important;
-          position: absolute;
-        }
-      }
-    }
-
     // Horizontal inner elements minimalization
 
     div.table:not(.vertical) div.day div.events {

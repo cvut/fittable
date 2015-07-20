@@ -103,43 +103,6 @@ div#fittable div.table.vertical {
   }
 }
 
-// Vertical overlays
-#fittable div.table.vertical div.day div.events {
-  div.event {
-    &:not(.detail-shown).half {
-      width: 50% !important;
-      padding-right: 5px;
-    }
-
-    &.half + div.event:not(.detail-shown).half {
-      left: auto !important;
-      right: 0;
-      padding-left: 5px;
-    }
-
-    &:not(.detail-shown).third {
-      width: 33% !important;
-      padding-right: 5px;
-
-      .time {
-        font-size: $small-font-size;
-      }
-    }
-
-    &.third + div.event:not(.detail-shown).third {
-      left: 33% !important;
-      padding-left: 5px;
-      padding-right: 5px;
-    }
-
-    &.third + div.event.third + div.event:not(.detail-shown).third {
-      left: auto !important;
-      right: 0;
-      padding-left: 5px;
-    }
-  }
-}
-
 // Horizontal inner elements minimalization
 #fittable div.table.vertical div.day div.events {
   div.event:not(.detail-shown) {

@@ -34,42 +34,50 @@ export default class Day extends React.Component
      */
     findOverlayedEvents( props )
     {
-        var lastend = null, prev, overlayed = [];
+        var overlayed = [], lastend = new Moment( 0 );
+        var events = props.events.sort( this.cmpByStart );
 
-        for ( var event of props.events.sort( this.cmpByStart ) )
+        for ( var evid in events )
         {
-            // Default appearance is regular
-            event.appear = 'regular';
+            /*
+                Compares this event's start with the last end. If the start is after the last end,
+                set appropriate appearances for all events in queue.
+            */
 
-            // If this event overlays with previous...
-            if ( lastend !== null && event.startsAt < lastend )
+            var start = new Moment( events[evid].startsAt );
+
+            // Compare
+            if ( start.isAfter( lastend ) || start.isSame( lastend ) )
             {
-                // Mark this event as overlayed event
-                overlayed.push( event );
+                var appearance = overlayed.length >= 4 ? 'quarter' : ( overlayed.length == 3 ? 'third' : ( overlayed.length == 2 ? 'half' : 'regular' ) );
 
-                // And if it already isn't, mark the previous too
-                if ( overlayed.indexOf( prev ) == -1 ) overlayed.push( prev );
-            }
-            else
-            {
-                // If no more overlayed events are found, mark overlays and clear the overlayed array...
-
-                // For every marked event, depending on count of overlays, assign appearance class
-                for ( var ovrld of overlayed )
-                    ovrld.appear = overlayed.length == 2 ? "half" : "third";
+                for ( var oid in overlayed )
+                {
+                    events[overlayed[oid]].appear = appearance;
+                    if ( overlayed.length >= 4 && oid % 4 == 0 ) events[overlayed[oid]].appear += '-m';
+                }
 
                 overlayed = [];
             }
 
-            lastend = event.endsAt;
-            prev = event;
+            // Queue the event
+            overlayed.push( evid );
+
+            // Set event's end as last end
+            if ( new Moment( events[evid].endsAt ).isAfter( lastend ) ) lastend = new Moment( events[evid].endsAt );
         }
 
-        // If no more events are found, mark overlays
-        for ( var ovrld of overlayed )
-            ovrld.appear = overlayed.length == 2 ? "half" : "third";
+        // Set appearance for the last events
 
-        return props.events;
+        var appearance = overlayed.length >= 4 ? 'quarter' : ( overlayed.length == 3 ? 'third' : ( overlayed.length == 2 ? 'half' : 'regular' ) );
+
+        for ( var oid in overlayed )
+        {
+            events[overlayed[oid]].appear = appearance;
+            if ( overlayed.length >= 4 && oid % 4 == 0 ) events[overlayed[oid]].appear += '-m';
+        }
+
+        return events;
     }
 
     /**
