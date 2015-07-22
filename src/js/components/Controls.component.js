@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import Week from './Week.component';
+import ViewDate from './ViewDate.component';
 import WeekNav from './WeekNav.component';
 import FunctionsBar from './FunctionsBar.component';
 import WeekSwitcher from './WeekSwitcher.component';
@@ -55,8 +55,9 @@ export default class Controls extends React.Component
     render()
     {
         return <div className="header">
-            <WeekNav onCalClick={this.handleWeekClick.bind(this)} onPrevClick={this.handlePrevClick.bind(this)} onNextClick={this.handleNextClick.bind(this)} />
-            <Week viewDate={this.props.viewDate} selectedDay={this.props.selectedDay} />
+            <WeekNav onCalClick={this.handleWeekClick.bind(this)} onPrevClick={this.handlePrevClick.bind(this)}
+                     onNextClick={this.handleNextClick.bind(this)} viewDate={this.props.viewDate} selectedDay={this.props.selectedDay} />
+            <ViewDate viewDate={this.props.viewDate} selectedDay={this.props.selectedDay} days7={this.props.days7} />
             <WeekSwitcher viewDate={this.props.viewDate} ref="weekSwitcher" onDateChange={this.props.onDateChange}
                             semester={this.props.semester} />
             <FunctionsBar onPanelToggle={this.props.onSettingsPanelChange} />

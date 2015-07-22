@@ -473,7 +473,7 @@ export default class Fittable extends React.Component
 
                 <Controls viewDate={this.state.viewDate} onWeekChange={this.handleChangeViewDate.bind( this )}
                     onDateChange={this.handleChangeViewDate.bind( this )} semester={this.getSemester( this.state.viewDate )}
-                    onSettingsPanelChange={this.handleChangeSettingsPanel.bind( this )}
+                    onSettingsPanelChange={this.handleChangeSettingsPanel.bind( this )} days7={this.state.options.days7}
                     onSelDayChange={this.handleChangeSelectedDay.bind( this )} selectedDay={this.state.selectedDay} />
 
                 <div className="clearfix"></div>

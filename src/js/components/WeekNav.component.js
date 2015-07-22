@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import Moment from 'moment';
 import CP from 'counterpart';
 
 export default class WeekNav extends React.Component
@@ -34,6 +35,19 @@ export default class WeekNav extends React.Component
     {
         this.props.onNextClick( e );
     }
+
+    dayOfWeek() {
+        return new Moment( this.props.viewDate ).isoWeekday( this.props.selectedDay + 1).format('dddd');
+    }
+
+    weekNum() {
+        return CP.translate( 'week', { num: this.props.viewDate.isoWeek() } );
+    }
+
+    weekParity() {
+        return CP.translate( this.props.viewDate.isoWeek() % 2 === 0 ? 'even' : 'odd' );
+    }
+
     /**
      * Renders the component
      */
@@ -43,11 +57,13 @@ export default class WeekNav extends React.Component
             <button type="button" className="week-nav-btn week-nav-prev" onClick={this.handlePrevClick.bind( this )} title={CP.translate('weekNav.prev')}>
                 <i className="fa fa-chevron-left"></i>
             </button>
+            <button type="button" className="week-nav-btn week-nav-calendar" onClick={this.handleCalClick.bind( this )} title={CP.translate('weekNav.selector')}>
+                <strong className="week-toggle-dow">{this.dayOfWeek()}</strong>{' '}
+                <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
+                <span className="week-toggle-parity">{this.weekParity()}</span>
+            </button>
             <button type="button" className="week-nav-btn week-nav-next" onClick={this.handleNextClick.bind( this )} title={CP.translate('weekNav.next')}>
               <i className="fa fa-chevron-right"></i>
-            </button>
-            <button type="button" className="week-nav-btn week-nav-prev" onClick={this.handleCalClick.bind( this )} title={CP.translate('weekNav.selector')}>
-                <i className="fa fa-caret-down"></i>
             </button>
         </div>;
     }
