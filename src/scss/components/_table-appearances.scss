@@ -86,6 +86,7 @@
         left: auto !important;
         right: 0;
         padding-left: 5px;
+        padding-right: 10px;
       }
 
       &:not(.detail-shown).third {
@@ -107,6 +108,39 @@
         left: auto !important;
         right: 0;
         padding-left: 5px;
+        padding-right: 10px;
+      }
+
+      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-m {
+        width: 25% !important;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        div.type, div.time {
+          display: none;
+        }
+
+        div.name {
+          font-size: 11px;
+        }
+      }
+
+      &:not(.detail-shown).quarter-m {
+        padding-left: 10px;
+      }
+
+      &.quarter-m + .event:not(.detail-shown).quarter {
+        left: 25% !important;
+      }
+
+      &.quarter-m + .quarter + .event:not(.detail-shown).quarter {
+        left: 50% !important;
+      }
+
+      &.quarter-m + .quarter + .quarter + .event:not(.detail-shown).quarter {
+        left: auto !important;
+        right: 0 !important;
+        padding-right: 10px;
       }
     }
   }
