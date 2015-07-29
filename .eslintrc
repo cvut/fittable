@@ -1,21 +1,19 @@
-{
-  parser: 'babel-eslint',
-  env: {
-    browser: true,
-    es6: true,
-    node: true //browserify
-  },
-  ecmaFeatures: {
-    modules: true,
-    blockBindings: true,
-    forOf: true,
-    jsx: true,
-    classes: true,
-    arrowFunctions,
-  },
-  rules: {
-    strict: 0,
-    quotes: [1, 'single', 'avoid-escape'],
-    'comma-dangle': 0
-  }
-}
+
+---
+extends: [standard, standard-react]
+env:
+  browser: true
+  node: true
+  es6: true
+ecmaFeatures:
+  modules: true
+rules:
+  camelcase: [2]
+  no-var: [1]
+  prefer-const: [1]
+  comma-dangle: [2, always-multiline]
+  react/jsx-quotes: [2, double, avoid-escape]
+  curly: [2, all]
+  max-len: [2, 120, 2]
+  # FIXME: supported in future ESLint:
+  # max-len: [2, 120, 2, {ignoreComments: true, ignoreUrls: true}]
