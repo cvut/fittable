@@ -3,40 +3,40 @@
  * @author Marián Hlaváč
  */
 
-import React from 'react';
+import React from 'react'
 
-export default class Toggleable extends React.Component
-{
-    constructor( props )
-    {
-        super.constructor( props );
-    }
+export default class Toggleable extends React.Component {
 
-    /**
-     * Toggles this component
-     */
-    toggle()
-    {
-        if ( ! this.refs.rootEl.getDOMNode().classList.contains( 'hide' ) )
-            this.refs.rootEl.getDOMNode().classList.add( 'hide' );
-        else
-            this.refs.rootEl.getDOMNode().classList.remove( 'hide' );
-    }
+  constructor (props) {
+    super.constructor(props)
+  }
 
-    /**
-     * Shows this component
-     */
-    show()
-    {
-        this.refs.rootEl.getDOMNode().classList.remove( 'hide' );
-    }
+  /**
+   * Toggles this component
+   */
+  toggle () {
 
-    /**
-     * Hides this component
-     */
-    hide()
-    {
-        if ( ! this.refs.rootEl.getDOMNode().classList.contains( 'hide' ) )
-            this.refs.rootEl.getDOMNode().classList.add( 'hide' );
+    if (!this.refs.rootEl.getDOMNode().classList.contains('hide')) {
+      this.refs.rootEl.getDOMNode().classList.add('hide')
+    } else {
+      this.refs.rootEl.getDOMNode().classList.remove('hide')
     }
+  }
+
+  /**
+   * Shows this component
+   */
+  show () {
+    this.refs.rootEl.getDOMNode().classList.remove('hide')
+  }
+
+  /**
+   * Hides this component
+   */
+  hide () {
+
+    if (!this.refs.rootEl.getDOMNode().classList.contains('hide')) {
+      this.refs.rootEl.getDOMNode().classList.add('hide')
+    }
+  }
 }

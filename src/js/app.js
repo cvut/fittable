@@ -6,42 +6,45 @@
  */
 
 try {
-// https://babeljs.io/docs/usage/polyfill/
-require('babel/polyfill');
+  // https://babeljs.io/docs/usage/polyfill/
+  require('babel/polyfill')
+} catch(e) {
+  console.warn(e)
 }
-catch(e) { console.warn(e); }
 
-import React from 'react';
-import Fittable from './components/Fittable.component';
+import React from 'react'
+import Fittable from './components/Fittable.component'
 
-import Counterpart from 'counterpart';
-import Moment from 'moment';
-import Momentcslocale from 'moment/locale/cs';
+import Counterpart from 'counterpart'
+import Moment from 'moment'
+import Momentcslocale from 'moment/locale/cs'
 
-import LocaleCS from '../lang/cs.json';
-import LocaleEN from '../lang/en.json';
+import LocaleCS from '../lang/cs.json'
+import LocaleEN from '../lang/en.json'
 
-function fittable ( containerElId, options )
-{
-    // Register translations
-    Counterpart.registerTranslations( 'en', LocaleEN );
-    Counterpart.registerTranslations( 'cs', Object.assign( LocaleCS, {
-        counterpart: {
-            pluralize: ( entry, count ) => { entry[ (count === 0 && 'zero' in entry) ? 'zero' : (count === 1) ? 'one' : 'other' ] }
-        }
-    } ) );
+function fittable (containerElId, options) {
 
-    // Set locale
-    Counterpart.setLocale( options.locale );
-    Moment.locale( options.locale );
+  // Register translations
+  Counterpart.registerTranslations('en', LocaleEN)
+  Counterpart.registerTranslations('cs', Object.assign(LocaleCS, {
+    counterpart: {
+      pluralize: (entry, count) => {
+        entry[ (count === 0 && 'zero' in entry) ? 'zero' : (count === 1) ? 'one' : 'other' ]
+      },
+    },
+  }))
 
-    // Create root fittable element
-    var element = React.createElement( Fittable, options );
-    var rendered = React.render( element, document.getElementById( containerElId ) );
+  // Set locale
+  Counterpart.setLocale(options.locale)
+  Moment.locale(options.locale)
 
-    // Return fittable instance
-    return rendered;
+  // Create root fittable element
+  var element = React.createElement(Fittable, options)
+  var rendered = React.render(element, document.getElementById(containerElId))
 
+  // Return fittable instance
+  return rendered
 }
-// global.fittable = fittable;
-export default fittable;
+
+// global.fittable = fittable
+export default fittable

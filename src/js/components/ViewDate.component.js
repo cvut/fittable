@@ -4,39 +4,43 @@
  * @author Marián Hlaváč
  */
 
-import React from 'react';
-import Moment from 'moment';
-import CP from 'counterpart';
+import React from 'react'
+import Moment from 'moment'
+import CP from 'counterpart'
 
-export default class ViewDate extends React.Component
-{
-    constructor( props )
-    {
-        super.constructor( props );
+export default class ViewDate extends React.Component {
+  constructor (props) {
 
-        this.state = {
-            open: false
-        };
+    super.constructor(props)
+
+    this.state = {
+      open: false,
+    }
+  }
+
+  weekRange () {
+
+    var weekStart = new Moment(this.props.viewDate).startOf('isoWeek')
+    var weekEnd = new Moment(this.props.viewDate).endOf('isoWeek')
+
+    if (!this.props.days7) {
+      weekEnd.subtract(2, 'days')
     }
 
-    weekRange() {
-        var weekStart = new Moment( this.props.viewDate ).startOf('isoWeek');
-        var weekEnd = new Moment( this.props.viewDate ).endOf('isoWeek');
-
-        if ( ! this.props.days7 ) weekEnd.subtract( 2, 'days' );
-
-        return weekStart.isSame( weekEnd, 'month' ) ?
-                    weekStart.date() + '. - ' + weekEnd.date() + '. ' + weekStart.format('MMMM') :
-                    weekStart.format( 'D. MMMM ' ) + ' - ' + weekEnd.format( 'D. MMMM' );
+    if (weekStart.isSame(weekEnd, 'month')) {
+      return `${weekStart.date()}. - ${weekEnd.date()}. ${weekStart.format('MMMM')}`
+    } else {
+      return `${weekStart.format('D. MMMM ')} - ${weekEnd.format('D. MMMM')}`
     }
+  }
 
-    /**
-     * Renders the component
-     */
-    render()
-    {
-        return <div className="view-date">
-            {this.weekRange()}
-               </div>;
-    }
+  /**
+   * Renders the component
+   */
+  render() {
+
+    return <div className="view-date">
+             {this.weekRange()}
+           </div>
+  }
 }

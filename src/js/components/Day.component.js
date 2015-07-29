@@ -10,6 +10,7 @@ import Moment from 'moment'
 import EventBox from './EventBox.component'
 
 function appearanceClass (overlaysLength) {
+
   if (overlaysLength >= 4) {
     return 'quarter'
   }
@@ -36,6 +37,7 @@ export default class Day extends React.Component {
    * @returns {number} Comparison result
    */
   cmpByStart (lhs, rhs) {
+
     if (lhs.startsAt < rhs.startsAt) {
       return -1
     } else if (lhs.startsAt > rhs.startsAt) {
@@ -51,6 +53,7 @@ export default class Day extends React.Component {
    * @returns {*} Updated events
    */
   findOverlayedEvents (props) {
+
     var overlayed = []
     var lastend = new Moment(0)
     var events = props.events.sort(this.cmpByStart)
@@ -97,6 +100,7 @@ export default class Day extends React.Component {
   }
 
   renderEvent (event) {
+
     if (!this.props.displayFilter[event.type]) {
       event.appear = 'hide'
     }
@@ -118,6 +122,7 @@ export default class Day extends React.Component {
   }
 
   render () {
+
     const events = this.findOverlayedEvents(this.props)
     const className = `day ${this.props.active ? 'active' : ''} ${this.props.selected ? 'selected' : ''}`
     const weekDay = new Moment().isoWeekday(parseInt(this.props.id) + 1, 10).format('dddd')
