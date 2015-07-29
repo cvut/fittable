@@ -3,103 +3,137 @@
  * @author Marián Hlaváč
  */
 
-import React from 'react';
-import CP from 'counterpart';
-import Moment from 'moment';
+import React from 'react'
+import CP from 'counterpart'
+import Moment from 'moment'
 
-import EventBox from './EventBox.component';
+import EventBox from './EventBox.component'
 
-export default class Day extends React.Component
-{
-    construtor( props )
-    {
-        super.constructor( props );
+function appearanceClass (overlaysLength) {
+  if (overlaysLength >= 4) {
+    return 'quarter'
+  }
+  if (overlaysLength === 3) {
+    return 'third'
+  }
+  if (overlaysLength === 2) {
+    return 'half'
+  }
+
+  return 'reuglar'
+}
+
+export default class Day extends React.Component {
+
+  construtor (props) {
+    super.constructor(props)
+  }
+
+  /**
+   * Compare function - compares by 'startsAs' member variable
+   * @param lhs Left hand side
+   * @param rhs Right hand side
+   * @returns {number} Comparison result
+   */
+  cmpByStart (lhs, rhs) {
+    if (lhs.startsAt < rhs.startsAt) {
+      return -1
+    } else if (lhs.startsAt > rhs.startsAt) {
+      return 1
+    } else {
+      return 0
     }
+  }
 
-    /**
-     * Compare function - compares by 'startsAs' member variable
-     * @param lhs Left hand side
-     * @param rhs Right hand side
-     * @returns {number} Comparison result
-     */
-    cmpByStart( lhs, rhs )
-    {
-        return ( lhs.startsAt < rhs.startsAt ? -1 : ( lhs.startsAt > rhs.startsAt ? 1 : 0 ) );
-    }
+  /**
+   * Finds all overlayed events and returns updated events array with appear property
+   * @param props Props
+   * @returns {*} Updated events
+   */
+  findOverlayedEvents (props) {
+    var overlayed = []
+    var lastend = new Moment(0)
+    var events = props.events.sort(this.cmpByStart)
 
-    /**
-     * Finds all overlayed events and returns updated events array with appear property
-     * @param props Props
-     * @returns {*} Updated events
-     */
-    findOverlayedEvents( props )
-    {
-        var overlayed = [], lastend = new Moment( 0 );
-        var events = props.events.sort( this.cmpByStart );
+    // Compares this event's start with the last end. If the start is after the last end,
+    // set appropriate appearances for all events in queue.
+    for (var evid in events) {
 
-        for ( var evid in events )
-        {
-            /*
-                Compares this event's start with the last end. If the start is after the last end,
-                set appropriate appearances for all events in queue.
-            */
+      var start = new Moment(events[evid].startsAt)
 
-            var start = new Moment( events[evid].startsAt );
+      // Compare
+      if (start.isAfter(lastend) || start.isSame(lastend)) {
+        let appearance = appearanceClass(overlayed.length)
 
-            // Compare
-            if ( start.isAfter( lastend ) || start.isSame( lastend ) )
-            {
-                var appearance = overlayed.length >= 4 ? 'quarter' : ( overlayed.length == 3 ? 'third' : ( overlayed.length == 2 ? 'half' : 'regular' ) );
-
-                for ( var oid in overlayed )
-                {
-                    events[overlayed[oid]].appear = appearance;
-                    if ( overlayed.length >= 4 && oid % 4 == 0 ) events[overlayed[oid]].appear += '-m';
-                }
-
-                overlayed = [];
-            }
-
-            // Queue the event
-            overlayed.push( evid );
-
-            // Set event's end as last end
-            if ( new Moment( events[evid].endsAt ).isAfter( lastend ) ) lastend = new Moment( events[evid].endsAt );
+        for (var oid in overlayed) {
+          events[overlayed[oid]].appear = appearance
+          if (overlayed.length >= 4 && oid % 4 == 0) {
+            events[overlayed[oid]].appear += '-m'
+          }
         }
+        overlayed = []
+      }
 
-        // Set appearance for the last events
+      // Queue the event
+      overlayed.push(evid)
 
-        var appearance = overlayed.length >= 4 ? 'quarter' : ( overlayed.length == 3 ? 'third' : ( overlayed.length == 2 ? 'half' : 'regular' ) );
+      // Set event's end as last end
+      if (new Moment(events[evid].endsAt).isAfter(lastend)) {
+        lastend = new Moment(events[evid].endsAt)
+      }
+    }
+    // FIXME: DUPLICATION!
+    // Set appearance for the last events
+    let appearance = appearanceClass(overlayed.length)
 
-        for ( var oid in overlayed )
-        {
-            events[overlayed[oid]].appear = appearance;
-            if ( overlayed.length >= 4 && oid % 4 == 0 ) events[overlayed[oid]].appear += '-m';
-        }
-
-        return events;
+    for (var oid in overlayed) {
+      events[overlayed[oid]].appear = appearance
+      if (overlayed.length >= 4 && oid % 4 == 0) {
+        events[overlayed[oid]].appear += '-m'
+      }
     }
 
-    /**
-     * Renders the component
-     */
-    render()
-    {
-        var events = this.findOverlayedEvents( this.props );
+    return events
+  }
 
-        return <div className={'day' + ( this.props.active ? ' active' : '') + ( this.props.selected ? ' selected' : '')} data-day={this.props.id}>
-                <div className="label" title={ this.props.active ? CP.translate( 'timetable.actual_day', { day: new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' ) } ) : '' }>
-                    <span className="day-num">{this.props.dayNum}</span>
-                    <span className="day-name">{new Moment().isoWeekday(parseInt(this.props.id) + 1).format( 'dddd' )}</span>
-                </div>
-            <div className="events" ref="events">
-                {events.map( function( event ) {
-                    if ( this.props.displayFilter[event.type] == false ) event.appear = 'hide';
-                    return <EventBox key={event.id} data={event} detailShown={event.id == this.props.showDetailOn}
-                        onClick={this.props.onDetailShow} openFromBottom={this.props.id >= 3} colored={this.props.colored}
-                        onViewChange={this.props.onViewChange} onDateChange={this.props.onDateChange} linkNames={this.props.linkNames} />;
-                }.bind(this) ) }
-            </div>
-        </div>;
+  renderEvent (event) {
+    if (!this.props.displayFilter[event.type]) {
+      event.appear = 'hide'
     }
+    const shown = (event.id == this.props.showDetailOn)
+
+    return (
+    <EventBox
+              key={event.id}
+              data={event}
+              detailShown={shown}
+              onClick={this.props.onDetailShow}
+              openFromBottom={this.props.id >= 3 }
+              colored={this.props.colored}
+              onViewChange={this.props.onViewChange}
+              onDateChange={this.props.onDateChange}
+              linkNames={this.props.linkNames }/>
+    )
+
+  }
+
+  render () {
+    const events = this.findOverlayedEvents(this.props)
+    const className = `day ${this.props.active ? 'active' : ''} ${this.props.selected ? 'selected' : ''}`
+    const weekDay = new Moment().isoWeekday(parseInt(this.props.id) + 1, 10).format('dddd')
+    let dayTitle = ''
+    if (this.props.active) {
+      dayTitle = CP.translate('timetable.actual_day', {day: weekDay})
+    }
+
+    return (<div className={className} data-day={this.props.id}>
+              <div className='label' title={dayTitle}>
+                <span className='day-num'>{this.props.dayNum}</span>
+                <span className='day-name'>{weekDay}</span>
+              </div>
+              <div className='events' ref='events'>
+                {events.map(this.renderEvent.bind(this))}
+              </div>
+            </div>)
+  }
 }
