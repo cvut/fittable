@@ -9,14 +9,5 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-[*.{js,html}]
-indent_size = 4
-
-[*.{scss}]
-indent_size = 2
-
-[Gruntfile.js]
-indent_size = 2
-
 [/script/*]
 indent_size = 4
