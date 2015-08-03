@@ -1,6 +1,5 @@
 /**
  * Renders a large alert, telling user that something wrong happened.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -12,9 +11,6 @@ export default class Error extends React.Component {
     super.constructor(props)
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     if (this.props.shown !== false) {

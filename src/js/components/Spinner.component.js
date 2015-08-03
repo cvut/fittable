@@ -2,9 +2,6 @@
  * Ajax spinner element
  *
  * Used Spinkit @ tobiasahlin.com/spinkit, thanks
- *
- * @author Marián Hlaváč
- * @author tobiasahlin.com/spinkit
  */
 
 import React from 'react'
@@ -15,9 +12,6 @@ export default class Week extends React.Component {
     super.constructor(props)
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

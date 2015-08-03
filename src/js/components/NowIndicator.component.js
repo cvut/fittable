@@ -1,6 +1,5 @@
 /**
  * Indicator showing line representing actual point of today's time
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -12,9 +11,6 @@ export default class Timetable extends React.Component {
     super.constructor(props)
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     var nowpoint = new Moment().diff(

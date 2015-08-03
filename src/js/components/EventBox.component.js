@@ -1,6 +1,5 @@
 /**
  * Component representing the event.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -81,9 +80,6 @@ export default class EventBox extends React.Component {
     }
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     // Generate time strings

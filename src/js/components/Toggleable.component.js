@@ -1,6 +1,5 @@
 /**
  * Base class (component) for all toggleable components. Used primarily for functions dialogs
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -30,9 +29,6 @@ export default class Toggleable extends React.Component {
     this.refs.rootEl.getDOMNode().classList.remove('hide')
   }
 
-  /**
-   * Hides this component
-   */
   hide () {
 
     if (!this.refs.rootEl.getDOMNode().classList.contains('hide')) {

@@ -1,6 +1,5 @@
 /**
  * Component rendering whole timetable, containing hierarchy of week, day and events components.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -85,9 +84,6 @@ export default class Timetable extends React.Component {
     this.setState({ detailShownOn: key, popupsOpened: popups })
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     var weekEvents = [ [], [], [], [], [], [], [] ],

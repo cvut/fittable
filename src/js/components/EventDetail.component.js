@@ -1,7 +1,6 @@
 /**
  * Child component of EventBox, showing more information that won't fit into
  * EventBox. Shows after clicking on EventBox.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -183,9 +182,6 @@ export default class EventDetail extends React.Component {
     }
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

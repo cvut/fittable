@@ -1,7 +1,6 @@
 /**
  * Week controller located in upper left corner, displaying actual week.
  * On click it toggles the WeekSwitcher component
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -35,9 +34,6 @@ export default class ViewDate extends React.Component {
     }
   }
 
-  /**
-   * Renders the component
-   */
   render () {
     return <div className="view-date">{this.weekRange()}</div>
   }

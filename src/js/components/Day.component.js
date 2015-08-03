@@ -1,6 +1,5 @@
 /**
  * Component representing one row (day) in timetable.
- * @author Marián Hlaváč
  */
 
 import React from 'react'

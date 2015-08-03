@@ -2,7 +2,6 @@
  * Week switcher is displayed after clicking on Week component. It contains three ways of
  * changing the displayed week. You can move it by one semester, one month or choose
  * exact week from calendar displayed in this dropdown.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -86,9 +85,6 @@ export default class WeekSwitcher extends Toggleable {
     )
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     let viewMoment = this.viewDateMoment()

@@ -1,8 +1,6 @@
 /**
  * Main application file of Fittable
  *  - Requires React.js to be loaded before loading this
- *
- *  @author Marián Hlaváč
  */
 
 try {

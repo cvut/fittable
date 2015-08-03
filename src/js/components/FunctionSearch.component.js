@@ -1,7 +1,6 @@
 /**
  * Function component, search function
  * Provides ability to search events, teachers etc.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -50,9 +49,6 @@ export default class FunctionSearch extends React.Component {
     this.refs.searchquery.getDOMNode().removeEventListener('keyup', this.handleInputKeyup.bind(this))
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

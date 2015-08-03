@@ -1,7 +1,6 @@
 /**
  * Function component, filtering function
  * Provides ability to filter out some types of events from timetable
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -26,9 +25,6 @@ export default class FunctionFilter extends React.Component {
     this.props.onFilterChange(newfilters)
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

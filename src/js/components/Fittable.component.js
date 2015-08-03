@@ -1,6 +1,5 @@
 /**
  * Root component drawing whole widget.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -417,25 +416,16 @@ export default class Fittable extends React . Component {
     this.hammer.destroy()
   }
 
-  /**
-   * Component mounting
-   */
   componentDidMount () {
     this.registerSwipeListener(this.refs.rootEl.getDOMNode())
     this.refs.rootEl.getDOMNode().addEventListener('click', this.handleClick.bind(this))
   }
 
-  /**
-   * Component unmounting
-   */
   componentWillUnmount () {
     this.unregisterSwipeListener()
     this.refs.rootEl.getDOMNode().removeEventListener('click', this.handleClick.bind(this))
   }
 
-  /**
-   * Renders the component
-   */
   render () {
     // Grid settings
     var gridsettings = {

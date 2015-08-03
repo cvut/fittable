@@ -1,7 +1,6 @@
 /**
  * Wraps all controls displayed in the heading of widget.
  * Contains week controllers and functions tools.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -49,9 +48,6 @@ export default class Controls extends React.Component {
     this.refs.weekSwitcher.toggle()
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

@@ -1,6 +1,5 @@
 /**
  * Component wrapping function panels
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -15,9 +14,6 @@ export default class FunctionsSidebar {
     super.constructor(props)
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     let functionToRender

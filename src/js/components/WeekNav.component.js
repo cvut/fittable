@@ -1,7 +1,6 @@
 /**
  * Week navigator components consists of two buttons, one for navigation to the left and second for navigation to the
  * right.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -44,9 +43,6 @@ export default class WeekNav extends React.Component {
     return CP.translate(this.props.viewDate.isoWeek() % 2 === 0 ? 'even' : 'odd')
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

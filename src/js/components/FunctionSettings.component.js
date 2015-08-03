@@ -1,7 +1,6 @@
 /**
  * Function component, settings function
  * Main dialog containing all important options to customize look and behaviour of fittable
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -41,9 +40,6 @@ export default class FunctionSettings extends React.Component {
     this.setState({ })
   }
 
-  /**
-   * Renders the component
-   */
   render () {
 
     return (

@@ -1,6 +1,5 @@
 /**
  * Component wrapping all function control buttons located in upper right corner of the widget.
- * @author Marián Hlaváč
  */
 
 import React from 'react'
@@ -38,9 +37,7 @@ export default class FunctionsBar extends React.Component {
   handleFilterClick () {
     this.props.onPanelToggle('filter')
   }
-  /**
-   * Renders the component
-   */
+
   render () {
 
     return (
