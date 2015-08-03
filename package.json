@@ -29,8 +29,8 @@
   "devDependencies": {
     "babel-eslint": "^3.1.17",
     "babelify": "^5.0.4",
-    "eslint": "^0.24.1",
-    "eslint-config-standard": "^3.4.1",
+    "eslint": "^1.0.0",
+    "eslint-config-standard": "^4.0.0-5",
     "eslint-config-standard-react": "^1.0.2",
     "eslint-plugin-react": "^3.1.0",
     "foundation-sites": "^5.5.2",
