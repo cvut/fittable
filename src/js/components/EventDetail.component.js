@@ -9,6 +9,7 @@ import CP from 'counterpart'
 import Moment from 'moment'
 
 export default class EventDetail extends React.Component {
+
   constructor (props) {
     super.constructor(props)
   }
@@ -37,90 +38,130 @@ export default class EventDetail extends React.Component {
 
   eventBasicProps () {
 
-    return <div className="prop-section basic-props">
-             <div className="type-num">
-               {CP.translate('event_type_num.' + this.props.data.type, { seqnumber: (this.props.data.sequenceNumber || '?') }) }
-             </div>
-             <div className="name">
-               <button onClick={this.handleCourseClick.bind(this, this.props.data.course) }>
-                 {  ((this.props.data.name || '') .length > 0) ? this.props.data.name : this.getLinkName('courses', this.props.data.course) }
-               </button>
-             </div>
-             <div className="location">
-               <button onClick={this.handleRoomClick.bind(this, this.props.data.room) }>
-                 <i className="fa fa-map-marker"></i> {this.props.data.room}
-               </button>
-             </div>
-           </div>
+    const seqNumber = this.props.data.sequenceNumber || '?'
+    const name = this.props.data.name || this.getLinkName('courses', this.props.data.course)
+
+    return (
+      <div className="prop-section basic-props">
+        <div className="type-num">
+          {CP.translate(`event_type_num.${this.props.data.type}`, {seqnumber: seqNumber}) }
+        </div>
+        <div className="name">
+          <button onClick={this.handleCourseClick.bind(this, this.props.data.course) }>
+            {name}
+          </button>
+        </div>
+        <div className="location">
+          <button onClick={this.handleRoomClick.bind(this, this.props.data.room) }>
+            <i className="fa fa-map-marker"></i>
+            {this.props.data.room}
+          </button>
+        </div>
+      </div>
+    )
   }
 
   eventExceptions () {
 
     if (this.props.data.details.appliedExceptions && this.props.data.details.appliedExceptions.length > 0) {
-      return <div className="prop-section exceptions">
-               <button className="reveal" onClick={this.revealHidden.bind(this) }>
-                 <i className="fa fa-exclamation-triangle fa-fw ex-icon"></i>
-                 <i className="fa fa-caret-down caret"></i> {CP.translate('detail.cancelled') }
-               </button>
-               <div className="hideable hide">
-                 <div className="because">
-                   {CP.translate('detail.becauseof') }
-                 </div>
-                 {this.props.data.details.appliedExceptions.map(function (exception) { return
-                 <div>
-                   <strong>{this.getLinkName('exceptions', exception) }</strong>
-                 </div>; }.bind(this)) }
-               </div>
-             </div>
+      return (
+        <div className="prop-section exceptions">
+          <button className="reveal" onClick={this.revealHidden.bind(this) }>
+            <i className="fa fa-exclamation-triangle fa-fw ex-icon"></i>
+            <i className="fa fa-caret-down caret"></i> {CP.translate('detail.cancelled') }
+          </button>
+          <div className="hideable hide">
+            <div className="because">
+              {CP.translate('detail.becauseof') }
+            </div>
+            {
+              this.props.data.details.appliedExceptions.map(function (exception) {
+                return (
+                  <div>
+                    <strong>{this.getLinkName('exceptions', exception) }</strong>
+                  </div>
+                )
+              }.bind(this))
+            }
+          </div>
+          </div>
+      )
     }
   }
 
   eventNumericProps () {
 
-    return <div className="prop-section num-props">
-             {this.numPropertyField(CP.translate('detail.students') , this.props.data.details.students ? this.props.data.details.students.length : '?') } {this.props.data.details.capacity ? this.numPropertyField(CP.translate('detail.capacity') , this.props.data.details.capacity,
-             'center') :
-             <div />} {this.props.data.details.parallel ? this.numPropertyField(CP.translate('detail.parallel') , CP.translate('detail.number', {num: this.props.data.details.parallel }) , 'right') :
-             <div />}
-           </div>
+    const studentsCount = this.props.data.details.students ? this.props.data.details.students.length : '?'
+    const studentsPropField = this.numPropertyField(CP.translate('detail.students'), studentsCount)
+
+    let capacityPropField = <div />
+    if (this.props.data.details.capacity) {
+      capacityPropField = this.numPropertyField(CP.translate('detail.capacity'),
+                                                this.props.data.details.capacity,
+                                                'center')
+    }
+
+    let parallelPropField = <div />
+    if (this.props.data.details.parallel) {
+      parallelPropField = this.numPropertyField(CP.translate('detail.parallel'),
+                                                CP.translate('detail.number', {num: this.props.data.details.parallel }),
+                                                'right')
+    }
+
+    return (
+      <div className="prop-section num-props">
+       {studentsPropField}
+       {capacityPropField}
+       {parallelPropField}
+      </div>
+    )
   }
 
   eventTeachers () {
 
-    return <div className="prop-section teachers">
-             {this.props.data.teachers.map(function (teacher) { return this.teacherField(teacher, this.getLinkName('teachers', teacher)); }.bind(this)) }
-             <div className="prop-title">
-               {CP.translate('detail.teachers') }
-             </div>
-           </div>
+    return (
+      <div className="prop-section teachers">
+        {this.props.data.teachers.map(function (teacher) {
+            return this.teacherField(teacher, this.getLinkName('teachers', teacher))
+          }.bind(this))
+        }
+        <div className="prop-title">
+          {CP.translate('detail.teachers') }
+        </div>
+      </div>
+    )
   }
 
   numPropertyField (title, value, align = 'left') {
 
-    return <div className={ 'num-prop ' + align}>
-             <div className="value">
-               {value}
-             </div>
-             <div className="prop-title">
-               {title}
-             </div>
-           </div>
+    return (
+      <div className={ 'num-prop ' + align}>
+        <div className="value">
+          {value}
+        </div>
+        <div className="prop-title">
+          {title}
+        </div>
+     </div>
+    )
   }
 
   teacherField (username, fullname) {
 
-    return <div className="teacher">
-             <button className="reveal" onClick={this.revealHidden.bind(this) }>
-               <i className="fa fa-male"></i><i className="fa fa-caret-down caret"></i> {fullname}
-             </button>
-             <div className="hideable hide">
-               <a href={ 'https://usermap.cvut.cz/profile/' + username}>{CP.translate('detail.usermap_profile') }</a>
-               <br />
-               <button onClick={this.handleTeacherClick.bind(this, username) }>
-                 {CP.translate('detail.personal_calendar') }
-               </button>
-             </div>
-           </div>
+    return (
+      <div className="teacher">
+        <button className="reveal" onClick={this.revealHidden.bind(this) }>
+          <i className="fa fa-male"></i><i className="fa fa-caret-down caret"></i> {fullname}
+        </button>
+        <div className="hideable hide">
+          <a href={ 'https://usermap.cvut.cz/profile/' + username}>{CP.translate('detail.usermap_profile') }</a>
+          <br />
+        <button onClick={this.handleTeacherClick.bind(this, username) }>
+          {CP.translate('detail.personal_calendar') }
+        </button>
+        </div>
+      </div>
+    )
   }
 
   revealHidden (e) {
@@ -135,7 +176,11 @@ export default class EventDetail extends React.Component {
 
     // Toggle hide class on reveal element
     el = e.target.parentNode.getElementsByClassName('hideable') [0]
-    if (el.classList.contains('hide')) el.classList.remove('hide') ; else el.classList.add('hide')
+    if (el.classList.contains('hide')) {
+      el.classList.remove('hide')
+    } else {
+      el.classList.add('hide')
+    }
   }
 
   /**
@@ -143,11 +188,16 @@ export default class EventDetail extends React.Component {
    */
   render () {
 
-    return <div className="detail">
-             <div className="wrap">
-               {this.eventBasicProps(this) } {this.eventExceptions(this) } {this.eventNumericProps(this) } {this.eventTeachers(this) }
-               <div className="clearfix"></div>
-             </div>
-           </div>
+    return (
+      <div className="detail">
+        <div className="wrap">
+          {this.eventBasicProps(this)}
+          {this.eventExceptions(this)}
+          {this.eventNumericProps(this)}
+          {this.eventTeachers(this)}
+          <div className="clearfix"></div>
+        </div>
+      </div>
+    )
   }
 }

@@ -28,54 +28,62 @@ export default class WeekSwitcher extends Toggleable {
     let semesterName = this.props.semester
     let viewMoment = this.viewDateMoment()
 
-    return <div className="row weeksw-selector weeksw-semester-selector collapse">
-             <div className="column small-3 gr-go">
-               <button
-                       type="button"
-                       className="gr-go-btn"
-                       onClick={this.props.onDateChange.bind(this, viewMoment().subtract(6, 'months'), null)}>
-                 <i className="fa fa-chevron-left"></i>
-               </button>
-             </div>
-             <div className="column small-6 active-item">
-               {semesterName}
-             </div>
-             <div className="column small-3 gr-go">
-               <button
-                       type="button"
-                       className="gr-go-btn"
-                       onClick={this.props.onDateChange.bind(this, viewMoment().add(6, 'months'), null)}>
-                 <i className="fa fa-chevron-right"></i>
-               </button>
-             </div>
-           </div>
+    return (
+      <div className="row weeksw-selector weeksw-semester-selector collapse">
+        <div className="column small-3 gr-go">
+          <button
+            type="button"
+            className="gr-go-btn"
+            onClick={this.props.onDateChange.bind(this, viewMoment().subtract(6, 'months'), null)}
+          >
+            <i className="fa fa-chevron-left"></i>
+          </button>
+        </div>
+        <div className="column small-6 active-item">
+          {semesterName}
+        </div>
+        <div className="column small-3 gr-go">
+          <button
+            type="button"
+            className="gr-go-btn"
+            onClick={this.props.onDateChange.bind(this, viewMoment().add(6, 'months'), null)}
+          >
+            <i className="fa fa-chevron-right"></i>
+          </button>
+         </div>
+       </div>
+    )
   }
 
   renderMonthSelector () {
 
     let viewMoment = this.viewDateMoment()
 
-    return <div className="row weeksw-selector weeksw-month-selector collapse">
-             <div className="column small-3 gr-go">
-               <button
-                       type="button"
-                       className="gr-go-btn"
-                       onClick={this.props.onDateChange.bind(this, viewMoment().subtract(1, 'months').startOf('isoWeek'), null)}>
-                 <i className="fa fa-chevron-left"></i>
-               </button>
-             </div>
-             <div className="column small-6 active-item">
-               {viewMoment().format('MMMM')}
-             </div>
-             <div className="column small-3 gr-go">
-               <button
-                       type="button"
-                       className="gr-go-btn"
-                       onClick={this.props.onDateChange.bind(this, viewMoment().add(1, 'months').startOf('isoWeek'), null)}>
-                 <i className="fa fa-chevron-right"></i>
-               </button>
-             </div>
-           </div>
+    return (
+      <div className="row weeksw-selector weeksw-month-selector collapse">
+        <div className="column small-3 gr-go">
+          <button
+            type="button"
+            className="gr-go-btn"
+            onClick={this.props.onDateChange.bind(this, viewMoment().subtract(1, 'months').startOf('isoWeek'), null)}
+          >
+            <i className="fa fa-chevron-left"></i>
+          </button>
+        </div>
+        <div className="column small-6 active-item">
+          {viewMoment().format('MMMM')}
+        </div>
+        <div className="column small-3 gr-go">
+          <button
+            type="button"
+            className="gr-go-btn"
+            onClick={this.props.onDateChange.bind(this, viewMoment().add(1, 'months').startOf('isoWeek'), null)}
+          >
+            <i className="fa fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    )
   }
 
   /**
@@ -135,23 +143,34 @@ export default class WeekSwitcher extends Toggleable {
     }
 
     // FIXME: (╯°□°)╯︵ ┻━┻
-    return <div className="weeksw hide" ref="rootEl">
-             {this.renderSemesterSelector()} {this.renderMonthSelector()} {weeks.map(function (week) {
-              return <div className={ 'row weeksw-selector weeksw-week-selector ' + activeWeekClass(week) } key={weeks.indexOf(week)}>
-               <div className="column small-12">
-                 {week.map(function (day) {
-                  return <button
-                         type="button"
-                         className={ 'weeksw-day ' + dayClass(week, day)}
-                         onClick={switchWeek.bind(this, week)}
-                         key={weeks.indexOf(week) + '-' + day}>
-                   {day}
-                 </button>
-                }.bind(this))
-              }
-               </div>
-             </div>
-            }.bind(this)) }
-           </div>
+    return (
+      <div className="weeksw hide" ref="rootEl">
+        {this.renderSemesterSelector()}
+        {this.renderMonthSelector()}
+        {weeks.map(function (week) {
+          return (
+            <div
+              className={`row weeksw-selector weeksw-week-selector ${activeWeekClass(week)}`}
+              key={weeks.indexOf(week)}
+            >
+              <div className="column small-12">
+                {week.map(function (day) {
+                  return (
+                    <button
+                      type="button"
+                      className={ 'weeksw-day ' + dayClass(week, day)}
+                      onClick={switchWeek.bind(this, week)}
+                      key={weeks.indexOf(week) + '-' + day}
+                    >
+                      {day}
+                    </button>
+                  )
+                }.bind(this))}
+              </div>
+            </div>
+          )
+        }.bind(this))}
+      </div>
+    )
   }
 }

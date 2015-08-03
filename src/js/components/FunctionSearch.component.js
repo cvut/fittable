@@ -8,6 +8,7 @@ import React from 'react'
 import CP from 'counterpart'
 
 export default class FunctionSearch extends React.Component {
+
   constructor (props) {
 
     super.constructor(props)
@@ -31,7 +32,9 @@ export default class FunctionSearch extends React.Component {
   handleInputKeyup (e) {
 
     if (e.target.value.length >= 3) {
-      if (this.autoSearchTimeout !== null) clearTimeout(this.autoSearchTimeout)
+      if (this.autoSearchTimeout !== null) {
+        clearTimeout(this.autoSearchTimeout)
+      }
 
       this.autoSearchTimeout = setTimeout(() => {
         this.props.onSearch(this.refs.searchquery.getDOMNode().value)
@@ -52,42 +55,50 @@ export default class FunctionSearch extends React.Component {
    */
   render () {
 
-    return <div className="function function-search" ref="rootEl">
-             <div className="clearfix"></div>
-             <div className="search-form">
-               <form name="search" onSubmit={this.handleSearch.bind(this)}>
-                 <input
-                        type="text"
-                        id="searchinput"
-                        name="search"
-                        ref="searchquery"
-                        placeholder={CP.translate ('functions.search.placeholder')} />
-                 <button
-                         type="submit"
-                         className="search"
-                         name="search">
-                   <i className="fa fa-search"></i>
-                 </button>
-               </form>
-             </div>
-             <div className="clearfix"></div>
-             <div className="search-results" ref="searchResults">
-               <ul className="search-results-list">
-                 {this.props.searchResults.map(function (result ) { return
-                 <li key={ 'result-' + result.id }>
-                   <button
-                           type="button"
-                           onClick={this.handleResultClick.bind(this, result.type, result.id)}
-                           className="search-results-item">
-                     { 'title' in result ? result.title : result.id }
-                     <div className="subtext">
-                       { 'title' in result ? result.id : '' }
-                     </div>
-                   </button>
-                 </li>; }.bind(this)) }
-               </ul>
-             </div>
-             <div className="clearfix"></div>
-           </div>
+    return (
+      <div className="function function-search" ref="rootEl">
+        <div className="clearfix" />
+        <div className="search-form">
+          <form name="search" onSubmit={this.handleSearch.bind(this)}>
+            <input
+              type="text"
+              id="searchinput"
+              name="search"
+              ref="searchquery"
+              placeholder={CP.translate('functions.search.placeholder')}
+            />
+            <button
+              type="submit"
+              className="search"
+              name="search"
+            >
+              <i className="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <div className="clearfix" />
+        <div className="search-results" ref="searchResults">
+          <ul className="search-results-list">
+            {this.props.searchResults.map(function (result) {
+              return (
+                <li key={ 'result-' + result.id }>
+                  <button
+                    type="button"
+                    onClick={this.handleResultClick.bind(this, result.type, result.id)}
+                    className="search-results-item"
+                  >
+                    {'title' in result ? result.title : result.id}
+                    <div className="subtext">
+                      {'title' in result ? result.id : ''}
+                    </div>
+                  </button>
+                </li>
+             )
+            }.bind(this)) }
+           </ul>
+         </div>
+         <div className="clearfix" />
+       </div>
+    )
   }
 }

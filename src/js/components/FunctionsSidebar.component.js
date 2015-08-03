@@ -23,32 +23,43 @@ export default class FunctionsSidebar {
     let functionToRender
 
     if (this.props.opened == 'settings') {
-      functionToRender = (<FunctionSettings
-                            ref="functionSettings"
-                            onSettingChange={this.props.onSettingChange}
-                            onLanguageChange={this.props.onRefreshNeed}
-                            options={this.props.options} />)
+      functionToRender = (
+        <FunctionSettings
+          ref="functionSettings"
+          onSettingChange={this.props.onSettingChange}
+          onLanguageChange={this.props.onRefreshNeed}
+          options={this.props.options}
+        />
+      )
     }
     if (this.props.opened == 'search') {
-      functionToRender = (<FunctionSearch
-                            ref="functionSearch"
-                            onSearch={this.props.onSearch}
-                            searchResults={this.props.searchResults}
-                            onViewChange={this.props.onViewChange} />)
+      functionToRender = (
+        <FunctionSearch
+          ref="functionSearch"
+          onSearch={this.props.onSearch}
+          searchResults={this.props.searchResults}
+          onViewChange={this.props.onViewChange}
+        />
+      )
     }
     if (this.props.opened == 'filter') {
-      functionToRender = (<FunctionFilter
-                            ref="functionFilter"
-                            displayFilter={this.props.displayFilter}
-                            onFilterChange={this.props.onFilterChange} />)
+      functionToRender = (
+        <FunctionFilter
+          ref="functionFilter"
+          displayFilter={this.props.displayFilter}
+          onFilterChange={this.props.onFilterChange}
+        />
+      )
     }
 
     const className = `functions-sidebar ${this.props.opened !== null ? '' : 'hide'}`
 
-    return <div className={className}>
-             <div className="wrap">
-               {functionToRender}
-             </div>
-           </div>
+    return (
+      <div className={className}>
+        <div className="wrap">
+          {functionToRender}
+        </div>
+      </div>
+    )
   }
 }

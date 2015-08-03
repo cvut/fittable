@@ -43,33 +43,42 @@ export default class FunctionsBar extends React.Component {
    */
   render () {
 
-    return <div className="functions-bar">
-             <button type="button" className="function-btn flags-function">
-               <span className="tooltip">{CP.translate('functions.flags.name')}</span>
-               <i className="fa fa-flag"></i>
-             </button>
-             <button
-                     type="button"
-                     className="function-btn filter-function"
-                     onClick={this.handleFilterClick.bind(this)}>
-               <span className="tooltip">{CP.translate('functions.filter.name')}</span>
-               <i className="fa fa-filter"></i>
-             </button>
-             <button
-                     type="button"
-                     className="function-btn settings-function"
-                     onClick={this.handleSettingsClick.bind(this)}
-                     onLayoutSelect>
-               <span className="tooltip">{CP.translate('functions.settings.name')}</span>
-               <i className="fa fa-cog"></i>
-             </button>
-             <button
-                     type="button"
-                     className="function-btn search-function"
-                     onClick={this.handleSearchClick.bind(this)}>
-               <span className="tooltip">{CP.translate('functions.search.name')}</span>
-               <i className="fa fa-search"></i>
-             </button>
-           </div>
+    return (
+      <div className="functions-bar">
+        <button
+          type="button"
+          className="function-btn flags-function"
+        >
+          <span className="tooltip">{ CP.translate('functions.flags.name') }</span>
+          <i className="fa fa-flag"></i>
+        </button>
+        <button
+          type="button"
+          className="function-btn filter-function"
+          onClick={ this.handleFilterClick.bind(this) }
+        >
+          <span className="tooltip">{ CP.translate('functions.filter.name') }</span>
+          <i className="fa fa-filter"></i>
+        </button>
+        <button
+          type="button"
+          className="function-btn settings-function"
+          onClick={ this.handleSettingsClick.bind(this) }
+          onLayoutSelect
+        >
+          <span className="tooltip">{ CP.translate('functions.settings.name') }</span>
+          <i className="fa fa-cog"></i>
+        </button>
+        <button
+          type="button"
+          className="function-btn search-function"
+          onClick={ this.handleSearchClick.bind(this) }
+        >
+          <span className="tooltip">{ CP.translate('functions.search.name') }</span>
+          <i className="fa fa-search"></i>
+        </button>
+      </div>
+
+    )
   }
 }

@@ -9,6 +9,7 @@ import Moment from 'moment'
 import CP from 'counterpart'
 
 export default class ViewDate extends React.Component {
+
   constructor (props) {
 
     super.constructor(props)
@@ -37,10 +38,7 @@ export default class ViewDate extends React.Component {
   /**
    * Renders the component
    */
-  render() {
-
-    return <div className="view-date">
-             {this.weekRange()}
-           </div>
+  render () {
+    return <div className="view-date">{this.weekRange()}</div>
   }
 }

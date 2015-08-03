@@ -49,30 +49,36 @@ export default class WeekNav extends React.Component {
    */
   render () {
 
-    return <div className="week-nav">
-             <button
-                     type="button"
-                     className="week-nav-btn week-nav-prev"
-                     onClick={this.handlePrevClick.bind(this)}
-                     title={CP.translate( 'weekNav.prev')}>
-               <i className="fa fa-chevron-left"></i>
-             </button>
-             <button
-                     type="button"
-                     className="week-nav-btn week-nav-calendar"
-                     onClick={this.handleCalClick.bind(this)}
-                     title={CP.translate( 'weekNav.selector')}>
-               <strong className="week-toggle-dow">{this.dayOfWeek()}</strong>{' '}
-               <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
-               <span className="week-toggle-parity">{this.weekParity()}</span>
-             </button>
-             <button
-                     type="button"
-                     className="week-nav-btn week-nav-next"
-                     onClick={this.handleNextClick.bind(this)}
-                     title={CP.translate( 'weekNav.next')}>
-               <i className="fa fa-chevron-right"></i>
-             </button>
-           </div>
+    return (
+      <div className="week-nav">
+        <button
+          type="button"
+          className="week-nav-btn week-nav-prev"
+          onClick={this.handlePrevClick.bind(this)}
+          title={CP.translate('weekNav.prev')}
+        >
+          <i className="fa fa-chevron-left"></i>
+        </button>
+        <button
+          type="button"
+          className="week-nav-btn week-nav-calendar"
+          onClick={this.handleCalClick.bind(this)}
+          title={CP.translate('weekNav.selector')}
+        >
+          <strong className="week-toggle-dow">{this.dayOfWeek()}</strong>
+          {' '}
+          <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
+          <span className="week-toggle-parity">{this.weekParity()}</span>
+        </button>
+        <button
+          type="button"
+          className="week-nav-btn week-nav-next"
+          onClick={this.handleNextClick.bind(this)}
+          title={CP.translate('weekNav.next')}
+        >
+          <i className="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    )
   }
 }

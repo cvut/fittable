@@ -34,7 +34,7 @@ export default class Fittable extends React . Component {
         'exam': true,
         'assessment': true,
         'course_event': true,
-        'other': true
+        'other': true,
       },
       // FIXME: this should be loaded dynamically from Sirius!
       grid: {
@@ -48,13 +48,16 @@ export default class Fittable extends React . Component {
       searchResults: [],
       error: false,
       errorType: null,
-      mutedError: false
+      mutedError: false,
     }
 
     // Declare variables
     this.weekEvents = null
     this.hammer = null
-    this.linkNames = { cs: { courses: {}, teachers: {}, exceptions: {} }, en: { courses: {}, teachers: {}, exceptions: {} } }
+    this.linkNames = {
+      cs: { courses: {}, teachers: {}, exceptions: {} },
+      en: { courses: {}, teachers: {}, exceptions: {} },
+    }
     this.semesters = null
     this.exceptions = {}
 
@@ -64,8 +67,7 @@ export default class Fittable extends React . Component {
     // Call for semester data, after finishing, setSemesterData will call for init data
     if ('semesterData' in this.props.callbacks) {
       this.props.callbacks.semesterData(this.setSemesterData.bind(this))
-    }
-    else {
+    } else {
       console.error('You forgot to implement the semesterData callback!')
     }
   }
@@ -101,11 +103,13 @@ export default class Fittable extends React . Component {
    */
   setWeekEvents (data, linksNames = null, alreadyCached = false) {
     // Animate in correct direction
-    if ('timetable' in this.refs)
-      if (this.state.prevViewDate.isAfter(this.state.viewDate))
+    if ('timetable' in this.refs) {
+      if (this.state.prevViewDate.isAfter(this.state.viewDate)) {
         this.refs.timetable.animateRight()
-      else
+      } else {
         this.refs.timetable.animateLeft()
+      }
+    }
 
     // Cache data if needed
     if (!alreadyCached) {
@@ -116,28 +120,25 @@ export default class Fittable extends React . Component {
 
     // Save teachers link names
     if ('teachers' in linksNames) {
-      for (var tlinkname of linksNames.teachers)
-      {
-      this.addNewLinkName(tlinkname.id, tlinkname.name.cs, 'teachers', 'cs')
-      this.addNewLinkName(tlinkname.id, tlinkname.name.en, 'teachers', 'en')
+      for (var tlinkname of linksNames.teachers) {
+        this.addNewLinkName(tlinkname.id, tlinkname.name.cs, 'teachers', 'cs')
+        this.addNewLinkName(tlinkname.id, tlinkname.name.en, 'teachers', 'en')
       }
     }
 
     // Save courses link names
     if ('courses' in linksNames) {
-      for (var clinkname of linksNames.courses)
-      {
-      this.addNewLinkName(clinkname.id, clinkname.name.cs, 'courses', 'cs')
-      this.addNewLinkName(clinkname.id, clinkname.name.en, 'courses', 'en')
+      for (var clinkname of linksNames.courses) {
+        this.addNewLinkName(clinkname.id, clinkname.name.cs, 'courses', 'cs')
+        this.addNewLinkName(clinkname.id, clinkname.name.en, 'courses', 'en')
       }
     }
 
     // Save exceptions link names
     if ('exceptions' in linksNames) {
-      for (var clinkname of linksNames.exceptions)
-      {
-      this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'cs')
-      this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'en')
+      for (var clinkname of linksNames.exceptions) {
+        this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'cs')
+        this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'en')
       }
     }
 
@@ -160,17 +161,21 @@ export default class Fittable extends React . Component {
     if (typeof data !== 'undefined' && data !== null) {
       for (var event of data) {
         // Test if dates are valid  (using Moment.js validation)
-        if (!new Moment(event.startsAt).isValid()) return false
-        if (!new Moment(event.endsAt).isValid()) return false
+        if (!new Moment(event.startsAt).isValid()) {
+          return false
+        }
+        if (!new Moment(event.endsAt).isValid()) {
+          return false
+        }
 
-      // todo: Tests missing!
+        // todo: Tests missing!
       }
 
       // Everything seems correct
       return true
-    }
-    else
+    } else {
       return false
+    }
   }
 
   setSemesterData (semesters) {
@@ -186,8 +191,9 @@ export default class Fittable extends React . Component {
     // Initial call of dateChange callback
     if ('data' in this.props.callbacks) {
       this.getWeekEvents()
+    } else {
+      console.error('You forgot to implement the data callback!')
     }
-    else console.error('You forgot to implement the data callback!')
 
     // Initial call of dateChange callback
     if ('dateChange' in this.props.callbacks) {
@@ -203,7 +209,7 @@ export default class Fittable extends React . Component {
       this.props.callbacks.search(query, this.receiveSearchResults.bind(this))
     } else {
       alert("Search callback hasn't been defined.")
-    // todo: do not alert, show UI error
+      // todo: do not alert, show UI error
     }
   }
 
@@ -219,7 +225,7 @@ export default class Fittable extends React . Component {
   onError (errorType) {
     this.setState({
       error: true,
-      errorType: errorType
+      errorType: errorType,
     })
   }
 
@@ -230,7 +236,7 @@ export default class Fittable extends React . Component {
 
     this.setState({
       error: false,
-      mutedError: true
+      mutedError: true,
     })
   }
 
@@ -238,7 +244,7 @@ export default class Fittable extends React . Component {
 
     this.setState({
       error: false,
-      mutedError: false
+      mutedError: false,
     })
   }
 
@@ -253,12 +259,15 @@ export default class Fittable extends React . Component {
   getSemester (viewDate) {
 
     var semestername
-    if (viewDate.month() < 2)
-      semestername = CP.translate('winter_sem', { year:  (parseInt(viewDate.format('YYYY')) - 1) + '/' + viewDate.format('YY') })
-    else if (viewDate.month() < 10)
-      semestername = CP.translate('summer_sem', { year:  (parseInt(viewDate.format('YYYY')) - 1) + '/' + viewDate.format('YY') })
-    else
-      semestername = CP.translate('winter_sem', { year:  (viewDate.format('YYYY')) + '/' + new Moment(viewDate).add(1, 'year').format('YY') })
+    let year = `${parseInt(viewDate.format('YYYY'), 10) - 1}/${viewDate.format('YY')}`
+    if (viewDate.month() < 2) {
+      semestername = CP.translate('winter_sem', {year: year})
+    } else if (viewDate.month() < 10) {
+      semestername = CP.translate('summer_sem', {year: year})
+    } else {
+      year = `${viewDate.format('YYYY')}/${new Moment(viewDate).add(1, 'year').format('YY')}`
+      semestername = CP.translate('winter_sem', {year: year})
+    }
 
     return semestername
   }
@@ -271,8 +280,9 @@ export default class Fittable extends React . Component {
 
     var node = target.parentNode
     while (node != null) {
-      if ('classList' in node && node.classList.contains('event'))
+      if ('classList' in node && node.classList.contains('event')) {
         return true
+      }
       node = node.parentNode
     }
     return false
@@ -281,7 +291,7 @@ export default class Fittable extends React . Component {
   handleClick (e) {
 
     // Check if user clicked outside of any event
-    if (! this.isTargetNodeEvent(e.target)) {
+    if (!this.isTargetNodeEvent(e.target)) {
       // Close all opened events
       this.refs.timetable.showDetailOn(-1)
     }
@@ -364,7 +374,7 @@ export default class Fittable extends React . Component {
    * @param to Panel to change
    */
   handleChangeSettingsPanel (to) {
-    this.setState({ functionOpened:  (this.state.functionOpened == to ? null : to) })
+    this.setState({functionOpened: (this.state.functionOpened == to ? null : to) })
   }
 
   /**
@@ -431,62 +441,77 @@ export default class Fittable extends React . Component {
     var gridsettings = {
       starts: this.state.grid.starts,
       ends: this.state.grid.ends,
-      lessonDuration:  (!this.state.options.facultygrid ? 1 : this.state.grid.lessonDuration),
+      lessonDuration: (!this.state.options.facultygrid ? 1 : this.state.grid.lessonDuration),
       hoursStartsAt1: this.state.options.facultygrid,
-      facultyHours:  (this.state.grid.ends - this.state.grid.starts) / this.state.grid.lessonDuration,
+      facultyHours: (this.state.grid.ends - this.state.grid.starts) / this.state.grid.lessonDuration,
       facultyGrid: this.state.options.facultygrid,
     }
 
     if (!this.state.error) {
-      return <div className="fittable-container" ref="rootEl">
-               <Error
-                      muted={true}
-                      shown={this.state.mutedError}
-                      type={this.state.errorType} />
-               <Controls
-                         viewDate={this.state.viewDate}
-                         onWeekChange={this.handleChangeViewDate.bind(this)}
-                         onDateChange={this.handleChangeViewDate.bind(this)}
-                         semester={this.getSemester(this.state.viewDate)}
-                         onSettingsPanelChange={this.handleChangeSettingsPanel.bind(this)}
-                         days7={this.state.options.days7}
-                         onSelDayChange={this.handleChangeSelectedDay.bind(this)}
-                         selectedDay={this.state.selectedDay} />
-               <div className="clearfix"></div>
-               <FunctionsSidebar
-                                 ref="sidebar"
-                                 opened={this.state.functionOpened}
-                                 displayFilter={this.state.displayFilter}
-                                 onFilterChange={this.handleChangeFilter.bind(this)}
-                                 onSettingChange={this.handleChangeSetting.bind(this)}
-                                 onRefreshNeed={this.handleRefreshNeed.bind(this)}
-                                 options={this.state.options}
-                                 onViewChange={this.handleChangeView.bind(this)}
-                                 onSearch={this.search.bind(this)}
-                                 searchResults={this.state.searchResults} />
-               <div className="clearfix"></div>
-               <Timetable
-                          grid={gridsettings}
-                          viewDate={this.state.viewDate}
-                          layout={this.state.options.layout}
-                          weekEvents={this.state.weekEvents}
-                          displayFilter={this.state.displayFilter}
-                          functionsOpened={this.state.functionOpened}
-                          selectedDay={this.state.selectedDay}
-                          onViewChange={this.handleChangeView.bind(this)}
-                          linkNames={this.linkNames}
-                          colored={this.state.options.colors}
-                          days7={this.state.options.days7}
-                          onDateChange={this.handleChangeViewDate.bind(this)}
-                          ref="timetable" />
-               <Spinner show={this.state.waiting} />
+      return (
+        <div className="fittable-container" ref="rootEl">
+              <Error
+                muted={true}
+                shown={this.state.mutedError}
+                type={this.state.errorType}
+              />
+              <Controls
+                viewDate={this.state.viewDate}
+                onWeekChange={this.handleChangeViewDate.bind(this)}
+                onDateChange={this.handleChangeViewDate.bind(this)}
+                semester={this.getSemester(this.state.viewDate)}
+                onSettingsPanelChange={this.handleChangeSettingsPanel.bind(this)}
+                days7={this.state.options.days7}
+                onSelDayChange={this.handleChangeSelectedDay.bind(this)}
+                selectedDay={this.state.selectedDay}
+              />
+              <div className="clearfix"></div>
+              <FunctionsSidebar
+                ref="sidebar"
+                opened={this.state.functionOpened}
+                displayFilter={this.state.displayFilter}
+                onFilterChange={this.handleChangeFilter.bind(this)}
+                onSettingChange={this.handleChangeSetting.bind(this)}
+                onRefreshNeed={this.handleRefreshNeed.bind(this)}
+                options={this.state.options}
+                onViewChange={this.handleChangeView.bind(this)}
+                onSearch={this.search.bind(this)}
+                searchResults={this.state.searchResults}
+              />
+              <div className="clearfix"></div>
+              <Timetable
+                grid={gridsettings}
+                viewDate={this.state.viewDate}
+                layout={this.state.options.layout}
+                weekEvents={this.state.weekEvents}
+                displayFilter={this.state.displayFilter}
+                functionsOpened={this.state.functionOpened}
+                selectedDay={this.state.selectedDay}
+                onViewChange={this.handleChangeView.bind(this)}
+                linkNames={this.linkNames}
+                colored={this.state.options.colors}
+                days7={this.state.options.days7}
+                onDateChange={this.handleChangeViewDate.bind(this)}
+                ref="timetable"
+              />
+              <Spinner show={this.state.waiting} />
              </div>
+        )
     } else {
-      return <div className="fittable-container" ref="rootEl">
-               <Error type={this.state.errorType} onMute={this.muteError.bind(this)} />
-             </div>
+      return (
+        <div className="fittable-container" ref="rootEl">
+          <Error type={this.state.errorType} onMute={this.muteError.bind(this)} />
+        </div>
+      )
     }
   }
 }
 
-Fittable.defaultProps = { callbacks: null, locale: 'en', layout: 'horizontal', colors: false, days7: false, facultygrid: true }
+Fittable.defaultProps = {
+  callbacks: null,
+  locale: 'en',
+  layout: 'horizontal',
+  colors: false,
+  days7: false,
+  facultygrid: true,
+}

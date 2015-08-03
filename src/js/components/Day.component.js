@@ -107,16 +107,17 @@ export default class Day extends React.Component {
     const shown = (event.id == this.props.showDetailOn)
 
     return (
-    <EventBox
-              key={event.id}
-              data={event}
-              detailShown={shown}
-              onClick={this.props.onDetailShow}
-              openFromBottom={this.props.id >= 3 }
-              colored={this.props.colored}
-              onViewChange={this.props.onViewChange}
-              onDateChange={this.props.onDateChange}
-              linkNames={this.props.linkNames }/>
+      <EventBox
+        key={event.id}
+        data={event}
+        detailShown={shown}
+        onClick={this.props.onDetailShow}
+        openFromBottom={this.props.id >= 3}
+        colored={this.props.colored}
+        onViewChange={this.props.onViewChange}
+        onDateChange={this.props.onDateChange}
+        linkNames={this.props.linkNames}
+      />
     )
 
   }
@@ -125,20 +126,23 @@ export default class Day extends React.Component {
 
     const events = this.findOverlayedEvents(this.props)
     const className = `day ${this.props.active ? 'active' : ''} ${this.props.selected ? 'selected' : ''}`
-    const weekDay = new Moment().isoWeekday(parseInt(this.props.id) + 1, 10).format('dddd')
+    const weekDay = new Moment().isoWeekday(parseInt(this.props.id, 10) + 1).format('dddd')
     let dayTitle = ''
+
     if (this.props.active) {
       dayTitle = CP.translate('timetable.actual_day', {day: weekDay})
     }
 
-    return (<div className={className} data-day={this.props.id}>
-              <div className='label' title={dayTitle}>
-                <span className='day-num'>{this.props.dayNum}</span>
-                <span className='day-name'>{weekDay}</span>
-              </div>
-              <div className='events' ref='events'>
-                {events.map(this.renderEvent.bind(this))}
-              </div>
-            </div>)
+    return (
+      <div className={className} data-day={this.props.id}>
+        <div className="label" title={dayTitle}>
+          <span className="day-num">{this.props.dayNum}</span>
+          <span className="day-name">{weekDay}</span>
+        </div>
+        <div className="events" ref="events">
+          {events.map(this.renderEvent.bind(this))}
+        </div>
+      </div>
+    )
   }
 }
