@@ -115,7 +115,7 @@ module.exports = function (grunt) {
         },
       },
       npm: {
-        files: ['src/js/**/*.js'],
+        files: ['src/js/**/*.js', 'src/js/**/*.jsx'],
         tasks: ['babel:npm']
       }
     },
@@ -182,6 +182,7 @@ module.exports = function (grunt) {
       options: {
         transform: [ 'babelify' ],
         browserifyOptions: {
+          extensions: ['.jsx'],
           debug: true,
           standalone: 'fittable'
         }
@@ -193,10 +194,6 @@ module.exports = function (grunt) {
           watch: true,
           keepAlive: true,
           transform: [[{}, 'babelify']],
-          browserifyOptions: {
-            debug: true,
-            standalone: 'fittable'
-          }
         }
       },
       dist: {
@@ -207,7 +204,7 @@ module.exports = function (grunt) {
       min: {
         options: {
           transform: [ 'babelify' ],
-          plugin: [ 'minifyify' ]
+          plugin: [ 'minifyify' ],
         },
         files: {
           'dist/fittable.min.js': entryJS
@@ -224,8 +221,9 @@ module.exports = function (grunt) {
         files: [{
             expand: true,
             cwd: 'src/js',
-            src: ['**/*.js'],
-            dest: npmDest + '/js'
+            src: ['**/*.js', '**/*.jsx'],
+            dest: npmDest + '/js',
+            ext: '.js',
         }]
       }
     },
