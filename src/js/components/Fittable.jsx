@@ -9,7 +9,7 @@ import Hammer from 'hammerjs'
 
 import Controls from './Controls'
 import Timetable from './Timetable'
-import DataCache from '../modules/DataCache.module'
+import DataCache from '../modules/DataCache'
 import FunctionsSidebar from './FunctionsSidebar'
 import Spinner from './Spinner'
 import Error from './Error'
