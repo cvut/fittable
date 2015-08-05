@@ -5,8 +5,8 @@
 import React from 'react'
 import Moment from 'moment'
 
-import Day from './Day.component'
-import NowIndicator from './NowIndicator.component'
+import Day from './Day'
+import NowIndicator from './NowIndicator'
 
 export default class Timetable extends React.Component {
 

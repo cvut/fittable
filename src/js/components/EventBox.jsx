@@ -6,7 +6,7 @@ import React from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
-import EventDetail from './EventDetail.component'
+import EventDetail from './EventDetail'
 
 export default class EventBox extends React.Component {
 

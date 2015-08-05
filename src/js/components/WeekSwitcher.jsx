@@ -8,7 +8,7 @@ import React from 'react'
 import Moment from 'moment'
 import CP from 'counterpart'
 
-import Toggleable from './Toggleable.component'
+import Toggleable from './Toggleable'
 
 export default class WeekSwitcher extends Toggleable {
 

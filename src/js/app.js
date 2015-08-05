@@ -11,7 +11,7 @@ try {
 }
 
 import React from 'react'
-import Fittable from './components/Fittable.component'
+import Fittable from './components/Fittable'
 
 import Counterpart from 'counterpart'
 import Moment from 'moment'

@@ -7,12 +7,12 @@ import Moment from 'moment'
 import CP from 'counterpart'
 import Hammer from 'hammerjs'
 
-import Controls from './Controls.component'
-import Timetable from './Timetable.component'
+import Controls from './Controls'
+import Timetable from './Timetable'
 import DataCache from '../modules/DataCache.module'
-import FunctionsSidebar from './FunctionsSidebar.component'
-import Spinner from './Spinner.component'
-import Error from './Error.component'
+import FunctionsSidebar from './FunctionsSidebar'
+import Spinner from './Spinner'
+import Error from './Error'
 
 export default class Fittable extends React . Component {
   constructor (props) {

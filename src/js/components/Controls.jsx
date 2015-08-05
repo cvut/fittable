@@ -4,10 +4,10 @@
  */
 
 import React from 'react'
-import ViewDate from './ViewDate.component'
-import WeekNav from './WeekNav.component'
-import FunctionsBar from './FunctionsBar.component'
-import WeekSwitcher from './WeekSwitcher.component'
+import ViewDate from './ViewDate'
+import WeekNav from './WeekNav'
+import FunctionsBar from './FunctionsBar'
+import WeekSwitcher from './WeekSwitcher'
 
 export default class Controls extends React.Component {
 

@@ -6,7 +6,7 @@ import React from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
-import EventBox from './EventBox.component'
+import EventBox from './EventBox'
 
 function appearanceClass (overlaysLength) {
 

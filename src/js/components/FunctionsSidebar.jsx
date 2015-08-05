@@ -3,11 +3,11 @@
  */
 
 import React from 'react'
-import FunctionSettings from './FunctionSettings.component'
-import FunctionSearch from './FunctionSearch.component'
-import FunctionFilter from './FunctionFilter.component'
+import FunctionSettings from './FunctionSettings'
+import FunctionSearch from './FunctionSearch'
+import FunctionFilter from './FunctionFilter'
 
-import Toggleable from './Toggleable.component'
+import Toggleable from './Toggleable'
 
 export default class FunctionsSidebar {
   constructor (props) {
