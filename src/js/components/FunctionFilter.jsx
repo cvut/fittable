@@ -3,15 +3,15 @@
  * Provides ability to filter out some types of events from timetable
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 
-export default class FunctionFilter extends React.Component {
+const propTypes = {
+  displayFilter: PropTypes.objectOf(PropTypes.bool),
+  onFilterChange: PropTypes.func,
+}
 
-  constructor (props) {
-
-    super.constructor(props)
-  }
+class FunctionFilter extends React.Component {
 
   /**
    * Handles clicking on one filter item
@@ -80,3 +80,7 @@ export default class FunctionFilter extends React.Component {
     )
   }
 }
+
+FunctionFilter.propTypes = propTypes
+
+export default FunctionFilter
