@@ -39,37 +39,4 @@
   .flags-function {
     display: none;
   }
-
-  @media #{$medium-only} {
-    .functions-bar {
-      width: 45%;
-      float: right;
-      text-align: center;
-      position: relative;
-      top: - $mobile-heading-height - 10px;
-      height: $mobile-heading-height + 10px;
-      margin-bottom: - $mobile-heading-height - 10px;
-    }
-    .function-btn {
-      line-height: $mobile-heading-height + 10px;
-    }
-  }
-
-  @media #{$medium-down} {
-    .functions-bar {
-      height: $mobile-heading-height;
-      background: $light-secondary-color;
-    }
-
-    .function-btn {
-      font-size: 18px;
-      background: $light-secondary-color;
-      line-height: $mobile-heading-height;
-      padding: 0 18px;
-    }
-
-    .function-btn .tooltip {
-      display: none;
-    }
-  }
 }

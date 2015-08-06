@@ -4,7 +4,7 @@
     position: relative;
     clear: left;
 
-    div.day {
+    .day {
       width: 100%;
       height: $day-row-height;
       max-height: $vertical-layout-day-height;
@@ -12,7 +12,7 @@
       color: $primary-color;
       transition: width $layoutchange-anim-speed;
 
-      div.label {
+      .label {
         display: block;
         background: none;
         width: 10%;
@@ -53,18 +53,20 @@
       }
     }
 
-    div.days div.day:nth-child(odd) {
-      background: $light-secondary-color;
-    }
+    .days {
+      div.day:nth-child(odd) {
+        background: $light-secondary-color;
+      }
 
-    div.days.a-left div.day div.events {
-      visibility: visible;
-      animation: week-move-left ease $events-move-anim-speed;
-    }
+      &.a-left div.day div.events {
+        visibility: visible;
+        animation: week-move-left ease $events-move-anim-speed;
+      }
 
-    div.days.a-right div.day div.events {
-      visibility: visible;
-      animation: week-move-right ease $events-move-anim-speed;
+      &.a-right div.day div.events {
+        visibility: visible;
+        animation: week-move-right ease $events-move-anim-speed;
+      }
     }
 
     .grid-overlay {
@@ -73,7 +75,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      z-index: 8;
+      z-index: 6;
 
       .grid-wrapper {
         width: 90%;
@@ -137,6 +139,7 @@
       @include disable-selection();
       overflow: hidden;
       height: 25px;
+      z-index: 6;
 
       .hour-label {
         position: absolute;

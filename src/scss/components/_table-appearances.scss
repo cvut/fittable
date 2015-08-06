@@ -2,7 +2,7 @@
 
   // Horizontal
 
-  div.table:not(.vertical) div.day div.events {
+  div.table:not(.vertical):not(.mobile) div.day div.events {
     div.event {
       &:not(.detail-shown).half {
         height: 45% !important;
@@ -75,7 +75,7 @@
 
   // Vertical
 
-  div.table.vertical div.day div.events {
+  div.table.vertical div.day div.events, div.table.mobile div.day div.events {
     div.event {
       &:not(.detail-shown).half {
         width: 50% !important;

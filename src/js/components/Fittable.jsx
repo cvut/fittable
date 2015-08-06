@@ -15,6 +15,10 @@ import FunctionsSidebar from './FunctionsSidebar'
 import Spinner from './Spinner'
 import Error from './Error'
 
+function isSmallScreen () {
+  return window.innerWidth <= 768
+}
+
 const propTypes = optionsType
 
 const defaultProps = {
@@ -58,6 +62,7 @@ class Fittable extends React.Component {
       error: false,
       errorType: null,
       mutedError: false,
+      isMobile: isSmallScreen(),
     }
 
     // Declare variables
@@ -426,7 +431,7 @@ class Fittable extends React.Component {
     this.hammer = new Hammer(el)
 
     this.hammer.on('swipe', function (e) {
-      if (window.innerWidth <= 768) {
+      if (isSmallScreen()) {
         this.handleChangeSelectedDay(e.velocityX > 0 ? 1 : -1)
       }
     }.bind(this))
@@ -439,14 +444,23 @@ class Fittable extends React.Component {
     this.hammer.destroy()
   }
 
+  onWindowResize (e) {
+    const mobile = isSmallScreen()
+    if (this.state.isMobile !== mobile) {
+      this.setState({ isMobile: mobile })
+    }
+  }
+
   componentDidMount () {
     this.registerSwipeListener(this.refs.rootEl.getDOMNode())
     this.refs.rootEl.getDOMNode().addEventListener('click', this.handleClick.bind(this))
+    window.addEventListener('resize', this.onWindowResize.bind(this))
   }
 
   componentWillUnmount () {
     this.unregisterSwipeListener()
     this.refs.rootEl.getDOMNode().removeEventListener('click', this.handleClick.bind(this))
+    window.removeEventListener('resize', this.onWindowResize.bind(this))
   }
 
   render () {
@@ -505,6 +519,7 @@ class Fittable extends React.Component {
                 colored={this.state.options.colors}
                 days7={this.state.options.days7}
                 onDateChange={this.handleChangeViewDate.bind(this)}
+                isMobile={this.state.isMobile}
                 ref="timetable"
               />
               <Spinner show={this.state.waiting} />

@@ -1,0 +1,39 @@
+#fittable div.table.mobile {
+
+  div.day {
+    width: 90% !important;
+    margin-left: 10% !important;
+  }
+
+  .hour-labels {
+    left: 0 !important;
+    background: white;
+    padding-right: 40px !important;
+  }
+
+  .days {
+    div.day:not(.selected) {
+      display: none;
+    }
+
+    div.day {
+      display: block;
+      background: transparent !important;
+
+      div.label {
+        position: absolute;
+        top: 4px;
+        left: 85px;
+        width: 40% !important;
+
+        span.day-num {
+          border: none;
+        }
+      }
+
+      .events {
+        top: 7%;
+      }
+    }
+  }
+}

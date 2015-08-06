@@ -22,6 +22,7 @@ const propTypes = {
   colored: PropTypes.bool,
   days7: PropTypes.bool,
   onDateChange: PropTypes.func,
+  isMobile: PropTypes.bool,
 }
 
 class Timetable extends React.Component {
@@ -202,8 +203,9 @@ class Timetable extends React.Component {
     const classMuted = this.state.popupsOpened > 0 ? 'muted' : ''
     const classCut = (this.props.functionsOpened !== null) ? 'cut' : ''
     const classDays7 = this.props.days7 ? 'days7' : ''
+    const classMobile = this.props.isMobile ? 'mobile' : ''
 
-    const className = `table ${this.props.layout} ${classMuted} ${classCut} ${classDays7}`
+    const className = `table ${this.props.layout} ${classMuted} ${classCut} ${classDays7} ${classMobile}`
 
     return (
       <div

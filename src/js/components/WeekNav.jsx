@@ -70,8 +70,6 @@ class WeekNav extends React.Component {
           onClick={this.handleCalClick.bind(this)}
           title={CP.translate('weekNav.selector')}
         >
-          <strong className="week-toggle-dow">{this.dayOfWeek()}</strong>
-          {' '}
           <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
           <span className="week-toggle-parity">{this.weekParity()}</span>
         </button>

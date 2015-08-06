@@ -1,10 +1,5 @@
 header {
-  display: none;
-  
-  @media #{$large-up} {
-    padding: 0px 30px;
-    display: block;
-  }
+  padding: 0px 30px;
 
   &.row {
     margin: 60px auto 30px auto;

@@ -1,0 +1,39 @@
+header {
+  &.row {
+    @media #{$medium-down} {
+      margin: 25px auto 10px auto;
+    }
+
+    @media #{$small-only} {
+      background: $primary-color;
+      margin: 0 !important;
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+  }
+
+  h1 {
+    @media #{$medium-down} {
+      font-size: 23px;
+    }
+
+    @media #{$small-only} {
+      font-size: 15px;
+      font-weight: 800 !important;
+      display: inline;
+      color: white !important;
+    }
+  }
+
+  h1 + .sub-header {
+    @media #{$medium-down} {
+      font-size: 10px;
+    }
+
+    @media #{$small-only} {
+      display: inline;
+      color: white !important;
+      text-transform: none !important;
+    }
+  }
+}
