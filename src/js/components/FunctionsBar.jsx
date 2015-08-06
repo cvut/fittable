@@ -2,14 +2,14 @@
  * Component wrapping all function control buttons located in upper right corner of the widget.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 
-export default class FunctionsBar extends React.Component {
+const propTypes = {
+  onPanelToggle: PropTypes.func,
+}
 
-  constructor (props) {
-    super.constructor(props)
-  }
+class FunctionsBar extends React.Component {
 
   /**
    * Handles a click on the settings icon
@@ -79,3 +79,7 @@ export default class FunctionsBar extends React.Component {
     )
   }
 }
+
+FunctionsBar.propTypes = propTypes
+
+export default FunctionsBar
