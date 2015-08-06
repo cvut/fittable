@@ -2,24 +2,33 @@
  * Indicator showing line representing actual point of today's time
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
+import { event as eventPropType, moment as momentPropType } from '../types'
 
-export default class Timetable extends React.Component {
+const propTypes = {
+  timelineStartHour: PropTypes.number,
+  timelineStartMins: PropTypes.number,
+  timelineLength: PropTypes.number,
+  viewDate: momentPropType,
+  closestEvent: eventPropType,
+}
+
+class NowIndicator extends React.Component {
 
   constructor (props) {
-    super.constructor(props)
+    super(props)
   }
 
   render () {
 
-    var nowpoint = new Moment().diff(
+    const nowpoint = new Moment().diff(
       new Moment().hour(this.props.timelineStartHour).minutes(this.props.timelineStartMins)
     )
 
-    var length = nowpoint / this.props.timelineLength
+    const length = nowpoint / this.props.timelineLength
 
-    var shown = this.props.viewDate.isSame(new Moment(), 'isoWeek') && length > 0 && length < 1
+    const shown = this.props.viewDate.isSame(new Moment(), 'isoWeek') && length > 0 && length < 1
 
     if (this.props.closestEvent !== null) {
       return (
@@ -48,3 +57,7 @@ export default class Timetable extends React.Component {
     }
   }
 }
+
+NowIndicator.propTypes = propTypes
+
+export default NowIndicator
