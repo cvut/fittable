@@ -20,7 +20,7 @@ function appearanceClass (overlaysLength) {
     return 'half'
   }
 
-  return 'reuglar'
+  return 'regular'
 }
 
 export default class Day extends React.Component {
