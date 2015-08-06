@@ -4,10 +4,10 @@
 
 import React from 'react'
 
-export default class Toggleable extends React.Component {
+class Toggleable extends React.Component {
 
   constructor (props) {
-    super.constructor(props)
+    super(props)
   }
 
   /**
@@ -36,3 +36,5 @@ export default class Toggleable extends React.Component {
     }
   }
 }
+
+export default Toggleable
