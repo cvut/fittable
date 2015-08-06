@@ -3,25 +3,28 @@
  * On click it toggles the WeekSwitcher component
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
 import CP from 'counterpart'
+import { moment as momentPropType } from '../types'
 
-export default class ViewDate extends React.Component {
+const propTypes = {
+  viewDate: momentPropType,
+  selectedDay: PropTypes.number,
+  days7: PropTypes.bool,
+}
+
+class ViewDate extends React.Component {
 
   constructor (props) {
-
-    super.constructor(props)
-
-    this.state = {
-      open: false,
-    }
+    super(props)
+    this.state = { open: false }
   }
 
   weekRange () {
 
-    var weekStart = new Moment(this.props.viewDate).startOf('isoWeek')
-    var weekEnd = new Moment(this.props.viewDate).endOf('isoWeek')
+    const weekStart = new Moment(this.props.viewDate).startOf('isoWeek')
+    const weekEnd = new Moment(this.props.viewDate).endOf('isoWeek')
 
     if (!this.props.days7) {
       weekEnd.subtract(2, 'days')
@@ -38,3 +41,7 @@ export default class ViewDate extends React.Component {
     return <div className="view-date">{this.weekRange()}</div>
   }
 }
+
+ViewDate.propTypes = propTypes
+
+export default ViewDate
