@@ -4,18 +4,24 @@
  * exact week from calendar displayed in this dropdown.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import CP from 'counterpart'
+import { moment as momentPropType } from '../types'
 
 import Toggleable from './Toggleable'
 
-export default class WeekSwitcher extends Toggleable {
+const propTypes = {
+  viewDate: momentPropType,
+  onDateChange: PropTypes.func,
+  semester: PropTypes.string,
+}
+
+class WeekSwitcher extends Toggleable {
 
   /** Returns a Moment factory constructed from this.props.viewDate */
   viewDateMoment () {
 
-    let moment = new Moment(this.props.viewDate)
+    const moment = new Moment(this.props.viewDate)
     return function () {
       return moment.clone()
     }
@@ -24,8 +30,8 @@ export default class WeekSwitcher extends Toggleable {
   renderSemesterSelector () {
 
     // Set a semester name
-    let semesterName = this.props.semester
-    let viewMoment = this.viewDateMoment()
+    const semesterName = this.props.semester
+    const viewMoment = this.viewDateMoment()
 
     return (
       <div className="row weeksw-selector weeksw-semester-selector collapse">
@@ -56,7 +62,7 @@ export default class WeekSwitcher extends Toggleable {
 
   renderMonthSelector () {
 
-    let viewMoment = this.viewDateMoment()
+    const viewMoment = this.viewDateMoment()
 
     return (
       <div className="row weeksw-selector weeksw-month-selector collapse">
@@ -87,13 +93,15 @@ export default class WeekSwitcher extends Toggleable {
 
   render () {
 
-    let viewMoment = this.viewDateMoment()
-    var weeks = [ [], [], [], [], [], [], [] ], moments = [ [], [], [], [], [], [], [] ]
-    var monthEnd = viewMoment().endOf('month').endOf('isoWeek')
-    var lastWeekIndex = 0, activeWeekIdx = -1
+    const viewMoment = this.viewDateMoment()
+    const monthEnd = viewMoment().endOf('month').endOf('isoWeek')
+    let weeks = [ [], [], [], [], [], [], [] ]
+    let moments = [ [], [], [], [], [], [], [] ]
+    let lastWeekIndex = 0
+    let activeWeekIdx = -1
 
     // Create weeks of month array
-    for (var i = viewMoment().startOf('month').startOf('isoWeek'), weeki = 0; i.isBefore(monthEnd); i.add(1, 'day')) {
+    for (let i = viewMoment().startOf('month').startOf('isoWeek'), weeki = 0; i.isBefore(monthEnd); i.add(1, 'day')) {
       weeks[weeki].push(i.date())
       if (i.isoWeekday() === 7) {
         moments[weeki] = new Moment(i).startOf('isoWeek')
@@ -121,7 +129,7 @@ export default class WeekSwitcher extends Toggleable {
      */
     function dayClass (week, day) {
 
-      let weekIndex = weeks.indexOf(week)
+      const weekIndex = weeks.indexOf(week)
 
       // if the day is in first week AND larger than > 7 OR last week AND smaller than 7
       if ((weekIndex === 0 && day > 7) || ((weekIndex === (lastWeekIndex - 1)) && day < 7)) {
@@ -133,8 +141,8 @@ export default class WeekSwitcher extends Toggleable {
 
     function switchWeek (week) {
 
-      var weekIndex = weeks.indexOf(week)
-      var moment = moments[weekIndex]
+      const weekIndex = weeks.indexOf(week)
+      const moment = moments[weekIndex]
       this.props.onDateChange.call(this, moment)
     }
 
@@ -170,3 +178,7 @@ export default class WeekSwitcher extends Toggleable {
     )
   }
 }
+
+WeekSwitcher.propTypes = propTypes
+
+export default WeekSwitcher
