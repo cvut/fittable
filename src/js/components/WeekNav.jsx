@@ -3,11 +3,20 @@
  * right.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
 import CP from 'counterpart'
+import { moment as momentPropType } from '../types'
 
-export default class WeekNav extends React.Component {
+const propTypes = {
+  onCalClick: PropTypes.func,
+  onPrevClick: PropTypes.func,
+  onNextClick: PropTypes.func,
+  viewDate: momentPropType,
+  selectedDay: PropTypes.number,
+}
+
+class WeekNav extends React.Component {
   /**
    * Handler for events, when the calendar button is clicked ( bubbles to parent )
    * @param e event
@@ -78,3 +87,7 @@ export default class WeekNav extends React.Component {
     )
   }
 }
+
+WeekNav.propTypes = propTypes
+
+export default WeekNav
