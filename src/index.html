@@ -33,7 +33,6 @@
         var dataCallback = function ( from, to, callback ) {
 
                 setTimeout( function( from, to ) {
-                    console.log( [ from, to ] );
                 var data = [];
                 var linknames = { teachers: [
                     { id: 'novacjo4', name: { cs: 'Josef Novák', en: 'Josef Novák' } }, { id: 'novacjin', name: { cs: 'Jindřich Novák', en: 'Jindřich Novák' } }, { id: 'skocdopo', name: { cs: 'Ing. Alexandra Skočdopolová, Ph.D.', en: 'Ing. Alexandra Skočdopolová, Ph.D.' } }
@@ -199,7 +198,7 @@
                 search: searchCallback,
                 data: dataCallback,
                 semesterData: semesterDataCallback,
-                dateChange: function( newdate, semester ) { console.log( [ newdate, semester ] ); }
+                dateChange: function( newdate, semester ) { /* ... */ }
             },
             locale: 'en',
             layout: 'vertical',
