@@ -2,7 +2,7 @@
  * Root component drawing whole widget.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
 import CP from 'counterpart'
 import Hammer from 'hammerjs'
@@ -14,13 +14,34 @@ import FunctionsSidebar from './FunctionsSidebar'
 import Spinner from './Spinner'
 import Error from './Error'
 
-export default class Fittable extends React . Component {
+const propTypes = {
+  callbacks: PropTypes.shape({
+    search: PropTypes.func,
+    data: PropTypes.func.isRequired,
+    semesterData: PropTypes.func.isRequired,
+    dateChange: PropTypes.func.isRequired,
+  }),
+  locale: PropTypes.oneOf(['cs', 'en']),
+  layout: PropTypes.oneOf(['horizontal', 'vertical']),
+  colors: PropTypes.bool,
+  days7: PropTypes.bool,
+  facultygrid: PropTypes.bool,
+}
+
+const defaultProps = {
+  locale: 'en',
+  layout: 'horizontal',
+  colors: false,
+  days7: false,
+  facultygrid: true,
+}
+
+class Fittable extends React.Component {
   constructor (props) {
 
-    super.constructor(props)
+    super(props)
 
     // Set initial states
-    // FIXME: move to getInitialState
     this.state = {
       viewDate: new Moment().startOf('isoweek'),
       prevViewDate: new Moment().startOf('isoweek'),
@@ -497,11 +518,7 @@ export default class Fittable extends React . Component {
   }
 }
 
-Fittable.defaultProps = {
-  callbacks: null,
-  locale: 'en',
-  layout: 'horizontal',
-  colors: false,
-  days7: false,
-  facultygrid: true,
-}
+Fittable.propTypes = propTypes
+Fittable.defaultProps = defaultProps
+
+export default Fittable
