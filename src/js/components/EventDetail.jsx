@@ -3,15 +3,19 @@
  * EventBox. Shows after clicking on EventBox.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
-export default class EventDetail extends React.Component {
+const propTypes = {
+  onViewChange: PropTypes.func,
+  showDetailOn: PropTypes.func,
+  onDateChange: PropTypes.func,
+  linkNames: PropTypes.object, // FIXME: validate shape
+  data: PropTypes.object, // FIXME: validate shape
+}
 
-  constructor (props) {
-    super.constructor(props)
-  }
+class EventDetail extends React.Component {
 
   handleCourseClick (course) {
     this.props.onViewChange('course', course)
@@ -197,3 +201,7 @@ export default class EventDetail extends React.Component {
     )
   }
 }
+
+EventDetail.propTypes = propTypes
+
+export default EventDetail
