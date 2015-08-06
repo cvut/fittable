@@ -3,14 +3,24 @@
  * Provides ability to search events, teachers etc.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
+
+const propTypes = {
+  onSearch: PropTypes.func,
+  onViewChange: PropTypes.func,
+  searchResults: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    type: PropTypes.string,
+    title: PropTypes.string,
+  })),
+}
 
 export default class FunctionSearch extends React.Component {
 
   constructor (props) {
 
-    super.constructor(props)
+    super(props)
     this.autoSearchTimeout = null
   }
 
@@ -98,3 +108,7 @@ export default class FunctionSearch extends React.Component {
     )
   }
 }
+
+FunctionSearch.propTypes = propTypes
+
+export default FunctionSearch
