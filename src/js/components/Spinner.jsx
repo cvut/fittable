@@ -1,15 +1,14 @@
 /**
  * Ajax spinner element
- *
  * Used Spinkit @ tobiasahlin.com/spinkit, thanks
  */
 
 import React from 'react'
 
-export default class Week extends React.Component {
+class Spinner extends React.Component {
 
   constructor (props) {
-    super.constructor(props)
+    super(props)
   }
 
   render () {
@@ -25,3 +24,5 @@ export default class Week extends React.Component {
     )
   }
 }
+
+export default Spinner
