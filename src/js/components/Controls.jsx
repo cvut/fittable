@@ -5,6 +5,7 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
+import { moment as momentPropType } from '../types'
 
 import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
@@ -15,12 +16,7 @@ const propTypes = {
   onWeekChange: PropTypes.func.isRequired,
   onSelDayChange: PropTypes.func.isRequired,
   onSettingsPanelChange: PropTypes.func.isRequired,
-  viewDate: (props, propName, componentName) => {
-    const prop = props[propName]
-    if (!Moment.isMoment(prop)) {
-      return new Error(`Expected ${propName} to be an instance of Moment. Got ${typeof prop}.`)
-    }
-  },
+  viewDate: momentPropType,
   days7: PropTypes.bool,
   selectedDay: PropTypes.number,
   semester: PropTypes.string,

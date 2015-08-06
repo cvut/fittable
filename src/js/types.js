@@ -1,4 +1,5 @@
 import { PropTypes } from 'react'
+import Moment from 'moment'
 
 export const event = PropTypes.shape({
   id: PropTypes.oneOfType(PropTypes.number, PropTypes.string),
@@ -36,3 +37,10 @@ export const options = Object.freeze({
   days7: PropTypes.bool,
   facultygrid: PropTypes.bool,
 })
+
+export const moment = (props, propName, componentName) => {
+  const prop = props[propName]
+  if (!Moment.isMoment(prop)) {
+    return new Error(`Expected ${propName} to be an instance of Moment. Got ${typeof prop}.`)
+  }
+}
