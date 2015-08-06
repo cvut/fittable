@@ -2,17 +2,26 @@
  * Component wrapping function panels
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
+
+import { options as optionsType } from '../types'
 import FunctionSettings from './FunctionSettings'
 import FunctionSearch from './FunctionSearch'
 import FunctionFilter from './FunctionFilter'
 
-import Toggleable from './Toggleable'
+const propTypes = {
+  opened: PropTypes.oneOf(['settings', 'search', 'filter']),
+  onSettingsChange: PropTypes.func,
+  onRefreshNeed: PropTypes.func,
+  options: PropTypes.shape(optionsType),
+  onSearch: PropTypes.func,
+  searchResults: PropTypes.array, // FIXME: shared type
+  onViewChange: PropTypes.func,
+  displayFilter: PropTypes.objectOf(PropTypes.bool), // FIXME: shared type
+  onFilterChange: PropTypes.func,
+}
 
-export default class FunctionsSidebar {
-  constructor (props) {
-    super.constructor(props)
-  }
+class FunctionsSidebar {
 
   render () {
 
@@ -59,3 +68,7 @@ export default class FunctionsSidebar {
     )
   }
 }
+
+FunctionsSidebar.propTypes = propTypes
+
+export default FunctionsSidebar
