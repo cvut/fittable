@@ -2,7 +2,7 @@
  * Component representing one row (day) in timetable.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
@@ -23,11 +23,25 @@ function appearanceClass (overlaysLength) {
   return 'regular'
 }
 
-export default class Day extends React.Component {
+const propTypes = {
+  id: PropTypes.number.isRequired,
+  dayNum: PropTypes.number.isRequired,
+  events: PropTypes.array, // FIXME: validate events' shape
+  showDetailOn: PropTypes.number,
+  colored: PropTypes.bool,
+  linkNames: PropTypes.object, // FIXME: validate shape
+  onDetailShow: PropTypes.func,
+  onViewChange: PropTypes.func,
+  onDateChange: PropTypes.func,
+  active: PropTypes.bool,
+  selected: PropTypes.bool,
+}
 
-  construtor (props) {
-    super.constructor(props)
-  }
+const defaultProps = {
+  events: [],
+}
+
+class Day extends React.Component {
 
   /**
    * Compare function - compares by 'startsAs' member variable
@@ -145,3 +159,8 @@ export default class Day extends React.Component {
     )
   }
 }
+
+Day.propTypes = propTypes
+Day.defaultProps = defaultProps
+
+export default Day
