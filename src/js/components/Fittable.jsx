@@ -7,6 +7,7 @@ import Moment from 'moment'
 import CP from 'counterpart'
 import Hammer from 'hammerjs'
 
+import { options as optionsType } from '../types'
 import Controls from './Controls'
 import Timetable from './Timetable'
 import DataCache from '../modules/DataCache'
@@ -14,19 +15,7 @@ import FunctionsSidebar from './FunctionsSidebar'
 import Spinner from './Spinner'
 import Error from './Error'
 
-const propTypes = {
-  callbacks: PropTypes.shape({
-    search: PropTypes.func,
-    data: PropTypes.func.isRequired,
-    semesterData: PropTypes.func.isRequired,
-    dateChange: PropTypes.func.isRequired,
-  }),
-  locale: PropTypes.oneOf(['cs', 'en']),
-  layout: PropTypes.oneOf(['horizontal', 'vertical']),
-  colors: PropTypes.bool,
-  days7: PropTypes.bool,
-  facultygrid: PropTypes.bool,
-}
+const propTypes = optionsType
 
 const defaultProps = {
   locale: 'en',

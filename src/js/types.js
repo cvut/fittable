@@ -22,3 +22,17 @@ export const event = PropTypes.shape({
     appliedExceptions: PropTypes.array, // FIXME: shape for exceptions
   }),
 })
+
+export const options = Object.freeze({
+  callbacks: PropTypes.shape({
+    search: PropTypes.func,
+    data: PropTypes.func.isRequired,
+    semesterData: PropTypes.func.isRequired,
+    dateChange: PropTypes.func.isRequired,
+  }),
+  locale: PropTypes.oneOf(['cs', 'en']),
+  layout: PropTypes.oneOf(['horizontal', 'vertical']),
+  colors: PropTypes.bool,
+  days7: PropTypes.bool,
+  facultygrid: PropTypes.bool,
+})
