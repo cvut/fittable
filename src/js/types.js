@@ -38,6 +38,15 @@ export const options = Object.freeze({
   facultygrid: PropTypes.bool,
 })
 
+export const grid = PropTypes.shape({
+  starts: PropTypes.number,
+  ends: PropTypes.number,
+  lessonDuration: PropTypes.number,
+  hoursStartsAt1: PropTypes.bool,
+  facultyHours: PropTypes.number,
+  facultyGrid: PropTypes.bool,
+})
+
 export const moment = (props, propName, componentName) => {
   const prop = props[propName]
   if (!Moment.isMoment(prop)) {

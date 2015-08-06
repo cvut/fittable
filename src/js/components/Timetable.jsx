@@ -2,23 +2,33 @@
  * Component rendering whole timetable, containing hierarchy of week, day and events components.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
+import { grid as gridPropType, moment as momentPropType } from '../types'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
 
-export default class Timetable extends React.Component {
+const propTypes = {
+  grid: gridPropType,
+  viewDate: momentPropType,
+  layout: PropTypes.string,
+  weekEvents: PropTypes.array, // todo: use events array shape instead
+  displayFilter: PropTypes.object,
+  functionsOpened: PropTypes.string,
+  selectedDay: PropTypes.number,
+  onViewChange: PropTypes.func,
+  linkNames: PropTypes.object,
+  colored: PropTypes.bool,
+  days7: PropTypes.bool,
+  onDateChange: PropTypes.func,
+}
+
+class Timetable extends React.Component {
 
   constructor (props) {
-
-    super.constructor(props)
-
-    // FIXME: getInitialState
-    this.state = {
-      detailShownOn: -1,
-      popupsOpened: 0,
-    }
+    super(props)
+    this.state = {detailShownOn: -1, popupsOpened: 0};
   }
 
   /**
@@ -26,7 +36,7 @@ export default class Timetable extends React.Component {
    */
   hide () {
 
-    var el = this.refs.days.getDOMNode()
+    const el = this.refs.days.getDOMNode()
 
     // Replay CSS animation
     el.classList.remove('a-left')
@@ -38,7 +48,7 @@ export default class Timetable extends React.Component {
    */
   animateLeft () {
 
-    var el = this.refs.days.getDOMNode()
+    const el = this.refs.days.getDOMNode()
 
     // Replay CSS animation
     el.classList.remove('a-left')
@@ -53,7 +63,7 @@ export default class Timetable extends React.Component {
    */
   animateRight () {
 
-    var el = this.refs.days.getDOMNode()
+    const el = this.refs.days.getDOMNode()
 
     // Replay CSS animation
     el.classList.remove('a-left')
@@ -69,59 +79,59 @@ export default class Timetable extends React.Component {
    */
   showDetailOn (key) {
 
-    var prevkey = this.state.detailShownOn
+    const prevkey = this.state.detailShownOn
 
     // If it's called on the same event, close all.
-    if (key == this.state.detailShownOn) {
+    if (key === this.state.detailShownOn) {
       key = -1
     }
 
     // Calculate num of shown popups
-    var popups = this.state.popupsOpened
-    if (prevkey == -1 && key != -1) { popups++ }
-    if (prevkey != -1 && key == -1) { popups-- }
+    let popups = this.state.popupsOpened
+    if (prevkey === -1 && key !== -1) { popups++ }
+    if (prevkey !== -1 && key === -1) { popups-- }
 
     this.setState({ detailShownOn: key, popupsOpened: popups })
   }
 
   render () {
 
-    var weekEvents = [ [], [], [], [], [], [], [] ],
-      firstDayStart = new Moment(this.props.viewDate).startOf('day'),
-      minClosestDiff = Infinity,
-      closestEvent = null
+    const weekEvents = [ [], [], [], [], [], [], [] ]
+    const firstDayStart = new Moment(this.props.viewDate).startOf('day')
+    let minClosestDiff = Infinity
+    let closestEvent = null
 
     // Timeline hours from - to
-    var timelineHoursFrom = Math.floor(this.props.grid.starts),
-      timelineHoursTo = Math.floor(this.props.grid.ends),
-      timelineMinutesFrom = Math.floor(( this.props.grid.starts - timelineHoursFrom) * 60),
-      timelineMinutesTo = Math.floor(( this.props.grid.ends - timelineHoursTo) * 60)
+    const timelineHoursFrom = Math.floor(this.props.grid.starts)
+    const timelineHoursTo = Math.floor(this.props.grid.ends)
+    const timelineMinutesFrom = Math.floor(( this.props.grid.starts - timelineHoursFrom) * 60)
+    const timelineMinutesTo = Math.floor(( this.props.grid.ends - timelineHoursTo) * 60)
 
     // Timeline length in milliseconds
-    var timelineLength = new Moment(firstDayStart).hour(timelineHoursTo).minutes(timelineMinutesTo)
+    const timelineLength = new Moment(firstDayStart).hour(timelineHoursTo).minutes(timelineMinutesTo)
       .diff(new Moment(firstDayStart).hour(timelineHoursFrom).minutes(timelineMinutesFrom))
 
     // Timeline grid length
-    var timelineGridLength = this.props.grid.lessonDuration * 3600000 / timelineLength
+    const timelineGridLength = this.props.grid.lessonDuration * 3600000 / timelineLength
 
     // Make sure the weekEvents data are available...
     if (typeof this.props.weekEvents !== 'undefined' && this.props.weekEvents !== null) {
-      for (var event of this.props.weekEvents) {
-        var dateStart = new Moment(event.startsAt), dateEnd = new Moment(event.endsAt)
-        var dayStart = new Moment(event.startsAt).startOf('day')
-          .hour(timelineHoursFrom).minutes(timelineMinutesFrom)
+      for (let event of this.props.weekEvents) {
+        const dateStart = new Moment(event.startsAt)
+        const dateEnd = new Moment(event.endsAt)
+        const dayStart = new Moment(event.startsAt).startOf('day').hour(timelineHoursFrom).minutes(timelineMinutesFrom)
 
         // Calculate event length and position, relative to timeline
-        var eventLength = dateEnd.diff(dateStart)
+        const eventLength = dateEnd.diff(dateStart)
         event._draw_length = eventLength / timelineLength
-        var eventStart = dateStart.diff(dayStart)
+        const eventStart = dateStart.diff(dayStart)
         event._draw_position = eventStart / timelineLength
 
         // Sort events by day of week
         weekEvents[ dateStart.isoWeekday() - 1 ].push(event)
 
         // Search for closest event from now
-        var diffwithnow = dateStart.diff(new Moment())
+        const diffwithnow = dateStart.diff(new Moment())
         if (diffwithnow < minClosestDiff && diffwithnow > 0) {
           minClosestDiff = diffwithnow
           closestEvent = event
@@ -130,17 +140,20 @@ export default class Timetable extends React.Component {
     }
 
     // Today
-    var todayId = -1
-    var today = new Moment()
+    let todayId = -1
+    const today = new Moment()
     if (this.props.viewDate.isSame(today, 'isoWeek')) {
       todayId = today.isoWeekday() - 1
     }
 
     // Create array of hour labels
-    var hourlabels = []
-    var idx = 0
-    var gridoffset = this.props.grid.facultyGrid ? 0 : this.props.grid.starts % 1
-    for (var i = Math.ceil(this.props.grid.starts); i < ( this.props.grid.facultyGrid ? Math.ceil(this.props.grid.starts) + this.props.grid.facultyHours : this.props.grid.ends); i++) {
+    const hourlabels = []
+    let idx = 0
+    const gridoffset = this.props.grid.facultyGrid ? 0 : this.props.grid.starts % 1
+    const gridStartCeil = Math.ceil(this.props.grid.starts)
+    const gridEnd = this.props.grid.ends
+    const facultyHours = this.props.grid.facultyHours
+    for (let i = gridStartCeil; i < (this.props.grid.facultyGrid ? gridStartCeil + facultyHours : gridEnd); i++) {
       const gridLenPercent = `${timelineGridLength * 100}%`
       const offsetLenPercent = `${(idx + gridoffset) * timelineGridLength * 100}%`
       const style = {
@@ -162,8 +175,8 @@ export default class Timetable extends React.Component {
     }
 
     // Create days
-    var days = []
-    for ( i = 0; i < 7; i++) {
+    let days = []
+    for (let i = 0; i < 7; i++) {
       days.push(
         <Day
           id={i}
@@ -235,3 +248,7 @@ export default class Timetable extends React.Component {
     )
   }
 }
+
+Timetable.propTypes = propTypes
+
+export default Timetable
