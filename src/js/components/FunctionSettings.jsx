@@ -3,15 +3,22 @@
  * Main dialog containing all important options to customize look and behaviour of fittable
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
-export default class FunctionSettings extends React.Component {
+const propTypes = {
+  onSettingChange: PropTypes.func,
+  onLanguageChange: PropTypes.func,
+  options: PropTypes.shape({
+    layout: PropTypes.oneOf(['horizontal', 'vertical']),
+    colors: PropTypes.bool,
+    days7: PropTypes.bool,
+    facultygrid: PropTypes.bool,
+  }),
+}
 
-  constructor (props) {
-    super.constructor(props)
-  }
+class FunctionSettings extends React.Component {
 
   /**
    * Handles setting selection change
@@ -159,3 +166,7 @@ export default class FunctionSettings extends React.Component {
     )
   }
 }
+
+FunctionSettings.propTypes = propTypes
+
+export default FunctionSettings
