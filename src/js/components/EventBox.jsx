@@ -29,12 +29,9 @@ const defaultProps = {
 class EventBox extends React.Component {
 
   constructor (props) {
-
     super(props)
 
-    this.state = {
-      detailShown: false,
-    }
+    this.state = { detailShown: false }
   }
 
   style (props) {

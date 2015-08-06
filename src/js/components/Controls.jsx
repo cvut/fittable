@@ -24,10 +24,6 @@ const propTypes = {
 
 class Controls extends React.Component {
 
-  constructor (props) {
-    super(props)
-  }
-
   /**
    * Handles WeekNav's previous button click event
    */

@@ -6,10 +6,6 @@ import React from 'react'
 
 class Toggleable extends React.Component {
 
-  constructor (props) {
-    super(props)
-  }
-
   /**
    * Toggles this component
    */

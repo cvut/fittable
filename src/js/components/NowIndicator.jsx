@@ -16,10 +16,6 @@ const propTypes = {
 
 class NowIndicator extends React.Component {
 
-  constructor (props) {
-    super(props)
-  }
-
   render () {
 
     const nowpoint = new Moment().diff(
