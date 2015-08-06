@@ -2,18 +2,36 @@
  * Component representing the event.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
 import EventDetail from './EventDetail'
 
-export default class EventBox extends React.Component {
+const propTypes = {
+  onViewChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onDateChange: PropTypes.func.isRequired,
+  linkNames: PropTypes.object,
+  colored: PropTypes.bool,
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    course: PropTypes.string,
+    appear: PropTypes.string,
+    type: PropTypes.string,
+  }),
+}
+
+const defaultProps = {
+  detailShown: false,
+}
+
+class EventBox extends React.Component {
 
   constructor (props) {
 
-    super.constructor(props)
-    // FIXME: this should be in getInitialState
+    super(props)
+
     this.state = {
       detailShown: false,
     }
@@ -127,4 +145,7 @@ export default class EventBox extends React.Component {
   }
 }
 
-EventBox.defaultProps = { detailShown: false }
+EventBox.propTypes = propTypes
+EventBox.defaultProps = defaultProps
+
+export default EventBox
