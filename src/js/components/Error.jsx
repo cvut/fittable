@@ -2,14 +2,22 @@
  * Renders a large alert, telling user that something wrong happened.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 
-export default class Error extends React.Component {
+const propTypes = {
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  shown: PropTypes.bool,
+  muted: PropTypes.bool,
+}
 
-  constructor (props) {
-    super.constructor(props)
-  }
+const defaultProps = {
+  type: 'generic',
+  shown: true,
+  muted: false,
+}
+
+class Error extends React.Component {
 
   render () {
 
@@ -72,4 +80,7 @@ export default class Error extends React.Component {
   }
 }
 
-Error.defaultProps = { type: 'generic', shown: true, muted: false }
+Error.propTypes = propTypes
+Error.defaultProps = defaultProps
+
+export default Error
