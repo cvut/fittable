@@ -3,16 +3,33 @@
  * Contains week controllers and functions tools.
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
+import Moment from 'moment'
+
 import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
 
-export default class Controls extends React.Component {
+const propTypes = {
+  onWeekChange: PropTypes.func.isRequired,
+  onSelDayChange: PropTypes.func.isRequired,
+  onSettingsPanelChange: PropTypes.func.isRequired,
+  viewDate: (props, propName, componentName) => {
+    const prop = props[propName]
+    if (!Moment.isMoment(prop)) {
+      return new Error(`Expected ${propName} to be an instance of Moment. Got ${typeof prop}.`)
+    }
+  },
+  days7: PropTypes.bool,
+  selectedDay: PropTypes.number,
+  semester: PropTypes.string,
+}
+
+class Controls extends React.Component {
 
   constructor (props) {
-    super.constructor(props)
+    super(props)
   }
 
   /**
@@ -75,3 +92,7 @@ export default class Controls extends React.Component {
     )
   }
 }
+
+Controls.propTypes = propTypes
+
+export default Controls
