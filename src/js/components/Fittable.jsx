@@ -374,6 +374,12 @@ class Fittable extends React.Component {
     if ('settingsChange' in this.props.callbacks) {
       this.props.callbacks.settingsChange(newOptions)
     }
+
+    // Force a date update for any date locale updates in
+    // the app containing fittable widget
+    if ('dateChange' in this.props.callbacks) {
+      this.props.callbacks.dateChange(this.state.viewDate.toISOString(), this.getSemester(this.state.viewDate))
+    }
   }
 
   /**
