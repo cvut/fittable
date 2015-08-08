@@ -132,7 +132,7 @@ class Timetable extends React.Component {
 
         // Search for closest event from now
         const diffwithnow = dateStart.diff(new Moment())
-        if (diffwithnow < minClosestDiff && diffwithnow > 0) {
+        if (diffwithnow < minClosestDiff && diffwithnow > 0 && new Moment().isSame(dateStart, 'day')) {
           minClosestDiff = diffwithnow
           closestEvent = event
         }
