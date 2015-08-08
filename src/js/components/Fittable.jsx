@@ -79,6 +79,10 @@ class Fittable extends React.Component {
     } else {
       console.error('You forgot to implement the semesterData callback!')
     }
+
+    // Set locale
+    CP.setLocale(this.props.locale)
+    Moment.locale(this.props.locale)
   }
 
   /**
@@ -360,6 +364,9 @@ class Fittable extends React.Component {
 
     var newOptions = this.state.options
     newOptions[key] = to
+
+    // Update viewDate's local locale to global locale
+    this.state.viewDate.locale(Moment.locale())
 
     this.setState({ options: newOptions })
 
