@@ -28,7 +28,10 @@ class Timetable extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {detailShownOn: -1, popupsOpened: 0};
+    this.state = {
+      detailShownOn: -1,
+      popupsOpened: 0,
+    }
   }
 
   /**
