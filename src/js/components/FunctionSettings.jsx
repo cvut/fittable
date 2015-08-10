@@ -7,15 +7,12 @@ import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
+import { options as optionsType } from '../types'
+
 const propTypes = {
   onSettingChange: PropTypes.func,
   onLanguageChange: PropTypes.func,
-  options: PropTypes.shape({
-    layout: PropTypes.oneOf(['horizontal', 'vertical']),
-    colors: PropTypes.bool,
-    days7: PropTypes.bool,
-    facultygrid: PropTypes.bool,
-  }),
+  options: PropTypes.shape(optionsType),
 }
 
 class FunctionSettings extends React.Component {
