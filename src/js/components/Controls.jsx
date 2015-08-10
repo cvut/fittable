@@ -13,6 +13,7 @@ import WeekSwitcher from './WeekSwitcher'
 
 const propTypes = {
   onWeekChange: PropTypes.func.isRequired,
+  onDateChange: PropTypes.func.isRequired,
   onSelDayChange: PropTypes.func.isRequired,
   onSettingsPanelChange: PropTypes.func.isRequired,
   viewDate: momentPropType,
