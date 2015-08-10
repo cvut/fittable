@@ -5,7 +5,6 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import CP from 'counterpart'
 import { moment as momentPropType } from '../types'
 
 const propTypes = {

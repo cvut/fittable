@@ -2,7 +2,7 @@
  * Root component drawing whole widget.
  */
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 import Moment from 'moment'
 import CP from 'counterpart'
 import Hammer from 'hammerjs'
