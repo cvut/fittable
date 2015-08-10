@@ -3,7 +3,11 @@
  * Used Spinkit @ tobiasahlin.com/spinkit, thanks
  */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
+
+const propTypes = {
+  show: PropTypes.bool,
+}
 
 class Spinner extends React.Component {
 
@@ -20,5 +24,7 @@ class Spinner extends React.Component {
     )
   }
 }
+
+Spinner.propTypes = propTypes
 
 export default Spinner
