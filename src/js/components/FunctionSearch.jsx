@@ -16,7 +16,7 @@ const propTypes = {
   })),
 }
 
-export default class FunctionSearch extends React.Component {
+class FunctionSearch extends React.Component {
 
   constructor (props) {
 
