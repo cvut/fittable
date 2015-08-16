@@ -53,7 +53,8 @@
       clear: both;
       border-bottom: 2px solid $primary-color;
       background: $light-secondary-color;
-      position: static;
+      position: relative;
+      z-index: 70;
     }
   }
 }
