@@ -1,7 +1,13 @@
 #fittable {
   button {
-    @include reset-box-model;
-    @include reset-font;
+    // reset-box-model
+    margin: 0;
+    padding: 0;
+    border: 0;
+    // reset-font
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
     background: none;
     text-align: left;
     -webkit-appearance: none;

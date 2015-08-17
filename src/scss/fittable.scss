@@ -1,4 +1,3 @@
-@import "compass";
 @import "settings";
 @import "normalize";
 @import "reset";
@@ -44,6 +43,4 @@
 
 @import "base";
 @import "mixins";
-
-//noinspection CssUnknownTarget
-@import "components/**";
+@import "components";
