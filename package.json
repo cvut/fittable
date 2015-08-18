@@ -12,20 +12,30 @@
     "url": "https://github.com/cvut/fittable-widget/issues"
   },
   "scripts": {
-    "prepublish": "grunt build:npm",
-    "build": "grunt build",
-    "start": "grunt dev",
-    "watch:npm": "grunt devNpm"
+    "lint": "eslint src",
+    "clean": "rimraf dist/",
+    "prebuild": "npm run clean",
+    "build": "npm-run-all -p build:full build:min build:npm build:assets",
+    "build:full": "NODE_ENV=production webpack",
+    "build:min": "NODE_ENV=production MINIFY=1 webpack",
+    "build:npm": "babel --out-dir dist/js src/js",
+    "build:assets": "node script/build-static",
+    "start": "webpack --watch",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "autoprefixer-loader": "^2.0.0",
     "babel": "^5.5.8",
     "counterpart": "^0.16.7",
     "curry-d": "^0.6.0",
+    "file-loader": "^0.8.4",
     "font-awesome": "^4.3.0",
     "hammerjs": "^2.0.4",
     "moment": "^2.10.3",
-    "react": "^0.13.3"
+    "npm-run-all": "^1.2.6",
+    "react": "^0.13.3",
+    "rimraf": "^2.4.2",
+    "shelljs": "^0.5.3"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",

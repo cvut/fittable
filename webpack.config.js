@@ -40,7 +40,7 @@ module.exports = {
         NODE_ENV: '"' + env + '"',
       },
     }),
-    new ExtractTextPlugin('fittable.css', {
+    new ExtractTextPlugin(minify ? 'fittable.min.css' : 'fittable.css', {
       allChunks: true,
     }),
   ].concat(minify ? [uglifyPlugin] : []),
@@ -51,7 +51,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        loader: 'babel',
         include: jsPath,
       },
       {
@@ -61,6 +61,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css!autoprefixer' + sassLoader + ''),
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'file',
       },
     ],
   },

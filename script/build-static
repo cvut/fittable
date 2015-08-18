@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+require('shelljs/global')
+
+var baseDir = 'src'
+var targetDir = 'dist'
+
+var files = [
+  baseDir + '/index.html',
+  baseDir + '/landing.html',
+  baseDir + '/img',
+]
+
+mkdir('-p', targetDir)
+cp('-Rf', files, targetDir)
