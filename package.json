@@ -18,6 +18,7 @@
     "watch:npm": "grunt devNpm"
   },
   "dependencies": {
+    "autoprefixer-loader": "^2.0.0",
     "babel": "^5.5.8",
     "counterpart": "^0.16.7",
     "curry-d": "^0.6.0",
