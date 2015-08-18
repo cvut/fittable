@@ -44,5 +44,5 @@ function fittable (containerElId, options) {
   return rendered
 }
 
-// global.fittable = fittable
+global.fittable = fittable
 export default fittable
