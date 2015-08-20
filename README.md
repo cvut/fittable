@@ -2,7 +2,6 @@
 
 [![Travis](https://img.shields.io/travis/cvut/fittable-widget/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable-widget)
 [![David](https://img.shields.io/david/cvut/fittable-widget.svg?style=flat-square)](https://david-dm.org/cvut/fittable-widget)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 **Fittable widget** is lightweight JavaScript widget used for displaying timetables and calendars for various applications. Offers subtle, flat and intuitive user interface. And it should be **more fittable** than any other timetable widget :blush:
 
@@ -45,31 +44,36 @@ npm install @cvut/fittable-widget
 
 ### Building from source code
 
-Besides Node, you will also need Ruby and [Bundler](http://bundler.io/) for [Compass](http://compass-style.org/) stylesheets preprocessor.
+We use npm scripts to execute common build tasks. Project uses [Webpack](https://webpack.github.io/) under the hood for JS and CSS bundling.
 
-Clone the repository and install all dependencies with:
-
-```
-script/setup
-```
-
-To build this project, you need [Grunt CLI](http://gruntjs.com/getting-started). Run the main build task with:
+Run the main `build` task with:
 
 ```
-grunt build
+npm run build
 ```
 
-You can also transpile ES6 files for consumption in other projects with `build:npm` task (this will also run the `build` task):
-
-```
-grunt build:npm
-```
+This will build full and minified source code, transpiles JS files and copy HTML and image assets.
 
 The resulting build is located in `dist/` directory:
 
 - `fittable.js` and `fittable.min.js` respectively are bundles for usage in web browsers,
-- `js` directory contains transpiled code for use in other projects,
+- `js` directory contains transpiled code to ES5 for use in other projects,
 - `index.html` is an example project with mock-up data.
+
+Alternatively you can use the following tasks individually:
+
+- `npm run build:full` – generates non-minified CSS and JS files
+- `npm run build:min` – generates minified CSS and JS files
+- `npm run build:npm` – transpiles ES6 source files to ES5 with [Babel](https://babeljs.io/) for consumption by other CommonJS packages,
+- `npm run build:assets` – copies HTML and image files to `dist/` directory
+
+### Development server
+
+Run `npm start` to launch [webpack-dev-server](https://webpack.github.io/docs/webpack-dev-server.html) with hot reloading.
+
+You can access the running server on http://localhost:8080/
+
+Visit http://localhost:8080/webpack-dev-server/ to have the page automatically reloaded on source code change.
 
 ## Quick start
 
