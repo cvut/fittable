@@ -77,7 +77,9 @@ module.exports = {
     colors: true,
   },
 
-  /*eslint: {
-    configFile: './.eslintrc',
-  },*/
+  devServer: {
+    contentBase: './dist',
+    hot: true,
+    // inline: true,
+  },
 }

@@ -15,13 +15,14 @@
     "lint": "eslint src",
     "clean": "rimraf dist/",
     "prebuild": "npm run clean",
+    "prepublish": "npm run build",
     "build": "npm-run-all -p build:full build:min build:npm build:assets",
     "build:full": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production MINIFY=1 webpack",
     "build:npm": "babel --out-dir dist/js src/js",
     "build:assets": "node script/build-static",
-    "start": "webpack --watch",
-    "prepublish": "npm run build"
+    "start": "webpack-dev-server",
+    "watch": "webpack --watch"
   },
   "dependencies": {
     "babel": "^5.5.8",
@@ -51,7 +52,8 @@
     "sass-loader": "^2.0.1",
     "shelljs": "^0.5.3",
     "style-loader": "^0.12.3",
-    "webpack": "^1.11.0"
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
   },
   "publishConfig": {
     "registry": "https://repository.fit.cvut.cz/npm"
