@@ -1,7 +1,11 @@
 dev/
 dist/fittable.js
 dist/fittable.min.js
+dist/fittable.min.css
+dist/*.map
 script/
 src/
 .tmp/
+.sass-cache/
+browserslists
 docs/
