@@ -8,6 +8,7 @@ var files = [
   baseDir + '/index.html',
   baseDir + '/landing.html',
   baseDir + '/img',
+  baseDir + '/lang',
 ]
 
 mkdir('-p', targetDir)
