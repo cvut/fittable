@@ -4,15 +4,8 @@ var webpack = require('webpack')
 var path = require('path')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var env = process.env.NODE_ENV || 'development'
-var minify = process.env.MINIFY || false
-
 var jsPath = path.resolve('./src/js')
 var cssPath = path.resolve('./src/scss')
-
-var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
-  sourceMap: true,
-})
 
 var sassLoader = '!sass?' +
   'includePaths[]=' +
@@ -22,32 +15,23 @@ var sassLoader = '!sass?' +
     (path.resolve(__dirname, './node_modules'))
 
 module.exports = {
-  devtool: 'sourcemap',
-
   entry: {
     js: jsPath + '/app.js',
     css: cssPath + '/fittable.scss',
   },
 
   output: {
-    filename: minify ? 'fittable.min.js' : 'fittable.js',
+    filename: 'fittable.js',
     path: path.resolve('./dist'),
   },
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"' + env + '"',
-      },
-    }),
-    new ExtractTextPlugin(minify ? 'fittable.min.css' : 'fittable.css', {
+    new ExtractTextPlugin('fittable.css', {
       allChunks: true,
     }),
-  ].concat(minify ? [uglifyPlugin] : []),
+  ],
 
   module: {
-    preLoaders: env === 'development' ? [
-    ] : [],
     loaders: [
       {
         test: /\.jsx?$/,
