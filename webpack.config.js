@@ -62,7 +62,7 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: './dist',
+    contentBase: path.resolve('./dist'),
     hot: true,
     // inline: true,
   },
