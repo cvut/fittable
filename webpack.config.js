@@ -1,11 +1,9 @@
 /* eslint-env node */
 /* eslint no-var:0 */
-var webpack = require('webpack')
 var path = require('path')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var jsPath = path.resolve('./src/js')
-var cssPath = path.resolve('./src/scss')
+var srcPath = path.resolve('./src')
 
 var sassLoader = '!sass?' +
   'includePaths[]=' +
@@ -16,8 +14,8 @@ var sassLoader = '!sass?' +
 
 module.exports = {
   entry: {
-    js: jsPath + '/app.js',
-    css: cssPath + '/fittable.scss',
+    js: srcPath + '/app.js',
+    css: srcPath + '/stylesheets/fittable.scss',
   },
 
   output: {
@@ -36,7 +34,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel',
-        include: jsPath,
+        include: srcPath,
       },
       {
         test: /\.json$/,

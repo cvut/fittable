@@ -7,8 +7,8 @@ var targetDir = 'dist'
 var files = [
   baseDir + '/index.html',
   baseDir + '/landing.html',
-  baseDir + '/img',
-  baseDir + '/lang',
+  baseDir + '/images',
+  baseDir + '/locales',
 ]
 
 mkdir('-p', targetDir)

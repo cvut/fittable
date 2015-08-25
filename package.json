@@ -19,7 +19,7 @@
     "build": "npm-run-all -p build:prod build:npm build:assets",
     "build:dev": "webpack -d",
     "build:prod": "webpack --optimize-minimize",
-    "build:npm": "babel --out-dir dist/js src/js",
+    "build:npm": "babel --out-dir dist/js src",
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server",
     "watch": "webpack -d --watch"
