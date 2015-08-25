@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react'
 
-import { options as optionsType } from '../types'
+import { options as optionsType } from '../constants/propTypes'
 import FunctionSettings from './FunctionSettings'
 import FunctionSearch from './FunctionSearch'
 import FunctionFilter from './FunctionFilter'

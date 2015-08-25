@@ -4,7 +4,7 @@
  */
 
 import React, { PropTypes } from 'react'
-import { moment as momentPropType } from '../types'
+import { moment as momentPropType } from '../constants/propTypes'
 
 import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'

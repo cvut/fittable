@@ -7,13 +7,13 @@ import Moment from 'moment'
 import CP from 'counterpart'
 import Hammer from 'hammerjs'
 
-import { options as optionsType } from '../types'
+import { options as optionsType } from '../constants/propTypes'
 import Controls from './Controls'
 import Timetable from './Timetable'
-import DataCache from '../modules/DataCache'
+import DataCache from '../DataCache'
 import FunctionsSidebar from './FunctionsSidebar'
 import Spinner from './Spinner'
-import Error from './Error'
+import Error from './ErrorMessage'
 
 function isSmallScreen () {
   return window.innerWidth <= 768

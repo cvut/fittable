@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
 import CP from 'counterpart'
-import { moment as momentPropType } from '../types'
+import { moment as momentPropType } from '../constants/propTypes'
 
 const propTypes = {
   onCalClick: PropTypes.func,

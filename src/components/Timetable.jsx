@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import { grid as gridPropType, moment as momentPropType } from '../types'
+import { grid as gridPropType, moment as momentPropType } from '../constants/propTypes'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'

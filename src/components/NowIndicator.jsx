@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import { event as eventPropType, moment as momentPropType } from '../types'
+import { event as eventPropType, moment as momentPropType } from '../constants/propTypes'
 
 const propTypes = {
   timelineStartHour: PropTypes.number,

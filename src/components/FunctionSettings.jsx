@@ -7,7 +7,7 @@ import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
 
-import { options as optionsType } from '../types'
+import { options as optionsType } from '../constants/propTypes'
 
 const propTypes = {
   onSettingChange: PropTypes.func,

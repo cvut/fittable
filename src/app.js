@@ -15,10 +15,10 @@ import Fittable from './components/Fittable'
 
 import Counterpart from 'counterpart'
 import Moment from 'moment'
-import Momentcslocale from 'moment/locale/cs'
+import 'moment/locale/cs'
 
-import LocaleCS from '../lang/cs.json'
-import LocaleEN from '../lang/en.json'
+import LocaleCS from './locales/cs.json'
+import LocaleEN from './locales/en.json'
 
 function fittable (containerElId, options) {
 

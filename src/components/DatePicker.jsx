@@ -6,7 +6,7 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import { moment as momentPropType } from '../types'
+import { moment as momentPropType } from '../constants/propTypes'
 
 import Toggleable from './Toggleable'
 
