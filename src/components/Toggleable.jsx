@@ -11,10 +11,10 @@ class Toggleable extends React.Component {
    */
   toggle () {
 
-    if (!this.refs.rootEl.getDOMNode().classList.contains('hide')) {
-      this.refs.rootEl.getDOMNode().classList.add('hide')
+    if (!this.refs.rootEl.classList.contains('hide')) {
+      this.refs.rootEl.classList.add('hide')
     } else {
-      this.refs.rootEl.getDOMNode().classList.remove('hide')
+      this.refs.rootEl.classList.remove('hide')
     }
   }
 
@@ -22,13 +22,13 @@ class Toggleable extends React.Component {
    * Shows this component
    */
   show () {
-    this.refs.rootEl.getDOMNode().classList.remove('hide')
+    this.refs.rootEl.classList.remove('hide')
   }
 
   hide () {
 
-    if (!this.refs.rootEl.getDOMNode().classList.contains('hide')) {
-      this.refs.rootEl.getDOMNode().classList.add('hide')
+    if (!this.refs.rootEl.classList.contains('hide')) {
+      this.refs.rootEl.classList.add('hide')
     }
   }
 }

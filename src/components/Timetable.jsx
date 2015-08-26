@@ -40,7 +40,7 @@ class Timetable extends React.Component {
    */
   hide () {
 
-    const el = this.refs.days.getDOMNode()
+    const el = this.refs.days
 
     // Replay CSS animation
     el.classList.remove('a-left')
@@ -52,7 +52,7 @@ class Timetable extends React.Component {
    */
   animateLeft () {
 
-    const el = this.refs.days.getDOMNode()
+    const el = this.refs.days
 
     // Replay CSS animation
     el.classList.remove('a-left')
@@ -67,7 +67,7 @@ class Timetable extends React.Component {
    */
   animateRight () {
 
-    const el = this.refs.days.getDOMNode()
+    const el = this.refs.days
 
     // Replay CSS animation
     el.classList.remove('a-left')

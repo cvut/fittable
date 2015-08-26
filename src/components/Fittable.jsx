@@ -452,14 +452,14 @@ class Fittable extends React.Component {
   }
 
   componentDidMount () {
-    this.registerSwipeListener(this.refs.rootEl.getDOMNode())
-    this.refs.rootEl.getDOMNode().addEventListener('click', this.handleClick.bind(this))
+    this.registerSwipeListener(this.refs.rootEl)
+    this.refs.rootEl.addEventListener('click', this.handleClick.bind(this))
     window.addEventListener('resize', this.onWindowResize.bind(this))
   }
 
   componentWillUnmount () {
     this.unregisterSwipeListener()
-    this.refs.rootEl.getDOMNode().removeEventListener('click', this.handleClick.bind(this))
+    this.refs.rootEl.removeEventListener('click', this.handleClick.bind(this))
     window.removeEventListener('resize', this.onWindowResize.bind(this))
   }
 

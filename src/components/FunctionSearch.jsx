@@ -30,7 +30,7 @@ class FunctionSearch extends React.Component {
    */
   handleSearch (e) {
 
-    this.props.onSearch(this.refs.searchquery.getDOMNode().value)
+    this.props.onSearch(this.refs.searchquery.value)
     e.preventDefault()
   }
 
@@ -46,17 +46,17 @@ class FunctionSearch extends React.Component {
       }
 
       this.autoSearchTimeout = setTimeout(() => {
-        this.props.onSearch(this.refs.searchquery.getDOMNode().value)
+        this.props.onSearch(this.refs.searchquery.value)
       }, 100)
     }
   }
 
   componentDidMount () {
-    this.refs.searchquery.getDOMNode().addEventListener('keyup', this.handleInputKeyup.bind(this))
+    this.refs.searchquery.addEventListener('keyup', this.handleInputKeyup.bind(this))
   }
 
   componentWillUnmount () {
-    this.refs.searchquery.getDOMNode().removeEventListener('keyup', this.handleInputKeyup.bind(this))
+    this.refs.searchquery.removeEventListener('keyup', this.handleInputKeyup.bind(this))
   }
 
   render () {
