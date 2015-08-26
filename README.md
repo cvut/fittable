@@ -75,12 +75,12 @@ You can access the running server on http://localhost:8080/
 
 Visit http://localhost:8080/webpack-dev-server/ to have the page automatically reloaded on source code change.
 
-## Quick start
+## JavaScript Usage
 
-After a successful installation of the widget, include **fittable.min.js** from the dist folder into your project.
+After a successful installation of the widget, include **fittable.js** from the dist folder into your project.
 
 ```html
-<script type="text/javascript" src="fittable.min.js"></script>
+<script type="text/javascript" src="fittable.js"></script>
 ```
 
 Configure the widget and initialize it.
