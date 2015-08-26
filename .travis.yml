@@ -5,7 +5,7 @@ before_install:
 install:
   - npm install
 script:
-  - true  # do nothing
+  - npm test
 after_success: |
   script/travis-npm-publish && \
   script/travis-trigger-build cvut/fittable master
