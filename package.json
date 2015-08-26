@@ -2,7 +2,7 @@
   "name": "@cvut/fittable-widget",
   "version": "0.8.1",
   "description": "Flexible calendar widget for fittable written in JavaScript",
-  "main": "dist/js/app.js",
+  "main": "dist/app.js",
   "author": "Marián Hlaváč",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "build": "npm-run-all -p build:prod build:npm build:assets",
     "build:dev": "webpack -d",
     "build:prod": "webpack --optimize-minimize",
-    "build:npm": "babel --out-dir dist/js src",
+    "build:npm": "babel --out-dir dist src",
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server",
     "watch": "webpack -d --watch"
