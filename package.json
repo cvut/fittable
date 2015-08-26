@@ -33,7 +33,8 @@
     "font-awesome": "^4.4.0",
     "hammerjs": "^2.0.4",
     "moment": "^2.10.6",
-    "react": "^0.13.3",
+    "react": "^0.14.0-beta3",
+    "react-dom": "^0.14.0-beta3",
     "react-redux": "^1.0.1",
     "redux": "^1.0.1"
   },

@@ -11,6 +11,7 @@ try {
 }
 
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Fittable from './components/Fittable'
 
 import Counterpart from 'counterpart'
@@ -38,7 +39,7 @@ function fittable (containerElId, options) {
 
   // Create root fittable element
   var element = React.createElement(Fittable, options)
-  var rendered = React.render(element, document.getElementById(containerElId))
+  var rendered = ReactDOM.render(element, document.getElementById(containerElId))
 
   // Return fittable instance
   return rendered
