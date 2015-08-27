@@ -23,7 +23,7 @@
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server",
     "watch": "webpack -d --watch",
-    "test": "babel-tape-runner 'test/**/*_test.js' | tap-spec"
+    "test": "babel-tape-runner 'test/**/*.test.js' | tap-spec"
   },
   "dependencies": {
     "babel": "^5.8.21",
