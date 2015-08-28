@@ -12,7 +12,7 @@ try {
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Fittable from './components/Fittable'
+import AppContainer from './containers/AppContainer'
 
 import Counterpart from 'counterpart'
 import Moment from 'moment'
@@ -38,7 +38,7 @@ function fittable (containerElId, options) {
   Moment.locale(options.locale)
 
   // Create root fittable element
-  var element = React.createElement(Fittable, options)
+  var element = React.createElement(AppContainer, options)
   var rendered = ReactDOM.render(element, document.getElementById(containerElId))
 
   // Return fittable instance
