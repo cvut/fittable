@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
 import store from '../../store'
-import Fittable from '../../components/Fittable'
+import FittableContianer from '../FittableContainer'
 import { options as optionsType } from '../../constants/propTypes'
 
 export default class AppContainer extends Component {
@@ -18,13 +18,7 @@ export default class AppContainer extends Component {
 
   render() {
     return <Provider store={store}>
-      {() =>
-        <Fittable callbacks={this.props.callbacks} locale={this.props.locale}
-          layout={this.props.layout}
-          colors={this.props.colors}
-          days7={this.props.days7}
-          facultygrid={this.props.facultygrid}
-        />}
+      <FittableContianer callbacks={this.props.callbacks} locale={this.props.locale} />
     </Provider>
   }
 }
