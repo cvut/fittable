@@ -15,5 +15,6 @@ rules:
   react/jsx-quotes: [2, double, avoid-escape]
   curly: [2, all]
   max-len: [2, 120, 2]
+  no-extra-bind: [2]
   # FIXME: supported in future ESLint:
   # max-len: [2, 120, 2, {ignoreComments: true, ignoreUrls: true}]
