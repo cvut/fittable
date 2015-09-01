@@ -160,11 +160,7 @@ const FittableContainer = React.createClass({
   handleSearch (query) {
     this.setState({ waiting: true })
 
-    if ('search' in this.props.callbacks) {
-      this.props.callbacks.search(query, this.receiveSearchResults)
-    } else {
-      alert("Search callback hasn't been defined.")
-    }
+    this.props.callbacks.search(query, this.receiveSearchResults)
   },
 
   // FIXME: this should not be needed at all
@@ -173,6 +169,12 @@ const FittableContainer = React.createClass({
   },
 
   render () {
+
+    // FIXME: side effects!!!
+    const { locale } = this.props.settings
+    CP.setLocale(locale)
+    Moment.locale(locale)
+
     return (
       <div className="fittable-container" ref="rootEl">
         <Controls
