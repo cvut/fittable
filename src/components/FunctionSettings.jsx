@@ -10,13 +10,13 @@ import { options as optionsType } from '../constants/propTypes'
 const propTypes = {
   onSettingChange: PropTypes.func,
   onLanguageChange: PropTypes.func,
-  options: PropTypes.shape(optionsType),
+  settings: PropTypes.shape(optionsType),
 }
 
 class FunctionSettings extends React.Component {
 
   render () {
-    const { locale, layout, eventColors, fullWeek, facultyGrid } = this.props.options
+    const { locale, layout, eventColors, fullWeek, facultyGrid } = this.props.settings
     const handleSettingChange = (k, v) => this.props.onSettingChange.bind(null, k, v)
     return (
       <div
