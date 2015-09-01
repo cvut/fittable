@@ -59,9 +59,4 @@ module.exports = {
     colors: true,
   },
 
-  devServer: {
-    contentBase: path.resolve('./dist'),
-    hot: true,
-    // inline: true,
-  },
 }

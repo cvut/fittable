@@ -21,7 +21,7 @@
     "build:prod": "webpack --optimize-minimize",
     "build:npm": "babel --out-dir dist src",
     "build:assets": "node script/build-static",
-    "start": "npm run build:assets && webpack-dev-server",
+    "start": "npm run build:assets && webpack-dev-server --content-base dist/ --hot -d",
     "watch": "webpack -d --watch",
     "test": "babel-tape-runner 'test/**/*.test.js' | tap-spec"
   },
