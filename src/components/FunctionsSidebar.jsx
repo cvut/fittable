@@ -13,7 +13,7 @@ const propTypes = {
   opened: PropTypes.oneOf(['settings', 'search', 'filter']),
   onSettingsChange: PropTypes.func,
   onRefreshNeed: PropTypes.func,
-  options: PropTypes.shape(optionsType),
+  settings: PropTypes.shape(optionsType),
   onSearch: PropTypes.func,
   searchResults: PropTypes.array, // FIXME: shared type
   onViewChange: PropTypes.func,
@@ -32,8 +32,7 @@ class FunctionsSidebar {
         <FunctionSettings
           ref="functionSettings"
           onSettingChange={this.props.onSettingChange}
-          onLanguageChange={this.props.onRefreshNeed}
-          options={this.props.options}
+          settings={this.props.settings}
         />
       )
     }

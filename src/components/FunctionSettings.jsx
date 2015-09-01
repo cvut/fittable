@@ -5,8 +5,6 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import Moment from 'moment'
-
 import { options as optionsType } from '../constants/propTypes'
 
 const propTypes = {
@@ -17,35 +15,9 @@ const propTypes = {
 
 class FunctionSettings extends React.Component {
 
-  /**
-   * Handles setting selection change
-   * @param key Setting key
-   * @param sel Selected
-   */
-  handleSettingSelect (key, sel) {
-
-    // Delegate to parent
-    this.props.onSettingChange(key, sel)
-  }
-
-  /**
-   * Handles language selection
-   * @param sel Selected layout
-   */
-  handleLanguageSelect (sel) {
-
-    this.props.onLanguageChange()
-
-    CP.setLocale(sel)
-    Moment.locale(sel)
-    this.props.onSettingChange('locale', sel)
-
-    // Force refresh
-    this.setState({ })
-  }
-
   render () {
-
+    const { locale, layout, eventColors, fullWeek, facultyGrid } = this.props.options
+    const handleSettingChange = (k, v) => this.props.onSettingChange.bind(null, k, v)
     return (
       <div
         className="function function-settings"
@@ -58,16 +30,16 @@ class FunctionSettings extends React.Component {
             <div className="settings-toggle toggleable-h">
               <button
                 type="button"
-                className={ 'settings-toggle-btn ' + (this.props.options.layout == 'horizontal' ? ' active' : '') }
-                onClick={ this.handleSettingSelect.bind(this, 'layout', 'horizontal') }
+                className={ 'settings-toggle-btn ' + (layout === 'horizontal' ? ' active' : '') }
+                onClick={ handleSettingChange('layout', 'horizontal') }
               >
                 <i className="fa fa-fw fa-th-list"></i>
                 { CP.translate('functions.settings.layout_horizontal') }
               </button>
               <button
                 type="button"
-                className={ 'settings-toggle-btn ' + (this.props.options.layout == 'vertical' ? ' active' : '') }
-                onClick={ this.handleSettingSelect.bind(this, 'layout', 'vertical') }
+                className={ 'settings-toggle-btn ' + (layout === 'vertical' ? ' active' : '') }
+                onClick={ handleSettingChange('layout', 'vertical') }
               >
                 <i className="fa fa-fw fa-th"></i>
                 { CP.translate('functions.settings.layout_vertical') }
@@ -79,15 +51,15 @@ class FunctionSettings extends React.Component {
             <div className="settings-toggle toggleable-h">
               <button
                 type="button"
-                className={ 'settings-toggle-btn ' + (CP.getLocale() == 'cs' ? ' active' : '') }
-                onClick={ this.handleLanguageSelect.bind(this, 'cs') }
+                className={ 'settings-toggle-btn ' + (locale === 'cs' ? ' active' : '') }
+                onClick={ handleSettingChange('locale', 'cs') }
               >
                 { CP.translate('functions.settings.language_czech') }
               </button>
               <button
                 type="button"
-                className={ 'settings-toggle-btn ' + (CP.getLocale() == 'en' ? ' active' : '') }
-                onClick={ this.handleLanguageSelect.bind(this, 'en') }
+                className={ 'settings-toggle-btn ' + (locale === 'en' ? ' active' : '') }
+                onClick={ handleSettingChange('locale', 'en') }
               >
                 { CP.translate('functions.settings.language_english') }
               </button>
@@ -101,11 +73,11 @@ class FunctionSettings extends React.Component {
               <input
                 id="setting-colors"
                 type="checkbox"
-                checked={ this.props.options.colors }
+                checked={ eventColors }
               />
               <label
-                for="setting-colors"
-                onClick={ this.handleSettingSelect.bind(this, 'colors', !this.props.options.colors) }
+                htmlFor="setting-colors"
+                onClick={ handleSettingChange('eventColors', !eventColors) }
               >
               </label>
             </div>
@@ -120,11 +92,11 @@ class FunctionSettings extends React.Component {
               <input
                 id="setting-days7"
                 type="checkbox"
-                checked={ this.props.options.days7 }
+                checked={ fullWeek }
               />
               <label
-                for="setting-days7"
-                onClick={ this.handleSettingSelect.bind(this, 'days7', !this.props.options.days7) }
+                htmlFor="setting-days7"
+                onClick={ handleSettingChange('fullWeek', !fullWeek) }
               >
               </label>
             </div>
@@ -139,11 +111,11 @@ class FunctionSettings extends React.Component {
               <input
                 id="setting-facultygrid"
                 type="checkbox"
-                checked={ this.props.options.facultygrid }
+                checked={ facultyGrid }
               />
               <label
-                for="setting-facultygrid"
-                onClick={ this.handleSettingSelect.bind(this, 'facultygrid', !this.props.options.facultygrid) }
+                htmlFor="setting-facultygrid"
+                onClick={ handleSettingChange('facultyGrid', !facultyGrid) }
               >
               </label>
             </div>
