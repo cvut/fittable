@@ -7,12 +7,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Moment from 'moment'
 import CP from 'counterpart'
-import Hammer from 'hammerjs'
 
 import { changeSettings } from '../../actions/settingsActions'
 
-import Controls from '../../components/Controls'
+import DataCache from '../../DataCache'
 import FunctionsSidebar from '../../components/FunctionsSidebar'
+import Spinner from '../../components/Spinner'
+import Controls from '../../components/Controls'
+import Timetable from '../../components/Timetable'
+import ErrorMessage from '../../components/ErrorMessage'
 
 // FIXME: move this to a separate module
 function isSmallScreen () {
@@ -171,19 +174,34 @@ const FittableContainer = React.createClass({
   render () {
 
     // FIXME: side effects!!!
-    const { locale } = this.props.settings
+    const { locale, layout, fullWeek, eventsColors, facultyGrid } = this.props.settings
     CP.setLocale(locale)
     Moment.locale(locale)
 
+    // FIXME: this should be calculated by selector
+    const gridsettings = {
+      starts: this.state.grid.starts,
+      ends: this.state.grid.ends,
+      lessonDuration: (!facultyGrid ? 1 : this.state.grid.lessonDuration),
+      hoursStartsAt1: facultyGrid,
+      facultyHours: (this.state.grid.ends - this.state.grid.starts) / this.state.grid.lessonDuration,
+      facultyGrid: facultyGrid,
+    }
+
     return (
       <div className="fittable-container" ref="rootEl">
+        <ErrorMessage
+          muted={true}
+          shown={this.state.mutedError}
+          type={this.state.errorType}
+        />
         <Controls
           viewDate={this.state.viewDate}
           onWeekChange={this.handleChangeViewDate}
           onDateChange={this.handleChangeViewDate}
           semester={this.getSemester(this.state.viewDate)}
           onSettingsPanelChange={this.handleChangeSettingsPanel}
-          days7={this.props.settings.fullWeek}
+          days7={fullWeek}
           onSelDayChange={this.handleChangeSelectedDay}
           selectedDay={this.state.selectedDay}
         />
@@ -200,6 +218,24 @@ const FittableContainer = React.createClass({
           onSearch={this.handleSearch}
           searchResults={this.state.searchResults}
         />
+        <div className="clearfix"></div>
+        <Timetable
+          grid={gridsettings}
+          viewDate={this.state.viewDate}
+          layout={layout}
+          weekEvents={this.state.weekEvents}
+          displayFilter={this.state.displayFilter}
+          functionsOpened={this.state.functionOpened}
+          selectedDay={this.state.selectedDay}
+          onViewChange={this.handleChangeView}
+          linkNames={this.linkNames}
+          colored={eventsColors}
+          days7={fullWeek}
+          onDateChange={this.handleChangeViewDate}
+          isMobile={this.state.isMobile}
+          ref="timetable"
+        />
+        <Spinner show={this.state.waiting} />
       </div>
     )
   },
