@@ -41,6 +41,18 @@ class Error extends React.Component {
             <i className="icon fa fa-plug"></i> {CP.translate('errors.connection_muted_message')}
           </div>
         )
+      } else if (this.props.type == 'not-found') {
+        return (
+          <div className="error-message">
+            <i className="icon fa fa-calendar-o"></i>
+            <h2>{CP.translate('errors.notfound_title')}</h2>
+            <p>
+              {CP.translate('errors.notfound_desc')}<br />
+              {CP.translate('errors.notfound_desc2')}<br /><br />
+              <a href="#error-muted" onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</a>
+            </p>
+          </div>
+        )
       } else if (this.props.type == 'connection') {
         return (
           <div className="error-message">
@@ -67,8 +79,7 @@ class Error extends React.Component {
               <a href="javascript:window.location.reload()">{CP.translate('errors.generic_refreshpage')}</a>
             </p>
             <p className="please">
-              {CP.translate('errors.help_please')}
-              <a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i> issue tracker</a>.
+              {CP.translate('errors.help_please')}&nbsp;<a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i>&nbsp;issue&nbsp;tracker</a>.
               {CP.translate('errors.help_thanks')}
             </p>
           </div>

@@ -128,6 +128,10 @@
     "connection_part_or": " or ",
     "connection_mutelink": "hide this error message",
     "connection_mutelink_partafter": " and continue without connection.",
-    "connection_muted_message": "You are working without connection."
+    "connection_muted_message": "You are working without connection.",
+    "notfound_title": "The calendar can't be displayed",
+    "notfound_desc": "You've tried to display a calendar that doesn't exists.",
+    "notfound_desc2": "If you're not a student or academic employee, it's possible you don't have your personal calendar.",
+    "hide_this": "Hide this and continue"
   }
 }

@@ -128,6 +128,10 @@
     "connection_part_or": ", nebo ",
     "connection_mutelink": "skryjte chybovou hlášku",
     "connection_mutelink_partafter": " a pracujte bez připojení.",
-    "connection_muted_message": "Pracujete bez připojení."
+    "connection_muted_message": "Pracujete bez připojení.",
+    "notfound_title": "Kalendář nemohl být zobrazen",
+    "notfound_desc": "Pokusili jste se zobrazit neexistující kalendář.",
+    "notfound_desc2": "Pokud nejste student ani akademický pracovník, je možné, že nemáte svůj osobní rozvrh.",
+    "hide_this": "Skrýt a pokračovat"
   }
 }
