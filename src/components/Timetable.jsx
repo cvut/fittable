@@ -77,7 +77,7 @@ class Timetable extends React.Component {
     this.props.onEventDisplay(key)
   }
 
-  onClickOutside (e) {
+  onClickOutside () {
     if (this.props.eventId) {
       this.showDetailOn(null)
     }
