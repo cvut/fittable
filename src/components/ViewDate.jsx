@@ -5,6 +5,7 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
+import CP from 'counterpart'
 import { moment as momentPropType } from '../constants/propTypes'
 
 const propTypes = {
@@ -20,24 +21,16 @@ class ViewDate extends React.Component {
     this.state = { open: false }
   }
 
-  weekRange () {
+  weekNum () {
+    return this.props.viewDate.format('Wo')
+  }
 
-    const weekStart = new Moment(this.props.viewDate).startOf('isoWeek')
-    const weekEnd = new Moment(this.props.viewDate).endOf('isoWeek')
-
-    if (!this.props.days7) {
-      weekEnd.subtract(2, 'days')
-    }
-
-    if (weekStart.isSame(weekEnd, 'month')) {
-      return `${weekStart.date()}. - ${weekEnd.date()}. ${weekStart.format('MMMM')}`
-    } else {
-      return `${weekStart.format('D. MMMM ')} - ${weekEnd.format('D. MMMM')}`
-    }
+  weekParity () {
+    return CP.translate(this.props.viewDate.isoWeek() % 2 === 0 ? 'even' : 'odd')
   }
 
   render () {
-    return <div className="view-date">{this.weekRange()}</div>
+    return <div className="view-date">{CP.translate('weekNav.teachweek', { weeknum: this.weekNum() })} ({this.weekParity()})</div>
   }
 }
 

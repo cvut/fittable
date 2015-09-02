@@ -38,7 +38,8 @@
   "weekNav": {
     "prev": "Předchozí týden",
     "next": "Následující týden",
-    "selector": "Výběr data"
+    "selector": "Výběr data",
+    "teachweek": "%(weeknum)s týden"
   },
 
   "functions": {

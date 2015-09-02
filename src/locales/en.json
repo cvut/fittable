@@ -38,7 +38,8 @@
   "weekNav": {
     "prev": "Previous week",
     "next": "Next week",
-    "selector": "Date selector"
+    "selector": "Date selector",
+    "teachweek": "%(weeknum)s week"
   },
 
   "functions": {

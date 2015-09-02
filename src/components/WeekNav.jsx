@@ -40,16 +40,22 @@ class WeekNav extends React.Component {
     this.props.onNextClick(e)
   }
 
-  dayOfWeek () {
-    return new Moment(this.props.viewDate).isoWeekday(this.props.selectedDay + 1).format('dddd')
-  }
+  viewDate () {
+    const weekStart = new Moment(this.props.viewDate).startOf('isoWeek')
+    const weekEnd = new Moment(this.props.viewDate).endOf('isoWeek')
 
-  weekNum () {
-    return CP.translate('week', { num: this.props.viewDate.isoWeek() })
-  }
+    if (!this.props.days7) {
+      weekEnd.subtract(2, 'days')
+    }
 
-  weekParity () {
-    return CP.translate(this.props.viewDate.isoWeek() % 2 === 0 ? 'even' : 'odd')
+    if (Moment.locale() == "cs")
+    {
+      return `${weekStart.format('D. M. ')} - ${weekEnd.format('D. M. YYYY')}`
+    }
+    else
+    {
+      return `${weekStart.format('M/D')} - ${weekEnd.format('M/D/YYYY')}`
+    }
   }
 
   render () {
@@ -70,8 +76,7 @@ class WeekNav extends React.Component {
           onClick={this.handleCalClick.bind(this)}
           title={CP.translate('weekNav.selector')}
         >
-          <strong className="week-toggle-num">{this.weekNum()}&nbsp;&nbsp;</strong>
-          <span className="week-toggle-parity">{this.weekParity()}</span>
+          <strong className="week-toggle-num">{this.viewDate()}</strong>
         </button>
         <button
           type="button"
