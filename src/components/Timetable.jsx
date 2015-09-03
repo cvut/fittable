@@ -118,13 +118,6 @@ class Timetable extends React.Component {
 
         // Sort events by day of week
         weekEvents[ dateStart.isoWeekday() - 1 ].push(event)
-
-        // Search for closest event from now
-        const diffwithnow = dateStart.diff(moment())
-        if (diffwithnow < minClosestDiff && diffwithnow > 0 && moment().isSame(dateStart, 'day')) {
-          minClosestDiff = diffwithnow
-          closestEvent = event
-        }
       }
     }
 
@@ -225,7 +218,6 @@ class Timetable extends React.Component {
           timelineStartMins={ timelineMinutesFrom }
           timelineLength={ timelineLength }
           viewDate={ this.props.viewDate }
-          closestEvent={ closestEvent }
         />
         <div
           className={daysClass}
