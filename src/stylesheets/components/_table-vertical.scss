@@ -66,24 +66,18 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
   }
 
   .now-indicator {
-    width: 100% !important;
     border-right: none;
-    border-bottom: 1px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
 
-    .next {
-      bottom: 0px;
-      text-align: left;
-      padding-left: 8px;
-    }
-
-    i.fa {
-      right: auto !important;
-      bottom: -6px;
-      left: -14px;
-    }
-
-    i.fa.fa-chevron-circle-right {
+    &.horizontal {
       display: none;
+    }
+
+    &::after {
+      top: auto;
+      right: auto;
+      bottom: -5px;
+      left: -4px;
     }
   }
 

@@ -11,7 +11,7 @@ const propTypes = {
   timelineStartMins: PropTypes.number,
   timelineLength: PropTypes.number,
   viewDate: PropTypes.instanceOf(Date),
-  closestEvent: eventPropType,
+  days7: PropTypes.bool,
 }
 
 class NowIndicator extends React.Component {
@@ -20,9 +20,20 @@ class NowIndicator extends React.Component {
     const nowpoint = moment().diff(
       moment().hour(this.props.timelineStartHour).minutes(this.props.timelineStartMins)
     )
+    const dayWidth = 1 / (this.props.days7 ? 7 : 5)
     const length = nowpoint / this.props.timelineLength
+    const shown = moment().isSame(this.props.viewDate, 'isoWeek') && length > 0 && length < 1
+    const offset = (new Moment().isoWeekday() - 1) * dayWidth
     return (
-      <div className={`now-indicator ${shown ? '' : ' hide'}`} ref="rootEl" style={{width: (length * 90 + 10) + '%', height: (length * 90 + 10) + '%'}}>
+      <div className="now-indicator-wrap">
+        <div className={`now-indicator horizontal ${shown ? '' : ' hide'}`} ref="rootEl" style={{
+          height: (dayWidth * 100) + '%', width: (length * 90 + 10) + '%', top: (offset * 100) + '%'
+        }}>
+        </div>
+        <div className={`now-indicator vertical ${shown ? '' : ' hide'}`} ref="rootEl" style={{
+          width: (dayWidth * 100) + '%', height: (length * 90 + 10) + '%', left: (offset * 100) + '%'
+        }}>
+        </div>
       </div>
     )
   }

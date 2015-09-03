@@ -105,29 +105,20 @@
       top: 0;
       height: 107%;
       z-index: 7;
-      border-right: 1px solid $primary-color;
+      border-right: 2px solid $primary-color;
       opacity: .5;
       @include disable-selection();
 
-      .next {
+      &::after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: $primary-color;
+        border-radius: 50%;
         position: absolute;
-        bottom: -14px;
-        font-size: $small-font-size;
-        color: $primary-color;
-        white-space: nowrap;
-        overflow: hidden;
-        text-align: right;
-        line-height: 16px;
-        width: 100%;
-        padding-right: 10px;
-      }
-
-      i.fa {
-        position: absolute;
-        bottom: -14px;
-        right: -8px;
-        font-size: 16px;
-        color: $primary-color;
+        top: -4px;
+        right: -5px;
       }
     }
 
@@ -204,7 +195,10 @@
       }
 
       .now-indicator {
-        height: 107% !important;
+
+        &.vertical {
+          display: none;
+        }
 
         i.fa.fa-chevron-circle-down {
           display: none;
