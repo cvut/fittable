@@ -79,7 +79,7 @@ class Error extends React.Component {
               <a href="javascript:window.location.reload()">{CP.translate('errors.generic_refreshpage')}</a>
             </p>
             <p className="please">
-              {CP.translate('errors.help_please')}&nbsp;<a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i>&nbsp;issue&nbsp;tracker</a>.
+              {CP.translate('errors.help_please')}&nbsp;<a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i>&nbsp;{CP.translate('errors.help_tracker')}</a>.
               {CP.translate('errors.help_thanks')}
             </p>
           </div>

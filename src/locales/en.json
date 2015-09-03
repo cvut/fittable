@@ -116,6 +116,7 @@
     "generic_try": "Try to ",
     "generic_refreshpage": "refresh the page",
     "help_please": "We are the faculty filled with developers. Please, don't be afraid, open the JS console and post the bug to our ",
+    "help_tracker": "issue tracker",
     "help_thanks": " Many thanks for your help!",
     "access_title": "You don't have permission to see this content",
     "access_desc": "We are sorry, but your account doesn't have sufficient permissions to display this calendar view.",
