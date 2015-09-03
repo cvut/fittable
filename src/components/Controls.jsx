@@ -68,11 +68,6 @@ class Controls extends React.Component {
           viewDate={this.props.viewDate}
           selectedDay={this.props.selectedDay}
         />
-        <ViewDate
-          viewDate={this.props.viewDate}
-          selectedDay={this.props.selectedDay}
-          days7={this.props.days7}
-        />
         <WeekSwitcher
           viewDate={this.props.viewDate}
           ref="weekSwitcher"
