@@ -50,11 +50,12 @@ class WeekNav extends React.Component {
 
     if (Moment.locale() == "cs")
     {
-      return `${weekStart.format('D. M. ')} - ${weekEnd.format('D. M. YYYY')}`
+      // u2013 : &ndash; \u2009 : &thinsp;
+      return `${weekStart.format('D.\u2009M. ')} \u2013 ${weekEnd.format('D.\u2009M.\u2009YYYY')}`
     }
     else
     {
-      return `${weekStart.format('M/D')} - ${weekEnd.format('M/D/YYYY')}`
+      return `${weekStart.format('M/D')} \u2013 ${weekEnd.format('M/D/YYYY')}`
     }
   }
 
