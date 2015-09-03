@@ -188,6 +188,9 @@ class FunctionSettings extends React.Component {
         <p>
           <input type="text" name="ical_export" value={this.getIcalLink()} className="url-input" onClick={this.selectInput} readonly="readonly" />
         </p>
+        <p className="ical-qr-code">
+          <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.getIcalLink()}`} alt={CP.translate('functions.ical_export.qr')} />
+        </p>
       </div>
     )
   }

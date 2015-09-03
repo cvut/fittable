@@ -79,7 +79,8 @@
     },
     "ical_export": {
       "name": "iCalendar export",
-      "desc": "You can import your personal calendar into your favorite application or mobile phone. Use the iCalendar export provided by Sirius"
+      "desc": "You can import your personal calendar into your favorite application or mobile phone. Use the iCalendar export provided by Sirius",
+      "qr": "QR code with link to calendar export"
     }
   },
 
