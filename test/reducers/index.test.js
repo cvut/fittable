@@ -5,7 +5,8 @@ import reducer from '../../src/reducers'
 
 test('Initial state', t => {
   const result = reducer(undefined, {type: 'FAUX_ACTION'})
-  t.ok(R.is(Object, result.settings), 'Missing property settings in initial state')
+  t.ok(R.is(Object, result.settings), 'settings is an object in initial state')
+  t.ok(R.is(Date, result.viewDate), 'viewDate is a Date in initial state')
   t.end()
 })
 

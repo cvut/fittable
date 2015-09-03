@@ -26,6 +26,7 @@ function isSmallScreen () {
 function mapStateToProps (state) {
   return {
     settings: state.settings,
+    viewDate: state.viewDate,
   }
 }
 

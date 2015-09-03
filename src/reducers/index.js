@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { merge } from 'ramda'
 
 import { SETTINGS_CHANGE } from '../constants/actionTypes'
+import { now } from '../date'
 
 const initialSettings = {
   locale: 'cs',
@@ -9,6 +10,10 @@ const initialSettings = {
   eventsColors: false,
   fullWeek: false,
   facultyGrid: false,
+}
+
+function viewDate (state = now()) {
+  return state
 }
 
 function settings (state = initialSettings, action) {
@@ -22,6 +27,7 @@ function settings (state = initialSettings, action) {
 
 const fittableApp = combineReducers({
   settings,
+  viewDate,
 })
 
 export default fittableApp
