@@ -27,6 +27,8 @@ const defaultProps = {
   colors: false,
   days7: false,
   facultygrid: true,
+  username: 'username',
+  usertoken: 'usertoken'
 }
 
 class Fittable extends React.Component {
@@ -504,6 +506,7 @@ class Fittable extends React.Component {
                 onViewChange={this.handleChangeView.bind(this)}
                 onSearch={this.search.bind(this)}
                 searchResults={this.state.searchResults}
+                user={[this.props.username, this.props.usertoken]}
               />
               <div className="clearfix"></div>
               <Timetable

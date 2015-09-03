@@ -36,6 +36,8 @@ export const options = Object.freeze({
   colors: PropTypes.bool,
   days7: PropTypes.bool,
   facultygrid: PropTypes.bool,
+  username: PropTypes.string,
+  usertoken: PropTypes.string,
 })
 
 export const grid = PropTypes.shape({

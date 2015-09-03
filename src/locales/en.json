@@ -76,6 +76,10 @@
       "subject": "Subject",
       "person": "Person",
       "room": "Room"
+    },
+    "ical_export": {
+      "name": "iCalendar export",
+      "desc": "You can import your personal calendar into your favorite application or mobile phone. Use the iCalendar export provided by Sirius"
     }
   },
 
