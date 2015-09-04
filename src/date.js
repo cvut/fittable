@@ -1,14 +1,16 @@
-import moment from 'moment'
+import moment from 'moment-timezone'
 import { curry } from 'ramda'
+
+import { TZ } from './constants'
 
 export const now = () => Object.freeze(new Date())
 
 export function isoDate (date) {
-  return moment(date).format('YYYY-MM-DD')
+  return moment.tz(date, TZ).format('YYYY-MM-DD')
 }
 
 function momentWeekRange (date) {
-  const m = moment(date)
+  const m = moment.tz(date, TZ)
 
   const weekStart = m.clone().startOf('isoWeek')
   const weekEnd = m.clone().endOf('isoWeek')
@@ -31,5 +33,5 @@ export function isoWeekRange (date) {
 }
 
 export const shiftDate = curry(function shiftDate (baseDate, kind, offset) {
-  return moment(baseDate).add(offset, kind).toDate()
+  return moment.tz(baseDate, TZ).add(offset, kind).toDate()
 })
