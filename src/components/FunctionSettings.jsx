@@ -13,6 +13,7 @@ const propTypes = {
   onSettingChange: PropTypes.func,
   onLanguageChange: PropTypes.func,
   options: PropTypes.shape(optionsType),
+  user: PropTypes.array,
 }
 
 class FunctionSettings extends React.Component {
@@ -42,6 +43,27 @@ class FunctionSettings extends React.Component {
 
     // Force refresh
     this.setState({ })
+  }
+
+  /**
+   * Returns iCalendar link (Sirius export)
+   * @returns {*}
+   */
+  getIcalLink () {
+    const siriusUrl = 'https://sirius.fit.cvut.cz/api/v1/people'
+    const username = this.props.user[0]
+    const usertoken = this.props.user[1]
+
+    return `${siriusUrl}/${username}/events.ics?access_token=${usertoken}`
+  }
+
+  /**
+   * Selects all text in input. Receives onclick event
+   * @param e onclick event parameters
+   */
+  selectInput (e) {
+    e.target.focus()
+    e.target.select()
   }
 
   render () {
@@ -158,6 +180,16 @@ class FunctionSettings extends React.Component {
         </p>
         <p>
           { CP.translate('functions.settings.about.usage') }
+        </p>
+        <h2>{ CP.translate('functions.ical_export.name') }</h2>
+        <p>
+          { CP.translate('functions.ical_export.desc') }
+        </p>
+        <p>
+          <input type="text" name="ical_export" value={this.getIcalLink()} className="url-input" onClick={this.selectInput} readonly="readonly" />
+        </p>
+        <p className="ical-qr-code">
+          <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.getIcalLink()}`} alt={CP.translate('functions.ical_export.qr')} />
         </p>
       </div>
     )

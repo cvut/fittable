@@ -19,6 +19,7 @@ const propTypes = {
   onViewChange: PropTypes.func,
   displayFilter: PropTypes.objectOf(PropTypes.bool), // FIXME: shared type
   onFilterChange: PropTypes.func,
+  user: PropTypes.array,
 }
 
 class FunctionsSidebar {
@@ -34,6 +35,7 @@ class FunctionsSidebar {
           onSettingChange={this.props.onSettingChange}
           onLanguageChange={this.props.onRefreshNeed}
           options={this.props.options}
+          user={this.props.user}
         />
       )
     }

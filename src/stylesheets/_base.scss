@@ -67,3 +67,12 @@ $grid-line-width: 1px;
   color: white;
 }
 
+// Expanded input with auto selection
+.url-input {
+  width: 100%;
+  border: 1px solid $dark-secondary-text-color;
+  font-family: $body-font-family;
+  font-size: 11px;
+  padding: 4px 7px;
+}
+
