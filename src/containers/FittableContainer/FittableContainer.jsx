@@ -68,6 +68,10 @@ const FittableContainer = React.createClass({
       errorType: null,
       mutedError: false,
       isMobile: isSmallScreen(),
+      linkNames: {
+        cs: { courses: {}, teachers: {}, exceptions: {} },
+        en: { courses: {}, teachers: {}, exceptions: {} },
+      },
     }
   },
 
@@ -218,6 +222,13 @@ const FittableContainer = React.createClass({
     this.setState({})
   },
 
+  // FIXME: what the hell is even this?
+  addNewLinkName (key, name, type, locale) {
+    const linkNames = {...this.state.linkNames}
+    linkNames[locale][type][key] = name
+    this.setState({linkNames})
+  },
+
   render () {
 
     // FIXME: side effects!!!
@@ -275,7 +286,7 @@ const FittableContainer = React.createClass({
           functionsOpened={this.state.functionOpened}
           selectedDay={this.state.selectedDay}
           onViewChange={this.handleChangeView}
-          linkNames={this.linkNames}
+          linkNames={this.state.linkNames}
           colored={eventsColors}
           days7={fullWeek}
           onDateChange={this.handleChangeViewDate}
