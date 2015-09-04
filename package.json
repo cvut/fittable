@@ -33,6 +33,7 @@
     "font-awesome": "^4.4.0",
     "hammerjs": "^2.0.4",
     "moment": "^2.10.6",
+    "moment-timezone": "^0.4.0",
     "ramda": "^0.17.1",
     "react": "^0.14.0-beta3",
     "react-dom": "^0.14.0-beta3",
