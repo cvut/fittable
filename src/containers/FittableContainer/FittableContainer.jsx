@@ -5,10 +5,12 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Moment from 'moment'
+import moment from 'moment'
 import CP from 'counterpart'
 
 import { changeSettings } from '../../actions/settingsActions'
+import { changeViewDate } from '../../actions/dateActions'
+import * as date from '../../date'
 
 import DataCache from '../../DataCache'
 import FunctionsSidebar from '../../components/FunctionsSidebar'
@@ -34,15 +36,15 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     onSettingChange: (key, val) => dispatch(changeSettings({[key]: val})),
+    onViewDateChange: (newDate) => dispatch(changeViewDate(newDate)),
   }
 }
 
 const FittableContainer = React.createClass({
   getInitialState () {
     return {
-      viewDate: new Moment().startOf('isoweek'),
-      prevViewDate: new Moment().startOf('isoweek'),
-      selectedDay: new Moment().isoWeekday() - 1,
+      prevViewDate: moment().startOf('isoweek'),
+      selectedDay: moment().isoWeekday() - 1,
       displayFilter: {
         laboratory: true,
         tutorial: true,
@@ -71,14 +73,15 @@ const FittableContainer = React.createClass({
 
   // FIXME: too much logic. should be in selector, I guess
   getSemester (viewDate) {
-    var semestername
+    viewDate = moment(viewDate)
+    let semestername
     let year = `${parseInt(viewDate.format('YYYY'), 10) - 1}/${viewDate.format('YY')}`
     if (viewDate.month() < 2) {
       semestername = CP.translate('winter_sem', {year: year})
     } else if (viewDate.month() < 10) {
       semestername = CP.translate('summer_sem', {year: year})
     } else {
-      year = `${viewDate.format('YYYY')}/${new Moment(viewDate).add(1, 'year').format('YY')}`
+      year = `${viewDate.format('YYYY')}/${moment(viewDate).add(1, 'year').format('YY')}`
       semestername = CP.translate('winter_sem', {year: year})
     }
 
@@ -87,15 +90,14 @@ const FittableContainer = React.createClass({
 
   // FIXME: this should totally be in selector
   getWeekEvents (viewDate = null) {
-    var newDate = viewDate == null ? this.state.viewDate : viewDate
+    const newDate = viewDate || this.props.viewDate
 
-    var dateFrom = newDate.toISOString()
-    var dateTo = new Moment(newDate).endOf('isoweek').toISOString()
+    const [dateFrom, dateTo] = date.isoWeekRange(newDate)
 
     // Try to load data from the cache
-    var cacheData = DataCache.lookupCache(dateFrom, dateTo)
+    const cacheData = DataCache.lookupCache(dateFrom, dateTo)
 
-    if (cacheData !== null) {
+    if (cacheData) {
       // Use cache data
       this.setWeekEvents(cacheData, true)
     } else {
@@ -104,17 +106,61 @@ const FittableContainer = React.createClass({
     }
   },
 
+  setWeekEvents (data, linksNames = null, alreadyCached = false) {
+    // Animate in correct direction
+    /*if ('timetable' in this.refs) {
+      if (this.state.prevViewDate.isAfter(this.state.viewDate)) {
+        this.refs.timetable.animateRight()
+      } else {
+        this.refs.timetable.animateLeft()
+      }
+    }*/
+    this.refs.timetable.animateRight()
+
+    // Cache data if needed
+    if (!alreadyCached) {
+      const [dateFrom, dateTo] = date.isoWeekRange(this.props.viewDate)
+      DataCache.cacheData(dateFrom, dateTo, data)
+    }
+
+    // Save teachers link names
+    if ('teachers' in linksNames) {
+      for (var tlinkname of linksNames.teachers) {
+        this.addNewLinkName(tlinkname.id, tlinkname.name.cs, 'teachers', 'cs')
+        this.addNewLinkName(tlinkname.id, tlinkname.name.en, 'teachers', 'en')
+      }
+    }
+
+    // Save courses link names
+    if ('courses' in linksNames) {
+      for (var clinkname of linksNames.courses) {
+        this.addNewLinkName(clinkname.id, clinkname.name.cs, 'courses', 'cs')
+        this.addNewLinkName(clinkname.id, clinkname.name.en, 'courses', 'en')
+      }
+    }
+
+    // Save exceptions link names
+    if ('exceptions' in linksNames) {
+      for (var clinkname of linksNames.exceptions) {
+        this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'cs')
+        this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'en')
+      }
+    }
+
+    // Set the data into state
+    this.setState({ weekEvents: data, waiting: false, prevViewDate: this.state.viewDate })
+  },
+
   // FIXME: this should be deduplicated with selectedDate
   handleChangeViewDate (viewDate) {
-    // Update viewDate
-    const newdate = new Moment(viewDate)
+    // Update the viewDate state
+    this.props.onViewDateChange(viewDate)
 
     // Hide until the request isn't done
     this.refs.timetable.hide()
 
-    // Update the viewDate state
-    this.setState({ viewDate: newdate, waiting: true })
-
+    // Update viewDate
+    const newdate = moment(viewDate)
     // Send new date through callback
     this.props.callbacks.dateChange(newdate.toISOString(), this.getSemester(newdate))
 
@@ -177,7 +223,7 @@ const FittableContainer = React.createClass({
     // FIXME: side effects!!!
     const { locale, layout, fullWeek, eventsColors, facultyGrid } = this.props.settings
     CP.setLocale(locale)
-    Moment.locale(locale)
+    moment.locale(locale)
 
     // FIXME: this should be calculated by selector
     const gridsettings = {
@@ -197,10 +243,10 @@ const FittableContainer = React.createClass({
           type={this.state.errorType}
         />
         <Controls
-          viewDate={this.state.viewDate}
+          viewDate={this.props.viewDate}
           onWeekChange={this.handleChangeViewDate}
           onDateChange={this.handleChangeViewDate}
-          semester={this.getSemester(this.state.viewDate)}
+          semester={this.getSemester(this.props.viewDate)}
           onSettingsPanelChange={this.handleChangeSettingsPanel}
           days7={fullWeek}
           onSelDayChange={this.handleChangeSelectedDay}
@@ -222,7 +268,7 @@ const FittableContainer = React.createClass({
         <div className="clearfix"></div>
         <Timetable
           grid={gridsettings}
-          viewDate={this.state.viewDate}
+          viewDate={this.props.viewDate}
           layout={layout}
           weekEvents={this.state.weekEvents}
           displayFilter={this.state.displayFilter}

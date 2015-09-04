@@ -4,19 +4,19 @@
  */
 
 import React, { PropTypes } from 'react'
-import { moment as momentPropType } from '../constants/propTypes'
 
 import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
+import { shiftDate } from '../date'
 
 const propTypes = {
   onWeekChange: PropTypes.func.isRequired,
   onDateChange: PropTypes.func.isRequired,
   onSelDayChange: PropTypes.func.isRequired,
   onSettingsPanelChange: PropTypes.func.isRequired,
-  viewDate: momentPropType,
+  viewDate: React.PropTypes.instanceOf(Date),
   days7: PropTypes.bool,
   selectedDay: PropTypes.number,
   semester: PropTypes.string,
@@ -28,10 +28,11 @@ class Controls extends React.Component {
    * Handles WeekNav's previous button click event
    */
   handlePrevClick () {
+    const shift = shiftDate(this.props.viewDate)
 
     // Different behaviour on different screens. Large up changes weeks, medium down changes active day
     if (window.innerWidth > 768) {
-      this.props.onWeekChange(this.props.viewDate.subtract(1, 'week'))
+      this.props.onDateChange(shift('week', -1))
     } else {
       this.props.onSelDayChange(-1)
     }
@@ -41,10 +42,10 @@ class Controls extends React.Component {
    * Handles WeekNav's next button click event
    */
   handleNextClick () {
+    const shift = shiftDate(this.props.viewDate)
 
-    // Different behaviour on different screens. Large up changes weeks, medium down changes active day
     if (window.innerWidth > 768) {
-      this.props.onWeekChange(this.props.viewDate.add(1, 'week'))
+      this.props.onWeekChange(shift('week', +1))
     } else {
       this.props.onSelDayChange(1)
     }

@@ -3,15 +3,15 @@
  */
 
 import React, { PropTypes } from 'react'
-import Moment from 'moment'
-import { grid as gridPropType, moment as momentPropType } from '../constants/propTypes'
+import moment from 'moment'
+import { grid as gridPropType } from '../constants/propTypes'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
 
 const propTypes = {
   grid: gridPropType,
-  viewDate: momentPropType,
+  viewDate: PropTypes.instanceOf(Date),
   layout: PropTypes.string,
   weekEvents: PropTypes.array, // todo: use events array shape instead
   displayFilter: PropTypes.object,
@@ -101,19 +101,19 @@ class Timetable extends React.Component {
   render () {
 
     const weekEvents = [ [], [], [], [], [], [], [] ]
-    const firstDayStart = new Moment(this.props.viewDate).startOf('day')
+    const firstDayStart = moment(this.props.viewDate).startOf('day')
     let minClosestDiff = Infinity
     let closestEvent = null
 
     // Timeline hours from - to
     const timelineHoursFrom = Math.floor(this.props.grid.starts)
     const timelineHoursTo = Math.floor(this.props.grid.ends)
-    const timelineMinutesFrom = Math.floor(( this.props.grid.starts - timelineHoursFrom) * 60)
-    const timelineMinutesTo = Math.floor(( this.props.grid.ends - timelineHoursTo) * 60)
+    const timelineMinutesFrom = Math.floor((this.props.grid.starts - timelineHoursFrom) * 60)
+    const timelineMinutesTo = Math.floor((this.props.grid.ends - timelineHoursTo) * 60)
 
     // Timeline length in milliseconds
-    const timelineLength = new Moment(firstDayStart).hour(timelineHoursTo).minutes(timelineMinutesTo)
-      .diff(new Moment(firstDayStart).hour(timelineHoursFrom).minutes(timelineMinutesFrom))
+    const timelineLength = moment(firstDayStart).hour(timelineHoursTo).minutes(timelineMinutesTo)
+      .diff(moment(firstDayStart).hour(timelineHoursFrom).minutes(timelineMinutesFrom))
 
     // Timeline grid length
     const timelineGridLength = this.props.grid.lessonDuration * 3600000 / timelineLength
@@ -121,9 +121,9 @@ class Timetable extends React.Component {
     // Make sure the weekEvents data are available...
     if (typeof this.props.weekEvents !== 'undefined' && this.props.weekEvents !== null) {
       for (let event of this.props.weekEvents) {
-        const dateStart = new Moment(event.startsAt)
-        const dateEnd = new Moment(event.endsAt)
-        const dayStart = new Moment(event.startsAt).startOf('day').hour(timelineHoursFrom).minutes(timelineMinutesFrom)
+        const dateStart = moment(event.startsAt)
+        const dateEnd = moment(event.endsAt)
+        const dayStart = moment(event.startsAt).startOf('day').hour(timelineHoursFrom).minutes(timelineMinutesFrom)
 
         // Calculate event length and position, relative to timeline
         const eventLength = dateEnd.diff(dateStart)
@@ -135,8 +135,8 @@ class Timetable extends React.Component {
         weekEvents[ dateStart.isoWeekday() - 1 ].push(event)
 
         // Search for closest event from now
-        const diffwithnow = dateStart.diff(new Moment())
-        if (diffwithnow < minClosestDiff && diffwithnow > 0 && new Moment().isSame(dateStart, 'day')) {
+        const diffwithnow = dateStart.diff(moment())
+        if (diffwithnow < minClosestDiff && diffwithnow > 0 && moment().isSame(dateStart, 'day')) {
           minClosestDiff = diffwithnow
           closestEvent = event
         }
@@ -145,8 +145,8 @@ class Timetable extends React.Component {
 
     // Today
     let todayId = -1
-    const today = new Moment()
-    if (this.props.viewDate.isSame(today, 'isoWeek')) {
+    const today = moment()
+    if (today.isSame(this.props.viewDate, 'isoWeek')) {
       todayId = today.isoWeekday() - 1
     }
 
@@ -185,7 +185,7 @@ class Timetable extends React.Component {
         <Day
           id={i}
           key={i}
-          dayNum={new Moment(this.props.viewDate).isoWeekday(i + 1).date()}
+          dayNum={moment(this.props.viewDate).isoWeekday(i + 1).date()}
           events={weekEvents[i]}
           onDetailShow={this.showDetailOn.bind(this)}
           showDetailOn={this.state.detailShownOn}

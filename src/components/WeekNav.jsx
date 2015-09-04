@@ -4,15 +4,15 @@
  */
 
 import React, { PropTypes } from 'react'
-import Moment from 'moment'
+import moment from 'moment'
 import CP from 'counterpart'
-import { moment as momentPropType } from '../constants/propTypes'
+import { weekRange, workWeekRange } from '../date'
 
 const propTypes = {
   onCalClick: PropTypes.func,
   onPrevClick: PropTypes.func,
   onNextClick: PropTypes.func,
-  viewDate: momentPropType,
+  viewDate: PropTypes.instanceOf(Date),
   selectedDay: PropTypes.number,
 }
 
@@ -41,20 +41,15 @@ class WeekNav extends React.Component {
   }
 
   viewDate () {
-    const weekStart = new Moment(this.props.viewDate).startOf('isoWeek')
-    const weekEnd = new Moment(this.props.viewDate).endOf('isoWeek')
+    const rangeFun = this.props.days7 ? weekRange : workWeekRange
 
-    if (!this.props.days7) {
-      weekEnd.subtract(2, 'days')
-    }
+    // FIXME: remove moment dependency
+    const [weekStart, weekEnd] = rangeFun(this.props.viewDate).map(d => moment(d))
 
-    if (Moment.locale() == "cs")
-    {
+    if (moment.locale() === 'cs') {
       // u2013 : &ndash; \u2009 : &thinsp;
       return `${weekStart.format('D.\u2009M. ')} \u2013 ${weekEnd.format('D.\u2009M.\u2009YYYY')}`
-    }
-    else
-    {
+    } else {
       return `${weekStart.format('M/D')} \u2013 ${weekEnd.format('M/D/YYYY')}`
     }
   }

@@ -6,12 +6,11 @@
 
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import { moment as momentPropType } from '../constants/propTypes'
 
 import Toggleable from './Toggleable'
 
 const propTypes = {
-  viewDate: momentPropType,
+  viewDate: PropTypes.instanceOf(Date),
   onDateChange: PropTypes.func,
   semester: PropTypes.string,
 }

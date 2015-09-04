@@ -4,14 +4,13 @@
  */
 
 import React, { PropTypes } from 'react'
-import Moment from 'moment'
+import moment from 'moment'
 import CP from 'counterpart'
-import { moment as momentPropType } from '../constants/propTypes'
+import { weekRange, workWeekRange } from '../date'
 
 const propTypes = {
-  viewDate: momentPropType,
+  viewDate: PropTypes.instanceOf(Date),
   selectedDay: PropTypes.number,
-  days7: PropTypes.bool,
 }
 
 class ViewDate extends React.Component {
@@ -22,11 +21,12 @@ class ViewDate extends React.Component {
   }
 
   weekNum () {
-    return this.props.viewDate.format('Wo')
+    return moment(this.props.viewDate).format('Wo')
   }
 
   weekParity () {
-    return CP.translate(this.props.viewDate.isoWeek() % 2 === 0 ? 'even' : 'odd')
+    const parity = moment(this.props.viewDate).isoWeek() % 2 === 0 ? 'even' : 'odd'
+    return CP.translate(parity)
   }
 
   render () {
