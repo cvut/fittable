@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { merge } from 'ramda'
 
-import { SETTINGS_CHANGE } from '../constants/actionTypes'
+import { SETTINGS_CHANGE, VIEW_DATE_CHANGE } from '../constants/actionTypes'
 import { now } from '../date'
 
 const initialSettings = {
@@ -12,8 +12,13 @@ const initialSettings = {
   facultyGrid: false,
 }
 
-function viewDate (state = now()) {
-  return state
+function viewDate (state = now(), action) {
+  switch (action.type) {
+    case VIEW_DATE_CHANGE:
+      return action.viewDate
+    default:
+      return state
+  }
 }
 
 function settings (state = initialSettings, action) {

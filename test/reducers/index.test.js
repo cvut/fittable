@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import R from 'ramda'
-import { SETTINGS_CHANGE } from '../../src/constants/actionTypes'
+import * as actionTypes from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers'
 
 test('Initial state', t => {
@@ -11,8 +11,23 @@ test('Initial state', t => {
 })
 
 test('Settings change', t => {
-  const settings = reducer(undefined, {type: SETTINGS_CHANGE, settings: {locale: 'en', layout: 'vertical'}}).settings
+  const action = {
+    type: actionTypes.SETTINGS_CHANGE,
+    settings: {locale: 'en', layout: 'vertical'},
+  }
+  const settings = reducer(undefined, action).settings
   t.equal(settings.locale, 'en')
   t.equal(settings.layout, 'vertical')
+  t.end()
+})
+
+test('viewDate change', t => {
+  const viewDate = new Date()
+  const action = {
+    type: actionTypes.VIEW_DATE_CHANGE,
+    viewDate,
+  }
+  const actualVD = reducer(undefined, action).viewDate
+  t.equal(actualVD, viewDate)
   t.end()
 })

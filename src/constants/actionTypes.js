@@ -1,2 +1,3 @@
 
 export const SETTINGS_CHANGE = 'SETTINGS_CHANGE'
+export const VIEW_DATE_CHANGE = 'VIEW_DATE_CHANGE'
