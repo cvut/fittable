@@ -18,11 +18,8 @@ class FunctionFilter extends React.Component {
    * @param {string} filter Clicked filter item
    */
   handleToggleFilter (filter) {
-
-    var newfilters = this.props.displayFilter
-    newfilters[ filter ] = !newfilters[ filter ]
-
-    this.props.onFilterChange(newfilters)
+    const oldState = this.props.displayFilter[filter]
+    this.props.onFilterChange({[filter]: !oldState})
   }
 
   render () {
