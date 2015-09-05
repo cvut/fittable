@@ -7,6 +7,7 @@ test('Initial state', t => {
   const result = reducer(undefined, {type: 'FAUX_ACTION'})
   t.ok(R.is(Object, result.settings), 'settings is an object in initial state')
   t.ok(R.is(Date, result.viewDate), 'viewDate is a Date in initial state')
+  t.ok(R.is(Object, result.displayFilters), 'viewFilters is an object in initial state')
   t.end()
 })
 
@@ -29,5 +30,23 @@ test('viewDate change', t => {
   }
   const actualVD = reducer(undefined, action).viewDate
   t.equal(actualVD, viewDate)
+  t.end()
+})
+
+test('displayFilters change', t => {
+  const action = {
+    type: actionTypes.DISPLAY_FILTERS_CHANGE,
+    displayFilters: {
+      laboratory: false,
+      other: true,
+    },
+  }
+
+  const actual = reducer(undefined, action).displayFilters
+
+  t.equal(actual.laboratory, false, 'changes given filter to false (laboratory)')
+  t.equal(actual.tutorial, true, 'returns also other filters (tutorial)')
+  t.equal(actual.other, true, 'keeps the original filter state (other)')
+
   t.end()
 })
