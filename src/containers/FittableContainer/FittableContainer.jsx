@@ -10,6 +10,7 @@ import CP from 'counterpart'
 
 import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
+import { changeDisplayFilters } from '../../actions/filterActions'
 import * as date from '../../date'
 
 import DataCache from '../../DataCache'
@@ -29,6 +30,7 @@ function mapStateToProps (state) {
   return {
     settings: state.settings,
     viewDate: state.viewDate,
+    displayFilters: state.displayFilters,
   }
 }
 
@@ -37,6 +39,7 @@ function mapDispatchToProps (dispatch) {
   return {
     onSettingChange: (key, val) => dispatch(changeSettings({[key]: val})),
     onViewDateChange: (newDate) => dispatch(changeViewDate(newDate)),
+    onDisplayFiltersChange: (filters) => dispatch(changeDisplayFilters(filters)),
   }
 }
 
@@ -44,15 +47,6 @@ const FittableContainer = React.createClass({
   getInitialState () {
     return {
       prevViewDate: moment().startOf('isoweek'),
-      displayFilter: {
-        laboratory: true,
-        tutorial: true,
-        lecture: true,
-        exam: true,
-        assessment: true,
-        course_event: true,
-        other: true,
-      },
       // FIXME: this should be loaded dynamically from Sirius!
       grid: {
         starts: 7.5,
@@ -171,12 +165,6 @@ const FittableContainer = React.createClass({
     this.getWeekEvents(newdate)
   },
 
-  //// Used by FunctionsSidebar
-  // FIXME: → mapDispatchToProps
-  handleChangeFilter (to) {
-    this.setState({ displayFilter: to })
-  },
-
   // FIXME: → mapDispatchToProps
   handleChangeSettingsPanel (to) {
     this.setState({
@@ -247,8 +235,8 @@ const FittableContainer = React.createClass({
         <FunctionsSidebar
           ref="sidebar"
           opened={this.state.functionOpened}
-          displayFilter={this.state.displayFilter}
-          onFilterChange={this.handleChangeFilter}
+          displayFilter={this.props.displayFilters}
+          onFilterChange={this.props.onDisplayFiltersChange}
           onSettingChange={this.props.onSettingChange}
           onRefreshNeed={this.handleRefreshNeed}
           settings={this.props.settings}
@@ -262,7 +250,7 @@ const FittableContainer = React.createClass({
           viewDate={this.props.viewDate}
           layout={layout}
           weekEvents={this.state.weekEvents}
-          displayFilter={this.state.displayFilter}
+          displayFilter={this.props.displayFilters}
           functionsOpened={this.state.functionOpened}
           onViewChange={this.handleChangeView}
           linkNames={this.state.linkNames}
