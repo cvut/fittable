@@ -16,7 +16,7 @@ const propTypes = {
 class FunctionSettings extends React.Component {
 
   render () {
-    const { locale, layout, eventColors, fullWeek, facultyGrid } = this.props.settings
+    const { locale, layout, eventsColors, fullWeek, facultyGrid } = this.props.settings
     const handleSettingChange = (k, v) => this.props.onSettingChange.bind(null, k, v)
     return (
       <div
@@ -73,11 +73,11 @@ class FunctionSettings extends React.Component {
               <input
                 id="setting-colors"
                 type="checkbox"
-                checked={ eventColors }
+                checked={ eventsColors }
               />
               <label
                 htmlFor="setting-colors"
-                onClick={ handleSettingChange('eventColors', !eventColors) }
+                onClick={ handleSettingChange('eventsColors', !eventsColors) }
               >
               </label>
             </div>
