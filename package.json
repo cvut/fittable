@@ -23,6 +23,7 @@
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server --content-base dist/ --hot -d",
     "watch": "webpack -d --watch",
+    "test:watch": "rerun-script",
     "test": "babel-tape-runner 'test/**/*.test.js' | tap-spec"
   },
   "dependencies": {
@@ -58,6 +59,7 @@
     "node-sass": "^3.3.2",
     "npm-run-all": "^1.2.8",
     "redux-devtools": "^1.1.1",
+    "rerun-script": "^0.6.0",
     "rimraf": "^2.4.2",
     "sass-loader": "^2.0.1",
     "shelljs": "^0.5.3",
@@ -70,5 +72,8 @@
   "publishConfig": {
     "registry": "https://repository.fit.cvut.cz/npm"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "watches": {
+    "test": [ "src/**/*.js", "src/**/*.jsx", "test/**/*.js" ]
+  }
 }
