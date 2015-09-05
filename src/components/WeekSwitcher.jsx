@@ -142,7 +142,7 @@ class WeekSwitcher extends Toggleable {
 
       const weekIndex = weeks.indexOf(week)
       const moment = moments[weekIndex]
-      this.props.onDateChange.call(this, moment)
+      this.props.onDateChange.call(this, moment.toDate())
     }
 
     // FIXME: (╯°□°)╯︵ ┻━┻
