@@ -62,7 +62,7 @@ test('isoWeekRange', (t) => {
 test('shiftDate', t => {
   const today = new Date('2015-09-03')
   const shiftDateForToday = date.shiftDate(today)
-  t.is(typeof shiftDateForToday, 'function', 'is curried')
+  t.equal(typeof shiftDateForToday, 'function', 'is curried')
 
   const testParams = [
     {args: ['week', 1], expected: '2015-09-10'},
@@ -76,5 +76,15 @@ test('shiftDate', t => {
     t.equal(date.isoDate(actual), expected, `shifts by ${args[1]} ${args[0]}`)
   })
 
+  t.end()
+})
+
+test('weekdayNum()', t => {
+  const day = new Date('2015-09-06') // Sunday
+
+  const expected = 6
+  const actual = date.weekdayNum(day)
+
+  t.equal(actual, expected, 'returns a 0-indexed ISO weekday number')
   t.end()
 })

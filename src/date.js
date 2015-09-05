@@ -35,3 +35,9 @@ export function isoWeekRange (date) {
 export const shiftDate = curry(function shiftDate (baseDate, kind, offset) {
   return moment.tz(baseDate, TZ).add(offset, kind).toDate()
 })
+
+export function weekdayNum (date) {
+  // getDay returns 0 for Sunday, 1 Monday etc.
+  // thus we need to shift by 6 and mod by 7
+  return (date.getDay() + 6) % 7
+}
