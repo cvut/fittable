@@ -6,6 +6,8 @@ import React, { PropTypes } from 'react'
 import moment from 'moment'
 import { grid as gridPropType } from '../constants/propTypes'
 
+import { weekdayNum } from '../date'
+
 import Day from './Day'
 import NowIndicator from './NowIndicator'
 
@@ -16,7 +18,6 @@ const propTypes = {
   weekEvents: PropTypes.array, // todo: use events array shape instead
   displayFilter: PropTypes.object,
   functionsOpened: PropTypes.string,
-  selectedDay: PropTypes.number,
   onViewChange: PropTypes.func,
   linkNames: PropTypes.object,
   colored: PropTypes.bool,
@@ -180,6 +181,7 @@ class Timetable extends React.Component {
 
     // Create days
     let days = []
+    const selectedDay = weekdayNum(this.props.viewDate)
     for (let i = 0; i < 7; i++) {
       days.push(
         <Day
@@ -193,7 +195,7 @@ class Timetable extends React.Component {
           onViewChange={this.props.onViewChange}
           linkNames={this.props.linkNames}
           active={todayId == i }
-          selected={this.props.selectedDay == i }
+          selected={selectedDay === i}
           colored={this.props.colored}
           onDateChange={this.props.onDateChange}
         />

@@ -44,7 +44,6 @@ const FittableContainer = React.createClass({
   getInitialState () {
     return {
       prevViewDate: moment().startOf('isoweek'),
-      selectedDay: moment().isoWeekday() - 1,
       displayFilter: {
         laboratory: true,
         tutorial: true,
@@ -172,23 +171,6 @@ const FittableContainer = React.createClass({
     this.getWeekEvents(newdate)
   },
 
-  // FIXME
-  handleChangeSelectedDay (by) {
-    let selection = this.state.selectedDay + by
-
-    if (selection > 6) {
-      selection -= 7
-      this.handleChangeViewDate(this.state.viewDate.add(1, 'week'))
-    }
-
-    if (selection < 0) {
-      selection += 7
-      this.handleChangeViewDate(this.state.viewDate.subtract(1, 'week'))
-    }
-
-    this.setState({ selectedDay: selection })
-  },
-
   //// Used by FunctionsSidebar
   // FIXME: → mapDispatchToProps
   handleChangeFilter (to) {
@@ -260,8 +242,6 @@ const FittableContainer = React.createClass({
           semester={this.getSemester(this.props.viewDate)}
           onSettingsPanelChange={this.handleChangeSettingsPanel}
           days7={fullWeek}
-          onSelDayChange={this.handleChangeSelectedDay}
-          selectedDay={this.state.selectedDay}
         />
         <div className="clearfix"></div>
         <FunctionsSidebar
@@ -284,7 +264,6 @@ const FittableContainer = React.createClass({
           weekEvents={this.state.weekEvents}
           displayFilter={this.state.displayFilter}
           functionsOpened={this.state.functionOpened}
-          selectedDay={this.state.selectedDay}
           onViewChange={this.handleChangeView}
           linkNames={this.state.linkNames}
           colored={eventsColors}

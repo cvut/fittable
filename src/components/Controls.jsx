@@ -12,13 +12,10 @@ import WeekSwitcher from './WeekSwitcher'
 import { shiftDate } from '../date'
 
 const propTypes = {
-  onWeekChange: PropTypes.func.isRequired,
   onDateChange: PropTypes.func.isRequired,
-  onSelDayChange: PropTypes.func.isRequired,
   onSettingsPanelChange: PropTypes.func.isRequired,
   viewDate: React.PropTypes.instanceOf(Date),
   days7: PropTypes.bool,
-  selectedDay: PropTypes.number,
   semester: PropTypes.string,
 }
 
@@ -28,27 +25,30 @@ class Controls extends React.Component {
    * Handles WeekNav's previous button click event
    */
   handlePrevClick () {
-    const shift = shiftDate(this.props.viewDate)
+    const shiftFun = shiftDate(this.props.viewDate)
+    let shiftBy
 
-    // Different behaviour on different screens. Large up changes weeks, medium down changes active day
     if (window.innerWidth > 768) {
-      this.props.onDateChange(shift('week', -1))
+      shiftBy = shiftFun('week', -1)
     } else {
-      this.props.onSelDayChange(-1)
+      shiftBy = shiftFun('day', -1)
     }
+    this.props.onDateChange(shiftBy)
   }
 
   /**
    * Handles WeekNav's next button click event
    */
   handleNextClick () {
-    const shift = shiftDate(this.props.viewDate)
+    const shiftFun = shiftDate(this.props.viewDate)
+    let shiftBy
 
     if (window.innerWidth > 768) {
-      this.props.onWeekChange(shift('week', +1))
+      shiftBy = shiftFun('week', +1)
     } else {
-      this.props.onSelDayChange(1)
+      shiftBy = shiftFun('day', +1)
     }
+    this.props.onDateChange(shiftBy)
   }
 
   /**
@@ -67,7 +67,6 @@ class Controls extends React.Component {
           onPrevClick={this.handlePrevClick.bind(this)}
           onNextClick={this.handleNextClick.bind(this)}
           viewDate={this.props.viewDate}
-          selectedDay={this.props.selectedDay}
         />
         <WeekSwitcher
           viewDate={this.props.viewDate}

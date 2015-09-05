@@ -13,7 +13,6 @@ const propTypes = {
   onPrevClick: PropTypes.func,
   onNextClick: PropTypes.func,
   viewDate: PropTypes.instanceOf(Date),
-  selectedDay: PropTypes.number,
 }
 
 class WeekNav extends React.Component {
