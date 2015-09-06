@@ -67,7 +67,7 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
 
   .now-indicator {
     border-right: none;
-    border-bottom: 2px solid $primary-color;
+    border-bottom: 2px solid $nowindicator-color;
 
     &.horizontal {
       display: none;

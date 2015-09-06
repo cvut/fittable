@@ -105,8 +105,8 @@
       top: 0;
       height: 107%;
       z-index: 7;
-      border-right: 2px solid $primary-color;
-      opacity: .5;
+      border-right: 2px solid $nowindicator-color;
+      opacity: 1;
       @include disable-selection();
 
       &::after {
@@ -114,7 +114,7 @@
         display: block;
         width: 8px;
         height: 8px;
-        background: $primary-color;
+        background: $nowindicator-color;
         border-radius: 50%;
         position: absolute;
         top: -4px;
