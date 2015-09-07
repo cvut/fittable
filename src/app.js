@@ -3,13 +3,6 @@
  *  - Requires React.js to be loaded before loading this
  */
 
-try {
-  // https://babeljs.io/docs/usage/polyfill/
-  require('babel/polyfill')
-} catch(e) {
-  console.warn(e)
-}
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppContainer from './containers/AppContainer'
