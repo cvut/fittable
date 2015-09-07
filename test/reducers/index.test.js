@@ -1,13 +1,14 @@
 import test from 'blue-tape'
-import R from 'ramda'
+import { type } from 'ramda'
 import * as actionTypes from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers'
 
 test('Initial state', t => {
   const result = reducer(undefined, {type: 'FAUX_ACTION'})
-  t.ok(R.is(Object, result.settings), 'settings is an object in initial state')
-  t.ok(R.is(Date, result.viewDate), 'viewDate is a Date in initial state')
-  t.ok(R.is(Object, result.displayFilters), 'viewFilters is an object in initial state')
+  t.is(type(result.settings), 'Object')
+  t.is(type(result.viewDate), 'Date')
+  t.is(type(result.displayFilters), 'Object')
+  t.is(type(result.data), 'Object')
   t.end()
 })
 

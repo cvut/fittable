@@ -4,6 +4,8 @@ import { merge } from 'ramda'
 import { SETTINGS_CHANGE, VIEW_DATE_CHANGE, DISPLAY_FILTERS_CHANGE } from '../constants/actionTypes'
 import { now } from '../date'
 
+import data from './dataReducer'
+
 const initialSettings = {
   locale: 'cs',
   layout: 'horizontal',
@@ -55,6 +57,7 @@ const fittableApp = combineReducers({
   settings,
   viewDate,
   displayFilters,
+  data,
 })
 
 export default fittableApp
