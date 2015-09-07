@@ -23,8 +23,9 @@
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server --content-base dist/ --hot -d",
     "watch": "webpack -d --watch",
-    "test:watch": "rerun-script",
-    "test": "babel-tape-runner 'test/**/*.test.js' | tap-spec"
+    "test": "babel-tape-runner 'test/**/*.test.js'",
+    "test:watch": "chokidar --initial 'src/**/*.js' 'src/**/*.js' 'test/**/*.js' -c 'npm test | tap-bail'",
+    "test:spec": "npm test | tap-spec"
   },
   "dependencies": {
     "babel": "^5.8.21",
@@ -49,6 +50,7 @@
     "babel-runtime": "^5.8.20",
     "babel-tape-runner": "^1.2.0",
     "blue-tape": "^0.1.10",
+    "chokidar-cli": "^1.0.1",
     "css-loader": "^0.16.0",
     "eslint": "^1.2.1",
     "eslint-config-standard": "^4.1.0",
@@ -60,11 +62,12 @@
     "node-sass": "^3.3.2",
     "npm-run-all": "^1.2.8",
     "redux-devtools": "^1.1.1",
-    "rerun-script": "^0.6.0",
     "rimraf": "^2.4.2",
     "sass-loader": "^2.0.1",
     "shelljs": "^0.5.3",
+    "sinon": "^1.16.1",
     "style-loader": "^0.12.3",
+    "tap-bail": "0.0.0",
     "tap-spec": "^4.1.0",
     "timekeeper": "0.0.5",
     "webpack": "^1.12.0",
@@ -73,8 +76,5 @@
   "publishConfig": {
     "registry": "https://repository.fit.cvut.cz/npm"
   },
-  "license": "MIT",
-  "watches": {
-    "test": [ "src/**/*.js", "src/**/*.jsx", "test/**/*.js" ]
-  }
+  "license": "MIT"
 }
