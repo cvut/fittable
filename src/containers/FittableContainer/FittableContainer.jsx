@@ -49,7 +49,6 @@ function mapDispatchToProps (dispatch) {
 const FittableContainer = React.createClass({
   getInitialState () {
     return {
-      prevViewDate: moment().startOf('isoweek'),
       // FIXME: this should be loaded dynamically from Sirius!
       grid: {
         starts: 7.5,
@@ -57,17 +56,12 @@ const FittableContainer = React.createClass({
         lessonDuration: 0.875,
       },
       functionOpened: null,
-      waiting: true,
       options: this.props,
       searchResults: [],
       error: false,
       errorType: null,
       mutedError: false,
       isMobile: isSmallScreen(),
-      linkNames: {
-        cs: { courses: {}, teachers: {}, exceptions: {} },
-        en: { courses: {}, teachers: {}, exceptions: {} },
-      },
     }
   },
 
@@ -126,8 +120,6 @@ const FittableContainer = React.createClass({
 
   // FIXME: → mapDispatchToProps
   handleSearch (query) {
-    this.setState({ waiting: true })
-
     this.props.callbacks.search(query, this.receiveSearchResults)
   },
 
