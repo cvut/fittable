@@ -209,6 +209,8 @@ class Timetable extends React.Component {
 
     const className = `table ${this.props.layout} ${classMuted} ${classCut} ${classDays7} ${classMobile}`
 
+    const daysClass = this.props.visible ? 'days a-right' : 'days'
+
     return (
       <div
         className={className}
@@ -242,7 +244,7 @@ class Timetable extends React.Component {
           closestEvent={ closestEvent }
         />
         <div
-          className="days a-right"
+          className={daysClass}
           ref="days"
         >
           {days.map(day => day)}
