@@ -30,9 +30,15 @@ test('fetchEvents() dispatch', t => {
   const responseData = [
     ['event', 'event'],
     {
-      cs: {
-        teachers: {vomackar: 'Karel Vomáčka'},
-      },
+      teachers: [
+        {
+          id: 'vomackar',
+          name: {
+            cs: 'Karel Vomáčka',
+            en: 'Carl Vomacka',
+          },
+        },
+      ],
     },
   ]
 
@@ -51,8 +57,24 @@ test('fetchEvents() dispatch', t => {
   })
 
   t.test('fetchEvents() second dispatch', st => {
-    const [events, linkNames] = responseData
-    const expectedArg = {type: EVENTS_RESPONSE, payload: {events, linkNames}}
+    const expectedLinkNames = {
+      cs: {
+        teachers: {
+          vomackar: 'Karel Vomáčka',
+        },
+        courses: {},
+        exceptions: {},
+      },
+      en: {
+        teachers: {
+          vomackar: 'Carl Vomacka',
+        },
+        courses: {},
+        exceptions: {},
+      },
+    }
+    const [events,] = responseData
+    const expectedArg = {type: EVENTS_RESPONSE, payload: {events, linkNames: expectedLinkNames}}
     const [actualArg,] = dispatch.secondCall.args
     st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_RESPONSE')
     st.end()

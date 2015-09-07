@@ -1,5 +1,6 @@
 import { EVENTS_REQUEST, EVENTS_RESPONSE } from '../constants/actionTypes'
 import { isoWeekRange } from '../date'
+import { invertLinkNames } from '../dataManipulation'
 
 function startEventsRequest () {
   return {
@@ -8,7 +9,6 @@ function startEventsRequest () {
 }
 
 function receiveEvents (events, linkNames) {
-
   return {
     type: EVENTS_RESPONSE,
     payload: {
@@ -16,7 +16,6 @@ function receiveEvents (events, linkNames) {
       linkNames,
     },
   }
-
 }
 
 export function fetchEvents (dataCallback, weekDate) {
@@ -29,7 +28,7 @@ export function fetchEvents (dataCallback, weekDate) {
     dataCallback(dateFrom, dateTo, function (events, linkNames) {
       // We have (hopefully) received data by now
       // FIXME: add error handling
-      dispatch(receiveEvents(events, linkNames))
+      dispatch(receiveEvents(events, invertLinkNames(linkNames)))
     })
   }
 }
