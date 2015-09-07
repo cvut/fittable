@@ -65,6 +65,10 @@ const FittableContainer = React.createClass({
     }
   },
 
+  componentDidMount () {
+    this.getWeekEvents()
+  },
+
   // FIXME: too much logic. should be in selector, I guess
   getSemester (viewDate) {
     viewDate = moment(viewDate)
