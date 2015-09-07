@@ -3,7 +3,6 @@
  */
 
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import CP from 'counterpart'
@@ -11,6 +10,7 @@ import CP from 'counterpart'
 import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
+import { fetchEvents } from '../../actions/dataActions'
 import * as date from '../../date'
 
 import DataCache from '../../DataCache'
@@ -31,6 +31,7 @@ function mapStateToProps (state) {
     settings: state.settings,
     viewDate: state.viewDate,
     displayFilters: state.displayFilters,
+    data: state.data,
   }
 }
 
@@ -40,6 +41,8 @@ function mapDispatchToProps (dispatch) {
     onSettingChange: (key, val) => dispatch(changeSettings({[key]: val})),
     onViewDateChange: (newDate) => dispatch(changeViewDate(newDate)),
     onDisplayFiltersChange: (filters) => dispatch(changeDisplayFilters(filters)),
+    // FIXME: this one should be bound to onViewDateChange
+    onEventsRequest: (callback, date) => dispatch(fetchEvents(callback, date)),
   }
 }
 
@@ -85,76 +88,17 @@ const FittableContainer = React.createClass({
     return semestername
   },
 
-  // FIXME: this should totally be in selector
+  // FIXME: this should be an implicit call with date change
   getWeekEvents (viewDate = null) {
-    const newDate = viewDate || this.props.viewDate
+    viewDate = viewDate || this.props.viewDate
 
-    const [dateFrom, dateTo] = date.isoWeekRange(newDate)
-
-    // Try to load data from the cache
-    const cacheData = DataCache.lookupCache(dateFrom, dateTo)
-
-    if (cacheData) {
-      // Use cache data
-      this.setWeekEvents(cacheData, true)
-    } else {
-      // Require new data
-      this.props.callbacks.data(dateFrom, dateTo, this.setWeekEvents)
-    }
+    this.props.onEventsRequest(this.props.callbacks.data, viewDate)
   },
 
-  setWeekEvents (data, linksNames = null, alreadyCached = false) {
-    // Animate in correct direction
-    /*if ('timetable' in this.refs) {
-      if (this.state.prevViewDate.isAfter(this.state.viewDate)) {
-        this.refs.timetable.animateRight()
-      } else {
-        this.refs.timetable.animateLeft()
-      }
-    }*/
-    this.refs.timetable.animateRight()
-
-    // Cache data if needed
-    if (!alreadyCached) {
-      const [dateFrom, dateTo] = date.isoWeekRange(this.props.viewDate)
-      DataCache.cacheData(dateFrom, dateTo, data)
-    }
-
-    // Save teachers link names
-    if ('teachers' in linksNames) {
-      for (var tlinkname of linksNames.teachers) {
-        this.addNewLinkName(tlinkname.id, tlinkname.name.cs, 'teachers', 'cs')
-        this.addNewLinkName(tlinkname.id, tlinkname.name.en, 'teachers', 'en')
-      }
-    }
-
-    // Save courses link names
-    if ('courses' in linksNames) {
-      for (var clinkname of linksNames.courses) {
-        this.addNewLinkName(clinkname.id, clinkname.name.cs, 'courses', 'cs')
-        this.addNewLinkName(clinkname.id, clinkname.name.en, 'courses', 'en')
-      }
-    }
-
-    // Save exceptions link names
-    if ('exceptions' in linksNames) {
-      for (var clinkname of linksNames.exceptions) {
-        this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'cs')
-        this.addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'en')
-      }
-    }
-
-    // Set the data into state
-    this.setState({ weekEvents: data, waiting: false, prevViewDate: this.state.viewDate })
-  },
-
-  // FIXME: this should be deduplicated with selectedDate
+  // FIXME: deprecate callback
   handleChangeViewDate (viewDate) {
     // Update the viewDate state
     this.props.onViewDateChange(viewDate)
-
-    // Hide until the request isn't done
-    this.refs.timetable.hide()
 
     // Update viewDate
     const newdate = moment(viewDate)
@@ -162,7 +106,7 @@ const FittableContainer = React.createClass({
     this.props.callbacks.dateChange(newdate.toISOString(), this.getSemester(newdate))
 
     // Update the data
-    this.getWeekEvents(newdate)
+    this.getWeekEvents(viewDate)
   },
 
   // FIXME: → mapDispatchToProps
@@ -192,19 +136,14 @@ const FittableContainer = React.createClass({
     this.setState({})
   },
 
-  // FIXME: what the hell is even this?
-  addNewLinkName (key, name, type, locale) {
-    const linkNames = {...this.state.linkNames}
-    linkNames[locale][type][key] = name
-    this.setState({linkNames})
-  },
-
   render () {
 
     // FIXME: side effects!!!
     const { locale, layout, fullWeek, eventsColors, facultyGrid } = this.props.settings
     CP.setLocale(locale)
     moment.locale(locale)
+
+    const { events, waiting, linkNames } = this.props.data
 
     // FIXME: this should be calculated by selector
     const gridsettings = {
@@ -249,18 +188,19 @@ const FittableContainer = React.createClass({
           grid={gridsettings}
           viewDate={this.props.viewDate}
           layout={layout}
-          weekEvents={this.state.weekEvents}
+          weekEvents={events}
           displayFilter={this.props.displayFilters}
           functionsOpened={this.state.functionOpened}
           onViewChange={this.handleChangeView}
-          linkNames={this.state.linkNames}
+          linkNames={linkNames}
           colored={eventsColors}
           days7={fullWeek}
           onDateChange={this.handleChangeViewDate}
           isMobile={this.state.isMobile}
           ref="timetable"
+          visible={!waiting}
         />
-        <Spinner show={this.state.waiting} />
+        <Spinner show={waiting} />
       </div>
     )
   },
