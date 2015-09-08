@@ -11,6 +11,7 @@ import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
 import { fetchEvents } from '../../actions/dataActions'
+import { displaySidebar } from '../../actions/uiActions'
 import * as date from '../../date'
 
 import DataCache from '../../DataCache'
@@ -26,12 +27,14 @@ function isSmallScreen () {
 }
 
 // Which part of the Redux global state does our component want to receive as props?
+// FIXME: since the root component works with the whole global state, we may as well remove this
 function mapStateToProps (state) {
   return {
     settings: state.settings,
     viewDate: state.viewDate,
     displayFilters: state.displayFilters,
     data: state.data,
+    ui: state.ui,
   }
 }
 
@@ -43,6 +46,7 @@ function mapDispatchToProps (dispatch) {
     onDisplayFiltersChange: (filters) => dispatch(changeDisplayFilters(filters)),
     // FIXME: this one should be bound to onViewDateChange
     onEventsRequest: (callback, date) => dispatch(fetchEvents(callback, date)),
+    onSidebarDisplay: (sidebar) => dispatch(displaySidebar(sidebar)),
   }
 }
 
@@ -55,7 +59,6 @@ const FittableContainer = React.createClass({
         ends: 21.5,
         lessonDuration: 0.875,
       },
-      functionOpened: null,
       options: this.props,
       searchResults: [],
       error: false,
@@ -108,16 +111,9 @@ const FittableContainer = React.createClass({
   },
 
   // FIXME: → mapDispatchToProps
-  handleChangeSettingsPanel (to) {
-    this.setState({
-      functionOpened: (this.state.functionOpened === to ? null : to),
-    })
-  },
-
-  // FIXME: → mapDispatchToProps
   handleChangeView (to, param) {
     // Close all opened functions
-    this.setState({ functionOpened: null })
+    this.props.onSidebarDisplay(null)
 
     this.props.callbacks.viewChange(to, param)
   },
@@ -140,6 +136,7 @@ const FittableContainer = React.createClass({
     moment.locale(locale)
 
     const { events, waiting, linkNames } = this.props.data
+    const { sidebar } = this.props.ui
 
     // FIXME: this should be calculated by selector
     const gridsettings = {
@@ -163,13 +160,13 @@ const FittableContainer = React.createClass({
           onWeekChange={this.handleChangeViewDate}
           onDateChange={this.handleChangeViewDate}
           semester={this.getSemester(this.props.viewDate)}
-          onSettingsPanelChange={this.handleChangeSettingsPanel}
+          onSettingsPanelChange={this.props.onSidebarDisplay}
           days7={fullWeek}
         />
         <div className="clearfix"></div>
         <FunctionsSidebar
           ref="sidebar"
-          opened={this.state.functionOpened}
+          opened={sidebar}
           displayFilter={this.props.displayFilters}
           onFilterChange={this.props.onDisplayFiltersChange}
           onSettingChange={this.props.onSettingChange}
@@ -186,7 +183,7 @@ const FittableContainer = React.createClass({
           layout={layout}
           weekEvents={events}
           displayFilter={this.props.displayFilters}
-          functionsOpened={this.state.functionOpened}
+          functionsOpened={sidebar}
           onViewChange={this.handleChangeView}
           linkNames={linkNames}
           colored={eventsColors}
