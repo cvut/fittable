@@ -12,3 +12,36 @@ export function findSemester (semesters, date) {
 
   return R.find(predicate, semesters)
 }
+
+export function semesterSeason (semesterId) {
+  const lastChar = semesterId.slice(-1)
+  if (lastChar === '1') {
+    return 'winter'
+  }
+  return 'summer'
+}
+
+export function convertRawSemester (semester) {
+  const { dayStartsAtHour, dayEndsAtHour, hourDuration, breakDuration } = semester
+  const hDur = hourDuration / 60
+  const bDur = breakDuration / 60
+  const lessonDuration = ((hDur * 2) + bDur) / 2
+  return {
+    id: semester.id,
+    startsOn: semester.startsAt,
+    endsOn: semester.endsAt,
+    season: semesterSeason(semester.semester),
+    grid: {
+      starts: dayStartsAtHour,
+      ends: dayEndsAtHour,
+      lessonDuration,
+    },
+    periods: [
+      {
+        type: 'exams',
+        startsOn: semester.examsStartsAt,
+        endsOn: semester.examsEndsAt,
+      },
+    ],
+  }
+}
