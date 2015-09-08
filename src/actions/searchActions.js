@@ -16,8 +16,9 @@ function receiveSearchResults (results) {
 
 export function fetchSearchResults (searchCallback, query) {
   return function searchResultsDispatcher (dispatch) {
-    // TODO: in case the query is empty, reset search state
-
+    if (!query) {
+      return dispatch(receiveSearchResults([]))
+    }
     // First dispatch: inform state that request has been sent
     dispatch(startSearchRequest(query))
 

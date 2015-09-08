@@ -22,14 +22,12 @@ test('fetchSearchResults() executes a given callback with query', t => {
 
 test('fetchSearchResults() dispatch', t => {
   const query = 'search query'
-  const dispatch = spy()
-
   const results = ['resultA', 'resultB']
-
   // faux callback passed from outside application
   const callback = (query, cb) => cb(results)
 
-  const thunk = actions.fetchSearchResults(callback, query)
+  let dispatch = spy()
+  let thunk = actions.fetchSearchResults(callback, query)
   thunk(dispatch)
 
   const expectedCalls = 2
@@ -46,6 +44,17 @@ test('fetchSearchResults() dispatch', t => {
     const expectedArg = {type: SEARCH_RESPONSE, payload: {results}}
     const [actualArg,] = dispatch.secondCall.args
     st.deepEqual(actualArg, expectedArg, 'dispatches an SEARCH_RESPONSE with results')
+    st.end()
+  })
+
+  t.test('fetchSearchResults() with empty query', st => {
+    dispatch = spy()
+    thunk = actions.fetchSearchResults(callback, '')
+    thunk(dispatch)
+    st.equal(dispatch.callCount, 1, 'dispatch is called only once')
+    const expectedArg = {type: SEARCH_RESPONSE, payload: {results: []}}
+    const [actualArg,] = dispatch.firstCall.args
+    st.deepEqual(actualArg, expectedArg, 'returns SEARCH_RESPONSE with empty results')
     st.end()
   })
 })
