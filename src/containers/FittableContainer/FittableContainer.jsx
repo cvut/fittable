@@ -12,6 +12,7 @@ import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
 import { fetchEvents } from '../../actions/dataActions'
 import { displaySidebar } from '../../actions/uiActions'
+import { fetchSearchResults } from '../../actions/searchActions'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -33,6 +34,7 @@ function mapStateToProps (state) {
     displayFilters: state.displayFilters,
     data: state.data,
     ui: state.ui,
+    search: state.search,
   }
 }
 
@@ -45,6 +47,7 @@ function mapDispatchToProps (dispatch) {
     // FIXME: this one should be bound to onViewDateChange
     onEventsRequest: (callback, date) => dispatch(fetchEvents(callback, date)),
     onSidebarDisplay: (sidebar) => dispatch(displaySidebar(sidebar)),
+    onSearchRequest: (callback, query) => dispatch(fetchSearchResults(callback, query)),
   }
 }
 
@@ -116,13 +119,11 @@ const FittableContainer = React.createClass({
     this.props.callbacks.viewChange(to, param)
   },
 
-  // FIXME: → mapDispatchToProps
   handleSearch (query) {
-    this.props.callbacks.search(query, this.receiveSearchResults)
+    this.props.onSearchRequest(this.props.callbacks.search, query)
   },
 
   render () {
-
     // FIXME: side effects!!!
     const { locale, layout, fullWeek, eventsColors, facultyGrid } = this.props.settings
     CP.setLocale(locale)
@@ -166,7 +167,7 @@ const FittableContainer = React.createClass({
           settings={this.props.settings}
           onViewChange={this.handleChangeView}
           onSearch={this.handleSearch}
-          searchResults={this.state.searchResults}
+          searchResults={this.props.search.results}
         />
         <div className="clearfix"></div>
         <Timetable
