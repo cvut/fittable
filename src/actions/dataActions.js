@@ -18,6 +18,13 @@ function receiveEvents (events, linkNames) {
   }
 }
 
+function receiveError (errorObject) {
+  return {
+    type: EVENTS_LOAD_FAILED,
+    payload: errorObject,
+  }
+}
+
 export function fetchEvents (dataCallback, weekDate) {
   const [dateFrom, dateTo] = isoWeekRange(weekDate)
 
@@ -25,7 +32,11 @@ export function fetchEvents (dataCallback, weekDate) {
     // First dispatch: inform state that loading is going on
     dispatch(startEventsRequest())
 
-    dataCallback(dateFrom, dateTo, function (events, linkNames) {
+    dataCallback(dateFrom, dateTo, function (error, result) {
+      if (error) {
+        return dispatch(receiveError(error))
+      }
+      const { events, linkNames } = result
       // We have (hopefully) received data by now
       // FIXME: add error handling
       dispatch(receiveEvents(events, invertLinkNames(linkNames)))

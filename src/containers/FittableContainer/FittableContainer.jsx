@@ -35,6 +35,10 @@ function mapStateToProps (state) {
     data: state.data,
     ui: state.ui,
     search: state.search,
+    error: {
+      type: state.data.error.type,
+      visible: state.data.errorVisible,
+    },
   }
 }
 
@@ -60,9 +64,6 @@ const FittableContainer = React.createClass({
         ends: 21.5,
         lessonDuration: 0.875,
       },
-      error: false,
-      errorType: null,
-      mutedError: false,
       isMobile: isSmallScreen(),
     }
   },
@@ -130,6 +131,8 @@ const FittableContainer = React.createClass({
     const { events, waiting, linkNames } = this.props.data
     const { sidebar } = this.props.ui
 
+    const error = this.props.error
+
     // FIXME: this should be calculated by selector
     const gridsettings = {
       starts: this.state.grid.starts,
@@ -144,8 +147,8 @@ const FittableContainer = React.createClass({
       <div className="fittable-container" ref="rootEl">
         <ErrorMessage
           muted={true}
-          shown={this.state.mutedError}
-          type={this.state.errorType}
+          shown={error.visible}
+          type={error.type}
         />
         <Controls
           viewDate={this.props.viewDate}

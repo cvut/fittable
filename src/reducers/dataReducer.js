@@ -7,9 +7,10 @@ const initialState = {
     en: { courses: {}, teachers: {}, exceptions: {} },
   },
   events: [],
+  errorVisible: false,
   error: {
     type: null,
-    visible: false,
+    message: null,
   },
 }
 
@@ -23,9 +24,22 @@ export default function data (state = initialState, action) {
     case EVENTS_LOAD_COMPLETED:
       const { events, linkNames } = action.payload
       return {
+        ...state,
         waiting: false,
+        errorVisible: false,
         events,
         linkNames,
+      }
+    case EVENTS_LOAD_FAILED:
+      const type = action.payload.type
+      return {
+        ...state,
+        waiting: false,
+        errorVisible: true,
+        error: {
+          type,
+          message: action.payload.toString(),
+        },
       }
     default:
       return state

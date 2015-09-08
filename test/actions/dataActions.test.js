@@ -27,9 +27,9 @@ test('fetchEvents() dispatch', t => {
   const today = new Date('2015-09-09')
   let dispatch = spy()
 
-  const responseData = [
-    ['event', 'event'],
-    {
+  const responseData = {
+    events: ['event', 'event'],
+    linkNames: {
       teachers: [
         {
           id: 'vomackar',
@@ -40,10 +40,10 @@ test('fetchEvents() dispatch', t => {
         },
       ],
     },
-  ]
+  }
 
-  const callback = (from, to, cb) => cb(...responseData)
-  const thunk = actions.fetchEvents(callback, today)
+  let callback = (from, to, cb) => cb(null, responseData)
+  let thunk = actions.fetchEvents(callback, today)
   thunk(dispatch)
 
   const expectedCalls = 2
@@ -73,7 +73,8 @@ test('fetchEvents() dispatch', t => {
         exceptions: {},
       },
     }
-    const [events,] = responseData
+
+    const {events} = responseData
     const expectedArg = {type: EVENTS_LOAD_COMPLETED, payload: {events, linkNames: expectedLinkNames}}
     const [actualArg,] = dispatch.secondCall.args
     st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_LOAD_COMPLETED')

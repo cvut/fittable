@@ -125,8 +125,15 @@
                     }
                 }
 
-                // Return to fittable
-                callback( data, linknames );
+                if (window.ERROR) {
+                  var e = new Error('Faux error given from window')
+                  e.type = window.ERROR
+                  callback(e)
+                } else {
+                  var result = {events: data, linkNames: linknames}
+                  callback(null, result)
+                }
+
                 }.bind( this, from, to ), Math.random() * 1000 );
         };
 
