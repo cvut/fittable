@@ -12,10 +12,17 @@ test('UI reducer initial state', t => {
   t.end()
 })
 
-test('ui reducer with SIDEBAR_DISPLAY action', t => {
+test('ui reducer SIDEBAR_DISPLAY action', t => {
   const expected = {sidebar: 'search', eventId: null}
   const actual = reducer(undefined, {type: SIDEBAR_DISPLAY, payload: {sidebar: 'search'}})
   t.deepEqual(actual, expected, 'sets sidebar to a given state')
   t.end()
+
+  t.test('ui reducer SIDEBAR_DISPLAY action with the same sidebar already opened', st => {
+    const expected = null
+    const actual = reducer({sidebar: 'search', eventId: null}, {type: SIDEBAR_DISPLAY, payload: {sidebar: 'search'}})
+    st.deepEqual(actual.sidebar, expected, 'resets sidebar to null')
+    st.end()
+  })
 })
 
