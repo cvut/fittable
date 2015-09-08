@@ -12,7 +12,6 @@ import FunctionFilter from './FunctionFilter'
 const propTypes = {
   opened: PropTypes.oneOf(['settings', 'search', 'filter']),
   onSettingsChange: PropTypes.func,
-  onRefreshNeed: PropTypes.func,
   settings: PropTypes.shape(optionsType),
   onSearch: PropTypes.func,
   searchResults: PropTypes.array, // FIXME: shared type

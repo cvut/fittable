@@ -121,11 +121,6 @@ const FittableContainer = React.createClass({
     this.props.callbacks.search(query, this.receiveSearchResults)
   },
 
-  // FIXME: this should not be needed at all
-  handleRefreshNeed () {
-    this.setState({})
-  },
-
   render () {
 
     // FIXME: side effects!!!
@@ -168,7 +163,6 @@ const FittableContainer = React.createClass({
           displayFilter={this.props.displayFilters}
           onFilterChange={this.props.onDisplayFiltersChange}
           onSettingChange={this.props.onSettingChange}
-          onRefreshNeed={this.handleRefreshNeed}
           settings={this.props.settings}
           onViewChange={this.handleChangeView}
           onSearch={this.handleSearch}
