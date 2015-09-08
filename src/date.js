@@ -41,3 +41,21 @@ export function weekdayNum (date) {
   // thus we need to shift by 6 and mod by 7
   return (date.getDay() + 6) % 7
 }
+
+export function compareDate (a, b) {
+  const mA = moment(a)
+  const mB = moment(b)
+  if (mA.isBefore(mB, 'day')) {
+    return -1
+  }
+  if (mA.isAfter(mB, 'day')) {
+    return 1
+  }
+
+  return 0
+}
+
+export function withinDates (min, max, date) {
+  const mDate = moment(date)
+  return mDate.isBetween(min, max, 'day') || mDate.isSame(min, 'day') || mDate.isSame(max, 'day')
+}

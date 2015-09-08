@@ -88,3 +88,27 @@ test('weekdayNum()', t => {
   t.equal(actual, expected, 'returns a 0-indexed ISO weekday number')
   t.end()
 })
+
+test('compareDate', t => {
+  const a = new Date('2015-09-06')
+  const b = new Date('2015-09-07')
+
+  t.equal(date.compareDate(a, b), -1, 'returns -1 if first var is smaller')
+  t.equal(date.compareDate(b, a), 1, 'returns +1 if first var is smaller')
+
+  const c = new Date('2015-09-06T14:00')
+  const d = new Date('2015-09-06T10:00')
+  t.equal(date.compareDate(c, d), 0, 'returns 0 if the date is the same, regardless of date')
+  t.end()
+})
+
+test('withinDates', t => {
+  const a = new Date('2015-09-08')
+  const b = new Date('2015-09-09')
+  const c = new Date('2015-09-10')
+
+  t.equal(date.withinDates(a, b, c), false, 'returns false if last arg is outside of interval')
+  t.equal(date.withinDates(a, c, b), true, 'returns true if last arg is within interval')
+  t.equal(date.withinDates(a, b, a), true, 'is inclusive with edge dates')
+  t.end()
+})
