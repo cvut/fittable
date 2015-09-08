@@ -60,8 +60,6 @@ const FittableContainer = React.createClass({
         ends: 21.5,
         lessonDuration: 0.875,
       },
-      options: this.props,
-      searchResults: [],
       error: false,
       errorType: null,
       mutedError: false,
