@@ -9,6 +9,7 @@ test('Initial state', t => {
   t.is(type(result.viewDate), 'Date')
   t.is(type(result.displayFilters), 'Object')
   t.is(type(result.data), 'Object')
+  t.is(type(result.ui), 'Object')
   t.end()
 })
 

@@ -5,6 +5,7 @@ import { SETTINGS_CHANGE, VIEW_DATE_CHANGE, DISPLAY_FILTERS_CHANGE } from '../co
 import { now } from '../date'
 
 import data from './dataReducer'
+import ui from './uiReducer'
 
 const initialSettings = {
   locale: 'cs',
@@ -58,6 +59,7 @@ const fittableApp = combineReducers({
   viewDate,
   displayFilters,
   data,
+  ui,
 })
 
 export default fittableApp
