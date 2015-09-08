@@ -193,12 +193,17 @@
 
         };
 
+        function viewChangeCallback (view, id) {
+          console.log('viewChangeCallback fired', view, id)
+        }
+
         var options = {
             callbacks: {
                 search: searchCallback,
                 data: dataCallback,
                 semesterData: semesterDataCallback,
-                dateChange: function( newdate, semester ) { /* ... */ }
+                dateChange: function( newdate, semester ) { /* ... */ },
+                viewChange: viewChangeCallback,
             },
             locale: 'en',
             layout: 'vertical',
