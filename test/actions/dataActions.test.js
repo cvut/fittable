@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { spy } from 'sinon'
-import { EVENTS_REQUEST, EVENTS_RESPONSE } from '../../src/constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/dataActions'
 
 test('fetchEvents() executes a given callback with a week range', t => {
@@ -25,7 +25,7 @@ test('fetchEvents() executes a given callback with a week range', t => {
 
 test('fetchEvents() dispatch', t => {
   const today = new Date('2015-09-09')
-  const dispatch = spy()
+  let dispatch = spy()
 
   const responseData = [
     ['event', 'event'],
@@ -50,9 +50,9 @@ test('fetchEvents() dispatch', t => {
   t.equal(dispatch.callCount, expectedCalls, `dispatch has been called ${expectedCalls} times`)
 
   t.test('fetchEvents() first dispatch', st => {
-    const expectedArg = {type: EVENTS_REQUEST}
+    const expectedArg = {type: EVENTS_LOAD_STARTED}
     const [actualArg,] = dispatch.firstCall.args
-    st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_REQUEST')
+    st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_LOAD_STARTED')
     st.end()
   })
 
@@ -74,9 +74,29 @@ test('fetchEvents() dispatch', t => {
       },
     }
     const [events,] = responseData
-    const expectedArg = {type: EVENTS_RESPONSE, payload: {events, linkNames: expectedLinkNames}}
+    const expectedArg = {type: EVENTS_LOAD_COMPLETED, payload: {events, linkNames: expectedLinkNames}}
     const [actualArg,] = dispatch.secondCall.args
-    st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_RESPONSE')
+    st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_LOAD_COMPLETED')
+    st.end()
+  })
+
+  t.test('fetchEvents() failed events load', st => {
+    const error = new Error('error message')
+    error.type = 'generic'
+
+    callback = (from, to, cb) => cb(error)
+    dispatch = spy()
+    thunk = actions.fetchEvents(callback, today)
+
+    thunk(dispatch)
+
+    const [actualArg,] = dispatch.secondCall.args
+    const expectedArg = {
+      type: EVENTS_LOAD_FAILED,
+      payload: error,
+    }
+
+    st.deepEqual(actualArg, expectedArg, 'dispatches EVENTS_LOAD_FAILED as second')
     st.end()
   })
 })

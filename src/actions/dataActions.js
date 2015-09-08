@@ -1,16 +1,16 @@
-import { EVENTS_REQUEST, EVENTS_RESPONSE } from '../constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED } from '../constants/actionTypes'
 import { isoWeekRange } from '../date'
 import { invertLinkNames } from '../dataManipulation'
 
 function startEventsRequest () {
   return {
-    type: EVENTS_REQUEST,
+    type: EVENTS_LOAD_STARTED,
   }
 }
 
 function receiveEvents (events, linkNames) {
   return {
-    type: EVENTS_RESPONSE,
+    type: EVENTS_LOAD_COMPLETED,
     payload: {
       events,
       linkNames,
