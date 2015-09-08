@@ -10,6 +10,7 @@ test('Initial state', t => {
   t.is(type(result.displayFilters), 'Object')
   t.is(type(result.data), 'Object')
   t.is(type(result.ui), 'Object')
+  t.is(type(result.search), 'Object')
   t.end()
 })
 
