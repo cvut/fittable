@@ -10,6 +10,7 @@ const INITIAL_STATE = {
     ends: 21.5,
     lessonDuration: 0.875,
   },
+  periods: [],
 }
 
 test('semester reducer initial state', t => {

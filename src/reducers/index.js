@@ -7,6 +7,7 @@ import { now } from '../date'
 import data from './dataReducer'
 import ui from './uiReducer'
 import search from './searchReducer'
+import semester from './semesterReducer'
 
 const initialSettings = {
   locale: 'cs',
@@ -62,6 +63,7 @@ const fittableApp = combineReducers({
   data,
   ui,
   search,
+  semester,
 })
 
 export default fittableApp

@@ -11,6 +11,7 @@ test('Initial state', t => {
   t.is(type(result.data), 'Object')
   t.is(type(result.ui), 'Object')
   t.is(type(result.search), 'Object')
+  t.is(type(result.semester), 'Object')
   t.end()
 })
 

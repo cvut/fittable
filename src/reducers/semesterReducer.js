@@ -8,6 +8,7 @@ const initialState = {
     ends: 21.5,
     lessonDuration: 0.875,
   },
+  periods: [],
   /*
   startsOn,
   endsOn,

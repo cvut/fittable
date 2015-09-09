@@ -13,6 +13,7 @@ import { changeDisplayFilters } from '../../actions/filterActions'
 import { fetchEvents } from '../../actions/dataActions'
 import { displaySidebar } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
+import { fetchSemesterData } from '../../actions/semesterActions'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -39,6 +40,8 @@ function mapStateToProps (state) {
       type: state.data.error.type,
       visible: state.data.errorVisible,
     },
+    semester: state.semester,
+    grid: state.semester.grid,
   }
 }
 
@@ -52,6 +55,8 @@ function mapDispatchToProps (dispatch) {
     onEventsRequest: (callback, date) => dispatch(fetchEvents(callback, date)),
     onSidebarDisplay: (sidebar) => dispatch(displaySidebar(sidebar)),
     onSearchRequest: (callback, query) => dispatch(fetchSearchResults(callback, query)),
+    // FIXME: bind this one to onViewDateChange too
+    onSemesterDataRequest: (callback, date) => dispatch(fetchSemesterData(callback, date)),
   }
 }
 
@@ -70,23 +75,24 @@ const FittableContainer = React.createClass({
 
   componentDidMount () {
     this.getWeekEvents()
+    this.getSemesterData()
   },
 
-  // FIXME: too much logic. should be in selector, I guess
-  getSemester (viewDate) {
-    viewDate = moment(viewDate)
-    let semestername
-    let year = `${parseInt(viewDate.format('YYYY'), 10) - 1}/${viewDate.format('YY')}`
-    if (viewDate.month() < 2) {
-      semestername = CP.translate('winter_sem', {year: year})
-    } else if (viewDate.month() < 10) {
-      semestername = CP.translate('summer_sem', {year: year})
-    } else {
-      year = `${viewDate.format('YYYY')}/${moment(viewDate).add(1, 'year').format('YY')}`
-      semestername = CP.translate('winter_sem', {year: year})
+  getSemesterData () {
+    this.props.onSemesterDataRequest(this.props.callbacks.semesterData, this.props.viewDate)
+  },
+
+  // FIXME: too much logic. should be somewhere else
+  getSemesterName () {
+    if (!this.props.semester || !this.props.season || !this.props.semester.years) {
+      return ''
     }
 
-    return semestername
+    const season = this.props.semester.season
+    const [beginYear, endYear] = this.props.semester.years
+    const translateKey = `${season}_sem`
+
+    return CP.translate(translateKey, {year: `${beginYear}/${endYear}`})
   },
 
   // FIXME: this should be an implicit call with date change
@@ -104,7 +110,7 @@ const FittableContainer = React.createClass({
     // Update viewDate
     const newdate = moment(viewDate)
     // Send new date through callback
-    this.props.callbacks.dateChange(newdate.toISOString(), this.getSemester(newdate))
+    this.props.callbacks.dateChange(newdate.toISOString(), this.getSemesterName())
 
     // Update the data
     this.getWeekEvents(viewDate)
@@ -133,13 +139,13 @@ const FittableContainer = React.createClass({
 
     const error = this.props.error
 
-    // FIXME: this should be calculated by selector
+    // FIXME: this should be done some better way
     const gridsettings = {
-      starts: this.state.grid.starts,
-      ends: this.state.grid.ends,
-      lessonDuration: (!facultyGrid ? 1 : this.state.grid.lessonDuration),
+      starts: this.props.grid.starts,
+      ends: this.props.grid.ends,
+      lessonDuration: (!facultyGrid ? 1 : this.props.grid.lessonDuration),
       hoursStartsAt1: facultyGrid,
-      facultyHours: (this.state.grid.ends - this.state.grid.starts) / this.state.grid.lessonDuration,
+      facultyHours: (this.props.grid.ends - this.props.grid.starts) / this.props.grid.lessonDuration,
       facultyGrid: facultyGrid,
     }
 
@@ -154,7 +160,7 @@ const FittableContainer = React.createClass({
           viewDate={this.props.viewDate}
           onWeekChange={this.handleChangeViewDate}
           onDateChange={this.handleChangeViewDate}
-          semester={this.getSemester(this.props.viewDate)}
+          semester={this.getSemesterName()}
           onSettingsPanelChange={this.props.onSidebarDisplay}
           days7={fullWeek}
         />
