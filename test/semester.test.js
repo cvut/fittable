@@ -36,6 +36,12 @@ test('semesterSeason()', t => {
   t.end()
 })
 
+test('semesterYears()', t => {
+  t.deepEqual(semester.semesterYears('B142'), [2014, 2015], '?14? is a semester in 2014/2015 academic year')
+  t.deepEqual(semester.semesterYears('B151'), [2015, 2016], '?15? is a semester in 2015/2016 academic year')
+  t.end()
+})
+
 test('convertRawSemester()', t => {
   const original = {
     id: '18000-B142',
@@ -56,6 +62,7 @@ test('convertRawSemester()', t => {
     startsOn: '2015-02-16',
     endsOn: '2015-09-21',
     season: 'summer',
+    years: [2014, 2015],
     grid: {
       starts: 7.5,
       ends: 21.25,
