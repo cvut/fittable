@@ -22,13 +22,29 @@ test('fetchSemesterData() dispatch', t => {
   const semesters = [
     {
       id: '18000-B142',
-      startsAt: '2014-10-01',
-      endsAt: '2015-02-15',
+      semester: 'B142',
+      faculty: 18000,
+      startsAt: '2015-02-16',
+      endsAt: '2015-09-21',
+      examsStartsAt: '2015-05-18',
+      examsEndsAt: '2015-06-27',
+      hourDuration: 45,
+      breakDuration: 15,
+      dayStartsAtHour: 7.5,
+      dayEndsAtHour: 21.25,
     },
     {
       id: '18000-B151',
-      startsAt: '2015-02-16',
-      endsAt: '2015-09-21',
+      semester: 'B151',
+      faculty: 18000,
+      startsAt: '2015-09-12',
+      endsAt: '2016-02-28',
+      examsStartsAt: '2015-01-12',
+      examsEndsAt: '2015-02-20',
+      hourDuration: 45,
+      breakDuration: 15,
+      dayStartsAtHour: 7.5,
+      dayEndsAtHour: 21.25,
     },
   ]
 
@@ -45,7 +61,9 @@ test('fetchSemesterData() dispatch', t => {
   t.test('fetchSemesterData() dispatched action', st => {
     const [actualArg,] = dispatch.firstCall.args
     st.equal(actualArg.type, SEMESTER_LOAD_COMPLETED, 'dispatches SEMESTER_LOAD_COMPLETED action')
-    st.equal(actualArg.payload.semester.id, '18000-B151', 'sends just the semester for a given date')
+    st.equal(actualArg.payload.semester.id, '18000-B142', 'sends just the semester for a given date')
+    st.equal(actualArg.payload.semester.season, 'summer', 'calculates the semester season')
+    st.equal(typeof actualArg.payload.semester.grid, 'object', 'converts semester details for consumption by fittable')
     st.end()
   })
 })

@@ -1,5 +1,5 @@
 import { SEMESTER_LOAD_COMPLETED } from '../constants/actionTypes'
-import { findSemester } from '../semester'
+import { findSemester, convertRawSemester } from '../semester'
 
 function receiveSemesterData (semester) {
   return {
@@ -20,7 +20,7 @@ export function fetchSemesterData (semesterCallback, date) {
         return
       }
 
-      dispatch(receiveSemesterData(currentSemester))
+      dispatch(receiveSemesterData(convertRawSemester(currentSemester)))
     })
   }
 }
