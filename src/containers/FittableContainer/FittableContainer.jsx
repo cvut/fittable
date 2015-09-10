@@ -59,18 +59,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 const FittableContainer = React.createClass({
-  getInitialState () {
-    return {
-      // FIXME: this should be loaded dynamically from Sirius!
-      grid: {
-        starts: 7.5,
-        ends: 21.5,
-        lessonDuration: 0.875,
-      },
-      isMobile: isSmallScreen(),
-    }
-  },
-
   componentDidMount () {
     this.getWeekEvents()
     this.getSemesterData()
