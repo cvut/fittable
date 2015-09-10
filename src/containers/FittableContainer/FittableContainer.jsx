@@ -14,17 +14,13 @@ import { fetchEvents } from '../../actions/dataActions'
 import { displaySidebar } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
+import { detectScreenSize } from '../../actions/clientActions'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
 import Controls from '../../components/Controls'
 import Timetable from '../../components/Timetable'
 import ErrorMessage from '../../components/ErrorMessage'
-
-// FIXME: move this to a separate module
-function isSmallScreen () {
-  return window.innerWidth <= 768
-}
 
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
@@ -42,6 +38,7 @@ function mapStateToProps (state) {
     },
     semester: state.semester,
     grid: state.semester.grid,
+    isMobile: state.client.smallScreen,
   }
 }
 
@@ -57,6 +54,7 @@ function mapDispatchToProps (dispatch) {
     onSearchRequest: (callback, query) => dispatch(fetchSearchResults(callback, query)),
     // FIXME: bind this one to onViewDateChange too
     onSemesterDataRequest: (callback, date) => dispatch(fetchSemesterData(callback, date)),
+    onWindowResize: () => dispatch(detectScreenSize()),
   }
 }
 
@@ -76,6 +74,12 @@ const FittableContainer = React.createClass({
   componentDidMount () {
     this.getWeekEvents()
     this.getSemesterData()
+    this.props.onWindowResize()
+    global.window.addEventListener('resize', this.props.onWindowResize)
+  },
+
+  componentWillUnmount () {
+    global.window.removeEventListener('resize', this.props.onWindowResize)
   },
 
   getSemesterData () {
@@ -189,7 +193,7 @@ const FittableContainer = React.createClass({
           colored={eventsColors}
           days7={fullWeek}
           onDateChange={this.handleChangeViewDate}
-          isMobile={this.state.isMobile}
+          isMobile={this.props.isMobile}
           ref="timetable"
           visible={!waiting}
         />
