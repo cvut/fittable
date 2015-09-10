@@ -8,6 +8,7 @@ import data from './dataReducer'
 import ui from './uiReducer'
 import search from './searchReducer'
 import semester from './semesterReducer'
+import client from './clientReducer'
 
 const initialSettings = {
   locale: 'cs',
@@ -64,6 +65,7 @@ const fittableApp = combineReducers({
   ui,
   search,
   semester,
+  client,
 })
 
 export default fittableApp
