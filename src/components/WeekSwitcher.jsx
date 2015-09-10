@@ -5,7 +5,7 @@
  */
 
 import React, { PropTypes } from 'react'
-import Moment from 'moment'
+import moment from 'moment'
 
 import Toggleable from './Toggleable'
 
@@ -19,11 +19,16 @@ class WeekSwitcher extends Toggleable {
 
   /** Returns a Moment factory constructed from this.props.viewDate */
   viewDateMoment () {
-
-    const moment = new Moment(this.props.viewDate)
+    const m = moment(this.props.viewDate)
     return function () {
-      return moment.clone()
+      return m.clone()
     }
+  }
+
+  onDateChange (newDate) {
+    return function () {
+      this.props.onDateChange(newDate.toDate())
+    }.bind(this)
   }
 
   renderSemesterSelector () {
@@ -38,7 +43,7 @@ class WeekSwitcher extends Toggleable {
           <button
             type="button"
             className="gr-go-btn"
-            onClick={this.props.onDateChange.bind(this, viewMoment().subtract(6, 'months'), null)}
+            onClick={this.onDateChange(viewMoment().subtract(6, 'months'))}
           >
             <i className="fa fa-chevron-left"></i>
           </button>
@@ -50,7 +55,7 @@ class WeekSwitcher extends Toggleable {
           <button
             type="button"
             className="gr-go-btn"
-            onClick={this.props.onDateChange.bind(this, viewMoment().add(6, 'months'), null)}
+            onClick={this.onDateChange(viewMoment().add(6, 'months'))}
           >
             <i className="fa fa-chevron-right"></i>
           </button>
@@ -69,7 +74,7 @@ class WeekSwitcher extends Toggleable {
           <button
             type="button"
             className="gr-go-btn"
-            onClick={this.props.onDateChange.bind(this, viewMoment().subtract(1, 'months').startOf('isoWeek'), null)}
+            onClick={this.onDateChange(viewMoment().subtract(1, 'months').startOf('isoWeek'))}
           >
             <i className="fa fa-chevron-left"></i>
           </button>
@@ -81,7 +86,7 @@ class WeekSwitcher extends Toggleable {
           <button
             type="button"
             className="gr-go-btn"
-            onClick={this.props.onDateChange.bind(this, viewMoment().add(1, 'months').startOf('isoWeek'), null)}
+            onClick={this.onDateChange(viewMoment().add(1, 'months').startOf('isoWeek'))}
           >
             <i className="fa fa-chevron-right"></i>
           </button>
@@ -103,7 +108,7 @@ class WeekSwitcher extends Toggleable {
     for (let i = viewMoment().startOf('month').startOf('isoWeek'), weeki = 0; i.isBefore(monthEnd); i.add(1, 'day')) {
       weeks[weeki].push(i.date())
       if (i.isoWeekday() === 7) {
-        moments[weeki] = new Moment(i).startOf('isoWeek')
+        moments[weeki] = moment(i).startOf('isoWeek')
         weeki++
       }
 
@@ -139,10 +144,9 @@ class WeekSwitcher extends Toggleable {
     }
 
     function switchWeek (week) {
-
       const weekIndex = weeks.indexOf(week)
-      const moment = moments[weekIndex]
-      this.props.onDateChange.call(this, moment.toDate())
+      const weekMoment = moments[weekIndex]
+      this.props.onDateChange(weekMoment.toDate())
     }
 
     // FIXME: (╯°□°)╯︵ ┻━┻
