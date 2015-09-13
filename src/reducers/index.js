@@ -57,7 +57,7 @@ function displayFilters (state = initialDisplayFilters, action) {
   }
 }
 
-const fittableApp = combineReducers({
+const rootReducer = combineReducers({
   settings,
   viewDate,
   displayFilters,
@@ -68,4 +68,4 @@ const fittableApp = combineReducers({
   client,
 })
 
-export default fittableApp
+export default rootReducer
