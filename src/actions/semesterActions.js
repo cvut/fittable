@@ -4,7 +4,7 @@ import { findSemester, convertRawSemester } from '../semester'
 function receiveSemesterData (semester) {
   return {
     type: SEMESTER_LOAD_COMPLETED,
-    payload: { semester },
+    payload: semester,
   }
 }
 

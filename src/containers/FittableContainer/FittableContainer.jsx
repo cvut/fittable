@@ -76,12 +76,13 @@ const FittableContainer = React.createClass({
 
   // FIXME: too much logic. should be somewhere else
   getSemesterName () {
-    if (!this.props.semester || !this.props.season || !this.props.semester.years) {
+    const {semester} = this.props
+    if (!semester || !semester.season || !semester.years) {
       return ''
     }
 
-    const season = this.props.semester.season
-    const [beginYear, endYear] = this.props.semester.years
+    const season = semester.season
+    const [beginYear, endYear] = semester.years
     const translateKey = `${season}_sem`
 
     return CP.translate(translateKey, {year: `${beginYear}/${endYear}`})

@@ -61,9 +61,9 @@ test('fetchSemesterData() dispatch', t => {
   t.test('fetchSemesterData() dispatched action', st => {
     const [actualArg,] = dispatch.firstCall.args
     st.equal(actualArg.type, SEMESTER_LOAD_COMPLETED, 'dispatches SEMESTER_LOAD_COMPLETED action')
-    st.equal(actualArg.payload.semester.id, '18000-B142', 'sends just the semester for a given date')
-    st.equal(actualArg.payload.semester.season, 'summer', 'calculates the semester season')
-    st.equal(typeof actualArg.payload.semester.grid, 'object', 'converts semester details for consumption by fittable')
+    st.equal(actualArg.payload.id, '18000-B142', 'sends just the semester for a given date')
+    st.equal(actualArg.payload.season, 'summer', 'calculates the semester season')
+    st.equal(typeof actualArg.payload.grid, 'object', 'converts semester details for consumption by fittable')
     st.end()
   })
 })

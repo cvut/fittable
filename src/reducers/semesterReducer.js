@@ -1,7 +1,7 @@
 import { SEMESTER_LOAD_COMPLETED } from '../constants/actionTypes'
 
 const initialState = {
-  season: 'winter', // TODO: this should be calculated from current date
+  season: 'winter', // XXX: this is a placeholder
   grid: {
     // Fallback data for FIT
     starts: 7.5,
