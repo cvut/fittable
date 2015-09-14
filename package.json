@@ -28,9 +28,8 @@
     "test:spec": "npm test | tap-spec"
   },
   "dependencies": {
-    "babel": "^5.8.21",
+    "babel-runtime": "^5.8.24",
     "counterpart": "^0.16.9",
-    "curry-d": "^0.6.0",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
     "hammerjs": "^2.0.4",
@@ -45,6 +44,7 @@
     "redux-thunk": "^0.1.0"
   },
   "devDependencies": {
+    "babel": "^5.8.21",
     "autoprefixer-loader": "^2.0.0",
     "babel-core": "^5.8.22",
     "babel-eslint": "^4.1.0",
