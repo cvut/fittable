@@ -15,6 +15,38 @@ const propTypes = {
   data: PropTypes.object, // FIXME: validate shape
 }
 
+const Reveal = React.createClass({
+  getInitialState () {
+    return {
+      open: false,
+    }
+  },
+
+  onClick () {
+    const open = this.state.open
+    this.setState({open: !open})
+  },
+
+  render () {
+    const open = this.state.open
+    const {buttonDesc, buttonIconClass} = this.props
+    const hideClass = open ? '' : 'hide'
+    const caretClass = open ? 'fa-caret-up' : 'fa-caret-down'
+
+    return (
+        <div className="reveal-container">
+          <button className="reveal" onClick={this.onClick}>
+            <i className={`fa ${buttonIconClass}`}></i>
+            <i className={`fa caret ${caretClass}`}></i> {buttonDesc}
+          </button>
+          <div className={`hideable ${hideClass}`}>
+            {this.props.children}
+          </div>
+        </div>
+      )
+  },
+})
+
 class EventDetail extends React.Component {
 
   handleCourseClick (course) {
@@ -30,17 +62,15 @@ class EventDetail extends React.Component {
   }
 
   gotoDate (date) {
-
     this.props.showDetailOn(-1)
     this.props.onDateChange(new Moment(date))
   }
 
   getLinkName (type, key) {
-    return this.props.linkNames[CP.getLocale() ][type][key] || key
+    return this.props.linkNames[CP.getLocale()][type][key] || key
   }
 
   eventBasicProps () {
-
     const seqNumber = this.props.data.sequenceNumber || '?'
     const name = this.props.data.name || this.getLinkName('courses', this.props.data.course)
 
@@ -65,15 +95,13 @@ class EventDetail extends React.Component {
   }
 
   eventExceptions () {
-
     if (this.props.data.details.appliedExceptions && this.props.data.details.appliedExceptions.length > 0) {
       return (
         <div className="prop-section exceptions">
-          <button className="reveal" onClick={this.revealHidden.bind(this) }>
-            <i className="fa fa-exclamation-triangle fa-fw ex-icon"></i>
-            <i className="fa fa-caret-down caret"></i> {CP.translate('detail.cancelled') }
-          </button>
-          <div className="hideable hide">
+          <Reveal
+            buttonDesc={CP.translate('detail.cancelled') }
+            buttonIconClass="fa-exclamation-triangle fa-fw ex-icon"
+          >
             <div className="because">
               {CP.translate('detail.becauseof') }
             </div>
@@ -86,14 +114,13 @@ class EventDetail extends React.Component {
                 )
               }.bind(this))
             }
-          </div>
-          </div>
+          </Reveal>
+        </div>
       )
     }
   }
 
   eventNumericProps () {
-
     const studentsCount = this.props.data.details.students ? this.props.data.details.students.length : '?'
     const studentsPropField = this.numPropertyField(CP.translate('detail.students'), studentsCount)
 
@@ -107,7 +134,7 @@ class EventDetail extends React.Component {
     let parallelPropField = <div />
     if (this.props.data.details.parallel) {
       parallelPropField = this.numPropertyField(CP.translate('detail.parallel'),
-                                                CP.translate('detail.number', {num: this.props.data.details.parallel }),
+                                                CP.translate('detail.number', {num: this.props.data.details.parallel}),
                                                 'right')
     }
 
@@ -121,7 +148,6 @@ class EventDetail extends React.Component {
   }
 
   eventTeachers () {
-
     return (
       <div className="prop-section teachers">
         {this.props.data.teachers.map(function (teacher) {
@@ -136,7 +162,6 @@ class EventDetail extends React.Component {
   }
 
   numPropertyField (title, value, align = 'left') {
-
     return (
       <div className={ 'num-prop ' + align}>
         <div className="value">
@@ -150,44 +175,20 @@ class EventDetail extends React.Component {
   }
 
   teacherField (username, fullname) {
-
     return (
       <div className="teacher">
-        <button className="reveal" onClick={this.revealHidden.bind(this) }>
-          <i className="fa fa-male"></i><i className="fa fa-caret-down caret"></i> {fullname}
-        </button>
-        <div className="hideable hide">
+        <Reveal buttonDesc={fullname} buttonIconClass="fa-male">
           <a href={ 'https://usermap.cvut.cz/profile/' + username}>{CP.translate('detail.usermap_profile') }</a>
           <br />
-        <button onClick={this.handleTeacherClick.bind(this, username) }>
-          {CP.translate('detail.personal_calendar') }
-        </button>
-        </div>
+          <button onClick={this.handleTeacherClick.bind(this, username) }>
+            {CP.translate('detail.personal_calendar') }
+          </button>
+        </Reveal>
       </div>
     )
   }
 
-  revealHidden (e) {
-
-    // Toggle caret icon
-    var el = e.target.getElementsByClassName('caret') [0]
-    if (el.classList.contains('fa-caret-down')) {
-      el.classList.remove('fa-caret-down') ; el.classList.add('fa-caret-up')
-    } else {
-      el.classList.add('fa-caret-down') ; el.classList.remove('fa-caret-up')
-    }
-
-    // Toggle hide class on reveal element
-    el = e.target.parentNode.getElementsByClassName('hideable') [0]
-    if (el.classList.contains('hide')) {
-      el.classList.remove('hide')
-    } else {
-      el.classList.add('hide')
-    }
-  }
-
   render () {
-
     return (
       <div className="detail">
         <div className="wrap">
