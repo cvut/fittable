@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
-import configureStore from '../../store'
+import store from '../../store'
 import FittableContianer from '../FittableContainer'
 import { options as optionsType } from '../../constants/propTypes'
 
-const store = configureStore()
+
+// React components for Redux DevTools
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 export default class AppContainer extends Component {
   static propTypes = optionsType
@@ -19,8 +21,16 @@ export default class AppContainer extends Component {
   }
 
   render() {
-    return <Provider store={store}>
-      <FittableContianer callbacks={this.props.callbacks} locale={this.props.locale} />
-    </Provider>
+    return (
+      <div>
+        <Provider store={store}>
+          <FittableContianer callbacks={this.props.callbacks} locale={this.props.locale} />
+        </Provider>
+        // FIXME: include this only in dev
+        <DebugPanel top right bottom>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+      </div>
+    )
   }
 }

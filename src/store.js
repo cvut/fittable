@@ -1,15 +1,20 @@
-import { createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
 import rootReducer from './reducers'
 
-const loggerMiddleware = createLogger()
+// Redux DevTools store enhancers
+import { devTools, persistState } from 'redux-devtools'
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunkMiddleware,
-  loggerMiddleware
+const finalCreateStore = compose(
+  applyMiddleware(
+    thunkMiddleware
+  ),
+  // Provides support for DevTools:
+  devTools(),
+  // Lets you write ?debug_session=<name> in address bar to persist debug sessions
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore)
 
-export default function configureStore (initialState) {
-  return createStoreWithMiddleware(rootReducer, initialState)
-}
+const store = finalCreateStore(rootReducer)
+
+export default store
