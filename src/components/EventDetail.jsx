@@ -95,24 +95,28 @@ class EventDetail extends React.Component {
   }
 
   eventExceptions () {
-    if (this.props.data.details.appliedExceptions && this.props.data.details.appliedExceptions.length > 0) {
+    const {appliedExceptions} = this.props.data.details
+    if (appliedExceptions && appliedExceptions.length > 0) {
       return (
         <div className="prop-section exceptions">
           <Reveal
-            buttonDesc={CP.translate('detail.cancelled') }
+            buttonDesc={CP.translate('detail.cancelled')}
             buttonIconClass="fa-exclamation-triangle fa-fw ex-icon"
           >
             <div className="because">
               {CP.translate('detail.becauseof') }
             </div>
             {
-              this.props.data.details.appliedExceptions.map(function (exception) {
+              appliedExceptions.map((exception) => {
+                const excObj = this.getLinkName('exceptions', exception)
+                // FIXME: why the hell there is an object? broken data callback?
+                const exceptionName = excObj.name || excObj
                 return (
                   <div>
-                    <strong>{this.getLinkName('exceptions', exception) }</strong>
+                    <strong>{exceptionName}</strong>
                   </div>
                 )
-              }.bind(this))
+              })
             }
           </Reveal>
         </div>
