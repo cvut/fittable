@@ -23,6 +23,7 @@
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server --content-base dist/ --hot -d",
     "watch": "webpack -d --watch",
+    "watch:npm": "babel -w --out-dir dist src",
     "test": "babel-tape-runner 'test/**/*.test.js'",
     "test:watch": "chokidar --initial 'src/**/*.js' 'src/**/*.js' 'test/**/*.js' -c 'npm test | tap-bail'",
     "test:spec": "npm test | tap-spec"
