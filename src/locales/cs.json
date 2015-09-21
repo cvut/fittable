@@ -10,7 +10,7 @@
     "tutorial": "Cvičení",
     "laboratory": "Laboratoř",
     "exam": "Zkouška",
-    "assessment": "Hodnocení",
+    "assessment": "Zápočtový test",
     "course_event": "Jednorázová akce",
     "other": "Ostatní"
   },
@@ -20,7 +20,7 @@
     "tutorial": "Cvi",
     "laboratory": "Lab",
     "exam": "Zk",
-    "assessment": "Hod",
+    "assessment": "Záp",
     "course_event": "Akc",
     "other": "Jiné"
   },
@@ -30,7 +30,7 @@
     "tutorial": "%(seqnumber)s. cvičení",
     "laboratory": "%(seqnumber)s. laboratoř",
     "exam": "%(seqnumber)s. zkouška",
-    "assessment": "%(seqnumber)s. hodnocení",
+    "assessment": "%(seqnumber)s. zápočtový test",
     "course_event": "%(seqnumber)s. jednorázová akce",
     "other": "%(seqnumber)s. jiná událost"
   },
