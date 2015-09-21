@@ -8,3 +8,10 @@ test('displaySidebar()', t => {
   t.deepEqual(actual, expected)
   t.end()
 })
+
+test('displayEvent()', t => {
+  const expected = {type: EVENT_DISPLAY, payload: {eventId: 154}}
+  const actual = actions.displayEvent(154)
+  t.deepEqual(actual, expected)
+  t.end()
+})

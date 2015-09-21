@@ -26,3 +26,10 @@ test('ui reducer SIDEBAR_DISPLAY action', t => {
   })
 })
 
+test('UI reducer EVENT_DISPLAY action', t => {
+  const expected = {sidebar: 'search', eventId: 42}
+  const actual = reducer({sidebar: 'search', eventId: null},
+                         {type: EVENT_DISPLAY, payload: {eventId: 42}})
+  t.deepEqual(actual, expected, 'sets event to a given ID')
+  t.end()
+})

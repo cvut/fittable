@@ -6,3 +6,10 @@ export function displaySidebar (sidebar) {
     payload: { sidebar },
   }
 }
+
+export function displayEvent (eventId) {
+  return {
+    type: EVENT_DISPLAY,
+    payload: { eventId },
+  }
+}
