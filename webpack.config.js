@@ -1,9 +1,18 @@
 /* eslint-env node */
 /* eslint no-var:0 */
 var path = require('path')
+var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var srcPath = path.resolve('./src')
+
+var NODE_ENV = process.env.NODE_ENV || 'development'
+
+var definePlugin = new webpack.DefinePlugin({
+  // Remember this will get replaced with literal contents of string, so we need extra quotes
+  'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+  '__DEV__': NODE_ENV !== 'production',
+})
 
 var sassLoader = '!sass?' +
   'includePaths[]=' +
@@ -24,6 +33,7 @@ module.exports = {
   },
 
   plugins: [
+    definePlugin,
     new ExtractTextPlugin('fittable.css', {
       allChunks: true,
     }),

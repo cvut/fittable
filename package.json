@@ -18,7 +18,7 @@
     "prepublish": "npm run build",
     "build": "npm-run-all -p build:prod build:npm build:assets",
     "build:dev": "webpack -d",
-    "build:prod": "webpack --optimize-minimize",
+    "build:prod": "webpack --optimize-minimize --config webpack.production.config.js",
     "build:npm": "babel --out-dir dist src",
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server --content-base dist/ --hot -d",
