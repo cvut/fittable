@@ -26,7 +26,7 @@ export default class AppContainer extends Component {
       </Provider>
     )
 
-    if (__DEV__) {
+    if (process.env.NODE_ENV === 'development') {
       return (
         <div>
           {main}

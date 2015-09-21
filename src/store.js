@@ -11,7 +11,7 @@ const storePlugins = [
   ),
 ]
 
-if (__DEV__) {
+if (process.env.NODE_ENV === 'development') {
   storePlugins.push(devTools())
   storePlugins.push(persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)))
 }
