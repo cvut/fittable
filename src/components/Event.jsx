@@ -90,20 +90,19 @@ class EventBox extends React.Component {
   }
 
   render () {
-
-    // Generate time strings
-    var appear = this.props.data.appear
+    const {appear, id} = this.props.data
+    const onClickVal = this.props.detailShown ? null : id
 
     return (
       <div
         className={this.classNames(this.props)}
-        data-event={this.props.data.id}
+        data-event={id}
         style={this.style(this.props)}
       >
         <div className="inner">
           <div
             className="head-space"
-            onClick={this.props.onClick.bind(null, appear === 'hide' ? -1 : this.props.data.id)}>
+            onClick={this.props.onClick.bind(null, onClickVal)}>
           </div>
           <div className="name">
             {this.props.data.course}
@@ -120,8 +119,6 @@ class EventBox extends React.Component {
              ref="detail"
              data={this.props.data}
              onViewChange={this.props.onViewChange}
-             onDateChange={this.props.onDateChange}
-             showDetailOn={this.props.onClick}
              linkNames={this.props.linkNames}
           />
           <div className="cancelflag">

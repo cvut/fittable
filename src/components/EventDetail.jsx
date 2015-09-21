@@ -5,12 +5,9 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import Moment from 'moment'
 
 const propTypes = {
   onViewChange: PropTypes.func,
-  showDetailOn: PropTypes.func,
-  onDateChange: PropTypes.func,
   linkNames: PropTypes.object, // FIXME: validate shape
   data: PropTypes.object, // FIXME: validate shape
 }
@@ -59,11 +56,6 @@ class EventDetail extends React.Component {
 
   handleRoomClick (room) {
     this.props.onViewChange('room', room)
-  }
-
-  gotoDate (date) {
-    this.props.showDetailOn(-1)
-    this.props.onDateChange(new Moment(date))
   }
 
   getLinkName (type, key) {

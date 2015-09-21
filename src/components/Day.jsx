@@ -27,7 +27,7 @@ const propTypes = {
   id: PropTypes.number.isRequired,
   dayNum: PropTypes.number.isRequired,
   events: PropTypes.array, // FIXME: validate events' shape
-  showDetailOn: PropTypes.number,
+  showDetailOn: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   colored: PropTypes.bool,
   linkNames: PropTypes.object, // FIXME: validate shape
   onDetailShow: PropTypes.func,
@@ -113,7 +113,6 @@ class Day extends React.Component {
   }
 
   renderEvent (event) {
-
     if (!this.props.displayFilter[event.type]) {
       event.appear = 'hide'
     }

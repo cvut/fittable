@@ -24,23 +24,16 @@ const propTypes = {
   days7: PropTypes.bool,
   onDateChange: PropTypes.func,
   isMobile: PropTypes.bool,
+  onEventDisplay: PropTypes.func,
+  eventId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 class Timetable extends React.Component {
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      detailShownOn: -1,
-      popupsOpened: 0,
-    }
-  }
 
   /**
    * Hides the days element by removing its animation property class
    */
   hide () {
-
     const el = this.refs.days
 
     // Replay CSS animation
@@ -52,7 +45,6 @@ class Timetable extends React.Component {
    * Replays the CSS animation of all events from right side to the left.
    */
   animateLeft () {
-
     const el = this.refs.days
 
     // Replay CSS animation
@@ -67,7 +59,6 @@ class Timetable extends React.Component {
    * Replays the CSS animation of all events from left side to the right.
    */
   animateRight () {
-
     const el = this.refs.days
 
     // Replay CSS animation
@@ -83,24 +74,10 @@ class Timetable extends React.Component {
    * @param key EventDetail to display
    */
   showDetailOn (key) {
-
-    const prevkey = this.state.detailShownOn
-
-    // If it's called on the same event, close all.
-    if (key === this.state.detailShownOn) {
-      key = -1
-    }
-
-    // Calculate num of shown popups
-    let popups = this.state.popupsOpened
-    if (prevkey === -1 && key !== -1) { popups++ }
-    if (prevkey !== -1 && key === -1) { popups-- }
-
-    this.setState({ detailShownOn: key, popupsOpened: popups })
+    this.props.onEventDisplay(key)
   }
 
   render () {
-
     const weekEvents = [ [], [], [], [], [], [], [] ]
     const firstDayStart = moment(this.props.viewDate).startOf('day')
     let minClosestDiff = Infinity
@@ -190,7 +167,7 @@ class Timetable extends React.Component {
           dayNum={moment(this.props.viewDate).isoWeekday(i + 1).date()}
           events={weekEvents[i]}
           onDetailShow={this.showDetailOn.bind(this)}
-          showDetailOn={this.state.detailShownOn}
+          showDetailOn={this.props.eventId}
           displayFilter={this.props.displayFilter}
           onViewChange={this.props.onViewChange}
           linkNames={this.props.linkNames}
@@ -202,7 +179,7 @@ class Timetable extends React.Component {
       )
     }
 
-    const classMuted = this.state.popupsOpened > 0 ? 'muted' : ''
+    const classMuted = (this.props.eventId !== null) ? 'muted' : ''
     const classCut = (this.props.functionsOpened !== null) ? 'cut' : ''
     const classDays7 = this.props.days7 ? 'days7' : ''
     const classMobile = this.props.isMobile ? 'mobile' : ''

@@ -11,7 +11,7 @@ import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
 import { fetchEvents } from '../../actions/dataActions'
-import { displaySidebar } from '../../actions/uiActions'
+import { displaySidebar, displayEvent } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
 import { detectScreenSize } from '../../actions/clientActions'
@@ -51,6 +51,7 @@ function mapDispatchToProps (dispatch) {
     // FIXME: this one should be bound to onViewDateChange
     onEventsRequest: (callback, date) => dispatch(fetchEvents(callback, date)),
     onSidebarDisplay: (sidebar) => dispatch(displaySidebar(sidebar)),
+    onEventDisplay: (eventId) => dispatch(displayEvent(eventId)),
     onSearchRequest: (callback, query) => dispatch(fetchSearchResults(callback, query)),
     // FIXME: bind this one to onViewDateChange too
     onSemesterDataRequest: (callback, date) => dispatch(fetchSemesterData(callback, date)),
@@ -129,7 +130,7 @@ const FittableContainer = React.createClass({
     moment.locale(locale)
 
     const { events, waiting, linkNames } = this.props.data
-    const { sidebar } = this.props.ui
+    const { sidebar, eventId } = this.props.ui
 
     const error = this.props.error
 
@@ -186,6 +187,8 @@ const FittableContainer = React.createClass({
           isMobile={this.props.isMobile}
           ref="timetable"
           visible={!waiting}
+          eventId={eventId}
+          onEventDisplay={this.props.onEventDisplay}
         />
         <Spinner show={waiting} />
       </div>
