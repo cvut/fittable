@@ -3,6 +3,10 @@ import { spy } from 'sinon'
 import { SEMESTER_LOAD_COMPLETED } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/semesterActions'
 
+const getEmptyState = () => {
+  return {semester: {}}
+}
+
 test('fetchSemesterData() dispatches SEMESTER_LOAD_COMPLETED with callback data', t => {
   const searchCallback = (cb) => {
     t.equal(typeof cb, 'function', 'callback receives a callback for response')
@@ -14,7 +18,7 @@ test('fetchSemesterData() dispatches SEMESTER_LOAD_COMPLETED with callback data'
 
   t.equal(typeof thunk, 'function', 'fetchSearchResults returns a thunk function immediately')
 
-  thunk(dispatch)
+  thunk(dispatch, getEmptyState)
 })
 
 test('fetchSemesterData() dispatch', t => {
@@ -53,7 +57,7 @@ test('fetchSemesterData() dispatch', t => {
 
   let dispatch = spy()
   let thunk = actions.fetchSemesterData(callback, date)
-  thunk(dispatch)
+  thunk(dispatch, getEmptyState)
 
   const expectedCalls = 1
   t.equal(dispatch.callCount, expectedCalls, `dispatch has been called ${expectedCalls} times`)
@@ -66,4 +70,24 @@ test('fetchSemesterData() dispatch', t => {
     st.equal(typeof actualArg.payload.grid, 'object', 'converts semester details for consumption by fittable')
     st.end()
   })
+})
+
+test('fetchSemesterData() dispatch with semester loaded', t => {
+  const date = new Date('2015-09-10')
+  const state = {
+    semester: {
+      startsOn: '2015-02-18',
+      endsOn: '2015-09-21',
+    },
+  }
+
+  const dispatch = spy()
+  const callback = spy()
+
+  const thunk = actions.fetchSemesterData(callback, date)
+
+  thunk(dispatch, () => state)
+  t.equal(callback.callCount, 0, 'does not execute callback if the date is already within current semester')
+  t.equal(dispatch.callCount, 0, 'does not dispatches action if the date is already within current semester')
+  t.end()
 })
