@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import * as semester from '../src/semester'
+import * as s from '../src/semester'
 
 test('currentSemester()', t => {
   const semesters = [
@@ -22,7 +22,7 @@ test('currentSemester()', t => {
   ]
 
   examples.forEach(([day, expectedId]) => {
-    const actual = semester.findSemester(semesters, day)
+    const actual = s.findSemester(semesters, day)
 
     t.equal(actual.id, expectedId, `day ${day} is within semester ${expectedId}`)
   })
@@ -31,14 +31,14 @@ test('currentSemester()', t => {
 })
 
 test('semesterSeason()', t => {
-  t.equal(semester.semesterSeason('B142'), 'summer', 'semester ending with 2 is summer')
-  t.equal(semester.semesterSeason('B151'), 'winter', 'semester ending with 1 is winter')
+  t.equal(s.semesterSeason('B142'), 'summer', 'semester ending with 2 is summer')
+  t.equal(s.semesterSeason('B151'), 'winter', 'semester ending with 1 is winter')
   t.end()
 })
 
 test('semesterYears()', t => {
-  t.deepEqual(semester.semesterYears('B142'), [2014, 2015], '?14? is a semester in 2014/2015 academic year')
-  t.deepEqual(semester.semesterYears('B151'), [2015, 2016], '?15? is a semester in 2015/2016 academic year')
+  t.deepEqual(s.semesterYears('B142'), [2014, 2015], '?14? is a semester in 2014/2015 academic year')
+  t.deepEqual(s.semesterYears('B151'), [2015, 2016], '?15? is a semester in 2015/2016 academic year')
   t.end()
 })
 
@@ -77,7 +77,20 @@ test('convertRawSemester()', t => {
     ],
   }
 
-  const actual = semester.convertRawSemester(original)
+  const actual = s.convertRawSemester(original)
   t.deepEqual(actual, expected, 'converts given data to match the expected state')
+  t.end()
+})
+
+test('dateInSemester()', t => {
+  const semester = {
+    startsOn: '2015-02-16',
+    endsOn: '2015-09-21',
+  }
+
+  const dateIn = new Date('2015-03-01')
+  const dateOut = new Date('2015-10-01')
+  t.equal(s.dateInSemester(semester, dateIn), true, 'returns true for date within the semester')
+  t.equal(s.dateInSemester(semester, dateOut), false, 'returns false for date outside of the semester')
   t.end()
 })
