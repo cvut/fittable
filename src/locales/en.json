@@ -72,7 +72,7 @@
     },
     "search": {
       "name": "Search",
-      "placeholder": "Search...",
+      "placeholder": "Search…",
       "subject": "Subject",
       "person": "Person",
       "room": "Room"
