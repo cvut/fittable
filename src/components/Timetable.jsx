@@ -77,6 +77,12 @@ class Timetable extends React.Component {
     this.props.onEventDisplay(key)
   }
 
+  onClickOutside () {
+    if (this.props.eventId) {
+      this.showDetailOn(null)
+    }
+  }
+
   render () {
     const weekEvents = [ [], [], [], [], [], [], [] ]
     const firstDayStart = moment(this.props.viewDate).startOf('day')
@@ -192,6 +198,7 @@ class Timetable extends React.Component {
       <div
         className={className}
         ref="rootEl"
+        onClick={this.onClickOutside.bind(this)}
       >
         <div className="grid-overlay">
           <div className="grid-wrapper">
