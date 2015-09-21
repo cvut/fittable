@@ -70,8 +70,8 @@ const FittableContainer = React.createClass({
     global.window.removeEventListener('resize', this.props.onWindowResize)
   },
 
-  getSemesterData () {
-    this.props.onSemesterDataRequest(this.props.callbacks.semesterData, this.props.viewDate)
+  getSemesterData (viewDate) {
+    this.props.onSemesterDataRequest(this.props.callbacks.semesterData, viewDate || this.props.viewDate)
   },
 
   // FIXME: too much logic. should be somewhere else
@@ -99,6 +99,7 @@ const FittableContainer = React.createClass({
   handleChangeViewDate (viewDate) {
     // Update the viewDate state
     this.props.onViewDateChange(viewDate)
+    this.getSemesterData(viewDate)
 
     // Update viewDate
     const newdate = moment(viewDate)
