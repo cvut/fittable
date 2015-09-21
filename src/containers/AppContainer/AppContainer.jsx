@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+import { compose } from 'redux'
 
 import store from '../../store'
-import FittableContianer from '../FittableContainer'
+import FittableContainer from '../FittableContainer'
 import { options as optionsType } from '../../constants/propTypes'
 
-
-// React components for Redux DevTools
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 export default class AppContainer extends Component {
@@ -20,17 +19,23 @@ export default class AppContainer extends Component {
     facultygrid: true,
   }
 
-  render() {
-    return (
-      <div>
-        <Provider store={store}>
-          <FittableContianer callbacks={this.props.callbacks} locale={this.props.locale} />
-        </Provider>
-        // FIXME: include this only in dev
-        <DebugPanel top right bottom>
-          <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
-      </div>
+  render () {
+    const main = (
+      <Provider store={store}>
+        <FittableContainer callbacks={this.props.callbacks} locale={this.props.locale} />
+      </Provider>
     )
+
+    if (__DEV__) {
+      return (
+        <div>
+          {main}
+          <DebugPanel top right bottom>
+            <DevTools store={store} monitor={LogMonitor} />
+          </DebugPanel>
+        </div>
+      )
+    }
+    return main
   }
 }
