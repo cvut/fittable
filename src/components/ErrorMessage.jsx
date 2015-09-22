@@ -47,8 +47,7 @@ class Error extends React.Component {
               <i className="icon fa fa-calendar-o"></i>
               <h2>{CP.translate('errors.notfound_title')}</h2>
               <p>
-                {CP.translate('errors.notfound_desc')}<br />
-                {CP.translate('errors.notfound_desc2')}<br /><br />
+                {CP.translate('errors.notfound_desc')}
                 <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
@@ -62,8 +61,7 @@ class Error extends React.Component {
               <i className="icon fa fa-calendar-o"></i>
               <h2>{CP.translate('errors.ownnotfound_title')}</h2>
               <p>
-                {CP.translate('errors.ownnotfound_desc')}<br />
-                {CP.translate('errors.ownnotfound_desc2')}<br /><br />
+                {CP.translate('errors.ownnotfound_desc')}
                 <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
@@ -90,7 +88,7 @@ class Error extends React.Component {
       } else if (this.props.type == 'unauthorized') {
         return (
             <div className="error-message">
-              <i className="icon fa fa-plug"></i>
+              <i className="icon fa fa-lock"></i>
               <h2>{CP.translate('errors.unauthorized_title')}</h2>
               <p>
                 {CP.translate('errors.unauthorized_desc')}
