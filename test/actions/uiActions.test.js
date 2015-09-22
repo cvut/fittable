@@ -15,3 +15,10 @@ test('displayEvent()', t => {
   t.deepEqual(actual, expected)
   t.end()
 })
+
+test('hideError()', t => {
+  const expected = {type: HIDE_ERROR, payload: {}}
+  const actual = actions.hideError()
+  t.deepEqual(actual, expected)
+  t.end()
+})
