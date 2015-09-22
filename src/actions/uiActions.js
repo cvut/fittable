@@ -1,4 +1,4 @@
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY } from '../constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY, HIDE_ERROR } from '../constants/actionTypes'
 
 export function displaySidebar (sidebar) {
   return {
@@ -11,5 +11,12 @@ export function displayEvent (eventId) {
   return {
     type: EVENT_DISPLAY,
     payload: { eventId },
+  }
+}
+
+export function hideError () {
+  return {
+    type: HIDE_ERROR,
+    payload: {},
   }
 }

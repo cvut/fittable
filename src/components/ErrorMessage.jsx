@@ -19,7 +19,7 @@ class Error extends React.Component {
 
   render () {
 
-    if (this.props.visible !== false) {
+    if (this.props.visible === true) {
 
       /**
        * Access error
@@ -34,7 +34,7 @@ class Error extends React.Component {
               <br />
               {CP.translate('errors.access_try')}
               <a href="javascript:window.location.back()">{CP.translate('errors.access_goback')}</a>.
-              <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
            </p>
          </div>
         )
@@ -49,7 +49,7 @@ class Error extends React.Component {
               <p>
                 {CP.translate('errors.notfound_desc')}<br />
                 {CP.translate('errors.notfound_desc2')}<br /><br />
-                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
         )
@@ -64,7 +64,7 @@ class Error extends React.Component {
               <p>
                 {CP.translate('errors.ownnotfound_desc')}<br />
                 {CP.translate('errors.ownnotfound_desc2')}<br /><br />
-                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
         )
@@ -80,7 +80,7 @@ class Error extends React.Component {
                 {CP.translate('errors.connection_desc')}
                 <br /> {CP.translate('errors.connection_try')}
                 <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
-                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
         )
@@ -96,7 +96,7 @@ class Error extends React.Component {
                 {CP.translate('errors.unauthorized_desc')}
                 <br /> {CP.translate('errors.unauthorized_try')}
                 <a href="landing.html">{CP.translate('errors.unauthorized_login')}</a>.
-                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
         )
@@ -112,7 +112,7 @@ class Error extends React.Component {
                 {CP.translate('errors.servererror_desc')}
                 <br /> {CP.translate('errors.servererror_try')}
                 <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
-                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
             </div>
         )
@@ -127,7 +127,7 @@ class Error extends React.Component {
             <p>
               {CP.translate('errors.generic_desc', { type: this.props.type })}
               <br /> {CP.translate('errors.generic_try')}
-              <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
             </p>
             <p className="please">
               {CP.translate('errors.help_please')}&nbsp;<a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i>&nbsp;{CP.translate('errors.help_tracker')}</a>.

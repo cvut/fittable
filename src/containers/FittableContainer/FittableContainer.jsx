@@ -15,6 +15,7 @@ import { displaySidebar, displayEvent } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
 import { detectScreenSize } from '../../actions/clientActions'
+import { hideError } from '../../actions/uiActions.js'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -56,6 +57,7 @@ function mapDispatchToProps (dispatch) {
     // FIXME: bind this one to onViewDateChange too
     onSemesterDataRequest: (callback, date) => dispatch(fetchSemesterData(callback, date)),
     onWindowResize: () => dispatch(detectScreenSize()),
+    onErrorHide: () => dispatch(hideError())
   }
 }
 

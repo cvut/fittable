@@ -1,4 +1,4 @@
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY } from '../constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY, HIDE_ERROR } from '../constants/actionTypes'
 
 const initialState = {
   sidebar: null,
@@ -23,6 +23,15 @@ export default function ui (state = initialState, action) {
         ...state,
         eventId,
       }
+    case HIDE_ERROR:
+        return {
+          ...state,
+          error: {
+            visible: false,
+            type,
+            message,
+          },
+        }
     default:
       return state
   }
