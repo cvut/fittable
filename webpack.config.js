@@ -11,6 +11,7 @@ var NODE_ENV = process.env.NODE_ENV || 'development'
 var definePlugin = new webpack.DefinePlugin({
   // Remember this will get replaced with literal contents of string, so we need extra quotes
   'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+  'process.env.FITTABLE_SOURCE': JSON.stringify(process.env.FITTABLE_SOURCE || 'faux'),
   '__DEV__': NODE_ENV !== 'production',
 })
 

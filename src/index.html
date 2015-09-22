@@ -1,28 +1,40 @@
 <!doctype html>
 <html>
-<head>
-    <title>fittable :: developement environment</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="fittable.css">
-</head>
-<body class="with-line">
+    <head>
+        <meta charset="utf-8">
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>fittable | FIT ČVUT</title>
+        <link type="text/css" rel="stylesheet" href="fittable.css">
+    </head>
+    <body class="with-line">
 
-    <header class="row">
-        <h1>fittable widget</h1>
-        <div class="sub-header">widget developement environment</div>
-    </header>
+        <header class="row">
+            <div class="user-menu">
+                <div class="user"><a href="#"><i class="fa fa-user"></i> <span id="username"></span> </a></div>
+                <!-- <a href="_oauth/login" class="logout"><i class="fa fa-power-off"></i></a> -->
+            </div>
 
-    <div class="row container">
-        <div id="fittable" data-fittable></div>
-    </div>
+            <h1></h1>
+            <div class="sub-header"></div>
+        </header>
 
-    <p>&nbsp;</p>
+        <div class="row container">
+            <div id="fittable" data-fittable></div>
+        </div>
 
-    <script type="text/javascript" src="fittable.js"></script>
+        <footer class="row fittable-footer">
+            <div class="build-info">
+                &copy; 2015&emsp;&emsp;FIT ČVUT v&nbsp;Praze
+            </div>
+            <ul>
+                <li><a href="https://github.com/cvut/fittable-widget"><i class="fa fa-github"></i>Fittable</a></li>
+                <li><a href="https://github.com/cvut/sirius/wiki">Sirius</a></li>
+                <li><a href="https://github.com/cvut/fittable-widget/issues">Report bug</a></li>
+            </ul>
+        </footer>
 
-    <!-- ^ These can be replaced just with this( reduce requests and size! :)
-    <script type="text/javascript" src="fittable.min.js"></script>
-    -->
-</body>
+        <script type="text/javascript" src="fittable.js"></script>
+    </body>
 </html>

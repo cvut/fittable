@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { compose } from 'redux'
 
 import store from '../../store'
 import FittableContainer from '../FittableContainer'
-import { options as optionsType } from '../../constants/propTypes'
 
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
-
-import * as callbacks from '../../callbacks/faux'
+let callbacks
+// XXX: CJS for conditional import
+if (process.env.FITTABLE_SOURCE === 'sirius') {
+  callbacks = require('../../callbacks/sirius')
+} else {
+  callbacks = require('../../callbacks/faux')
+}
 
 export default class AppContainer extends Component {
 
@@ -20,6 +22,9 @@ export default class AppContainer extends Component {
     )
 
     if (process.env.NODE_ENV === 'development') {
+      // XXX: CJS for conditional import
+      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react')
+
       return (
         <div>
           {main}
