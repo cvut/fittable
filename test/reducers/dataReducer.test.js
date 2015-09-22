@@ -9,8 +9,8 @@ const INITIAL_STATE = {
     en: { courses: {}, teachers: {}, exceptions: {} },
   },
   events: [],
-  errorVisible: false,
   error: {
+    visible: false,
     type: null,
     message: null,
   },
@@ -42,7 +42,11 @@ test('data reducer EVENTS_LOAD_COMPLETED action', t => {
   const state = {
     ...INITIAL_STATE,
     waiting: true,
-    errorVisible: true,
+    error: {
+      visible: true,
+      type,
+      message
+    },
   }
 
   const events = [
@@ -56,13 +60,17 @@ test('data reducer EVENTS_LOAD_COMPLETED action', t => {
   const expected = {
     ...state,
     waiting: false,
-    errorVisible: false,
+    error: {
+      visible: false,
+      type,
+      message,
+    },
     events,
     linkNames,
   }
   const actual = reducer(state, {type: EVENTS_LOAD_COMPLETED, payload: {events, linkNames}})
 
-  t.deepEqual(actual, expected, 'emits passed payload, sets waiting and errorVisible to false')
+  t.deepEqual(actual, expected, 'emits passed payload, sets waiting and error.visible to false')
   t.end()
 })
 
@@ -70,7 +78,11 @@ test('data reducer EVENTS_LOAD_FAILED action', t => {
   const state = {
     ...INITIAL_STATE,
     waiting: true,
-    errorVisible: false,
+    error: {
+      visible: false,
+      type,
+      message
+    }
   }
 
   const payload = new Error('Something failed')
@@ -79,7 +91,7 @@ test('data reducer EVENTS_LOAD_FAILED action', t => {
   const actual = reducer(state, {type: EVENTS_LOAD_FAILED, payload})
 
   t.equal(actual.waiting, false, 'sets waiting to false')
-  t.equal(actual.errorVisible, true, 'sets error visibility to true')
+  t.equal(actual.error.visible, true, 'sets error visibility to true')
   t.equal(actual.error.type, 'generic', 'stores error type into state')
   t.equal(actual.error.message, 'Error: Something failed', 'sets error message by serialising the error')
   t.end()

@@ -34,7 +34,7 @@ function mapStateToProps (state) {
     search: state.search,
     error: {
       type: state.data.error.type,
-      visible: state.data.errorVisible,
+      visible: state.data.error.visible,
     },
     semester: state.semester,
     grid: state.semester.grid,
