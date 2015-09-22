@@ -149,8 +149,7 @@ const FittableContainer = React.createClass({
     return (
       <div className="fittable-container" ref="rootEl">
         <ErrorMessage
-          muted={true}
-          shown={error.visible}
+          visible={error.visible}
           type={error.type}
         />
         <Controls

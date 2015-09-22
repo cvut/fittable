@@ -7,19 +7,19 @@ import CP from 'counterpart'
 
 const propTypes = {
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  shown: PropTypes.bool,
+  visible: PropTypes.bool,
 }
 
 const defaultProps = {
   type: 'generic',
-  shown: true,
+  visible: true,
 }
 
 class Error extends React.Component {
 
   render () {
 
-    if (this.props.shown !== false) {
+    if (this.props.visible !== false) {
 
       /**
        * Access error
