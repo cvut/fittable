@@ -22,6 +22,10 @@ class Error extends React.Component {
   render () {
 
     if (this.props.shown !== false) {
+
+      /**
+       * Access error
+       */
       if (this.props.type == 'access') {
         return (
           <div className="error-message">
@@ -31,43 +35,92 @@ class Error extends React.Component {
               {CP.translate('errors.access_desc')}
               <br />
               {CP.translate('errors.access_try')}
-              <a href="javascript:window.history.back()">{CP.translate('errors.access_trygoback')}</a>.
+              <a href="javascript:window.location.back()">{CP.translate('errors.access_goback')}</a>.
+              <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
            </p>
          </div>
         )
-      } else if (this.props.type == 'connection' && this.props.muted) {
+      /**
+       * Calendar not found error
+       */
+      } else if (this.props.type == 'notfound') {
         return (
-          <div className="muted-error-message">
-            <i className="icon fa fa-plug"></i> {CP.translate('errors.connection_muted_message')}
-          </div>
+            <div className="error-message">
+              <i className="icon fa fa-calendar-o"></i>
+              <h2>{CP.translate('errors.notfound_title')}</h2>
+              <p>
+                {CP.translate('errors.notfound_desc')}<br />
+                {CP.translate('errors.notfound_desc2')}<br /><br />
+                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              </p>
+            </div>
         )
-      } else if (this.props.type == 'not-found') {
+      /**
+       * Own calendar not found error
+       */
+      } else if (this.props.type == 'ownnotfound') {
         return (
-          <div className="error-message">
-            <i className="icon fa fa-calendar-o"></i>
-            <h2>{CP.translate('errors.notfound_title')}</h2>
-            <p>
-              {CP.translate('errors.notfound_desc')}<br />
-              {CP.translate('errors.notfound_desc2')}<br /><br />
-              <a href="#error-muted" onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</a>
-            </p>
-          </div>
+            <div className="error-message">
+              <i className="icon fa fa-calendar-o"></i>
+              <h2>{CP.translate('errors.ownnotfound_title')}</h2>
+              <p>
+                {CP.translate('errors.ownnotfound_desc')}<br />
+                {CP.translate('errors.ownnotfound_desc2')}<br /><br />
+                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              </p>
+            </div>
         )
+        /**
+         * Connection error
+         */
       } else if (this.props.type == 'connection') {
         return (
-          <div className="error-message">
-            <i className="icon fa fa-plug"></i>
-            <h2>{CP.translate('errors.connection_title')}</h2>
-            <p>
-              {CP.translate('errors.connection_desc')}
-              <br /> {CP.translate('errors.connection_try')}
-              <a href="javascript:window.location.reload()">{CP.translate('errors.connection_refresh')}</a>
-              {CP.translate('errors.connection_part_or')}
-              <a href="#error-muted" onClick={this.props.onMute}>{CP.translate('errors.connection_mutelink')}</a>.
-              {CP.translate('errors.connection_mutelink_partafter')}
-            </p>
-          </div>
+            <div className="error-message">
+              <i className="icon fa fa-plug"></i>
+              <h2>{CP.translate('errors.connection_title')}</h2>
+              <p>
+                {CP.translate('errors.connection_desc')}
+                <br /> {CP.translate('errors.connection_try')}
+                <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
+                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              </p>
+            </div>
         )
+        /**
+         * User unauthorized error
+         */
+      } else if (this.props.type == 'unauthorized') {
+        return (
+            <div className="error-message">
+              <i className="icon fa fa-plug"></i>
+              <h2>{CP.translate('errors.unauthorized_title')}</h2>
+              <p>
+                {CP.translate('errors.unauthorized_desc')}
+                <br /> {CP.translate('errors.unauthorized_try')}
+                <a href="landing.html">{CP.translate('errors.unauthorized_login')}</a>.
+                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              </p>
+            </div>
+        )
+      /**
+       * Server error
+       */
+      } else if (this.props.type == 'servererror') {
+        return (
+            <div className="error-message">
+              <i className="icon fa fa-plug"></i>
+              <h2>{CP.translate('errors.servererror_title')}</h2>
+              <p>
+                {CP.translate('errors.servererror_desc')}
+                <br /> {CP.translate('errors.servererror_try')}
+                <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
+                <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
+              </p>
+            </div>
+        )
+      /**
+       * Generic error
+       */
       } else {
         return (
           <div className="error-message">
