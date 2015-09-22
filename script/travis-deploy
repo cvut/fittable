@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Exit if any statement returns a non-true return value.
+set -e
+
+if [[ "$TRAVIS_PULL_REQUEST" != 'false' ]]; then
+    echo 'This is a pull request, skipping deploy.'; exit 0
+fi
+
+if [[ -z "$REMOTE" ]]; then
+    echo '$REMOTE is not set, skipping deploy.'; exit 0
+fi
+
+if [[ "$TRAVIS_BRANCH" != 'master' ]]; then
+    echo 'This is not the master branch, skipping deploy.'; exit 0
+fi
+
+if [[ "$TRAVIS_BUILD_NUMBER.1" != "$TRAVIS_JOB_NUMBER" ]]; then
+    echo 'This is not a first job of the build, skipping deploy.'; exit 0
+fi
+
+openssl aes-256-cbc -K $encrypted_97a5f01c84d8_key -iv $encrypted_97a5f01c84d8_iv -in .deploy_key.enc -out .deploy_key -d
+chmod 600 .deploy_key
+
+echo "Deploying to the remote server."
+scp -Br -i .deploy_key -o StrictHostKeyChecking=no dist/* $REMOTE:/var/www/sirius/fittable-dev/
