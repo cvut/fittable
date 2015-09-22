@@ -8,13 +8,11 @@ import CP from 'counterpart'
 const propTypes = {
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   shown: PropTypes.bool,
-  muted: PropTypes.bool,
 }
 
 const defaultProps = {
   type: 'generic',
   shown: true,
-  muted: false,
 }
 
 class Error extends React.Component {
@@ -129,7 +127,7 @@ class Error extends React.Component {
             <p>
               {CP.translate('errors.generic_desc', { type: this.props.type })}
               <br /> {CP.translate('errors.generic_try')}
-              <a href="javascript:window.location.reload()">{CP.translate('errors.generic_refreshpage')}</a>
+              <button onClick={this.props.onMute}>{CP.translate('errors.hide_this')}</button>
             </p>
             <p className="please">
               {CP.translate('errors.help_please')}&nbsp;<a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i>&nbsp;{CP.translate('errors.help_tracker')}</a>.
