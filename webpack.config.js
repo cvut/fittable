@@ -3,6 +3,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+require('dotenv').load()
 
 var srcPath = path.resolve('./src')
 
