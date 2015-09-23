@@ -1,31 +1,65 @@
-node_modules
-npm-debug.log
+### Environment configuration ###
+.env
 
-*.DS_Store
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-
-pids
+### Node ###
+# Logs
 logs
-results
-.sass-cache
-.tmp
+*.log
 
-src/css
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules/*
+
+### Sass ###
+.sass-cache
+*.css.map
+
+### JetBrains ###
+*.iml
 .idea/
 
-dist/
+### Archives ###
+*.gz
+*.zip
 
-/index.html
-/landing.html
-/fittable.js
-/fittable.css
-/react.js
-/browser-polyfill.js
-dev/
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+### Linux ###
+*~
+
+# KDE directory preferences
+.directory
+
+### Project-specific ###
+
+# Continuous deployment
 .deploy_key
+
+# Compiled files
+dist/
+.tmp
+
+# Temporary stuff
+tmp/
