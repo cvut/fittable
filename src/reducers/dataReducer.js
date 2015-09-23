@@ -31,7 +31,6 @@ export default function data (state = initialState, action) {
         error: {
           visible: false,
           type,
-          message,
         },
       }
     case EVENTS_LOAD_FAILED:
