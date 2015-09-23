@@ -93,6 +93,9 @@ function generateError (status, message = 'No message specified') {
   const error = new Error(message)
   if (status in STATUS_ERROR_TYPES) {
     error.type = STATUS_ERROR_TYPES[status]
+    if (error.type === 'notfound' && view === 'person' && parameter === user.name) {
+      error.type = 'own' + error.type
+    }
   } else {
     error.type = 'generic'
   }
