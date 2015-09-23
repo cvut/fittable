@@ -23,6 +23,21 @@ var sassLoader = '!sass?' +
   'includePaths[]=' +
     (path.resolve(__dirname, './node_modules'))
 
+// webpack-dev-server extension
+var ENV_COOKIES = {
+  /* eslint camelcase:0 */
+  oauth_access_token: process.env.OAUTH_ACCESS_TOKEN,
+  oauth_nickname: process.env.OAUTH_NICKNAME,
+}
+
+function setCookiesMiddleware (req, res, next) {
+  for (var name in ENV_COOKIES) {
+    var value = ENV_COOKIES[name]
+    res.cookie(name, value, {httpOnly: false})
+  }
+  next()
+}
+
 module.exports = {
   entry: {
     js: srcPath + '/app.js',
@@ -71,6 +86,17 @@ module.exports = {
 
   stats: {
     colors: true,
+  },
+
+  devServer: {
+    hot: true,
+    inline: true,
+    lazy: false,
+    historyApiFallback: true,
+    contentBase: 'dist/',
+    setup: function (app) {
+      app.use(setCookiesMiddleware)
+    },
   },
 
 }
