@@ -25,7 +25,7 @@ test('data reducer initial state', t => {
   t.equal(actual.waiting, true, 'waiting is initially true')
   t.deepEqual(actual.events, [], 'events are empty')
   t.deepEqual(actual.linkNames, expectedLinkNames, 'initialises linkNames structure')
-  t.deepEqual(actual.error, {type: null, message: null}, 'initialises with null error')
+  t.deepEqual(actual.error, {type: null, message: null, visible: false}, 'initialises with null error')
   t.end()
 })
 
