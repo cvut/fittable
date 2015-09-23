@@ -15,25 +15,10 @@ if (process.env.FITTABLE_SOURCE === 'sirius') {
 export default class AppContainer extends Component {
 
   render () {
-    const main = (
+    return (
       <Provider store={store}>
         <FittableContainer callbacks={callbacks} />
       </Provider>
     )
-
-    if (process.env.NODE_ENV === 'development') {
-      // XXX: CJS for conditional import
-      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react')
-
-      return (
-        <div>
-          {main}
-          <DebugPanel top right bottom>
-            <DevTools store={store} monitor={LogMonitor} />
-          </DebugPanel>
-        </div>
-      )
-    }
-    return main
   }
 }

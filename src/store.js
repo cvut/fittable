@@ -1,22 +1,17 @@
 import { compose, createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
-// Redux DevTools store enhancers
-import { devTools, persistState } from 'redux-devtools'
-
-const storePlugins = [
-  applyMiddleware(
-    thunkMiddleware
-  ),
+const middlewares = [
+  thunk,
 ]
 
 if (process.env.NODE_ENV === 'development') {
-  storePlugins.push(devTools())
-  storePlugins.push(persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)))
+  const createLogger = require('redux-logger')
+  middlewares.push(createLogger())
 }
 
-const finalCreateStore = compose(...storePlugins)(createStore)
+const finalCreateStore = applyMiddleware(...middlewares)(createStore)
 
 const store = finalCreateStore(rootReducer)
 
