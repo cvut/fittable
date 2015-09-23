@@ -92,7 +92,6 @@ class Error extends React.Component {
               <h2>{CP.translate('errors.unauthorized_title')}</h2>
               <p>
                 {CP.translate('errors.unauthorized_desc')}
-                <br /> {CP.translate('errors.unauthorized_try')}
                 <a href="landing.html">{CP.translate('errors.unauthorized_login')}</a>.
                 <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
