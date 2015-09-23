@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY } from '../../src/constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY, HIDE_ERROR } from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers/uiReducer'
 
 test('UI reducer initial state', t => {
