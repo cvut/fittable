@@ -32,6 +32,8 @@ class Error extends React.Component {
             <p>
               {CP.translate('errors.access_desc')}
               <br />
+              {CP.translate('errors.access_desc2')}
+              <br />
               {CP.translate('errors.access_try')}
               <a href="javascript:window.location.back()">{CP.translate('errors.access_goback')}</a>.
               <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
@@ -107,7 +109,6 @@ class Error extends React.Component {
               <h2>{CP.translate('errors.servererror_title')}</h2>
               <p>
                 {CP.translate('errors.servererror_desc')}
-                <br /> {CP.translate('errors.servererror_try')}
                 <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
                 <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
               </p>
