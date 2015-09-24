@@ -22,8 +22,8 @@ class NowIndicator extends React.Component {
     )
     const dayWidth = 1 / (this.props.days7 ? 7 : 5)
     const length = nowpoint / this.props.timelineLength
+    const offset = (moment().isoWeekday() - 1) * dayWidth
     const shown = moment().isSame(this.props.viewDate, 'isoWeek') && length > 0 && length < 1 && offset < 1
-    const offset = (new Moment().isoWeekday() - 1) * dayWidth
     return (
       <div className="now-indicator-wrap">
         <div className={`now-indicator horizontal ${shown ? '' : ' hide'}`} ref="rootEl" style={{
