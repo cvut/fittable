@@ -89,10 +89,13 @@ class EventDetail extends React.Component {
   eventExceptions () {
     const {appliedExceptions} = this.props.data.details
     if (appliedExceptions && appliedExceptions.length > 0) {
+
+      const exceptionDesc = this.props.data.cancelled ? 'detail.cancelled' : 'detail.modified';
+
       return (
         <div className="prop-section exceptions">
           <Reveal
-            buttonDesc={CP.translate('detail.cancelled')}
+            buttonDesc={CP.translate(exceptionDesc)}
             buttonIconClass="fa-exclamation-triangle fa-fw ex-icon"
           >
             <div className="because">
