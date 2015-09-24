@@ -23,6 +23,24 @@ function appearanceClass (overlaysLength) {
   return 'regular'
 }
 
+/**
+ * Applies appearance for array of overlayed events
+ * @param events Events array
+ * @param overlayed Overlayed events
+ * @param appearanceClass Appearance class to be set
+ * @returns {*}
+ */
+function applyAppearance (events, overlayed, appearanceClass) {
+  for (var oid in overlayed) {
+    events[overlayed[oid]].appear = appearanceClass
+
+    if ((overlayed.length >= 4 && oid % 4 == 0) || (overlayed.length > 1 && oid % overlayed.length == 0)) {
+      events[overlayed[oid]].appear += '-first'
+    }
+  }
+  return events
+}
+
 const propTypes = {
   id: PropTypes.number.isRequired,
   dayNum: PropTypes.number.isRequired,
@@ -80,13 +98,7 @@ class Day extends React.Component {
       // Compare
       if (start.isAfter(lastend) || start.isSame(lastend)) {
         let appearance = appearanceClass(overlayed.length)
-
-        for (var oid in overlayed) {
-          events[overlayed[oid]].appear = appearance
-          if (overlayed.length >= 4 && oid % 4 == 0) {
-            events[overlayed[oid]].appear += '-m'
-          }
-        }
+        events = applyAppearance(events, overlayed, appearance)
         overlayed = []
       }
 
@@ -101,15 +113,7 @@ class Day extends React.Component {
     // FIXME: DUPLICATION!
     // Set appearance for the last events
     let appearance = appearanceClass(overlayed.length)
-
-    for (var oid in overlayed) {
-      events[overlayed[oid]].appear = appearance
-      if (overlayed.length >= 4 && oid % 4 == 0) {
-        events[overlayed[oid]].appear += '-m'
-      }
-    }
-
-    return events
+    return applyAppearance(events, overlayed, appearance)
   }
 
   renderEvent (event) {

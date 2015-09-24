@@ -4,7 +4,8 @@
 
   div.table:not(.vertical):not(.mobile) div.day div.events {
     div.event {
-      &:not(.detail-shown).half {
+      &:not(.detail-shown).half,
+      &:not(.detail-shown).half-first {
         height: 45% !important;
 
         div.type, div.time {
@@ -17,12 +18,13 @@
         }
       }
 
-      &.half + .event:not(.detail-shown).half:nth-of-type(even) {
+      &.half-first + .event:not(.detail-shown).half {
         top: auto !important;
         bottom: 0;
       }
 
-      &:not(.detail-shown).third {
+      &:not(.detail-shown).third,
+      &:not(.detail-shown).third-first {
         height: 30% !important;
 
         div.type, div.time {
@@ -35,16 +37,16 @@
         }
       }
 
-      &.third + .event:not(.detail-shown).third {
+      &.third-first + .event:not(.detail-shown).third {
         top: 35% !important;
       }
 
-      &.third + .third + .event:not(.detail-shown).third {
+      &.third-first + .third + .event:not(.detail-shown).third {
         top: auto !important;
         bottom: 0;
       }
 
-      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-m {
+      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-first {
         height: 20% !important;
 
         div.type, div.time, div.name {
@@ -52,15 +54,15 @@
         }
       }
 
-      &.quarter-m + .event:not(.detail-shown).quarter {
+      &.quarter-first + .event:not(.detail-shown).quarter {
         top: 27% !important;
       }
 
-      &.quarter-m + .quarter + .event:not(.detail-shown).quarter {
+      &.quarter-first + .quarter + .event:not(.detail-shown).quarter {
         top: 54% !important;
       }
 
-      &.quarter-m + .quarter + .quarter + .event:not(.detail-shown).quarter {
+      &.quarter-first + .quarter + .quarter + .event:not(.detail-shown).quarter {
         top: auto !important;
         bottom: 0 !important;
       }
@@ -77,19 +79,21 @@
 
   div.table.vertical div.day div.events, div.table.mobile div.day div.events {
     div.event {
-      &:not(.detail-shown).half {
+      &:not(.detail-shown).half,
+      &:not(.detail-shown).half-first {
         width: 50% !important;
         padding-right: 5px;
       }
 
-      &.half + div.event:not(.detail-shown).half {
+      &.half-first + div.event:not(.detail-shown).half {
         left: auto !important;
         right: 0;
         padding-left: 5px;
         padding-right: 10px;
       }
 
-      &:not(.detail-shown).third {
+      &:not(.detail-shown).third,
+      &:not(.detail-shown).third-first {
         width: 33% !important;
         padding-right: 5px;
 
@@ -98,20 +102,20 @@
         }
       }
 
-      &.third + div.event:not(.detail-shown).third {
+      &.third-first + div.event:not(.detail-shown).third {
         left: 33% !important;
         padding-left: 5px;
         padding-right: 5px;
       }
 
-      &.third + div.event.third + div.event:not(.detail-shown).third {
+      &.third-first + div.event.third + div.event:not(.detail-shown).third {
         left: auto !important;
         right: 0;
         padding-left: 5px;
         padding-right: 10px;
       }
 
-      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-m {
+      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-first {
         width: 25% !important;
         padding-left: 5px;
         padding-right: 5px;
@@ -125,19 +129,19 @@
         }
       }
 
-      &:not(.detail-shown).quarter-m {
+      &:not(.detail-shown).quarter-first {
         padding-left: 10px;
       }
 
-      &.quarter-m + .event:not(.detail-shown).quarter {
+      &.quarter-first + .event:not(.detail-shown).quarter {
         left: 25% !important;
       }
 
-      &.quarter-m + .quarter + .event:not(.detail-shown).quarter {
+      &.quarter-first + .quarter + .event:not(.detail-shown).quarter {
         left: 50% !important;
       }
 
-      &.quarter-m + .quarter + .quarter + .event:not(.detail-shown).quarter {
+      &.quarter-first + .quarter + .quarter + .event:not(.detail-shown).quarter {
         left: auto !important;
         right: 0 !important;
         padding-right: 10px;
