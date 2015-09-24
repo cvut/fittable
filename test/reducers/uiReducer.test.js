@@ -33,11 +33,3 @@ test('UI reducer EVENT_DISPLAY action', t => {
   t.deepEqual(actual, expected, 'sets event to a given ID')
   t.end()
 })
-
-test('UI reducer HIDE_ERROR action', t => {
-  const expected = {error: {visible: false}}
-  const actual = reducer({error: {visible: null}},
-                          {type: HIDE_ERROR, payload: {}})
-  t.deepEqual(actual, expected, 'hides an error message')
-  t.end()
-})

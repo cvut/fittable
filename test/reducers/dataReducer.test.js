@@ -25,7 +25,8 @@ test('data reducer initial state', t => {
   t.equal(actual.waiting, true, 'waiting is initially true')
   t.deepEqual(actual.events, [], 'events are empty')
   t.deepEqual(actual.linkNames, expectedLinkNames, 'initialises linkNames structure')
-  t.deepEqual(actual.error, {type: null, message: null, visible: false}, 'initialises with null error')
+  t.deepEqual(actual.errorVisible, false, 'initialises with error hidden')
+  t.deepEqual(actual.error, {type: null, message: null}, 'initialises with null error')
   t.end()
 })
 
@@ -43,10 +44,6 @@ test('data reducer EVENTS_LOAD_COMPLETED action', t => {
     ...INITIAL_STATE,
     waiting: true,
     errorVisible: true,
-    error: {
-      type,
-      message
-    },
   }
 
   const events = [
@@ -61,16 +58,12 @@ test('data reducer EVENTS_LOAD_COMPLETED action', t => {
     ...state,
     waiting: false,
     errorVisible: false,
-    error: {
-      type,
-      message,
-    },
     events,
     linkNames,
   }
   const actual = reducer(state, {type: EVENTS_LOAD_COMPLETED, payload: {events, linkNames}})
 
-  t.deepEqual(actual, expected, 'emits passed payload, sets waiting and error.visible to false')
+  t.deepEqual(actual, expected, 'emits passed payload, sets waiting and errorVisible to false')
   t.end()
 })
 
@@ -94,5 +87,13 @@ test('data reducer EVENTS_LOAD_FAILED action', t => {
   t.equal(actual.errorVisible, true, 'sets error visibility to true')
   t.equal(actual.error.type, 'generic', 'stores error type into state')
   t.equal(actual.error.message, 'Error: Something failed', 'sets error message by serialising the error')
+  t.end()
+})
+
+test('data reducer HIDE_ERROR action', t => {
+  const expected = {errorVisible: true}
+  const actual = reducer({errorVisible: false},
+    {type: HIDE_ERROR, payload: {}})
+  t.deepEqual(actual, expected, 'hides an error message')
   t.end()
 })
