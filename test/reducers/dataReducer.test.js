@@ -87,8 +87,8 @@ test('data reducer EVENTS_LOAD_FAILED action', t => {
 })
 
 test('data reducer HIDE_ERROR action', t => {
-  const expected = {errorVisible: true}
-  const actual = reducer({errorVisible: false},
+  const expected = {errorVisible: false}
+  const actual = reducer({errorVisible: true},
     {type: HIDE_ERROR, payload: {}})
   t.deepEqual(actual, expected, 'hides an error message')
   t.end()
