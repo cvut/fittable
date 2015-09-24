@@ -7,8 +7,8 @@ const initialState = {
     en: { courses: {}, teachers: {}, exceptions: {} },
   },
   events: [],
+  errorVisible: false,
   error: {
-    visible: false,
     type: null,
     message: null,
   },
@@ -28,19 +28,15 @@ export default function data (state = initialState, action) {
         waiting: false,
         events,
         linkNames,
-        error: {
-          visible: false,
-          type,
-          message,
-        },
+        errorVisible: false,
       }
     case EVENTS_LOAD_FAILED:
       const type = action.payload.type
       return {
         ...state,
         waiting: false,
+        errorVisible: true,
         error: {
-          visible: true,
           type,
           message: action.payload.toString(),
         },
@@ -48,11 +44,7 @@ export default function data (state = initialState, action) {
     case HIDE_ERROR:
       return {
         ...state,
-        error: {
-          visible: false,
-          type: null,
-          message: null,
-        },
+        errorVisible: false,
       }
     default:
       return state

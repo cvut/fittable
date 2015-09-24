@@ -32,9 +32,10 @@ function mapStateToProps (state) {
     data: state.data,
     ui: state.ui,
     search: state.search,
+    errorVisible: state.data.errorVisible,
     error: {
       type: state.data.error.type,
-      visible: state.data.error.visible,
+      message: state.data.error.message,
     },
     semester: state.semester,
     grid: state.semester.grid,
@@ -136,6 +137,7 @@ const FittableContainer = React.createClass({
     const { sidebar, eventId } = this.props.ui
 
     const error = this.props.error
+    const errorVisible = this.props.errorVisible
 
     // FIXME: this should be done some better way
     const gridsettings = {
@@ -188,6 +190,7 @@ const FittableContainer = React.createClass({
           eventId={eventId}
           onEventDisplay={this.props.onEventDisplay}
           error={error}
+          errorVisible={errorVisible}
           onErrorHide={this.props.onErrorHide}
         />
         <Spinner show={waiting} />

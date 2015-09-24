@@ -238,7 +238,7 @@ class Timetable extends React.Component {
           {hourlabels.map(label => label)}
         </div>
         <ErrorMessage
-          visible={this.props.error.visible}
+          visible={this.props.errorVisible}
           type={this.props.error.type}
           onErrorHide={this.props.onErrorHide}
           />
