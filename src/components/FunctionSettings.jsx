@@ -54,7 +54,7 @@ class FunctionSettings extends React.Component {
     const username = this.props.user[0]
     const usertoken = this.props.user[1]
 
-    return `${siriusUrl}/${username}/events.ics?access_token=${usertoken}`
+    return `${siriusUrl}/${username}/events.ical?access_token=${usertoken}`
   }
 
   /**
