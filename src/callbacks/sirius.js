@@ -11,6 +11,9 @@
 import Grapnel from 'grapnel'
 import ReactCookie from 'react-cookie'
 import URL from 'url'
+import R from 'ramda'
+
+const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('length', 0))
 
 /**
  * Fittable widget instance
@@ -204,16 +207,12 @@ var dataCallback = function (rangeFrom, rangeTo, callback) {
         var ajaxresult = JSON.parse(request.responseText)
         var itemCount = ajaxresult.meta.count
 
-        var data = []
         var linknames = { teachers: [], courses: [], exceptions: [] }
 
-        // Create events from data
-        for (var i = 0; i < itemCount; i++) {
-          // Get event
-          var event = ajaxresult.events[ i ]
-
+        const responseEvents = ajaxresult.events || []
+        const data = responseEvents.map(event => {
           // And add new event to array
-          data[ i ] = {
+          const newEvent = {
             id: event.id,
             name: event.name,
             course: event.links.course,
@@ -231,12 +230,12 @@ var dataCallback = function (rangeFrom, rangeTo, callback) {
               students: event.links.students,
               capacity: event.capacity,
               parallel: event.parallel,
-              appliedExceptions: event.links.applied_exceptions
-            }
+              appliedExceptions: event.links.applied_exceptions,
+            },
           }
 
           // If the original data are present, insert one reverted event
-          if ('original_data' in event && event.original_data.length > 0) {
+          if (!emptyObject(event.original_data)) {
             // Convert times to milliseconds
             var rangeFromMs = (new Date(rangeFrom)).getMilliseconds()
             var rangeToMs = (new Date(rangeTo)).getMilliseconds()
@@ -245,51 +244,52 @@ var dataCallback = function (rangeFrom, rangeTo, callback) {
             // Check if the original start is between the range
             if (rangeFromMs <= originalFromMs && originalFromMs >= rangeToMs) {
               // The event is cancelled, show with original data
-              data[i].startsAt = event.original_data.starts_at
-              data[i].endsAt = event.original_data.ends_at
-              data[i].room = event.original_data.room_id
-              data[i].cancelled = true
-              data[i].replacedAt = event.starts_at
+              newEvent.startsAt = event.original_data.starts_at
+              newEvent.endsAt = event.original_data.ends_at
+              newEvent.room = event.original_data.room_id
+              newEvent.cancelled = true
+              newEvent.replacedAt = event.starts_at
             } else {
               // The event is replacement
-              data[i].replacement = true
-              data[i].replaces = event.original_data.starts_at
+              newEvent.replacement = true
+              newEvent.replaces = event.original_data.starts_at
             }
           }
-        }
+          return newEvent
+        })
 
         // Add teachers links full names
         if ('linked' in ajaxresult) {
           if ('teachers' in ajaxresult.linked) {
-            for (i = 0; i < ajaxresult.linked.teachers.length; i++) {
+            for (let i = 0; i < ajaxresult.linked.teachers.length; i++) {
               // Add teacher link full name
               linknames.teachers.push({
                 id: ajaxresult.linked.teachers[i].id,
                 name: {
                   cs: ajaxresult.linked.teachers[i].full_name,
-                  en: ajaxresult.linked.teachers[i].full_name
-                }
+                  en: ajaxresult.linked.teachers[i].full_name,
+                },
               })
             }
           }
 
           // Add courses links full names
           if ('courses' in ajaxresult.linked) {
-            for (i = 0; i < ajaxresult.linked.courses.length; i++) {
+            for (let i = 0; i < ajaxresult.linked.courses.length; i++) {
               // Add course link full name
               linknames.courses.push({
                 id: ajaxresult.linked.courses[i].id,
                 name: {
                   cs: ajaxresult.linked.courses[i].name.cs,
-                  en: ajaxresult.linked.courses[i].name.en
-                }
+                  en: ajaxresult.linked.courses[i].name.en,
+                },
               })
             }
           }
 
           // Add exceptions links full names
           if ('schedule_exceptions' in ajaxresult.linked) {
-            for (i = 0; i < ajaxresult.linked.schedule_exceptions.length; i++) {
+            for (let i = 0; i < ajaxresult.linked.schedule_exceptions.length; i++) {
               // Add exceptions link full name
               linknames.exceptions.push({
                 id: ajaxresult.linked.schedule_exceptions[i].id,
