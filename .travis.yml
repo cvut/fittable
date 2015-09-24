@@ -7,6 +7,7 @@ install:
 script:
   - npm run test:spec
 after_success:
+  - script/travis-deploy
 notifications:
   email: false
   slack: rozvoj-fit:oIJm1tjEXhiJLDHvp2ATCZIT
