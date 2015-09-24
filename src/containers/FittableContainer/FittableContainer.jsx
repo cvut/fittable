@@ -115,6 +115,8 @@ const FittableContainer = React.createClass({
   handleChangeView (to, param) {
     // Close all opened functions
     this.props.onSidebarDisplay(null)
+    // Also close opened event
+    this.props.onEventDisplay(null)
     this.props.callbacks.viewChange(to, param)
     this.getWeekEvents()
   },
