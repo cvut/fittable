@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED } from '../../src/constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, HIDE_ERROR } from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers/dataReducer'
 
 const INITIAL_STATE = {
@@ -72,10 +72,6 @@ test('data reducer EVENTS_LOAD_FAILED action', t => {
     ...INITIAL_STATE,
     waiting: true,
     errorVisible: false,
-    error: {
-      type,
-      message
-    }
   }
 
   const payload = new Error('Something failed')
