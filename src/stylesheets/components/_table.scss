@@ -105,20 +105,20 @@
       top: 0;
       height: 107%;
       z-index: 7;
-      border-right: 2px solid $nowindicator-color;
+      border-right: 1px solid $nowindicator-color;
       opacity: 1;
       @include disable-selection();
 
       &::after {
         content: '';
         display: block;
-        width: 8px;
-        height: 8px;
+        width: 5px;
+        height: 5px;
         background: $nowindicator-color;
         border-radius: 50%;
         position: absolute;
-        top: -4px;
-        right: -5px;
+        top: -2px;
+        right: -3px;
       }
     }
 
