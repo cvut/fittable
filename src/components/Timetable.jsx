@@ -77,7 +77,7 @@ class Timetable extends React.Component {
     this.props.onEventDisplay(key)
   }
 
-  onClickOutside () {
+  onClickOutside (e) {
     if (this.props.eventId) {
       this.showDetailOn(null)
     }
@@ -198,9 +198,8 @@ class Timetable extends React.Component {
       <div
         className={className}
         ref="rootEl"
-        onClick={this.onClickOutside.bind(this)}
       >
-        <div className="grid-overlay">
+        <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
             <div
               className="grid hor"
