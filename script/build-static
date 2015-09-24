@@ -7,6 +7,7 @@ var targetDir = 'dist'
 var files = [
   baseDir + '/index.html',
   baseDir + '/landing.html',
+  baseDir + '/signpost.html',
   baseDir + '/images',
   baseDir + '/locales',
 ]

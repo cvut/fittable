@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <title>fittable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="fittable.css">
+</head>
+<body>
+
+<div id="fittable-signpost">
+  <div class="langswitcher js-langswitcher"></div>
+  <div class="lang-variant js-lang-box-cs" lang="cs">
+    <div class="row">
+    <h1>Zvolte si zobrazení rozvrhu</h1>
+    </div>
+    <div class="row">
+        <div class="column large-5">
+          <a href="https://timetable.fit.cvut.cz/new/" class="button login">
+            <i class="fa fa-calendar"></i>
+            Kalendář
+            <small>Nová aplikace fittable</small>
+          </a>
+
+          <p class="desc">Fittable zobrazuje události v semestru jako kalendář, včetně zkoušek, blokové výuky a změn ve výuce.</p>
+        </div>
+
+        <div class="column large-5">
+
+          <a href="https://timetable.fit.cvut.cz/old/" class="button"> <i class="fa fa-table"></i>
+          Rozvrh hodin
+          <small>Původní timetable</small>
+          </a>
+
+          <p class="desc">Timetable poskytuje pohled na pravidelný čtrnáctidenní rozvrh hodin.</p>
+        </div>
+    </div>
+  </div>
+  <div class="lang-variant js-lang-box-en" lang="en">
+    <div class="row">
+    <h1>Choose a timetable application</h1>
+    </div>
+    <div class="row">
+        <div class="column large-5">
+          <a href="https://timetable.fit.cvut.cz/new/" class="button login">
+            <i class="fa fa-calendar"></i>
+            Calendar
+            <small>New application fittable</small>
+          </a>
+
+          <p class="desc">Fittable displays your schedule as a calendar, including exams, short-term courses, and schedule changes.</p>
+        </div>
+
+        <div class="column large-5">
+
+          <a href="https://timetable.fit.cvut.cz/old/" class="button"> <i class="fa fa-table"></i>
+          Timetable
+          <small>Original timetable</small>
+          </a>
+
+          <p class="desc">Timetable shows a regular 14-day schedule.</p>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+function langCode (lang) {
+  if (lang.search(/(cs|cz)/i) !== -1) {
+    return 'cs'
+  }
+  return 'en'
+}
+
+function oppositeLang (lang) {
+  if (lang === 'cs') {
+    return 'en'
+  }
+  return 'cs'
+}
+
+function langName (lang) {
+  if (lang === 'cs') {
+    return 'Česky'
+  }
+  return 'English'
+}
+
+function setLanguage (elements, button, lang) {
+  var opposite = oppositeLang(lang)
+  button.textContent = langName(opposite)
+  var oldEl = elements[opposite]
+  var newEl = elements[lang]
+
+  oldEl.classList.add('hidden')
+  newEl.classList.remove('hidden')
+}
+
+var _lang = langCode(window.navigator.userLanguage || window.navigator.language)
+
+var btn = document.createElement('button')
+
+var elements = {
+  en: document.querySelector('.js-lang-box-en'),
+  cs: document.querySelector('.js-lang-box-cs'),
+}
+
+setLanguage(elements, btn, _lang)
+
+var btnRoot = document.querySelector('.js-langswitcher')
+btnRoot.appendChild(btn)
+
+btn.addEventListener('click', function () {
+  _lang = oppositeLang(_lang)
+  setLanguage(elements, btn, _lang)
+})
+</script>
+</body>
+</html>
