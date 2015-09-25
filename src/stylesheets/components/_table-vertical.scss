@@ -12,7 +12,11 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
       line-height: 1.7;
       height: 7%;
       margin: 0;
-      padding: $day-row-padding;
+    }
+
+    .wrap {
+      padding: 14px 0;
+      margin: 0 13px;
     }
 
     div.events {
@@ -33,7 +37,14 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
           width: 300px !important;
         }
       }
+    }
 
+    &.active {
+      .wrap {
+        border-left: none;
+        border-top: 4px solid $primary-color;
+        padding-top: 10px;
+      }
     }
   }
 
