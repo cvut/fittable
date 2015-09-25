@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { spy } from 'sinon'
-import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED } from '../../src/constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, DATA_ERROR_HIDE } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/dataActions'
 
 test('fetchEvents() executes a given callback with a week range', t => {
