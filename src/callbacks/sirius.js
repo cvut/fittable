@@ -131,7 +131,15 @@ function initRouter () {
  * trailing slash omitted.
  */
 function getBaseUri () {
-  return URL.parse(document.baseURI).pathname.replace(/\/$/, '')
+  var baseUri = document.baseURI
+
+  // IE doesn't support baseURI, workaround
+  if (typeof baseURI === 'undefined') {
+    var baseTag = document.getElementsByTagName("base")[0]
+    baseUri = baseTag.href
+  }
+
+  return URL.parse(baseUri).pathname.replace(/\/$/, '')
 }
 
 /**
