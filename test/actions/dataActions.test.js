@@ -101,3 +101,10 @@ test('fetchEvents() dispatch', t => {
     st.end()
   })
 })
+
+test('hideError()', t => {
+  const expected = {type: DATA_ERROR_HIDE, payload: {}}
+  const actual = actions.hideError()
+  t.deepEqual(actual, expected)
+  t.end()
+})
