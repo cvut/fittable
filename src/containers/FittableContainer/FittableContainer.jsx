@@ -39,8 +39,8 @@ function mapStateToProps (state) {
     },
     semester: state.semester,
     grid: state.semester.grid,
-    isMobile: state.client.smallScreen,
     user: state.user,
+    screenSize: state.client.screenSize,
   }
 }
 
@@ -166,6 +166,7 @@ const FittableContainer = React.createClass({
           semester={this.getSemesterName()}
           onSettingsPanelChange={this.props.onSidebarDisplay}
           days7={fullWeek}
+          screenSize={this.props.screenSize}
         />
         <div className="clearfix"></div>
         <FunctionsSidebar
@@ -193,7 +194,7 @@ const FittableContainer = React.createClass({
           colored={eventsColors}
           days7={fullWeek}
           onDateChange={this.handleChangeViewDate}
-          isMobile={this.props.isMobile}
+          screenSize={this.props.screenSize}
           ref="timetable"
           visible={!waiting}
           eventId={eventId}

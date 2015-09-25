@@ -24,9 +24,9 @@ const propTypes = {
   colored: PropTypes.bool,
   days7: PropTypes.bool,
   onDateChange: PropTypes.func,
-  isMobile: PropTypes.bool,
   onEventDisplay: PropTypes.func,
   eventId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  screenSize: PropTypes.string,
 }
 
 class Timetable extends React.Component {
@@ -189,9 +189,8 @@ class Timetable extends React.Component {
     const classMuted = (this.props.eventId !== null) ? 'muted' : ''
     const classCut = (this.props.functionsOpened !== null) ? 'cut' : ''
     const classDays7 = this.props.days7 ? 'days7' : ''
-    const classMobile = this.props.isMobile ? 'mobile' : ''
 
-    const className = `table ${this.props.layout} ${classMuted} ${classCut} ${classDays7} ${classMobile}`
+    const className = `table ${this.props.layout} ${classMuted} ${classCut} ${classDays7} table--${this.props.screenSize}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
 

@@ -1,7 +1,8 @@
 import { CLIENT_CHANGE } from '../constants/actionTypes'
+import { SMALL_SCREEN } from '../constants/screenSizes'
 
 const initialState = {
-  smallScreen: true,
+  screenSize: SMALL_SCREEN,
 }
 
 export default function client (state = initialState, action) {
