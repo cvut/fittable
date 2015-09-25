@@ -68,6 +68,7 @@ class Controls extends React.Component {
           onPrevClick={this.handlePrevClick.bind(this)}
           onNextClick={this.handleNextClick.bind(this)}
           viewDate={this.props.viewDate}
+          screenSize={this.props.screenSize}
         />
         <WeekSwitcher
           viewDate={this.props.viewDate}

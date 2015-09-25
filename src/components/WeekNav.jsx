@@ -7,6 +7,7 @@ import React, { PropTypes } from 'react'
 import moment from 'moment'
 import CP from 'counterpart'
 import { weekRange, workWeekRange } from '../date'
+import { SMALL_SCREEN } from '../constants/screenSizes'
 
 const propTypes = {
   onCalClick: PropTypes.func,
@@ -44,12 +45,19 @@ class WeekNav extends React.Component {
 
     // FIXME: remove moment dependency
     const [weekStart, weekEnd] = rangeFun(this.props.viewDate).map(d => moment(d))
+    const currDayM = moment(this.props.viewDate)
 
-    if (moment.locale() === 'cs') {
-      // u2013 : &ndash; \u2009 : &thinsp;
-      return `${weekStart.format('D.\u2009M. ')} \u2013 ${weekEnd.format('D.\u2009M.\u2009YYYY')}`
+    const rangeIsWeek = this.props.screenSize !== SMALL_SCREEN
+
+    if (rangeIsWeek) {
+      if (moment.locale() === 'cs') {
+        // u2013 : &ndash; \u2009 : &thinsp;
+        return `${weekStart.format('D.\u2009M. ')} \u2013 ${weekEnd.format('D.\u2009M.\u2009YYYY')}`
+      } else {
+        return `${weekStart.format('M/D')} \u2013 ${weekEnd.format('M/D/YYYY')}`
+      }
     } else {
-      return `${weekStart.format('M/D')} \u2013 ${weekEnd.format('M/D/YYYY')}`
+      return `${currDayM.format('dddd D.\u2009MMMM')}`
     }
   }
 
