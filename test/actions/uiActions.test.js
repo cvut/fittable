@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY, HIDE_ERROR } from '../../src/constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY, DATA_ERROR_HIDE } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/uiActions'
 
 test('displaySidebar()', t => {
@@ -17,7 +17,7 @@ test('displayEvent()', t => {
 })
 
 test('hideError()', t => {
-  const expected = {type: HIDE_ERROR, payload: {}}
+  const expected = {type: DATA_ERROR_HIDE, payload: {}}
   const actual = actions.hideError()
   t.deepEqual(actual, expected)
   t.end()

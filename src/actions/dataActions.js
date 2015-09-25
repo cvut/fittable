@@ -1,4 +1,4 @@
-import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED } from '../constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, DATA_ERROR_HIDE } from '../constants/actionTypes'
 import { isoWeekRange } from '../date'
 import { invertLinkNames } from '../dataManipulation'
 
@@ -41,5 +41,12 @@ export function fetchEvents (dataCallback, weekDate) {
       // FIXME: add error handling
       dispatch(receiveEvents(events, invertLinkNames(linkNames)))
     })
+  }
+}
+
+export function hideError () {
+  return {
+    type: DATA_ERROR_HIDE,
+    payload: {},
   }
 }

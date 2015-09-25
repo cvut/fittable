@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, HIDE_ERROR } from '../../src/constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, DATA_ERROR_HIDE } from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers/dataReducer'
 
 const INITIAL_STATE = {
@@ -86,10 +86,10 @@ test('data reducer EVENTS_LOAD_FAILED action', t => {
   t.end()
 })
 
-test('data reducer HIDE_ERROR action', t => {
+test('data reducer DATA_ERROR_HIDE action', t => {
   const expected = {errorVisible: false}
   const actual = reducer({errorVisible: true},
-    {type: HIDE_ERROR, payload: {}})
+    {type: DATA_ERROR_HIDE, payload: {}})
   t.deepEqual(actual, expected, 'hides an error message')
   t.end()
 })
