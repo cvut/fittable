@@ -21,6 +21,7 @@ const propTypes = {
     appear: PropTypes.string,
     type: PropTypes.string,
   }),
+  screenSize: PropTypes.number,
 }
 
 const defaultProps = {

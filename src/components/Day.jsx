@@ -54,6 +54,7 @@ const propTypes = {
   active: PropTypes.bool,
   selected: PropTypes.bool,
   layout: PropTypes.string,
+  screenSize: PropTypes.number
 }
 
 const defaultProps = {
@@ -135,6 +136,7 @@ class Day extends React.Component {
         onDateChange={this.props.onDateChange}
         linkNames={this.props.linkNames}
         layout={this.props.layout}
+        screenSize={this.props.screenSize}
       />
     )
 

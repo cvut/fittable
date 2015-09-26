@@ -27,7 +27,7 @@ const propTypes = {
   onDateChange: PropTypes.func,
   onEventDisplay: PropTypes.func,
   eventId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  screenSize: PropTypes.string,
+  screenSize: PropTypes.number,
 }
 
 class Timetable extends React.Component {
