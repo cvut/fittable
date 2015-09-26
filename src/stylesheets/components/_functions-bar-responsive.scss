@@ -1,0 +1,38 @@
+#fittable {
+
+  // Medium screen
+  @media #{$medium-down} {
+
+    .function-btn {
+      font-size: 1.25rem;
+      padding: 0 15px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  // Small screen
+  @media #{$small-down} {
+
+    .functions-bar {
+      float: none;
+      width: 100%;
+      background: $light-secondary-color;
+      text-align: center;
+      height: 45px;
+    }
+
+    .function-btn {
+      font-size: 1.5rem;
+      height: 45px;
+      line-height: 45px;
+      padding: 0 20px;
+
+      &:last-child {
+        padding: 0 20px;
+      }
+    }
+  }
+}

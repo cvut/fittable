@@ -1,0 +1,26 @@
+#fittable .table {
+  // Medium screen
+  @media #{$medium-down} {
+    .hour-labels {
+      left: -2.25rem;
+    }
+
+    .hour-label {
+      font-size: $small-font-size * 0.75;
+    }
+  }
+
+  // Small screen
+  @media #{$small-down} {
+    width: 90%;
+    margin-left: 10%;
+
+    .day {
+      background: white !important;
+      width: 100%;
+    }
+    .day:not(.selected) { display: none; }
+    .day .label { display: none; }
+  }
+}
+

@@ -38,6 +38,12 @@ $grid-line-width: 1.5px;
   position: relative;
 }
 
+@media #{$medium-up} {
+  .row.container {
+    padding: 0 20px;
+  }
+}
+
 @media #{$large-up} {
   .row.container {
     padding: 0 30px;
@@ -69,3 +75,14 @@ $grid-line-width: 1.5px;
   color: white;
 }
 
+// iOS header
+@media #{$small-down} {
+  body {
+    background-color: $primary-color;
+  }
+
+  .fittable-container {
+    background: white;
+    padding-bottom: 30px;
+  }
+}

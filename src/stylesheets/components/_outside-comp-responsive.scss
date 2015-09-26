@@ -1,40 +1,43 @@
 header {
-  &.row {
-    @media #{$medium-down} {
+
+  // Medium screen
+  @media #{$medium-down} {
+    &.row {
       margin: 15px auto 15px auto;
       text-align: center;
     }
 
-    @media #{$small-only} {
-      background: $primary-color;
-      margin: 0 !important;
-      padding-top: 20px;
-      padding-bottom: 0px;
-    }
-  }
-
-  h1 {
-    @media #{$medium-down} {
+    h1 {
       font-size: 23px;
       display: inline;
     }
 
-    @media #{$small-only} {
-      font-size: 15px;
-      font-weight: 800 !important;
-      color: white !important;
-    }
-  }
-
-  h1 + .sub-header {
-    @media #{$medium-down} {
+    h1 + .sub-header {
       font-size: 10px;
       display: block;
     }
+  }
 
-    @media #{$small-only} {
-      color: white !important;
-      text-transform: none !important;
+  // Small screen
+  @media #{$small-down} {
+    &.row {
+      background: $primary-color;
+      margin: 0;
+      padding: 10px 20px 5px;
+    }
+
+    h1 {
+      font-size: 15px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.3;
+    }
+
+    h1 + .sub-header {
+      color: white;
+      text-transform: none;
+      line-height: 1;
+      margin-top: -2px;
     }
   }
 }

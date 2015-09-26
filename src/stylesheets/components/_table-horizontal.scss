@@ -2,7 +2,6 @@
 
   .day {
     height: $day-row-height;
-    transition: width $layoutchange-anim-speed;
     width: 100%;
 
     .label {

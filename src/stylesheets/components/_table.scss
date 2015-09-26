@@ -1,11 +1,12 @@
 #fittable .table {
   position: relative;
   clear: left;
-  transition: width $default-anim-speed;
   width: 100%;
 
-  &--cut {
-    width: 75%;
+  &--cut { width: 75%; }
+
+  @media screen and (max-width: 1200px) {
+    &--cut { width: 60%; }
   }
 
   &--muted {
@@ -24,7 +25,6 @@
     height: $vertical-layout-day-height;
     width: 20%;
     float: left;
-    transition: height $layoutchange-anim-speed;
 
     .label {
       display: block;
@@ -39,6 +39,7 @@
       height: 7%;
       margin: 0;
       padding: $day-row-padding;
+      overflow: hidden;
       @include disable-selection();
 
       span {

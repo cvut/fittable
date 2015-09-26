@@ -15,11 +15,7 @@
     line-height: $header-elements-weight;
     position: relative;
     z-index: 199;
-
-    @media #{$medium-down} {
-      font-size: 1.25rem;
-      padding: 0 20px;
-    }
+    background: transparent;
   }
 
   .function-btn .tooltip {

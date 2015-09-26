@@ -1,0 +1,18 @@
+#fittable {
+
+  // Medium screen
+  @media #{$medium-down} {
+    .functions-sidebar.hide { display: none; }
+
+    .functions-sidebar {
+      padding: 30px;
+      float: none;
+      width: 100%;
+      clear: both;
+      border-bottom: 2px solid $primary-color;
+      background: $light-secondary-color;
+      position: absolute;
+      z-index: 200;
+    }
+  }
+}

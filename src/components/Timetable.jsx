@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
 import { grid as gridPropType } from '../constants/propTypes'
-import { SMALL_SCREEN } from '../constants/screenSizes'
+import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
 
 import { weekdayNum } from '../date'
 
@@ -96,7 +96,7 @@ class Timetable extends React.Component {
 
     const gridColor = 'rgba(0,0,0,.1)'
 
-    if (horizontalLayout) {
+    if (horizontalLayout && this.props.screenSize > MEDIUM_SCREEN) {
       return (
         <div className="grid grid--horizontal" style={{
             backgroundImage: `repeating-linear-gradient(90deg, ${gridColor}, ${gridColor} 1px, transparent 1.25px, transparent ${length * 100}%)`,
@@ -179,7 +179,7 @@ class Timetable extends React.Component {
       const halfLenOffsetPercent = `${((idx + gridoffset) * timelineGridLength - timelineGridLength/2) * 100}%`
 
       let style
-      if (this.props.layout === 'horizontal') {
+      if (this.props.layout === 'horizontal' && this.props.screenSize > MEDIUM_SCREEN) {
         style = {
           width: gridLenPercent,
           left: halfLenOffsetPercent,
@@ -223,16 +223,17 @@ class Timetable extends React.Component {
           colored={this.props.colored}
           onDateChange={this.props.onDateChange}
           layout={this.props.layout}
+          screenSize={this.props.screenSize}
         />
       )
     }
 
     const classMuted = (this.props.eventId !== null) ? 'table--muted' : ''
-    const classCut = (this.props.functionsOpened !== null) ? 'table--cut' : ''
+    const classCut = (this.props.functionsOpened !== null && this.props.screenSize > MEDIUM_SCREEN) ? 'table--cut' : ''
     const classDays7 = this.props.days7 ? 'table--7days' : ''
-    const classLayout = this.props.screenSize == SMALL_SCREEN ? 'table--vertical' : ('table--' + this.props.layout)
+    const classLayout = this.props.screenSize <= MEDIUM_SCREEN ? 'table--vertical' : ('table--' + this.props.layout)
 
-    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7} table--${this.props.screenSize}`
+    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
 

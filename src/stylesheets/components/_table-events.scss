@@ -9,7 +9,7 @@
     position: absolute;
     padding: $events-gutter/2 $events-gutter;
     z-index: 99;
-    height: 100%;
+    width: 100%;
     box-sizing: border-box;
     transition: opacity $default-anim-speed;
     transform-origin: 0 0;
