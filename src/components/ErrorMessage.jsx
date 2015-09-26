@@ -8,6 +8,7 @@ import CP from 'counterpart'
 const propTypes = {
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   visible: PropTypes.bool,
+  onErrorHide: PropTypes.func.required,
 }
 
 const defaultProps = {
@@ -17,14 +18,25 @@ const defaultProps = {
 
 class Error extends React.Component {
 
+  renderHideButton (action) {
+    return (
+      <button
+        onClick={action}>
+        {CP.translate('errors.hide_this')}
+      </button>
+    )
+  }
+
   render () {
+    const {onErrorHide, type, visible} = this.props
+    if (!visible) {
+      // null or false is legit to render for React
+      return null
+    }
 
-    if (this.props.visible === true) {
-
-      /**
-       * Access error
-       */
-      if (this.props.type == 'access') {
+    switch (type) {
+      // Access error - user permissions
+      case 'access':
         return (
           <div className="error-message">
             <i className="icon fa fa-lock"></i>
@@ -36,88 +48,70 @@ class Error extends React.Component {
               <br />
               {CP.translate('errors.access_try')}
               <a href="javascript:window.location.back()">{CP.translate('errors.access_goback')}</a>.
-              <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
-           </p>
-         </div>
+              {this.renderHideButton(onErrorHide)}
+            </p>
+          </div>
         )
-      /**
-       * Calendar not found error
-       */
-      } else if (this.props.type == 'notfound') {
+      case 'notfound':
         return (
-            <div className="error-message">
-              <i className="icon fa fa-calendar-o"></i>
-              <h2>{CP.translate('errors.notfound_title')}</h2>
-              <p>
-                {CP.translate('errors.notfound_desc')}
-                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
-              </p>
-            </div>
+          <div className="error-message">
+            <i className="icon fa fa-calendar-o"></i>
+            <h2>{CP.translate('errors.notfound_title')}</h2>
+            <p>
+              {CP.translate('errors.notfound_desc')}
+              {this.renderHideButton(onErrorHide)}
+            </p>
+          </div>
         )
-      /**
-       * Own calendar not found error
-       */
-      } else if (this.props.type == 'ownnotfound') {
+      case 'ownnotfound':
         return (
-            <div className="error-message">
-              <i className="icon fa fa-calendar-o"></i>
-              <h2>{CP.translate('errors.ownnotfound_title')}</h2>
-              <p>
-                {CP.translate('errors.ownnotfound_desc')}
-                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
-              </p>
-            </div>
+          <div className="error-message">
+            <i className="icon fa fa-calendar-o"></i>
+            <h2>{CP.translate('errors.ownnotfound_title')}</h2>
+            <p>
+              {CP.translate('errors.ownnotfound_desc')}
+              {this.renderHideButton(onErrorHide)}
+            </p>
+          </div>
         )
-        /**
-         * Connection error
-         */
-      } else if (this.props.type == 'connection') {
+      case 'connection':
         return (
-            <div className="error-message">
-              <i className="icon fa fa-plug"></i>
-              <h2>{CP.translate('errors.connection_title')}</h2>
-              <p>
-                {CP.translate('errors.connection_desc')}
-                <br /> {CP.translate('errors.connection_try')}
-                <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
-                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
-              </p>
-            </div>
+          <div className="error-message">
+            <i className="icon fa fa-plug"></i>
+            <h2>{CP.translate('errors.connection_title')}</h2>
+            <p>
+              {CP.translate('errors.connection_desc')}
+              <br /> {CP.translate('errors.connection_try')}
+              <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
+              {this.renderHideButton(onErrorHide)}
+            </p>
+          </div>
         )
-        /**
-         * User unauthorized error
-         */
-      } else if (this.props.type == 'unauthorized') {
+      case 'unauthorized':
         return (
-            <div className="error-message">
-              <i className="icon fa fa-lock"></i>
-              <h2>{CP.translate('errors.unauthorized_title')}</h2>
-              <p>
-                {CP.translate('errors.unauthorized_desc')}
-                <a href="landing.html">{CP.translate('errors.unauthorized_login')}</a>.
-                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
-              </p>
-            </div>
+          <div className="error-message">
+            <i className="icon fa fa-lock"></i>
+            <h2>{CP.translate('errors.unauthorized_title')}</h2>
+            <p>
+              {CP.translate('errors.unauthorized_desc')}
+              <a href="landing.html">{CP.translate('errors.unauthorized_login')}</a>.
+              {this.renderHideButton(onErrorHide)}
+            </p>
+          </div>
         )
-      /**
-       * Server error
-       */
-      } else if (this.props.type == 'servererror') {
+      case 'servererror':
         return (
-            <div className="error-message">
-              <i className="icon fa fa-plug"></i>
-              <h2>{CP.translate('errors.servererror_title')}</h2>
-              <p>
-                {CP.translate('errors.servererror_desc')}
-                <a href="javascript:window.location.reload()">{CP.translate('errors.refresh')}</a>.
-                <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
-              </p>
-            </div>
+          <div className="error-message">
+            <i className="icon fa fa-lock"></i>
+            <h2>{CP.translate('errors.unauthorized_title')}</h2>
+            <p>
+              {CP.translate('errors.unauthorized_desc')}
+              <a href="landing.html">{CP.translate('errors.unauthorized_login')}</a>.
+              {this.renderHideButton(onErrorHide)}
+            </p>
+          </div>
         )
-      /**
-       * Generic error
-       */
-      } else {
+      default:
         return (
           <div className="error-message">
             <i className="icon fa fa-exclamation-triangle"></i>
@@ -125,17 +119,17 @@ class Error extends React.Component {
             <p>
               {CP.translate('errors.generic_desc', { type: this.props.type })}
               <br /> {CP.translate('errors.generic_try')}
-              <button onClick={this.props.onErrorHide}>{CP.translate('errors.hide_this')}</button>
+              {this.renderHideButton(onErrorHide)}
             </p>
             <p className="please">
-              {CP.translate('errors.help_please')}&nbsp;<a href="https://github.com/cvut/fittable/issues"><i className="fa fa-github"></i>&nbsp;{CP.translate('errors.help_tracker')}</a>.
+              {CP.translate('errors.help_please')}&nbsp;
+              <a href="https://github.com/cvut/fittable/issues">
+                <i className="fa fa-github"></i>&nbsp;{CP.translate('errors.help_tracker')}
+              </a>.
               {CP.translate('errors.help_thanks')}
             </p>
           </div>
         )
-      }
-    } else {
-      return <div />
     }
   }
 }
