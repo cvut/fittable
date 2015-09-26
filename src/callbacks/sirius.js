@@ -82,14 +82,18 @@ var defaultLimit = 32
 
 var STATUS_ERROR_TYPES = {
   0: 'connection',
+  401: 'unauthorized',
   403: 'access',
-  404: 'not-found',
-  500: 'server-error',
+  404: 'notfound',
+  500: 'servererror'
 }
 function generateError (status, message = 'No message specified') {
   const error = new Error(message)
   if (status in STATUS_ERROR_TYPES) {
     error.type = STATUS_ERROR_TYPES[status]
+    if (error.type === 'notfound' && view === 'person' && parameter === user.name) {
+      error.type = 'own' + error.type
+    }
   } else {
     error.type = 'generic'
   }

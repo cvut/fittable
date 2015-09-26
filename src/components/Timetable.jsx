@@ -10,6 +10,7 @@ import { weekdayNum } from '../date'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
+import ErrorMessage from './ErrorMessage'
 
 const propTypes = {
   grid: gridPropType,
@@ -77,7 +78,7 @@ class Timetable extends React.Component {
     this.props.onEventDisplay(key)
   }
 
-  onClickOutside (e) {
+  onClickOutside () {
     if (this.props.eventId) {
       this.showDetailOn(null)
     }
@@ -236,6 +237,11 @@ class Timetable extends React.Component {
         <div className="hour-labels">
           {hourlabels.map(label => label)}
         </div>
+        <ErrorMessage
+          visible={this.props.errorVisible}
+          type={this.props.error.type}
+          onErrorHide={this.props.onErrorHide}
+          />
       </div>
     )
   }

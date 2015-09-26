@@ -1,4 +1,4 @@
-import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED } from '../constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, DATA_ERROR_HIDE } from '../constants/actionTypes'
 
 const initialState = {
   waiting: true,
@@ -26,9 +26,9 @@ export default function data (state = initialState, action) {
       return {
         ...state,
         waiting: false,
-        errorVisible: false,
         events,
         linkNames,
+        errorVisible: false,
       }
     case EVENTS_LOAD_FAILED:
       const type = action.payload.type
@@ -40,6 +40,11 @@ export default function data (state = initialState, action) {
           type,
           message: action.payload.toString(),
         },
+      }
+    case DATA_ERROR_HIDE:
+      return {
+        ...state,
+        errorVisible: false,
       }
     default:
       return state

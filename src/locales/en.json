@@ -112,22 +112,29 @@
 
   "errors": {
     "generic_title": "We can't display the calendar",
-    "generic_desc": "There is an error '%(type)s error'. Sorry for the inconvenience. ",
+    "generic_desc": "There is an error '%(type)s'.",
     "generic_try": "Try to ",
-    "generic_refreshpage": "refresh the page",
-    "help_please": "We are the faculty filled with developers. Please, don't be afraid, open the JS console and post the bug to our ",
+    "help_please": "We are the faculty full of developers. Please, don't be afraid, open the JS console and post the bug to our ",
+    "help_tracker": "issue tracker",
     "help_thanks": " Many thanks for your help!",
     "access_title": "You don't have permission to see this content",
     "access_desc": "We are sorry, but your account doesn't have sufficient permissions to display this calendar view.",
+    "access_desc2": "We can't show you the data due to rector's order no. 5/2015, 'Ochrana osobních údajů na ČVUT v Praze'.",
     "access_try": "Try to ",
     "access_trygoback": "go back",
     "connection_title": "Connection problem",
-    "connection_desc": "We are sorry, but we are unable to connect to our server. Please check, if you're still connected to the Internet.",
+    "connection_desc": "We are unable to connect to our server. Please check, if you're still connected to the Internet.",
     "connection_try": "Try to ",
-    "connection_refresh": "refresh the page",
-    "connection_part_or": " or ",
-    "connection_mutelink": "hide this error message",
-    "connection_mutelink_partafter": " and continue without connection.",
-    "connection_muted_message": "You are working without connection."
+    "notfound_title": "The calendar can't be displayed",
+    "notfound_desc": "You've tried to display a calendar that doesn't exists.",
+    "ownnotfound_title": "The calendar can't be displayed",
+    "ownnotfound_desc": "If you're not a student or academic employee, it's possible you don't have your personal calendar.",
+    "unauthorized_title": "You're not authorized",
+    "unauthorized_desc": "There is a chance you've been logged out. Try to ",
+    "unauthorized_login": "login again",
+    "servererror_title": "Server error",
+    "servererror_desc": "The server encountered an error. We are sorry for the inconvience. Try to ",
+    "hide_this": "Hide this and continue",
+    "refresh": "refresh the page"
   }
 }

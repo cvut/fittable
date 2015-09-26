@@ -11,7 +11,7 @@ import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
 import { fetchEvents } from '../../actions/dataActions'
-import { displaySidebar, displayEvent } from '../../actions/uiActions'
+import { displaySidebar, displayEvent, hideDataError } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
 import { detectScreenSize } from '../../actions/clientActions'
@@ -20,7 +20,6 @@ import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
 import Controls from '../../components/Controls'
 import Timetable from '../../components/Timetable'
-import ErrorMessage from '../../components/ErrorMessage'
 
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
@@ -32,9 +31,10 @@ function mapStateToProps (state) {
     data: state.data,
     ui: state.ui,
     search: state.search,
+    errorVisible: state.data.errorVisible,
     error: {
       type: state.data.error.type,
-      visible: state.data.errorVisible,
+      message: state.data.error.message,
     },
     semester: state.semester,
     grid: state.semester.grid,
@@ -56,6 +56,7 @@ function mapDispatchToProps (dispatch) {
     // FIXME: bind this one to onViewDateChange too
     onSemesterDataRequest: (callback, date) => dispatch(fetchSemesterData(callback, date)),
     onWindowResize: () => dispatch(detectScreenSize()),
+    onErrorHide: () => dispatch(hideDataError()),
   }
 }
 
@@ -135,6 +136,7 @@ const FittableContainer = React.createClass({
     const { sidebar, eventId } = this.props.ui
 
     const error = this.props.error
+    const errorVisible = this.props.errorVisible
 
     // FIXME: this should be done some better way
     const gridsettings = {
@@ -148,11 +150,6 @@ const FittableContainer = React.createClass({
 
     return (
       <div className="fittable-container" ref="rootEl">
-        <ErrorMessage
-          muted={true}
-          shown={error.visible}
-          type={error.type}
-        />
         <Controls
           viewDate={this.props.viewDate}
           onWeekChange={this.handleChangeViewDate}
@@ -191,6 +188,9 @@ const FittableContainer = React.createClass({
           visible={!waiting}
           eventId={eventId}
           onEventDisplay={this.props.onEventDisplay}
+          error={error}
+          errorVisible={errorVisible}
+          onErrorHide={this.props.onErrorHide}
         />
         <Spinner show={waiting} />
       </div>

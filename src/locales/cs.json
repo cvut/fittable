@@ -112,22 +112,29 @@
 
   "errors": {
     "generic_title": "Kalendář nemohl být zobrazen",
-    "generic_desc": "Nastala chyba '%(type)s error' při jeho zobrazování. Omlouváme se za způsobené potíže.",
+    "generic_desc": "Nastala chyba '%(type)s' při jeho zobrazování.",
     "generic_try": "Zkuste ",
-    "generic_refreshpage": "obnovit stránku",
     "help_please": "Jsme fakulta plná vývojářů. Nebojte se otevřít JavaScriptovou konzoli a nahlásit nám chybu do ",
+    "help_tracker": "issue trackeru",
     "help_thanks": " Díky za pomoc.",
     "access_title": "K tomuto zobrazení nemáte přístup",
     "access_desc": "Omlouváme se, ale pro zobrazení tohoto pohledu kalendáře nemá váš účet dostatečná oprávnění.",
+    "access_desc2": "Na základě příkazu rektora č. 5/2015, Ochrana osobních údajů na ČVUT v Praze, vám tato data bohužel nemůžeme zobrazit.",
     "access_try": "Zkuste se ",
-    "access_trygoback": "vrátit zpět",
+    "access_goback": "vrátit zpět",
     "connection_title": "Problém s připojením",
     "connection_desc": "Omlouváme se, ale nedaří se nám stáhnout aktuální data ze serveru. Zkontrolujte, zdali jste stále připojeni k Internetu.",
     "connection_try": "Zkuste ",
-    "connection_refresh": "obnovit stránku",
-    "connection_part_or": ", nebo ",
-    "connection_mutelink": "skryjte chybovou hlášku",
-    "connection_mutelink_partafter": " a pracujte bez připojení.",
-    "connection_muted_message": "Pracujete bez připojení."
+    "notfound_title": "Kalendář nemohl být zobrazen",
+    "notfound_desc": "Pokusili jste se zobrazit neexistující kalendář.",
+    "ownnotfound_title": "Váš kalendář nemohl být zobrazen",
+    "ownnotfound_desc": "Pokud nejste student ani akademický pracovník, je možné, že nemáte svůj osobní rozvrh.",
+    "unauthorized_title": "Nejste přihlášen",
+    "unauthorized_desc": "Vypadá to, že jste byli odhlášeni. Zkuste se ",
+    "unauthorized_login": "znovu přihlásit",
+    "servererror_title": "Serverová chyba",
+    "servererror_desc": "Omlouváme se, ale server má potíže se zpracováním požadavku. Zkuste ",
+    "hide_this": "Skrýt a pokračovat",
+    "refresh": "obnovit stránku"
   }
 }
