@@ -1,24 +1,25 @@
-#fittable .table .events {
-  width: 90%;
+#fittable .events {
+  width: 100%;
   float: left;
-  height: $day-row-height - ($day-row-padding * 2);
   position: relative;
-  visibility: hidden;
-  margin: $day-row-padding 0px;
+  height: 93%;
+  margin: 0;
 
   .event {
     position: absolute;
-    padding: 0 5px;
-    transition: opacity $events-move-anim-speed;
+    padding: $events-gutter/2 $events-gutter;
     z-index: 99;
     height: 100%;
+    box-sizing: border-box;
+    transition: opacity $default-anim-speed;
+    transform-origin: 0 0;
 
-    &.hide, &:not(.detail-shown).hide {
+    &.hide, &:not(.is-opened).hide {
       display: block;
       opacity: 0 !important;
     }
 
-    div.inner {
+    .inner {
       background: $primary-color;
       color: white;
       height: 100%;
@@ -54,23 +55,12 @@
       }
     }
 
-    &:not(.cancelled) .cancelflag {
+    &:not(.event--cancelled) .cancelflag {
       display: none;
     }
 
-    &:not(.replacement) .replaceflag {
+    &:not(.event--replacement) .replaceflag {
       display: none;
-    }
-
-    &.cancelled .inner {
-      border-top: 3px dashed rgba(white, .5);
-      background: $third-color;
-      color: white;
-    }
-
-    &.replacement .inner {
-      border-top: 3px dashed rgba(white, .5);
-      color: white;
     }
 
     .cancelflag, .replaceflag {
@@ -82,6 +72,17 @@
       left: -10px;
     }
 
+    &--cancelled .inner {
+      border-top: 3px dashed rgba(white, .5);
+      background: $third-color;
+      color: white;
+    }
+
+    &--replacement .inner {
+      border-top: 3px dashed rgba(white, .5);
+      color: white;
+    }
+
     &:not(.hide) div.inner div.head-space {
       width: 100%;
       position: absolute;
@@ -90,14 +91,8 @@
       cursor: pointer;
     }
 
-    &:not(.detail-shown) div.inner div.head-space {
+    &:not(.is-opened) div.inner div.head-space {
       height: 100%;
-    }
-
-    &:not(.detail-shown) {
-      div.type span.long {
-        display: none;
-      }
     }
 
     &.detail-shown div.inner div.head-space {
@@ -108,40 +103,6 @@
       &:hover {
         background: rgba( white, 0.1 );
 
-      }
-    }
-  }
-}
-
-@media #{$large-up} {
-
-  // Horizontal overlays
-
-  #fittable {
-
-    // Horizontal inner elements minimalization
-
-    div.table:not(.vertical) div.day div.events {
-      div.event:not(.detail-shown) {
-        &.min-light {
-
-        }
-
-        &.min-hard {
-          .type {
-            display: none !important;
-          }
-
-          .time {
-            font-size: $xsmall-font-size !important;
-          }
-        }
-
-        &.min-all {
-          .type, .time, .name {
-            display: none !important;
-          }
-        }
       }
     }
   }

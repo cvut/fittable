@@ -14,6 +14,7 @@ const propTypes = {
   onDateChange: PropTypes.func.isRequired,
   linkNames: PropTypes.object,
   colored: PropTypes.bool,
+  layout: PropTypes.string,
   data: PropTypes.shape({
     id: PropTypes.number,
     course: PropTypes.string,
@@ -32,46 +33,38 @@ class EventBox extends React.Component {
 
     var length = `${props.data._draw_length * 100}%`
     var position = `${props.data._draw_position * 100}%`
-    return {
-      width: length,
-      height: length,
-      left: position,
-      top: position,
-    }
-  }
 
-  minimalization (drawLength) {
-
-    // Determine amount of needed minimalization of text elements in box by its length
-    if (drawLength <= 0.12) {
-      return 'min-light'
-    }
-    if (drawLength <= 0.10) {
-      return 'min-hard'
-    }
-    if (drawLength <= 0.07) {
-      return 'min-all'
+    if (this.props.layout === 'horizontal') {
+      return {
+        width: length,
+        left: position,
+      }
+    } else {
+      return {
+        height: length,
+        top: position,
+      }
     }
   }
 
   classNames (props) {
 
-    let cls = ['event', props.data.appear, this.minimalization(props.data._draw_length)]
+    const cls = ['event', props.data.appear]
     if (props.detailShown) {
-      cls.push('detail-shown')
+      cls.push('is-opened')
     }
     if (props.data.cancelled) {
-      cls.push('cancelled')
+      cls.push('event--cancelled')
     }
     if (props.openFromBottom) {
-      cls.push('from-bottom')
+      cls.push('event--frombottom')
     }
     if (props.data.replacement) {
-      cls.push('replacement')
+      cls.push('event--replacement')
     }
 
     if (props.colored) {
-      cls.push(`color-${props.data.type}`)
+      cls.push(`event--${props.data.type}`)
     }
 
     return cls.join(' ')

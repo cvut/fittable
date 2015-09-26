@@ -5,9 +5,9 @@
   $laboratory: #DE5543;
   $exam: #9169B5;
 
-  div.events div.event {
+  .event {
 
-    &.color-lecture {
+    &--lecture {
 
       .inner {
         background: $lecture;
@@ -19,7 +19,7 @@
       }
     }
 
-    &.color-tutorial {
+    &--tutorial {
 
       .inner {
         background: $tutorial;
@@ -30,7 +30,7 @@
       }
     }
 
-    &.color-laboratory {
+    &--laboratory {
 
       .inner {
         background: $laboratory;
@@ -41,7 +41,7 @@
       }
     }
 
-    &.color-exam {
+    &--exam {
 
       .inner {
         background: $exam;

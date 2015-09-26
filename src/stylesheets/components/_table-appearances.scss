@@ -1,151 +1,183 @@
 #fittable {
 
-  // Horizontal
+  // Vertical
+  .table--vertical .events .event {
 
-  div.table:not(.vertical):not(.mobile) div.day div.events {
-    div.event {
-      &:not(.detail-shown).half,
-      &:not(.detail-shown).half-first {
-        height: 45% !important;
+    // Half
+    &.half,
+    &.half-first {
+      width: 50%;
 
-        div.type, div.time {
-          display: none;
-        }
+      &:not(.is-opened) .name {
+        font-size: 13px;
+      }
+    }
 
-        div.name {
-          margin-top: 0;
-          font-size: $small-font-size;
-        }
+    &.half-first { padding-right: $events-gutter/2; }
+
+    &.half-first + .event.half {
+      left: auto;
+      right: 0;
+      padding-left: $events-gutter/2;
+    }
+
+    // Third
+    &.third,
+    &.third-first {
+      width: 33%;
+
+      &:not(.is-opened) .name {
+        font-size: 13px;
       }
 
-      &.half-first + .event:not(.detail-shown).half {
-        top: auto !important;
-        bottom: 0;
+      &:not(.is-opened) .time {
+        display: none;
+      }
+    }
+
+    &.third-first { padding-right: $events-gutter/2; }
+
+    &.third-first + .event.third {
+      left: 33%;
+      padding: $events-gutter/2;
+    }
+
+    &.third-first + .third + .event.third {
+      left: auto;
+      right: 0;
+      padding-left: $events-gutter/2;
+    }
+
+    // Quarter
+    &.quarter,
+    &.quarter-first {
+      width: 25%;
+
+      &:not(.is-opened) .time {
+        display: none;
       }
 
-      &:not(.detail-shown).third,
-      &:not(.detail-shown).third-first {
-        height: 30% !important;
-
-        div.type, div.time {
-          display: none;
-        }
-
-        div.name {
-          margin-top: -5px;
-          font-size: $xsmall-font-size;
-        }
+      &:not(.is-opened) .name,
+      &:not(.is-opened) .type {
+        font-size: 10px;
       }
+    }
 
-      &.third-first + .event:not(.detail-shown).third {
-        top: 35% !important;
-      }
+    &.quarter-first { padding-right: $events-gutter/2; }
 
-      &.third-first + .third + .event:not(.detail-shown).third {
-        top: auto !important;
-        bottom: 0;
-      }
+    &.quarter-first + .event.quarter {
+      left: 25%;
+      padding: $events-gutter/2;
+    }
 
-      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-first {
-        height: 20% !important;
+    &.quarter-first + .quarter + .event.quarter {
+      left: 50%;
+      padding: $events-gutter/2;
+    }
 
-        div.type, div.time, div.name {
-          display: none;
-        }
-      }
-
-      &.quarter-first + .event:not(.detail-shown).quarter {
-        top: 27% !important;
-      }
-
-      &.quarter-first + .quarter + .event:not(.detail-shown).quarter {
-        top: 54% !important;
-      }
-
-      &.quarter-first + .quarter + .quarter + .event:not(.detail-shown).quarter {
-        top: auto !important;
-        bottom: 0 !important;
-      }
-
-      &.from-bottom.detail-shown {
-        top: auto !important;
-        bottom: 0 !important;
-        position: absolute;
-      }
+    &.quarter-first + .quarter + .quarter + .event.quarter {
+      left: auto;
+      right: 0;
+      padding-left: $events-gutter/2;
     }
   }
 
-  // Vertical
+  // Horizontal
+  .table--horizontal .events .event {
 
-  div.table.vertical div.day div.events, div.table.mobile div.day div.events {
-    div.event {
-      &:not(.detail-shown).half,
-      &:not(.detail-shown).half-first {
-        width: 50% !important;
-        padding-right: 5px;
+    // Half
+    &.half,
+    &.half-first {
+      height: 50%;
+
+      &:not(.is-opened) .name {
+        font-size: 14px;
+        margin-top: 0;
       }
 
-      &.half-first + div.event:not(.detail-shown).half {
-        left: auto !important;
-        right: 0;
-        padding-left: 5px;
-        padding-right: 10px;
+      &:not(.is-opened) .type {
+        font-size: 10px;
+        bottom: 7px;
+        left: 10px;
       }
 
-      &:not(.detail-shown).third,
-      &:not(.detail-shown).third-first {
-        width: 33% !important;
-        padding-right: 5px;
+      &:not(.is-opened) .time {
+        display: none;
+      }
+    }
 
-        .time {
-          font-size: $small-font-size;
-        }
+    &.half-first { padding-bottom: $events-gutter/4; }
+
+    &.half-first + .event.half {
+      top: auto;
+      bottom: 0;
+      padding-top: $events-gutter/4;
+    }
+
+    // Third
+    &.third,
+    &.third-first {
+      height: 33%;
+
+      &:not(.is-opened) .name {
+        font-size: 12px;
+        margin-top: -7px;
+        margin-right: -3px;
       }
 
-      &.third-first + div.event:not(.detail-shown).third {
-        left: 33% !important;
-        padding-left: 5px;
-        padding-right: 5px;
+      &:not(.is-opened) .type,
+      &:not(.is-opened) .time, {
+        display: none;
+      }
+    }
+
+    &.third-first { padding-bottom: 0; }
+
+    &.third-first + .event.third {
+      top: 33%;
+      padding: $events-gutter/2;
+    }
+
+    &.third-first + .third + .event.third {
+      top: auto;
+      bottom: 0;
+      padding-top: 0;
+    }
+
+    // Quarter
+    &.quarter,
+    &.quarter-first{
+      height: 25%;
+
+      &:not(.is-opened) .name {
+        font-size: 9px;
+        margin-top: -10px;
       }
 
-      &.third-first + div.event.third + div.event:not(.detail-shown).third {
-        left: auto !important;
-        right: 0;
-        padding-left: 5px;
-        padding-right: 10px;
+      &:not(.is-opened) .type,
+      &:not(.is-opened) .time, {
+        display: none;
       }
+    }
 
-      &:not(.detail-shown).quarter, &:not(.detail-shown).quarter-first {
-        width: 25% !important;
-        padding-left: 5px;
-        padding-right: 5px;
+    &.quarter-first { padding-bottom: 0; }
 
-        div.type, div.time {
-          display: none;
-        }
+    &.quarter-first + .event.quarter {
+      top: 25%;
+      padding-top: $events-gutter/1.5;
+      padding-bottom: $events-gutter/3;
+    }
 
-        div.name {
-          font-size: 11px;
-        }
-      }
+    &.quarter-first + .quarter + .event.quarter {
+      top: 50%;
+      padding-bottom: $events-gutter/1.5;
+      padding-top: $events-gutter/3;
+    }
 
-      &:not(.detail-shown).quarter-first {
-        padding-left: 10px;
-      }
-
-      &.quarter-first + .event:not(.detail-shown).quarter {
-        left: 25% !important;
-      }
-
-      &.quarter-first + .quarter + .event:not(.detail-shown).quarter {
-        left: 50% !important;
-      }
-
-      &.quarter-first + .quarter + .quarter + .event:not(.detail-shown).quarter {
-        left: auto !important;
-        right: 0 !important;
-        padding-right: 10px;
-      }
+    &.quarter-first + .quarter + .quarter + .event.quarter {
+      top: auto;
+      bottom: 0;
+      padding-top: 0;
     }
   }
 }

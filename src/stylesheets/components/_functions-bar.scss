@@ -15,6 +15,11 @@
     line-height: $header-elements-weight;
     position: relative;
     z-index: 199;
+
+    @media #{$medium-down} {
+      font-size: 1.25rem;
+      padding: 0 20px;
+    }
   }
 
   .function-btn .tooltip {
@@ -29,6 +34,10 @@
     transition: top $default-anim-speed, opacity $default-anim-speed;
     height: 5px;
     z-index: 99;
+
+    @media #{$medium-down} {
+      display: none;
+    }
   }
 
   .function-btn:hover .tooltip {

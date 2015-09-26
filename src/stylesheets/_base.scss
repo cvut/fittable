@@ -16,9 +16,9 @@ $small-font-size: 12px;
 $xsmall-font-size: 11px;
 
 // Anim speeds
-$default-anim-speed: .2s;
-$event-rollout-anim-speed: .25s;
-$events-move-anim-speed: .25s;
+$default-anim-speed: .1s;
+$event-rollout-anim-speed: .2s;
+$events-move-anim-speed: .2s;
 $layoutchange-anim-speed: .5s;
 
 // Elements dimensions
@@ -28,6 +28,8 @@ $day-row-padding: 12px;
 $vertical-layout-day-height: 720px;
 
 $mobile-heading-height: 50px;
+
+$events-gutter: 12px;
 
 // Other
 $grid-line-width: 1.5px;

@@ -3,19 +3,12 @@
   .detail {
     visibility: hidden;
     background: white;
-    padding: 20px;
     clear: both;
     min-height: 0;
     margin: 0px -10px 0px -10px;
     height: 0;
     color: #222;
     width: inherit;
-    transition: opacity $event-rollout-anim-speed*2,
-                min-height $event-rollout-anim-speed,
-                max-height $event-rollout-anim-speed*2,
-                height $event-rollout-anim-speed,
-                margin $event-rollout-anim-speed,
-                top $event-rollout-anim-speed;
     opacity: 0;
     overflow: hidden;
 
@@ -32,11 +25,11 @@
         padding-bottom: 13px;
         border-bottom: 1px solid #ddd;
       }
+    }
 
-      .prop-title {
-        color: $dark-secondary-text-color;
-        text-transform: lowercase;
-      }
+    .prop-title {
+      color: $dark-secondary-text-color;
+      text-transform: lowercase;
     }
 
     .basic-props {
@@ -138,27 +131,37 @@
     }
   }
 
-  &.detail-shown {
+  @keyframes open {
+    from {
+      transform: scaleX(.75) scaleY(.25);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+
+  &.is-opened {
     width: 300px !important;
     height: auto !important;
-    position: relative;
     z-index: 999;
-    transition: width $event-rollout-anim-speed;
     overflow: hidden;
+    animation: open $events-move-anim-speed ease-out;
 
-    div.detail {
+    .detail {
       visibility: visible;
       opacity: 1;
       min-height: 180px;
       height: auto;
       margin: 10px -10px 5px -10px;
+      padding: 20px;
 
       .wrap {
         width: 240px;
       }
     }
 
-    div.type {
+    .type {
       display: none;
     }
   }

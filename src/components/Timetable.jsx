@@ -5,6 +5,7 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
 import { grid as gridPropType } from '../constants/propTypes'
+import { SMALL_SCREEN } from '../constants/screenSizes'
 
 import { weekdayNum } from '../date'
 
@@ -84,6 +85,36 @@ class Timetable extends React.Component {
     }
   }
 
+  /**
+   * Renders the grid
+   * @param horizontalLayout Renders the horizontal grid if set to true
+   * @param length Grid length
+   * @param offset Grid offset
+   * @returns {XML}
+   */
+  getGrid(horizontalLayout = false, length = 0, offset = 0) {
+
+    const gridColor = 'rgba(0,0,0,.1)'
+
+    if (horizontalLayout) {
+      return (
+        <div className="grid grid--horizontal" style={{
+            backgroundImage: `repeating-linear-gradient(90deg, ${gridColor}, ${gridColor} 1px, transparent 1.25px, transparent ${length * 100}%)`,
+            left: `${offset * length * 100}%`
+            }}>
+        </div>
+      )
+    } else {
+      return (
+        <div className="grid grid--vertical" style={{
+            backgroundImage: `repeating-linear-gradient(0deg, ${gridColor}, ${gridColor} 1px, transparent 1.25px, transparent ${length * 100}%)`,
+            top: `${offset * length * -100}%`
+            }}>
+        </div>
+      )
+    }
+  }
+
   render () {
     const weekEvents = [ [], [], [], [], [], [], [] ]
     const firstDayStart = moment(this.props.viewDate).startOf('day')
@@ -145,12 +176,21 @@ class Timetable extends React.Component {
     for (let i = gridStartCeil; i < (this.props.grid.facultyGrid ? gridStartCeil + facultyHours : gridEnd); i++) {
       const gridLenPercent = `${timelineGridLength * 100}%`
       const offsetLenPercent = `${(idx + gridoffset) * timelineGridLength * 100}%`
-      const style = {
-        width: gridLenPercent,
-        height: gridLenPercent,
-        left: offsetLenPercent,
-        top: offsetLenPercent,
+      const halfLenOffsetPercent = `${((idx + gridoffset) * timelineGridLength - timelineGridLength/2) * 100}%`
+
+      let style
+      if (this.props.layout === 'horizontal') {
+        style = {
+          width: gridLenPercent,
+          left: halfLenOffsetPercent,
+        }
+      } else {
+        style = {
+          height: gridLenPercent,
+          top: offsetLenPercent,
+        }
       }
+
       hourlabels.push(
         <div
           className="hour-label"
@@ -166,7 +206,7 @@ class Timetable extends React.Component {
     // Create days
     let days = []
     const selectedDay = weekdayNum(this.props.viewDate)
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < (this.props.days7 ? 7 : 5); i++) {
       days.push(
         <Day
           id={i}
@@ -182,15 +222,17 @@ class Timetable extends React.Component {
           selected={selectedDay === i}
           colored={this.props.colored}
           onDateChange={this.props.onDateChange}
+          layout={this.props.layout}
         />
       )
     }
 
-    const classMuted = (this.props.eventId !== null) ? 'muted' : ''
-    const classCut = (this.props.functionsOpened !== null) ? 'cut' : ''
-    const classDays7 = this.props.days7 ? 'days7' : ''
+    const classMuted = (this.props.eventId !== null) ? 'table--muted' : ''
+    const classCut = (this.props.functionsOpened !== null) ? 'table--cut' : ''
+    const classDays7 = this.props.days7 ? 'table--7days' : ''
+    const classLayout = this.props.screenSize == SMALL_SCREEN ? 'table--vertical' : ('table--' + this.props.layout)
 
-    const className = `table ${this.props.layout} ${classMuted} ${classCut} ${classDays7} table--${this.props.screenSize}`
+    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7} table--${this.props.screenSize}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
 
@@ -201,22 +243,7 @@ class Timetable extends React.Component {
       >
         <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
-            <div
-              className="grid hor"
-              style={{
-                backgroundSize: `${timelineGridLength * 100}% 100%`,
-                backgroundPosition: `${gridoffset * -100}% 0%`,
-              }}
-            >
-            </div>
-            <div
-              className="grid ver"
-              style={{
-                backgroundSize: `100% ${timelineGridLength * 100}%`,
-                backgroundPosition: `0% ${gridoffset * -100}%`,
-              }}
-            >
-            </div>
+            {this.getGrid(this.props.layout === 'horizontal', timelineGridLength, gridoffset)}
           </div>
         </div>
         <NowIndicator

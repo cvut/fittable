@@ -53,6 +53,7 @@ const propTypes = {
   onDateChange: PropTypes.func,
   active: PropTypes.bool,
   selected: PropTypes.bool,
+  layout: PropTypes.string,
 }
 
 const defaultProps = {
@@ -133,6 +134,7 @@ class Day extends React.Component {
         onViewChange={this.props.onViewChange}
         onDateChange={this.props.onDateChange}
         linkNames={this.props.linkNames}
+        layout={this.props.layout}
       />
     )
 

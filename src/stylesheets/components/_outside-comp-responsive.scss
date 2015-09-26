@@ -1,7 +1,8 @@
 header {
   &.row {
     @media #{$medium-down} {
-      margin: 25px auto 10px auto;
+      margin: 15px auto 15px auto;
+      text-align: center;
     }
 
     @media #{$small-only} {
@@ -15,12 +16,12 @@ header {
   h1 {
     @media #{$medium-down} {
       font-size: 23px;
+      display: inline;
     }
 
     @media #{$small-only} {
       font-size: 15px;
       font-weight: 800 !important;
-      display: inline;
       color: white !important;
     }
   }
@@ -28,10 +29,10 @@ header {
   h1 + .sub-header {
     @media #{$medium-down} {
       font-size: 10px;
+      display: block;
     }
 
     @media #{$small-only} {
-      display: inline;
       color: white !important;
       text-transform: none !important;
     }

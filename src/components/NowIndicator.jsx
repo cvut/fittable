@@ -33,10 +33,6 @@ class NowIndicator extends React.Component {
           ref="rootEl"
           style={{width: (length * 90 + 10) + '%', height: (length * 90 + 10) + '%'}}
         >
-          <div className="next">
-            {this.props.closestEvent.course} {moment(this.props.closestEvent.startsAt).fromNow()}
-          </div>
-          <i className="fa fa-chevron-circle-right"></i><i className="fa fa-chevron-circle-down"></i>
         </div>
       )
     } else {
@@ -46,8 +42,6 @@ class NowIndicator extends React.Component {
           ref="rootEl"
           style={{width: (length * 90 + 10) + '%', height: (length * 90 + 10) + '%'}}
         >
-          <div className="next"></div>
-          <i className="fa fa-chevron-circle-right"></i><i className="fa fa-chevron-circle-down"></i>
         </div>
       )
     }

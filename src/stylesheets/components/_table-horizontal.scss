@@ -1,0 +1,79 @@
+#fittable .table--horizontal {
+
+  .day {
+    height: $day-row-height;
+    transition: width $layoutchange-anim-speed;
+    width: 100%;
+
+    .label {
+      float: left;
+      padding: 0 10px;
+      margin: $day-row-padding 0;
+      width: 10%;
+      height: 100%;
+      line-height: $day-row-height - ($day-row-padding * 2);
+    }
+  }
+
+  .events {
+    width: 90%;
+    height: 100%;
+    float: left;
+  }
+
+  .event {
+    padding: $events-gutter $events-gutter/2;
+  }
+
+  .grid-wrapper {
+    width: 90%;
+    height: 100%;
+    left: 10%;
+    top: 0;
+    padding: $day-row-padding 0;
+  }
+
+  .grid {
+    background-color: transparent;
+    background-image: linear-gradient(90deg, $grid-color 0px, $grid-color $grid-line-width, transparent $grid-line-width );
+    background-position: top left;
+    width: 100%;
+    height: 100%;
+  }
+
+  .now-indicator {
+    width: 100% !important;
+    border-right: none;
+    border-bottom: 1px solid $primary-color;
+
+    .next {
+      bottom: 0px;
+      text-align: left;
+      padding-left: 8px;
+    }
+
+    i.fa {
+      right: auto !important;
+      bottom: -6px;
+      left: -14px;
+    }
+
+    i.fa.fa-chevron-circle-right {
+      display: none;
+    }
+  }
+
+  .hour-labels {
+    bottom: -2.5rem;
+    top: auto;
+    left: 10%;
+    height: 2rem;
+    width: 90%;
+  }
+
+  .hour-label {
+    text-align: center;
+    height: 2rem;
+    margin: 0;
+  }
+}

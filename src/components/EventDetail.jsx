@@ -175,7 +175,7 @@ class EventDetail extends React.Component {
 
   teacherField (username, fullname) {
     return (
-      <div className="teacher">
+      <div className="teacher" key={username}>
         <Reveal buttonDesc={fullname} buttonIconClass="fa-male">
           <a href={ 'https://usermap.cvut.cz/profile/' + username}>{CP.translate('detail.usermap_profile') }</a>
           <br />

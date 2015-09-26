@@ -1,215 +1,152 @@
-#fittable {
+#fittable .table {
+  position: relative;
+  clear: left;
+  transition: width $default-anim-speed;
+  width: 100%;
 
-  div.table {
-    position: relative;
-    clear: left;
-
-    .day {
-      width: 100%;
-      height: $day-row-height;
-      max-height: $vertical-layout-day-height;
-      background: white;
-      color: $primary-color;
-      transition: width $layoutchange-anim-speed;
-
-      .label {
-        display: block;
-        background: none;
-        width: 10%;
-        float: left;
-        line-height: $day-row-height - ($day-row-padding * 2);
-        text-align: left;
-        color: $primary-color;
-        padding: 0 10px;
-        margin: $day-row-padding 0;
-        transition: opacity $events-move-anim-speed;
-        position: relative;
-        z-index: 12;
-        @include disable-selection();
-
-        span {
-          padding: 5px 0 5px 20px;
-          margin-left: -18px;
-        }
-
-        span.day-num {
-          display: inline;
-          font-weight: bold;
-          margin-right: 5px;
-        }
-      }
-
-      &.active {
-        div.label span.day-num {
-          font-weight: 700;
-          border-left: 4px solid $primary-color;
-          margin-left: -14px;
-          padding-left: 14px;
-        }
-
-        div.label span.day-num {
-          font-weight: 700;
-        }
-      }
-    }
-
-    .days {
-      div.day:nth-child(odd) {
-        background: $light-secondary-color;
-      }
-
-      &.a-left div.day div.events {
-        visibility: visible;
-        animation: week-move-left ease $events-move-anim-speed;
-      }
-
-      &.a-right div.day div.events {
-        visibility: visible;
-        animation: week-move-right ease $events-move-anim-speed;
-      }
-    }
-
-    .grid-overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 6;
-
-      .grid-wrapper {
-        width: 90%;
-        height: 100%;
-        position: relative;
-        left: 10%;
-        top: 0;
-        padding: $day-row-padding 0;
-      }
-
-      .grid {
-        background-color: transparent;
-        background-image: linear-gradient(90deg, $grid-color 0px, $grid-color $grid-line-width, transparent $grid-line-width );
-        background-position: top left;
-        width: 100%;
-        height: 100%;
-      }
-
-      .grid.ver {
-        display: none;
-      }
-    }
-
-    .now-indicator {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 107%;
-      z-index: 7;
-      border-right: 1px solid $primary-color;
-      opacity: .5;
-      @include disable-selection();
-
-      .next {
-        position: absolute;
-        bottom: -14px;
-        font-size: $small-font-size;
-        color: $primary-color;
-        white-space: nowrap;
-        overflow: hidden;
-        text-align: right;
-        line-height: 16px;
-        width: 100%;
-        padding-right: 10px;
-      }
-
-      i.fa {
-        position: absolute;
-        bottom: -14px;
-        right: -8px;
-        font-size: 16px;
-        color: $primary-color;
-      }
-    }
-
-    .hour-labels {
-      float: right;
-      width: 90%;
-      position: relative;
-      padding: 8px 0;
-      @include disable-selection();
-      overflow: hidden;
-      height: 25px;
-      z-index: 6;
-
-      .hour-label {
-        position: absolute;
-        color: $lightgraytext-color;
-        font-size: $small-font-size;
-        text-align: left;
-      }
-    }
-
+  &--cut {
+    width: 75%;
   }
 
-  @media #{$large-up} {
+  &--muted {
+    .grid,
+    .now-indicator,
+    .label,
+    .hour-labels,
+    .event:not(.is-opened){ opacity: .3; }
+    .days .day:nth-child(odd) { background: rgba($secondary-color, .3); }
+  }
 
-    div.table {
-      transition: width $default-anim-speed;
+  .day {
+    max-height: $vertical-layout-day-height;
+    background: white;
+    color: $primary-color;
+    height: $vertical-layout-day-height;
+    width: 20%;
+    float: left;
+    transition: height $layoutchange-anim-speed;
+
+    .label {
+      display: block;
+      background: none;
+      text-align: left;
+      color: $primary-color;
+      position: relative;
+      z-index: 12;
+      float: none;
       width: 100%;
+      line-height: 1.7;
+      height: 7%;
+      margin: 0;
+      padding: $day-row-padding;
+      @include disable-selection();
 
-      &:not(.days7) {
-        .days .day:nth-child(6), .days .day:nth-child(7) {
-          display: none;
-        }
-      }
-
-      &.days7.vertical div.day {
-        width: 14.28%;
-      }
-
-
-      &.cut {
-        width: 62%;
-
-        @media (min-width: 1100px) {
-          width: 70%;
-        }
-
-        @media #{$xxlarge-up} {
-          width: 75%;
-        }
+      span {
+        padding: 5px 0 5px 20px;
+        margin-left: -18px;
       }
     }
 
-    div.table:not(.vertical) {
+    .day-num {
+      display: inline;
+      font-weight: bold;
+      margin-right: 5px;
+    }
 
-      div.day div.events {
-
-        div.event {
-          top: 0 !important;
-          &:not(.detail-shown) {
-            height: 100% !important;
-          }
-
-          &.hide, &:not(.detail-shown).hide {
-            display: block;
-            opacity: 0 !important;
-          }
-        }
+    &.active {
+      .day-num {
+        font-weight: 700;
+        border-left: 4px solid $primary-color;
+        margin-left: -14px;
+        padding-left: 14px;
       }
 
-      .hour-labels .hour-label {
-        top: auto !important;
-        height: auto !important;
+      .day-num {
+        font-weight: 700;
       }
+    }
+  }
 
-      .now-indicator {
-        height: 107% !important;
+  &--7days .day {
+    width: 14.28%;
+  }
 
-        i.fa.fa-chevron-circle-down {
-          display: none;
-        }
-      }
+  .event .type {
+    bottom: 15px;
+  }
+
+  .event.is-opened {
+    width: 300px !important;
+  }
+
+  .day:nth-child(odd) {
+    background: $light-secondary-color;
+  }
+
+  .a-left .events { animation: week-move-left ease $events-move-anim-speed; }
+  .a-right .events { animation: week-move-right ease $events-move-anim-speed; }
+
+  .grid-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+  }
+
+  .grid-wrapper {
+    width: 100%;
+    height: 93%;
+    position: relative;
+    left: 0;
+    top: 7%;
+    padding: 0 $day-row-padding;
+  }
+
+  .grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .now-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 107%;
+    z-index: 7;
+    border-right: 1px solid $primary-color;
+    opacity: .5;
+    @include disable-selection();
+  }
+
+  .hour-labels {
+    @include disable-selection();
+    overflow: hidden;
+    z-index: 10;
+    left: -2.5rem;
+    top: 7%;
+    width: 2rem;
+    position: absolute;
+    height: 93%;
+    text-align: right;
+  }
+
+  .hour-label {
+    position: absolute;
+    color: $lightgraytext-color;
+    font-size: $small-font-size;
+    text-align: right;
+    left: 0;
+    margin-top: -10px;
+    width: 25px;
+  }
+
+  .event {
+    &.hide, &:not(.detail-shown).hide {
+      display: block;
+      opacity: 0 !important;
     }
   }
 }
