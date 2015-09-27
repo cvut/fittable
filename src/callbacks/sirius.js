@@ -78,7 +78,8 @@ var viewPaths = {
   room: 'rooms',
 }
 
-var defaultLimit = 32
+// TODO: This should be removed!
+var defaultLimit = 200
 
 var STATUS_ERROR_TYPES = {
   0: 'connection',
