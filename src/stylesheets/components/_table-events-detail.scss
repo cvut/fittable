@@ -166,3 +166,19 @@
     }
   }
 }
+
+
+@keyframes open-mobile {
+  from {
+    transform: scaleX(1) scaleY(.3);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+#fittable .table.table--small .events .event.is-opened {
+  width: 100% !important;
+  animation-name: open-mobile;
+}

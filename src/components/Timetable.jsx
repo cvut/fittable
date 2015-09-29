@@ -232,8 +232,9 @@ class Timetable extends React.Component {
     const classCut = (this.props.functionsOpened !== null && this.props.screenSize > MEDIUM_SCREEN) ? 'table--cut' : ''
     const classDays7 = this.props.days7 ? 'table--7days' : ''
     const classLayout = this.props.screenSize <= MEDIUM_SCREEN ? 'table--vertical' : ('table--' + this.props.layout)
+    const classSmall = this.props.screenSize == SMALL_SCREEN ? 'table--small' : ''
 
-    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7}`
+    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7} ${classSmall}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
 
