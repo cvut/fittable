@@ -11,6 +11,10 @@
     padding: 20px $column-gutter/2;
     opacity: 1;
     transition: opacity $default-anim-speed, height $default-anim-speed;
+
+    @media #{$small-down} {
+      width: 100%;
+    }
   }
 
   // FIXME: this overrides foundation class; perhaps use a better class name?
@@ -76,6 +80,4 @@
   .weeksw-day.in-other {
     color: rgba(255,255,255,.3);
   }
-
-
 }
