@@ -42,6 +42,23 @@
 
   .build-info {
     float: right;
+    padding: 0 8px;
   }
 
+  .usermenu {
+    padding: 8px;
+
+    .logout {
+      float: right;
+    }
+
+    &-username {
+      margin-left: 8px;
+      font-weight: bold;
+    }
+
+    @media #{$medium-down} {
+
+    }
+  }
 }

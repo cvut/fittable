@@ -11,11 +11,6 @@
     <body class="with-line">
 
         <header class="row">
-            <div class="user-menu">
-                <div class="user"><a href="#"><i class="fa fa-user"></i> <span id="username"></span> </a></div>
-                <!-- <a href="_oauth/login" class="logout"><i class="fa fa-power-off"></i></a> -->
-            </div>
-
             <h1></h1>
             <div class="sub-header"></div>
         </header>
@@ -34,6 +29,17 @@
         </div>
 
         <footer class="row fittable-footer">
+          <div class="usermenu">
+              <!-- fixme: missing translation, waiting for fittable+widget merge -->
+              <span class="usermenu-loggedas">Přihlášen jako</span>
+              <span class="usermenu-username">
+                <i class="fa fa-user"></i> <span id="username"></span>
+              </span>
+              <a href="_oauth/login" class="logout">
+                <i class="fa fa-power-off"></i>
+                <span>Odhlásit se</span>
+              </a>
+          </div>
           <div class="build-info">
             &copy; 2015&emsp;&emsp;FIT ČVUT v&nbsp;Praze
           </div>
