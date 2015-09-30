@@ -11,7 +11,6 @@
     padding: 20px $column-gutter/2;
     opacity: 1;
     transition: opacity $default-anim-speed, height $default-anim-speed;
-    outline: 1px solid white;
   }
 
   // FIXME: this overrides foundation class; perhaps use a better class name?
