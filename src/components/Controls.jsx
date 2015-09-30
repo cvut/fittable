@@ -10,7 +10,7 @@ import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
-import { shiftDate } from '../date'
+import { shiftDate, isWeekend } from '../date'
 
 const propTypes = {
   onDateChange: PropTypes.func.isRequired,
@@ -27,10 +27,12 @@ class Controls extends React.Component {
    */
   handlePrevClick () {
     const shiftFun = shiftDate(this.props.viewDate)
+    const skipWeekend = !this.props.days7 && this.props.viewDate.getDay() === 1
+
     let shiftBy
 
     if (this.props.screenSize == SMALL_SCREEN) {
-      shiftBy = shiftFun('day', -1)
+      shiftBy = shiftFun('day', skipWeekend ? -3 : -1)
     } else {
       shiftBy = shiftFun('week', -1)
     }
@@ -42,10 +44,12 @@ class Controls extends React.Component {
    */
   handleNextClick () {
     const shiftFun = shiftDate(this.props.viewDate)
+    const skipWeekend = !this.props.days7 && this.props.viewDate.getDay() === 5
+
     let shiftBy
 
     if (this.props.screenSize == SMALL_SCREEN) {
-      shiftBy = shiftFun('day', +1)
+      shiftBy = shiftFun('day', skipWeekend ? +3 : +1)
     } else {
       shiftBy = shiftFun('week', +1)
     }
