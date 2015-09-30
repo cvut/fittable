@@ -1,9 +1,12 @@
-.fittable-footer {
+.footer {
   line-height: 16px;
-  padding: 0 20px;
-  margin-top: 4em;
   font-size: $base-font-size;
   color: $darkgraytext-color;
+
+  @media #{$small-down} {
+    background: #363636;
+    color: white;
+  }
 
   img {
     margin-right: 10px;
@@ -17,7 +20,7 @@
   ul {
     display: inline;
     list-style: none;
-    margin: 0;
+    margin: 0 -8px;
     padding: 0;
     vertical-align: middle;
     line-height: 16px;
@@ -40,15 +43,36 @@
     }
   }
 
-  .build-info {
-    float: right;
-    padding: 0 8px;
+  &-content {
+    padding: .5em 20px 4em 20px;
+
+    &-buildinfo {
+      float: right;
+    }
+
+    @media #{$small-down} {
+      padding: 2em 25px;
+      text-align: center;
+
+      a { color: white; }
+
+      &-buildinfo {
+        float: none;
+        padding-bottom: 1.5em;
+      }
+
+      li {
+        font-size: 15px;
+      }
+    }
   }
 
-  .usermenu {
-    padding: 8px;
+  &-usermenu {
+    position: relative;
+    overflow: hidden;
+    padding: 4em 20px 0em 20px;
 
-    .logout {
+    &-logout {
       float: right;
     }
 
@@ -57,8 +81,39 @@
       font-weight: bold;
     }
 
-    @media #{$medium-down} {
+    @media #{$small-down} {
+      background: #494c4e;
+      padding: 15px 15px 15px 70px;
 
+      &-username {
+        margin-left: 0;
+      }
+
+      a { color: white; }
+
+      &-username i.fa {
+        position: absolute;
+        left: 6px;
+        top: -15%;
+        font-size: 60px;
+        color: #696f72;
+      }
+
+      &-logout {
+        color: white;
+        background: #696f72;
+        padding: 15px;
+        margin: -15px;
+        font-size: 18px;
+
+        i.fa {
+          margin-right: 0;
+        }
+
+        span {
+          display: none;
+        }
+      }
     }
   }
 }
