@@ -200,10 +200,15 @@ function dateChangeCallback (newdate, semester) {
  /* ... */
 }
 
+function user (cb) {
+  cb(null, { accessToken: 'asdasdasd1234' })
+}
+
 export {
     searchCallback as search,
     dataCallback as data,
     semesterDataCallback as semesterData,
     dateChangeCallback as dateChange,
     viewChangeCallback as viewChange,
+    user,
 }
