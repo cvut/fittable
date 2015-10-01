@@ -201,7 +201,7 @@ function dateChangeCallback (newdate, semester) {
 }
 
 function user (cb) {
-  cb(null, { accessToken: 'asdasdasd1234' })
+  cb(null, { id: 'novacjos', name: 'Josef Nováček, MBA', publicAccessToken: 'asdasdasd1234' })
 }
 
 export {

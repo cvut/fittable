@@ -8,12 +8,10 @@ function startUserRequest () {
   }
 }
 
-function receiveUser (publicAccessToken) {
+function receiveUser (payload) {
   return {
     type: USER_LOAD_COMPLETED,
-    payload: {
-      publicAccessToken,
-    },
+    payload,
   }
 }
 
@@ -25,8 +23,7 @@ export function fetchUserData (dataCallback, weekDate) {
       if (error) {
         return dispatch(receiveUser(null))
       }
-      const { accessToken } = result
-      dispatch(receiveUser(accessToken))
+      dispatch(receiveUser(result))
     })
   }
 }

@@ -3,6 +3,8 @@ import { USER_LOAD_STARTED, USER_LOAD_COMPLETED } from '../constants/actionTypes
 const initialState = {
   isFetching: false,
   publicAccessToken: null,
+  id: null,
+  name: null,
 }
 
 export default function userReducer (state = initialState, action) {

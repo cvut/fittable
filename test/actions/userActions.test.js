@@ -30,6 +30,8 @@ test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
 
     st.equal(actualArg.type, USER_LOAD_COMPLETED, 'dispatches USER_LOAD_COMPLETED')
     st.equal(typeof actualArg.payload.publicAccessToken, 'string', 'dispatches payload with publicAccessToken')
+    st.equal(typeof actualArg.payload.id, 'string', 'dispatches payload with user id')
+    st.equal(typeof actualArg.payload.name, 'string', 'dispatches payload with user name')
     st.end()
   })
 })
