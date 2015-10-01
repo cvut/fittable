@@ -15,6 +15,7 @@ import { displaySidebar, displayEvent } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
 import { detectScreenSize } from '../../actions/clientActions'
+import { fetchUserData } from '../../actions/userActions'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -39,6 +40,7 @@ function mapStateToProps (state) {
     semester: state.semester,
     grid: state.semester.grid,
     isMobile: state.client.smallScreen,
+    user: state.user,
   }
 }
 
@@ -57,6 +59,7 @@ function mapDispatchToProps (dispatch) {
     onSemesterDataRequest: (callback, date) => dispatch(fetchSemesterData(callback, date)),
     onWindowResize: () => dispatch(detectScreenSize()),
     onErrorHide: () => dispatch(hideDataError()),
+    onUserRequest: () => dispatch(fetchUserData()),
   }
 }
 
@@ -65,6 +68,7 @@ const FittableContainer = React.createClass({
     this.getWeekEvents()
     this.getSemesterData()
     this.props.onWindowResize()
+    this.props.onUserRequest()
     global.window.addEventListener('resize', this.props.onWindowResize)
   },
 
@@ -169,6 +173,7 @@ const FittableContainer = React.createClass({
           onViewChange={this.handleChangeView}
           onSearch={this.handleSearch}
           searchResults={this.props.search.results}
+          user={this.props.user}
         />
         <div className="clearfix"></div>
         <Timetable
