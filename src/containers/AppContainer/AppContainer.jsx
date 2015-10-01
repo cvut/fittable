@@ -4,13 +4,7 @@ import { Provider } from 'react-redux'
 import store from '../../store'
 import FittableContainer from '../FittableContainer'
 
-let callbacks
-// XXX: CJS for conditional import
-if (process.env.FITTABLE_SOURCE === 'sirius') {
-  callbacks = require('../../callbacks/sirius')
-} else {
-  callbacks = require('../../callbacks/faux')
-}
+import * as callbacks from '../../callbacks'
 
 export default class AppContainer extends Component {
 
