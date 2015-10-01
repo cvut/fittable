@@ -12,17 +12,9 @@ const propTypes = {
 class FunctionsBar extends React.Component {
 
   /**
-   * Handles a click on the settings icon
-   */
-  handleSettingsClick () {
-    this.props.onPanelToggle('settings')
-  }
-
-  /**
    * Handles a click on the search icon
    */
   handleSearchClick () {
-
     this.props.onPanelToggle('search')
 
     // Focus the search input
@@ -31,11 +23,8 @@ class FunctionsBar extends React.Component {
     }, 1000)
   }
 
-  /**
-   * Handles a click on the filter icon
-   */
-  handleFilterClick () {
-    this.props.onPanelToggle('filter')
+  onFunctionClick (functionName) {
+    this.props.onPanelToggle(functionName)
   }
 
   render () {
@@ -52,7 +41,7 @@ class FunctionsBar extends React.Component {
         <button
           type="button"
           className="function-btn filter-function"
-          onClick={ this.handleFilterClick.bind(this) }
+          onClick={ this.onFunctionClick.bind(this, 'filter') }
         >
           <span className="tooltip">{ CP.translate('functions.filter.name') }</span>
           <i className="fa fa-filter"></i>
@@ -60,7 +49,7 @@ class FunctionsBar extends React.Component {
         <button
           type="button"
           className="function-btn settings-function"
-          onClick={ this.handleSettingsClick.bind(this) }
+          onClick={ this.onFunctionClick.bind(this, 'settings') }
           onLayoutSelect
         >
           <span className="tooltip">{ CP.translate('functions.settings.name') }</span>
