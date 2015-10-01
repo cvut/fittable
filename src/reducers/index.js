@@ -9,6 +9,7 @@ import ui from './uiReducer'
 import search from './searchReducer'
 import semester from './semesterReducer'
 import client from './clientReducer'
+import user from './userReducer'
 
 const initialSettings = {
   locale: 'cs',
@@ -66,6 +67,7 @@ const rootReducer = combineReducers({
   search,
   semester,
   client,
+  user,
 })
 
 export default rootReducer

@@ -13,6 +13,7 @@ test('Initial state', t => {
   t.is(type(result.search), 'Object')
   t.is(type(result.semester), 'Object')
   t.is(type(result.client), 'Object')
+  t.is(type(result.user), 'Object')
   t.end()
 })
 
