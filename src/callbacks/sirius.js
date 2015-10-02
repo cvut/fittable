@@ -424,11 +424,6 @@ var settingsChangeCallback = function (settings) {
  * --- Initialize the widget ---
  */
 
-document.addEventListener('DOMContentLoaded', function () {
-
-
-})
-
 function viewChangeCallback (view, param) {
   router.navigate(`/${viewPaths[view]}/${param}`)
 }
@@ -476,6 +471,37 @@ if (!isUserLoggedIn()) {
     viewNames[appLocale]['personal'] : viewNames[appLocale][view] + ' ' + parameter, null)
 }
 
+function userCallback (cb) {
+  const request = makeRequest(`people/${user.name}`)
+
+  request.onreadystatechange = (callback, fittable) => {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      if (request.status === 200) {
+        // Request successful
+        const rawData = JSON.parse(request.responseText)
+
+        if (!rawData || !rawData.people) {
+          cb(generateError('generic'))
+          return
+        }
+
+        const rawUser = rawData.people
+
+        const data = {
+          publicAccessToken: rawUser['access_token'],
+          id: rawUser.id,
+          name: rawUser.name,
+        }
+
+        cb(null, data)
+      } else {
+        // Request failed
+        cb(generateError(request.status).type)
+      }
+    }
+  }
+}
+
 export {
   dataCallback as data,
   searchCallback as search,
@@ -483,4 +509,5 @@ export {
   semesterDataCallback as semesterData,
   settingsChangeCallback as settingsChange,
   viewChangeCallback as viewChange,
+  userCallback as user,
 }
