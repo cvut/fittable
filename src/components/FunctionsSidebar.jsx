@@ -23,10 +23,9 @@ const propTypes = {
 class FunctionsSidebar {
 
   render () {
-
     let functionToRender
 
-    if (this.props.opened == 'settings') {
+    if (this.props.opened === 'settings') {
       functionToRender = (
         <FunctionSettings
           ref="functionSettings"
@@ -35,7 +34,7 @@ class FunctionsSidebar {
         />
       )
     }
-    if (this.props.opened == 'search') {
+    if (this.props.opened === 'search') {
       functionToRender = (
         <FunctionSearch
           ref="functionSearch"
@@ -45,7 +44,7 @@ class FunctionsSidebar {
         />
       )
     }
-    if (this.props.opened == 'filter') {
+    if (this.props.opened === 'filter') {
       functionToRender = (
         <FunctionFilter
           ref="functionFilter"
