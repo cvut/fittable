@@ -103,7 +103,7 @@ layout: page
   .. projekt bude verzovaný systémem Git na GitHubu.
 
 . Technologie:
-  .. bude implementovaný v jazyce kompilovaném do JavaScriptu; preferovaná je syntaxe ECMAScript 6+ (s překladem pomocí https://github.com/6to5/6to5[6to5]).
+  .. bude implementovaný v jazyce kompilovaném do JavaScriptu; preferovaná je syntaxe ECMAScript 6+ (s překladem pomocí https://github.com/babel/babel[Babel]).
 
 . Běhové prostředí:
   .. bude fungovat _client-side_, ve webovém prohlížeči s podporou JavaScriptu:
