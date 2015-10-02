@@ -1,8 +1,8 @@
 ![fittable](http://i.imgur.com/tJuZ7l3.png)
 
-[![Travis](https://img.shields.io/travis/cvut/fittable-widget/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable-widget)
-[![AppVeyor](https://img.shields.io/appveyor/ci/cvut/fittable-widget.svg?style=flat-square)](https://ci.appveyor.com/project/cvut/fittable-widget)
-[![David](https://img.shields.io/david/cvut/fittable-widget.svg?style=flat-square)](https://david-dm.org/cvut/fittable-widget)
+[![Travis](https://img.shields.io/travis/cvut/fittable/master.svg?style=flat-square)](https://travis-ci.org/cvut/fittable)
+[![AppVeyor](https://img.shields.io/appveyor/ci/cvut/fittable.svg?style=flat-square)](https://ci.appveyor.com/project/cvut/fittable)
+[![David](https://img.shields.io/david/cvut/fittable.svg?style=flat-square)](https://david-dm.org/cvut/fittable)
 
 Fittable is new timetable application developed at [FIT CTU in Prague](http://fit.cvut.cz).
 It’s a client-side JavaScript application built on top of the [Sirius API](https://github.com/cvut/sirius), created with an emphasis on modern approach to design and used technology.
