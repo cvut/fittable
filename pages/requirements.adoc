@@ -27,30 +27,30 @@ layout: page
 
 . okénko události bude obsahovat:
   .. kód předmětu,
-  .. místnost (KOSí kód),
-  .. čas začátku a konce události,
+  .. [p1]#místnost (KOSí kód),#
+  .. čas začátku a [p2]#konce události,#
   .. typ události (barevným rozlišením),
-  .. [p2]#příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).#
+  .. příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).
 
 . po kliknutí na okénko události se zobrazí detail události obsahující:
   .. celý název předmětu nebo události,
-  .. [p1]#odkaz na kalendář předmětu (jen pro P/C/L/J/Z),#
-  .. ořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),
+  .. odkaz na kalendář předmětu (jen pro P/C/L/J/Z),
+  .. pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),
   .. číslo paralelky (jen pro P/C/L/J),
   .. odkaz na kalendář místnosti,
   .. vyučující/zkoušející/organizátoři události (jeden nebo více lidí):
      ... celé jméno,
      ... [line-through]#e-mail# (je na Usermapu),
-     ... [p1]#odkaz na kalendář,#
+     ... odkaz na kalendář,
      ... odkaz na Usermap.
   .. [p3]#seznam studentů v paralelce (jen pro P/C/L):#
      ... [p3]#celé jméno,#
      ... [p3]#uživatelské jméno,#
      ... [p3]#zobrazovat ve „fancy pop-up.“#
-  .. [p2]#seznam výjimek, které událost ovlivnily.#
+  .. seznam výjimek, které událost ovlivnily.
 
-. [p2]#na původním místě zrušené či přesunuté události bude zobrazovat zástupné okýnko:#
-  .. v případě přesunuté události s odkazem na novou událost.
+. na původním místě zrušené či přesunuté události bude zobrazovat zástupné okýnko:
+  .. [p3]#v případě přesunuté události s odkazem na novou událost.#
 
 . bude umožňovat navigaci v kalendáři po týdnech/měsících/semestrech.
 
