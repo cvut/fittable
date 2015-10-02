@@ -116,11 +116,6 @@ layout: page
   .. bude využívat výhradně _open-source_ knihovny.
 
 
-== TODO
-
-* Navrhnout způsob zabezpečení.
-
-
 == Zkratky
 
 Typy událostí:
