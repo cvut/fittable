@@ -4,4 +4,4 @@ rvm: 2.2.0
 script: bundle exec rake deploy
 env:
   global:
-    secure: Vu0lM473mN4isHghkUcoz2xiIbCtrfFD3vHc77q264zrgsKBdog9WJApQGEQSUze7PuHTvufQAAak62+PWtRaiztfDJGALaJ5E8ybiFi0Thmi3zm7SgKhu0bQa5wYDqC97lv2WK4YvA45JzY1QzPXBu5YKlPpNc4Q6+nTy/0L9A=
+    - secure: C4uIU2zCWERoPQR41yCYI05LL4joqdAcD1yrLAzPq8wKgWAq3T/vdmEm4ePEWM+mNcXW3aHXAj/1tjFNvamZ6kzf7c1+E2ubbqRKEGQsk7g5PJM/IaCAF3z6VYhK8+QktsbgZHDeG6+x1nU/oQf9g+tLIwK474gtfkSP7C3NMyg=  # GH_TOKEN
