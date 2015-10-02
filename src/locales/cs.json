@@ -76,6 +76,13 @@
       "subject": "Předmět",
       "person": "Osoba",
       "room": "Místnost"
+    },
+    "ical": {
+      "name": "iCal",
+      "title": "iCalendar export",
+      "desc": "Svůj osobní kalendář si můžete naimportovat do své oblíbené aplikace, či mobilního telefonu. Použijte k tomu export ve formátu iCalendar ze služby Sirius.",
+      "help": "Jak si přidat kalendář do aplikace",
+      "label": "Adresa kalendáře"
     }
   },
 

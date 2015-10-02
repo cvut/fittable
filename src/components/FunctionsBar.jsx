@@ -28,15 +28,15 @@ class FunctionsBar extends React.Component {
   }
 
   render () {
-
     return (
       <div className="functions-bar">
         <button
           type="button"
-          className="function-btn flags-function"
+          className="function-btn ical-function"
+          onClick={this.onFunctionClick.bind(this, 'ical')}
         >
-          <span className="tooltip">{ CP.translate('functions.flags.name') }</span>
-          <i className="fa fa-flag"></i>
+          <span className="tooltip">{ CP.translate('functions.ical.name') }</span>
+          <i className="fa fa-calendar"></i>
         </button>
         <button
           type="button"

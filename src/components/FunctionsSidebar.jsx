@@ -8,9 +8,10 @@ import { options as optionsType } from '../constants/propTypes'
 import FunctionSettings from './FunctionSettings'
 import FunctionSearch from './FunctionSearch'
 import FunctionFilter from './FunctionFilter'
+import SidebarIcal from './SidebarIcal'
 
 const propTypes = {
-  opened: PropTypes.oneOf(['settings', 'search', 'filter']),
+  opened: PropTypes.oneOf(['settings', 'search', 'filter', 'ical']),
   onSettingsChange: PropTypes.func,
   settings: PropTypes.shape(optionsType),
   onSearch: PropTypes.func,
@@ -18,6 +19,11 @@ const propTypes = {
   onViewChange: PropTypes.func,
   displayFilter: PropTypes.objectOf(PropTypes.bool), // FIXME: shared type
   onFilterChange: PropTypes.func,
+  user: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    publicAccessToken: PropTypes.string,
+  }),
 }
 
 class FunctionsSidebar {
@@ -51,6 +57,13 @@ class FunctionsSidebar {
           displayFilter={this.props.displayFilter}
           onFilterChange={this.props.onFilterChange}
         />
+      )
+    }
+
+    if (this.props.opened === 'ical') {
+      const {id, publicAccessToken} = this.props.user
+      functionToRender = (
+        <SidebarIcal username={id} token={publicAccessToken} />
       )
     }
 
