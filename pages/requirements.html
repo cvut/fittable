@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Požadavky</title>
+
+    <link rel="stylesheet" href="/fittable/css/main.css">
+    <link rel="canonical" href="https://cvut.github.io//fittable/pages/requirements.html">
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/fittable/">Sirius – calendar widget</a>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Požadavky</h1>
+  </header>
+
+  <article class="post-content">
+    <section class="sect1"><h2 id="funkční-požadavky"><a class="anchor" href="#funkční-požadavky"></a>Funkční požadavky</h2><div class="olist arabic decimal-nested"><ol class="arabic"><li>bude poskytovat náhled na události (tj. kalendáře) z pohledu:<ol class="loweralpha" type="a"><li>osoby,</li><li>předmětu,</li><li>místnosti.</li></ol></li><li>bude poskytovat různé módy zobrazení:<ol class="loweralpha" type="a"><li>rozvrhový (horizontální):<ol class="lowerroman" type="i"><li>s přepínáním mezi zobrazení 5/7 dní (např. dálkoví studenti mívají výuku i o víkendu),</li><li>s časovou osou podle harmonogramu dané fakulty (<em>časové</em> rozsahy) sloužící jako <em>pomocné</em> vodítko.</li></ol></li><li>kalendářní:<ol class="lowerroman" type="i"><li>týdenní (výchozí),</li><li><span class="p2">měsíční,</span></li><li>denní.</li></ol></li></ol></li><li>bude zobrazovat paritu (sudý/lichý) aktuálně vybraného období.</li><li>bude zobrazovat označení semestru aktuálně vybraného období.</li><li>okénko události bude obsahovat:<ol class="loweralpha" type="a"><li>kód předmětu,</li><li><span class="p1">místnost (KOSí kód),</span></li><li>čas začátku a <span class="p2">konce události,</span></li><li>typ události (barevným rozlišením),</li><li>příznak, zda byla událost ovlivněna rozvrhovou výjimkou (tj. změna oproti pravidelnému rozvrhu).</li></ol></li><li>po kliknutí na okénko události se zobrazí detail události obsahující:<ol class="loweralpha" type="a"><li>celý název předmětu nebo události,</li><li>odkaz na kalendář předmětu (jen pro P/C/L/J/Z),</li><li>pořadové číslo výukové hodiny nebo zkoušky v semestru (jen pro P/C/L/Z),</li><li>číslo paralelky (jen pro P/C/L/J),</li><li>odkaz na kalendář místnosti,</li><li>vyučující/zkoušející/organizátoři události (jeden nebo více lidí):<ol class="lowerroman" type="i"><li>celé jméno,</li><li><span class="line-through">e-mail</span> (je na Usermapu),</li><li>odkaz na kalendář,</li><li>odkaz na Usermap.</li></ol></li><li><span class="p3">seznam studentů v paralelce (jen pro P/C/L):</span><ol class="lowerroman" type="i"><li><span class="p3">celé jméno,</span></li><li><span class="p3">uživatelské jméno,</span></li><li><span class="p3">zobrazovat ve „fancy pop-up.“</span></li></ol></li><li>seznam výjimek, které událost ovlivnily.</li></ol></li><li>na původním místě zrušené či přesunuté události bude zobrazovat zástupné okýnko:<ol class="loweralpha" type="a"><li><span class="p3">v případě přesunuté události s odkazem na novou událost.</span></li></ol></li><li>bude umožňovat navigaci v kalendáři po týdnech/měsících/semestrech.</li><li>bude poskytovat filtr zobrazených událostí:<ol class="loweralpha" type="a"><li>podle typu události.</li></ol></li><li>bude poskytovat jednotný vyhledávač kalendářů:<ol class="loweralpha" type="a"><li>osoby (podle uživatelského i občanského jména),</li><li>předmětu (podle kódu a názvu),</li><li>místnosti (podle KOSího kódu).</li></ol></li><li>kalendářní data bude získávat ze služby Sirius:<ol class="loweralpha" type="a"><li>přes jeho RESTful API, ve formátu JSON,</li><li><em>on-demand</em>.</li></ol></li><li>bude poskytovat JS API pro:<ol class="loweralpha" type="a"><li>přidání položek zobrazených v okénku události,</li><li>přidání položek zobrazených v detailu události (textových i akcí),</li><li>odchytávání akcí nad kalendářem [TODO].</li></ol></li></ol></div></section>
+<section class="sect1"><h2 id="nefunkční-požadavky"><a class="anchor" href="#nefunkční-požadavky"></a>Nefunkční požadavky</h2><div class="olist arabic decimal-nested"><ol class="arabic"><li>Uživatelské rozhraní:<ol class="loweralpha" type="a"><li>bude lokalizované do češtiny a angličtiny,</li><li>bude responzivní (od desktopu po mobilní telefon s WVGA),</li><li>bude přizpůsobené i pro ovládání na dotykovém displeji,</li><li>vizuálně bude vycházet z grafiky vytvořené pro „nový web“ od Josefa Lobotky (fonty, barvy, příp. ikony).</li></ol></li><li>Přizpůsobitelnost a konfigurovatelnost:<ol class="loweralpha" type="a"><li>widget bude možné přizpůsobit pro různá použití:<ol class="lowerroman" type="i"><li>na fakultním webu pro studenty a vyučující,</li><li>v rámci administračního rozhraní pro rozvrháře,</li><li>v módu omezené funkčnosti, např. na osobní stránce vyučujícího, studenta atp.</li></ol></li><li>widget bude počítat s nasazením i na dalších fakultách.</li></ol></li><li>Dokumentace:<ol class="loweralpha" type="a"><li>bude obsahovat kompletní postup pro sestavení (build),</li><li>bude obsahovat popis konfigurace a JS API pro přizpůsobení widgetu,</li><li>veškerá dokumentace by měla být v angličtině.</li></ol></li><li>Kvalita kódu:<ol class="loweralpha" type="a"><li>kód bude srozumitelný, dobře strukturovaný a potenciálně nejasné části okomentované,</li><li>kód bude pokrytý jednotkovými a integračními testy,</li><li>kód i další textové soubory budou v UTF-8 a s unixovým způsobem ukončování řádek (řídící znak LF / 0x0A),</li><li>názvy všech identifikátorů použitých v kódu budou v angličtině.</li></ol></li><li>Verzování:<ol class="loweralpha" type="a"><li>projekt bude verzovaný systémem Git na GitHubu.</li></ol></li><li>Technologie:<ol class="loweralpha" type="a"><li>bude implementovaný v jazyce kompilovaném do JavaScriptu; preferovaná je syntaxe ECMAScript 6+ (s překladem pomocí <a href="https://github.com/babel/babel">Babel</a>).</li></ol></li><li>Běhové prostředí:<ol class="loweralpha" type="a"><li>bude fungovat <em>client-side</em>, ve webovém prohlížeči s podporou JavaScriptu:<ol class="lowerroman" type="i"><li>Chrome/Chromium 35+,</li><li>Firefox 31+,</li><li>Internet Explorer 10+ (9 alespoň omezeně),</li><li>Safari 6+.</li></ol></li></ol></li><li>Licence:<ol class="loweralpha" type="a"><li>bude využívat výhradně <em>open-source</em> knihovny.</li></ol></li></ol></div></section>
+<section class="sect1"><h2 id="zkratky"><a class="anchor" href="#zkratky"></a>Zkratky</h2><p>Typy událostí:</p>
+<div class="ulist"><ul><li>přednáška [P]</li><li>cvičení [C]</li><li>laboratoř [L]</li><li>jednorázová akce předmětu [J]</li><li>zkouška (i zápočtová) [Z]</li><li>omezení vyučujícího [V]</li><li>obecná událost [O]</li></ul></div></section>
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-3">
+            <p class="text">&copy; FIT ČVUT v Praze, 2015</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Timetable a nové rozhraní</title>
+
+    <link rel="stylesheet" href="/fittable/css/main.css">
+    <link rel="canonical" href="https://cvut.github.io//fittable/pages/timetable.html">
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/fittable/">Sirius – calendar widget</a>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Timetable a nové rozhraní</h1>
+  </header>
+
+  <article class="post-content">
+    <div id="preamble"><p>Tento dokument analyzuje současné rozhraní pro prohlížení rozvrhů (<a href="https://timetable.fit.cvut.cz">timetable</a>) a dává ho do kontrastu s připravovaným novým rozhraním postaveným nad službou <a href="http://rozvoj.fit.cvut.cz/Main/sirius">Sirius</a>.</p></div>
+<section class="sect1"><h2 id="přehled-stránek"><a class="anchor" href="#přehled-stránek"></a>1. Přehled stránek</h2><p>Následující sekce popisují jednotlivé základní stránky v rozhraní timetable z pohledu poskytovaných dat a navigace mezi nimi.</p>
+<section class="sect2"><h3 id="hlavní-stránka"><a class="anchor" href="#hlavní-stránka"></a>1.1. Hlavní stránka</h3><p>Hlavní stránka slouží jako rozcestník a také prostor pro další textové informace.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>nestrukturované informace:<ul><li>parita prvního týdne semestru</li><li>datum začátku semestru</li><li>standardní začátky hodin (tj. harmonogram dne)</li><li>mimořádné přesuny výuky a odchylky od standardního hramonogramu dne (tj. rozvrhové výjimky)</li><li>rozvrh blokové výuky</li><li>vysvětlivky ke KOSím kódům místností</li><li>soupis místností (kódy)</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#seznam-předmětů">Seznam předmětů</a></li><li><a href="#seznam-místností">Seznam místností</a></li><li><a href="#rozvrh-místnosti-na-den">Rozvrh všech místností v jednotlivé dny</a></li><li><a href="#seznam-zkoušek">Seznam zkoušek</a></li><li><a href="#seznam-učitelů">Seznam učitelů</a></li><li><a href="#seznam-studentů">Seznam studentů</a></li><li><a href="#seznam-jednorázových-akcí">Seznam jednorázových akcí</a></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Hlavní stránkou v novém rozhraní bude přímo kalendář přihlášeného uživatele otevřený na aktuálním týdnu.</div></section>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Všechny rozvrhové výjimky i blokovou výuku budou rozvrháři zadávat do Siria a promítnou se do výsledných kalendářů.
+     Zároveň bude existovat přehledová stránka všech zadaných výjimek.</div></section>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Přehled počítačových a seminárních učeben je také na <a href="https://ict.fit.cvut.cz/~web/current/web/classrooms/ucebny/ucebny.shtml">webu ICT</a>.</div></section></section>
+<section class="sect2"><h3 id="seznam-předmětů"><a class="anchor" href="#seznam-předmětů"></a>1.2. Seznam předmětů</h3><p>Seznam všech existujících předmětů dané fakulty s odkazem na rozvrh aktuálně vypsaného předmětu a zapsané studenty.
+Slouží především jako rozcestník k rozvrhům předmětů.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>všechny předměty vyučované fakultou (volitelně seskupené dle katedry)<ul><li>český název a kód katedry zajišťující výuku</li><li>český název a kód předmětu</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-předmětu">Rozvrh předmětu</a> (pro aktuálně vypsané)</li><li><a href="#seznam-studentů-zapsaných-na-předmět">Seznam studentů zapsaných na předmět</a> (pro aktuálně vypsané)</li><li><a href="#seznam-studentů-zapsaných-na-předmět">Seznam studentů zapsaných na předmět</a> bez rozvrhu (pro aktuálně vypsané)</li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Funkci rozcestníku k rozvrhům zastoupí vyhledávání kalendářů osob, místností a předmětů.
+     Místo toho, aby uživatel hledal daný předmět v seznamu, jen napíše jeho název či kód do vyhledávacího políčka (s našeptávačem).</div></section>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Kategorizovaný seznam předmětů vyučovaných na fakultě poskytuje Bílá kniha a (víceméně) KOS, tady s ní tedy nepočítáme.</div></section></section>
+<section class="sect2"><h3 id="seznam-místností"><a class="anchor" href="#seznam-místností"></a>1.3. Seznam místností</h3><p>Seznam všech místností fakulty s odkazem na rozvrh místnosti.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>místnosti fakulty (seskupené dle lokality)<ul><li>zkratka lokalita</li><li>kód místnosti</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-místnosti">Rozvrh místnosti</a> (pro aktuálně využívané)</li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Funkci rozcestníku k rozvrhům zastoupí vyhledávání kalendářů osob, místností a předmětů.
+     Místo toho, aby uživatel hledal danou místnost v seznamu, jen napíše její kód do vyhledávacího políčka (s našeptávačem).</div></section>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Seznam (kódů) místností fakulty s rozvrhy přímo nesouvisí, bude-li však o něj zájem, poskytneme ho na samostatné stránce.</div></section></section>
+<section class="sect2"><h3 id="seznam-zkoušek"><a class="anchor" href="#seznam-zkoušek"></a>1.4. Seznam zkoušek</h3><p>Seznam všech existujících předmětů dané fakulty s odkazem na seznam aktuálně vypsaných zkoušek.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>všechny předměty vyučované fakultou (seskupené dle katedry)<ul><li>název a kód katedry zajišťující výuku</li><li>český název a kód předmětu</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#seznam-zkouškových-termínů-předmětu">Seznam zkouškových termínů předmětu</a></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Viz <a href="#seznam-předmětů">Seznam předmětů</a>.</div></section></section>
+<section class="sect2"><h3 id="seznam-zkouškových-termínů-předmětu"><a class="anchor" href="#seznam-zkouškových-termínů-předmětu"></a>1.5. Seznam zkouškových termínů předmětu</h3><p>Seznam aktuálně vypsaných zkouškových termínů jednoho předmětu.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>zkouškové termíny předmětu (seskupené dle semestru)<ul><li>kód semestru</li><li>datum konání</li><li>kód místnosti</li><li>jméno učitele, který termín vypsal</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-učitele">Rozvrh učitele</a>, který vypsal daný termín</li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Zkouškové termíny jsou v Siriu reprezentovány jako události s vazbou na daný předmět a místnost, zobrazí se tedy v kalendáři předmětu, resp. místnosti.
+     Navíc se zobrazí v kalendáři učitele, který zkoušku vypsal, a studentů, kteří se na ni přes KOS přihlásili.</div></section></section>
+<section class="sect2"><h3 id="seznam-učitelů"><a class="anchor" href="#seznam-učitelů"></a>1.6. Seznam učitelů</h3><p>Seznam učitelů fakulty, kteří daný semestr vyučují nějaký předmět, s odkazem na jejich rozvrh.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>učitelé fakulty<ul><li>název a kód katedry, ke které přísluší</li><li>celé jméno</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-učitele">Rozvrh učitele</a></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Funkci rozcestníku k rozvrhům zastoupí vyhledávání kalendářů osob, místností a předmětů.
+     Místo toho, aby uživatel hledal daného učitele v seznamu, jen napíše jeho jméno nebo uživatelské jméno do vyhledávacího políčka (s našeptávačem).</div></section>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Jmenný seznam učitelů (vč. jejich katedry) je dostupný na fakultních webových stránkách a je dohledatelný také v Usermapu, tady s ním tedy nepočítáme.</div></section></section>
+<section class="sect2"><h3 id="seznam-studentů"><a class="anchor" href="#seznam-studentů"></a>1.7. Seznam studentů</h3><p>Seznam studentů fakulty s odkazem na jejich rozvrh.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>studenti fakulty<ul><li>celé jméno</li><li>uživatelské jméno</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-studenta">Rozvrh studenta</a></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Funkci rozcestníku k rozvrhům zastoupí vyhledávání kalendářů osob, místností a předmětů.
+     Místo toho, aby uživatel hledal daného studenta v seznamu, jen napíše jeho jméno nebo uživatelské jméno do vyhledávacího políčka (s našeptávačem).</div></section>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Jmenný seznam studentů s rozvrhy přímo nesouvisí, tady s ním tedy nepočítáme.
+         Zaměstnanci mohou studenty vyhledávat v Usermapu, studenti na to dle nového nařízení rektora ohledně ochramy osobních údajů nemají právo.</div></section></section>
+<section class="sect2"><h3 id="seznam-jednorázových-akcí"><a class="anchor" href="#seznam-jednorázových-akcí"></a>1.8. Seznam jednorázových akcí</h3><p>Seznam aktuálně vypsaných jednorázových akcí fakulty.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>jednorázové akce předmětů fakulty (seskupené dle předmětu)<ul><li>český název a kód předmětu</li><li>název akce</li><li>datum a čas konání</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#jednorázová-akce">Jednorázová akce</a></li></ul></dd></dl></div></section>
+<section class="sect2"><h3 id="jednorázová-akce"><a class="anchor" href="#jednorázová-akce"></a>1.9. Jednorázová akce</h3><div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>název akce</li><li>kapacita</li><li>počet obsazených míst</li><li>čas a datum konání</li><li>datum uzávěrky přihlášek</li><li>celé jméno učitele</li><li>katedra (kód a název)</li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-učitele">Rozvrh učitele</a></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Jednorázové akce předmětů jsou v Siriu reprezentovány jako události s vazbou na daný předmět a místnost, zobrazí se tedy v kalendáři předmětu, resp. místnosti.
+     Navíc se zobrazí v kalendáři učitele, který akci vypsal, a studentů, kteří se na ni přes KOS přihlásili.</div></section></section>
+<section class="sect2"><h3 id="rozvrh"><a class="anchor" href="#rozvrh"></a>1.10. Rozvrh</h3><p>Dvoutýdenní rozvrh ve formě tabulky s hodinami na horizontální ose a dny na vertikální ose.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>rozvrhové lístky:<ul><li>den, hodina (pořadové číslo) a parita týdne</li><li>typ paralelky (P/C/L)</li></ul></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">Dvoutýdenní rozvrh bude nahrazen klasickým kalendářním pohledem, který reflektuje skutečný průběh semestru (vč. přesunů výuky apod.), dokáže zobrazit blokovou výuku apod.
+     Budou k dispozici dva základní módy zobrazení – horizontální (rozvrhový) a vertikální (klasický kalendářní).</div></section>
+<section class="sect3"><h4 id="rozvrh-předmětu"><a class="anchor" href="#rozvrh-předmětu"></a>1.10.1. Rozvrh předmětu</h4><p><em>(rozšiřuje <a href="#rozvrh">Rozvrh</a>)</em></p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>český název a kód předmětu</li><li>hodinová dotace předmětu (např. 2+2, 2+0…)</li><li>rozvrhové lístky paralelek předmětu<ul><li>kód místnosti</li><li>jména učitelů</li><li>číslo paralelky</li><li>počet zapsaných studentů</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#seznam-studentů-zapsaných-na-předmět">Seznam studentů zapsaných na předmět</a></li><li>u každého rozvrhového lístku:<ul><li><a href="#rozvrh-místnosti">Rozvrh místnosti</a></li><li><a href="#rozvrh-učitele">Rozvrhy učitelů</a></li><li><a href="#seznam-studentů-zapsaných-na-paralelku">Seznam studentů zapsaných na paralelku</a></li></ul></li></ul></dd></dl></div>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Aktuálně nepočítáme se zobrazováním hodinové dotace předmětu, neb v kontextu již sestaveného rozvrhu jde o redundantní informaci a navíc je dostupná v Bílé knize.</div></section></section>
+<section class="sect3"><h4 id="rozvrh-učitele"><a class="anchor" href="#rozvrh-učitele"></a>1.10.2. Rozvrh učitele</h4><p><em>(rozšiřuje <a href="#rozvrh">Rozvrh</a>)</em></p>
+<p>Rozvrh učitele navíc obsahuje speciální rovrhové lístky, tzv. omezení učitele.
+Tento typ lístku využívají učitelé pro přidání vlastních událostí do svého rozvrhu, např. konzultační hodiny, schůze pracovní skupiny apod.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>celé jméno učitele</li><li>rozvrhové lístky paralelek, které učitel vyučuje<ul><li>kód předmětu</li><li>kód místnosti</li><li>číslo paralelky</li><li>počet zapsaných studentů</li></ul></li><li>rozvrhové lístky typu „omezení učitele“<ul><li>den, hodina (pořadové číslo) a parita týdne</li><li>název lístku</li></ul></li><li>emailové adresy studentů paralelek, které vyučuje, dle předmětu a typu paralelky</li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li>u každého rozvrhového lístku:<ul><li><a href="#rozvrh-předmětu">Rozvrh předmětu</a></li><li><a href="#rozvrh-místnosti">Rozvrh místnosti</a></li><li><a href="#seznam-studentů-zapsaných-na-paralelku">Seznam studentů zapsaných na paralelku</a></li></ul></li></ul></dd></dl></div>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">S agregací e-mailových adres studentů napříč více paralelkami konkrétního vyučujícího momentálně nepočítáme.
+         Stejnou funkcionalitu poskytuje webové rozhraní KOSu, pro vyučující dostupné přes Předměty → Prezenční seznamy → Email → Všechny moje paralelky.</div></section></section>
+<section class="sect3"><h4 id="rozvrh-studenta"><a class="anchor" href="#rozvrh-studenta"></a>1.10.3. Rozvrh studenta</h4><p><em>(rozšiřuje <a href="#rozvrh">Rozvrh</a>)</em></p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>celé jméno studenta</li><li>rozvrhové lístky paralelek, na které je student zapsaný<ul><li>kód předmětu</li><li>kód místnosti</li><li>jména učitelů</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li>zkouškové termíny zapsaných předmětů</li><li>u každého rozvrhového lístku:<ul><li><a href="#rozvrh-předmětu">Rozvrh předmětu</a></li><li><a href="#rozvrh-místnosti">Rozvrh místnosti</a></li><li><a href="#rozvrh-učitele">Rozvrhy učitelů</a></li></ul></li></ul></dd></dl></div></section>
+<section class="sect3"><h4 id="rozvrh-místnosti"><a class="anchor" href="#rozvrh-místnosti"></a>1.10.4. Rozvrh místnosti</h4><p><em>(rozšiřuje <a href="#rozvrh">Rozvrh</a>)</em></p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>kód místnosti</li><li>rozvrhové lístky paralelek, které se v místnosti učí<ul><li>kód předmětu</li><li>jména učitelů</li><li>číslo paralelky</li><li>počet zapsaných studentů</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li>u každého rozvrhového lístku:<ul><li><a href="#rozvrh-předmětu">Rozvrh předmětu</a></li><li><a href="#rozvrh-učitele">Rozvrhy učitelů</a></li><li><a href="#seznam-studentů-zapsaných-na-paralelku">Seznam studentů zapsaných na paralelku</a></li></ul></li></ul></dd></dl></div></section>
+<section class="sect3"><h4 id="rozvrh-místnosti-na-den"><a class="anchor" href="#rozvrh-místnosti-na-den"></a>1.10.5. Rozvrh místnosti na den</h4><p><em>(rozšiřuje <a href="#rozvrh">Rozvrh</a>)</em></p>
+<p>Tento způsob zobrazení se od předchozích podstatně liší v tom, že na vertikální ose nejsou dny, ale místnosti.
+Poskytuje přehled využití všech místností fakulty po jednotlivých dnech.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>kód místnosti</li><li>rozvrhové lístky paralelek, které se v místnosti učí<ul><li>kód předmětu</li><li>jména učitelů</li><li>číslo paralelky</li><li>počet zapsaných studentů</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li>u každého rozvrhového lístku:<ul><li><a href="#rozvrh-předmětu">Rozvrh předmětu</a></li><li><a href="#rozvrh-učitele">Rozvrhy učitelů</a></li><li><a href="#seznam-studentů-zapsaných-na-paralelku">Seznam studentů zapsaných na paralelku</a></li></ul></li></ul></dd></dl></div>
+<section class="admonitionblock warning"><h6>Warning</h6>
+<div class="content">Tento pohled moc nepasuje do kalendářního zobrazení rozvrhů a jde spíše o pomůcku pro rozvrháře.
+         Je potřeba zjistit, zda ho používá i někdo jiný než rozvrháři a k jakým konkrétním účelům, případně pak vymyslet vhodnou náhradu.
+         Zatím s ním počítáme pouze v rozhraní pro rozvrháře.</div></section></section></section>
+<section class="sect2"><h3 id="seznam-zapsaných-studentů"><a class="anchor" href="#seznam-zapsaných-studentů"></a>1.11. Seznam zapsaných studentů</h3><p>Seznam studentů zapsaných na předmět nebo paralelku.</p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>český název a kód předmětu</li><li>semestr slovy</li><li>den, hodina (skutečný čas od-do), parita týdne</li><li>seznam studentů řazený dle jména:<ul><li>příjmení a jméno</li><li>ročník</li><li>kruh</li><li>docházka (nepoužívá se, KOS taková data ani neobsahuje)</li><li>zápočet</li><li>e-mailová adresa</li></ul></li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-předmětu">Rozvrh předmětu</a></li><li><a href="#rozvrh-studenta">Rozvrh studenta</a></li></ul></dd></dl></div>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Někteří vyučující si tuto stránku tisknou a používají jako záznamový arch pro docházku.
+         S touto funkcionalitou zde nepočítáme, vyučující si mohou prezenční seznam vytisknout z webového rozhraní KOSu: Předměty → Prezenční seznamy → Tisk (<a href="../images/kos-attendance-list.png">ukázka</a>).</div></section>
+<section class="sect3"><h4 id="seznam-studentů-zapsaných-na-předmět"><a class="anchor" href="#seznam-studentů-zapsaných-na-předmět"></a>1.11.1. Seznam studentů zapsaných na předmět</h4><p><em>(rozšiřuje <a href="#seznam-zapsaných-studentů">Seznam zapsaných studentů</a>)</em></p>
+<p>Tento seznam zahrnuje i studenty, kteří nejsou zapsaní na žádnou paralelku.</p>
+<section class="admonitionblock caution"><h6>Caution</h6>
+<div class="content">Toto nespadá do kompetence Siria a v novém rozhraní s tím momentálně nepočítáme.
+         Vyučující si mohou zobrazit seznam všech studentů ve webovém rozhraní KOSu: Předměty → Prezenční seznamy, ve filtru „Paralelka“ zvolit „Všechny moje paralelky.“</div></section></section>
+<section class="sect3"><h4 id="seznam-studentů-zapsaných-na-paralelku"><a class="anchor" href="#seznam-studentů-zapsaných-na-paralelku"></a>1.11.2. Seznam studentů zapsaných na paralelku</h4><p><em>(rozšiřuje <a href="#seznam-zapsaných-studentů">Seznam zapsaných studentů</a>)</em></p>
+<div class="dlist"><dl><dt class="hdlist1">Data</dt><dd><ul><li>počet studentů zapsaných na paralelce</li><li>číslo paralelky</li><li>jména vyučujících</li><li>kód místnosti</li><li>e-mailová adresa (alias) paralelky</li></ul></dd><dt class="hdlist1">Odkazy</dt><dd><ul><li><a href="#rozvrh-učitele">Rozvrh učitele</a></li><li><a href="#rozvrh-místnosti">Rozvrh místnosti</a></li><li><a href="#rozvrh-studenta">Rozvrhy studentů</a></li></ul></dd></dl></div>
+<section class="admonitionblock tip"><h6>Tip</h6>
+<div class="content">U každé události bude seznam jejích účastníků, tedy zapsaných studentů.</div></section></section></section></section>
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-3">
+            <p class="text">&copy; FIT ČVUT v Praze, 2015</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
