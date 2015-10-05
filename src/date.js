@@ -1,7 +1,7 @@
 import moment from 'moment-timezone'
 import { curry } from 'ramda'
 
-import { TZ } from './constants'
+import { TZ } from './config'
 
 export const now = () => Object.freeze(new Date())
 
