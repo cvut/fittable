@@ -13,7 +13,7 @@ import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
 
-import SIRIUS_BASE_URL from '../config'
+import { SIRIUS_BASE_URL } from '../config'
 
 const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('length', 0))
 
