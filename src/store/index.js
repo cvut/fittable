@@ -1,5 +1,6 @@
-import { createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import { mergePersistedState } from 'redux-localstorage'
 import rootReducer from '../reducers'
 
 const middlewares = [
@@ -11,8 +12,19 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(createLogger())
 }
 
-const finalCreateStore = applyMiddleware(...middlewares)(createStore)
+let finalCreateStore = applyMiddleware(...middlewares)(createStore)
 
-const store = finalCreateStore(rootReducer)
+// Always rehydrate store
+const reducer = compose(
+  mergePersistedState()
+)(rootReducer)
+
+// Persistence is enabled only conditionally
+if (global.window.localStorage) {
+  const createPersistentStore = require('./persistence')
+  finalCreateStore = createPersistentStore()(finalCreateStore)
+}
+
+const store = finalCreateStore(reducer)
 
 export default store
