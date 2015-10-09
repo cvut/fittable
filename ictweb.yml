@@ -1,0 +1,16 @@
+name_cs: 'Fittable'
+description_cs: 'Aplikace pro zobrazení kalendáře výuky; technická a uživatelská dokumentace.'
+name_en: 'Fittable'
+description_en: 'Application for displaying study schedule; documentation for users and developers.'
+dir_index:
+  - README.md
+doc_root: doc
+icon: icon.png
+keywords:
+  - fittable
+  - timetable
+  - rozvrh
+  - kalendář
+exclude:
+  - img
+  - include
