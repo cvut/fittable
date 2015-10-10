@@ -17,10 +17,9 @@
         background: none;
         width: 10%;
         float: left;
-        line-height: $day-row-height - ($day-row-padding * 2);
         text-align: left;
         color: $primary-color;
-        padding: 0 10px;
+        padding: 0;
         margin: $day-row-padding 0;
         transition: opacity $events-move-anim-speed;
         position: relative;
@@ -37,18 +36,22 @@
           font-weight: bold;
           margin-right: 5px;
         }
+
+        .wrap {
+          padding: 10px 14px;
+          margin: 10px 0;
+        }
       }
 
       &.active {
-        div.label span.day-num {
+        div.label span.day-num,
+        div.label span.day-name {
           font-weight: 700;
-          border-left: 4px solid $primary-color;
-          margin-left: -14px;
-          padding-left: 14px;
         }
 
-        div.label span.day-num {
-          font-weight: 700;
+        .wrap {
+          border-left: 4px solid $primary-color;
+          padding-left: 10px;
         }
       }
     }
@@ -105,29 +108,20 @@
       top: 0;
       height: 107%;
       z-index: 7;
-      border-right: 1px solid $primary-color;
-      opacity: .5;
+      border-right: 1px solid $nowindicator-color;
+      opacity: 1;
       @include disable-selection();
 
-      .next {
+      &::after {
+        content: '';
+        display: block;
+        width: 5px;
+        height: 5px;
+        background: $nowindicator-color;
+        border-radius: 50%;
         position: absolute;
-        bottom: -14px;
-        font-size: $small-font-size;
-        color: $primary-color;
-        white-space: nowrap;
-        overflow: hidden;
-        text-align: right;
-        line-height: 16px;
-        width: 100%;
-        padding-right: 10px;
-      }
-
-      i.fa {
-        position: absolute;
-        bottom: -14px;
-        right: -8px;
-        font-size: 16px;
-        color: $primary-color;
+        top: -2px;
+        right: -3px;
       }
     }
 
@@ -204,7 +198,10 @@
       }
 
       .now-indicator {
-        height: 107% !important;
+
+        &.vertical {
+          display: none;
+        }
 
         i.fa.fa-chevron-circle-down {
           display: none;

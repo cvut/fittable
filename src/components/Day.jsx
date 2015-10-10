@@ -152,8 +152,10 @@ class Day extends React.Component {
     return (
       <div className={className} data-day={this.props.id}>
         <div className="label" title={dayTitle}>
-          <span className="day-num">{this.props.dayNum}</span>
-          <span className="day-name">{weekDay}</span>
+          <div className="wrap">
+            <span className="day-num">{this.props.dayNum}</span>
+            <span className="day-name">{weekDay}</span>
+          </div>
         </div>
         <div className="events" ref="events">
           {events.map(this.renderEvent.bind(this))}

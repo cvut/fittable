@@ -12,7 +12,11 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
       line-height: 1.7;
       height: 7%;
       margin: 0;
-      padding: $day-row-padding;
+    }
+
+    .wrap {
+      padding: 14px 0;
+      margin: 0 13px;
     }
 
     div.events {
@@ -33,7 +37,14 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
           width: 300px !important;
         }
       }
+    }
 
+    &.active {
+      .wrap {
+        border-left: none;
+        border-top: 4px solid $primary-color;
+        padding-top: 10px;
+      }
     }
   }
 
@@ -66,24 +77,18 @@ div#fittable div.table.vertical, div#fittable div.table.mobile {
   }
 
   .now-indicator {
-    width: 100% !important;
     border-right: none;
-    border-bottom: 1px solid $primary-color;
+    border-bottom: 1px solid $nowindicator-color;
 
-    .next {
-      bottom: 0px;
-      text-align: left;
-      padding-left: 8px;
-    }
-
-    i.fa {
-      right: auto !important;
-      bottom: -6px;
-      left: -14px;
-    }
-
-    i.fa.fa-chevron-circle-right {
+    &.horizontal {
       display: none;
+    }
+
+    &::after {
+      top: auto;
+      right: auto;
+      bottom: -3px;
+      left: -2px;
     }
   }
 
