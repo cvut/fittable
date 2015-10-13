@@ -86,36 +86,6 @@ class Timetable extends React.Component {
     }
   }
 
-  /**
-   * Renders the grid
-   * @param horizontalLayout Renders the horizontal grid if set to true
-   * @param length Grid length
-   * @param offset Grid offset
-   * @returns {XML}
-   */
-  getGrid(horizontalLayout = false, length = 0, offset = 0) {
-
-    const gridColor = 'rgba(0,0,0,.1)'
-
-    if (horizontalLayout && this.props.screenSize > MEDIUM_SCREEN) {
-      return (
-        <div className="grid grid--horizontal" style={{
-            backgroundImage: `repeating-linear-gradient(90deg, ${gridColor}, ${gridColor} 1px, transparent 1.25px, transparent ${length * 100}%)`,
-            left: `${offset * length * 100}%`
-            }}>
-        </div>
-      )
-    } else {
-      return (
-        <div className="grid grid--vertical" style={{
-            backgroundImage: `repeating-linear-gradient(0deg, ${gridColor}, ${gridColor} 1px, transparent 1.25px, transparent ${length * 100}%)`,
-            top: `${offset * length * -100}%`
-            }}>
-        </div>
-      )
-    }
-  }
-
   render () {
     const weekEvents = [ [], [], [], [], [], [], [] ]
     const firstDayStart = moment(this.props.viewDate).startOf('day')
