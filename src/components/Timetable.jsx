@@ -216,7 +216,7 @@ class Timetable extends React.Component {
       >
         <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
-            <Grid horizontal="false" items={12} offset={.5} color="rgb(60,60,60)" />
+            <Grid horizontal={this.props.layout === 'horizontal'} hours={14} offset={-0.5} color="rgb(120,120,120)" />
           </div>
         </div>
         <NowIndicator
