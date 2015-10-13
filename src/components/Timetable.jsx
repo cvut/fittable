@@ -12,6 +12,7 @@ import { weekdayNum } from '../date'
 import Day from './Day'
 import NowIndicator from './NowIndicator'
 import ErrorMessage from './ErrorMessage'
+import Grid from './Grid'
 
 const propTypes = {
   grid: gridPropType,
@@ -245,7 +246,7 @@ class Timetable extends React.Component {
       >
         <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
-            {this.getGrid(this.props.layout === 'horizontal', timelineGridLength, gridoffset)}
+            <Grid horizontal="false" items={12} offset={.5} color="rgb(60,60,60)" />
           </div>
         </div>
         <NowIndicator
