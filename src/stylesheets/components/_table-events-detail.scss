@@ -132,11 +132,11 @@
   }
 
   @keyframes open {
-    from {
-      transform: scaleX(.75) scaleY(.25);
+    0% {
+      transform: scaleX(1) scaleY(.25);
     }
 
-    to {
+    100% {
       transform: scale(1);
     }
   }
