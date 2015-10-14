@@ -6,36 +6,32 @@ import React, { PropTypes } from 'react'
 
 const propTypes = {
   horizontal: PropTypes.bool,
-  hours: PropTypes.number,
-  offset: PropTypes.number,
+  hourLength: PropTypes.number,
+  timelineOffset: PropTypes.number,
   color: PropTypes.string,
 }
 
 class Grid extends React.Component {
 
-  getPattern() {
-
-    const patternSize = 1 / this.props.hours
-    const patternOffset = this.props.offset * patternSize
+  getPattern () {
+    const hourOffset = this.props.timelineOffset * this.props.hourLength
 
     if (this.props.horizontal) {
       return (
-        <pattern id="Grid" x={patternOffset} y="0" width={patternSize} height="100%">
+        <pattern id="Grid" x={hourOffset} y="0" width={this.props.hourLength} height="100%">
           <line x1="0" y1="0" x2="0" y2="100%" stroke={this.props.color} stroke-width="1" />
         </pattern>
       )
     } else {
       return (
-        <pattern id="Grid" x="0" y={patternOffset} width="100%" height={patternSize}>
+        <pattern id="Grid" x="0" y={hourOffset} width="100%" height={this.props.hourLength}>
           <line x1="0" y1="0" x2="100%" y2="0" stroke={this.props.color} stroke-width="1" />
         </pattern>
       )
     }
-
   }
 
   render () {
-
     return (
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>

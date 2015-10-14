@@ -88,9 +88,8 @@ class Timetable extends React.Component {
 
   render () {
     const weekEvents = [ [], [], [], [], [], [], [] ]
-    const firstDayStart = moment(this.props.viewDate).startOf('day')
-    let minClosestDiff = Infinity
-    let closestEvent = null
+
+    // (ಠ_ಠ) let's refactor this asap, this is not cool, I guess
 
     // Timeline hours from - to
     const timelineHoursFrom = Math.floor(this.props.grid.starts)
@@ -98,12 +97,11 @@ class Timetable extends React.Component {
     const timelineMinutesFrom = Math.floor((this.props.grid.starts - timelineHoursFrom) * 60)
     const timelineMinutesTo = Math.floor((this.props.grid.ends - timelineHoursTo) * 60)
 
-    // Timeline length in milliseconds
-    const timelineLength = moment(firstDayStart).hour(timelineHoursTo).minutes(timelineMinutesTo)
-      .diff(moment(firstDayStart).hour(timelineHoursFrom).minutes(timelineMinutesFrom))
-
-    // Timeline grid length
-    const timelineGridLength = this.props.grid.lessonDuration * 3600000 / timelineLength
+    // Compute timeline properties
+    const timelineLength = moment().hour(timelineHoursTo).minutes(timelineMinutesTo)
+      .diff(moment().hour(timelineHoursFrom).minutes(timelineMinutesFrom))
+    const timelineHourLength = 3600000 / timelineLength
+    const timelineOffset = timelineMinutesFrom / 60
 
     // Make sure the weekEvents data are available...
     if (typeof this.props.weekEvents !== 'undefined' && this.props.weekEvents !== null) {
@@ -120,13 +118,6 @@ class Timetable extends React.Component {
 
         // Sort events by day of week
         weekEvents[ dateStart.isoWeekday() - 1 ].push(event)
-
-        // Search for closest event from now
-        const diffwithnow = dateStart.diff(moment())
-        if (diffwithnow < minClosestDiff && diffwithnow > 0 && moment().isSame(dateStart, 'day')) {
-          minClosestDiff = diffwithnow
-          closestEvent = event
-        }
       }
     }
 
@@ -140,37 +131,33 @@ class Timetable extends React.Component {
     // Create array of hour labels
     const hourlabels = []
     let idx = 0
-    const gridoffset = this.props.grid.facultyGrid ? 0 : this.props.grid.starts % 1
-    const gridStartCeil = Math.ceil(this.props.grid.starts)
-    const gridEnd = this.props.grid.ends
-    const facultyHours = this.props.grid.facultyHours
-    for (let i = gridStartCeil; i < (this.props.grid.facultyGrid ? gridStartCeil + facultyHours : gridEnd); i++) {
-      const gridLenPercent = `${timelineGridLength * 100}%`
-      const offsetLenPercent = `${(idx + gridoffset) * timelineGridLength * 100}%`
-      const halfLenOffsetPercent = `${((idx + gridoffset) * timelineGridLength - timelineGridLength/2) * 100}%`
-
+    for (let i = timelineHoursFrom; i <= timelineHoursTo; i++) {
+      // Set hour label proportions
       let style
+
+      const length = timelineHourLength * 100 + '%'
+      const position = (timelineHourLength * idx - timelineOffset * timelineHourLength) * 100 + '%'
+
       if (this.props.layout === 'horizontal' && this.props.screenSize > MEDIUM_SCREEN) {
         style = {
-          width: gridLenPercent,
-          left: halfLenOffsetPercent,
+          width: length,
+          left: position,
         }
       } else {
         style = {
-          height: gridLenPercent,
-          top: offsetLenPercent,
+          height: length,
+          top: position,
         }
       }
 
+      const label = this.props.grid.facultyGrid ? idx + 1 : i
+
+      console.log(timelineLength, timelineHoursFrom, timelineHoursTo, timelineHourLength, timelineOffset)
+
       hourlabels.push(
-        <div
-          className="hour-label"
-          key={idx}
-          style={style}
-        >
-          {this.props.grid.hoursStartsAt1 ? idx + 1 : i}
-        </div>
-        )
+        <div className="hour-label" key={i} style={style}>{label}</div>
+      )
+
       idx++
     }
 
@@ -216,7 +203,12 @@ class Timetable extends React.Component {
       >
         <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
-            <Grid horizontal={this.props.layout === 'horizontal'} hours={14} offset={-0.5} color="rgb(120,120,120)" />
+            <Grid
+              horizontal={this.props.layout === 'horizontal'}
+              hourLength={timelineHourLength}
+              timelineOffset={timelineOffset}
+              color="rgb(180,180,180)"
+            />
           </div>
         </div>
         <NowIndicator
@@ -224,7 +216,6 @@ class Timetable extends React.Component {
           timelineStartMins={ timelineMinutesFrom }
           timelineLength={ timelineLength }
           viewDate={ this.props.viewDate }
-          closestEvent={ closestEvent }
         />
         <div
           className={daysClass}
