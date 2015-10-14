@@ -21,6 +21,14 @@
     }
     .day:not(.selected) { display: none; }
     .day .label { display: none; }
+
+    .hour-labels {
+      top: 0%;
+    }
+
+    .grid-wrapper {
+      top: 0%;
+    }
   }
 }
 

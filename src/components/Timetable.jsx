@@ -195,6 +195,7 @@ class Timetable extends React.Component {
     const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7} ${classSmall}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
+    const isGridHorizontal = this.props.screenSize <= MEDIUM_SCREEN ? false : this.props.layout === 'horizontal'
 
     return (
       <div
@@ -204,7 +205,7 @@ class Timetable extends React.Component {
         <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
             <Grid
-              horizontal={this.props.layout === 'horizontal'}
+              horizontal={isGridHorizontal}
               hourLength={timelineHourLength}
               timelineOffset={timelineOffset}
               color="rgb(180,180,180)"
