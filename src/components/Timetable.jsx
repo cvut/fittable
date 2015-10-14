@@ -216,6 +216,10 @@ class Timetable extends React.Component {
           timelineStartMins={ timelineMinutesFrom }
           timelineLength={ timelineLength }
           viewDate={ this.props.viewDate }
+          days7={ this.props.days7 }
+          layout={ this.props.layout }
+          screenSize={ this.props.screenSize }
+          selectedDay={ selectedDay }
         />
         <div
           className={daysClass}

@@ -14,7 +14,7 @@
     .now-indicator,
     .label,
     .hour-labels,
-    .event:not(.is-opened){ opacity: .3; }
+    .event:not(.is-opened){ opacity: .3 !important; }
     .days .day:nth-child(odd) { background: rgba($secondary-color, .3); }
   }
 
@@ -38,8 +38,8 @@
       line-height: 1.7;
       height: 7%;
       margin: 0;
-      padding: $day-row-padding;
       overflow: hidden;
+      padding: 0 $day-row-padding;
       @include disable-selection();
 
       span {
@@ -54,16 +54,23 @@
       margin-right: 5px;
     }
 
+    .label-wrap {
+      padding: $day-row-padding 0;
+    }
+
     &.active {
       .day-num {
         font-weight: 700;
-        border-left: 4px solid $primary-color;
         margin-left: -14px;
         padding-left: 14px;
       }
 
-      .day-num {
+      .day-name {
         font-weight: 700;
+      }
+
+      .label-wrap {
+        border-top: 3px solid $primary-color;
       }
     }
   }
@@ -113,9 +120,21 @@
     top: 0;
     height: 107%;
     z-index: 7;
-    border-right: 1px solid $primary-color;
-    opacity: .5;
+    border-bottom: $nowindicator-thickness solid $nowindicator-color;
+    opacity: 1;
     @include disable-selection();
+
+    &::after {
+      content: '';
+      display: block;
+      width: $nowindicator-thickness*3;
+      height: $nowindicator-thickness*3;
+      background: $nowindicator-color;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -$nowindicator-thickness*2;
+      left: -$nowindicator-thickness*2;
+    }
   }
 
   .hour-labels {

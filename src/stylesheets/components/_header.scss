@@ -3,6 +3,10 @@
   .header {
     position: relative;
 
+    @media #{$small-down} {
+      margin-bottom: 15px;
+    }
+
     .function-controls {
       float: right;
       height: $header-elements-weight;

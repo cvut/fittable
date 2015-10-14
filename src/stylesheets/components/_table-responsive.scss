@@ -22,6 +22,11 @@
     .day:not(.selected) { display: none; }
     .day .label { display: none; }
 
+    .now-indicator {
+      width: 98% !important;
+      left: 2% !important;
+    }
+
     .hour-labels {
       top: 0%;
     }
