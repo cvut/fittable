@@ -23,7 +23,7 @@
   .event {
     padding: $events-gutter $events-gutter/2;
 
-    &:not(.is-opened) .inner {
+    &.regular:not(.is-opened) .inner {
       height: $day-row-height - $events-gutter*2;
     }
   }
