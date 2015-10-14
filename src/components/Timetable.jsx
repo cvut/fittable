@@ -100,8 +100,8 @@ class Timetable extends React.Component {
     // Compute timeline properties
     const timelineLength = moment().hour(timelineHoursTo).minutes(timelineMinutesTo)
       .diff(moment().hour(timelineHoursFrom).minutes(timelineMinutesFrom))
-    const timelineHourLength = 3600000 / timelineLength
-    const timelineOffset = timelineMinutesFrom / 60
+    const timelineHourLength = this.props.grid.facultyGrid ? this.props.grid.lessonDuration * 3600000 / timelineLength : 3600000 / timelineLength
+    const timelineOffset = this.props.grid.facultyGrid ? 0 : timelineMinutesFrom / 60
 
     // Make sure the weekEvents data are available...
     if (typeof this.props.weekEvents !== 'undefined' && this.props.weekEvents !== null) {
@@ -131,7 +131,7 @@ class Timetable extends React.Component {
     // Create array of hour labels
     const hourlabels = []
     let idx = 0
-    for (let i = timelineHoursFrom; i <= timelineHoursTo; i++) {
+    for (let i = timelineHoursFrom; i <= timelineHoursTo + 1; i++) {
       // Set hour label proportions
       let style
 
