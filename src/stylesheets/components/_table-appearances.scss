@@ -108,6 +108,10 @@
         left: 10px;
       }
 
+      &:not(.is-opened) .time {
+        font-size: 10px;
+      }
+
       &:not(.is-opened) .room {
         display: none;
       }
@@ -128,7 +132,7 @@
 
       &:not(.is-opened) .name {
         font-size: 12px;
-        margin-top: -7px;
+        margin-top: -2px;
         margin-right: -3px;
       }
 
@@ -149,7 +153,7 @@
     &.third-first + .third + .event.third {
       top: auto;
       bottom: 0;
-      padding-top: 0;
+      padding-top: 2px;
     }
 
     // Quarter
@@ -159,7 +163,7 @@
 
       &:not(.is-opened) .name {
         font-size: 9px;
-        margin-top: -10px;
+        margin-top: -4px;
       }
 
       &:not(.is-opened) .type,
