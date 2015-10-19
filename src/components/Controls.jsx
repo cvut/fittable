@@ -4,7 +4,7 @@
  */
 
 import React, { PropTypes } from 'react'
-import { SMALL_SCREEN } from '../constants/screenSizes'
+import { isScreenMediumAndUp } from '../screen'
 
 import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
@@ -31,10 +31,10 @@ class Controls extends React.Component {
 
     let shiftBy
 
-    if (this.props.screenSize == SMALL_SCREEN) {
-      shiftBy = shiftFun('day', skipWeekend ? -3 : -1)
-    } else {
+    if (isScreenMediumAndUp(this.props.screenSize)) {
       shiftBy = shiftFun('week', -1)
+    } else {
+      shiftBy = shiftFun('day', skipWeekend ? -3 : -1)
     }
     this.props.onDateChange(shiftBy)
   }
@@ -48,10 +48,10 @@ class Controls extends React.Component {
 
     let shiftBy
 
-    if (this.props.screenSize == SMALL_SCREEN) {
-      shiftBy = shiftFun('day', skipWeekend ? +3 : +1)
-    } else {
+    if (isScreenMediumAndUp(this.props.screenSize)) {
       shiftBy = shiftFun('week', +1)
+    } else {
+      shiftBy = shiftFun('day', skipWeekend ? +3 : +1)
     }
     this.props.onDateChange(shiftBy)
   }

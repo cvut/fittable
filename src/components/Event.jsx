@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
-import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
+import { isScreenLarge } from '../screen'
 
 import EventDetail from './EventDetail'
 
@@ -36,7 +36,7 @@ class EventBox extends React.Component {
     var length = `${props.data._draw_length * 100}%`
     var position = `${props.data._draw_position * 100}%`
 
-    if (this.props.layout === 'horizontal' && this.props.screenSize > MEDIUM_SCREEN) {
+    if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
       return {
         width: length,
         left: position,

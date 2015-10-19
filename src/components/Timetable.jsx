@@ -5,9 +5,9 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
 import { grid as gridPropType } from '../constants/propTypes'
-import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
 
 import { weekdayNum } from '../date'
+import { classByScreenSize, isScreenLarge } from '../screen'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
@@ -138,7 +138,7 @@ class Timetable extends React.Component {
       const length = timelineHourLength * 100 + '%'
       const position = (timelineHourLength * idx - timelineOffset * timelineHourLength) * 100 + '%'
 
-      if (this.props.layout === 'horizontal' && this.props.screenSize > MEDIUM_SCREEN) {
+      if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
         style = {
           width: length,
           left: position,
@@ -151,8 +151,6 @@ class Timetable extends React.Component {
       }
 
       const label = this.props.grid.facultyGrid ? idx + 1 : i
-
-      console.log(timelineLength, timelineHoursFrom, timelineHoursTo, timelineHourLength, timelineOffset)
 
       hourlabels.push(
         <div className="hour-label" key={i} style={style}>{label}</div>
@@ -187,15 +185,16 @@ class Timetable extends React.Component {
     }
 
     const classMuted = (this.props.eventId !== null) ? 'table--muted' : ''
-    const classCut = (this.props.functionsOpened !== null && this.props.screenSize > MEDIUM_SCREEN) ? 'table--cut' : ''
+    const classCut = (this.props.functionsOpened !== null && isScreenLarge(this.props.screenSize)) ? 'table--cut' : ''
     const classDays7 = this.props.days7 ? 'table--7days' : ''
-    const classLayout = this.props.screenSize <= MEDIUM_SCREEN ? 'table--vertical' : ('table--' + this.props.layout)
-    const classSmall = this.props.screenSize == SMALL_SCREEN ? 'table--small' : ''
+    const classLayout = classByScreenSize(this.props.screenSize, ['table--vertical table--small', 'table--vertical', ('table--' + this.props.layout)])
 
-    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7} ${classSmall}`
+    console.log(classLayout)
+
+    const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
-    const isGridHorizontal = this.props.screenSize <= MEDIUM_SCREEN ? false : this.props.layout === 'horizontal'
+    const isGridHorizontal = !isScreenLarge(this.props.screenSize) ? false : this.props.layout === 'horizontal'
 
     return (
       <div

@@ -7,7 +7,7 @@ import React, { PropTypes } from 'react'
 import moment from 'moment'
 import CP from 'counterpart'
 import { weekRange, workWeekRange } from '../date'
-import { SMALL_SCREEN } from '../constants/screenSizes'
+import { isScreenMediumAndUp } from '../screen'
 
 const propTypes = {
   onCalClick: PropTypes.func,
@@ -47,7 +47,7 @@ class WeekNav extends React.Component {
     const [weekStart, weekEnd] = rangeFun(this.props.viewDate).map(d => moment(d))
     const currDayM = moment(this.props.viewDate)
 
-    const rangeIsWeek = this.props.screenSize !== SMALL_SCREEN
+    const rangeIsWeek = isScreenMediumAndUp(this.props.screenSize)
 
     if (rangeIsWeek) {
       if (moment.locale() === 'cs') {
