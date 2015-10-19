@@ -74,14 +74,19 @@ class EventBox extends React.Component {
 
   displayTime (props) {
 
-    var startsAt = new Moment(this.props.data.startsAt).format('LT')
-    var endsAt = new Moment(this.props.data.endsAt).format('LT')
+    var startsAt = new Moment(props.data.startsAt).format('LT')
+    var endsAt = new Moment(props.data.endsAt).format('LT')
 
-    if (props.detailShown) {
-      return `${startsAt}—${endsAt}`
-    } else {
-      return `${startsAt}`
-    }
+    return `${startsAt}—${endsAt}`
+  }
+
+  displayRoom (props) {
+    return (
+      <div>
+        <i className="fa fa-map-marker"></i>
+        {props.data.room}
+      </div>
+    )
   }
 
   render () {
@@ -104,6 +109,9 @@ class EventBox extends React.Component {
           </div>
           <div className="time">
             {this.displayTime(this.props)}
+          </div>
+          <div className="room">
+            {this.displayRoom(this.props)}
           </div>
           <div className="type">
             <span className={`short ${this.props.colored ? ' hide' : ''}`}>

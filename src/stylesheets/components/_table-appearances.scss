@@ -8,6 +8,11 @@
     &.half-first {
       width: 50%;
 
+      &:not(.is-opened) .time,
+      &:not(.is-opened) .room {
+        display: none;
+      }
+
       &:not(.is-opened) .name {
         font-size: 13px;
       }
@@ -30,7 +35,8 @@
         font-size: 13px;
       }
 
-      &:not(.is-opened) .time {
+      &:not(.is-opened) .time,
+      &:not(.is-opened) .room {
         display: none;
       }
     }
@@ -53,7 +59,8 @@
     &.quarter-first {
       width: 25%;
 
-      &:not(.is-opened) .time {
+      &:not(.is-opened) .time,
+      &:not(.is-opened) .room {
         display: none;
       }
 
@@ -101,7 +108,7 @@
         left: 10px;
       }
 
-      &:not(.is-opened) .time {
+      &:not(.is-opened) .room {
         display: none;
       }
     }
@@ -126,7 +133,8 @@
       }
 
       &:not(.is-opened) .type,
-      &:not(.is-opened) .time, {
+      &:not(.is-opened) .time,
+      &:not(.is-opened) .room {
         display: none;
       }
     }
@@ -155,7 +163,8 @@
       }
 
       &:not(.is-opened) .type,
-      &:not(.is-opened) .time, {
+      &:not(.is-opened) .time,
+      &:not(.is-opened) .room {
         display: none;
       }
     }
