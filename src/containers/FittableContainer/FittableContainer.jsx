@@ -107,6 +107,11 @@ const FittableContainer = React.createClass({
     this.props.onViewDateChange(viewDate)
     this.getSemesterData(viewDate)
 
+    // Close all opened functions
+    this.props.onSidebarDisplay(null)
+    // Also close opened event
+    this.props.onEventDisplay(null)
+
     // Update viewDate
     const newdate = moment(viewDate)
     // Send new date through callback
