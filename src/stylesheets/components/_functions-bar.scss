@@ -30,7 +30,7 @@
     height: 5px;
     z-index: 99;
     
-    media #{$medium-down} {
+    @media #{$medium-down} {
       top: 25px;
     }
     
@@ -40,7 +40,7 @@
     opacity: 1;
     top: -15px;
     
-    media #{$medium-down} {
+    @media #{$medium-down} {
       top: 35px;
     }
   }
