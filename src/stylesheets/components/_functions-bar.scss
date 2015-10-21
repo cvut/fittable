@@ -29,11 +29,20 @@
     transition: top $default-anim-speed, opacity $default-anim-speed;
     height: 5px;
     z-index: 99;
+    
+    media #{$medium-down} {
+      top: 25px;
+    }
+    
   }
 
   .function-btn:hover .tooltip {
     opacity: 1;
     top: -15px;
+    
+    media #{$medium-down} {
+      top: 35px;
+    }
   }
 
   .flags-function {
