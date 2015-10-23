@@ -12,7 +12,7 @@ rules:
   no-var: [1]
   prefer-const: [1]
   comma-dangle: [2, always-multiline]
-  react/jsx-quotes: [2, double, avoid-escape]
+  jsx-quotes: [2, prefer-double]
   curly: [2, all]
   max-len: [2, 120, 2]
   no-extra-bind: [2]
