@@ -6,9 +6,9 @@ import React, { PropTypes } from 'react'
 
 const propTypes = {
   horizontal: PropTypes.bool,
-  hourLength: PropTypes.number,
-  timelineOffset: PropTypes.number,
-  color: PropTypes.string,
+  hourLength: PropTypes.number.isRequired,
+  timelineOffset: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
 }
 
 class Grid extends React.Component {
@@ -19,13 +19,13 @@ class Grid extends React.Component {
     if (this.props.horizontal) {
       return (
         <pattern id="Grid" x={hourOffset} y="0" width={this.props.hourLength} height="100%">
-          <line x1="0" y1="0" x2="0" y2="100%" stroke={this.props.color} stroke-width="1" />
+          <line x1="0" y1="0" x2="0" y2="100%" stroke={this.props.color} strokeWidth="1" />
         </pattern>
       )
     } else {
       return (
         <pattern id="Grid" x="0" y={hourOffset} width="100%" height={this.props.hourLength}>
-          <line x1="0" y1="0" x2="100%" y2="0" stroke={this.props.color} stroke-width="1" />
+          <line x1="0" y1="0" x2="100%" y2="0" stroke={this.props.color} strokeWidth="1" />
         </pattern>
       )
     }
