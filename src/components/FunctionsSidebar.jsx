@@ -26,7 +26,7 @@ const propTypes = {
   }),
 }
 
-class FunctionsSidebar {
+class FunctionsSidebar extends React.Component {
 
   render () {
     let functionToRender
