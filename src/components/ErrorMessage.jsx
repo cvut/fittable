@@ -8,7 +8,7 @@ import CP from 'counterpart'
 const propTypes = {
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   visible: PropTypes.bool,
-  onErrorHide: PropTypes.func.required,
+  onErrorHide: PropTypes.func.isRequired,
 }
 
 const defaultProps = {
