@@ -100,8 +100,15 @@ class Timetable extends React.Component {
     // Compute timeline properties
     const timelineLength = moment().hour(timelineHoursTo).minutes(timelineMinutesTo)
       .diff(moment().hour(timelineHoursFrom).minutes(timelineMinutesFrom))
-    const timelineHourLength = this.props.grid.facultyGrid ? this.props.grid.lessonDuration * 3600000 / timelineLength : 3600000 / timelineLength
-    const timelineOffset = this.props.grid.facultyGrid ? 0 : timelineMinutesFrom / 60
+
+    let timelineHourLength, timelineOffset
+    if (this.props.grid.facultyGrid) {
+      timelineHourLength = this.props.grid.lessonDuration * 3600000 / timelineLength
+      timelineOffset = 0
+    } else {
+      timelineHourLength = 3600000 / timelineLength
+      timelineOffset = timelineMinutesFrom / 60
+    }
 
     // Make sure the weekEvents data are available...
     if (typeof this.props.weekEvents !== 'undefined' && this.props.weekEvents !== null) {
@@ -187,14 +194,16 @@ class Timetable extends React.Component {
     const classMuted = (this.props.eventId !== null) ? 'table--muted' : ''
     const classCut = (this.props.functionsOpened !== null && isScreenLarge(this.props.screenSize)) ? 'table--cut' : ''
     const classDays7 = this.props.days7 ? 'table--7days' : ''
-    const classLayout = classByScreenSize(this.props.screenSize, ['table--vertical table--small', 'table--vertical', ('table--' + this.props.layout)])
-
-    console.log(classLayout)
+    const classLayout = classByScreenSize(this.props.screenSize, [
+      'table--vertical table--small',
+      'table--vertical',
+      `table--${this.props.layout}`,
+    ])
 
     const className = `table ${classLayout} ${classMuted} ${classCut} ${classDays7}`
 
     const daysClass = this.props.visible ? 'days a-right' : 'days'
-    const isGridHorizontal = !isScreenLarge(this.props.screenSize) ? false : this.props.layout === 'horizontal'
+    const isGridHorizontal = !isScreenLarge(this.props.screenSize) ? false : (this.props.layout === 'horizontal')
 
     return (
       <div
