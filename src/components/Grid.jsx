@@ -11,6 +11,8 @@ const propTypes = {
   color: PropTypes.string.isRequired,
 }
 
+const PATTERN_ID = 'Grid-pattern'
+
 class Grid extends React.Component {
 
   getPattern () {
@@ -18,17 +20,25 @@ class Grid extends React.Component {
 
     if (this.props.horizontal) {
       return (
-        <pattern id="Grid" x={hourOffset} y="0" width={this.props.hourLength} height="100%">
+        <pattern id={PATTERN_ID} x={hourOffset} y="0" width={this.props.hourLength} height="100%">
           <line x1="0" y1="0" x2="0" y2="100%" stroke={this.props.color} strokeWidth="1" />
         </pattern>
       )
     } else {
       return (
-        <pattern id="Grid" x="0" y={hourOffset} width="100%" height={this.props.hourLength}>
+        <pattern id={PATTERN_ID} x="0" y={hourOffset} width="100%" height={this.props.hourLength}>
           <line x1="0" y1="0" x2="100%" y2="0" stroke={this.props.color} strokeWidth="1" />
         </pattern>
       )
     }
+  }
+
+  // XXX:You need actually either document's name or a full URL
+  //     to resolve the url() reference.
+  //     http://stackoverflow.com/q/18259032/240963
+  //     Yes, SVG is Magical!
+  getPatternUrl () {
+    return `${global.location.href}#${PATTERN_ID}`
   }
 
   render () {
@@ -37,7 +47,7 @@ class Grid extends React.Component {
         <defs>
           {this.getPattern()}
         </defs>
-        <rect fill="url(#Grid)" x="0" y="0" width="100%" height="100%" />
+        <rect fill={`url(${this.getPatternUrl()})`} x="0" y="0" width="100%" height="100%" />
       </svg>
     )
   }
