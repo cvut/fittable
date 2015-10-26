@@ -186,11 +186,13 @@ function isUserLoggedIn () {
 }
 
 function setUsername (username) {
-  document.getElementById('username').innerHTML = username
+  const elems = document.querySelectorAll('.js-username')
+  for (const element of elems) {
+    element.innerHTML = username
+  }
 }
 
 function makeRequest (parameters) {
-
   var requestUrl = siriusAPIUrl
 
   requestUrl += parameters
