@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import { merge } from 'ramda'
 
+import { routerStateReducer } from 'redux-router'
+
 import { SETTINGS_CHANGE, VIEW_DATE_CHANGE, DISPLAY_FILTERS_CHANGE } from '../constants/actionTypes'
 import { now } from '../date'
 
@@ -59,6 +61,7 @@ function displayFilters (state = initialDisplayFilters, action) {
 }
 
 const rootReducer = combineReducers({
+  router: routerStateReducer,
   settings,
   viewDate,
   displayFilters,
