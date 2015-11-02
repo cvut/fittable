@@ -119,7 +119,7 @@
     left: 0;
     top: 0;
     height: 107%;
-    z-index: 7;
+    z-index: 5;
     border-bottom: $nowindicator-thickness solid $nowindicator-color;
     opacity: 1;
     @include disable-selection();
