@@ -13,6 +13,12 @@
       background: $light-secondary-color;
       position: absolute;
       z-index: 200;
+    }
+  }
+
+  @media #{$small-down} {
+
+    .functions-sidebar {
       margin: -15px 0 0 0;
     }
   }
