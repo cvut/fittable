@@ -78,7 +78,7 @@ $grid-line-width: 1.5px;
 
 // iOS header
 @media #{$small-down} {
-  body {
+  body.ios-bg {
     background-color: $primary-color;
   }
 
