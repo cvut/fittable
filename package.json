@@ -19,7 +19,7 @@
     "postinstall": "cd node_modules/webpack-dev-server && npm install",
     "build": "npm-run-all -p build:prod build:assets",
     "build:dev": "webpack -d",
-    "build:prod": "webpack --optimize-minimize --config webpack.production.config.js",
+    "build:prod": "webpack --optimize-minimize --config webpack.production.config.js --bail",
     "build:npm": "babel --out-dir dist src",
     "build:assets": "node script/build-static",
     "start": "npm run build:assets && webpack-dev-server --content-base dist/ --hot -d",
