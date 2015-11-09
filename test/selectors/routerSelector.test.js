@@ -1,20 +1,9 @@
 import test from 'blue-tape'
 import * as sel from '../../src/selectors/routerSelector'
 import timekeeper from 'timekeeper'
+import routerState from '../helpers/routerState'
 
-const STATE = {
-  router: {
-    params: {
-      calendarId: 'MI-RUB',
-      calendarType: 'courses',
-    },
-    location: {
-      query: {
-        date: '2015-10-12',
-      },
-    },
-  },
-}
+const STATE = routerState()
 
 const FIXED_DATE = '2015-12-13'
 
