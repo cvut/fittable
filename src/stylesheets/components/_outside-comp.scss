@@ -1,5 +1,6 @@
 header {
   padding: 0px 30px;
+  position: relative;
 
   &.row {
     margin: 60px auto 30px auto;
@@ -17,5 +18,52 @@ header {
     margin-top: -7px;
     color: $primary-color;
     font-weight: 400;
+  }
+
+  .header-usermenu {
+    position: absolute;
+    top: 0;
+    right: 30px;
+
+    @media #{$medium-down} {
+      right: 20px;
+    }
+
+    @media #{$small-down} {
+      display: none;
+    }
+  }
+
+  .header-usermenu-username {
+    background: $light-secondary-color;
+    @include upcase();
+    padding: .5rem 1rem;
+    float: left;
+
+    a {
+      color: $body-font-color;
+    }
+
+    i.fa {
+      color: $primary-color;
+      margin-right: .7rem;
+    }
+
+    @media #{$medium-down} {
+      display: none;
+    }
+  }
+
+  .header-usermenu-logout {
+    background: $primary-color;
+    color: white;
+    @include upcase();
+    padding: .5rem 1rem;
+    float: right;
+
+    @media #{$medium-down} {
+      font-size: .8rem;
+      padding: .5rem 1rem;
+    }
   }
 }

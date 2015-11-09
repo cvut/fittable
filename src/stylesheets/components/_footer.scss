@@ -2,10 +2,12 @@
   line-height: 16px;
   font-size: $base-font-size;
   color: $darkgraytext-color;
+  padding-top: 4em;
 
   @media #{$small-down} {
     background: #363636;
     color: white;
+    padding-top: 0;
   }
 
   img {
@@ -75,7 +77,8 @@
   &-usermenu {
     position: relative;
     overflow: hidden;
-    padding: 4em 30px 0 30px;
+    padding: 0 30px 0 30px;
+    display: none;
 
     &-logout {
       float: right;
@@ -89,8 +92,8 @@
     @media #{$medium-down} {
       padding-left: 20px;
       padding-right: 20px;
+      display: block;
     }
-
 
     @media #{$small-down} {
       background: #494c4e;
