@@ -106,7 +106,7 @@
       height: 100%;
     }
 
-    &.detail-shown div.inner div.head-space {
+    &.is-opened div.inner div.head-space {
       height: $day-row-height - ($day-row-padding * 2);
       background: transparent;
       transition: background $default-anim-speed;
