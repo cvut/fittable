@@ -40,6 +40,10 @@ header {
     padding: .5rem 1rem;
     float: left;
 
+    a {
+      color: $body-font-color;
+    }
+
     i.fa {
       color: $primary-color;
       margin-right: .7rem;
