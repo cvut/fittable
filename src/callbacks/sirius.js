@@ -207,15 +207,24 @@ function makeRequest (parameters) {
 
 /**
  * Data callback, requesting the events from Sirius API, depending on view type and range.
- * @param rangeFrom Start point of the range
- * @param rangeTo Ending point of the range
+ * @param params   Object with request parameters
  * @param callback Callback to be called after successful request
  */
-var dataCallback = function (rangeFrom, rangeTo, callback) {
+function dataCallback (params, callback) {
+  const {calendarType, dateFrom, dateTo} = params
+  let {calendarId} = params
+
+  // FIXME: until `me` is a valid shortcut on Sirius
+  if (calendarId === 'me' && calendarType === 'people') {
+    calendarId = user.name
+  }
+
+  const path = `${calendarType}/${calendarId}/events` +
+    `?from=${dateFrom}&to=${dateTo}&limit=${defaultLimit}` +
+    `&include=courses,teachers,schedule_exceptions&deleted=true`
 
   // Make the request
-  var request = makeRequest(viewPaths[view] + '/' + parameter + '/events?from=' + rangeFrom +
-    '&to=' + rangeTo + '&limit=' + defaultLimit + '&include=courses,teachers,schedule_exceptions&deleted=true')
+  const request = makeRequest(path)
 
   request.onreadystatechange = function (callback, fittable) {
     if (request.readyState === XMLHttpRequest.DONE) {
@@ -254,8 +263,8 @@ var dataCallback = function (rangeFrom, rangeTo, callback) {
           // If the original data are present, insert one reverted event
           if (!emptyObject(event.original_data)) {
             // Convert times to milliseconds
-            var rangeFromMs = (new Date(rangeFrom)).getMilliseconds()
-            var rangeToMs = (new Date(rangeTo)).getMilliseconds()
+            var rangeFromMs = (new Date(dateFrom)).getMilliseconds()
+            var rangeToMs = (new Date(dateTo)).getMilliseconds()
             var originalFromMs = (new Date(event.original_data.starts_at)).getMilliseconds()
 
             // Check if the original start is between the range
@@ -311,7 +320,7 @@ var dataCallback = function (rangeFrom, rangeTo, callback) {
               linknames.exceptions.push({
                 id: ajaxresult.linked.schedule_exceptions[i].id,
                 type: ajaxresult.linked.schedule_exceptions[i].exception_type,
-                name: ajaxresult.linked.schedule_exceptions[i].name
+                name: ajaxresult.linked.schedule_exceptions[i].name,
               })
             }
           }

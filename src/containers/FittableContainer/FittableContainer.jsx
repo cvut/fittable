@@ -100,9 +100,13 @@ const FittableContainer = React.createClass({
 
   // FIXME: this should be an implicit call with date change
   getWeekEvents (viewDate = null) {
-    viewDate = viewDate || this.props.viewDate
+    const date = viewDate || this.props.viewDate
+    const params = {
+      ...this.props.calendar,
+      date,
+    }
 
-    this.props.onEventsRequest(this.props.callbacks.data, viewDate)
+    this.props.onEventsRequest(this.props.callbacks.data, params)
   },
 
   // FIXME: deprecate callback
@@ -118,8 +122,6 @@ const FittableContainer = React.createClass({
 
     // Update viewDate
     const newdate = moment(viewDate)
-    // Send new date through callback
-    this.props.callbacks.dateChange(newdate.toISOString(), this.getSemesterName())
 
     // Update the data
     this.getWeekEvents(viewDate)
@@ -131,9 +133,8 @@ const FittableContainer = React.createClass({
     this.props.onSidebarDisplay(null)
     // Also close opened event
     this.props.onEventDisplay(null)
-    this.props.callbacks.viewChange(to, param)
-    this.getWeekEvents()
     this.props.changeCalendar(to, param)
+    this.getWeekEvents()
   },
 
   handleSearch (query) {

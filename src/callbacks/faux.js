@@ -1,4 +1,5 @@
-var dataCallback = function(from, to, callback) {
+var dataCallback = function(params, callback) {
+  const {calendarType, calendarId, dateFrom: from, dateTo: to} = params
 
   setTimeout(function(from, to) {
     var data = [];

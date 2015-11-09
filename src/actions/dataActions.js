@@ -4,7 +4,7 @@ import {
   EVENTS_LOAD_STARTED,
   EVENTS_LOAD_COMPLETED,
   EVENTS_LOAD_FAILED,
-  DATA_ERROR_HIDE
+  DATA_ERROR_HIDE,
 } from '../constants/actionTypes'
 
 function startEventsRequest () {
@@ -30,14 +30,15 @@ function receiveError (errorObject) {
   }
 }
 
-export function fetchEvents (dataCallback, weekDate) {
-  const [dateFrom, dateTo] = isoWeekRange(weekDate)
+export function fetchEvents (dataCallback, calendar) {
+  const {id: calendarId, type: calendarType, date} = calendar
+  const [dateFrom, dateTo] = isoWeekRange(date)
 
   return function (dispatch) {
     // First dispatch: inform state that loading is going on
     dispatch(startEventsRequest())
 
-    dataCallback(dateFrom, dateTo, function (error, result) {
+    dataCallback({calendarId, calendarType, dateFrom, dateTo}, function (error, result) {
       if (error) {
         return dispatch(receiveError(error))
       }

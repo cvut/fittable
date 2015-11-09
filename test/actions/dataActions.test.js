@@ -5,22 +5,27 @@ import {
   EVENTS_LOAD_STARTED,
   EVENTS_LOAD_COMPLETED,
   EVENTS_LOAD_FAILED,
-  DATA_ERROR_HIDE
+  DATA_ERROR_HIDE,
 } from '../../src/constants/actionTypes'
 
 test('fetchEvents() executes a given callback with a week range', t => {
+  const params = {
+    type: 'courses',
+    id: 'MI-RUB',
+    date: '2015-09-09',
+  }
+
   const expectedFrom = '2015-09-07'
   const expectedTo = '2015-09-13'
-  const today = new Date('2015-09-09')
 
-  const dataCallback = (actualFrom, actualTo, cb) => {
-    t.equal(actualFrom, expectedFrom, 'callback receives dateFrom string for a week start')
-    t.equal(actualTo, expectedTo, 'callback receives dateTo string for a week end')
+  const dataCallback = (actualParams, cb) => {
+    t.equal(actualParams.dateFrom, expectedFrom, 'callback receives dateFrom string for a week start')
+    t.equal(actualParams.dateTo, expectedTo, 'callback receives dateTo string for a week end')
     t.equal(typeof cb, 'function', 'callback receives a callback for response')
     t.end()
   }
 
-  const thunk = actions.fetchEvents(dataCallback, today)
+  const thunk = actions.fetchEvents(dataCallback, params)
   const dispatch = () => {}
 
   t.equal(typeof thunk, 'function', 'fetchEvents returns a thunk function immediately')
@@ -29,7 +34,11 @@ test('fetchEvents() executes a given callback with a week range', t => {
 })
 
 test('fetchEvents() dispatch', t => {
-  const today = new Date('2015-09-09')
+  const params = {
+    type: 'courses',
+    id: 'MI-RUB',
+    date: '2015-09-09',
+  }
   let dispatch = spy()
 
   const responseData = {
@@ -47,8 +56,8 @@ test('fetchEvents() dispatch', t => {
     },
   }
 
-  let callback = (from, to, cb) => cb(null, responseData)
-  let thunk = actions.fetchEvents(callback, today)
+  let callback = (passedParams, cb) => cb(null, responseData)
+  let thunk = actions.fetchEvents(callback, params)
   thunk(dispatch)
 
   const expectedCalls = 2
@@ -90,9 +99,9 @@ test('fetchEvents() dispatch', t => {
     const error = new Error('error message')
     error.type = 'generic'
 
-    callback = (from, to, cb) => cb(error)
+    callback = (passedParams, cb) => cb(error)
     dispatch = spy()
-    thunk = actions.fetchEvents(callback, today)
+    thunk = actions.fetchEvents(callback, params)
 
     thunk(dispatch)
 
