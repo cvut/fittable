@@ -105,6 +105,11 @@ const FittableContainer = React.createClass({
   // FIXME: too much logic. should be somewhere else
   getSemesterName () {
     const {semester} = this.props
+
+    if (!semester.valid) {
+      return 'no data'
+    }
+
     if (!semester || !semester.season || !semester.years) {
       return ''
     }
