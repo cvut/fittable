@@ -8,20 +8,29 @@ function receiveSemesterData (semester) {
   }
 }
 
+export function invalidateSemesterData (semester) {
+  return {
+    ...semester,
+    valid: false,
+  }
+}
+
 export function fetchSemesterData (semesterCallback, date) {
   return function semesterDataThunk (dispatch, getState) {
     const {semester} = getState()
-    if (semester && dateInSemester(semester, date)) {
+    if (semester && semester.valid && dateInSemester(semester, date)) {
       return
     }
 
     semesterCallback(data => {
       if (!data) {
+        dispatch(receiveSemesterData(invalidateSemesterData(semester)))
         return
       }
 
       const currentSemester = findSemester(data, date)
       if (!currentSemester) {
+        dispatch(receiveSemesterData(invalidateSemesterData(semester)))
         return
       }
 

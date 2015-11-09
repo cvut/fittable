@@ -75,6 +75,7 @@ test('convertRawSemester()', t => {
         endsOn: '2015-06-27',
       },
     ],
+    valid: true,
   }
 
   const actual = s.convertRawSemester(original)

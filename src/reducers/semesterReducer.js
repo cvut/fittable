@@ -9,6 +9,7 @@ const initialState = {
     lessonDuration: 0.875,
   },
   periods: [],
+  valid: false,
   /*
   startsOn,
   endsOn,

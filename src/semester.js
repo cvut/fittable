@@ -56,5 +56,6 @@ export function convertRawSemester (semester) {
         endsOn: semester.examsEndsAt,
       },
     ],
+    valid: true,
   }
 }

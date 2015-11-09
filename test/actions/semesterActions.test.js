@@ -78,6 +78,7 @@ test('fetchSemesterData() dispatch with semester loaded', t => {
     semester: {
       startsOn: '2015-02-18',
       endsOn: '2015-09-21',
+      valid: true,
     },
   }
 
@@ -89,5 +90,25 @@ test('fetchSemesterData() dispatch with semester loaded', t => {
   thunk(dispatch, () => state)
   t.equal(callback.callCount, 0, 'does not execute callback if the date is already within current semester')
   t.equal(dispatch.callCount, 0, 'does not dispatches action if the date is already within current semester')
+  t.end()
+})
+
+test('invalidateSemesterData()', t => {
+  const semester = {
+    season: 'winter',
+    valid: true,
+    years: [2015, 2016],
+  }
+
+  const expected = {
+    season: 'winter',
+    valid: false,
+    years: [2015, 2016],
+  }
+
+  const invalidated = actions.invalidateSemesterData(semester)
+
+  t.deepEqual(invalidated, expected, 'invalidate semester')
+  t.deepEqual(actions.invalidateSemesterData(invalidated), expected, 'invalidating invalidated semester does nothing')
   t.end()
 })
