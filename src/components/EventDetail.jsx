@@ -73,7 +73,7 @@ class EventDetail extends React.Component {
         </div>
         <div className="name">
           <button onClick={this.handleCourseClick.bind(this, this.props.data.course) }>
-            {name}
+            {name[CP.getLocale()] || name.cs}
           </button>
         </div>
         <div className="location">
