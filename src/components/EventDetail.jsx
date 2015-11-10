@@ -62,9 +62,22 @@ class EventDetail extends React.Component {
     return this.props.linkNames[CP.getLocale()][type][key] || key
   }
 
+  getEventName () {
+    let name = this.props.data.name
+
+    // Lectures, tutorials, and laboratories don't have name.
+    if (name) {
+      name = name[CP.getLocale()] || name.cs
+    }
+    // If event name is not set, use course name instead.
+    if (!name) {
+      name = this.getLinkName('courses', this.props.data.course)
+    }
+    return name
+  }
+
   eventBasicProps () {
     const seqNumber = this.props.data.sequenceNumber || '?'
-    const name = this.props.data.name || this.getLinkName('courses', this.props.data.course)
 
     return (
       <div className="prop-section basic-props">
@@ -73,7 +86,7 @@ class EventDetail extends React.Component {
         </div>
         <div className="name">
           <button onClick={this.handleCourseClick.bind(this, this.props.data.course) }>
-            {name[CP.getLocale()] || name.cs}
+            {this.getEventName()}
           </button>
         </div>
         <div className="location">
