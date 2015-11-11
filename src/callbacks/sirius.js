@@ -8,7 +8,6 @@
  * @version     1.0
  */
 
-import Grapnel from 'grapnel'
 import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
@@ -103,35 +102,6 @@ function generateError (status, message = 'No message specified') {
   return error
 }
 
-/**
- * @return {Grapnel} an initialized router.
- */
-function initRouter () {
-
-  var router = new Grapnel({
-    root: getBaseUri(),
-    hashBang: true,
-    pushState: mayUsePushState()
-  })
-
-  var handleView = function (viewName) {
-    return (req) => changeView(viewName, req.params.id)
-  }
-
-  router.get('/?', req => changeView('person', user.name))
-  router.get('/courses/:id', handleView('course'))
-  router.get('/people/:id', handleView('person'))
-  router.get('/rooms/:id', handleView('room'))
-
-  // Default route, redirect all unmatched to /.
-  router.get('/*', (req, e) => {
-    if (!e.parent()) {
-      router.navigate('/')
-    }
-  })
-
-  return router
-}
 
 /**
  * @return {string} a base URI (aka relative URL root) of this site with
@@ -150,21 +120,17 @@ function getBaseUri () {
 }
 
 /**
- * @return {boolean} should we enable pushState?
- */
-function mayUsePushState () {
-  return window.location.protocol !== 'file:'
-}
-
-/**
  * Updates the title on the top
  * @param {string} title Large title
  * @param {string} subtitle Small subtitle under title
  */
-function updateTitle (title, subtitle = null)
-{
-  if ( title !== null ) document.getElementsByTagName('h1')[0].innerHTML = title
-  if ( subtitle !== null ) document.getElementsByClassName('sub-header')[0].innerHTML = subtitle
+function updateTitle (title, subtitle = null) {
+  if (title !== null) {
+    document.getElementsByTagName('h1')[0].innerHTML = title
+  }
+  if (subtitle !== null ) {
+    document.getElementsByClassName('sub-header')[0].innerHTML = subtitle
+  }
 }
 
 function changeView (newView, newParam) {
@@ -210,10 +176,7 @@ function makeRequest (parameters) {
  * @param params   Object with request parameters
  * @param callback Callback to be called after successful request
  */
-function dataCallback (params, callback) {
-  const {calendarType, dateFrom, dateTo} = params
-  let {calendarId} = params
-
+function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
   // FIXME: until `me` is a valid shortcut on Sirius
   if (calendarId === 'me' && calendarType === 'people') {
     calendarId = user.name
@@ -445,8 +408,6 @@ function viewChangeCallback (view, param) {
 if (!isUserLoggedIn()) {
   window.location.href = 'landing.html'
 } else {
-  var router = initRouter()
-
   setUsername(user.name)
 
   // Prepare the options object with default values
