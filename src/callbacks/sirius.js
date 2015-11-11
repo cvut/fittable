@@ -429,7 +429,7 @@ var settingsChangeCallback = function (settings) {
  */
 
 function viewChangeCallback (view, param) {
-  router.navigate(`/${viewPaths[view]}/${param}`)
+  console.error('viewChangeCallback fired!')
 }
 
 // If the user is not logged in, redirect him to the landing page

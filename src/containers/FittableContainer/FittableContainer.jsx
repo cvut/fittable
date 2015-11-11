@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import CP from 'counterpart'
 
-import { pushState } from 'redux-router'
 import { calendar as calendarSelector } from '../../selectors/routerSelector'
 import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
@@ -18,6 +17,7 @@ import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
 import { detectScreenSize } from '../../actions/clientActions'
 import { fetchUserData } from '../../actions/userActions'
+import { changeCalendar } from '../../actions/linkActions'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -63,7 +63,7 @@ function mapDispatchToProps (dispatch) {
     onWindowResize: () => dispatch(detectScreenSize()),
     onErrorHide: () => dispatch(hideDataError()),
     onUserRequest: () => dispatch(fetchUserData()),
-    pushState,
+    changeCalendar: (entity, id) => dispatch(changeCalendar(entity, id)),
   }
 }
 
@@ -133,6 +133,7 @@ const FittableContainer = React.createClass({
     this.props.onEventDisplay(null)
     this.props.callbacks.viewChange(to, param)
     this.getWeekEvents()
+    this.props.changeCalendar(to, param)
   },
 
   handleSearch (query) {
