@@ -69,6 +69,14 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
+function requestSemesterData (props) {
+  props.onSemesterDataRequest(props.callbacks.semesterData, props.viewDate)
+}
+
+function requestWeekEvents (props) {
+  props.onEventsRequest(props.callbacks.data, props.calendar)
+}
+
 const FittableContainer = React.createClass({
   componentDidMount () {
     this.props.onWindowResize()
@@ -77,8 +85,8 @@ const FittableContainer = React.createClass({
 
   componentWillMount () {
     this.props.onUserRequest()
-    this.getWeekEvents(this.props)
-    this.getSemesterData(this.props)
+    requestWeekEvents(this.props)
+    requestSemesterData(this.props)
   },
 
   componentWillUnmount () {
@@ -87,13 +95,9 @@ const FittableContainer = React.createClass({
 
   componentWillReceiveProps (nextProps) {
     if (!equals(nextProps.calendar, this.props.calendar)) {
-      this.getWeekEvents(nextProps)
-      this.getSemesterData(nextProps)
+      requestWeekEvents(nextProps)
+      requestSemesterData(nextProps)
     }
-  },
-
-  getSemesterData (props) {
-    props.onSemesterDataRequest(props.callbacks.semesterData, props.viewDate)
   },
 
   // FIXME: too much logic. should be somewhere else
@@ -108,11 +112,6 @@ const FittableContainer = React.createClass({
     const translateKey = `${season}_sem`
 
     return CP.translate(translateKey, {year: `${beginYear}/${endYear}`})
-  },
-
-  // FIXME: this should be an implicit call with date change
-  getWeekEvents (props) {
-    props.onEventsRequest(props.callbacks.data, props.calendar)
   },
 
   // FIXME: deprecate callback
