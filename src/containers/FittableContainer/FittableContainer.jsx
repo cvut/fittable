@@ -160,7 +160,12 @@ const FittableContainer = React.createClass({
 
     return (
       <div className="fittable-container" ref="rootEl">
-        <Header />
+        <Header
+          view="no data"
+          semesterName={this.getSemesterName()}
+          userName={this.props.user.name || this.props.user.id}
+        />
+        {/* FIXME: we don't have the view name data inside fittable :( */}
         <Controls
           viewDate={this.props.viewDate}
           onWeekChange={this.handleChangeViewDate}
