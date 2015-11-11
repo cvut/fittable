@@ -21,6 +21,7 @@ import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
 import Controls from '../../components/Controls'
 import Timetable from '../../components/Timetable'
+import Header from '../../components/Header'
 
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
@@ -159,6 +160,7 @@ const FittableContainer = React.createClass({
 
     return (
       <div className="fittable-container" ref="rootEl">
+        <Header />
         <Controls
           viewDate={this.props.viewDate}
           onWeekChange={this.handleChangeViewDate}

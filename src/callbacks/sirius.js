@@ -163,8 +163,9 @@ function mayUsePushState () {
  */
 function updateTitle (title, subtitle = null)
 {
-  if ( title !== null ) document.getElementsByTagName('h1')[0].innerHTML = title
-  if ( subtitle !== null ) document.getElementsByClassName('sub-header')[0].innerHTML = subtitle
+  //if ( title !== null ) document.getElementsByTagName('h1')[0].innerHTML = title
+  //if ( subtitle !== null ) document.getElementsByClassName('sub-header')[0].innerHTML = subtitle
+  //fixme
 }
 
 function changeView (newView, newParam) {

@@ -1,3 +1,73 @@
+header {
+  position: relative;
+
+  &.row {
+    margin: 60px 0 30px 0 !important;
+  }
+
+  h1 {
+    color: $primary-color;
+    font-weight: 300;
+    margin: -10px 0 0 0;
+  }
+
+  h1 + .sub-header {
+    text-transform: uppercase;
+    font-size: $small-font-size;
+    margin-top: -7px;
+    color: $primary-color;
+    font-weight: 400;
+  }
+
+  .header-usermenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @media #{$medium-down} {
+      right: 20px;
+    }
+
+    @media #{$small-down} {
+      display: none;
+    }
+  }
+
+  .header-usermenu-username {
+    background: $light-secondary-color;
+    @include upcase();
+    padding: .5rem 1rem;
+    float: left;
+
+    a {
+      color: $body-font-color;
+    }
+
+    i.fa {
+      color: $primary-color;
+      margin-right: .7rem;
+    }
+
+    @media #{$medium-down} {
+      display: none;
+    }
+  }
+
+  .header-usermenu-logout {
+    background: $primary-color;
+    color: white;
+    @include upcase();
+    padding: .5rem 1rem;
+    float: right;
+
+    @media #{$medium-down} {
+      font-size: .8rem;
+      padding: .5rem 1rem;
+    }
+  }
+}
+
+
 #fittable {
 
   .header {
