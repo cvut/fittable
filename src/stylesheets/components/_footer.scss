@@ -45,11 +45,21 @@
     }
   }
 
+  &-alert {
+    padding-top: 2em;
+    text-align: center;
+  }
+
   &-content {
     padding: .5em 30px 4em 30px;
 
     &-buildinfo {
       float: right;
+    }
+
+    &-betalabel{
+      color: #cd4d4d;
+      font-weight: bold;
     }
 
     @media #{$medium-down} {

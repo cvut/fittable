@@ -22,6 +22,7 @@ import Spinner from '../../components/Spinner'
 import Controls from '../../components/Controls'
 import Timetable from '../../components/Timetable'
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
@@ -210,6 +211,10 @@ const FittableContainer = React.createClass({
           errorVisible={errorVisible}
           onErrorHide={this.props.onErrorHide}
         />
+        <Footer
+          userName={this.props.user.name || this.props.user.id}
+          />
+
         <Spinner show={waiting} />
       </div>
     )
