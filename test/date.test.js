@@ -112,3 +112,12 @@ test('withinDates', t => {
   t.equal(date.withinDates(a, b, a), true, 'is inclusive with edge dates')
   t.end()
 })
+
+test('strToDate', t => {
+  const str = '2015-09-03'
+  const expected = new Date(str).toString()
+  const actual = date.strToDate(str).toString()
+
+  t.equal(actual, expected)
+  t.end()
+})

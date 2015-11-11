@@ -5,6 +5,10 @@ import { TZ } from './config'
 
 export const now = () => Object.freeze(new Date())
 
+export function strToDate (date) {
+  return new Date(date)
+}
+
 export function isoDate (date) {
   return moment.tz(date, TZ).format('YYYY-MM-DD')
 }
