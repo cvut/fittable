@@ -3,8 +3,7 @@ import { merge } from 'ramda'
 
 import { routerStateReducer } from 'redux-router'
 
-import { SETTINGS_CHANGE, VIEW_DATE_CHANGE, DISPLAY_FILTERS_CHANGE } from '../constants/actionTypes'
-import { now } from '../date'
+import { SETTINGS_CHANGE, DISPLAY_FILTERS_CHANGE } from '../constants/actionTypes'
 
 import data from './dataReducer'
 import ui from './uiReducer'
@@ -33,15 +32,6 @@ const initialDisplayFilters = {
 /*eslint-enable */
 }
 
-function viewDate (state = now(), action) {
-  switch (action.type) {
-    case VIEW_DATE_CHANGE:
-      return action.viewDate
-    default:
-      return state
-  }
-}
-
 function settings (state = initialSettings, action) {
   switch (action.type) {
     case SETTINGS_CHANGE:
@@ -63,7 +53,6 @@ function displayFilters (state = initialDisplayFilters, action) {
 const rootReducer = combineReducers({
   router: routerStateReducer,
   settings,
-  viewDate,
   displayFilters,
   data,
   ui,

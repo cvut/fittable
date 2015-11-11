@@ -6,7 +6,6 @@ import reducer from '../../src/reducers'
 test('Initial state', t => {
   const result = reducer(undefined, {type: 'FAUX_ACTION'})
   t.is(type(result.settings), 'Object')
-  t.is(type(result.viewDate), 'Date')
   t.is(type(result.displayFilters), 'Object')
   t.is(type(result.data), 'Object')
   t.is(type(result.ui), 'Object')
@@ -25,17 +24,6 @@ test('Settings change', t => {
   const settings = reducer(undefined, action).settings
   t.equal(settings.locale, 'en')
   t.equal(settings.layout, 'vertical')
-  t.end()
-})
-
-test('viewDate change', t => {
-  const viewDate = new Date()
-  const action = {
-    type: actionTypes.VIEW_DATE_CHANGE,
-    viewDate,
-  }
-  const actualVD = reducer(undefined, action).viewDate
-  t.equal(actualVD, viewDate)
   t.end()
 })
 
