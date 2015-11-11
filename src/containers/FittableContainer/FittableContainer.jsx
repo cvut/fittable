@@ -10,7 +10,6 @@ import { equals } from 'ramda'
 
 import { calendar as calendarSelector } from '../../selectors/routerSelector'
 import { changeSettings } from '../../actions/settingsActions'
-import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
 import { fetchEvents, hideDataError } from '../../actions/dataActions'
 import { displaySidebar, displayEvent } from '../../actions/uiActions'
@@ -20,6 +19,8 @@ import { detectScreenSize } from '../../actions/clientActions'
 import { fetchUserData } from '../../actions/userActions'
 import { changeCalendar } from '../../actions/linkActions'
 
+import { isoDate, strToDate } from '../../date'
+
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
 import Controls from '../../components/Controls'
@@ -28,9 +29,10 @@ import Timetable from '../../components/Timetable'
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
 function mapStateToProps (state) {
+  const calendar = calendarSelector(state)
+
   return {
     settings: state.settings,
-    viewDate: state.viewDate,
     displayFilters: state.displayFilters,
     data: state.data,
     ui: state.ui,
@@ -44,7 +46,8 @@ function mapStateToProps (state) {
     grid: state.semester.grid,
     user: state.user,
     screenSize: state.client.screenSize,
-    calendar: calendarSelector(state),
+    viewDate: strToDate(calendar.date),
+    calendar,
   }
 }
 
@@ -52,9 +55,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     onSettingChange: (key, val) => dispatch(changeSettings({[key]: val})),
-    onViewDateChange: (newDate) => dispatch(changeViewDate(newDate)),
     onDisplayFiltersChange: (filters) => dispatch(changeDisplayFilters(filters)),
-    // FIXME: this one should be bound to onViewDateChange
     onEventsRequest: (callback, date) => dispatch(fetchEvents(callback, date)),
     onSidebarDisplay: (sidebar) => dispatch(displaySidebar(sidebar)),
     onEventDisplay: (eventId) => dispatch(displayEvent(eventId)),
@@ -64,7 +65,7 @@ function mapDispatchToProps (dispatch) {
     onWindowResize: () => dispatch(detectScreenSize()),
     onErrorHide: () => dispatch(hideDataError()),
     onUserRequest: () => dispatch(fetchUserData()),
-    changeCalendar: (entity, id) => dispatch(changeCalendar(entity, id)),
+    changeCalendar: (calendar) => dispatch(changeCalendar(calendar)),
   }
 }
 
@@ -77,7 +78,7 @@ const FittableContainer = React.createClass({
   componentWillMount () {
     this.props.onUserRequest()
     this.getWeekEvents(this.props)
-    this.getSemesterData()
+    this.getSemesterData(this.props)
   },
 
   componentWillUnmount () {
@@ -87,11 +88,12 @@ const FittableContainer = React.createClass({
   componentWillReceiveProps (nextProps) {
     if (!equals(nextProps.calendar, this.props.calendar)) {
       this.getWeekEvents(nextProps)
+      this.getSemesterData(nextProps)
     }
   },
 
-  getSemesterData (viewDate) {
-    this.props.onSemesterDataRequest(this.props.callbacks.semesterData, viewDate || this.props.viewDate)
+  getSemesterData (props) {
+    props.onSemesterDataRequest(props.callbacks.semesterData, props.viewDate)
   },
 
   // FIXME: too much logic. should be somewhere else
@@ -114,27 +116,31 @@ const FittableContainer = React.createClass({
   },
 
   // FIXME: deprecate callback
-  handleChangeViewDate (viewDate) {
-    // Update the viewDate state
-    this.props.onViewDateChange(viewDate)
-    this.getSemesterData(viewDate)
-
+  handleChangeViewDate (date) {
     // Close all opened functions
     this.props.onSidebarDisplay(null)
     // Also close opened event
     this.props.onEventDisplay(null)
 
-    // Update viewDate
-    const newdate = moment(viewDate)
+    const calendar = {
+      ...this.props.calendar,
+      date: isoDate(date),
+    }
+    this.props.changeCalendar(calendar)
   },
 
   // FIXME: → mapDispatchToProps
-  handleChangeView (to, param) {
+  handleChangeView (type, id) {
     // Close all opened functions
     this.props.onSidebarDisplay(null)
     // Also close opened event
     this.props.onEventDisplay(null)
-    this.props.changeCalendar(to, param)
+    const calendar = {
+      ...this.props.calendar,
+      id,
+      type,
+    }
+    this.props.changeCalendar(calendar)
   },
 
   handleSearch (query) {
