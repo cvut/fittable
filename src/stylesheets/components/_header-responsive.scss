@@ -3,7 +3,7 @@ header {
   // Medium screen
   @media #{$medium-down} {
     &.row {
-      margin: 15px auto 15px auto;
+      margin: 15px auto 15px auto !important;
       text-align: center;
     }
 
@@ -22,7 +22,7 @@ header {
   @media #{$small-down} {
     &.row {
       background: $primary-color;
-      margin: 0;
+      margin: 0 !important;
       padding: 10px 20px 5px;
     }
 

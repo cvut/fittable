@@ -117,6 +117,26 @@
     "personal_calendar": "Osobní kalendář"
   },
 
+  "calendarType": {
+    "personal": "osobní rozvrh",
+    "person": "osoba",
+    "people": "osoba",
+    "room": "místnost",
+    "rooms": "místnost",
+    "course": "předmět",
+    "courses": "předmět"
+  },
+
+  "footer": {
+    "loggedInAs": "Přihlášený uživatel",
+    "reportBug": "Nahlásit chybu",
+    "reportBugPlead": "Narazili jste na chybu? Nahlašte nám ji prosím na",
+    "meanwhile": "Zatím můžete využít",
+    "oldTimetable": "původní Timetable"
+  },
+
+  "logout": "Odhlásit se",
+
   "errors": {
     "generic_title": "Kalendář nemohl být zobrazen",
     "generic_desc": "Nastala chyba '%(type)s' při jeho zobrazování.",

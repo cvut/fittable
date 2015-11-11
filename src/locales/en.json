@@ -117,6 +117,26 @@
     "personal_calendar": "Personal calendar"
   },
 
+  "calendarType": {
+    "personal": "personal schedule",
+    "person": "person",
+    "people": "person",
+    "room": "room",
+    "rooms": "room",
+    "course": "course",
+    "courses": "course"
+  },
+
+  "footer": {
+    "loggedInAs": "Logged in as",
+    "reportBug": "Report bug",
+    "reportBugPlead": "Did you find a bug? Please, report it at",
+    "meanwhile": "In the meantime, use the",
+    "oldTimetable": "original timetable application"
+  },
+
+  "logout": "Log out",
+
   "errors": {
     "generic_title": "We can't display the calendar",
     "generic_desc": "There is an error '%(type)s'.",
