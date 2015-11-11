@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import CP from 'counterpart'
 
+import { pushState } from 'redux-router'
+import { calendar as calendarSelector } from '../../selectors/routerSelector'
 import { changeSettings } from '../../actions/settingsActions'
 import { changeViewDate } from '../../actions/dateActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
@@ -41,6 +43,7 @@ function mapStateToProps (state) {
     grid: state.semester.grid,
     user: state.user,
     screenSize: state.client.screenSize,
+    calendar: calendarSelector(state),
   }
 }
 
@@ -60,6 +63,7 @@ function mapDispatchToProps (dispatch) {
     onWindowResize: () => dispatch(detectScreenSize()),
     onErrorHide: () => dispatch(hideDataError()),
     onUserRequest: () => dispatch(fetchUserData()),
+    pushState,
   }
 }
 
