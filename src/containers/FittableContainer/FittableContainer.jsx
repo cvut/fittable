@@ -6,6 +6,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import CP from 'counterpart'
+import { equals } from 'ramda'
 
 import { calendar as calendarSelector } from '../../selectors/routerSelector'
 import { changeSettings } from '../../actions/settingsActions'
@@ -69,15 +70,24 @@ function mapDispatchToProps (dispatch) {
 
 const FittableContainer = React.createClass({
   componentDidMount () {
-    this.getWeekEvents()
-    this.getSemesterData()
     this.props.onWindowResize()
-    this.props.onUserRequest()
     global.window.addEventListener('resize', this.props.onWindowResize)
+  },
+
+  componentWillMount () {
+    this.props.onUserRequest()
+    this.getWeekEvents(this.props)
+    this.getSemesterData()
   },
 
   componentWillUnmount () {
     global.window.removeEventListener('resize', this.props.onWindowResize)
+  },
+
+  componentWillReceiveProps (nextProps) {
+    if (!equals(nextProps.calendar, this.props.calendar)) {
+      this.getWeekEvents(nextProps)
+    }
   },
 
   getSemesterData (viewDate) {
@@ -99,14 +109,8 @@ const FittableContainer = React.createClass({
   },
 
   // FIXME: this should be an implicit call with date change
-  getWeekEvents (viewDate = null) {
-    const date = viewDate || this.props.viewDate
-    const params = {
-      ...this.props.calendar,
-      date,
-    }
-
-    this.props.onEventsRequest(this.props.callbacks.data, params)
+  getWeekEvents (props) {
+    props.onEventsRequest(props.callbacks.data, props.calendar)
   },
 
   // FIXME: deprecate callback
@@ -122,9 +126,6 @@ const FittableContainer = React.createClass({
 
     // Update viewDate
     const newdate = moment(viewDate)
-
-    // Update the data
-    this.getWeekEvents(viewDate)
   },
 
   // FIXME: → mapDispatchToProps
@@ -134,7 +135,6 @@ const FittableContainer = React.createClass({
     // Also close opened event
     this.props.onEventDisplay(null)
     this.props.changeCalendar(to, param)
-    this.getWeekEvents()
   },
 
   handleSearch (query) {
