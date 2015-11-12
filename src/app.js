@@ -28,4 +28,4 @@ Counterpart.registerTranslations('cs', Object.assign(LocaleCS, {
 // Counterpart.setLocale(options.locale)
 // Moment.locale(options.locale)
 
-ReactDOM.render(React.createElement(AppContainer), rootElement)
+ReactDOM.render(<AppContainer />, rootElement)
