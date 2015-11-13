@@ -6,8 +6,8 @@ import React, { PropTypes } from 'react'
 
 const propTypes = {
   horizontal: PropTypes.bool,
-  hourLength: PropTypes.number.isRequired,
-  timelineOffset: PropTypes.number.isRequired,
+  hours: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
 }
 
@@ -33,6 +33,22 @@ class Grid extends React.Component {
     }
   }
 
+  getLines () {
+    let lines = []
+
+    for (let i = 0; i < this.props.hours; i++) {
+      const pos = i / this.props.hours * 100 + (this.props.offset * 100 / this.props.hours)
+
+      if (this.props.horizontal) {
+        lines.push(<line x1={pos + '%'} y1="0" x2={pos + '%'} y2="100%" stroke={this.props.color} strokeWidth="1"/>)
+      } else {
+        lines.push(<line x1="0" y1={pos + '%'} x2="100%" y2={pos + '%'} stroke={this.props.color} strokeWidth="1"/>)
+      }
+    }
+
+    return lines
+  }
+
   // XXX:You need actually either document's name or a full URL
   //     to resolve the url() reference.
   //     http://stackoverflow.com/q/18259032/240963
@@ -44,10 +60,7 @@ class Grid extends React.Component {
   render () {
     return (
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <defs>
-          {this.getPattern()}
-        </defs>
-        <rect fill={`url(${this.getPatternUrl()})`} x="0" y="0" width="100%" height="100%" />
+        {this.getLines()}
       </svg>
     )
   }

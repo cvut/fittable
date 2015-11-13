@@ -101,12 +101,14 @@ class Timetable extends React.Component {
     const timelineLength = moment().hour(timelineHoursTo).minutes(timelineMinutesTo)
       .diff(moment().hour(timelineHoursFrom).minutes(timelineMinutesFrom))
 
-    let timelineHourLength, timelineOffset
+    let timelineHourLength, timelineOffset, timelineHours
     if (this.props.grid.facultyGrid) {
       timelineHourLength = this.props.grid.lessonDuration * 3600000 / timelineLength
+      timelineHours = timelineLength / this.props.grid.lessonDuration * 3600000
       timelineOffset = 0
     } else {
       timelineHourLength = 3600000 / timelineLength
+      timelineHours = timelineLength / 3600000
       timelineOffset = timelineMinutesFrom / 60
     }
 
@@ -215,9 +217,9 @@ class Timetable extends React.Component {
           <div className="grid-wrapper">
             <Grid
               horizontal={isGridHorizontal}
-              hourLength={timelineHourLength}
-              timelineOffset={timelineOffset}
-              color="rgb(180,180,180)"
+              hours={timelineHours}
+              offset={timelineOffset}
+              color="rgb(210,210,210)"
             />
           </div>
         </div>
