@@ -19,17 +19,15 @@ class ViewDate extends React.Component {
     this.state = { open: false }
   }
 
-  weekNum () {
-    return moment(this.props.viewDate).format('Wo')
-  }
-
-  weekParity () {
-    const parity = moment(this.props.viewDate).isoWeek() % 2 === 0 ? 'even' : 'odd'
-    return CP.translate(parity)
+  weekParity (weekParity) {
+    if (weekParity !== 'even' && weekParity !== 'odd') return '-'
+    return CP.translate(weekParity)
   }
 
   render () {
-    return <div className="view-date">{CP.translate('weekNav.teachweek', { weeknum: this.weekNum() })} ({this.weekParity()})</div>
+    return <div className="view-date">
+      {CP.translate('weekNav.teachweek', { weeknum: this.props.weekNum })} ({this.weekParity(this.props.weekParity)})
+    </div>
   }
 }
 

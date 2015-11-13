@@ -1,7 +1,7 @@
 {
-  "week": "Week %(num)s",
-  "even": "Even",
-  "odd": "Odd",
+  "t-week": "%(num)sst teaching week",
+  "even": "even",
+  "odd": "odd",
   "summer_sem": "Summer %(year)s",
   "winter_sem": "Winter %(year)s",
 
@@ -39,7 +39,7 @@
     "prev": "Previous week",
     "next": "Next week",
     "selector": "Date selector",
-    "teachweek": "%(weeknum)s week",
+    "teachweek": "%(weeknum)s teaching week",
     "unknown_semester": "unknown"
   },
 
