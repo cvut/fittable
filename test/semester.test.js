@@ -56,6 +56,13 @@ test('convertRawSemester()', t => {
     breakDuration: 15,
     dayStartsAtHour: 7.5,
     dayEndsAtHour: 21.25,
+    periods: [
+      {
+        type: 'exams',
+        startsOn: '2015-05-18',
+        endsOn: '2015-06-27',
+      },
+    ],
   }
 
   const expected = {
@@ -134,6 +141,57 @@ test('semesterName()', t => {
   t.equal(s.semesterName(translate, semester), 'translated-string', 'returns translated string from counterpart')
   t.equal(s.semesterName(translate, invsemester), null, 'returns null on invalid semesters')
   t.equal(s.semesterName(translate, emptysemester), null, 'returns null on semesters with missing data')
+
+  t.end()
+})
+
+test('getPeriodFromDate()', t => {
+  const periods = [
+    {type: 'teaching', starts_at: '2015-01-01', ends_at: '2015-02-01', first_week_parity: 'even'},
+    {type: 'exam',     starts_at: '2015-03-01', ends_at: '2015-04-01', first_week_parity: 'even'},
+    {type: 'teaching', starts_at: '2015-04-01', ends_at: '2015-06-01', first_week_parity: 'even'},
+    {type: 'teaching', starts_at: '2015-06-01', ends_at: '2017-01-01', first_week_parity: 'even'},
+  ]
+
+  t.deepEqual(s.getPeriodFromDate(new Date('2015-01-01'), periods), periods[0], 'is within period')
+  t.deepEqual(s.getPeriodFromDate(new Date('2015-01-15'), periods), periods[0], 'is within period')
+  t.deepEqual(s.getPeriodFromDate(new Date('2015-03-15'), periods), periods[1], 'is within period')
+  t.deepEqual(s.getPeriodFromDate(new Date('2016-01-01'), periods), periods[3], 'is within period')
+
+  t.deepEqual(s.getPeriodFromDate(new Date('1970-05-15'), periods), null, 'is not within any period')
+  t.deepEqual(s.getPeriodFromDate(new Date('2015-02-15'), periods), null, 'is not within any period')
+  t.deepEqual(s.getPeriodFromDate(new Date('2020-05-15'), periods), null, 'is not within any period')
+
+  t.end()
+})
+
+test('semesterWeek()', t => {
+  const period = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'even'}
+
+  t.equal(s.semesterWeek(new Date('2015-11-02'), period), 1, 'returns first week on same date')
+  t.equal(s.semesterWeek(new Date('2015-11-08'), period), 1, 'returns first week on date +6 days')
+  t.equal(s.semesterWeek(new Date('2015-11-09'), period), 2, 'returns second week on date +7 days')
+  t.equal(s.semesterWeek(new Date('2015-11-16'), period), 3, 'returns third week on date +14 days')
+
+  t.equal(s.semesterWeek(new Date('2014-01-08'), period), null, 'returns null on past date')
+
+  t.end()
+})
+
+test('periodWeekParity()', t => {
+  const period = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'even'}
+
+  t.equal(s.periodWeekParity(new Date('2015-11-02'), period), 'even', 'returns even on same date')
+  t.equal(s.periodWeekParity(new Date('2015-11-08'), period), 'even', 'returns even on date +6 days')
+  t.equal(s.periodWeekParity(new Date('2015-11-09'), period), 'odd', 'returns odd on date +7 days')
+  t.equal(s.periodWeekParity(new Date('2015-11-16'), period), 'even', 'returns even on date +14 days')
+
+  const period2 = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'odd'}
+
+  t.equal(s.periodWeekParity(new Date('2015-11-02'), period2), 'odd', 'returns odd on same date')
+  t.equal(s.periodWeekParity(new Date('2015-11-08'), period2), 'odd', 'returns odd on date +6 days')
+  t.equal(s.periodWeekParity(new Date('2015-11-09'), period2), 'even', 'returns even on date +7 days')
+  t.equal(s.periodWeekParity(new Date('2015-11-16'), period2), 'odd', 'returns odd on date +14 days')
 
   t.end()
 })

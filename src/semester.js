@@ -1,5 +1,6 @@
 import R from 'ramda'
 import { withinDates } from './date'
+import moment from 'moment-timezone'
 
 const toDate = d => new Date(d)
 
@@ -68,4 +69,28 @@ export function semesterName (translate, semester) {
   const academicYear = `${semester.years[0]}/${semester.years[1] % 100}`
 
   return translate(translateKey, { year: academicYear })
+}
+
+export function getPeriodFromDate (date, periods) {
+  if (periods.length === 0) { return null }
+
+  for (let period of periods) {
+    if (withinDates(period.starts_at, period.ends_at, date)) {
+      return period
+    }
+  }
+
+  return null
+}
+
+export function semesterWeek (date, period) {
+  if (moment(date).isoWeek() < moment(period.starts_at).isoWeek()) return null
+  return moment(date).isoWeek() - moment(period.starts_at).isoWeek() + 1
+}
+
+export function periodWeekParity (date, period) {
+  const week = semesterWeek(date, period)
+  const firstWeekOdd = period.first_week_parity === 'odd'
+
+  return ((week % 2 === 0) === firstWeekOdd) ? 'even' : 'odd'
 }
