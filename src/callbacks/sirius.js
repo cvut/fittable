@@ -56,24 +56,6 @@ var siriusAPIUrl = SIRIUS_BASE_URL
  */
 var appLocale = 'cs'
 
-/**
- * Localized view names
- */
-var viewNames = {
-  cs: {
-    person: 'osoba',
-    room: 'místnost',
-    course: 'předmět',
-    personal: 'osobní rozvrh',
-  },
-  en: {
-    person: 'person',
-    room: 'room',
-    course: 'course',
-    personal: 'personal timetable',
-  },
-}
-
 var viewPaths = {
   course: 'courses',
   person: 'people',
@@ -156,25 +138,10 @@ function mayUsePushState () {
   return window.location.protocol !== 'file:'
 }
 
-/**
- * Updates the title on the top
- * @param {string} title Large title
- * @param {string} subtitle Small subtitle under title
- */
-function updateTitle (title, subtitle = null)
-{
-  if ( title !== null ) document.getElementsByTagName('h1')[0].innerHTML = title
-  if ( subtitle !== null ) document.getElementsByClassName('sub-header')[0].innerHTML = subtitle
-}
-
 function changeView (newView, newParam) {
   // Set new view
   view = newView
   parameter = newParam
-
-  // Change title
-  updateTitle(view === 'person' && parameter === user.name ?
-    viewNames[appLocale]['personal'] : viewNames[appLocale][view] + ' ' + parameter, null)
 }
 
 /**
@@ -353,10 +320,8 @@ var searchCallback = function (query, callback) {
   }.bind(null, callback, f)
 }
 
-var dateChangeCallback = function (newdate, newsemester) {
-  console.log(newdate, newsemester)
-  // Display semester name in subheading
-  updateTitle(null, newsemester)
+function dateChangeCallback (newdate, semester) {
+  /* ... */
 }
 
 var semesterDataCallback = function (callback) {
@@ -418,10 +383,6 @@ var settingsChangeCallback = function (settings) {
 
   // Update appLocale
   appLocale = settings.locale
-
-  // Update title and subtitle for possible locale change
-  updateTitle(view === 'person' && parameter === user.name ?
-    viewNames[appLocale]['personal'] : viewNames[appLocale][view] + ' ' + parameter, null)
 }
 
 /**
@@ -469,10 +430,6 @@ if (!isUserLoggedIn()) {
 
   // Get app locale
   appLocale = options.locale
-
-  // Init set title
-  updateTitle(view === 'person' && parameter === user.name ?
-    viewNames[appLocale]['personal'] : viewNames[appLocale][view] + ' ' + parameter, null)
 }
 
 function userCallback (cb) {
