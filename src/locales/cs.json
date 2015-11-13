@@ -1,7 +1,7 @@
 {
   "week": "Týden %(num)s",
-  "even": "Sudý",
-  "odd": "Lichý",
+  "even": "sudý",
+  "odd": "lichý",
   "summer_sem": "%(year)s Letní",
   "winter_sem": "%(year)s Zimní",
 
@@ -39,7 +39,7 @@
     "prev": "Předchozí týden",
     "next": "Následující týden",
     "selector": "Výběr data",
-    "teachweek": "%(weeknum)s týden",
+    "teachweek": "%(weeknum)s. týden výuky",
     "unknown_semester": "neznámý"
   },
 
