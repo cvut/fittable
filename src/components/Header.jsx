@@ -1,35 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 
-const propTypes = {
-  view: PropTypes.string,
-  semesterName: PropTypes.string,
-}
+import LogoutButton from './LogoutButton'
 
-class Header extends Component {
+export default function Header ({view, userName, semesterName}) {
+  return (
+    <header className="Header row">
+      <h1>{view}</h1>
 
-  render () {
-    return (
-      <header className="row">
-        <h1>{this.props.view}</h1>
-
-        <div className="sub-header">{this.props.semesterName}</div>
-        <div className="header-usermenu">
-          <div className="header-usermenu-username">
-            <a href="#">
-              <i className="fa fa-user"></i> <span className="js-username">{this.props.userName}</span>
-            </a>
-          </div>
-          <a className="header-usermenu-logout u-hidden"
-             href="_oauth/login" alt="Odhlásit se" title="Odhlásit se">
-            <i className="fa fa-power-off"></i>
-          </a>
+      <div className="sub-header">{semesterName}</div>
+      <div className="header-usermenu">
+        <div className="header-usermenu-username">
+          <LogoutButton />
         </div>
-      </header>
-    )
-  }
-
+      </div>
+    </header>
+  )
 }
-
-Header.propTypes = propTypes
-
-export default Header
