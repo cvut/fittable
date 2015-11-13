@@ -11,6 +11,8 @@
     background: none;
     text-align: left;
     -webkit-appearance: none;
+    // reset border-radius for mobile FF
+    border-radius: 0;
 
     &:focus {
       outline: 0;
