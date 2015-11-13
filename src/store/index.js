@@ -2,7 +2,7 @@ import { compose, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { mergePersistedState } from 'redux-localstorage'
 import { reduxReactRouter } from 'redux-router'
-import { createHistory } from 'history'
+import { createHistory, useBasename } from 'history'
 
 import rootReducer from '../reducers'
 import routes from '../routes'
@@ -20,12 +20,15 @@ const reducer = compose(
   mergePersistedState()
 )(rootReducer)
 
+// Use history with <base href> support
+const history = useBasename(createHistory)()
+
 // Store enhancers
 let finalCreateStore = compose(
   applyMiddleware(...middlewares),
   reduxReactRouter({
     routes,
-    createHistory,
+    history,
   })
 )(createStore)
 
