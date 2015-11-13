@@ -10,8 +10,11 @@ export default function Header ({view, userName, semesterName}) {
       <div className="sub-header">{semesterName}</div>
       <div className="header-usermenu">
         <div className="header-usermenu-username">
-          <LogoutButton />
+          <a href="#">
+            <i className="fa fa-user"></i> <span className="js-username">{userName}</span>
+          </a>
         </div>
+        {/*<LogoutButton />*/}
       </div>
     </header>
   )
