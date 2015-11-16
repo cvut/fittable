@@ -71,6 +71,7 @@ class FunctionSearch extends React.Component {
               id="searchinput"
               name="search"
               ref="searchquery"
+              autoComplete="off"
               placeholder={CP.translate('functions.search.placeholder')}
             />
             <button
