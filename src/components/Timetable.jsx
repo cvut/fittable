@@ -7,7 +7,7 @@ import moment from 'moment'
 import { grid as gridPropType } from '../constants/propTypes'
 
 import { weekdayNum } from '../date'
-import { classByScreenSize, isScreenLarge } from '../screen'
+import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
@@ -169,7 +169,7 @@ class Timetable extends React.Component {
     // Create days
     let days = []
     const selectedDay = weekdayNum(this.props.viewDate)
-    for (let i = 0; i < (this.props.days7 ? 7 : 5); i++) {
+    for (let i = 0; i < (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5); i++) {
       days.push(
         <Day
           id={i}
