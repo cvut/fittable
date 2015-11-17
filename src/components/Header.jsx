@@ -21,7 +21,7 @@ export default function Header ({calendar, userName, semesterName}) {
       <div className="header-usermenu">
         <div className="header-usermenu-username">
           <a href=""> {/* Intentionally left blank to return to base href */}
-            <i className="fa fa-user"></i> <span className="js-username">{userName}</span>
+            <i className="fa fa-user"></i> <span>{userName}</span>
           </a>
         </div>
         {/* <LogoutButton /> */}

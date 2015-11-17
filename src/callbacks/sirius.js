@@ -116,13 +116,6 @@ function isUserLoggedIn () {
   return (user.name && user.token)
 }
 
-function setUsername (username) {
-  const elems = document.querySelectorAll('.js-username')
-  for (const element of elems) {
-    element.innerHTML = username
-  }
-}
-
 function makeRequest (parameters) {
   var requestUrl = siriusAPIUrl
 
@@ -373,8 +366,6 @@ function viewChangeCallback (view, param) {
 if (!isUserLoggedIn()) {
   window.location.href = 'landing.html'
 } else {
-  setUsername(user.name)
-
   // Prepare the options object with default values
   var options = {
     locale: 'cs',

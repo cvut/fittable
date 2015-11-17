@@ -10,7 +10,7 @@ export default function Footer ({userName}) {
         <span className="footer-usermenu-loggedas">{CP.translate('footer.loggedInAs')}{'\u0020'}</span>
           <span className="footer-usermenu-username">
             <i className="fa fa-user"></i>
-            <span className="js-username">{userName}</span>
+            <span>{userName}</span>
           </span>
         { /*<LogoutButton />*/ }
       </div>
