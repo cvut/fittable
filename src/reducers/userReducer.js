@@ -5,6 +5,7 @@ const initialState = {
   publicAccessToken: null,
   id: null,
   name: null,
+  accessToken: null,
 }
 
 export default function userReducer (state = initialState, action) {
