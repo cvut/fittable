@@ -1,8 +1,3 @@
-/**
- * Main application file of Fittable
- *  - Requires React.js to be loaded before loading this
- */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -12,7 +7,7 @@ import 'moment/locale/cs'
 import LocaleCS from './locales/cs.json'
 import LocaleEN from './locales/en.json'
 
-import AppContainer from './containers/AppContainer'
+import Root from './Root'
 
 const rootElement = document.getElementById('fittable')
 
@@ -28,4 +23,4 @@ Counterpart.registerTranslations('cs', Object.assign(LocaleCS, {
 // Counterpart.setLocale(options.locale)
 // Moment.locale(options.locale)
 
-ReactDOM.render(<AppContainer />, rootElement)
+ReactDOM.render(<Root />, rootElement)
