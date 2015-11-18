@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
-import store from '../../store'
+import createStore from '../../store'
 import FittableContainer from '../FittableContainer'
 
 import * as callbacks from '../../callbacks'
+
+const store = createStore()
 
 export default class AppContainer extends Component {
 
