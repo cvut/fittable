@@ -169,7 +169,8 @@ class Timetable extends React.Component {
     // Create days
     let days = []
     const selectedDay = weekdayNum(this.props.viewDate)
-    for (let i = 0; i < (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5); i++) {
+    const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
+    for (let i = 0; i < dayCount; i++) {
       days.push(
         <Day
           id={i}
