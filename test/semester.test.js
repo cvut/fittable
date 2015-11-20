@@ -153,14 +153,23 @@ test('getPeriodFromDate()', t => {
     {type: 'teaching', starts_at: '2015-06-01', ends_at: '2017-01-01', first_week_parity: 'even'},
   ]
 
-  t.deepEqual(s.getPeriodFromDate(new Date('2015-01-01'), periods), periods[0], 'is within period')
-  t.deepEqual(s.getPeriodFromDate(new Date('2015-01-15'), periods), periods[0], 'is within period')
-  t.deepEqual(s.getPeriodFromDate(new Date('2015-03-15'), periods), periods[1], 'is within period')
-  t.deepEqual(s.getPeriodFromDate(new Date('2016-01-01'), periods), periods[3], 'is within period')
+  const cases = [
+    {date: '2015-01-01', expected: periods[0]},
+    {date: '2015-01-15', expected: periods[0]},
+    {date: '2015-03-15', expected: periods[1]},
+    {date: '2016-01-01', expected: periods[3]},
+    {date: '1970-05-15', expected: null},
+    {date: '2015-02-15', expected: null},
+    {date: '2020-05-15', expected: null},
+  ]
 
-  t.deepEqual(s.getPeriodFromDate(new Date('1970-05-15'), periods), null, 'is not within any period')
-  t.deepEqual(s.getPeriodFromDate(new Date('2015-02-15'), periods), null, 'is not within any period')
-  t.deepEqual(s.getPeriodFromDate(new Date('2020-05-15'), periods), null, 'is not within any period')
+  cases.forEach((c) => {
+    let message = `${c.date} matches correct period`
+    if (c.expected === null) {
+      message = `${c.date} matches no period`
+    }
+    t.deepEqual(s.getPeriodFromDate(new Date(c.date), periods), c.expected, message)
+  })
 
   t.end()
 })
@@ -168,30 +177,35 @@ test('getPeriodFromDate()', t => {
 test('semesterWeek()', t => {
   const period = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'even'}
 
-  t.equal(s.semesterWeek(new Date('2015-11-02'), period), 1, 'returns first week on same date')
-  t.equal(s.semesterWeek(new Date('2015-11-08'), period), 1, 'returns first week on date +6 days')
-  t.equal(s.semesterWeek(new Date('2015-11-09'), period), 2, 'returns second week on date +7 days')
-  t.equal(s.semesterWeek(new Date('2015-11-16'), period), 3, 'returns third week on date +14 days')
+  const cases = [
+    {date: '2015-11-02', expected: 1, message: 'returns first week on the same date'},
+    {date: '2015-11-08', expected: 1, message: 'returns first week on date +6 days'},
+    {date: '2015-11-09', expected: 2, message: 'returns second week on date +7 days'},
+    {date: '2015-11-16', expected: 3, message: 'returns third week on date +14 days'},
+    {date: '2014-01-08', expected: null, message: 'returns null on past date'},
+  ]
 
-  t.equal(s.semesterWeek(new Date('2014-01-08'), period), null, 'returns null on past date')
+  cases.forEach((c) => t.equal(s.semesterWeek(new Date(c.date), period), c.expected, c.message))
 
   t.end()
 })
 
 test('periodWeekParity()', t => {
   const period = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'even'}
-
-  t.equal(s.periodWeekParity(new Date('2015-11-02'), period), 'even', 'returns even on same date')
-  t.equal(s.periodWeekParity(new Date('2015-11-08'), period), 'even', 'returns even on date +6 days')
-  t.equal(s.periodWeekParity(new Date('2015-11-09'), period), 'odd', 'returns odd on date +7 days')
-  t.equal(s.periodWeekParity(new Date('2015-11-16'), period), 'even', 'returns even on date +14 days')
-
   const period2 = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'odd'}
 
-  t.equal(s.periodWeekParity(new Date('2015-11-02'), period2), 'odd', 'returns odd on same date')
-  t.equal(s.periodWeekParity(new Date('2015-11-08'), period2), 'odd', 'returns odd on date +6 days')
-  t.equal(s.periodWeekParity(new Date('2015-11-09'), period2), 'even', 'returns even on date +7 days')
-  t.equal(s.periodWeekParity(new Date('2015-11-16'), period2), 'odd', 'returns odd on date +14 days')
+  const cases = [
+    {date: '2015-11-02', period: period, expected: 'even', message: 'returns first week on the same date'},
+    {date: '2015-11-08', period: period, expected: 'even', message: 'returns first week on date +6 days'},
+    {date: '2015-11-09', period: period, expected: 'odd', message: 'returns second week on date +7 days'},
+    {date: '2015-11-16', period: period, expected: 'even', message: 'returns third week on date +14 days'},
+    {date: '2015-11-02', period: period2, expected: 'odd', message: 'returns first week on the same date'},
+    {date: '2015-11-08', period: period2, expected: 'odd', message: 'returns first week on date +6 days'},
+    {date: '2015-11-09', period: period2, expected: 'even', message: 'returns second week on date +7 days'},
+    {date: '2015-11-16', period: period2, expected: 'odd', message: 'returns third week on date +14 days'},
+  ]
+
+  cases.forEach((c) => t.equal(s.periodWeekParity(new Date(c.date), c.period), c.expected, c.message))
 
   t.end()
 })
