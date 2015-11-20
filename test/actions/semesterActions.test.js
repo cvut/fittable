@@ -54,20 +54,46 @@ test('fetchSemesterData() dispatch', t => {
 
   // faux callback passed from outside application
   const callback = (cb) => cb(semesters)
+  const callbackEmpty = (cb) => cb({})
 
   let dispatch = spy()
+  let expectedCalls = 1
+
+  // fetch correct data
   let thunk = actions.fetchSemesterData(callback, date)
   thunk(dispatch, getEmptyState)
-
-  const expectedCalls = 1
   t.equal(dispatch.callCount, expectedCalls, `dispatch has been called ${expectedCalls} times`)
+
+  // fetch missing data
+  thunk = actions.fetchSemesterData(callbackEmpty, date)
+  thunk(dispatch, getEmptyState)
+  t.equal(dispatch.callCount, ++expectedCalls, `dispatch has been called ${expectedCalls} times`)
+
+  // fetch correct data with incorrect actual date
+  date = new Date('1970-09-10')
+  thunk = actions.fetchSemesterData(callback, date)
+  thunk(dispatch, getEmptyState)
+  t.equal(dispatch.callCount, ++expectedCalls, `dispatch has been called ${expectedCalls} times`)
 
   t.test('fetchSemesterData() dispatched action', st => {
     const [actualArg,] = dispatch.firstCall.args
     st.equal(actualArg.type, SEMESTER_LOAD_COMPLETED, 'dispatches SEMESTER_LOAD_COMPLETED action')
     st.equal(actualArg.payload.id, '18000-B142', 'sends just the semester for a given date')
     st.equal(actualArg.payload.season, 'summer', 'calculates the semester season')
+    st.equal(actualArg.payload.valid, true, 'is valid when the data are complete and current semester')
     st.equal(typeof actualArg.payload.grid, 'object', 'converts semester details for consumption by fittable')
+    st.end()
+  })
+
+  t.test('fetchSemesterData() dispatched with missing data', st => {
+    const [actualArg,] = dispatch.secondCall.args
+    st.equal(actualArg.payload.valid, false, 'is invalid because of missing data')
+    st.end()
+  })
+
+  t.test('fetchSemesterData() dispatched with out-of-semester date', st => {
+    const [actualArg,] = dispatch.thirdCall.args
+    st.equal(actualArg.payload.valid, false, 'is invalid because of wrong date')
     st.end()
   })
 })
