@@ -1,4 +1,5 @@
 import test from 'blue-tape'
+import { spy } from 'sinon'
 import * as s from '../src/semester'
 
 test('currentSemester()', t => {
@@ -93,5 +94,48 @@ test('dateInSemester()', t => {
   const dateOut = new Date('2015-10-01')
   t.equal(s.dateInSemester(semester, dateIn), true, 'returns true for date within the semester')
   t.equal(s.dateInSemester(semester, dateOut), false, 'returns false for date outside of the semester')
+  t.end()
+})
+
+test('semesterName()', t => {
+  const dispatch = spy()
+
+  // faux counterpart
+  const fcounterpart = {
+    translate: (key, options) => {
+      dispatch(key, options)
+      return 'translated-string'
+    },
+  }
+
+  const semester = {
+    season: 'winter',
+    valid: true,
+    years: [2015, 2016],
+  }
+  s.semesterName(semester, fcounterpart)
+
+  const semester2 = {
+    season: 'summer',
+    valid: true,
+    years: [2016, 2017],
+  }
+  s.semesterName(semester2, fcounterpart)
+
+  const invsemester = {
+    season: 'summer',
+    valid: false,
+    years: [2016, 2017],
+  }
+
+  const emptysemester = { }
+
+  t.deepEqual(dispatch.firstCall.args, ['winter_sem', {year: '2015/2016'}], 'correctly recognize winter sem. 15/16')
+  t.deepEqual(dispatch.lastCall.args, ['summer_sem', {year: '2016/2017'}], 'correctly recognize summer sem. 16/17')
+
+  t.equal(s.semesterName(semester, fcounterpart), 'translated-string', 'returns translated string from counterpart')
+  t.equal(s.semesterName(invsemester, fcounterpart), null, 'returns null on invalid semesters')
+  t.equal(s.semesterName(emptysemester, fcounterpart), null, 'returns null on semesters with missing data')
+
   t.end()
 })

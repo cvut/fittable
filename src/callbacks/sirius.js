@@ -365,6 +365,7 @@ function viewChangeCallback (view, param) {
 // If the user is not logged in, redirect him to the landing page
 if (!isUserLoggedIn()) {
   window.location.href = 'landing.html'
+
 } else {
   // Prepare the options object with default values
   var options = {

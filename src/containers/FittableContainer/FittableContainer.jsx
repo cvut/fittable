@@ -20,6 +20,7 @@ import { fetchUserData } from '../../actions/userActions'
 import { changeCalendar } from '../../actions/linkActions'
 
 import { isoDate, strToDate } from '../../date'
+import { semesterName } from '../../semester'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -102,25 +103,6 @@ const FittableContainer = React.createClass({
     }
   },
 
-  // FIXME: too much logic. should be somewhere else
-  getSemesterName () {
-    const {semester} = this.props
-
-    if (!semester.valid) {
-      return 'no data'
-    }
-
-    if (!semester || !semester.season || !semester.years) {
-      return ''
-    }
-
-    const season = semester.season
-    const [beginYear, endYear] = semester.years
-    const translateKey = `${season}_sem`
-
-    return CP.translate(translateKey, {year: `${beginYear}/${endYear}`})
-  },
-
   // FIXME: deprecate callback
   handleChangeViewDate (date) {
     // Close all opened functions
@@ -179,7 +161,7 @@ const FittableContainer = React.createClass({
       <div className="fittable-container" ref="rootEl">
         <Header
           calendar={this.props.calendar}
-          semesterName={this.getSemesterName()}
+          semesterName={semesterName(this.props.semester, CP)}
           userName={this.props.user.name || this.props.user.id}
         />
         {/* FIXME: we don't have the view name data inside fittable :( */}
@@ -187,7 +169,7 @@ const FittableContainer = React.createClass({
           viewDate={this.props.viewDate}
           onWeekChange={this.handleChangeViewDate}
           onDateChange={this.handleChangeViewDate}
-          semester={this.getSemesterName()}
+          semester={this.props.semester}
           onSettingsPanelChange={this.props.onSidebarDisplay}
           days7={fullWeek}
           screenSize={this.props.screenSize}

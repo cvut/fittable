@@ -6,8 +6,10 @@
 
 import React, { PropTypes } from 'react'
 import moment from 'moment'
+import CP from 'counterpart'
 
 import Toggleable from './Toggleable'
+import { semesterName } from '../semester'
 
 const propTypes = {
   viewDate: PropTypes.instanceOf(Date),
@@ -32,9 +34,7 @@ class WeekSwitcher extends Toggleable {
   }
 
   renderSemesterSelector () {
-
-    // Set a semester name
-    const semesterName = this.props.semester
+    const name = semesterName(this.props.semester, CP) || 'no semester'
     const viewMoment = this.viewDateMoment()
 
     return (
@@ -49,7 +49,7 @@ class WeekSwitcher extends Toggleable {
           </button>
         </div>
         <div className="column small-6 active-item">
-          {semesterName}
+          {name}
         </div>
         <div className="column small-3 gr-go">
           <button
