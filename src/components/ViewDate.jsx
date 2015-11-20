@@ -20,7 +20,10 @@ class ViewDate extends React.Component {
   }
 
   weekParity (weekParity) {
-    if (weekParity !== 'even' && weekParity !== 'odd') return '-'
+    if (weekParity !== 'even' && weekParity !== 'odd') {
+      return '-'
+    }
+
     return CP.translate(weekParity)
   }
 
