@@ -61,13 +61,10 @@ export function convertRawSemester (semester) {
 }
 
 export function semesterName (translate, semester) {
-  if (!semester.valid || !semester || !semester.season || !semester.years) {
+  if (!semester || !semester.valid || !semester.season || !semester.years) {
     return null
   }
+  const translateKey = `${semester.season}_sem`
 
-  const season = semester.season
-  const [beginYear, endYear] = semester.years
-  const translateKey = `${season}_sem`
-
-  return translate(translateKey, {year: `${beginYear}/${endYear}`})
+  return translate(translateKey, { year: semester.years.join('/') })
 }
