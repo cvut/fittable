@@ -145,7 +145,7 @@ test('semesterName()', t => {
   t.end()
 })
 
-test('getPeriodFromDate()', t => {
+test('periodFromDate()', t => {
   const periods = [
     {type: 'teaching', starts_at: '2015-01-01', ends_at: '2015-02-01', first_week_parity: 'even'},
     {type: 'exam',     starts_at: '2015-03-01', ends_at: '2015-04-01', first_week_parity: 'even'},
@@ -168,7 +168,7 @@ test('getPeriodFromDate()', t => {
     if (c.expected === null) {
       message = `${c.date} matches no period`
     }
-    t.deepEqual(s.getPeriodFromDate(new Date(c.date), periods), c.expected, message)
+    t.deepEqual(s.periodFromDate(new Date(c.date), periods), c.expected, message)
   })
 
   t.end()
