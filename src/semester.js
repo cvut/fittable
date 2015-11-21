@@ -71,7 +71,7 @@ export function semesterName (translate, semester) {
   return translate(translateKey, { year: academicYear })
 }
 
-export function getPeriodFromDate (date, periods) {
+export function periodFromDate (date, periods) {
   if (periods.length === 0) { return null }
 
   for (let period of periods) {

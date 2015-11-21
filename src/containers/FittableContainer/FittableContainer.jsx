@@ -20,7 +20,7 @@ import { fetchUserData } from '../../actions/userActions'
 import { changeCalendar } from '../../actions/linkActions'
 
 import { isoDate, strToDate } from '../../date'
-import { semesterName, getPeriodFromDate, periodWeekParity, semesterWeek } from '../../semester'
+import { semesterName, periodFromDate, periodWeekParity, semesterWeek } from '../../semester'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -161,7 +161,7 @@ const FittableContainer = React.createClass({
     let weekNum = 0
 
     if ('periods' in this.props.semester && this.props.semester.periods) {
-      const period = getPeriodFromDate(this.props.viewDate, this.props.semester.periods)
+      const period = periodFromDate(this.props.viewDate, this.props.semester.periods)
 
       console.log(this.props.viewDate, this.props.semester.periods)
 
