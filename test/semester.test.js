@@ -101,11 +101,9 @@ test('semesterName()', t => {
   const dispatch = spy()
 
   // faux counterpart
-  const fcounterpart = {
-    translate: (key, options) => {
-      dispatch(key, options)
-      return 'translated-string'
-    },
+  const translate = (key, options) => {
+    dispatch(key, options)
+    return 'translated-string'
   }
 
   const semester = {
@@ -113,14 +111,14 @@ test('semesterName()', t => {
     valid: true,
     years: [2015, 2016],
   }
-  s.semesterName(semester, fcounterpart)
+  s.semesterName(translate, semester)
 
   const semester2 = {
     season: 'summer',
     valid: true,
     years: [2016, 2017],
   }
-  s.semesterName(semester2, fcounterpart)
+  s.semesterName(translate, semester2)
 
   const invsemester = {
     season: 'summer',
@@ -133,9 +131,9 @@ test('semesterName()', t => {
   t.deepEqual(dispatch.firstCall.args, ['winter_sem', {year: '2015/2016'}], 'correctly recognize winter sem. 15/16')
   t.deepEqual(dispatch.lastCall.args, ['summer_sem', {year: '2016/2017'}], 'correctly recognize summer sem. 16/17')
 
-  t.equal(s.semesterName(semester, fcounterpart), 'translated-string', 'returns translated string from counterpart')
-  t.equal(s.semesterName(invsemester, fcounterpart), null, 'returns null on invalid semesters')
-  t.equal(s.semesterName(emptysemester, fcounterpart), null, 'returns null on semesters with missing data')
+  t.equal(s.semesterName(translate, semester), 'translated-string', 'returns translated string from counterpart')
+  t.equal(s.semesterName(translate, invsemester), null, 'returns null on invalid semesters')
+  t.equal(s.semesterName(translate, emptysemester), null, 'returns null on semesters with missing data')
 
   t.end()
 })

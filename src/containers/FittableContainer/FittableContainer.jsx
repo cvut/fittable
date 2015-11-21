@@ -161,7 +161,7 @@ const FittableContainer = React.createClass({
       <div className="fittable-container" ref="rootEl">
         <Header
           calendar={this.props.calendar}
-          semesterName={semesterName(this.props.semester, CP)}
+          semesterName={semesterName(CP.translate.bind(CP), this.props.semester)}
           userName={this.props.user.name || this.props.user.id}
         />
         {/* FIXME: we don't have the view name data inside fittable :( */}
