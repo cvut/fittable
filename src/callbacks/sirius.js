@@ -39,7 +39,7 @@ var parameter = ''
  * @type {{name: string, token: string}}
  */
 var user = {
-  name: ReactCookie.load('oauth_nickname'),
+  name: ReactCookie.load('oauth_username'),
   token: ReactCookie.load('oauth_access_token'),
 }
 

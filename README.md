@@ -86,7 +86,7 @@ Then add following to the `.env` file (or copy `.env.sample` in the repository):
 
 ```
 OAUTH_ACCESS_TOKEN=<value of oauth_access_token cookie>
-OAUTH_NICKNAME=<your username>
+OAUTH_USERNAME=<your username>
 ```
 
 These variables will be passed as respective cookies by the [development server](#development-server).
@@ -118,7 +118,7 @@ By default, `staging` instance is used. Can be set to `production` to use produc
 
 `OAUTH_ACCESS_TOKEN`: Used by [development server](#development-server) to set `oauth_access_token` cookie for Sirius authorisation. See [Access Credentials](#access-credentials).
 
-`OAUTH_NICKNAME`: Used by [development server](#development-server) to set `oauth_nickname` cookie. It contains CTU username to load user's personal calendar from Sirius.
+`OAUTH_USERNAME`: Used by [development server](#development-server) to set `oauth_username` cookie. It contains CTU username to load user's personal calendar from Sirius.
 
 ### Sirius Base URL Override
 

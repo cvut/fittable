@@ -27,7 +27,7 @@ var sassLoader = '!sass?' +
 var ENV_COOKIES = {
   /* eslint camelcase:0 */
   oauth_access_token: process.env.OAUTH_ACCESS_TOKEN,
-  oauth_nickname: process.env.OAUTH_NICKNAME,
+  oauth_username: process.env.OAUTH_USERNAME,
 }
 
 function setCookiesMiddleware (req, res, next) {
