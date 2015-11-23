@@ -81,7 +81,7 @@ class Controls extends React.Component {
           onDateChange={this.props.onDateChange}
           semester={this.props.semester}
         />
-        <ViewDate weekNum={this.props.weekNum} weekParity={this.props.weekParity} />
+        <ViewDate weekNum={this.props.weekNum} weekParity={this.props.weekParity} weekType={this.props.weekType} />
         <FunctionsBar onPanelToggle={this.props.onSettingsPanelChange} />
       </div>
     )
