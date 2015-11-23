@@ -33,3 +33,26 @@ export function classByScreenSize (screenSize, classes) {
     return classes['large'] || classes[2]
   }
 }
+
+export function isElementOutOfScreen (element, window) {
+  let {
+    innerWidth: screenWidth,
+    innerHeight: screenHeight,
+  } = window
+
+  let {
+    offsetLeft: elementLeft,
+    offsetTop: elementTop,
+    style: { width: elementWidth, height: elementHeight },
+  } = element
+
+  // Convert strings with 'px' to numbers
+  elementWidth = parseFloat(elementWidth)
+  elementHeight = parseFloat(elementHeight)
+
+  // Test exceeding
+  const exceedsWidth = elementLeft < 0 || elementLeft + elementWidth > screenWidth
+  const exceedsHeight = elementTop < 0 || elementTop + elementHeight > screenHeight
+
+  return exceedsWidth || exceedsHeight
+}

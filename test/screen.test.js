@@ -94,3 +94,36 @@ test('classByScreenSize', t => {
 
   t.end()
 })
+
+test('isElementOutOfScreen()', t => {
+  let fakeWindow = {
+    innerWidth: 1366,
+    innerHeight: 768,
+  }
+
+  let element = {
+    style: { width: '200px', height: '200px' },
+    offsetLeft: 0.9 * fakeWindow.innerWidth,
+    offsetTop: 0,
+  }
+
+  t.equal(screen.isElementOutOfScreen(element, fakeWindow), true, 'returns true when the el. exceeds on the right')
+
+  element.offsetTop = 0.99 * fakeWindow.innerHeight
+  t.equal(screen.isElementOutOfScreen(element, fakeWindow), true, 'returns true when the el. exceeds right and bottom')
+
+  element.offsetTop = -0.5 * fakeWindow.innerHeight
+  t.equal(screen.isElementOutOfScreen(element, fakeWindow), true, 'returns true when the el. starts in negative pos')
+
+  element.offsetTop = 0
+  element.offsetLeft = 0.5 * fakeWindow.innerWidth
+  element.style.width = '684px'
+  t.equal(screen.isElementOutOfScreen(element, fakeWindow), true, 'returns true when the el. exceeds by 1 px')
+  element.style.width = '682px'
+  t.equal(screen.isElementOutOfScreen(element, fakeWindow), false, 'returns false when the el. has 1 px space')
+
+  element.style.width = '200px'
+  t.equal(screen.isElementOutOfScreen(element, fakeWindow), false, 'returns false when the el. doesn\'t exceeds')
+
+  t.end()
+})
