@@ -6,24 +6,32 @@ test('currentSemester()', t => {
   const semesters = [
     {
       id: '18000-B142',
+      faculty: 18000,
       startsAt: '2014-10-01',
       endsAt: '2015-02-15',
     },
     {
       id: '18000-B151',
+      faculty: 18000,
+      startsAt: '2015-02-16',
+      endsAt: '2015-09-21',
+    },
+    {
+      id: '13000-B151',
+      faculty: 13000,
       startsAt: '2015-02-16',
       endsAt: '2015-09-21',
     },
   ]
 
-  ;[// day         expectedId
-    ['2015-03-01', '18000-B151'],
-    ['2015-02-16', '18000-B151'],
-    ['2015-02-15', '18000-B142'],
-  ].forEach(([day, expectedId]) => {
-    const actual = s.findSemester(semesters, day)
+  ;[// day         facultyCode  expectedId
+    ['2015-03-01', 18000,    '18000-B151'],
+    ['2015-02-16', 13000,    '13000-B151'],
+    ['2015-02-15', 18000,    '18000-B142'],
+  ].forEach(([day, facultyCode, expectedId]) => {
+    const actual = s.findSemester(semesters, day, facultyCode)
 
-    t.equal(actual.id, expectedId, `day ${day} is within semester ${expectedId}`)
+    t.equal(actual.id, expectedId, `day ${day} is within semester ${expectedId} with fc ${facultyCode}`)
   })
 
   t.end()
@@ -50,6 +58,7 @@ test('convertRawSemester()', t => {
     endsAt: '2015-09-21',
     examsStartsAt: '2015-05-18',
     examsEndsAt: '2015-06-27',
+    firstWeekParity: 'odd',
     hourDuration: 45,
     breakDuration: 15,
     dayStartsAtHour: 7.5,
@@ -82,6 +91,7 @@ test('convertRawSemester()', t => {
       },
     ],
     valid: true,
+    firstWeekParity: 'odd',
   }
 
   const actual = s.convertRawSemester(original)
