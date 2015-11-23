@@ -157,17 +157,15 @@ const FittableContainer = React.createClass({
       facultyGrid: facultyGrid,
     }
 
-    let weekParity = 'none'
+    let weekParity = null
     let weekNum = 0
 
-    if ('periods' in this.props.semester && this.props.semester.periods) {
+    if ('periods' in this.props.semester) {
       const period = periodFromDate(this.props.viewDate, this.props.semester.periods)
 
-      console.log(this.props.viewDate, this.props.semester.periods)
-
       if (period) {
-        weekParity = periodWeekParity(this.props.viewDate, period)
-        weekNum = semesterWeek(this.props.viewDate, period)
+        weekParity = periodWeekParity(this.props.viewDate, this.props.semester)
+        weekNum = semesterWeek(this.props.viewDate, this.props.semester)
       }
     }
 
