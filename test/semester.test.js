@@ -179,7 +179,7 @@ test('periodFromDate()', t => {
 })
 
 test('semesterWeek()', t => {
-  const period = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'even'}
+  const period = {type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'even'}
 
   ;[// date       expected  message
     ['2015-11-02', 1,      'returns first week on the same date'],
@@ -195,18 +195,18 @@ test('semesterWeek()', t => {
 })
 
 test('periodWeekParity()', t => {
-  const period = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'even'}
-  const period2 = {type: 'teaching', starts_at: '2015-11-02', ends_at: '2015-12-01', first_week_parity: 'odd'}
+  const period = {type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'even'}
+  const period2 = {type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'odd'}
 
   ;[// date        period   expected  message
-    ['2015-11-02', period,  'even',   'returns first week on the same date'],
-    ['2015-11-08', period,  'even',   'returns first week on date +6 days' ],
-    ['2015-11-09', period,  'odd',    'returns second week on date +7 days'],
-    ['2015-11-16', period,  'even',   'returns third week on date +14 days'],
-    ['2015-11-02', period2, 'odd',    'returns first week on the same date'],
-    ['2015-11-08', period2, 'odd',    'returns first week on date +6 days' ],
-    ['2015-11-09', period2, 'even',   'returns second week on date +7 days'],
-    ['2015-11-16', period2, 'odd',    'returns third week on date +14 days'],
+    ['2015-11-02', period,  'even',   'returns first week on the same date (first week is even)'],
+    ['2015-11-08', period,  'even',   'returns first week on date +6 days (first week is even)' ],
+    ['2015-11-09', period,  'odd',    'returns second week on date +7 days (first week is even)'],
+    ['2015-11-16', period,  'even',   'returns third week on date +14 days (first week is even)'],
+    ['2015-11-02', period2, 'odd',    'returns first week on the same date (first week is odd)'],
+    ['2015-11-08', period2, 'odd',    'returns first week on date +6 days (first week is odd)' ],
+    ['2015-11-09', period2, 'even',   'returns second week on date +7 days (first week is odd)'],
+    ['2015-11-16', period2, 'odd',    'returns third week on date +14 days (first week is odd)'],
   ].forEach(([date, period, expected, message]) => {
     t.equal(s.periodWeekParity(new Date(date), period), expected, message)
   })

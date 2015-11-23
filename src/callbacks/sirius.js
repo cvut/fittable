@@ -283,6 +283,7 @@ function semesterDataCallback (callback) {
             breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
             dayStartsAtHour: 7.5,
             dayEndsAtHour: 21.25,
+            firstWeekParity: semester.first_week_parity,
             periods: semester.periods,
           }
         }

@@ -59,6 +59,7 @@ export function convertRawSemester (semester) {
       },
     ],
     valid: true,
+    firstWeekParity: semester.firstWeekParity,
   }
 }
 
@@ -84,14 +85,21 @@ export function periodFromDate (date, periods) {
   return null
 }
 
-export function semesterWeek (date, period) {
-  if (moment(date).isoWeek() < moment(period.starts_at).isoWeek()) return null
-  return moment(date).isoWeek() - moment(period.starts_at).isoWeek() + 1
+export function semesterWeek (date, semester) {
+  const mD = moment(date)
+  const semesterStart = moment(semester.startsOn)
+
+  if (mD.isBefore(semesterStart)) {
+    return null
+  }
+
+  return mD.diff(semesterStart, 'weeks') + 1
 }
 
-export function periodWeekParity (date, period) {
-  const week = semesterWeek(date, period)
-  const firstWeekOdd = period.first_week_parity === 'odd'
+export function periodWeekParity (date, semester) {
+  const diffEven = semesterWeek(date, semester) % 2 === 0
+  const fweekEven = semester.firstWeekParity === 'even'
 
-  return ((week % 2 === 0) === firstWeekOdd) ? 'even' : 'odd'
+
+  return (fweekEven === diffEven) ? 'odd' : 'even'
 }
