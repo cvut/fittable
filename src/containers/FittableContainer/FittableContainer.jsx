@@ -159,6 +159,7 @@ const FittableContainer = React.createClass({
 
     let weekParity = null
     let weekNum = 0
+    let weekType = null
 
     if ('periods' in this.props.semester) {
       const period = periodFromDate(this.props.viewDate, this.props.semester.periods)
@@ -166,6 +167,7 @@ const FittableContainer = React.createClass({
       if (period) {
         weekParity = periodWeekParity(this.props.viewDate, this.props.semester)
         weekNum = semesterWeek(this.props.viewDate, this.props.semester)
+        weekType = period.type
       }
     }
 
@@ -184,6 +186,7 @@ const FittableContainer = React.createClass({
           semester={this.props.semester}
           weekNum={weekNum}
           weekParity={weekParity}
+          weekType={weekType}
           onSettingsPanelChange={this.props.onSidebarDisplay}
           days7={fullWeek}
           screenSize={this.props.screenSize}

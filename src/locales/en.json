@@ -40,7 +40,10 @@
     "next": "Next week",
     "selector": "Date selector",
     "teachweek": "%(weeknum)s teaching week",
-    "unknown_semester": "unknown"
+    "unknown_semester": "unknown",
+    "week_teaching": "%(weeknum)s. teaching week (%(parity)s)",
+    "week_exams": "Exams (%(weeknum)s. %(parity)s week)",
+    "week_holiday": "Holidays"
   },
 
   "functions": {

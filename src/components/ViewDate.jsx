@@ -28,8 +28,13 @@ class ViewDate extends React.Component {
   }
 
   render () {
+    const weekParity = this.weekParity(this.props.weekParity)
+    const weekText = CP.translate('weekNav.week_' + this.props.weekType, { weeknum: this.props.weekNum, parity: weekParity })
+    const translationExists = ['teaching', 'exams', 'holiday'].indexOf(this.props.weekType) >= 0
+    const week = (this.props.weekNum && translationExists) ? weekText : ''
+
     return <div className="view-date">
-      {CP.translate('weekNav.teachweek', { weeknum: this.props.weekNum })} ({this.weekParity(this.props.weekParity)})
+      {week}
     </div>
   }
 }
