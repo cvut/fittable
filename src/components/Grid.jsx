@@ -16,6 +16,7 @@ class Grid extends React.Component {
 
   createLine (type, hours, offset, color) {
     const defaults = {
+      className: 'Grid-line',
       x1: '0',
       y1: '0',
       x2: '100%',
@@ -44,7 +45,7 @@ class Grid extends React.Component {
 
   render () {
     return (
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <svg class="Grid" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
         {this.getLines(this)}
       </svg>
     )
