@@ -10,11 +10,12 @@ import CP from 'counterpart'
 
 import Toggleable from './Toggleable'
 import { semesterName } from '../semester'
+import { semester as semesterType } from '../constants/propTypes'
 
 const propTypes = {
   viewDate: PropTypes.instanceOf(Date),
   onDateChange: PropTypes.func,
-  semester: PropTypes.string,
+  semester: semesterType,
 }
 
 class WeekSwitcher extends Toggleable {

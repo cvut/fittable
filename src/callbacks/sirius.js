@@ -322,7 +322,7 @@ var semesterDataCallback = function (callback) {
             examsStartsAt: semester.exams_start_at,
             examsEndsAt: semester.exams_end_at,
             hourDuration: semester.hour_duration,
-            breakDuration: 15,
+            breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
             dayStartsAtHour: 7.5,
             dayEndsAtHour: 21.25
           }

@@ -47,6 +47,20 @@ export const grid = PropTypes.shape({
   facultyGrid: PropTypes.bool,
 })
 
+export const semester = PropTypes.shape({
+  id: PropTypes.string,
+  semester: PropTypes.string,
+  faculty: PropTypes.number,
+  startsAt: PropTypes.string,  // FIXME: should be converted to datetime
+  endsAt: PropTypes.string,  // FIXME: should be converted to datetime
+  examsStartsAt: PropTypes.string,  // FIXME: should be converted to datetime
+  examsEndsAt: PropTypes.string,  // FIXME: should be converted to datetime
+  hourDuration: PropTypes.number,
+  breakDuration: PropTypes.number,
+  dayStartsAtHour: PropTypes.number,  // FIXME: this should be probably replaced with hourStarts array
+  dayEndsAtHour: PropTypes.number,  // FIXME: this should be probably replaced with hourStarts array
+})
+
 export const moment = (props, propName, componentName) => {
   const prop = props[propName]
   if (!Moment.isMoment(prop)) {

@@ -11,13 +11,14 @@ import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
 import { shiftDate, isWeekend } from '../date'
+import { semester as semesterType } from '../constants/propTypes'
 
 const propTypes = {
   onDateChange: PropTypes.func.isRequired,
   onSettingsPanelChange: PropTypes.func.isRequired,
   viewDate: React.PropTypes.instanceOf(Date),
   days7: PropTypes.bool,
-  semester: PropTypes.string,
+  semester: semesterType,
 }
 
 class Controls extends React.Component {
