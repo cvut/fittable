@@ -65,6 +65,7 @@ export function semesterName (translate, semester) {
     return null
   }
   const translateKey = `${semester.season}_sem`
+  const academicYear = `${semester.years[0]}/${semester.years[1] % 100}`
 
-  return translate(translateKey, { year: semester.years.join('/') })
+  return translate(translateKey, { year: academicYear })
 }

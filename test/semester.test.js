@@ -128,8 +128,8 @@ test('semesterName()', t => {
 
   const emptysemester = { }
 
-  t.deepEqual(dispatch.firstCall.args, ['winter_sem', {year: '2015/2016'}], 'correctly recognize winter sem. 15/16')
-  t.deepEqual(dispatch.lastCall.args, ['summer_sem', {year: '2016/2017'}], 'correctly recognize summer sem. 16/17')
+  t.deepEqual(dispatch.firstCall.args, ['winter_sem', {year: '2015/16'}], 'correctly recognize winter sem. 15/16')
+  t.deepEqual(dispatch.lastCall.args, ['summer_sem', {year: '2016/17'}], 'correctly recognize summer sem. 16/17')
 
   t.equal(s.semesterName(translate, semester), 'translated-string', 'returns translated string from counterpart')
   t.equal(s.semesterName(translate, invsemester), null, 'returns null on invalid semesters')
