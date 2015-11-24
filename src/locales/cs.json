@@ -39,7 +39,8 @@
     "prev": "Předchozí týden",
     "next": "Následující týden",
     "selector": "Výběr data",
-    "teachweek": "%(weeknum)s týden"
+    "teachweek": "%(weeknum)s týden",
+    "unknown_semester": "neznámý"
   },
 
   "functions": {

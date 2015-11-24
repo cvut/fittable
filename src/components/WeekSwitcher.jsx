@@ -35,7 +35,8 @@ class WeekSwitcher extends Toggleable {
   }
 
   renderSemesterSelector () {
-    const name = semesterName(CP.translate.bind(CP), this.props.semester) || 'no semester'
+    const name = semesterName(CP.translate.bind(CP), this.props.semester) ||
+                 CP.translate('weekNav.unknown_semester')
     const viewMoment = this.viewDateMoment()
 
     return (
