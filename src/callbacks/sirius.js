@@ -12,8 +12,6 @@ import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
 
-import { SIRIUS_BASE_URL } from '../config'
-
 const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('length', 0))
 
 /**
@@ -44,10 +42,10 @@ var user = {
 }
 
 /**
- * Actual Sirius API URL
+ * URL of proxy for Sirius API
  * @type {string}
  */
-var siriusAPIUrl = SIRIUS_BASE_URL
+var siriusAPIUrl = `${getBaseUri()}/_proxy/api/v1/`
 
 /**
  * Currently selected application language setting
@@ -123,7 +121,6 @@ function makeRequest (parameters) {
 
   var request = new XMLHttpRequest()
   request.open('GET', encodeURI(requestUrl), true)
-  request.setRequestHeader('Authorization', 'Bearer ' + user.token)
   request.send(null)
 
   return request
