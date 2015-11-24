@@ -8,6 +8,7 @@ require('dotenv').load()
 var srcPath = path.resolve('./src')
 
 var NODE_ENV = process.env.NODE_ENV || 'development'
+var SIRIUS_BASE_URL = process.env.SIRIUS_BASE_URL || 'https://sirius.fit.cvut.cz/staging/api/v1/'
 
 var definePlugin = new webpack.DefinePlugin({
   // Remember this will get replaced with literal contents of string, so we need extra quotes
@@ -36,6 +37,18 @@ function setCookiesMiddleware (req, res, next) {
     res.cookie(name, value, {httpOnly: false})
   }
   next()
+}
+
+function rewriteUrl (replacePath) {
+  return function(req, opt) {
+    var queryIdx = req.url.indexOf('?')
+    var query = queryIdx >= 0 ? req.url.substr(queryIdx) : ''
+
+    req.url = req.path.replace(opt.path, replacePath) + query
+    req.headers['Authorization'] = 'Bearer ' + ENV_COOKIES.oauth_access_token
+
+    console.log('proxying:', req.originalUrl, '->', req.url)
+  }
 }
 
 module.exports = {
@@ -97,6 +110,15 @@ module.exports = {
     setup: function (app) {
       app.use(setCookiesMiddleware)
     },
+    proxy: [
+      {
+        path: new RegExp('/_proxy/api/v1/(.*)'),
+        rewrite: rewriteUrl('$1'),
+        target: SIRIUS_BASE_URL,
+        changeOrigin: true,  // set proper Host of the target
+        secure: false,  // do not validate certificates
+      },
+    ],
   },
 
 }
