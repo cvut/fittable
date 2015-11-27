@@ -8,11 +8,13 @@ import { grid as gridPropType } from '../constants/propTypes'
 
 import { weekdayNum } from '../date'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
+import { findOverlayedEvents } from '../timetable'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
 import ErrorMessage from './ErrorMessage'
 import Grid from './Grid'
+import EventBox from './Event'
 
 const propTypes = {
   grid: gridPropType,
@@ -84,6 +86,36 @@ class Timetable extends React.Component {
     if (this.props.eventId) {
       this.showDetailOn(null)
     }
+  }
+
+  renderEvents (day) {
+    return 'i dunno, events here!'
+
+    /*
+     renderEvent (event) {
+     if (!this.props.displayFilter[event.type]) {
+     event.appear = 'hide'
+     }
+     const shown = (event.id == this.props.showDetailOn)
+
+     return (
+     <EventBox
+     key={event.id}
+     data={event}
+     detailShown={shown}
+     onClick={this.props.onDetailShow}
+     openFromBottom={this.props.id >= 3}
+     colored={this.props.colored}
+     onViewChange={this.props.onViewChange}
+     onDateChange={this.props.onDateChange}
+     linkNames={this.props.linkNames}
+     layout={this.props.layout}
+     screenSize={this.props.screenSize}
+     />
+     )
+
+     }
+     */
   }
 
   render () {
