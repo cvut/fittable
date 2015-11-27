@@ -14,7 +14,7 @@ import user from './userReducer'
 
 const initialSettings = {
   locale: 'cs',
-  layout: 'horizontal',
+  layout: 'vertical',
   eventsColors: false,
   fullWeek: false,
   facultyGrid: false,
