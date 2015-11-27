@@ -11,7 +11,8 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version x64
   # install modules
-  - npm install -g npm@2
+  - npm install -g npm@3
+  - set PATH=%APPDATA%\npm;%PATH%
   - npm install
 
 # Post-install test scripts.
@@ -22,5 +23,10 @@ test_script:
   # run tests
   - npm test
 
+cache:
+  - node_modules -> package.json
+  - "%APPDATA%\\npm-cache -> package.json"
+
 # Don't actually build.
 build: off
+deploy: off
