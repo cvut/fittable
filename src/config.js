@@ -11,10 +11,11 @@ if (global.SIRIUS_BASE_URL) {
   SIRIUS_BASE_URL = global.SIRIUS_BASE_URL
 }
 
-// Faculty profile number
-export const FACULTY_ID = 18000
+// Faculty id
+const FACULTY_ID = 18000 // FIT CTU faculty
 
 export {
+  FACULTY_ID,
   SIRIUS_BASE_URL,
-  TZ
+  TZ,
 }
