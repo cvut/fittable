@@ -33,8 +33,8 @@ class EventBox extends React.Component {
 
   style (props) {
 
-    var length = `${props.data._draw_length * 100}%`
-    var position = `${props.data._draw_position * 100}%`
+    var length = `${props.data._length * 100}%`
+    var position = `${props.data._position * 100}%`
 
     if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
       return {
@@ -51,7 +51,7 @@ class EventBox extends React.Component {
 
   classNames (props) {
 
-    const cls = ['event', props.data.appear]
+    const cls = ['event', props.data._appear]
     if (props.detailShown) {
       cls.push('is-opened')
     }

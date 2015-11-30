@@ -1,5 +1,5 @@
 import moment from 'moment-timezone'
-import { curry } from 'ramda'
+import R from 'ramda'
 
 import { TZ } from './config'
 
@@ -36,7 +36,7 @@ export function isoWeekRange (date) {
   return weekRange(date).map(d => isoDate(d))
 }
 
-export const shiftDate = curry(function shiftDate (baseDate, kind, offset) {
+export const shiftDate = R.curry(function shiftDate (baseDate, kind, offset) {
   return moment.tz(baseDate, TZ).add(offset, kind).toDate()
 })
 
@@ -62,4 +62,16 @@ export function compareDate (a, b) {
 export function withinDates (min, max, date) {
   const mDate = moment(date)
   return mDate.isBetween(min, max, 'day') || mDate.isSame(min, 'day') || mDate.isSame(max, 'day')
+}
+
+export function setDateToZeroTime(date) {
+  date.setHours(0)
+  date.setMinutes(0)
+  date.setSeconds(0)
+  return date
+}
+
+export function dateInFuture(current, byDays) {
+  const mCurrent = moment(current)
+  return mCurrent.add(byDays, 'days').date()
 }
