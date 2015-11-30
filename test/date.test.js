@@ -121,3 +121,22 @@ test('strToDate', t => {
   t.equal(actual, expected)
   t.end()
 })
+
+test('setDateToZeroTime', t => {
+  const d = new Date('2015-09-03 15:00:00')
+
+  t.deepEqual(date.setDateToZeroTime(d), new Date('2015-09-03 00:00:00'), 'sets date to zero time')
+  t.notDeepEqual(date.setDateToZeroTime(d), d, 'test if function returns new object')
+  t.end()
+})
+
+test('weekStartDate', t => {
+  const expected = new Date('2015-12-14 00:00:00')
+
+  ;['2015-12-16', '2015-12-14', '2015-12-20'].forEach(d => {
+    const actual = date.weekStartDate(new Date(`${d} 00:00:00`))
+    t.deepEqual(actual, expected, `returns 2015-12-14 as start of the week for ${d}`)
+  })
+
+  t.end()
+})

@@ -4,20 +4,21 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import Moment from 'moment'
+import moment from 'moment'
 
 const propTypes = {
   id: PropTypes.number.isRequired,
   dayNum: PropTypes.number.isRequired,
-  active: PropTypes.bool,
-  selected: PropTypes.bool,
+  viewDate: PropTypes.instanceOf(Date),
 }
 
 class Day extends React.Component {
 
   render () {
-    const className = `day ${this.props.active ? 'active' : ''} ${this.props.selected ? 'selected' : ''}`
-    const weekDay = new Moment().isoWeekday(parseInt(this.props.id, 10) + 1).format('dddd')
+    const thisDay = moment(this.props.viewDate).isoWeekday(parseInt(this.props.id, 10) + 1)
+    const isToday = moment(thisDay).isSame(moment(), 'days')
+    const isSelected = moment(thisDay).isSame(moment(this.props.viewDate), 'days')
+    const className = `day ${isToday ? 'active' : ''} ${isSelected ? 'selected' : ''}`
 
     let dayTitle = ''
     if (this.props.active) {
@@ -29,7 +30,7 @@ class Day extends React.Component {
         <div className="label" title={dayTitle}>
           <div className="label-wrap">
             <span className="day-num">{this.props.dayNum}</span>
-            <span className="day-name">{weekDay}</span>
+            <span className="day-name">{thisDay.format('dddd')}</span>
           </div>
         </div>
         <div className="events" ref="events">

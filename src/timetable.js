@@ -1,87 +1,125 @@
 import R from 'ramda'
+import moment from 'moment'
+import { setDateToZeroTime, weekdayNum } from './date'
 
+export function createTimeline (grid) {
+  return {
+    start: grid.starts * 3600,
+    end: grid.ends * 3600,
+    duration: (grid.ends - grid.starts) * 3600,
+    hourDuration: grid.lessonDuration * 3600,
+    hours: (grid.ends - grid.starts) / grid.lessonDuration,
+    firstHour: grid.facultyGrid ? 1 : Math.ceil(grid.starts),
+    offset: grid.facultyGrid ? 0 : grid.starts % 1,
+  }
+}
 
-/**
- * Finds all overlayed events and returns updated events array with appear property
- * @param props Props
- * @returns {*} Updated events
- */
-export function findOverlayedEvents (props) {
+export function calculateEventPosition (event, timeline) {
+  const eventStartDate = new Date(event.startsAt)
+  const eventStartTs = eventStartDate.getTime() / 1000
+  const eventEndTs = new Date(event.endsAt).getTime() / 1000
+  const dayStartTs = setDateToZeroTime(eventStartDate).getTime() / 1000
+  const timelineStartTs = dayStartTs + timeline.start
 
-  function cmpByStart (lhs, rhs) {
-    if (lhs.startsAt < rhs.startsAt) {
+  return {
+    position: (eventStartTs - timelineStartTs) / timeline.duration,
+    length: (eventEndTs - eventStartTs) / timeline.duration,
+  }
+}
+
+export function calculateHourLabels (timeline) {
+  return R.times(n => ({
+    id: 'hlbl-' + n,
+    label: timeline.firstHour + n,
+    position: (n + timeline.offset) / timeline.hours,
+    length: (1 / timeline.hours),
+  }), Math.ceil(timeline.hours))
+}
+
+export function classModifiers (properties, elementClass) {
+  let className = elementClass + ' '
+
+  for (const property in properties) {
+    if (!properties[property] || !property.startsWith('is')) {
+      continue
+    }
+
+    className += elementClass + '--' + property.substr(2).toLowerCase() + ' '
+  }
+
+  return className
+}
+
+export function groupEventsByDays (events) {
+  const groupByWeekday = R.groupBy((event) => {
+    const startD = new Date(event.startsAt)
+    return weekdayNum(startD)
+  })
+
+  return groupByWeekday(events)
+}
+
+export function calculateOverlap (events) {
+  let lastend = moment(0)
+
+  const sortByStart = ({startsAt: lhs}, {startsAt: rhs}) => {
+    const lhsD = moment(lhs)
+    const rhsD = moment(rhs)
+    if (lhsD.isBefore(rhsD)) {
       return -1
-    } else if (lhs.startsAt > rhs.startsAt) {
-      return 1
     } else {
-      return 0
+      return lhsD.isAfter(rhsD) ? 1 : 0
     }
   }
 
-  var overlayed = []
-  var lastend = new Moment(0)
-  var events = props.events.sort(cmpByStart)
+  const sortedevents = R.sort(sortByStart, events)
+  let overlap = []
+
+  function markOverlayedEvents (events) {
+    R.forEach((event) => {
+      event._overlaps = events.length - 1
+    }, events)
+
+    if (events.length > 1) {
+      events[0]._firstOverlapping = true
+    }
+  }
 
   // Compares this event's start with the last end. If the start is after the last end,
   // set appropriate appearances for all events in queue.
-  for (var evid in events) {
+  R.forEach((event) => {
+    const start = moment(event.startsAt)
+    event._overlaps = 0
+    event._firstOverlapping = false
 
-    var start = new Moment(events[evid].startsAt)
+    markOverlayedEvents(overlap)
 
-    // Compare
     if (start.isAfter(lastend) || start.isSame(lastend)) {
-      let appearance = appearanceClass(overlayed.length)
-      events = applyAppearance(events, overlayed, appearance)
-      overlayed = []
+      overlap = []
     }
 
-    // Queue the event
-    overlayed.push(evid)
+    overlap.push(event)
 
-    // Set event's end as last end
-    if (new Moment(events[evid].endsAt).isAfter(lastend)) {
-      lastend = new Moment(events[evid].endsAt)
-    }
-  }
-  // FIXME: DUPLICATION!
-  // Set appearance for the last events
-  let appearance = appearanceClass(overlayed.length)
-  return applyAppearance(events, overlayed, appearance)
+    lastend = moment(event.endsAt)
+  }, sortedevents)
+
+  return sortedevents
 }
 
-/*
+export function eventAppearance (event) {
+  let className = 'regular'
 
-
- function appearanceClass (overlaysLength) {
-
- if (overlaysLength >= 4) {
- return 'quarter'
- }
- if (overlaysLength === 3) {
- return 'third'
- }
- if (overlaysLength === 2) {
- return 'half'
- }
-
- return 'regular'
- }
-
- /**
- * Applies appearance for array of overlayed events
- * @param events Events array
- * @param overlayed Overlayed events
- * @param appearanceClass Appearance class to be set
- * @returns {*}
-
-function applyAppearance (events, overlayed, appearanceClass) {
-  for (var oid in overlayed) {
-    events[overlayed[oid]].appear = appearanceClass
-
-    if ((overlayed.length >= 4 && oid % 4 == 0) || (overlayed.length > 1 && oid % overlayed.length == 0)) {
-      events[overlayed[oid]].appear += '-first'
-    }
+  if (event._overlaps >= 3) {
+    className = 'quarter'
+  } else if (event._overlaps === 2) {
+    className = 'third'
+  } else if (event._overlaps === 1) {
+    className = 'half'
   }
-  return events
+
+  if (event._firstOverlapping) {
+    className += '-first'
+  }
+
+  return className
 }
- */
