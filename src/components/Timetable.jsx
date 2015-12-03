@@ -166,7 +166,7 @@ class Timetable extends React.Component {
     let className = mapPropertiesToClass({
       isMuted: this.props.eventId !== null,
       isCut: this.props.functionsOpened !== null && isScreenLarge(this.props.screenSize),
-      isDays7: this.props.days7,
+      is7days: this.props.days7,
     }, 'table') // fixme: change class 'table' to 'Timetable'!
 
     // Classes by screen size
