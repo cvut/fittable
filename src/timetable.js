@@ -96,6 +96,7 @@ export function calculateOverlap (events) {
   R.forEach((event) => {
     const start = moment(event.startsAt)
     event._overlaps = 0
+    event._firstOverlapping = false
 
     markOverlayedEvents(overlap)
 

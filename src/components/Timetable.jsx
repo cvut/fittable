@@ -52,7 +52,9 @@ function calculateEvents (events, timeline) {
 }
 
 function createHourLabels (timeline, layout) {
+  console.log(timeline)
   return calculateHourLabels(timeline).map((label) => {
+    console.log(label)
     return <HourLabel key={label.id} position={label.position} length={label.length} layout={layout}>
       {label.label}
     </HourLabel>
