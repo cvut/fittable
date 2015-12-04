@@ -1,0 +1,68 @@
+$animation-speed: .25s;
+
+#fittable .events .event {
+  // Without direction
+  &.animnone-appear, &.animnone-enter {
+    opacity: 0.01;
+  }
+
+  &.animnone-appear-active, &.animnone-enter-active {
+    opacity: 1;
+    transition: opacity $animation-speed;
+  }
+
+  &.animnone-leave {
+    opacity: 1;
+  }
+
+  &.animnone-leave-active {
+    opacity: 0.01;
+    transition: opacity $animation-speed;
+  }
+
+  // Left direction
+  &.animleft-appear, &.animleft-enter {
+    opacity: 0.01;
+    transform: translateX(15vw);
+  }
+
+  &.animleft-appear-active, &.animleft-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity $animation-speed, transform $animation-speed;
+  }
+
+  &.animleft-leave {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &.animleft-leave-active {
+    opacity: 0.01;
+    transform: translateX(-15vw);
+    transition: opacity $animation-speed/4, transform $animation-speed;
+  }
+
+  // Right direction
+  &.animright-appear, &.animright-enter {
+    opacity: 0.01;
+    transform: translateX(-15vw);
+  }
+
+  &.animright-appear-active, &.animright-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity $animation-speed, transform $animation-speed;
+  }
+
+  &.animright-leave {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &.animright-leave-active {
+    opacity: 0.01;
+    transform: translateX(15vw);
+    transition: opacity $animation-speed/4, transform $animation-speed;
+  }
+}

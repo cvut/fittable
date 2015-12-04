@@ -87,9 +87,6 @@
     background: $light-secondary-color;
   }
 
-  .a-left .events { animation: week-move-left ease $events-move-anim-speed; }
-  .a-right .events { animation: week-move-right ease $events-move-anim-speed; }
-
   .grid-overlay {
     position: absolute;
     left: 0;

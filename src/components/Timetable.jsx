@@ -3,10 +3,11 @@
  */
 
 import React, { PropTypes } from 'react'
+import CSSTransitionGroup from 'react-addons-css-transition-group'
 import R from 'ramda'
 import { grid as gridPropType } from '../constants/propTypes'
 
-import { weekdayNum, shiftDate, weekStartDate } from '../date'
+import { weekdayNum, shiftDate, weekStartDate, compareDate } from '../date'
 import { convertSecondsToTime } from '../time'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import {
@@ -59,14 +60,14 @@ function createHourLabels (layout, timeline) {
   ), calculateHourLabels(timeline))
 }
 
-function createDays (props, dayCount, events) {
+function createDays (props, dayCount, animationDirection, events) {
   const groupedEvents = groupEventsByDays(events)
   const viewDateWeekStart = weekStartDate(props.viewDate)
 
   return R.times((n) => {
     let dayEvents = ''
     if (n in groupedEvents) {
-      dayEvents = createDayEvents(props, groupedEvents[n])
+      dayEvents = createDayEvents(props, animationDirection, groupedEvents[n])
     }
 
     return (
@@ -80,8 +81,8 @@ function createDays (props, dayCount, events) {
   }, dayCount)
 }
 
-function createDayEvents (props, events) {
-  return R.map((event) => {
+function createDayEvents (props, animationDirection, events) {
+  const eventComponents = R.map((event) => {
     if (!props.displayFilter[event.type]) {
       event._appear = 'hide'
     }
@@ -104,58 +105,51 @@ function createDayEvents (props, events) {
         />
     )
   }, events)
+
+  return (
+    <CSSTransitionGroup
+      transitionName={'anim' + animationDirection}
+      transitionAppear
+      transitionEnterTimeout={250}
+      transitionLeaveTimeout={250}
+      transitionAppearTimeout={250}
+    >
+      {eventComponents}
+    </CSSTransitionGroup>
+  )
+}
+
+function numberToDirection (number) {
+  const directions = ['left', 'none', 'right']
+  return directions[number + 1]
 }
 
 class Timetable extends React.Component {
+  constructor () {
+    super()
 
-  /**
-   * Hides the days element by removing its animation property class
-   */
-  hide () {
-    const el = this.refs.days
-
-    // Replay CSS animation
-    el.classList.remove('a-left')
-    el.classList.remove('a-right')
-  }
-
-  /**
-   * Replays the CSS animation of all events from right side to the left.
-   */
-  animateLeft () {
-    const el = this.refs.days
-
-    // Replay CSS animation
-    el.classList.remove('a-left')
-    el.classList.remove('a-right')
-    setTimeout(() => {
-      el.classList.add('a-left')
-    }, 50)
-  }
-
-  /**
-   * Replays the CSS animation of all events from left side to the right.
-   */
-  animateRight () {
-    const el = this.refs.days
-
-    // Replay CSS animation
-    el.classList.remove('a-left')
-    el.classList.remove('a-right')
-    setTimeout(() => {
-      el.classList.add('a-right')
-    }, 50)
+    this.state = {
+      animationDirection: 'none',
+    }
   }
 
   onClickOutside () {
     if (this.props.eventId) {
-      this.showDetailOn(null)
+      this.props.onDetailShow(null)
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    const dateComparison = compareDate(this.props.viewDate, nextProps.viewDate)
+
+    if (dateComparison !== 0) {
+      this.setState({
+        animationDirection: numberToDirection(dateComparison),
+      })
     }
   }
 
   render () {
     const timeline = createTimeline(this.props.grid)
-    const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
 
     let layout
     let events = this.props.weekEvents
@@ -176,7 +170,8 @@ class Timetable extends React.Component {
     const hourLabels = createHourLabels(layout, timeline)
 
     // Create days
-    const days = createDays(this.props, dayCount, events)
+    const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
+    const days = createDays(this.props, dayCount, this.state.animationDirection, events)
 
     // Classes by properties
     let className = classModifiers({
@@ -226,18 +221,16 @@ class Timetable extends React.Component {
           screenSize={ this.props.screenSize }
           selectedDay={ selectedDay }
         />
-        <div className="days a-right" ref="days">
+        <div className="days" ref="days" key="days">
           {days}
         </div>
         <div className="clearfix" />
-        <div className="hour-labels">
-          {hourLabels}
-        </div>
+        <div className="hour-labels">{hourLabels}</div>
         <ErrorMessage
           visible={this.props.errorVisible}
           type={this.props.error.type}
           onErrorHide={this.props.onErrorHide}
-          />
+        />
       </div>
     )
   }
