@@ -14,7 +14,12 @@ export function calendarUrl ({id, date, type = null}) {
   const urlType = entityType(type)
   const dateQuery = date ? `?date=${date}` : ''
 
-  return `${urlType}/${id}${dateQuery}`
+  let path = `${urlType}/${id}`
+  if (urlType === 'people' && id === 'me') {
+    path = ''
+  }
+
+  return `${path}${dateQuery}`
 }
 
 export function changeCalendar (calendar) {

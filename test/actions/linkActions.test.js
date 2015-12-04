@@ -25,6 +25,19 @@ test('calendarUrl()', t => {
     st.equal(actual, expected, 'generates URL without a date')
   })
 
+  t.test('calendarUrl() for people/me', st => {
+    st.plan(1)
+    const expected = ''
+    const calendar = {
+      type: 'person',
+      id: 'me',
+      date: null,
+    }
+    const actual = actions.calendarUrl(calendar)
+
+    st.equal(actual, expected, 'generates empty URL')
+  })
+
   t.end()
 })
 
