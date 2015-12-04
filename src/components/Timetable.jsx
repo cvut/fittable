@@ -74,7 +74,7 @@ function createDays (props, dayCount, events, eventsfn, animationDirection) {
 function createDayEvents (events, props, animationDirection) {
   const eventComponents = R.map((event) => {
     if (!props.displayFilter[event.type]) {
-      event.appear = 'hide'
+      event._appear = 'hide'
     }
 
     /* fixme: passing too many props to eventbox */
