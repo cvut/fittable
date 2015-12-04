@@ -171,7 +171,7 @@ class Timetable extends React.Component {
     const selectedDay = weekdayNum(this.props.viewDate)
     const isGridHorizontal = layout === 'horizontal'
     const timelineHours = timeline.hours
-    const timelineOffset = (timeline.duration % 3600) / 3600
+    const timelineOffset = timeline.offset
 
     return (
       <div className={className} ref="rootEl"

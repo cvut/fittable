@@ -10,6 +10,7 @@ export function createTimeline (grid) {
     hourDuration: grid.lessonDuration * 3600,
     hours: (grid.ends - grid.starts) / grid.lessonDuration,
     firstHour: grid.facultyGrid ? 1 : Math.ceil(grid.starts),
+    offset: grid.facultyGrid ? 0 : grid.starts % 1,
   }
 }
 
@@ -29,12 +30,12 @@ export function calculateEventPosition (event, timeline) {
 export function calculateHourLabels (timeline) {
   return R.times((n) => {
     return {
-      id: 'l-' + n,
+      id: 'hlbl-' + n,
       label: timeline.firstHour + n,
-      position: (n / timeline.hours),
+      position: (n + timeline.offset) / timeline.hours,
       length: (1 / timeline.hours),
     }
-  }, Math.floor(timeline.hours))
+  }, Math.ceil(timeline.hours))
 }
 
 export function mapPropertiesToClass (properties, elementClass) {
