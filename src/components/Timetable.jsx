@@ -98,14 +98,17 @@ function createDayEvents (events, props, animationDirection) {
     )
   }, events)
 
-  const directions = ['left', 'none', 'right']
-
   return (
-    <CSSTransitionGroup transitionName={'anim' + directions[animationDirection + 1]} transitionAppear={true}
+    <CSSTransitionGroup transitionName={'anim' + animationDirection} transitionAppear={true}
                         transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppearTimeout={250}>
       {eventComponents}
     </CSSTransitionGroup>
   )
+}
+
+function numberToDirection(number) {
+  const directions = ['left', 'none', 'right']
+  return directions[number + 1]
 }
 
 class Timetable extends React.Component {
@@ -113,7 +116,7 @@ class Timetable extends React.Component {
     super()
 
     this.state = {
-      animationDirection: 0,
+      animationDirection: 'none',
     }
   }
 
@@ -127,7 +130,7 @@ class Timetable extends React.Component {
 
     if (dateComparison !== 0) {
       this.setState({
-        animationDirection: dateComparison,
+        animationDirection: numberToDirection(dateComparison),
       })
     }
   }
