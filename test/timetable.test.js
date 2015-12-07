@@ -171,7 +171,9 @@ test('calculateOverlap()', t => {
 
   const overlaps = tt.calculateOverlap(events)
 
-  if (events.length !== overlaps.length) t.fail('length of events and overlapped events have to be equal')
+  if (events.length !== overlaps.length) {
+    t.fail('length of events and overlapped events have to be equal')
+  }
 
   let eventid
   for ( eventid in events ) {
