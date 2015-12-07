@@ -5,16 +5,17 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 require('dotenv').load()
 
+var config = require('./webpack/config')
+
 var srcPath = path.resolve('./src')
 
-var NODE_ENV = process.env.NODE_ENV || 'development'
-var SIRIUS_BASE_URL = process.env.SIRIUS_BASE_URL || 'https://sirius.fit.cvut.cz/staging/api/v1/'
+var proxyMatch = new RegExp(config.SIRIUS_PROXY_PATH + '/?(.*)')
 
 var definePlugin = new webpack.DefinePlugin({
   // Remember this will get replaced with literal contents of string, so we need extra quotes
-  'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-  'process.env.FITTABLE_SOURCE': JSON.stringify(process.env.FITTABLE_SOURCE || 'faux'),
-  '__DEV__': NODE_ENV !== 'production',
+  'process.env.NODE_ENV': JSON.stringify(config.NODE_ENV),
+  'process.env.FITTABLE_SOURCE': JSON.stringify(config.FITTABLE_SOURCE),
+  'process.env.SIRIUS_PROXY_PATH': JSON.stringify(config.SIRIUS_PROXY_PATH),
 })
 
 var sassLoader = '!sass?' +
@@ -40,7 +41,7 @@ function setCookiesMiddleware (req, res, next) {
 }
 
 function rewriteUrl (replacePath) {
-  return function(req, opt) {
+  return function (req, opt) {
     var queryIdx = req.url.indexOf('?')
     var query = queryIdx >= 0 ? req.url.substr(queryIdx) : ''
 
@@ -112,9 +113,9 @@ module.exports = {
     },
     proxy: [
       {
-        path: new RegExp('/_proxy/api/v1/(.*)'),
+        path: proxyMatch,
         rewrite: rewriteUrl('$1'),
-        target: SIRIUS_BASE_URL,
+        target: config.SIRIUS_UPSTREAM_URL,
         changeOrigin: true,  // set proper Host of the target
         secure: false,  // do not validate certificates
       },
