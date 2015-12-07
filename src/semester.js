@@ -15,9 +15,11 @@ export const dateInSemester = (semester, date) => withinDates(...semesterDates(s
 
 export function findSemester (semesters, date, facultyId) {
   // XXX: must be wrapped since we have a different order
-  const predicate = (sem) => (dateInSemesterRaw(sem, date) && R.propEq('faculty', facultyId))
+  const predicate = (sem) => (dateInSemesterRaw(sem, date))
+  const isSelectedFaculty = R.propEq('faculty', facultyId)
 
-  return R.find(predicate, semesters)
+  const facultySemesters = R.filter(isSelectedFaculty, semesters)
+  return R.find(predicate, facultySemesters)
 }
 
 export function semesterSeason (semesterId) {
@@ -50,13 +52,7 @@ export function convertRawSemester (semester) {
       ends: dayEndsAtHour,
       lessonDuration,
     },
-    periods: [
-      {
-        type: 'exams',
-        startsOn: semester.examsStartsAt,
-        endsOn: semester.examsEndsAt,
-      },
-    ],
+    periods: semester.periods,
     valid: true,
     firstWeekParity: semester.firstWeekParity,
   }
@@ -98,7 +94,6 @@ export function semesterWeek (date, semester) {
 export function periodWeekParity (date, semester) {
   const diffEven = semesterWeek(date, semester) % 2 === 0
   const fweekEven = semester.firstWeekParity === 'even'
-
 
   return (fweekEven === diffEven) ? 'odd' : 'even'
 }

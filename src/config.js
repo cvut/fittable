@@ -11,7 +11,6 @@ if (global.SIRIUS_BASE_URL) {
   SIRIUS_BASE_URL = global.SIRIUS_BASE_URL
 }
 
-// Faculty id
 const FACULTY_ID = 18000 // FIT CTU faculty
 
 export {
