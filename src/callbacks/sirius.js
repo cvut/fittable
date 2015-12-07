@@ -12,6 +12,8 @@ import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
 
+import { SIRIUS_PROXY_PATH } from '../config'
+
 const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('length', 0))
 
 /**
@@ -45,7 +47,7 @@ var user = {
  * URL of proxy for Sirius API
  * @type {string}
  */
-var siriusAPIUrl = `${getBaseUri()}/_proxy/api/v1/`
+var siriusAPIUrl = `${getBaseUri()}${SIRIUS_PROXY_PATH}/`
 
 /**
  * Currently selected application language setting
