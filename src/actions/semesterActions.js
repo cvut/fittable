@@ -1,6 +1,6 @@
 import { SEMESTER_LOAD_COMPLETED } from '../constants/actionTypes'
 import { findSemester, convertRawSemester, dateInSemester } from '../semester'
-import { FACULTY_ID as facultyId } from '../config'
+import { FACULTY_ID } from '../config'
 
 function receiveSemesterData (semester) {
   return {
@@ -29,7 +29,7 @@ export function fetchSemesterData (semesterCallback, date) {
         return
       }
 
-      const currentSemester = findSemester(data, date, facultyId)
+      const currentSemester = findSemester(data, date, FACULTY_ID)
       if (!currentSemester) {
         dispatch(receiveSemesterData(invalidateSemesterData(semester)))
         return

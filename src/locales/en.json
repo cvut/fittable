@@ -39,7 +39,6 @@
     "prev": "Previous week",
     "next": "Next week",
     "selector": "Date selector",
-    "teachweek": "%(weeknum)s teaching week",
     "unknown_semester": "unknown",
     "week_teaching": "%(weeknum)s. teaching week (%(parity)s)",
     "week_exams": "Exams (%(weeknum)s. %(parity)s week)",
