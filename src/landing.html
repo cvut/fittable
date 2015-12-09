@@ -19,7 +19,11 @@
                     Pro přístup k vašemu osobnímu rozvrhu se musíte nejprve přihlásit svým školním účtem.
                 </p>
 
-                <a href="_oauth/login" class="button login"> <i class="fa fa-lock"></i> Přihlaste se účtem ČVUT</a>
+                <form method="POST" action="_oauth/login">
+                  <button type="submit" class="button login">
+                    <i class="fa fa-lock"></i> Přihlaste se účtem ČVUT
+                  </button>
+                </form>
             </div>
         </div>
 

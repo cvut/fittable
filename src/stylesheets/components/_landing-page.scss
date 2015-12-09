@@ -18,7 +18,7 @@
       max-width: 300px;
     }
 
-    a.button.login {
+    button.login {
       @include button;
       font-weight: bold;
       margin-bottom: 7px;
@@ -26,15 +26,6 @@
 
       i.fa {
         margin-right: 15px;
-      }
-
-      & + a {
-        color: #777;
-        text-decoration: underline;
-
-        &:hover {
-          text-decoration: none;
-        }
       }
     }
 
