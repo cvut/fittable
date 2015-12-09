@@ -342,9 +342,6 @@ var settingsChangeCallback = function (settings) {
   // We really don't want to save the user property
   settings.user = null
 
-  // Save settings
-  window.localStorage.setItem(user.name + '.settings', JSON.stringify(settings))
-
   // Update appLocale
   appLocale = settings.locale
 
@@ -364,37 +361,6 @@ function viewChangeCallback (view, param) {
 // If the user is not logged in, redirect him to the landing page
 if (!isUserLoggedIn()) {
   window.location.href = 'landing.html'
-
-} else {
-  // Prepare the options object with default values
-  var options = {
-    locale: 'cs',
-  }
-
-  // Load settings from localStorage
-  var save = window.localStorage.getItem(user.name + '.settings')
-  if (save !== null) {
-    var usersettings = JSON.parse(save)
-
-    for (var key in usersettings) {
-      options[key] = usersettings[key]
-    }
-  }
-
-  // Set user and callbacks
-  options.username = user.name
-  options.usertoken = user.token
-  options.callbacks = {
-    data: dataCallback,
-    search: searchCallback,
-
-    dateChange: dateChangeCallback,
-    semesterData: semesterDataCallback,
-    settingsChange: settingsChangeCallback
-  }
-
-  // Get app locale
-  appLocale = options.locale
 }
 
 function userCallback (cb) {
