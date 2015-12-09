@@ -116,18 +116,29 @@ By default, fake data source is used (called `faux`). Set to `sirius` for `npm r
 `SIRIUS_TARGET`: Controls which instance of Sirius should be used for `sirius` data source
 By default, `staging` instance is used. Can be set to `production` to use production instance, or alternatively the resulting URL can be overriden by global variable (see below). Note that this is currently **not set** by `npm run build:prod`, i.e. staging instance is used by default.
 
+`SIRIUS_PROXY_PATH`: Defines path to the OAuth proxy to access Sirius API, both in development server and production. Set to `/api/sirius` by default and it is further merged with `<base href>` in HTML.
+See below for overriding this in runtime.
+
 `OAUTH_ACCESS_TOKEN`: Used by [development server](#development-server) to set `oauth_access_token` cookie for Sirius authorisation. See [Access Credentials](#access-credentials).
 
 `OAUTH_USERNAME`: Used by [development server](#development-server) to set `oauth_username` cookie. It contains CTU username to load user's personal calendar from Sirius.
 
-### Sirius Base URL Override
+### OAuth Proxy
 
-It is possible to directly override base URL for Sirius API without rebuilding whole bundle by adding JavaScript global variable `SIRIUS_BASE_URL` before bundle initialisation, for example by adding the following to the `index.html` file (into `<head>`):
+Fittable doesn't handle OAuth authorization directly, we use [ngx-oauth](https://github.com/jirutka/ngx-oauth) to handle authorization and token refreshing. It acts as a proxy for the remote API.
+
+The proxy manages following cookies for the client:
+
+- `oauth_refresh_token` – Long-lived token (in encrypted form) which is used by the proxy to refresh an access token after expiration. As long this token is set, we assume the user is authorized.
+- `oauth_access_token` – Short-lived token to authorize requests to the remote API (passed through by the proxy).
+- `oauth_username` – Username of the associated user, used to bootstrap initial requests.
+
+Proxy needs to be located on `SIRIUS_PROXY_PATH`. You can override this variable in the generated bundle by setting global variable `SIRIUS_PROXY_PATH` before bundle initialisation, for example by adding the following to the `index.html` file (into `<head>`):
 
 ```html
 <script>
-window.SIRIUS_BASE_URL = 'https://sirius.fit.cvut.cz/api/v1/'
+window.SIRIUS_PROXY_PATH = '/_proxy/api/v1'
 </script>
 ```
 
-This is useful for redeploying staging bundles to production.
+Keep in mind the path is combined with `<base href>`.
