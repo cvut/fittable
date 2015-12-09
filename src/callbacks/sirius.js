@@ -35,13 +35,9 @@ var view = 'person'
 var parameter = ''
 
 /**
- * Logged user's credentials
- * @type {{name: string, token: string}}
+ * Logged user's username.
  */
-var user = {
-  name: ReactCookie.load('oauth_username'),
-  token: ReactCookie.load('oauth_access_token'),
-}
+var username = ReactCookie.load('oauth_username')
 
 /**
  * URL of proxy for Sirius API
@@ -76,7 +72,7 @@ function generateError (status, message = 'No message specified') {
   const error = new Error(message)
   if (status in STATUS_ERROR_TYPES) {
     error.type = STATUS_ERROR_TYPES[status]
-    if (error.type === 'notfound' && view === 'person' && parameter === user.name) {
+    if (error.type === 'notfound' && view === 'person' && parameter === username) {
       error.type = 'own' + error.type
     }
   } else {
@@ -108,12 +104,11 @@ function changeView (newView, newParam) {
   parameter = newParam
 }
 
-/**
- * Checks the user variable, if it's valid logged user.
- * @returns {bool}
- */
 function isUserLoggedIn () {
-  return (user.name && user.token)
+  return username && (
+    // TODO: Remove oauth_access_token once we implement OAuth for dev-server.
+    ReactCookie.load('oauth_refresh_token') || ReactCookie.load('oauth_access_token')
+  )
 }
 
 function makeRequest (parameters) {
@@ -136,7 +131,7 @@ function makeRequest (parameters) {
 function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
   // FIXME: until `me` is a valid shortcut on Sirius
   if (calendarId === 'me' && calendarType === 'people') {
-    calendarId = user.name
+    calendarId = username
   }
 
   const path = `${calendarType}/${calendarId}/events` +
@@ -346,7 +341,7 @@ var settingsChangeCallback = function (settings) {
   appLocale = settings.locale
 
   // Update title and subtitle for possible locale change
-  updateTitle(view === 'person' && parameter === user.name ?
+  updateTitle(view === 'person' && parameter === username ?
     viewNames[appLocale]['personal'] : viewNames[appLocale][view] + ' ' + parameter, null)
 }
 
@@ -364,7 +359,7 @@ if (!isUserLoggedIn()) {
 }
 
 function userCallback (cb) {
-  const request = makeRequest(`people/${user.name}`)
+  const request = makeRequest(`people/${username}`)
 
   request.onreadystatechange = (callback, fittable) => {
     if (request.readyState === XMLHttpRequest.DONE) {
