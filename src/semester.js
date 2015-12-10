@@ -70,15 +70,8 @@ export function semesterName (translate, semester) {
 }
 
 export function periodFromDate (date, periods) {
-  if (periods.length === 0) { return null }
-
-  for (let period of periods) {
-    if (withinDates(period.starts_at, period.ends_at, date)) {
-      return period
-    }
-  }
-
-  return null
+  const includesDate = (period) => withinDates(period.starts_at, period.ends_at, date)
+  return R.find(includesDate, periods)
 }
 
 export function semesterWeek (date, semester) {
