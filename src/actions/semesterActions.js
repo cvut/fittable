@@ -19,7 +19,7 @@ export function invalidateSemesterData (semester) {
 export function fetchSemesterData (semesterCallback, date) {
   return function semesterDataThunk (dispatch, getState) {
     const {semester} = getState()
-    if (semester && semester.valid && dateInSemester(semester, date)) {
+    if (semester && semester.valid && dateInSemester(date, semester)) {
       return
     }
 

@@ -107,8 +107,8 @@ test('dateInSemester()', t => {
 
   const dateIn = new Date('2015-03-01')
   const dateOut = new Date('2015-10-01')
-  t.equal(s.dateInSemester(semester, dateIn), true, 'returns true for date within the semester')
-  t.equal(s.dateInSemester(semester, dateOut), false, 'returns false for date outside of the semester')
+  t.equal(s.dateInSemester(dateIn, semester), true, 'returns true for date within the semester')
+  t.equal(s.dateInSemester(dateOut, semester), false, 'returns false for date outside of the semester')
   t.end()
 })
 
