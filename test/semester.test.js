@@ -166,11 +166,11 @@ test('periodFromDate()', t => {
     ['2015-01-15', periods[0]],
     ['2015-03-15', periods[1]],
     ['2016-01-01', periods[3]],
-    ['1970-05-15', null      ],
-    ['2015-02-15', null      ],
-    ['2020-05-15', null      ],
+    ['1970-05-15', undefined ],
+    ['2015-02-15', undefined ],
+    ['2020-05-15', undefined ],
   ].forEach(([date, expected]) => {
-    const message = `${date} matches ${expected === null ? 'no' : 'correct'} period`
+    const message = `${date} matches ${expected === undefined ? 'no' : 'correct'} period`
 
     t.deepEqual(s.periodFromDate(new Date(date), periods), expected, message)
   })
