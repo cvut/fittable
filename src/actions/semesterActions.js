@@ -29,7 +29,7 @@ export function fetchSemesterData (semesterCallback, date) {
         return
       }
 
-      const currentSemester = findSemester(data, date, FACULTY_ID)
+      const currentSemester = findSemester(FACULTY_ID, data, date)
       if (!currentSemester) {
         dispatch(receiveSemesterData(invalidateSemesterData(semester)))
         return

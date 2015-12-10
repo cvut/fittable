@@ -29,7 +29,7 @@ test('currentSemester()', t => {
     ['2015-02-16', 13000,    '13000-B151'],
     ['2015-02-15', 18000,    '18000-B142'],
   ].forEach(([day, facultyId, expectedId]) => {
-    const actual = s.findSemester(semesters, day, facultyId)
+    const actual = s.findSemester(facultyId, semesters, day)
 
     t.equal(actual.id, expectedId, `day ${day} is within semester ${expectedId} with fc ${facultyId}`)
   })
