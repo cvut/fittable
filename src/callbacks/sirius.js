@@ -51,6 +51,10 @@ function generateError (status, message = 'No message specified') {
   return error
 }
 
+function redirectToLanding () {
+  window.location.href = 'landing.html'
+}
+
 /**
  * @return {string} a base URI (aka relative URL root) of this site with
  * trailing slash omitted.
@@ -80,6 +84,12 @@ function makeRequest (parameters = '', requestHandler) {
   const request = new XMLHttpRequest()
   request.onreadystatechange = () => {
     if (request.readyState === 4) {
+      // Bail out early on 401
+      if (request.status === 401) {
+        redirectToLanding()
+        return
+      }
+
       requestHandler(request)
     }
   }
@@ -322,7 +332,7 @@ function userCallback (cb) {
 
 // If the user is not logged in, redirect him to the landing page
 if (!isUserLoggedIn()) {
-  window.location.href = 'landing.html'
+  redirectToLanding()
 }
 
 export {
