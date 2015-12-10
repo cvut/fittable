@@ -15,7 +15,7 @@ const semesterInterval = R.props(['startsOn', 'endsOn'])
 const semesterDates = R.pipe(semesterInterval, R.map(toDate))
 export const dateInSemester = (date, semester) => withinDates(...semesterDates(semester), date)
 
-export function findSemester (semesters, date, facultyId) {
+export function findSemester (facultyId, semesters, date) {
   const predicate = R.allPass([
     R.propEq('faculty', facultyId),
     dateInSemesterRaw(date),
