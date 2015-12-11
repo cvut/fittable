@@ -232,6 +232,7 @@ class Timetable extends React.Component {
           layout={ this.props.layout }
           screenSize={ this.props.screenSize }
           selectedDay={ selectedDay }
+          now={ this.props.now }
         />
         <div
           className={daysClass}

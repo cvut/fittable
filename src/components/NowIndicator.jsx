@@ -16,11 +16,13 @@ const propTypes = {
   days7: PropTypes.bool,
   layout: PropTypes.string,
   screenSize: PropTypes.number,
+  now: PropTypes.instanceOf(Date),
 }
 
 class NowIndicator extends React.Component {
 
   render () {
+    // FIXME: actually use the this.props.now (will do in refactoring phase)
     const nowpoint = moment().diff(
       moment().hour(this.props.timelineStartHour).minutes(this.props.timelineStartMins)
     )
