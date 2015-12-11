@@ -1,4 +1,4 @@
-import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, DATA_ERROR_HIDE } from '../constants/actionTypes'
+import { EVENTS_LOAD_STARTED, EVENTS_LOAD_COMPLETED, EVENTS_LOAD_FAILED, DATA_ERROR_HIDE, DATA_UPDATE_NOW } from '../constants/actionTypes'
 
 const initialState = {
   waiting: true,
@@ -12,6 +12,7 @@ const initialState = {
     type: null,
     message: null,
   },
+  now: null
 }
 
 export default function data (state = initialState, action) {
@@ -45,6 +46,11 @@ export default function data (state = initialState, action) {
       return {
         ...state,
         errorVisible: false,
+      }
+    case DATA_UPDATE_NOW:
+      return {
+        ...state,
+        now: action.payload,
       }
     default:
       return state

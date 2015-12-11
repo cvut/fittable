@@ -11,7 +11,7 @@ import { equals } from 'ramda'
 import { calendar as calendarSelector } from '../../selectors/routerSelector'
 import { changeSettings } from '../../actions/settingsActions'
 import { changeDisplayFilters } from '../../actions/filterActions'
-import { fetchEvents, hideDataError } from '../../actions/dataActions'
+import { fetchEvents, hideDataError, updateNow } from '../../actions/dataActions'
 import { displaySidebar, displayEvent } from '../../actions/uiActions'
 import { fetchSearchResults } from '../../actions/searchActions'
 import { fetchSemesterData } from '../../actions/semesterActions'
@@ -28,6 +28,8 @@ import Controls from '../../components/Controls'
 import Timetable from '../../components/Timetable'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+
+const updatePeriod = 60 // seconds
 
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
@@ -69,6 +71,7 @@ function mapDispatchToProps (dispatch) {
     onErrorHide: () => dispatch(hideDataError()),
     onUserRequest: () => dispatch(fetchUserData()),
     changeCalendar: (calendar) => dispatch(changeCalendar(calendar)),
+    updateNow: () => dispatch(updateNow()),
   }
 }
 
@@ -84,6 +87,7 @@ const FittableContainer = React.createClass({
   componentDidMount () {
     this.props.onWindowResize()
     global.window.addEventListener('resize', this.props.onWindowResize)
+    setInterval(this.props.updateNow, updatePeriod * 1000)
   },
 
   componentWillMount () {
@@ -208,6 +212,7 @@ const FittableContainer = React.createClass({
           error={error}
           errorVisible={errorVisible}
           onErrorHide={this.props.onErrorHide}
+          now={this.props.data.now}
         />
         <Footer
           userName={this.props.user.name || this.props.user.id}
