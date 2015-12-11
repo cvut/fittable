@@ -20,7 +20,7 @@ import { fetchUserData } from '../../actions/userActions'
 import { changeCalendar } from '../../actions/linkActions'
 
 import { isoDate, strToDate } from '../../date'
-import { semesterName, periodFromDate, periodWeekParity, semesterWeek } from '../../semester'
+import { semesterName, periodFromDate, periodWeekParity, semesterWeek, actualWeekProperties } from '../../semester'
 
 import FunctionsSidebar from '../../components/FunctionsSidebar'
 import Spinner from '../../components/Spinner'
@@ -157,19 +157,7 @@ const FittableContainer = React.createClass({
       facultyGrid: facultyGrid,
     }
 
-    let weekParity = null
-    let weekNum = 0
-    let weekType = null
-
-    if ('periods' in this.props.semester) {
-      const period = periodFromDate(this.props.viewDate, this.props.semester.periods)
-
-      if (period) {
-        weekParity = periodWeekParity(this.props.viewDate, this.props.semester)
-        weekNum = semesterWeek(this.props.viewDate, this.props.semester)
-        weekType = period.type
-      }
-    }
+    const { weekParity, weekNum, weekType } = actualWeekProperties(this.props.viewDate, this.props.semester)
 
     return (
       <div className="fittable-container" ref="rootEl">
