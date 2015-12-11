@@ -91,3 +91,21 @@ export function periodWeekParity (date, semester) {
 
   return (fweekEven === diffEven) ? 'odd' : 'even'
 }
+
+export function actualWeekProperties (viewDate, semester) {
+  if (!('periods' in semester)) {
+    return { weekParity: null, weekNum: null, weekType: null }
+  }
+
+  const period = periodFromDate(viewDate, semester.periods)
+
+  if (!period) {
+    return { weekParity: null, weekNum: null, weekType: null }
+  }
+
+  return {
+    weekParity: periodWeekParity(viewDate, semester),
+    weekNum: semesterWeek(viewDate, semester),
+    weekType: period.type,
+  }
+}
