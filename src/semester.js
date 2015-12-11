@@ -92,7 +92,7 @@ export function periodWeekParity (date, semester) {
   return (fweekEven === diffEven) ? 'odd' : 'even'
 }
 
-export function actualWeekProperties (viewDate, semester) {
+export function weekProperties (viewDate, semester) {
   if (!('periods' in semester)) {
     return { weekParity: null, weekNum: null, weekType: null }
   }
