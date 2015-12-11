@@ -93,11 +93,7 @@ export function periodWeekParity (date, semester) {
 }
 
 export function weekProperties (viewDate, semester) {
-  if (!('periods' in semester)) {
-    return { weekParity: null, weekNum: null, weekType: null }
-  }
-
-  const period = periodFromDate(viewDate, semester.periods)
+  const period = R.unless(R.isNil, R.partial(periodFromDate, viewDate), semester.periods)
 
   if (!period) {
     return { weekParity: null, weekNum: null, weekType: null }
