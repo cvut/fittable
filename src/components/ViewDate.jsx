@@ -4,10 +4,7 @@
  */
 
 import React, { PropTypes } from 'react'
-import R from 'ramda'
-import moment from 'moment'
 import CP from 'counterpart'
-import { weekRange, workWeekRange } from '../date'
 
 const propTypes = {
   viewDate: PropTypes.instanceOf(Date),
@@ -30,18 +27,19 @@ class ViewDate extends React.Component {
 
   render () {
     const weekParity = this.weekParity(this.props.weekParity)
-    const translationExists = R.contains(this.props.weekType, ['teaching', 'exams', 'holiday'])
 
-    let weekText
-    if (translationExists) {
-      weekText = CP.translate('weekNav.week_' + this.props.weekType, { weeknum: this.props.weekNum, parity: weekParity })
-    } else {
-      weekText = ''
-    }
+    const weekText = CP.translate('weekNav.week_' + this.props.weekType,
+      {
+        weeknum: this.props.weekNum,
+        parity: weekParity,
+        fallback: ' ',
+      })
 
-    return <div className="view-date">
-      {weekText}
-    </div>
+    return (
+      <div className="view-date">
+        {weekText}
+      </div>
+    )
   }
 }
 
