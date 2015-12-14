@@ -130,7 +130,7 @@ test('mapPropertiesToClass()', t => {
     isDolorSitAmet: true,
   }
 
-  const expected = 'class class--a class--property class--dolorsitamet '
+  const expected = 'class class--a class--property class--dolorsitamet'
 
   t.equal(tt.mapPropertiesToClass(properties, 'class'), expected, 'returns properties transformed to classname')
   t.end()

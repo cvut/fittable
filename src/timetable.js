@@ -39,17 +39,13 @@ export function calculateHourLabels (timeline) {
 }
 
 export function mapPropertiesToClass (properties, elementClass) {
-  let className = elementClass + ' '
-
-  for (const property in properties) {
-    if (!properties[property] || !property.startsWith('is')) {
-      continue
+  return R.reduce((accu, [key, val]) => {
+    if (!key.startsWith('is') || !val) {
+      return accu
     }
-
-    className += elementClass + '--' + property.substr(2).toLowerCase() + ' '
-  }
-
-  return className
+    const propertyName = key.substr(2).toLowerCase()
+    return accu + ' ' + elementClass + '--' + propertyName
+  }, elementClass, R.toPairs(properties))
 }
 
 export function groupEventsByDays (events) {
