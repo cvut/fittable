@@ -110,11 +110,9 @@ export function eventAppearance (event) {
 
   if (event._overlaps >= 3) {
     className = 'quarter'
-  }
-  if (event._overlaps === 2) {
+  } else if (event._overlaps === 2) {
     className = 'third'
-  }
-  if (event._overlaps === 1) {
+  } else if (event._overlaps === 1) {
     className = 'half'
   }
 
