@@ -3,6 +3,7 @@ import moment from 'moment'
 import { setDateToZeroTime, weekdayNum } from './date'
 
 const isTruthy = Boolean
+const startsWith = R.flip(String.startsWith)
 
 export function createTimeline (grid) {
   return {
@@ -44,6 +45,7 @@ export function mapPropertiesToClass (properties, elementClass) {
   return R.pipe(
     R.pickBy(isTruthy),
     R.keys,
+    R.filter(startsWith('is')),
     R.map(key => key.substr(2).toLowerCase()),
     R.reduce((className, key) => `${className} ${elementClass}--${key}`, elementClass)
   )(properties)
