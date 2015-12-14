@@ -1,25 +1,23 @@
 import test from 'blue-tape'
 import * as time from '../src/time'
-import R from 'ramda'
 
 test('convertSecondsToTime()', t => {
-  const testCases = [
-    {seconds: 0, time: [0, 0, 0]},
-    {seconds: 1, time: [0, 0, 1]},
-    {seconds: 60, time: [0, 1, 0]},
-    {seconds: 65, time: [0, 1, 5]},
-    {seconds: 3600, time: [1, 0, 0]},
-    {seconds: 3601, time: [1, 0, 1]},
-  ]
-
-  R.forEach(testCase => {
-    const [h, m, s] = testCase.time
+  [
+    // seconds, [h, m, s]
+    [0, [0, 0, 0]],
+    [1, [0, 0, 1]],
+    [60, [0, 1, 0]],
+    [65, [0, 1, 5]],
+    [3600, [1, 0, 0]],
+    [3601, [1, 0, 1]],
+  ].forEach(([seconds, resultTime]) => {
+    const [h, m, s] = resultTime
     t.deepEqual(
-      time.convertSecondsToTime(testCase.seconds),
+      time.convertSecondsToTime(seconds),
       {h, m, s},
-      `converts correctly ${testCase.seconds}s to time`
+      `converts correctly ${seconds}s to time`
     )
-  }, testCases)
+  })
 
   t.end()
 })

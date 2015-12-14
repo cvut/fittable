@@ -164,21 +164,22 @@ test('groupEventsByDays()', t => {
 
 test('calculateOverlap()', t => {
   const expected = [
-    {startsAt: '2015-12-03 12:00:00', endsAt: '2015-12-03 13:00:00', _firstOverlapping: false, _overlaps: 0},
-    {startsAt: '2015-12-03 13:00:00', endsAt: '2015-12-03 14:00:00', _firstOverlapping: false, _overlaps: 0},
-    {startsAt: '2015-12-03 15:00:00', endsAt: '2015-12-03 17:00:00', _firstOverlapping: false, _overlaps: 0},
-    {startsAt: '2015-12-03 20:00:00', endsAt: '2015-12-03 20:30:00', _firstOverlapping: false, _overlaps: 0},
-    {startsAt: '2015-12-04 12:00:00', endsAt: '2015-12-04 13:00:00', _firstOverlapping: true, _overlaps: 1},
-    {startsAt: '2015-12-04 12:30:00', endsAt: '2015-12-04 14:00:00', _firstOverlapping: false, _overlaps: 1},
-    {startsAt: '2015-12-04 15:00:00', endsAt: '2015-12-04 17:00:00', _firstOverlapping: true, _overlaps: 1},
-    {startsAt: '2015-12-04 16:00:00', endsAt: '2015-12-04 17:00:00', _firstOverlapping: false, _overlaps: 1},
-    {startsAt: '2015-12-05 12:00:00', endsAt: '2015-12-05 13:00:00', _firstOverlapping: true, _overlaps: 2},
-    {startsAt: '2015-12-05 12:30:00', endsAt: '2015-12-05 13:00:00', _firstOverlapping: false, _overlaps: 2},
-    {startsAt: '2015-12-05 12:45:00', endsAt: '2015-12-05 15:00:00', _firstOverlapping: false, _overlaps: 2},
-    {startsAt: '2015-12-05 15:00:00', endsAt: '2015-12-05 20:30:00', _firstOverlapping: false, _overlaps: 0},
+    // startsAt, endsAt, _firstOverlapping, _overlaps
+    ['2015-12-03 12:00:00', '2015-12-03 13:00:00', false, 0],
+    ['2015-12-03 13:00:00', '2015-12-03 14:00:00', false, 0],
+    ['2015-12-03 15:00:00', '2015-12-03 17:00:00', false, 0],
+    ['2015-12-03 20:00:00', '2015-12-03 20:30:00', false, 0],
+    ['2015-12-04 12:00:00', '2015-12-04 13:00:00', true, 1],
+    ['2015-12-04 12:30:00', '2015-12-04 14:00:00', false, 1],
+    ['2015-12-04 15:00:00', '2015-12-04 17:00:00', true, 1],
+    ['2015-12-04 16:00:00', '2015-12-04 17:00:00', false, 1],
+    ['2015-12-05 12:00:00', '2015-12-05 13:00:00', true, 2],
+    ['2015-12-05 12:30:00', '2015-12-05 13:00:00', false, 2],
+    ['2015-12-05 12:45:00', '2015-12-05 15:00:00', false, 2],
+    ['2015-12-05 15:00:00', '2015-12-05 20:30:00', false, 0],
   ]
 
-  const events = R.map(({startsAt, endsAt}) => {
+  const events = R.map(([startsAt, endsAt]) => {
     return {
       startsAt,
       endsAt,
