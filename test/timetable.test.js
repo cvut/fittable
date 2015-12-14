@@ -108,14 +108,14 @@ test('calculateHourLabels()', t => {
 
 test('classModifiers()', t => {
   const properties = {
-    isA: true,
-    isB: false,
     isProperty: true,
     isLoremIpsum: false,
     isDolorSitAmet: true,
+    irrelevantProp: true,
+    anotherNoise: false,
   }
 
-  const expected = 'class class--a class--property class--dolorsitamet '
+  const expected = 'class class--property class--dolorsitamet'
 
   t.equal(tt.classModifiers(properties, 'class'), expected, 'returns properties transformed to classname')
   t.end()

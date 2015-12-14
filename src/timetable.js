@@ -37,27 +37,20 @@ export function calculateHourLabels (timeline) {
 }
 
 export function classModifiers (properties, elementClass) {
-  let className = elementClass + ' '
+  const className = (key) => `${elementClass}--${key.substr(2).toLowerCase()}`
 
-  for (const property in properties) {
-    if (!properties[property] || !property.startsWith('is')) {
-      continue
+  return R.reduce((acc, key) => {
+    if (key.startsWith('is') && !!properties[key]) {
+      return `${acc} ${className(key)}`
     }
-
-    className += elementClass + '--' + property.substr(2).toLowerCase() + ' '
-  }
-
-  return className
+    return acc
+  }, elementClass, R.keys(properties))
 }
 
-export function groupEventsByDays (events) {
-  const groupByWeekday = R.groupBy((event) => {
-    const startD = new Date(event.startsAt)
-    return weekdayNum(startD)
-  })
-
-  return groupByWeekday(events)
-}
+// groupEventsByDays :: [Event] -> {String: [Event]}
+export const groupEventsByDays = R.groupBy(event => {
+  return weekdayNum(new Date(event.startsAt))
+})
 
 export function calculateOverlap (events) {
   let lastend = moment(0)
