@@ -128,12 +128,3 @@ test('setDateToZeroTime', t => {
   t.deepEqual(date.setDateToZeroTime(d), new Date('2015-09-03 00:00:00'), 'sets date to zero time')
   t.end()
 })
-
-test('dateInFuture', t => {
-  const current = new Date('2015-09-03')
-
-  t.equal(date.dateInFuture(current, 1), 4, 'returns tomorrow')
-  t.equal(date.dateInFuture(current, 2), 5, 'returns day after tomorrow')
-
-  t.end()
-})

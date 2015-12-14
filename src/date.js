@@ -70,8 +70,3 @@ export function setDateToZeroTime(date) {
   date.setSeconds(0)
   return date
 }
-
-export function dateInFuture(current, byDays) {
-  const mCurrent = moment(current)
-  return mCurrent.add(byDays, 'days').date()
-}

@@ -7,7 +7,7 @@ import CSSTransitionGroup from 'react-addons-css-transition-group'
 import R from 'ramda'
 import { grid as gridPropType } from '../constants/propTypes'
 
-import { weekdayNum, dateInFuture, compareDate } from '../date'
+import { weekdayNum, shiftDate, compareDate } from '../date'
 import { convertSecondsToTime } from '../time'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import { createTimeline, calculateEventPosition, calculateHourLabels, mapPropertiesToClass,
@@ -72,7 +72,7 @@ function createDays (props, dayCount, events, eventsfn, animationDirection) {
     return (
       <Day id={n}
            key={'day-' + n}
-           dayNum={dateInFuture(props.viewDate, n)}
+           dayNum={shiftDate(props.viewDate, 'days', n).getDate()}
            viewDate={props.viewDate}>
         {dayEvents}
       </Day>
