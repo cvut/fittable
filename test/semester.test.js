@@ -231,7 +231,7 @@ test('weekProperties()', t => {
   ].forEach(({viewDate, weekParity, weekNum, weekType}) => {
     const actual = s.weekProperties(viewDate, semester)
     const expected = {weekParity, weekNum, weekType}
-    t.deepEqual(actual, expected, 'test if week properties for ' + viewDate + ' are correct')
+    t.deepEqual(actual, expected, `test if week properties for ${viewDate} are correct`)
   })
 
   const outofrangeExpected = { weekParity: null, weekNum: null, weekType: null }
