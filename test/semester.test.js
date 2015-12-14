@@ -234,9 +234,9 @@ test('weekProperties()', t => {
     t.deepEqual(actual, expected, `test if week properties for ${viewDate} are correct`)
   })
 
-  const outofrangeExpected = { weekParity: null, weekNum: null, weekType: null }
+  const expected = { weekParity: null, weekNum: null, weekType: null }
   t.deepEqual(s.weekProperties(new Date('2020-01-01'), semester),
-              outofrangeExpected,
+              expected,
               'test week properties for viewDate out of range')
 
   t.end()
