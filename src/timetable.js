@@ -70,11 +70,7 @@ export function calculateOverlap (events) {
     if (lhsD.isBefore(rhsD)) {
       return -1
     } else {
-      if (lhsD.isAfter(rhsD)) {
-        return 1
-      } else {
-        return 0
-      }
+      return lhsD.isAfter(rhsD) ? 1 : 0
     }
   }
 
