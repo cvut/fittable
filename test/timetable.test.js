@@ -44,10 +44,26 @@ test('calculateEventPosition()', t => {
     offset: 0,
   }
 
+  function timeToDate (h, m, s) {
+    return `1970-01-01 ${h}:${m}:${s}`
+  }
+
   const events = [
-    { startsAt: '1970-01-01 07:30:00', endsAt: '1970-01-01 21:15:00', expected: { position: 0, length: 1 } },
-    { startsAt: '1970-01-01 14:22:30', endsAt: '1970-01-01 21:15:00', expected: { position: 0.5, length: 0.5 } },
-    { startsAt: '1970-01-01 14:22:30', endsAt: '1970-01-01 17:48:45', expected: { position: 0.5, length: 0.25 } },
+    {
+      startsAt: timeToDate(7, 30, 0),
+      endsAt: timeToDate(21, 15, 0),
+      expected: { position: 0, length: 1 },
+    },
+    {
+      startsAt: timeToDate(14, 22, 30),
+      endsAt: timeToDate(21, 15, 0),
+      expected: { position: 0.5, length: 0.5 },
+    },
+    {
+      startsAt: timeToDate(14, 22, 30),
+      endsAt: timeToDate(17, 48, 45),
+      expected: { position: 0.5, length: 0.25 },
+    },
   ]
 
   R.forEach(event => {
@@ -68,7 +84,6 @@ test('calculateHourLabels()', t => {
     offset: 0.5,
   }
 
-  // Test n, n+1, m-1, m (n=first, m=last)
   const expected = [
     {
       id: 'hlbl-0',
@@ -98,10 +113,11 @@ test('calculateHourLabels()', t => {
 
   const result = tt.calculateHourLabels(timeline)
   const rlen = result.length
+
+  // Test n, n+1, m-1, m (n=first, m=last)
   const resultSelection = [result[0], result[1], result[rlen - 2], result[rlen - 1]]
 
   t.deepEqual(resultSelection, expected, 'calculate hour labels for timeline 7:30 - 21:15')
-
   t.end()
 })
 
@@ -169,18 +185,12 @@ test('calculateOverlap()', t => {
     }
   }, expected)
 
-  const overlaps = tt.calculateOverlap(events)
+  const actual = tt.calculateOverlap(events)
+  t.equal(events.length, actual.length, 'length of events and overlapped events have to be equal')
 
-  if (events.length !== overlaps.length) {
-    t.fail('length of events and overlapped events have to be equal')
-  }
-
-  let eventid
-  for ( eventid in events ) {
-    if (events.hasOwnProperty(eventid)) {
-      t.deepEqual(overlaps[eventid], expected[eventid], 'finds correct number of overlaps')
-    }
-  }
+  t.deepEqual(R.pick(['eventid'], actual),
+              R.pick(['eventid'], expected),
+              'finds correct number of overlaps')
 
   t.end()
 })
@@ -191,7 +201,7 @@ test('eventAppearance()', t => {
     {_overlaps: 0, _firstOverlapping: false},
   ]
 
-  t.equal(tt.eventAppearance(events[0]), 'quarter-first')
-  t.equal(tt.eventAppearance(events[1]), 'regular')
+  t.equal(tt.eventAppearance(events[0]), 'quarter-first', 'sets appearance to quarter-first on 3 overlaps')
+  t.equal(tt.eventAppearance(events[1]), 'regular', 'sets regular on no overlaps')
   t.end()
 })

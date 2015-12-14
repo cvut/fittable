@@ -3,7 +3,7 @@ import * as time from '../src/time'
 import R from 'ramda'
 
 test('convertSecondsToTime()', t => {
-  const testcases = [
+  const testCases = [
     {seconds: 0, time: [0, 0, 0]},
     {seconds: 1, time: [0, 0, 1]},
     {seconds: 60, time: [0, 1, 0]},
@@ -12,13 +12,14 @@ test('convertSecondsToTime()', t => {
     {seconds: 3601, time: [1, 0, 1]},
   ]
 
-  R.forEach(testcase => {
+  R.forEach(testCase => {
+    const [h, m, s] = testCase.time
     t.deepEqual(
-      time.convertSecondsToTime(testcase.seconds),
-      {h: testcase.time[0], m: testcase.time[1], s: testcase.time[2]},
-      `converts correctly ${testcase.seconds}s to time`
+      time.convertSecondsToTime(testCase.seconds),
+      {h, m, s},
+      `converts correctly ${testCase.seconds}s to time`
     )
-  }, testcases)
+  }, testCases)
 
   t.end()
 })

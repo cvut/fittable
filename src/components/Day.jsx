@@ -6,8 +6,6 @@ import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import moment from 'moment'
 
-import { weekdayNum } from '../date'
-
 const propTypes = {
   id: PropTypes.number.isRequired,
   dayNum: PropTypes.number.isRequired,

@@ -14,7 +14,9 @@ export default function HourLabel ({position, length, layout, children}) {
     }
   }
 
-  return <div className="HourLabel" style={style}>
-    {children}
+  return (
+    <div className="HourLabel" style={style}>
+      {children}
     </div>
+  )
 }

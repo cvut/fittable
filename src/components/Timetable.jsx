@@ -5,7 +5,6 @@
 import React, { PropTypes } from 'react'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import R from 'ramda'
-import moment from 'moment'
 import { grid as gridPropType } from '../constants/propTypes'
 
 import { weekdayNum, dateInFuture, compareDate } from '../date'
@@ -52,12 +51,12 @@ function calculateEvents (events, timeline) {
 }
 
 function createHourLabels (timeline, layout) {
-  console.log(timeline)
-  return calculateHourLabels(timeline).map((label) => {
-    console.log(label)
-    return <HourLabel key={label.id} position={label.position} length={label.length} layout={layout}>
-      {label.label}
-    </HourLabel>
+  calculateHourLabels(timeline).map((label) => {
+    return (
+      <HourLabel key={label.id} position={label.position} length={label.length} layout={layout}>
+        {label.label}
+      </HourLabel>
+    )
   })
 }
 
@@ -65,9 +64,17 @@ function createDays (props, dayCount, events, eventsfn, animationDirection) {
   const groupedEvents = groupEventsByDays(events)
 
   return R.times((n) => {
+    let dayEvents = ''
+    if (n in groupedEvents) {
+      dayEvents = createDayEvents(groupedEvents[0], props, animationDirection)
+    }
+
     return (
-      <Day id={n} key={'day-' + n} dayNum={dateInFuture(props.viewDate, n)} viewDate={props.viewDate}>
-        {(n in groupedEvents) ? eventsfn(groupedEvents[n], props, animationDirection) : ''}
+      <Day id={n}
+           key={'day-' + n}
+           dayNum={dateInFuture(props.viewDate, n)}
+           viewDate={props.viewDate}>
+        {dayEvents}
       </Day>
     )
   }, dayCount)
@@ -137,9 +144,15 @@ class Timetable extends React.Component {
 
   render () {
     const timeline = createTimeline(this.props.grid)
-    const layout = this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize) ? 'horizontal': 'vertical'
 
+    let layout
     let events = this.props.weekEvents
+
+    if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
+      layout = 'horizontal'
+    } else {
+      layout = 'vertical'
+    }
 
     // Find overlapping events
     events = calculateOverlap(events)
@@ -152,7 +165,7 @@ class Timetable extends React.Component {
 
     // Create days
     const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
-    const days = createDays(this.props, dayCount, events, createDayEvents, this.state.animationDirection)
+    const days = createDays(this.props, dayCount, events, this.state.animationDirection)
 
     // Classes by properties
     let className = mapPropertiesToClass({

@@ -41,7 +41,7 @@ export function calculateHourLabels (timeline) {
 export function mapPropertiesToClass (properties, elementClass) {
   let className = elementClass + ' '
 
-  for (let property in properties) {
+  for (const property in properties) {
     if (!properties[property] || !property.startsWith('is')) {
       continue
     }
@@ -78,7 +78,7 @@ export function calculateOverlap (events) {
     }
   }
 
-  let sortedevents = R.sort(sortByStart, events)
+  const sortedevents = R.sort(sortByStart, events)
   let overlap = []
 
   function markOverlayedEvents (events) {
@@ -112,7 +112,7 @@ export function calculateOverlap (events) {
   return sortedevents
 }
 
-export function eventAppearance(event) {
+export function eventAppearance (event) {
   let className = 'regular'
 
   if (event._overlaps >= 3) {

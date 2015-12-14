@@ -135,10 +135,6 @@ const FittableContainer = React.createClass({
     this.props.onSearchRequest(this.props.callbacks.search, query)
   },
 
-  showDetailOn (key) {
-    this.props.onEventDisplay(key)
-  },
-
   render () {
     // FIXME: side effects!!!
     const { locale, layout, fullWeek, eventsColors, facultyGrid } = this.props.settings
@@ -212,7 +208,7 @@ const FittableContainer = React.createClass({
           error={error}
           errorVisible={errorVisible}
           onErrorHide={this.props.onErrorHide}
-          onDetailShow={this.showDetailOn}
+          onDetailShow={this.props.onEventDisplay}
         />
         <Footer
           userName={this.props.user.name || this.props.user.id}
