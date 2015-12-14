@@ -26,12 +26,10 @@ class ViewDate extends React.Component {
   }
 
   render () {
-    const weekParity = this.weekParity(this.props.weekParity)
-
     const weekText = CP.translate('weekNav.week_' + this.props.weekType,
       {
         weeknum: this.props.weekNum,
-        parity: weekParity,
+        parity: this.weekParity(this.props.weekParity),
         fallback: ' ',
       })
 
