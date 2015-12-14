@@ -10,7 +10,7 @@ import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
-import { shiftDate, isWeekend } from '../date'
+import { shiftDate } from '../date'
 import { semester as semesterType } from '../constants/propTypes'
 
 const propTypes = {
@@ -65,7 +65,6 @@ class Controls extends React.Component {
   }
 
   render () {
-
     return (
       <div className="header">
         <WeekNav
@@ -81,7 +80,7 @@ class Controls extends React.Component {
           onDateChange={this.props.onDateChange}
           semester={this.props.semester}
         />
-        <ViewDate weekNum={this.props.weekNum} weekParity={this.props.weekParity} weekType={this.props.weekType} />
+        <ViewDate viewDate={this.props.viewDate} semester={this.props.semester} />
         <FunctionsBar onPanelToggle={this.props.onSettingsPanelChange} />
       </div>
     )
