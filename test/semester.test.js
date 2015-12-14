@@ -213,3 +213,31 @@ test('periodWeekParity()', t => {
 
   t.end()
 })
+
+
+test('weekProperties()', t => {
+  const semester = {
+    startsOn: '2015-10-01',
+    endsOn: '2016-02-22',
+    periods: [
+      {ends_at: '2015-12-22', first_week_parity: 'even', starts_at: '2015-10-01', type: 'teaching'},
+      {ends_at: '2015-12-31', first_week_parity: 'even', starts_at: '2015-12-23', type: 'holidays'},
+    ],
+  }
+
+  ;[
+    { viewDate: new Date('2015-12-14'), weekParity: 'odd', weekNum: 11, weekType: 'teaching' },
+    { viewDate: new Date('2015-12-21'), weekParity: 'even', weekNum: 12, weekType: 'teaching' },
+    { viewDate: new Date('2015-12-28'), weekParity: 'odd', weekNum: 13, weekType: 'holidays' },
+  ].forEach(({viewDate, weekParity, weekNum, weekType}) => {
+    const weekProps = s.weekProperties(viewDate, semester)
+    t.deepEqual(weekProps, {weekParity, weekNum, weekType},
+                'test if week properties for ' + viewDate + ' are correct')
+  })
+
+  const outofrangeExpected = { weekParity: null, weekNum: null, weekType: null }
+  t.deepEqual(s.weekProperties(new Date('2020-01-01'), semester), outofrangeExpected,
+              'test week properties for viewDate out of range')
+
+  t.end()
+})
