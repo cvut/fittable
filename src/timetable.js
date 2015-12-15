@@ -2,9 +2,6 @@ import R from 'ramda'
 import moment from 'moment'
 import { setDateToZeroTime, weekdayNum } from './date'
 
-const isTruthy = Boolean
-const startsWith = R.flip(String.startsWith)
-
 export function createTimeline (grid) {
   return {
     start: grid.starts * 3600,
@@ -42,13 +39,14 @@ export function calculateHourLabels (timeline) {
 }
 
 export function mapPropertiesToClass (properties, elementClass) {
-  return R.pipe(
-    R.pickBy(isTruthy),
-    R.keys,
-    R.filter(startsWith('is')),
-    R.map(key => key.substr(2).toLowerCase()),
-    R.reduce((className, key) => `${className} ${elementClass}--${key}`, elementClass)
-  )(properties)
+  const className = (key) => `${elementClass}--${key.substr(2).toLowerCase()}`
+
+  return R.reduce((acc, key) => {
+    if (key.startsWith('is') && !!properties[key]) {
+      return `${acc} ${className(key)}`
+    }
+    return acc
+  }, elementClass, R.keys(properties))
 }
 
 export function groupEventsByDays (events) {
