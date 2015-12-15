@@ -49,14 +49,10 @@ export function mapPropertiesToClass (properties, elementClass) {
   }, elementClass, R.keys(properties))
 }
 
-export function groupEventsByDays (events) {
-  const groupByWeekday = R.groupBy((event) => {
-    const startD = new Date(event.startsAt)
-    return weekdayNum(startD)
-  })
-
-  return groupByWeekday(events)
-}
+// groupEventsByDays :: [Event] -> {String: [Event]}
+export const groupEventsByDays = R.groupBy(event => {
+  return weekdayNum(new Date(event.startsAt))
+})
 
 export function calculateOverlap (events) {
   let lastend = moment(0)
