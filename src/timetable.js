@@ -28,14 +28,12 @@ export function calculateEventPosition (event, timeline) {
 }
 
 export function calculateHourLabels (timeline) {
-  return R.times((n) => {
-    return {
-      id: 'hlbl-' + n,
-      label: timeline.firstHour + n,
-      position: (n + timeline.offset) / timeline.hours,
-      length: (1 / timeline.hours),
-    }
-  }, Math.ceil(timeline.hours))
+  return R.times(n => ({
+    id: 'hlbl-' + n,
+    label: timeline.firstHour + n,
+    position: (n + timeline.offset) / timeline.hours,
+    length: (1 / timeline.hours),
+  }), Math.ceil(timeline.hours))
 }
 
 export function mapPropertiesToClass (properties, elementClass) {
