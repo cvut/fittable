@@ -64,9 +64,13 @@ export function withinDates (min, max, date) {
   return mDate.isBetween(min, max, 'day') || mDate.isSame(min, 'day') || mDate.isSame(max, 'day')
 }
 
-export function setDateToZeroTime(date) {
+export function setDateToZeroTime (date) {
   date.setHours(0)
   date.setMinutes(0)
   date.setSeconds(0)
   return date
+}
+
+export function weekStart (date) {
+  return moment(date).startOf('isoWeek')
 }
