@@ -72,5 +72,5 @@ export function setDateToZeroTime (date) {
 }
 
 export function weekStart (date) {
-  return moment(date).startOf('isoWeek')
+  return moment(date).startOf('isoWeek').toDate()
 }

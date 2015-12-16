@@ -128,3 +128,14 @@ test('setDateToZeroTime', t => {
   t.deepEqual(date.setDateToZeroTime(d), new Date('2015-09-03 00:00:00'), 'sets date to zero time')
   t.end()
 })
+
+test('weekStart', t => {
+  const actual = new Date('2015-12-16 00:00:00')
+  const actual2 = new Date('2015-12-14 00:00:00')
+  const expected = new Date('2015-12-14 00:00:00')
+
+  t.deepEqual(date.weekStart(actual), expected, 'returns 2015-12-14 as start of the week for 2015-12-16')
+  t.deepEqual(date.weekStart(actual2), expected, 'returns 2015-12-14 as start of the week for 2015-12-14')
+
+  t.end()
+})
