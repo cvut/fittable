@@ -224,13 +224,14 @@ test('weekProperties()', t => {
     ],
   }
 
-  ;[
-    { viewDate: new Date('2015-12-14'), weekParity: 'odd', weekNum: 11, weekType: 'teaching' },
-    { viewDate: new Date('2015-12-21'), weekParity: 'even', weekNum: 12, weekType: 'teaching' },
-    { viewDate: new Date('2015-12-28'), weekParity: 'odd', weekNum: 13, weekType: 'holidays' },
-  ].forEach(({viewDate, weekParity, weekNum, weekType}) => {
-    const actual = s.weekProperties(viewDate, semester)
-    const expected = {weekParity, weekNum, weekType}
+  ;[//viewDate,    weekParity, weekNum, weekType
+    ['2015-12-14', 'odd',      11,      'teaching'],
+    ['2015-12-21', 'even',     12,      'teaching'],
+    ['2015-12-28', 'odd',      13,      'holidays'],
+  ].forEach(([viewDate, weekParity, weekNum, weekType]) => {
+    const expected = { weekParity, weekNum, weekType }
+    const actual = s.weekProperties(new Date(viewDate), semester)
+
     t.deepEqual(actual, expected, `test if week properties for ${viewDate} are correct`)
   })
 
