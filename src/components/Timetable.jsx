@@ -10,8 +10,10 @@ import { grid as gridPropType } from '../constants/propTypes'
 import { weekdayNum, shiftDate, compareDate } from '../date'
 import { convertSecondsToTime } from '../time'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
-import { createTimeline, calculateEventPosition, calculateHourLabels, mapPropertiesToClass,
-  groupEventsByDays, calculateOverlap, eventAppearance } from '../timetable'
+import {
+  createTimeline, calculateEventPosition, calculateHourLabels, mapPropertiesToClass,
+  groupEventsByDays, calculateOverlap, eventAppearance,
+} from '../timetable'
 
 import Day from './Day'
 import NowIndicator from './NowIndicator'
@@ -108,14 +110,19 @@ function createDayEvents (props, animationDirection, events) {
   ))
 
   return (
-    <CSSTransitionGroup transitionName={'anim' + animationDirection} transitionAppear={true}
-                        transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppearTimeout={250}>
+    <CSSTransitionGroup
+      transitionName={'anim' + animationDirection}
+      transitionAppear
+      transitionEnterTimeout={250}
+      transitionLeaveTimeout={250}
+      transitionAppearTimeout={250}
+    >
       {eventComponents}
     </CSSTransitionGroup>
   )
 }
 
-function numberToDirection(number) {
+function numberToDirection (number) {
   const directions = ['left', 'none', 'right']
   return directions[number + 1]
 }
