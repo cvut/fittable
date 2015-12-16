@@ -38,7 +38,7 @@ const propTypes = {
   screenSize: PropTypes.number,
 }
 
-function calculateEvents (events, timeline) {
+function calculateEvents (timeline, events) {
   return R.map((event) => {
     const {position, length} = calculateEventPosition(event, timeline)
     return {
@@ -50,7 +50,7 @@ function calculateEvents (events, timeline) {
   }, events)
 }
 
-function createHourLabels (timeline, layout) {
+function createHourLabels (layout, timeline) {
   calculateHourLabels(timeline).map((label) => {
     return (
       <HourLabel key={label.id} position={label.position} length={label.length} layout={layout}>
@@ -60,13 +60,13 @@ function createHourLabels (timeline, layout) {
   })
 }
 
-function createDays (props, dayCount, events, animationDirection) {
+function createDays (props, dayCount, animationDirection, events) {
   const groupedEvents = groupEventsByDays(events)
 
   return R.times((n) => {
     let dayEvents = ''
     if (n in groupedEvents) {
-      dayEvents = createDayEvents(groupedEvents[0], props, animationDirection)
+      dayEvents = createDayEvents(props, animationDirection, groupedEvents[0])
     }
 
     return (
@@ -80,7 +80,7 @@ function createDays (props, dayCount, events, animationDirection) {
   }, dayCount)
 }
 
-function createDayEvents (events, props, animationDirection) {
+function createDayEvents (props, animationDirection, events) {
   const eventComponents = R.map((event) => {
     if (!props.displayFilter[event.type]) {
       event._appear = 'hide'
@@ -158,14 +158,14 @@ class Timetable extends React.Component {
     events = calculateOverlap(events)
 
     // Calculate their positions, lengths and appearance
-    events = calculateEvents(events, timeline)
+    events = calculateEvents(timeline, events)
 
     // Create hour labels
-    const hourLabels = createHourLabels(timeline, layout)
+    const hourLabels = createHourLabels(layout, timeline)
 
     // Create days
     const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
-    const days = createDays(this.props, dayCount, events, this.state.animationDirection)
+    const days = createDays(this.props, dayCount, this.state.animationDirection, events)
 
     // Classes by properties
     let className = mapPropertiesToClass({
