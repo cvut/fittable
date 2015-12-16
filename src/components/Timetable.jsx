@@ -63,21 +63,20 @@ function createHourLabels (layout, timeline) {
 function createDays (props, dayCount, animationDirection, events) {
   const groupedEvents = groupEventsByDays(events)
 
-  return R.times((n) => {
-    let dayEvents = ''
+  const dayEvents = (n) => {
     if (n in groupedEvents) {
-      dayEvents = createDayEvents(props, animationDirection, groupedEvents[n])
+      return createDayEvents(props, animationDirection, groupedEvents[n])
     }
+  }
 
-    return (
-      <Day id={n}
-           key={'day-' + n}
-           dayNum={shiftDate(props.viewDate, 'days', n).getDate()}
-           viewDate={props.viewDate}>
-        {dayEvents}
-      </Day>
-    )
-  }, dayCount)
+  return R.times(n => (
+    <Day id={n}
+         key={'day-' + n}
+         dayNum={shiftDate(props.viewDate, 'days', n).getDate()}
+         viewDate={props.viewDate}>
+      {dayEvents(n) || ''}
+    </Day>
+  ), dayCount)
 }
 
 function createDayEvents (props, animationDirection, events) {
