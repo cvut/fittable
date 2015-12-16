@@ -36,7 +36,7 @@ export function isoWeekRange (date) {
   return weekRange(date).map(d => isoDate(d))
 }
 
-export const shiftDate = R.curry(function shiftDate (baseDate, kind, offset) {
+export const shiftDate = R.curry((baseDate, kind, offset) => {
   return moment.tz(baseDate, TZ).add(offset, kind).toDate()
 })
 
