@@ -40,8 +40,9 @@ const propTypes = {
   screenSize: PropTypes.number,
 }
 
-function calculateEvents (timeline, events) {
-  return R.map((event) => {
+// Calculate events positions, lengths and appearance.
+const calculateEvents = R.curry((timeline, events) => {
+  return R.map(event => {
     const {position, length} = calculateEventPosition(event, timeline)
     return {
       ...event,
@@ -50,7 +51,7 @@ function calculateEvents (timeline, events) {
       _appear: eventAppearance(event),
     }
   }, events)
-}
+})
 
 function createHourLabels (layout, timeline) {
   return R.map(label => (
@@ -60,51 +61,53 @@ function createHourLabels (layout, timeline) {
   ), calculateHourLabels(timeline))
 }
 
-function createDays (props, dayCount, animationDirection, events) {
+const createDays = R.curry((props, dayCount, animationDirection, events) => {
   const groupedEvents = groupEventsByDays(events)
   const viewDateWeekStart = weekStartDate(props.viewDate)
 
-  return R.times((n) => {
-    let dayEvents = ''
+  const dayEvents = (n) => {
     if (n in groupedEvents) {
-      dayEvents = createDayEvents(props, animationDirection, groupedEvents[n])
+      return createDayEvents(props, animationDirection, groupedEvents[n])
     }
+    return null
+  }
 
-    return (
-      <Day id={n}
-           key={'day-' + n}
-           dayNum={shiftDate(viewDateWeekStart, 'days', n).getDate()}
-           viewDate={props.viewDate}>
-        {dayEvents}
-      </Day>
-    )
-  }, dayCount)
-}
+  return R.times(n => (
+    <Day id={n}
+         key={'day-' + n}
+         dayNum={shiftDate(viewDateWeekStart, 'days', n).getDate()}
+         viewDate={props.viewDate}>
+      {dayEvents(n)}
+    </Day>
+  ), dayCount)
+})
 
 function createDayEvents (props, animationDirection, events) {
-  const eventComponents = R.map((event) => {
+  // warn: mutates the given value!
+  const hideFilteredEvent = (event) => {
     if (!props.displayFilter[event.type]) {
       event._appear = 'hide'
     }
+    return event
+  }
 
-    /* fixme: passing too many props to eventbox */
-    return (
-      <EventBox
-        key={event.id}
-        data={event}
-        detailShown={event.id === props.eventId}
-        onClick={props.onDetailShow}
-        openFromBottom={event.id >= 3}
-        colored={props.colored}
-        onViewChange={props.onViewChange}
-        onDateChange={props.onDateChange}
-        onDetailShow={props.onDetailShow}
-        linkNames={props.linkNames}
-        layout={props.layout}
-        screenSize={props.screenSize}
-        />
-    )
-  }, events)
+  const eventComponents = events.map(event => (
+    // FIXME: passing too many props to eventbox
+    <EventBox
+      key={event.id}
+      data={hideFilteredEvent(event)}
+      detailShown={event.id === props.eventId}
+      onClick={props.onDetailShow}
+      openFromBottom={event.id >= 3}
+      colored={props.colored}
+      onViewChange={props.onViewChange}
+      onDateChange={props.onDateChange}
+      onDetailShow={props.onDetailShow}
+      linkNames={props.linkNames}
+      layout={props.layout}
+      screenSize={props.screenSize}
+    />
+  ))
 
   return (
     <CSSTransitionGroup
@@ -149,29 +152,17 @@ class Timetable extends React.Component {
   }
 
   render () {
+    const layout = isScreenLarge(this.props.screenSize) ? this.props.layout : 'vertical'
+    const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
+
     const timeline = createTimeline(this.props.grid)
-
-    let layout
-    let events = this.props.weekEvents
-
-    if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
-      layout = 'horizontal'
-    } else {
-      layout = 'vertical'
-    }
-
-    // Find overlapping events
-    events = calculateOverlap(events)
-
-    // Calculate their positions, lengths and appearance
-    events = calculateEvents(timeline, events)
-
-    // Create hour labels
     const hourLabels = createHourLabels(layout, timeline)
 
-    // Create days
-    const dayCount = (this.props.days7 || isScreenSmall(this.props.screenSize) ? 7 : 5)
-    const days = createDays(this.props, dayCount, this.state.animationDirection, events)
+    const days = R.pipe(
+      calculateOverlap,
+      calculateEvents(timeline),
+      createDays(this.props, dayCount, this.state.animationDirection)
+    )(this.props.weekEvents)
 
     // Classes by properties
     let className = classModifiers({
@@ -198,8 +189,7 @@ class Timetable extends React.Component {
     const timelineOffset = timeline.offset
 
     return (
-      <div className={className} ref="rootEl"
-      >
+      <div className={className} ref="rootEl">
         <div className="grid-overlay" onClick={this.onClickOutside.bind(this)}>
           <div className="grid-wrapper">
             {/* fixme: change props to only layout, timeline and color */}
