@@ -7,7 +7,7 @@ import CSSTransitionGroup from 'react-addons-css-transition-group'
 import R from 'ramda'
 import { grid as gridPropType } from '../constants/propTypes'
 
-import { weekdayNum, shiftDate, compareDate, weekStart } from '../date'
+import { weekdayNum, shiftDate, compareDate, weekStartDate } from '../date'
 import { convertSecondsToTime } from '../time'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import {
@@ -63,14 +63,13 @@ function createHourLabels (layout, timeline) {
 
 const createDays = R.curry((props, dayCount, animationDirection, events) => {
   const groupedEvents = groupEventsByDays(events)
+  const viewDateWeekStart = weekStartDate(props.viewDate)
 
   const dayEvents = (n) => {
     if (n in groupedEvents) {
       return createDayEvents(props, animationDirection, groupedEvents[n])
     }
   }
-
-  const viewDateWeekStart = weekStart(props.viewDate)
 
   return R.times(n => (
     <Day id={n}
