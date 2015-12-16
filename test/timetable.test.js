@@ -44,31 +44,16 @@ test('calculateEventPosition()', t => {
     offset: 0,
   }
 
-  function timeToDate (h, m, s) {
-    return `1970-01-01 ${h}:${m}:${s}`
-  }
+  ;[//startsAt,  endsAt,     position, length
+    ['07:30:00', '21:15:00', 0,        1   ],
+    ['14:22:30', '21:15:00', 0.5,      0.5 ],
+    ['14:22:30', '17:48:45', 0.5,      0.25],
+  ].forEach(([startsAt, endsAt, position, length]) => {
+    const event = {startsAt: `1970-01-01 ${startsAt}`, endsAt: `1970-01-01 ${endsAt}`}
+    const expected = {position, length}
 
-  const events = [
-    {
-      startsAt: timeToDate(7, 30, 0),
-      endsAt: timeToDate(21, 15, 0),
-      expected: { position: 0, length: 1 },
-    },
-    {
-      startsAt: timeToDate(14, 22, 30),
-      endsAt: timeToDate(21, 15, 0),
-      expected: { position: 0.5, length: 0.5 },
-    },
-    {
-      startsAt: timeToDate(14, 22, 30),
-      endsAt: timeToDate(17, 48, 45),
-      expected: { position: 0.5, length: 0.25 },
-    },
-  ]
-
-  R.forEach(event => {
-    t.deepEqual(tt.calculateEventPosition(event, timeline), event.expected, 'calculates correct event position')
-  }, events)
+    t.deepEqual(tt.calculateEventPosition(event, timeline), expected, 'calculates correct event position')
+  })
 
   t.end()
 })
