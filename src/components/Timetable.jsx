@@ -81,29 +81,31 @@ const createDays = R.curry((props, dayCount, animationDirection, events) => {
 })
 
 function createDayEvents (props, animationDirection, events) {
-  const eventComponents = R.map((event) => {
+  // warn: mutates the given value!
+  const hideFilteredEvent = (event) => {
     if (!props.displayFilter[event.type]) {
       event._appear = 'hide'
     }
+    return event
+  }
 
-    /* fixme: passing too many props to eventbox */
-    return (
-      <EventBox
-        key={event.id}
-        data={event}
-        detailShown={event.id === props.eventId}
-        onClick={props.onDetailShow}
-        openFromBottom={event.id >= 3}
-        colored={props.colored}
-        onViewChange={props.onViewChange}
-        onDateChange={props.onDateChange}
-        onDetailShow={props.onDetailShow}
-        linkNames={props.linkNames}
-        layout={props.layout}
-        screenSize={props.screenSize}
-        />
-    )
-  }, events)
+  const eventComponents = events.map(event => (
+    // FIXME: passing too many props to eventbox
+    <EventBox
+      key={event.id}
+      data={hideFilteredEvent(event)}
+      detailShown={event.id === props.eventId}
+      onClick={props.onDetailShow}
+      openFromBottom={event.id >= 3}
+      colored={props.colored}
+      onViewChange={props.onViewChange}
+      onDateChange={props.onDateChange}
+      onDetailShow={props.onDetailShow}
+      linkNames={props.linkNames}
+      layout={props.layout}
+      screenSize={props.screenSize}
+    />
+  ))
 
   return (
     <CSSTransitionGroup transitionName={'anim' + animationDirection} transitionAppear={true}
