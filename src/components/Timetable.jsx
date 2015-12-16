@@ -60,7 +60,7 @@ function createHourLabels (timeline, layout) {
   })
 }
 
-function createDays (props, dayCount, events, eventsfn, animationDirection) {
+function createDays (props, dayCount, events, animationDirection) {
   const groupedEvents = groupEventsByDays(events)
 
   return R.times((n) => {
