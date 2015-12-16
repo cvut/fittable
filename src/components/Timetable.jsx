@@ -66,7 +66,7 @@ function createDays (props, dayCount, animationDirection, events) {
   return R.times((n) => {
     let dayEvents = ''
     if (n in groupedEvents) {
-      dayEvents = createDayEvents(props, animationDirection, groupedEvents[0])
+      dayEvents = createDayEvents(props, animationDirection, groupedEvents[n])
     }
 
     return (
