@@ -54,13 +54,11 @@ const calculateEvents = R.curry((timeline, events) => {
 })
 
 function createHourLabels (layout, timeline) {
-  calculateHourLabels(timeline).map((label) => {
-    return (
-      <HourLabel key={label.id} position={label.position} length={label.length} layout={layout}>
-        {label.label}
-      </HourLabel>
-    )
-  })
+  return R.map(label => (
+    <HourLabel key={label.id} position={label.position} length={label.length} layout={layout}>
+      {label.label}
+    </HourLabel>
+  ), calculateHourLabels(timeline))
 }
 
 const createDays = R.curry((props, dayCount, animationDirection, events) => {
