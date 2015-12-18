@@ -5,9 +5,11 @@ import createStore from './store'
 import FittableContainer from './containers/FittableContainer'
 import * as callbacks from './callbacks'
 import { browserLanguage } from './client'
+import { initialState as settingsInitialState } from './reducers/settingsReducer'
 
 const initialState = {
   settings: {
+    ...settingsInitialState,
     locale: browserLanguage(window.navigator.userLanguage || window.navigator.language),
   },
 }

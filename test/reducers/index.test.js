@@ -16,17 +16,6 @@ test('Initial state', t => {
   t.end()
 })
 
-test('Settings change', t => {
-  const action = {
-    type: actionTypes.SETTINGS_CHANGE,
-    settings: {locale: 'en', layout: 'vertical'},
-  }
-  const settings = reducer(undefined, action).settings
-  t.equal(settings.locale, 'en')
-  t.equal(settings.layout, 'vertical')
-  t.end()
-})
-
 test('displayFilters change', t => {
   const action = {
     type: actionTypes.DISPLAY_FILTERS_CHANGE,

@@ -3,7 +3,7 @@ import { merge } from 'ramda'
 
 import { routerStateReducer } from 'redux-router'
 
-import { SETTINGS_CHANGE, DISPLAY_FILTERS_CHANGE } from '../constants/actionTypes'
+import { DISPLAY_FILTERS_CHANGE } from '../constants/actionTypes'
 
 import data from './dataReducer'
 import ui from './uiReducer'
@@ -11,14 +11,7 @@ import search from './searchReducer'
 import semester from './semesterReducer'
 import client from './clientReducer'
 import user from './userReducer'
-
-const initialSettings = {
-  locale: 'cs',
-  layout: 'vertical',
-  eventsColors: false,
-  fullWeek: false,
-  facultyGrid: false,
-}
+import settings from './settingsReducer'
 
 const initialDisplayFilters = {
 /*eslint-disable */
@@ -30,15 +23,6 @@ const initialDisplayFilters = {
   course_event: true,
   other: true,
 /*eslint-enable */
-}
-
-function settings (state = initialSettings, action) {
-  switch (action.type) {
-    case SETTINGS_CHANGE:
-      return merge(state, action.settings)
-    default:
-      return state
-  }
 }
 
 function displayFilters (state = initialDisplayFilters, action) {
