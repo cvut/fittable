@@ -126,6 +126,7 @@ test('setDateToZeroTime', t => {
   const d = new Date('2015-09-03 15:00:00')
 
   t.deepEqual(date.setDateToZeroTime(d), new Date('2015-09-03 00:00:00'), 'sets date to zero time')
+  t.notDeepEqual(date.setDateToZeroTime(d), d, 'test if function returns new object')
   t.end()
 })
 

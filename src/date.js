@@ -65,10 +65,11 @@ export function withinDates (min, max, date) {
 }
 
 export function setDateToZeroTime (date) {
-  date.setHours(0)
-  date.setMinutes(0)
-  date.setSeconds(0)
-  return date
+  const newDate = new Date(date)
+  newDate.setHours(0)
+  newDate.setMinutes(0)
+  newDate.setSeconds(0)
+  return newDate
 }
 
 export function weekStartDate (date) {
