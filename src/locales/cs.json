@@ -88,8 +88,7 @@
   },
 
   "timetable": {
-    "actual": "Aktuální týden",
-    "actual_day": "Dnes je %(day)s"
+    "actual": "Aktuální týden"
   },
 
   "detail": {

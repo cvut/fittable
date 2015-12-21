@@ -88,8 +88,7 @@
   },
 
   "timetable": {
-    "actual": "Actual week",
-    "actual_day": "Today is %(day)s"
+    "actual": "Actual week"
   },
 
   "detail": {
