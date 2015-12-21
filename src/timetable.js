@@ -36,7 +36,7 @@ export function calculateHourLabels (timeline) {
   }), Math.ceil(timeline.hours))
 }
 
-export function mapPropertiesToClass (properties, elementClass) {
+export function classModifiers (properties, elementClass) {
   const className = (key) => `${elementClass}--${key.substr(2).toLowerCase()}`
 
   return R.reduce((acc, key) => {

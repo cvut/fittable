@@ -11,7 +11,7 @@ import { weekdayNum, shiftDate, compareDate, weekStartDate } from '../date'
 import { convertSecondsToTime } from '../time'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import {
-  createTimeline, calculateEventPosition, calculateHourLabels, mapPropertiesToClass,
+  createTimeline, calculateEventPosition, calculateHourLabels, classModifiers,
   groupEventsByDays, calculateOverlap, eventAppearance,
 } from '../timetable'
 
@@ -163,7 +163,7 @@ class Timetable extends React.Component {
     )(this.props.weekEvents)
 
     // Classes by properties
-    let className = mapPropertiesToClass({
+    let className = classModifiers({
       isMuted: this.props.eventId !== null,
       isCut: this.props.functionsOpened !== null && isScreenLarge(this.props.screenSize),
       is7days: this.props.days7,

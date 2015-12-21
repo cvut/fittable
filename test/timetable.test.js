@@ -106,7 +106,7 @@ test('calculateHourLabels()', t => {
   t.end()
 })
 
-test('mapPropertiesToClass()', t => {
+test('classModifiers()', t => {
   const properties = {
     isProperty: true,
     isLoremIpsum: false,
@@ -117,7 +117,7 @@ test('mapPropertiesToClass()', t => {
 
   const expected = 'class class--property class--dolorsitamet'
 
-  t.equal(tt.mapPropertiesToClass(properties, 'class'), expected, 'returns properties transformed to classname')
+  t.equal(tt.classModifiers(properties, 'class'), expected, 'returns properties transformed to classname')
   t.end()
 })
 
