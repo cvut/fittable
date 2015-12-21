@@ -7,17 +7,16 @@ import CP from 'counterpart'
 import moment from 'moment'
 
 const propTypes = {
-  id: PropTypes.number.isRequired,
-  dayNum: PropTypes.number.isRequired,
+  date: PropTypes.instanceOf(moment),
   viewDate: PropTypes.instanceOf(Date),
 }
 
 class Day extends React.Component {
 
   render () {
-    const thisDay = moment(this.props.viewDate).isoWeekday(parseInt(this.props.id, 10) + 1)
-    const isToday = moment(thisDay).isSame(moment(), 'days')
-    const isSelected = moment(thisDay).isSame(moment(this.props.viewDate), 'days')
+    const date = this.props.date
+    const isToday = date.isSame(moment(), 'days')
+    const isSelected = date.isSame(this.props.viewDate, 'days')
     const className = `day ${isToday ? 'active' : ''} ${isSelected ? 'selected' : ''}`
 
     let dayTitle = ''
@@ -26,11 +25,11 @@ class Day extends React.Component {
     }
 
     return (
-      <div className={className} data-day={this.props.id}>
+      <div className={className}>
         <div className="label" title={dayTitle}>
           <div className="label-wrap">
-            <span className="day-num">{this.props.dayNum}</span>
-            <span className="day-name">{thisDay.format('dddd')}</span>
+            <span className="day-num">{date.getDate()}</span>
+            <span className="day-name">{date.format('dddd')}</span>
           </div>
         </div>
         <div className="events" ref="events">
