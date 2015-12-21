@@ -3,7 +3,6 @@
  */
 
 import React, { PropTypes } from 'react'
-import CP from 'counterpart'
 import moment from 'moment'
 
 const propTypes = {
@@ -19,14 +18,9 @@ class Day extends React.Component {
     const isSelected = date.isSame(this.props.viewDate, 'days')
     const className = `day ${isToday ? 'active' : ''} ${isSelected ? 'selected' : ''}`
 
-    let dayTitle = ''
-    if (this.props.active) {
-      dayTitle = CP.translate('timetable.actual_day', {day: weekDay})
-    }
-
     return (
       <div className={className}>
-        <div className="label" title={dayTitle}>
+        <div className="label">
           <div className="label-wrap">
             <span className="day-num">{date.getDate()}</span>
             <span className="day-name">{date.format('dddd')}</span>
