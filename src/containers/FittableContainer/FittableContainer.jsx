@@ -208,6 +208,7 @@ const FittableContainer = React.createClass({
           error={error}
           errorVisible={errorVisible}
           onErrorHide={this.props.onErrorHide}
+          onDetailShow={this.props.onEventDisplay}
         />
         <Footer
           userName={this.props.user.name || this.props.user.id}
