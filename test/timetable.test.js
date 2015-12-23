@@ -164,12 +164,12 @@ test('calculateOverlap()', t => {
     ['2015-12-05 15:00:00', '2015-12-05 20:30:00', false, 0],
   ]
 
-  const events = R.map(([startsAt, endsAt]) => {
-    return {
+  const events = R.map(([startsAt, endsAt]) => (
+    {
       startsAt,
       endsAt,
     }
-  }, expected)
+  ), expected)
 
   const actual = tt.calculateOverlap(events)
   t.equal(events.length, actual.length, 'length of events and overlapped events have to be equal')
