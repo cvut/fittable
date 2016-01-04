@@ -12,18 +12,14 @@ const PeriodicUpdate = createClass({
 
   displayName: 'PeriodicUpdate',
 
-  getDefaultProps () {
-    return {
-      period: 1000,
-    }
-  },
+  getDefaultProps: () => ({
+    period: 1000, // timeOut period in ms
+  }),
 
-  getInitialState () {
-    return {
-      currentDate: now(),
-      timeoutObject: null,
-    }
-  },
+  getInitialState: () => ({
+    currentDate: now(),
+    timeoutObject: null,
+  }),
 
   componentDidMount () {
     this.setState({ timeoutObject: global.setTimeout(this.updateDate, this.props.period) })
