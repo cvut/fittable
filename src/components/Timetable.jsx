@@ -235,7 +235,7 @@ class Timetable extends React.Component {
             timeline={ timeline }
             viewDate={ this.props.viewDate }
             days7={ this.props.days7 }
-            horizontalLayout={isGridHorizontal}
+            horizontalLayout={ isGridHorizontal }
             screenSize={ this.props.screenSize }
             selectedDay={ selectedDay }
           />
