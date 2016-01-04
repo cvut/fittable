@@ -2,13 +2,13 @@
  * Indicator showing line representing actual point of today's time
  */
 
-import React, { PropTypes } from 'react'
+import React, from 'react'
 import moment from 'moment'
-import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
 import { isScreenMediumAndUp } from '../screen'
 
 function NowIndicator ({
     currentDate, timeline, viewDate, selectedDay, days7, screenSize, horizontalLayout }) {
+
   const now = moment(currentDate)
 
   // Distance from start of timeline in ms
