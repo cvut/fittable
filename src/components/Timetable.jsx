@@ -230,7 +230,7 @@ class Timetable extends React.Component {
             />
           </div>
         </div>
-        <PeriodicUpdate>
+        <PeriodicUpdate period={60000}>
           <NowIndicator
             timeline={ timeline }
             viewDate={ this.props.viewDate }
