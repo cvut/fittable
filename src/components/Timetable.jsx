@@ -10,6 +10,7 @@ import { weekdayNum } from '../date'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 
 import Day from './Day'
+import PeriodicUpdate from './PeriodicUpdate'
 import NowIndicator from './NowIndicator'
 import ErrorMessage from './ErrorMessage'
 import Grid from './Grid'
@@ -110,6 +111,12 @@ class Timetable extends React.Component {
       timelineHourLength = 3600000 / timelineLength
       timelineHours = timelineLength / 3600000
       timelineOffset = timelineMinutesFrom / 60
+    }
+
+    const timeline = {
+      startHour: timelineHoursFrom,
+      startMins: timelineMinutesFrom,
+      length: timelineLength,
     }
 
     // Make sure the weekEvents data are available...
@@ -223,16 +230,16 @@ class Timetable extends React.Component {
             />
           </div>
         </div>
-        <NowIndicator
-          timelineStartHour={ timelineHoursFrom }
-          timelineStartMins={ timelineMinutesFrom }
-          timelineLength={ timelineLength }
-          viewDate={ this.props.viewDate }
-          days7={ this.props.days7 }
-          layout={ this.props.layout }
-          screenSize={ this.props.screenSize }
-          selectedDay={ selectedDay }
-        />
+        <PeriodicUpdate period={60000}>
+          <NowIndicator
+            timeline={ timeline }
+            viewDate={ this.props.viewDate }
+            days7={ this.props.days7 }
+            horizontalLayout={ isGridHorizontal }
+            screenSize={ this.props.screenSize }
+            selectedDay={ selectedDay }
+          />
+        </PeriodicUpdate>
         <div
           className={daysClass}
           ref="days"
