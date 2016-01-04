@@ -2,60 +2,65 @@
  * Indicator showing line representing actual point of today's time
  */
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 import moment from 'moment'
-import { event as eventPropType } from '../constants/propTypes'
-import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
+import { isScreenMediumAndUp } from '../screen'
 
-const propTypes = {
-  timelineStartHour: PropTypes.number,
-  timelineStartMins: PropTypes.number,
-  timelineLength: PropTypes.number,
-  viewDate: PropTypes.instanceOf(Date),
-  selectedDay: PropTypes.number,
-  days7: PropTypes.bool,
-  layout: PropTypes.string,
-  screenSize: PropTypes.number,
-}
+function NowIndicator ({
+    currentDate, timeline, viewDate, selectedDay, days7, screenSize, horizontalLayout }) {
 
-class NowIndicator extends React.Component {
+  const now = moment(currentDate)
 
-  render () {
-    const nowpoint = moment().diff(
-      moment().hour(this.props.timelineStartHour).minutes(this.props.timelineStartMins)
+  // Distance from start of timeline in ms
+  const nowPoint = now.diff(now.clone().hour(timeline.startHour).minutes(timeline.startMins))
+
+  const dayWidth = 1 / (days7 ? 7 : 5)
+  const length = nowPoint / timeline.length
+  const currentWeekday = now.isoWeekday() - 1
+  const offset = currentWeekday * dayWidth
+
+  const displayMultipleDays = isScreenMediumAndUp(screenSize)
+
+  // Indicator will be shown if:
+  // - it is not bleeding out of the timeline (i.e. length and offset are within some percentage)
+  // - we are displaying current week
+  let shown = (length > 0 && length < 1 && offset < 1) &&
+              now.isSame(viewDate, 'isoWeek')
+
+  if (displayMultipleDays && currentWeekday !== selectedDay) {
+    shown = false
+  }
+
+  if (!shown) {
+    // XXX: stateless components cannot return null or false (for now)
+    return <noscript />
+  }
+
+  if (displayMultipleDays && horizontalLayout) {
+    return (
+      <div className="now-indicator-wrap">
+        <div className="now-indicator horizontal"
+             style={{
+               height: (dayWidth * 100) + '%',
+               width: (length * 90 + 10) + '%',
+               top: (offset * 100) + '%',
+             }}
+        />
+      </div>
     )
-    const dayWidth = 1 / (this.props.days7 ? 7 : 5)
-    const length = nowpoint / this.props.timelineLength
-    const offset = (moment().isoWeekday() - 1) * dayWidth
-    let shown = moment().isSame(this.props.viewDate, 'isoWeek') && length > 0 && length < 1 && offset < 1
-
-    // If we are on a mobile, hide the indicator when the current day isn't today.
-    if (this.props.screenSize <= MEDIUM_SCREEN && moment().isoWeekday() - 1 !== this.props.selectedDay) {
-      shown = false
-    }
-
-    if (this.props.screenSize <= MEDIUM_SCREEN ? false : this.props.layout === 'horizontal') {
-      return (
-        <div className="now-indicator-wrap">
-          <div className={`now-indicator horizontal ${shown ? '' : ' hide'}`} ref="rootEl" style={{
-          height: (dayWidth * 100) + '%', width: (length * 90 + 10) + '%', top: (offset * 100) + '%'
-        }}>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="now-indicator-wrap">
-          <div className={`now-indicator vertical ${shown ? '' : ' hide'}`} ref="rootEl" style={{
-          width: (dayWidth * 100) + '%', height: (length * 90 + 10) + '%', left: (offset * 100) + '%'
-        }}>
-          </div>
-        </div>
-      )
-    }
+  } else {
+    return (
+      <div className="now-indicator-wrap">
+        <div className="now-indicator vertical"
+             style={{
+               width: (dayWidth * 100) + '%',
+               height: (length * 90 + 10) + '%',
+               left: (offset * 100) + '%',
+             }}
+        />
+      </div>
+    )
   }
 }
-
-NowIndicator.propTypes = propTypes
 
 export default NowIndicator
