@@ -13,7 +13,7 @@ const PeriodicUpdate = createClass({
   displayName: 'PeriodicUpdate',
 
   getDefaultProps: () => ({
-    period: 1000, // timeOut period in ms
+    period: 1000, // period in ms for setTimeout
   }),
 
   getInitialState: () => ({
