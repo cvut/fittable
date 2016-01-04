@@ -2,7 +2,7 @@
  * Indicator showing line representing actual point of today's time
  */
 
-import React, from 'react'
+import React from 'react'
 import moment from 'moment'
 import { isScreenMediumAndUp } from '../screen'
 
