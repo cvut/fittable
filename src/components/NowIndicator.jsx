@@ -7,7 +7,8 @@ import moment from 'moment'
 import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
 import { isScreenMediumAndUp } from '../screen'
 
-function NowIndicator ({currentDate, timeline, viewDate, selectedDay, days7, screenSize, horizontalLayout}) {
+function NowIndicator ({
+    currentDate, timeline, viewDate, selectedDay, days7, screenSize, horizontalLayout }) {
   const now = moment(currentDate)
 
   // Distance from start of timeline in ms
@@ -20,6 +21,9 @@ function NowIndicator ({currentDate, timeline, viewDate, selectedDay, days7, scr
 
   const displayMultipleDays = isScreenMediumAndUp(screenSize)
 
+  // Indicator will be shown if:
+  // - it is not bleeding out of the timeline (i.e. length and offset are within some percentage)
+  // - we are displaying current week
   let shown = (length > 0 && length < 1 && offset < 1) &&
               now.isSame(viewDate, 'isoWeek')
 
@@ -28,7 +32,8 @@ function NowIndicator ({currentDate, timeline, viewDate, selectedDay, days7, scr
   }
 
   if (!shown) {
-    return null
+    // XXX: stateless components cannot return null or false (for now)
+    return <noscript />
   }
 
   if (displayMultipleDays && horizontalLayout) {
