@@ -7,7 +7,7 @@ import moment from 'moment'
 import { SMALL_SCREEN, MEDIUM_SCREEN } from '../constants/screenSizes'
 import { isScreenMediumAndUp } from '../screen'
 
-function NowIndicator ({currentDate, timeline, viewDate, selectedDay, days7, layout, screenSize}) {
+function NowIndicator ({currentDate, timeline, viewDate, selectedDay, days7, screenSize, horizontalLayout}) {
   const now = moment(currentDate)
 
   // Distance from start of timeline in ms
@@ -31,7 +31,7 @@ function NowIndicator ({currentDate, timeline, viewDate, selectedDay, days7, lay
     return null
   }
 
-  if (displayMultipleDays && layout === 'horizontal') {
+  if (displayMultipleDays && horizontalLayout) {
     return (
       <div className="now-indicator-wrap">
         <div className="now-indicator horizontal"
