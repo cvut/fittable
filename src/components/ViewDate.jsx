@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 
-import { weekProperties } from '../semester'
+import { weekProperties } from '../semesterPeriods'
 
 const propTypes = {
   viewDate: PropTypes.instanceOf(Date),
