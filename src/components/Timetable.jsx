@@ -69,13 +69,14 @@ const createDays = R.curry((props, dayCount, animationDirection, events) => {
     if (n in groupedEvents) {
       return createDayEvents(props, animationDirection, groupedEvents[n])
     }
+    return null
   }
 
   return R.times(n => (
     <Day date={shiftDate(viewDateWeekStart, 'days', n)}
          key={'day-' + n}
          viewDate={props.viewDate}>
-      {dayEvents(n) || ''}
+      {dayEvents(n)}
     </Day>
   ), dayCount)
 })
