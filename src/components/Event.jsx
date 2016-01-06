@@ -91,7 +91,6 @@ class EventBox extends React.Component {
     return (
       <div
         className={this.classNames(this.props)}
-        data-event={this.props.id}
         style={this.style(this.props)}
       >
         <div className="inner">
