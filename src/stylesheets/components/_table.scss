@@ -87,9 +87,6 @@
     background: $light-secondary-color;
   }
 
-  .a-left .events { animation: week-move-left ease $events-move-anim-speed; }
-  .a-right .events { animation: week-move-right ease $events-move-anim-speed; }
-
   .grid-overlay {
     position: absolute;
     left: 0;
@@ -149,7 +146,7 @@
     text-align: right;
   }
 
-  .hour-label {
+  .HourLabel {
     position: absolute;
     color: $lightgraytext-color;
     font-size: $small-font-size;

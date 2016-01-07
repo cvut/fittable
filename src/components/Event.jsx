@@ -30,11 +30,9 @@ const defaultProps = {
 }
 
 class EventBox extends React.Component {
-
   style (props) {
-
-    var length = `${props.data._draw_length * 100}%`
-    var position = `${props.data._draw_position * 100}%`
+    const length = `${props.data._length * 100}%`
+    const position = `${props.data._position * 100}%`
 
     if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
       return {
@@ -50,8 +48,7 @@ class EventBox extends React.Component {
   }
 
   classNames (props) {
-
-    const cls = ['event', props.data.appear]
+    const cls = ['event', props.data._appear]
     if (props.detailShown) {
       cls.push('is-opened')
     }
@@ -73,9 +70,8 @@ class EventBox extends React.Component {
   }
 
   displayTime (props) {
-
-    var startsAt = new Moment(props.data.startsAt).format('LT')
-    var endsAt = new Moment(props.data.endsAt).format('LT')
+    const startsAt = new Moment(props.data.startsAt).format('LT')
+    const endsAt = new Moment(props.data.endsAt).format('LT')
 
     return `${startsAt}—${endsAt}`
   }
@@ -90,13 +86,11 @@ class EventBox extends React.Component {
   }
 
   render () {
-    const {appear, id} = this.props.data
-    const onClickVal = this.props.detailShown ? null : id
+    const onClickVal = this.props.detailShown ? null : this.props.data.id
 
     return (
       <div
         className={this.classNames(this.props)}
-        data-event={id}
         style={this.style(this.props)}
       >
         <div className="inner">
