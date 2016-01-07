@@ -2,6 +2,43 @@ import R from 'ramda'
 import moment from 'moment'
 import { setDateToZeroTime, weekdayNum } from './date'
 
+/**
+* @typedef Grid
+* @type Object
+* @property {number} starts - Start time of the day in decimal hours, e.g. 7:30 is `7.5`.
+* @property {number} ends - End time of the day in decimal hours, e.g. 21:30 is `21.5`.
+* @property {boolean} facultyGrid - Whether to display grid in faculty hours, or using real clock
+*                    hours.
+* @property {number} lessonDuration - How long is one teaching hour with a break,
+*                    as a fraction of real hour, e.g. two teaching hours are 90 minutes
+                     w/ 15 minutes break. Therefore one teaching hour is 52.5 minutes,
+                     which is 0.875. If facultyGrid is false, this is 1, i.e. a real clock hour.
+* @property {number} facultyHours - How many teaching hours are in one day.
+* @property {boolean} hoursStartsAt1 - Whether the first hour is numbered by 1, usually corresponds
+*                     to facultyGrid.
+*/
+/**
+ * @typedef Timeline
+ * @type Object
+ * @property {number} start - Start time of the day (i.e. when classes start) in seconds.
+ * @property {number} end - End time of the day (i.e. when classes end) in seconds.
+ * @property {number} duration - Total duration of the "teaching day" in seconds.
+ * @property {number} hourDuration - Duration of a teaching hour in seconds.
+ * @property {number} hours - Count of teaching hours in one day.
+ * @property {number} firstHour - Number of the first displayed hour; 1 if faculty grid is enabled,
+ *                    real clock hour rounded to the nearest full hour otherwise, e.g. `7:30 → 8`.
+ * @property {number} offset - Distance from the firstHour defined as a fraction (0 to 1).
+ *                    0 for faculty grid, since the firstHour has no offset.
+ *                    Otherwise this is calculated as modulo, e.g. 7:30 becomes 0.5, since
+ *                    grid.starts is `7.5` and `7.5 mod 1 = 0.5`.
+ */
+
+/**
+ * Converts {Grid} to {Timeline} object.
+ *
+ * @param {Grid} grid
+ * @returns {Timeline}
+ */
 export function createTimeline (grid) {
   return {
     start: grid.starts * 3600,
