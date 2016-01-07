@@ -27,11 +27,15 @@ class Grid extends React.Component {
 
     return (n) => {
       const pos = ((n + offset) / hours * 100) + '%'
+      const inheritedParams = {
+        ...defaults,
+        key: n,
+      }
 
       if (type === 'vertical') {
-        return <line {...defaults} y1={pos} y2={pos} />
+        return <line {...inheritedParams} y1={pos} y2={pos} />
       } else {
-        return <line {...defaults} x1={pos} x2={pos} />
+        return <line {...inheritedParams} x1={pos} x2={pos} />
       }
     }
   }
