@@ -16,5 +16,5 @@ rules:
   curly: [2, all]
   max-len: [2, 120, 2]
   no-extra-bind: [2]
-  # FIXME: supported in future ESLint:
-  # max-len: [2, 120, 2, {ignoreComments: true, ignoreUrls: true}]
+  max-len: [2, 100, 2, {ignoreComments: true, ignoreUrls: true}]
+  padded-blocks: [0]
