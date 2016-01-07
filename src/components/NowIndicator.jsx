@@ -5,21 +5,25 @@
 import React from 'react'
 import moment from 'moment'
 import { isScreenMediumAndUp } from '../screen'
+import { weekdayNum } from '../date'
 
 function NowIndicator ({
-    currentDate, timeline, viewDate, selectedDay, days7, screenSize, horizontalLayout }) {
+    currentDate, timeline, viewDate, days7, screenSize, horizontalLayout }) {
 
   const now = moment(currentDate)
 
-  // Distance from start of timeline in ms
-  const nowPoint = now.diff(now.clone().hour(timeline.startHour).minutes(timeline.startMins))
+  const startOfToday = now.clone().startOf('day').add(timeline.start, 'seconds')
+  // Distance from start of timeline in seconds
+  const nowSeconds = now.diff(startOfToday, 'seconds')
 
   const dayWidth = 1 / (days7 ? 7 : 5)
-  const length = nowPoint / timeline.length
+  const length = nowSeconds / timeline.duration
   const currentWeekday = now.isoWeekday() - 1
   const offset = currentWeekday * dayWidth
-
+  console.log(nowSeconds, timeline.duration, length)
   const displayMultipleDays = isScreenMediumAndUp(screenSize)
+
+  const selectedDay = weekdayNum(viewDate)
 
   // Indicator will be shown if:
   // - it is not bleeding out of the timeline (i.e. length and offset are within some percentage)

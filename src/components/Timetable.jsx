@@ -8,7 +8,6 @@ import R from 'ramda'
 import { grid as gridPropType } from '../constants/propTypes'
 
 import { weekdayNum, shiftDate, weekStartDate, compareDate } from '../date'
-import { convertSecondsToTime } from '../time'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import {
   createTimeline, calculateEventPosition, calculateHourLabels, classModifiers,
@@ -177,15 +176,7 @@ class Timetable extends React.Component {
       ' table--' + this.props.layout,
     ])
 
-    // fixme: pass only timeline object, not this bu!@#$it \/
-    const timelineStartTime = convertSecondsToTime(timeline.start)
-    const timelineHoursFrom = timelineStartTime.h
-    const timelineMinutesFrom = timelineStartTime.m
-    const timelineLength = timeline.duration / 3600
-    const selectedDay = weekdayNum(this.props.viewDate)
     const isGridHorizontal = layout === 'horizontal'
-    const timelineHours = timeline.hours
-    const timelineOffset = timeline.offset
 
     return (
       <div className={className} ref="rootEl">
@@ -194,8 +185,8 @@ class Timetable extends React.Component {
             {/* fixme: change props to only layout, timeline and color */}
             <Grid
               horizontal={isGridHorizontal}
-              hours={timelineHours}
-              offset={timelineOffset}
+              hours={timeline.hours}
+              offset={timeline.offset}
               color="rgb(210,210,210)"
             />
           </div>
@@ -207,7 +198,6 @@ class Timetable extends React.Component {
             days7={ this.props.days7 }
             horizontalLayout={ isGridHorizontal }
             screenSize={ this.props.screenSize }
-            selectedDay={ selectedDay }
           />
         </PeriodicUpdate>
         <div className="days" ref="days" key="days">
