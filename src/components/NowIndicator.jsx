@@ -12,7 +12,7 @@ function NowIndicator ({
   const now = moment(currentDate)
 
   // Distance from start of timeline in ms
-  const nowPoint = now.diff(now.clone().hour(timeline.startHour).minutes(timeline.startMins))
+  const nowPoint = now.diff(now.clone().seconds(timeline.start))
 
   const dayWidth = 1 / (days7 ? 7 : 5)
   const length = nowPoint / timeline.length
