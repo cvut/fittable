@@ -147,12 +147,12 @@ const FittableContainer = React.createClass({
     const error = this.props.error
     const errorVisible = this.props.errorVisible
 
-    // FIXME: this should be done some better way
+    // FIXME: this should be replaced by Timeline object
     const gridsettings = {
       starts: this.props.grid.starts,
       ends: this.props.grid.ends,
       lessonDuration: (!facultyGrid ? 1 : this.props.grid.lessonDuration),
-      hoursStartsAt1: facultyGrid,
+      hoursStartsAt1: facultyGrid, // TODO: Remove this one
       facultyHours: (this.props.grid.ends - this.props.grid.starts) / this.props.grid.lessonDuration,
       facultyGrid: facultyGrid,
     }
@@ -208,6 +208,7 @@ const FittableContainer = React.createClass({
           error={error}
           errorVisible={errorVisible}
           onErrorHide={this.props.onErrorHide}
+          onDetailShow={this.props.onEventDisplay}
         />
         <Footer
           userName={this.props.user.name || this.props.user.id}
