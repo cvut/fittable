@@ -20,7 +20,6 @@ function NowIndicator ({
   const length = nowSeconds / timeline.duration
   const currentWeekday = now.isoWeekday() - 1
   const offset = currentWeekday * dayWidth
-  console.log(nowSeconds, timeline.duration, length)
   const displayMultipleDays = isScreenMediumAndUp(screenSize)
 
   const selectedDay = weekdayNum(viewDate)
