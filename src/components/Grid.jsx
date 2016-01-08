@@ -26,7 +26,9 @@ class Grid extends React.Component {
     }
 
     return (n) => {
-      const pos = ((n + offset) / hours * 100) + '%'
+      const pos = ((n + offset) / hours * 100 + 0.1) + '%'
+      // Position percentage +0.1% to avoid cropping the first line
+
       const inheritedParams = {
         ...defaults,
         key: n,
