@@ -136,7 +136,6 @@
 
   .hour-labels {
     @include disable-selection();
-    overflow: hidden;
     z-index: 10;
     left: -2.5rem;
     top: 7%;
