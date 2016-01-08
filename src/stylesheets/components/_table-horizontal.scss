@@ -53,6 +53,13 @@
     height: 100%;
   }
 
+  .now-indicator-wrap {
+    top: 0;
+    left: 10%;
+    width: 90%;
+    height: 100%;
+  }
+
   .now-indicator {
     border-bottom: none;
     border-right: $nowindicator-thickness solid $nowindicator-color;
