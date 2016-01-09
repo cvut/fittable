@@ -45,8 +45,8 @@ function NowIndicator ({
         <div className="now-indicator horizontal"
              style={{
                height: (dayWidth * 100) + '%',
-               width: (length * 90 + 10) + '%',
-               top: (offset * 100) + '%',
+               width: (length * 100) + '%',
+               top: (offset * 100 + 0.1) + '%', // +0.1% is grid offset
              }}
         />
       </div>
@@ -57,8 +57,8 @@ function NowIndicator ({
         <div className="now-indicator vertical"
              style={{
                width: (dayWidth * 100) + '%',
-               height: (length * 90 + 10) + '%',
-               left: (offset * 100) + '%',
+               height: (length * 100) + '%',
+               left: (offset * 100 + 0.1) + '%', // +0.1% is grid offset
              }}
         />
       </div>
