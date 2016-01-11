@@ -96,7 +96,6 @@ function createDayEvents (props, animationDirection, events) {
       data={hideFilteredEvent(event)}
       showDetail={event.id === props.eventId}
       onClick={props.onDetailShow}
-      openFromBottom={event.id >= 3}
       colored={props.colored}
       onViewChange={props.onViewChange}
       onDateChange={props.onDateChange}
