@@ -56,9 +56,6 @@ class EventBox extends React.Component {
     if (props.data.cancelled) {
       cls.push('event--cancelled')
     }
-    if (props.openFromBottom) {
-      cls.push('event--frombottom')
-    }
     if (props.data.replacement) {
       cls.push('event--replacement')
     }
