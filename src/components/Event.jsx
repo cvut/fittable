@@ -5,7 +5,9 @@
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 import Moment from 'moment'
-import { isScreenLarge } from '../screen'
+import { isScreenLarge, isScreenSmall } from '../screen'
+
+import { EVENT_MAX_WIDTH, EVENT_HEAD_HEIGHT } from '../constants/events'
 
 import EventDetail from './EventDetail'
 
@@ -35,16 +37,22 @@ class EventBox extends React.Component {
     const length = `${props.data._length * 100}%`
     const position = `${props.data._position * 100}%`
 
-    if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
+    // Vertical layout is forced on small screens
+    const layoutCanBeHorizontal = isScreenLarge(props.screenSize)
+    const limitMaximumWidth = !isScreenSmall(props.screenSize)
+    const isHorizontal = layoutCanBeHorizontal && props.layout === 'horizontal'
+
+    const positionProps = isHorizontal
+        ? { width: length, left: position }
+        : { height: length, top: position }
+
+    if (limitMaximumWidth && props.showDetail) {
       return {
-        width: length,
-        left: position,
+        ...positionProps,
+        maxWidth: EVENT_MAX_WIDTH,
       }
     } else {
-      return {
-        height: length,
-        top: position,
-      }
+      return positionProps
     }
   }
 
@@ -98,6 +106,7 @@ class EventBox extends React.Component {
 
   render () {
     const onClickVal = this.props.showDetail ? null : this.props.data.id
+    const headSpaceStyle = this.props.showdetail ? {height: EVENT_HEAD_HEIGHT} : {}
 
     return (
       <div
@@ -107,21 +116,22 @@ class EventBox extends React.Component {
         <div className="inner">
           <div
             className="head-space"
-            onClick={this.props.onClick.bind(null, onClickVal)}>
-          </div>
-          <div className="name">
-            {this.props.data.course}
-          </div>
-          <div className="time">
-            {this.displayTime(this.props)}
-          </div>
-          <div className="room">
-            {this.displayRoom(this.props)}
-          </div>
-          <div className="type">
-            <span className={`short ${this.props.colored ? ' hide' : ''}`}>
-              {CP.translate('event_type_short.' + this.props.data.type)}
-            </span>
+            onClick={this.props.onClick.bind(null, onClickVal)}
+            style={headSpaceStyle}>
+            <div className="head-name">
+              {this.props.data.course}
+            </div>
+            <div className="head-time">
+              {this.displayTime(this.props)}
+            </div>
+            <div className="head-room">
+              {this.displayRoom(this.props)}
+            </div>
+            <div className="head-type">
+              <span className={`short ${this.props.colored ? ' hide' : ''}`}>
+                {CP.translate('event_type_short.' + this.props.data.type)}
+              </span>
+            </div>
           </div>
 
           {this.eventDetail()}

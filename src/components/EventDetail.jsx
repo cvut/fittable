@@ -6,6 +6,8 @@
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
 
+import { EVENT_MAX_HEIGHT, EVENT_HEAD_HEIGHT } from '../constants/events'
+
 const propTypes = {
   onViewChange: PropTypes.func,
   linkNames: PropTypes.object, // FIXME: validate shape
@@ -217,7 +219,7 @@ class EventDetail extends React.Component {
 
   render () {
     return (
-      <div className="detail">
+      <div className="detail" style={{maxHeight: EVENT_MAX_HEIGHT - EVENT_HEAD_HEIGHT}}>
         <div className="wrap">
           {this.eventBasicProps(this)}
           {this.eventNote(this)}
