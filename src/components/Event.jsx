@@ -83,6 +83,19 @@ class EventBox extends React.Component {
     )
   }
 
+  eventDetail () {
+    if (this.props.showDetail) {
+      return (
+        <EventDetail
+         ref="detail"
+         data={this.props.data}
+         onViewChange={this.props.onViewChange}
+         linkNames={this.props.linkNames}
+       />
+      )
+    }
+  }
+
   render () {
     const onClickVal = this.props.detailShown ? null : this.props.data.id
 
@@ -110,12 +123,9 @@ class EventBox extends React.Component {
               {CP.translate('event_type_short.' + this.props.data.type)}
             </span>
           </div>
-          <EventDetail
-             ref="detail"
-             data={this.props.data}
-             onViewChange={this.props.onViewChange}
-             linkNames={this.props.linkNames}
-          />
+
+          {this.eventDetail()}
+
           <div className="cancelflag">
             <i className="fa fa-ban"></i>
           </div>
