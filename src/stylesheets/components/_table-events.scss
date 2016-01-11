@@ -24,46 +24,9 @@
       color: white;
       height: 100%;
       @include background-hover-effect( $primary-color );
-      padding: 5px 10px;
       overflow: hidden;
       position: relative;
       line-height: 1.35;
-
-      & > .name {
-        font-size: $xlarge-font-size;
-        font-weight: 300;
-        text-align: right;
-        margin-top: 5px;
-        @include disable-selection();
-      }
-
-      & > .time {
-        font-size: $xsmall-font-size;
-        text-align: right;
-        @include disable-selection();
-      }
-
-      & > .room {
-        font-size: $xsmall-font-size;
-        text-align: right;
-        @include disable-selection();
-
-        i {
-          margin-right: .5em;
-        }
-      }
-
-      & > .type {
-        position: absolute;
-        bottom: 10px;
-        left: 15px;
-        font-size: $small-font-size;
-        font-weight: 700;
-        border-left: 2px solid white;
-        padding-left: 5px;
-        line-height: 1.2;
-        @include disable-selection();
-      }
     }
 
     &:not(.event--cancelled) .cancelflag {
@@ -94,11 +57,12 @@
       color: white;
     }
 
+    .head-space {
+      padding: $events-gutter/2 $events-gutter;
+    }
+
     &:not(.hide) div.inner div.head-space {
       width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
       cursor: pointer;
     }
 
@@ -106,8 +70,43 @@
       height: 100%;
     }
 
+    .head-name {
+      font-size: $xlarge-font-size;
+      font-weight: 300;
+      text-align: right;
+      margin-top: 5px;
+      @include disable-selection();
+    }
+
+    .head-time {
+      font-size: $xsmall-font-size;
+      text-align: right;
+      @include disable-selection();
+    }
+
+    .head-room {
+      font-size: $xsmall-font-size;
+      text-align: right;
+      @include disable-selection();
+
+      i {
+        margin-right: .5em;
+      }
+    }
+
+    .head-type {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      font-size: $small-font-size;
+      font-weight: 700;
+      border-left: 2px solid white;
+      padding-left: 5px;
+      line-height: 1.2;
+      @include disable-selection();
+    }
+
     &.is-opened div.inner div.head-space {
-      height: $day-row-height - ($day-row-padding * 2);
       background: transparent;
       transition: background $default-anim-speed;
 
