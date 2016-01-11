@@ -7,6 +7,8 @@ import CP from 'counterpart'
 import Moment from 'moment'
 import { isScreenLarge } from '../screen'
 
+import { EVENT_MAX_WIDTH, EVENT_MAX_HEIGHT, EVENT_HEAD_HEIGHT } from '../constants/events'
+
 import EventDetail from './EventDetail'
 
 const propTypes = {
@@ -35,16 +37,26 @@ class EventBox extends React.Component {
     const length = `${props.data._length * 100}%`
     const position = `${props.data._position * 100}%`
 
+    let positionProperties = {}
     if (this.props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
-      return {
+      positionProperties = {
         width: length,
         left: position,
       }
     } else {
-      return {
+      positionProperties = {
         height: length,
         top: position,
       }
+    }
+
+    if (props.showDetail) {
+      return {
+        ...positionProperties,
+        maxWidth: EVENT_MAX_WIDTH,
+      }
+    } else {
+      return positionProperties
     }
   }
 
@@ -107,21 +119,22 @@ class EventBox extends React.Component {
         <div className="inner">
           <div
             className="head-space"
-            onClick={this.props.onClick.bind(null, onClickVal)}>
-          </div>
-          <div className="name">
-            {this.props.data.course}
-          </div>
-          <div className="time">
-            {this.displayTime(this.props)}
-          </div>
-          <div className="room">
-            {this.displayRoom(this.props)}
-          </div>
-          <div className="type">
-            <span className={`short ${this.props.colored ? ' hide' : ''}`}>
-              {CP.translate('event_type_short.' + this.props.data.type)}
-            </span>
+            onClick={this.props.onClick.bind(null, onClickVal)}
+            style={{height: EVENT_HEAD_HEIGHT}}>
+            <div className="head-name">
+              {this.props.data.course}
+            </div>
+            <div className="head-time">
+              {this.displayTime(this.props)}
+            </div>
+            <div className="head-room">
+              {this.displayRoom(this.props)}
+            </div>
+            <div className="head-type">
+              <span className={`short ${this.props.colored ? ' hide' : ''}`}>
+                {CP.translate('event_type_short.' + this.props.data.type)}
+              </span>
+            </div>
           </div>
 
           {this.eventDetail()}
