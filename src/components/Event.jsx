@@ -23,6 +23,7 @@ const propTypes = {
     type: PropTypes.string,
   }),
   screenSize: PropTypes.number,
+  showDetail: PropTypes.bool,
 }
 
 const defaultProps = {
@@ -49,7 +50,7 @@ class EventBox extends React.Component {
 
   classNames (props) {
     const cls = ['event', props.data._appear]
-    if (props.detailShown) {
+    if (props.showDetail) {
       cls.push('is-opened')
     }
     if (props.data.cancelled) {

@@ -94,7 +94,7 @@ function createDayEvents (props, animationDirection, events) {
     <EventBox
       key={event.id}
       data={hideFilteredEvent(event)}
-      detailShown={event.id === props.eventId}
+      showDetail={event.id === props.eventId}
       onClick={props.onDetailShow}
       openFromBottom={event.id >= 3}
       colored={props.colored}
