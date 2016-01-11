@@ -97,6 +97,7 @@
     "students": "Studentů",
     "capacity": "Kapacita",
     "room": "Místnost",
+    "note": "Poznámka",
     "number": "č. %(num)s",
     "students_count": {
       "zero": "Bez studentů",

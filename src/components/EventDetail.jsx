@@ -99,6 +99,21 @@ class EventDetail extends React.Component {
     )
   }
 
+  eventNote () {
+    const { note } = this.props.data
+
+    if (note) {
+      return (
+        <div className="prop-section note">
+          <div className="prop-title">
+            {CP.translate('detail.note')}
+          </div>
+          {note[CP.getLocale()] || note.cs}
+        </div>
+      )
+    }
+  }
+
   eventExceptions () {
     const {appliedExceptions} = this.props.data.details
     if (appliedExceptions && appliedExceptions.length > 0) {
@@ -205,6 +220,7 @@ class EventDetail extends React.Component {
       <div className="detail">
         <div className="wrap">
           {this.eventBasicProps(this)}
+          {this.eventNote(this)}
           {this.eventExceptions(this)}
           {this.eventNumericProps(this)}
           {this.eventTeachers(this)}

@@ -129,6 +129,7 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
           const newEvent = {
             id: event.id,
             name: event.name,
+            note: event.note,
             course: event.links.course,
             startsAt: event.starts_at,
             endsAt: event.ends_at,

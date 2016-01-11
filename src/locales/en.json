@@ -97,6 +97,7 @@
     "students": "Students",
     "capacity": "Capacity",
     "room": "Room",
+    "note": "Note",
     "number": "# %(num)s",
     "students_count": {
       "zero": "No students",
