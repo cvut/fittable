@@ -52,8 +52,8 @@ export function convertRawSemester (semester) {
     periods: [
       {
         type: 'exams',
-        startsOn: semester.examsStartsAt,
-        endsOn: semester.examsEndsAt,
+        startsOn: semester.examsStartAt,
+        endsOn: semester.examsEndAt,
       },
     ],
     valid: true,
