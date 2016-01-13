@@ -1,3 +1,4 @@
+/*eslint camelcase: 0 */
 import test from 'blue-tape'
 import * as s from '../src/semesterPeriods'
 
@@ -27,7 +28,9 @@ test('periodFromDate()', t => {
 })
 
 test('semesterWeek()', t => {
-  const period = {type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'even'}
+  const period = {
+    type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'even',
+  }
 
   ;[// date       expected  message
     ['2015-11-02', 1,      'returns first week on the same date'],
@@ -43,8 +46,12 @@ test('semesterWeek()', t => {
 })
 
 test('periodWeekParity()', t => {
-  const period = {type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'even'}
-  const period2 = {type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'odd'}
+  const period = {
+    type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'even',
+  }
+  const period2 = {
+    type: 'teaching', startsOn: '2015-11-02', endsOn: '2015-12-01', firstWeekParity: 'odd',
+  }
 
   ;[// date        period   expected  message
     ['2015-11-02', period,  'even',   'returns first week on the same date (first week is even)'],
@@ -87,6 +94,71 @@ test('weekProperties()', t => {
   t.deepEqual(s.weekProperties(new Date('2020-01-01'), semester),
               expected,
               'test week properties for viewDate out of range')
+
+  t.end()
+})
+
+test('periodsByWeek()', t => {
+  const periods = [
+    { // 0
+      type: 'holiday',
+      starts_at: '2015-12-28',
+      ends_at: '2016-01-04',
+    },
+    { // 1
+      type: 'teaching',
+      starts_at: '2016-01-05',
+      ends_at: '2016-01-06',
+      first_week_parity: 'even',
+    },
+    { // 2
+      type: 'teaching',
+      starts_at: '2016-01-07',
+      ends_at: '2016-01-07',
+      first_week_parity: 'odd',
+    },
+    { // 3
+      type: 'teaching',
+      starts_at: '2016-01-08',
+      ends_at: '2016-01-12',
+      first_week_parity: 'even',
+    },
+    { // 4
+      type: 'exam',
+      starts_at: '2016-01-13',
+      ends_at: '2016-01-18',
+      first_week_parity: 'odd',
+    },
+  ]
+
+  const expected = {
+    1: {
+      type: 'holiday',
+      parity: 'odd',
+      periods: [ periods[0] ],
+    },
+    2: {
+      type: 'teaching',
+      parity: 'even',
+      // weekOrder: 1,
+      periods: [ periods[0], periods[1] ],
+    },
+    3: {
+      type: 'teaching',
+      parity: 'odd',
+      // weekOrder: 2,
+      periods: [ periods[1], periods[2], periods[3] ],
+    },
+    4: {
+      type: 'exam',
+      parity: 'even',
+      periods: [ periods[4] ],
+    },
+  }
+
+  const actual = s.periodsByWeek(periods)
+
+  t.deepEqual(actual, expected, 'converts periods to a map of week to ')
 
   t.end()
 })
