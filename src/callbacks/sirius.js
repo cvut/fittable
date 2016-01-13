@@ -11,6 +11,7 @@
 import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
+import camelize from 'camelize'
 
 import { SIRIUS_PROXY_PATH } from '../config'
 
@@ -255,42 +256,23 @@ function searchCallback (query, callback) {
 function semesterDataCallback (callback) {
   function requestHandler (request) {
     if (request.readyState === XMLHttpRequest.DONE) {
+
+      // Request successful
       if (request.status === 200) {
-        // Request successful
-        var ajaxresult = JSON.parse(request.responseText)
-        var itemCount = ajaxresult.meta.count
+        const data = camelize(JSON.parse(request.responseText))
 
-        // Check if there is semesters object in result
-        if (!('semesters' in ajaxresult)) {
-          return false
-        }
-
-        var semesters = []
-
-        // Create events from data
-        for (var i = 0; i < itemCount; i++) {
-          var semester = ajaxresult.semesters[i]
-
-          // And add new semester to array
-          semesters[ i ] = {
-            id: semester.id,
-            semester: semester.semester,
-            faculty: semester.faculty,
-            startsAt: semester.starts_at,
-            endsAt: semester.ends_at,
-            examsStartsAt: semester.exams_start_at,
-            examsEndsAt: semester.exams_end_at,
-            hourDuration: semester.hour_duration,
-            breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
-            dayStartsAtHour: 7.5,
-            dayEndsAtHour: 21.25,
-          }
-        }
+        const semesters = R.map(semester => ({
+          ...semester,
+          breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
+          dayStartsAtHour: 7.5,
+          dayEndsAtHour: 21.25,
+        }), data.semesters || [])
 
         // Send semester data to fittable
         callback(semesters)
+
+      // Request failed
       } else {
-        // Request failed
         // fittable.onError(generateError(request.status).type)
         console.error(generateError(request.status))
       }
