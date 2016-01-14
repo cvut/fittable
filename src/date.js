@@ -1,4 +1,5 @@
 import moment from 'moment-timezone'
+import frozenMoment from 'frozen-moment'
 import R from 'ramda'
 
 import { TZ } from './config'
@@ -75,3 +76,5 @@ export function setDateToZeroTime (date) {
 export function weekStartDate (date) {
   return moment(date).startOf('isoWeek').toDate()
 }
+
+export const fmoment = (date) => frozenMoment(date).freeze()

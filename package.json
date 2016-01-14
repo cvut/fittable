@@ -34,6 +34,7 @@
     "counterpart": "^0.17.0",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
+    "frozen-moment": "^0.3.0",
     "hammerjs": "^2.0.4",
     "history": "^1.13.1",
     "moment": "^2.10.6",

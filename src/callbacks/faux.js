@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { fmoment } from '../date'
 
 var dataCallback = function(params, callback) {
   const {calendarType, calendarId, dateFrom: from, dateTo: to} = params
@@ -147,10 +147,10 @@ var semesterDataCallback = function(callback) {
       id: "18000-B142",
       semester: "B142",
       faculty: 18000,
-      startsAt: moment("2015-02-16"),
-      endsAt: moment("2015-09-21"),
-      examsStartAt: moment("2015-05-18"),
-      examsEndAt: moment("2015-06-27"),
+      startsAt: fmoment("2015-02-16"),
+      endsAt: fmoment("2015-09-21"),
+      examsStartAt: fmoment("2015-05-18"),
+      examsEndAt: fmoment("2015-06-27"),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
@@ -159,10 +159,10 @@ var semesterDataCallback = function(callback) {
       id: "18000-B151",
       semester: "B151",
       faculty: 18000,
-      startsAt: moment("2015-02-16"),
-      endsAt: moment("2015-09-21"),
-      examsStartAt: moment("2015-05-18"),
-      examsEndAt: moment("2015-06-27"),
+      startsAt: fmoment("2015-02-16"),
+      endsAt: fmoment("2015-09-21"),
+      examsStartAt: fmoment("2015-05-18"),
+      examsEndAt: fmoment("2015-06-27"),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
