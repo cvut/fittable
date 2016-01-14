@@ -119,6 +119,7 @@ export function calculateOverlap (events) {
   // set appropriate appearances for all events in queue.
   R.forEach((event) => {
     const start = moment(event.startsAt)
+    const end = moment(event.endsAt)
     event._overlaps = 0
     event._firstOverlapping = false
 
@@ -130,7 +131,9 @@ export function calculateOverlap (events) {
 
     overlap.push(event)
 
-    lastend = moment(event.endsAt)
+    if (end.isAfter(lastend)) {
+      lastend = end
+    }
   }, sortedevents)
 
   return sortedevents
