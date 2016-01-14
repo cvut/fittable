@@ -12,6 +12,7 @@ import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
 import camelize from 'camelize'
+import Moment from 'moment'
 
 import { SIRIUS_PROXY_PATH } from '../config'
 
@@ -261,12 +262,23 @@ function semesterDataCallback (callback) {
       if (request.status === 200) {
         const data = camelize(JSON.parse(request.responseText))
 
-        const semesters = R.map(semester => ({
-          ...semester,
-          breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
-          dayStartsAtHour: 7.5,
-          dayEndsAtHour: 21.25,
-        }), data.semesters || [])
+        const semesters = R.map(semester => R.evolve(
+          { // transformations; converts date to Moment
+            startsAt: Moment,
+            endsAt: Moment,
+            examsStartAt: Moment,  // FIXME: remove, it's deprecated
+            examsEndAt: Moment,  // FIXME: remove, it's deprecated
+            periods: R.map(R.evolve({
+              startsAt: Moment,
+              endsAt: Moment,
+            })),
+          }, {
+            ...semester,
+            breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
+            dayStartsAtHour: 7.5,
+            dayEndsAtHour: 21.25,
+          }
+        ), data.semesters || [])
 
         // Send semester data to fittable
         callback(semesters)

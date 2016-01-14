@@ -5,12 +5,10 @@ const toDate = d => new Date(d)
 
 // FIXME: get rid of Raw functions; raw properties should be handled at system boundaries, in the middleware
 const semesterIntervalRaw = R.props(['startsAt', 'endsAt'])
-const semesterDatesRaw = R.pipe(semesterIntervalRaw, R.map(toDate))
-const dateInSemesterRaw = (semester, date) => withinDates(...semesterDatesRaw(semester), date)
+const dateInSemesterRaw = (semester, date) => withinDates(...semesterIntervalRaw(semester), date)
 
 const semesterInterval = R.props(['startsOn', 'endsOn'])
-const semesterDates = R.pipe(semesterInterval, R.map(toDate))
-export const dateInSemester = (semester, date) => withinDates(...semesterDates(semester), date)
+export const dateInSemester = (semester, date) => withinDates(...semesterInterval(semester), date)
 
 export function findSemester (semesters, date) {
   // XXX: must be wrapped since we have a different order
@@ -49,6 +47,7 @@ export function convertRawSemester (semester) {
       ends: dayEndsAtHour,
       lessonDuration,
     },
+    // FIXME: replace with real periods!
     periods: [
       {
         type: 'exams',

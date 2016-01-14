@@ -1,18 +1,19 @@
 import test from 'blue-tape'
 import { spy } from 'sinon'
+import Moment from 'moment'
 import * as s from '../src/semester'
 
 test('currentSemester()', t => {
   const semesters = [
     {
       id: '18000-B142',
-      startsAt: '2014-10-01',
-      endsAt: '2015-02-15',
+      startsAt: Moment('2014-10-01'),
+      endsAt: Moment('2015-02-15'),
     },
     {
       id: '18000-B151',
-      startsAt: '2015-02-16',
-      endsAt: '2015-09-21',
+      startsAt: Moment('2015-02-16'),
+      endsAt: Moment('2015-09-21'),
     },
   ]
 
@@ -48,10 +49,10 @@ test('convertRawSemester()', t => {
     id: '18000-B142',
     semester: 'B142',
     faculty: 18000,
-    startsAt: '2015-02-16',
-    endsAt: '2015-09-21',
-    examsStartAt: '2015-05-18',
-    examsEndAt: '2015-06-27',
+    startsAt: Moment('2015-02-16'),
+    endsAt: Moment('2015-09-21'),
+    examsStartAt: Moment('2015-05-18'),
+    examsEndAt: Moment('2015-06-27'),
     hourDuration: 45,
     breakDuration: 15,
     dayStartsAtHour: 7.5,
@@ -60,8 +61,8 @@ test('convertRawSemester()', t => {
 
   const expected = {
     id: original.id,
-    startsOn: '2015-02-16',
-    endsOn: '2015-09-21',
+    startsOn: Moment('2015-02-16'),
+    endsOn: Moment('2015-09-21'),
     season: 'summer',
     years: [2014, 2015],
     grid: {
@@ -72,8 +73,8 @@ test('convertRawSemester()', t => {
     periods: [
       {
         type: 'exams',
-        startsOn: '2015-05-18',
-        endsOn: '2015-06-27',
+        startsOn: Moment('2015-05-18'),
+        endsOn: Moment('2015-06-27'),
       },
     ],
     valid: true,
@@ -86,8 +87,8 @@ test('convertRawSemester()', t => {
 
 test('dateInSemester()', t => {
   const semester = {
-    startsOn: '2015-02-16',
-    endsOn: '2015-09-21',
+    startsOn: Moment('2015-02-16'),
+    endsOn: Moment('2015-09-21'),
   }
 
   const dateIn = new Date('2015-03-01')
