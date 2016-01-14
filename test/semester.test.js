@@ -1,19 +1,19 @@
 import test from 'blue-tape'
 import { spy } from 'sinon'
-import moment from 'moment'
+import { fmoment } from '../src/date'
 import * as s from '../src/semester'
 
 test('currentSemester()', t => {
   const semesters = [
     {
       id: '18000-B142',
-      startsAt: moment('2014-10-01'),
-      endsAt: moment('2015-02-15'),
+      startsAt: fmoment('2014-10-01'),
+      endsAt: fmoment('2015-02-15'),
     },
     {
       id: '18000-B151',
-      startsAt: moment('2015-02-16'),
-      endsAt: moment('2015-09-21'),
+      startsAt: fmoment('2015-02-16'),
+      endsAt: fmoment('2015-09-21'),
     },
   ]
 
@@ -49,10 +49,10 @@ test('convertRawSemester()', t => {
     id: '18000-B142',
     semester: 'B142',
     faculty: 18000,
-    startsAt: moment('2015-02-16'),
-    endsAt: moment('2015-09-21'),
-    examsStartAt: moment('2015-05-18'),
-    examsEndAt: moment('2015-06-27'),
+    startsAt: fmoment('2015-02-16'),
+    endsAt: fmoment('2015-09-21'),
+    examsStartAt: fmoment('2015-05-18'),
+    examsEndAt: fmoment('2015-06-27'),
     hourDuration: 45,
     breakDuration: 15,
     dayStartsAtHour: 7.5,
@@ -61,8 +61,8 @@ test('convertRawSemester()', t => {
 
   const expected = {
     id: original.id,
-    startsOn: moment('2015-02-16'),
-    endsOn: moment('2015-09-21'),
+    startsOn: fmoment('2015-02-16'),
+    endsOn: fmoment('2015-09-21'),
     season: 'summer',
     years: [2014, 2015],
     grid: {
@@ -73,8 +73,8 @@ test('convertRawSemester()', t => {
     periods: [
       {
         type: 'exams',
-        startsOn: moment('2015-05-18'),
-        endsOn: moment('2015-06-27'),
+        startsOn: fmoment('2015-05-18'),
+        endsOn: fmoment('2015-06-27'),
       },
     ],
     valid: true,
@@ -87,8 +87,8 @@ test('convertRawSemester()', t => {
 
 test('dateInSemester()', t => {
   const semester = {
-    startsOn: moment('2015-02-16'),
-    endsOn: moment('2015-09-21'),
+    startsOn: fmoment('2015-02-16'),
+    endsOn: fmoment('2015-09-21'),
   }
 
   const dateIn = new Date('2015-03-01')

@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { spy } from 'sinon'
-import moment from 'moment'
+import { fmoment } from '../../src/date'
 import { SEMESTER_LOAD_COMPLETED } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/semesterActions'
 
@@ -29,10 +29,10 @@ test('fetchSemesterData() dispatch', t => {
       id: '18000-B142',
       semester: 'B142',
       faculty: 18000,
-      startsAt: moment('2015-02-16'),
-      endsAt: moment('2015-09-21'),
-      examsStartAt: moment('2015-05-18'),
-      examsEndAt: moment('2015-06-27'),
+      startsAt: fmoment('2015-02-16'),
+      endsAt: fmoment('2015-09-21'),
+      examsStartAt: fmoment('2015-05-18'),
+      examsEndAt: fmoment('2015-06-27'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
@@ -42,10 +42,10 @@ test('fetchSemesterData() dispatch', t => {
       id: '18000-B151',
       semester: 'B151',
       faculty: 18000,
-      startsAt: moment('2015-09-12'),
-      endsAt: moment('2016-02-28'),
-      examsStartAt: moment('2015-01-12'),
-      examsEndAt: moment('2015-02-20'),
+      startsAt: fmoment('2015-09-12'),
+      endsAt: fmoment('2016-02-28'),
+      examsStartAt: fmoment('2015-01-12'),
+      examsEndAt: fmoment('2015-02-20'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
@@ -103,8 +103,8 @@ test('fetchSemesterData() dispatch with semester loaded', t => {
   const date = new Date('2015-09-10')
   const state = {
     semester: {
-      startsOn: moment('2015-02-18'),
-      endsOn: moment('2015-09-21'),
+      startsOn: fmoment('2015-02-18'),
+      endsOn: fmoment('2015-09-21'),
       valid: true,
     },
   }
