@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 var dataCallback = function(params, callback) {
   const {calendarType, calendarId, dateFrom: from, dateTo: to} = params
 
@@ -145,10 +147,10 @@ var semesterDataCallback = function(callback) {
       id: "18000-B142",
       semester: "B142",
       faculty: 18000,
-      startsAt: "2015-02-16",
-      endsAt: "2015-09-21",
-      examsStartAt: "2015-05-18",
-      examsEndAt: "2015-06-27",
+      startsAt: moment("2015-02-16"),
+      endsAt: moment("2015-09-21"),
+      examsStartAt: moment("2015-05-18"),
+      examsEndAt: moment("2015-06-27"),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
@@ -157,10 +159,10 @@ var semesterDataCallback = function(callback) {
       id: "18000-B151",
       semester: "B151",
       faculty: 18000,
-      startsAt: "2015-02-16",
-      endsAt: "2015-09-21",
-      examsStartAt: "2015-05-18",
-      examsEndAt: "2015-06-27",
+      startsAt: moment("2015-02-16"),
+      endsAt: moment("2015-09-21"),
+      examsStartAt: moment("2015-05-18"),
+      examsEndAt: moment("2015-06-27"),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,

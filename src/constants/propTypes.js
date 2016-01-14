@@ -51,10 +51,10 @@ export const semester = PropTypes.shape({
   id: PropTypes.string,
   semester: PropTypes.string,
   faculty: PropTypes.number,
-  startsAt: PropTypes.string,  // FIXME: should be converted to datetime
-  endsAt: PropTypes.string,  // FIXME: should be converted to datetime
-  examsStartAt: PropTypes.string,  // FIXME: should be converted to datetime
-  examsEndAt: PropTypes.string,  // FIXME: should be converted to datetime
+  startsAt: moment,
+  endsAt: moment,
+  examsStartAt: moment,
+  examsEndAt: moment,
   hourDuration: PropTypes.number,
   breakDuration: PropTypes.number,
   dayStartsAtHour: PropTypes.number,  // FIXME: this should be probably replaced with hourStarts array
@@ -64,8 +64,8 @@ export const semester = PropTypes.shape({
 
 export const period = PropTypes.shape({
   type: PropTypes.oneOf(['exams', 'holiday', 'teaching']),
-  startsAt: PropTypes.string,  // FIXME: should be converted to datetime
-  endsAt: PropTypes.string,  // FIXME: should be converted to datetime
+  startsAt: moment,
+  endsAt: moment,
   firstWeekParity: PropTypes.oneOf(['odd', 'even']),
   firstDayOverride: PropTypes.string,
 })
