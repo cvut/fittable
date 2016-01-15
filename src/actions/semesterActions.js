@@ -1,5 +1,6 @@
 import { SEMESTER_LOAD_COMPLETED } from '../constants/actionTypes'
 import { findSemester, convertRawSemester, dateInSemester } from '../semester'
+import { FACULTY_ID } from '../config'
 
 function receiveSemesterData (semester) {
   return {
@@ -18,7 +19,7 @@ export function invalidateSemesterData (semester) {
 export function fetchSemesterData (semesterCallback, date) {
   return function semesterDataThunk (dispatch, getState) {
     const {semester} = getState()
-    if (semester && semester.valid && dateInSemester(semester, date)) {
+    if (semester && semester.valid && dateInSemester(date, semester)) {
       return
     }
 
@@ -28,7 +29,7 @@ export function fetchSemesterData (semesterCallback, date) {
         return
       }
 
-      const currentSemester = findSemester(data, date)
+      const currentSemester = findSemester(FACULTY_ID, data, date)
       if (!currentSemester) {
         dispatch(receiveSemesterData(invalidateSemesterData(semester)))
         return

@@ -4,9 +4,9 @@
  */
 
 import React, { PropTypes } from 'react'
-import moment from 'moment'
 import CP from 'counterpart'
-import { weekRange, workWeekRange } from '../date'
+
+import { weekProperties } from '../semesterPeriods'
 
 const propTypes = {
   viewDate: PropTypes.instanceOf(Date),
@@ -19,17 +19,30 @@ class ViewDate extends React.Component {
     this.state = { open: false }
   }
 
-  weekNum () {
-    return moment(this.props.viewDate).format('Wo')
-  }
+  weekParity (weekParity) {
+    if (weekParity !== 'even' && weekParity !== 'odd') {
+      return '-'
+    }
 
-  weekParity () {
-    const parity = moment(this.props.viewDate).isoWeek() % 2 === 0 ? 'even' : 'odd'
-    return CP.translate(parity)
+    return CP.translate(weekParity)
   }
 
   render () {
-    return <div className="view-date">{CP.translate('weekNav.teachweek', { weeknum: this.weekNum() })} ({this.weekParity()})</div>
+
+    const { weekParity, weekNum, weekType } = weekProperties(this.props.viewDate, this.props.semester)
+
+    const weekText = CP.translate('weekNav.week_' + weekType,
+      {
+        weeknum: weekNum,
+        parity: this.weekParity(weekParity),
+        fallback: ' ',
+      })
+
+    return (
+      <div className="view-date">
+        {weekText}
+      </div>
+    )
   }
 }
 

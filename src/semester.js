@@ -6,16 +6,19 @@ const toDate = d => new Date(d)
 // FIXME: get rid of Raw functions; raw properties should be handled at system boundaries, in the middleware
 const semesterIntervalRaw = R.props(['startsAt', 'endsAt'])
 const semesterDatesRaw = R.pipe(semesterIntervalRaw, R.map(toDate))
-const dateInSemesterRaw = (semester, date) => withinDates(...semesterDatesRaw(semester), date)
+const dateInSemesterRaw = R.curry((date, semester) =>
+  withinDates(...semesterDatesRaw(semester), date)
+)
 
 const semesterInterval = R.props(['startsOn', 'endsOn'])
 const semesterDates = R.pipe(semesterInterval, R.map(toDate))
-export const dateInSemester = (semester, date) => withinDates(...semesterDates(semester), date)
+export const dateInSemester = (date, semester) => withinDates(...semesterDates(semester), date)
 
-export function findSemester (semesters, date) {
-  // XXX: must be wrapped since we have a different order
-  const predicate = (sem) => dateInSemesterRaw(sem, date)
-
+export function findSemester (facultyId, semesters, date) {
+  const predicate = R.allPass([
+    R.propEq('faculty', facultyId),
+    dateInSemesterRaw(date),
+  ])
   return R.find(predicate, semesters)
 }
 
@@ -49,14 +52,9 @@ export function convertRawSemester (semester) {
       ends: dayEndsAtHour,
       lessonDuration,
     },
-    periods: [
-      {
-        type: 'exams',
-        startsOn: semester.examsStartsAt,
-        endsOn: semester.examsEndsAt,
-      },
-    ],
+    periods: semester.periods,
     valid: true,
+    firstWeekParity: semester.firstWeekParity,
   }
 }
 

@@ -6,26 +6,32 @@ test('currentSemester()', t => {
   const semesters = [
     {
       id: '18000-B142',
+      faculty: 18000,
       startsAt: '2014-10-01',
       endsAt: '2015-02-15',
     },
     {
       id: '18000-B151',
+      faculty: 18000,
+      startsAt: '2015-02-16',
+      endsAt: '2015-09-21',
+    },
+    {
+      id: '13000-B151',
+      faculty: 13000,
       startsAt: '2015-02-16',
       endsAt: '2015-09-21',
     },
   ]
 
-  const examples = [
-    ['2015-03-01', '18000-B151'],
-    ['2015-02-16', '18000-B151'],
-    ['2015-02-15', '18000-B142'],
-  ]
+  ;[// day         facultyId  expectedId
+    ['2015-03-01', 18000,    '18000-B151'],
+    ['2015-02-16', 13000,    '13000-B151'],
+    ['2015-02-15', 18000,    '18000-B142'],
+  ].forEach(([day, facultyId, expectedId]) => {
+    const actual = s.findSemester(facultyId, semesters, day)
 
-  examples.forEach(([day, expectedId]) => {
-    const actual = s.findSemester(semesters, day)
-
-    t.equal(actual.id, expectedId, `day ${day} is within semester ${expectedId}`)
+    t.equal(actual.id, expectedId, `day ${day} is within semester ${expectedId} with fc ${facultyId}`)
   })
 
   t.end()
@@ -52,10 +58,18 @@ test('convertRawSemester()', t => {
     endsAt: '2015-09-21',
     examsStartsAt: '2015-05-18',
     examsEndsAt: '2015-06-27',
+    firstWeekParity: 'odd',
     hourDuration: 45,
     breakDuration: 15,
     dayStartsAtHour: 7.5,
     dayEndsAtHour: 21.25,
+    periods: [
+      {
+        type: 'exams',
+        startsOn: '2015-05-18',
+        endsOn: '2015-06-27',
+      },
+    ],
   }
 
   const expected = {
@@ -77,6 +91,7 @@ test('convertRawSemester()', t => {
       },
     ],
     valid: true,
+    firstWeekParity: 'odd',
   }
 
   const actual = s.convertRawSemester(original)
@@ -92,8 +107,8 @@ test('dateInSemester()', t => {
 
   const dateIn = new Date('2015-03-01')
   const dateOut = new Date('2015-10-01')
-  t.equal(s.dateInSemester(semester, dateIn), true, 'returns true for date within the semester')
-  t.equal(s.dateInSemester(semester, dateOut), false, 'returns false for date outside of the semester')
+  t.equal(s.dateInSemester(dateIn, semester), true, 'returns true for date within the semester')
+  t.equal(s.dateInSemester(dateOut, semester), false, 'returns false for date outside of the semester')
   t.end()
 })
 
