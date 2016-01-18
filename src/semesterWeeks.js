@@ -7,7 +7,7 @@ const referenceDate = fmoment(0).startOf('isoWeek').freeze()
 
 
 /**
- * Returns number of ISO weeks since the unix epoch.
+ * Returns number of ISO weeks since the start of the unix epoch.
  *
  * @see http://www.epochconverter.com/date-and-time/weeknumbers-by-year.php?year=1970
  * @sig Moment -> Number
@@ -56,8 +56,8 @@ const weekParity = (periods, weekstamp) => {
   ))
 
   if (period) {
-    const firstParity = parityToNum(period.firstWeekParity)
-    const parity = (weeksSinceEpoch(period.startsAt) + firstParity + weekstamp) % 2
+    const weeksSinceStart = weekstamp - weeksSinceEpoch(period.startsAt)
+    const parity = (weeksSinceStart + parityToNum(period.firstWeekParity)) % 2
 
     return parityName(parity)
   }
