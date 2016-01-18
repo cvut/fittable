@@ -274,6 +274,10 @@ function semesterDataCallback (callback) {
             })),
           }, {
             ...semester,
+            // TODO: remove after resolving https://github.com/cvut/sirius/issues/172
+            periods: R.map(
+              per => ({ ...per, irregular: !!per.firstDayOverride }),
+              semester.periods),
             breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
             dayStartsAtHour: 7.5,
             dayEndsAtHour: 21.25,
