@@ -266,8 +266,6 @@ function semesterDataCallback (callback) {
           { // transformations; converts date to frozen moment
             startsAt: fmoment,
             endsAt: fmoment,
-            examsStartAt: fmoment,  // FIXME: remove, it's deprecated
-            examsEndAt: fmoment,  // FIXME: remove, it's deprecated
             periods: R.map(R.evolve({
               startsAt: fmoment,
               endsAt: fmoment,

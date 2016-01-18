@@ -45,18 +45,24 @@ test('semesterYears()', t => {
 })
 
 test('convertRawSemester()', t => {
+
+  const periods = [{
+    type: 'teaching',
+    startsAt: fmoment('2015-10-05'),
+    endsAt: fmoment('2015-12-20'),
+  }]
+
   const original = {
     id: '18000-B142',
     semester: 'B142',
     faculty: 18000,
     startsAt: fmoment('2015-02-16'),
     endsAt: fmoment('2015-09-21'),
-    examsStartAt: fmoment('2015-05-18'),
-    examsEndAt: fmoment('2015-06-27'),
     hourDuration: 45,
     breakDuration: 15,
     dayStartsAtHour: 7.5,
     dayEndsAtHour: 21.25,
+    periods,
   }
 
   const expected = {
@@ -70,13 +76,7 @@ test('convertRawSemester()', t => {
       ends: 21.25,
       lessonDuration: 0.875,
     },
-    periods: [
-      {
-        type: 'exams',
-        startsOn: fmoment('2015-05-18'),
-        endsOn: fmoment('2015-06-27'),
-      },
-    ],
+    periods,
     valid: true,
   }
 

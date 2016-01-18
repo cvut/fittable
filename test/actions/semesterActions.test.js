@@ -31,12 +31,11 @@ test('fetchSemesterData() dispatch', t => {
       faculty: 18000,
       startsAt: fmoment('2015-02-16'),
       endsAt: fmoment('2015-09-21'),
-      examsStartAt: fmoment('2015-05-18'),
-      examsEndAt: fmoment('2015-06-27'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
       dayEndsAtHour: 21.25,
+      periods: [],
     },
     {
       id: '18000-B151',
@@ -44,12 +43,11 @@ test('fetchSemesterData() dispatch', t => {
       faculty: 18000,
       startsAt: fmoment('2015-09-12'),
       endsAt: fmoment('2016-02-28'),
-      examsStartAt: fmoment('2015-01-12'),
-      examsEndAt: fmoment('2015-02-20'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
       dayEndsAtHour: 21.25,
+      periods: [],
     },
   ]
 

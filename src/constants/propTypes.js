@@ -53,8 +53,6 @@ export const semester = PropTypes.shape({
   faculty: PropTypes.number,
   startsAt: moment,
   endsAt: moment,
-  examsStartAt: moment,
-  examsEndAt: moment,
   hourDuration: PropTypes.number,
   breakDuration: PropTypes.number,
   dayStartsAtHour: PropTypes.number,  // FIXME: this should be probably replaced with hourStarts array

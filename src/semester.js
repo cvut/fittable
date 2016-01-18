@@ -47,14 +47,7 @@ export function convertRawSemester (semester) {
       ends: dayEndsAtHour,
       lessonDuration,
     },
-    // FIXME: replace with real periods!
-    periods: [
-      {
-        type: 'exams',
-        startsOn: semester.examsStartAt,
-        endsOn: semester.examsEndAt,
-      },
-    ],
+    periods: semester.periods,
     valid: true,
   }
 }

@@ -147,26 +147,46 @@ var semesterDataCallback = function(callback) {
       id: "18000-B142",
       semester: "B142",
       faculty: 18000,
-      startsAt: fmoment("2015-02-16"),
-      endsAt: fmoment("2015-09-21"),
-      examsStartAt: fmoment("2015-05-18"),
-      examsEndAt: fmoment("2015-06-27"),
+      startsAt: fmoment('2015-02-16'),
+      endsAt: fmoment('2015-09-21'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
-      dayEndsAtHour: 21.25
+      dayEndsAtHour: 21.25,
+      periods: [
+        {
+          type: 'teaching',
+          startsAt: fmoment('2015-02-16'),
+          endsAt: fmoment('2015-05-17'),
+        },
+        {
+          type: 'exams',
+          startsAt: fmoment('2015-05-18'),
+          endsAt: fmoment('2015-06-27')
+        },
+      ],
     }, {
       id: "18000-B151",
       semester: "B151",
       faculty: 18000,
-      startsAt: fmoment("2015-02-16"),
-      endsAt: fmoment("2015-09-21"),
-      examsStartAt: fmoment("2015-05-18"),
-      examsEndAt: fmoment("2015-06-27"),
+      startsAt: fmoment('2015-10-05'),
+      endsAt: fmoment('2016-02-21'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
-      dayEndsAtHour: 21.25
+      dayEndsAtHour: 21.25,
+      periods: [
+        {
+          type: 'teaching',
+          startsAt: fmoment('2015-10-05'),
+          endsAt: fmoment('2015-12-22'),
+        },
+        {
+          type: 'exams',
+          startsAt: fmoment('2016-01-04'),
+          endsAt: fmoment('2016-02-21')
+        },
+      ],
     }]);
 
   }, Math.random() * 2000);
