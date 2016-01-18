@@ -1,5 +1,6 @@
 import R from 'ramda'
 import { withinDates } from './date'
+import { semesterPeriodsToWeeks } from './semesterWeeks'
 
 const toDate = d => new Date(d)
 
@@ -43,7 +44,7 @@ export function convertRawSemester (semester) {
       ends: dayEndsAtHour,
       lessonDuration,
     },
-    periods: semester.periods,
+    weeks: semesterPeriodsToWeeks(semester.periods),
     valid: true,
   }
 }
