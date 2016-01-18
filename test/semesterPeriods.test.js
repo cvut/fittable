@@ -6,7 +6,6 @@ import * as sp from '../src/semesterPeriods'
 const omitPeriods = R.map(R.omit('periods'))
 const pickPeriods = R.map(R.pick('periods'))
 
-
 test('semesterWeeks()', t => {
 
   const periods = [
