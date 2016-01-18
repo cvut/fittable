@@ -51,8 +51,8 @@ export const semester = PropTypes.shape({
   id: PropTypes.string,
   semester: PropTypes.string,
   faculty: PropTypes.number,
-  startsAt: moment,
-  endsAt: moment,
+  startsOn: moment,
+  endsOn: moment,
   hourDuration: PropTypes.number,
   breakDuration: PropTypes.number,
   dayStartsAtHour: PropTypes.number,  // FIXME: this should be probably replaced with hourStarts array
@@ -62,8 +62,8 @@ export const semester = PropTypes.shape({
 
 export const period = PropTypes.shape({
   type: PropTypes.oneOf(['exams', 'holiday', 'teaching']),
-  startsAt: moment,
-  endsAt: moment,
+  startsOn: moment,
+  endsOn: moment,
   firstWeekParity: PropTypes.oneOf(['odd', 'even']),
   firstDayOverride: PropTypes.string,
 })

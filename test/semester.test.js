@@ -7,13 +7,13 @@ test('currentSemester()', t => {
   const semesters = [
     {
       id: '18000-B142',
-      startsAt: fmoment('2014-10-01'),
-      endsAt: fmoment('2015-02-15'),
+      startsOn: fmoment('2014-10-01'),
+      endsOn: fmoment('2015-02-15'),
     },
     {
       id: '18000-B151',
-      startsAt: fmoment('2015-02-16'),
-      endsAt: fmoment('2015-09-21'),
+      startsOn: fmoment('2015-02-16'),
+      endsOn: fmoment('2015-09-21'),
     },
   ]
 
@@ -48,16 +48,16 @@ test('convertRawSemester()', t => {
 
   const periods = [{
     type: 'teaching',
-    startsAt: fmoment('2015-10-05'),
-    endsAt: fmoment('2015-12-20'),
+    startsOn: fmoment('2015-10-05'),
+    endsOn: fmoment('2015-12-20'),
   }]
 
   const original = {
     id: '18000-B142',
     semester: 'B142',
     faculty: 18000,
-    startsAt: fmoment('2015-02-16'),
-    endsAt: fmoment('2015-09-21'),
+    startsOn: fmoment('2015-02-16'),
+    endsOn: fmoment('2015-09-21'),
     hourDuration: 45,
     breakDuration: 15,
     dayStartsAtHour: 7.5,

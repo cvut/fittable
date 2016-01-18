@@ -147,8 +147,8 @@ var semesterDataCallback = function(callback) {
       id: "18000-B142",
       semester: "B142",
       faculty: 18000,
-      startsAt: fmoment('2015-02-16'),
-      endsAt: fmoment('2015-09-21'),
+      startsOn: fmoment('2015-02-16'),
+      endsOn: fmoment('2015-09-21'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
@@ -156,21 +156,21 @@ var semesterDataCallback = function(callback) {
       periods: [
         {
           type: 'teaching',
-          startsAt: fmoment('2015-02-16'),
-          endsAt: fmoment('2015-05-17'),
+          startsOn: fmoment('2015-02-16'),
+          endsOn: fmoment('2015-05-17'),
         },
         {
           type: 'exams',
-          startsAt: fmoment('2015-05-18'),
-          endsAt: fmoment('2015-06-27')
+          startsOn: fmoment('2015-05-18'),
+          endsOn: fmoment('2015-06-27')
         },
       ],
     }, {
       id: "18000-B151",
       semester: "B151",
       faculty: 18000,
-      startsAt: fmoment('2015-10-05'),
-      endsAt: fmoment('2016-02-21'),
+      startsOn: fmoment('2015-10-05'),
+      endsOn: fmoment('2016-02-21'),
       hourDuration: 45,
       breakDuration: 15,
       dayStartsAtHour: 7.5,
@@ -178,13 +178,13 @@ var semesterDataCallback = function(callback) {
       periods: [
         {
           type: 'teaching',
-          startsAt: fmoment('2015-10-05'),
-          endsAt: fmoment('2015-12-22'),
+          startsOn: fmoment('2015-10-05'),
+          endsOn: fmoment('2015-12-22'),
         },
         {
           type: 'exams',
-          startsAt: fmoment('2016-01-04'),
-          endsAt: fmoment('2016-02-21')
+          startsOn: fmoment('2016-01-04'),
+          endsOn: fmoment('2016-02-21')
         },
       ],
     }]);
