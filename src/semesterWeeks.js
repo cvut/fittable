@@ -6,24 +6,34 @@ import { forEachWithIndex, reduceBy } from './utils'
 const referenceDate = fmoment(0).startOf('isoWeek').freeze()
 
 
-// weeksSinceEpoch :: Moment -> Number
+/**
+ * Returns number of ISO weeks since the unix epoch.
+ *
+ * @see http://www.epochconverter.com/date-and-time/weeknumbers-by-year.php?year=1970
+ * @sig Moment -> Number
+ */
 const weeksSinceEpoch = (date) => referenceDate.diff(date, 'weeks') * -1
 
-// periodWeeksRange :: Period -> [Number, Number]
+/**
+ * Returns an array of weekstamps from start to end of the given
+ * Semester Period.
+ *
+ * @sig Period -> [Number]
+ */
 const periodWeeksRange = ({ startsAt, endsAt }) => {
   return R.range(weeksSinceEpoch(startsAt), weeksSinceEpoch(endsAt) + 1)
 }
 
-// isRegularPeriod :: Period -> Boolean
+// @sig Period -> Boolean
 const isRegularPeriod = (period) => !period.irregular
 
-// isTeachingWeek :: Week -> Boolean
+// @sig Week -> Boolean
 const isTeachingWeek = (week) => week.types.includes('teaching')
 
-// parityName :: Number -> String
+// @sig Number -> String
 const parityName = (num) => num % 2 ? 'odd' : 'even'
 
-// parityToNum :: String -> Number | undefined
+// @sig String -> Number | undefined
 const parityToNum = (str) => {
   switch (str) {
     case 'even': return 0
@@ -32,7 +42,13 @@ const parityToNum = (str) => {
   }
 }
 
-// weekParity :: ([Period], Number) -> String | undefined
+/**
+ * Computes a parity of the teaching week specified by the Weekstamp and
+ * Semester Periods that belongs to that week. If there's no Period with the
+ * key `firstWeekParity` in the given periods, then it returns undefined.
+ *
+ * @sig ([Period], Number) -> String | undefined
+ */
 const weekParity = (periods, weekstamp) => {
   const period = periods.find(R.both(
     isRegularPeriod,
@@ -47,14 +63,19 @@ const weekParity = (periods, weekstamp) => {
   }
 }
 
-// regularPeriodsTypes :: [Period] -> [String]
+// @sig [Period] -> [String]
 const regularPeriodsTypes = R.pipe(
   R.filter(isRegularPeriod),
   R.map(p => p.type),
   R.uniq
 )
 
-// createWeek :: (Number, [Period]) -> Week
+/**
+ * Returns a new Semester Week object with the given Semester Periods that
+ * belongs to the calendar week specified by the weekstamp.
+ *
+ * @sig (Number, [Period]) -> Week
+ */
 const createWeek = (weekstamp, periods) => ({
   weekstamp,
   periods,
@@ -63,16 +84,27 @@ const createWeek = (weekstamp, periods) => ({
   teachingWeek: undefined,
 })
 
-// periodsByWeek :: [Period] -> {String: [Period]}
-const periodsByWeek = R.pipe(
+/**
+ * Groups Semester Periods into calendar weeks numbered by a Weekstamp (number
+ * of weeks since the epoch). Each Semester Period can be present in multiple
+ * calendar weeks (it's a many-to-many mapping).
+ *
+ * @sig [Period] -> {String: [Period]}
+ */
+const periodsByWeeks = R.pipe(
   R.sortBy(p => p.startsAt),
   R.chain(p => R.xprod(periodWeeksRange(p), [p])),
   reduceBy(R.head, (acc, pair) => acc.concat(pair[1]), [])
 )
 
-// semesterPeriodsToWeeks :: [Period] -> {String: Week}
+/**
+ * Transforms the Periods of a single Semester into the semester Weeks indexed
+ * by a Weekstamp (number of weeks since the epoch).
+ *
+ * @sig [Period] -> {String: Week}
+ */
 export const semesterPeriodsToWeeks = R.pipe(
-  periodsByWeek,
+  periodsByWeeks,
   R.mapObjIndexed((periods, key) => {
     return createWeek(key *1, periods)
   }),
