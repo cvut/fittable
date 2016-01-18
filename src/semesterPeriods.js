@@ -32,16 +32,16 @@ const parityToNum = (str) => {
   }
 }
 
-// weekParity :: ([Period], Number) -> String
+// weekParity :: ([Period], Number) -> String | undefined
 const weekParity = (periods, weekstamp) => {
-  const period = periods.find(R.allPass([
+  const period = periods.find(R.both(
     isRegularPeriod,
     R.prop('firstWeekParity')
-  ]))
+  ))
 
   if (period) {
     const firstParity = parityToNum(period.firstWeekParity)
-    const parity = (weeksSinceEpoch(period.startsAt) + weekstamp + firstParity) % 2
+    const parity = (weeksSinceEpoch(period.startsAt) + firstParity + weekstamp) % 2
 
     return parityName(parity)
   }
