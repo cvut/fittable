@@ -9,7 +9,7 @@ test('className()', t => {
       expected: 'ComponentName-descendants ComponentName-descendants--modifier is-states',
     },
     {
-      args: ['AwesomeComponent', ['heading'], null, { blinking: false }],
+      args: ['AwesomeComponent', ['heading'], [], { blinking: false }],
       expected: 'AwesomeComponent-heading',
     },
     {
@@ -17,11 +17,11 @@ test('className()', t => {
       expected: 'AwesomeComponent-footer AwesomeComponent-footer--darker is-blinking',
     },
     {
-      args: ['MenuBar', null, ['lighter'], { blinking: true, visible: true }],
+      args: ['MenuBar', [], ['lighter'], { blinking: true, visible: true }],
       expected: 'MenuBar MenuBar--lighter is-blinking is-visible',
     },
     {
-      args: ['Selector', ['heading', 'text'], null, { hoverable: true, highlighted: false }],
+      args: ['Selector', ['heading', 'text'], [], { hoverable: true, highlighted: false }],
       expected: 'Selector-heading-text is-hoverable',
     },
     {
@@ -29,7 +29,7 @@ test('className()', t => {
       expected: 'Car-roof Car-roof--shiny Car-roof--large is-opened',
     },
     {
-      args: ['Selector', null, null, null],
+      args: ['Selector', [], [], {}],
       expected: 'Selector',
     },
   ]
