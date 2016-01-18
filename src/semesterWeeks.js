@@ -109,7 +109,8 @@ export const semesterPeriodsToWeeks = R.pipe(
     return createWeek(key *1, periods)
   }),
   R.tap(R.pipe(
-    R.values, R.filter(isTeachingWeek),
+    R.values,
+    R.filter(isTeachingWeek),
     R.sortBy(o => o.weekstamp),
     forEachWithIndex((week, idx) => {
       week.teachingWeek = idx + 1
