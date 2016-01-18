@@ -3,13 +3,13 @@
   clear: left;
   width: 100%;
 
-  &--cut { width: 75%; }
+  &.is-cut { width: 75%; }
 
   @media screen and (max-width: 1200px) {
-    &--cut { width: 60%; }
+    &.is-cut { width: 60%; }
   }
 
-  &--muted {
+  &.is-muted {
     .grid-wrapper,
     .now-indicator,
     .label,
@@ -75,7 +75,7 @@
     }
   }
 
-  &--7days .day {
+  &.is-7days .day {
     width: 14.28%;
   }
 
