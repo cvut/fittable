@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import R from 'ramda'
 import { fmoment } from '../src/date'
-import * as sp from '../src/semesterPeriods'
+import * as sp from '../src/semesterWeeks'
 
 const omitPeriods = R.map(R.omit('periods'))
 const pickPeriods = R.map(R.pick('periods'))
