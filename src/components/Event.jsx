@@ -27,7 +27,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  detailShown: false,
+  showDetail: false,
 }
 
 class EventBox extends React.Component {
@@ -97,7 +97,7 @@ class EventBox extends React.Component {
   }
 
   render () {
-    const onClickVal = this.props.detailShown ? null : this.props.data.id
+    const onClickVal = this.props.showDetail ? null : this.props.data.id
 
     return (
       <div
