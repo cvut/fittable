@@ -3,11 +3,11 @@ import { fmoment } from './date'
 import { forEachWithIndex, reduceBy } from './utils'
 
 // The reference point for weeks since the epoch.
-const REFERENCE_DATE = fmoment(0).startOf('isoWeek').freeze()
+const referenceDate = fmoment(0).startOf('isoWeek').freeze()
 
 
 // weeksSinceEpoch :: Moment -> Number
-const weeksSinceEpoch = (date) => REFERENCE_DATE.diff(date, 'weeks') * -1
+const weeksSinceEpoch = (date) => referenceDate.diff(date, 'weeks') * -1
 
 // periodWeeksRange :: Period -> [Number, Number]
 const periodWeeksRange = ({ startsAt, endsAt }) => {
