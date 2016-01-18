@@ -73,17 +73,6 @@ export function calculateHourLabels (timeline) {
   }), Math.ceil(timeline.hours))
 }
 
-export function classModifiers (properties, elementClass) {
-  const className = (key) => `${elementClass}--${key.substr(2).toLowerCase()}`
-
-  return R.reduce((acc, key) => {
-    if (key.startsWith('is') && !!properties[key]) {
-      return `${acc} ${className(key)}`
-    }
-    return acc
-  }, elementClass, R.keys(properties))
-}
-
 // groupEventsByDays :: [Event] -> {String: [Event]}
 export const groupEventsByDays = R.groupBy(event => {
   return weekdayNum(new Date(event.startsAt))

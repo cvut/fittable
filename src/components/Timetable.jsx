@@ -10,9 +10,10 @@ import { grid as gridPropType } from '../constants/propTypes'
 import { weekdayNum, shiftDate, weekStartDate, compareDate } from '../date'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import {
-  createTimeline, calculateEventPosition, calculateHourLabels, classModifiers,
+  createTimeline, calculateEventPosition, calculateHourLabels,
   groupEventsByDays, calculateOverlap, eventAppearance,
 } from '../timetable'
+import suitClassName from '../utils/suitClassName'
 import Day from './Day'
 import PeriodicUpdate from './PeriodicUpdate'
 import NowIndicator from './NowIndicator'
@@ -161,19 +162,17 @@ class Timetable extends React.Component {
       createDays(this.props, dayCount, this.state.animationDirection)
     )(this.props.weekEvents)
 
-    // Classes by properties
-    let className = classModifiers({
-      isMuted: this.props.eventId !== null,
-      isCut: this.props.functionsOpened !== null && isScreenLarge(this.props.screenSize),
-      is7days: this.props.days7,
-    }, 'table') // fixme: change class 'table' to 'Timetable'!
-
-    // Classes by screen size
-    className += classByScreenSize(this.props.screenSize, [
-      ' table--vertical table--small',
-      ' table--vertical',
-      ' table--' + this.props.layout,
+    // Modifiers by screen size
+    const modifiers = classByScreenSize(this.props.screenSize, [
+      ['vertical', 'small'], ['vertical'], [this.props.layout],
     ])
+
+    // Classes by properties
+    const className = suitClassName('table', null, modifiers, {
+      muted: this.props.eventId !== null,
+      cut: this.props.functionsOpened !== null && isScreenLarge(this.props.screenSize),
+      '7days': this.props.days7,
+    }) // fixme: change class 'table' to 'Timetable'!
 
     const isGridHorizontal = layout === 'horizontal'
 

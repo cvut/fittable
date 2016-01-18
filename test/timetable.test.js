@@ -106,21 +106,6 @@ test('calculateHourLabels()', t => {
   t.end()
 })
 
-test('classModifiers()', t => {
-  const properties = {
-    isProperty: true,
-    isLoremIpsum: false,
-    isDolorSitAmet: true,
-    irrelevantProp: true,
-    anotherNoise: false,
-  }
-
-  const expected = 'class class--property class--dolorsitamet'
-
-  t.equal(tt.classModifiers(properties, 'class'), expected, 'returns properties transformed to classname')
-  t.end()
-})
-
 test('groupEventsByDays()', t => {
   const events = [
     {startsAt: '2015-12-03 12:00:00'},
