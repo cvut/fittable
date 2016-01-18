@@ -49,7 +49,8 @@ test('convertRawSemester()', t => {
   const periods = [{
     type: 'teaching',
     startsOn: fmoment('2015-10-05'),
-    endsOn: fmoment('2015-12-20'),
+    endsOn: fmoment('2015-10-11'),
+    firstWeekParity: 'even',
   }]
 
   const original = {
@@ -76,7 +77,15 @@ test('convertRawSemester()', t => {
       ends: 21.25,
       lessonDuration: 0.875,
     },
-    periods,
+    weeks: {
+      2388: {
+        weekstamp: 2388,
+        types: ['teaching'],
+        parity: 'even',
+        teachingWeek: 1,
+        periods,
+      }
+    },
     valid: true,
   }
 

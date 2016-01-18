@@ -68,6 +68,16 @@ export const period = PropTypes.shape({
   firstDayOverride: PropTypes.string,
 })
 
+const periodType = PropTypes.oneOf(['exams', 'holiday', 'teaching'])
+
+export const semesterWeek = PropTypes.shape({
+  weekstamp: PropTypes.number,
+  periods: PropTypes.arrayOf(period),
+  types: PropTypes.arrayOf(periodType),
+  parity: PropTypes.oneOf(['even', 'odd']),  // optional
+  teachingWeek: PropTypes.number,  // optional
+})
+
 export const moment = (props, propName, componentName) => {
   const prop = props[propName]
   if (!Moment.isMoment(prop)) {
