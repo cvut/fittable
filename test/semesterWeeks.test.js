@@ -9,7 +9,7 @@ const pickPeriods = R.map(R.pick('periods'))
 test('semesterPeriodsToWeeks()', t => {
 
   const periods = [
-    // type    , startsAt    , endsAt      , weekParity, dayOverride, irregular   weekstamp
+    // type    , startsOn    , endsOn      , weekParity, dayOverride, irregular   weekstamp
     ['teaching', '2015-12-03', '2015-12-20', 'odd'     , undefined  , false],  // 2396-2398
     ['teaching', '2015-12-21', '2015-12-21', 'even'    , 'wednesday', true ],  // 2399
     ['teaching', '2015-12-22', '2015-12-22', 'odd'     , 'tuesday'  , true ],  // 2399
@@ -18,8 +18,8 @@ test('semesterPeriodsToWeeks()', t => {
     ['exams'   , '2016-01-07', '2016-01-15', undefined , undefined  , false],  // 2402
   ].map(column => ({
     type: column[0],
-    startsAt: fmoment(column[1]),
-    endsAt: fmoment(column[2]),
+    startsOn: fmoment(column[1]),
+    endsOn: fmoment(column[2]),
     firstWeekParity: column[3],
     firstDayOverride: column[4],
     irregular: column[5],

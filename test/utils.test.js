@@ -35,3 +35,21 @@ test('reduceBy()', t => {
 
   t.end()
 })
+
+test('renameKeys()', t => {
+
+  const keysMap = { title: 'name', type: 'kind', foo: 'bar' }
+  const input = { title: 'Elisia', age: 22, type: 'human' }
+  const expected = { name: 'Elisia', age: 22, kind: 'human' }
+
+  const inputClone = { ...input }
+
+  t.deepEqual(util.renameKeys(keysMap, input), expected,
+    'renames keys according to the given keysMap')
+
+  t.deepEqual(input, inputClone, 'does not mutate given object')
+
+  t.deepEqual(util.renameKeys(keysMap)(input), expected, 'is curried')
+
+  t.end()
+})

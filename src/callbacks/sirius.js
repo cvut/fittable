@@ -13,6 +13,7 @@ import URL from 'url'
 import R from 'ramda'
 import camelize from 'camelize'
 import { fmoment } from '../date'
+import { renameKeys } from '../utils'
 
 import { SIRIUS_PROXY_PATH } from '../config'
 
@@ -261,26 +262,7 @@ function semesterDataCallback (callback) {
       // Request successful
       if (request.status === 200) {
         const data = camelize(JSON.parse(request.responseText))
-
-        const semesters = R.map(semester => R.evolve(
-          { // transformations; converts date to frozen moment
-            startsAt: fmoment,
-            endsAt: fmoment,
-            periods: R.map(R.evolve({
-              startsAt: fmoment,
-              endsAt: fmoment,
-            })),
-          }, {
-            ...semester,
-            // TODO: remove after resolving https://github.com/cvut/sirius/issues/172
-            periods: R.map(
-              per => ({ ...per, irregular: !!per.firstDayOverride }),
-              semester.periods),
-            breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
-            dayStartsAtHour: 7.5,
-            dayEndsAtHour: 21.25,
-          }
-        ), data.semesters || [])
+        const semesters = R.map(convertSemester, data.semesters || [])
 
         // Send semester data to fittable
         callback(semesters)
@@ -295,6 +277,33 @@ function semesterDataCallback (callback) {
 
   makeRequest(`semesters?limit=${defaultLimit}`, requestHandler)
 }
+
+const convertInterval = R.pipe(
+  // Badly named in Sirius API; "at" marks a specific time, "on" is for date.
+  renameKeys({ startsAt: 'startsOn', endsAt: 'endsOn' }),
+  // Convert string dates to frozen moment.
+  R.evolve({ startsOn: fmoment, endsOn: fmoment })
+)
+
+const convertSemester = R.pipe(
+  (semester) => ({
+    ...semester,
+    periods: R.map(convertPeriod, semester.periods),
+    breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
+    dayStartsAtHour: 7.5,
+    dayEndsAtHour: 21.25,
+  }),
+  convertInterval
+)
+
+const convertPeriod = R.pipe(
+  // TODO: remove after resolving https://github.com/cvut/sirius/issues/172
+  (period) => ({
+    ...period,
+    irregular: !!period.firstDayOverride,
+  }),
+  convertInterval
+)
 
 function userCallback (cb) {
   function requestHandler (request) {

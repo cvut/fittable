@@ -3,16 +3,12 @@ import { withinDates } from './date'
 
 const toDate = d => new Date(d)
 
-// FIXME: get rid of Raw functions; raw properties should be handled at system boundaries, in the middleware
-const semesterIntervalRaw = R.props(['startsAt', 'endsAt'])
-const dateInSemesterRaw = (semester, date) => withinDates(...semesterIntervalRaw(semester), date)
-
 const semesterInterval = R.props(['startsOn', 'endsOn'])
 export const dateInSemester = (semester, date) => withinDates(...semesterInterval(semester), date)
 
 export function findSemester (semesters, date) {
   // XXX: must be wrapped since we have a different order
-  const predicate = (sem) => dateInSemesterRaw(sem, date)
+  const predicate = (sem) => dateInSemester(sem, date)
 
   return R.find(predicate, semesters)
 }
@@ -38,8 +34,8 @@ export function convertRawSemester (semester) {
   const lessonDuration = ((hDur * 2) + bDur) / 2
   return {
     id: semester.id,
-    startsOn: semester.startsAt,
-    endsOn: semester.endsAt,
+    startsOn: semester.startsOn,
+    endsOn: semester.endsOn,
     season: semesterSeason(semester.semester),
     years: semesterYears(semester.semester),
     grid: {

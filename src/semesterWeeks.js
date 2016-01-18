@@ -21,8 +21,8 @@ const weeksSinceEpoch = (date) => referenceDate.diff(date, 'weeks') * -1
  *
  * @sig Period -> [Number]
  */
-const periodWeeksRange = ({ startsAt, endsAt }) => {
-  return R.range(weeksSinceEpoch(startsAt), weeksSinceEpoch(endsAt) + 1)
+const periodWeeksRange = ({ startsOn, endsOn }) => {
+  return R.range(weeksSinceEpoch(startsOn), weeksSinceEpoch(endsOn) + 1)
 }
 
 // @sig Period -> Boolean
@@ -51,7 +51,7 @@ const parityToNum = (str) => {
  * The calculation is based on difference between the period's start Weekstamp
  * and the given date's Weekstamp, shifted by the firstWeekParity:
  *
- *   (weekstamp(date) - weekstamp(startsAt) + firstWeekParity) mod 2
+ *   (weekstamp(date) - weekstamp(startsOn) + firstWeekParity) mod 2
  *
  * @sig ([Period], Number) -> String | undefined
  */
@@ -62,7 +62,7 @@ const weekParity = (periods, weekstamp) => {
   ))
 
   if (period) {
-    const weeksSinceStart = weekstamp - weeksSinceEpoch(period.startsAt)
+    const weeksSinceStart = weekstamp - weeksSinceEpoch(period.startsOn)
     const parity = (weeksSinceStart + parityToNum(period.firstWeekParity)) % 2
 
     return parityName(parity)
@@ -98,7 +98,7 @@ const createWeek = (weekstamp, periods) => ({
  * @sig [Period] -> {String: [Period]}
  */
 const periodsByWeeks = R.pipe(
-  R.sortBy(p => p.startsAt),
+  R.sortBy(p => p.startsOn),
   R.chain(p => R.xprod(periodWeeksRange(p), [p])),
   reduceBy(R.head, (acc, pair) => acc.concat(pair[1]), [])
 )
