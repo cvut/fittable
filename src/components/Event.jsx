@@ -37,7 +37,7 @@ class EventBox extends React.Component {
     const length = `${props.data._length * 100}%`
     const position = `${props.data._position * 100}%`
 
-    let positionProperties = {}
+    let positionProperties
     if (props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
       positionProperties = {
         width: length,
