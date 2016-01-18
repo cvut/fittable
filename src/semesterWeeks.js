@@ -70,8 +70,8 @@ const periodsByWeek = R.pipe(
   reduceBy(R.head, (acc, pair) => acc.concat(pair[1]), [])
 )
 
-// semesterWeeks :: [Period] -> {String: Week}
-export const semesterWeeks = R.pipe(
+// semesterPeriodsToWeeks :: [Period] -> {String: Week}
+export const semesterPeriodsToWeeks = R.pipe(
   periodsByWeek,
   R.mapObjIndexed((periods, key) => {
     return createWeek(key *1, periods)

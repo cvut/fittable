@@ -6,7 +6,7 @@ import * as sp from '../src/semesterWeeks'
 const omitPeriods = R.map(R.omit('periods'))
 const pickPeriods = R.map(R.pick('periods'))
 
-test('semesterWeeks()', t => {
+test('semesterPeriodsToWeeks()', t => {
 
   const periods = [
     // type    , startsAt    , endsAt      , weekParity, dayOverride, irregular   weekstamp
@@ -46,7 +46,7 @@ test('semesterWeeks()', t => {
     R.indexBy(o => o.weekstamp)
   )()
 
-  const actual = sp.semesterWeeks(periods)
+  const actual = sp.semesterPeriodsToWeeks(periods)
 
   // Omit periods to make diff more readable.
   t.deepEqual(omitPeriods(actual), omitPeriods(expected),
