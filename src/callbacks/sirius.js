@@ -15,7 +15,7 @@ import camelize from 'camelize'
 import { fmoment } from '../date'
 import { renameKeys } from '../utils'
 
-import { SIRIUS_PROXY_PATH } from '../config'
+import { FACULTY_ID, SIRIUS_PROXY_PATH } from '../config'
 
 const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('length', 0))
 
@@ -275,7 +275,7 @@ function semesterDataCallback (callback) {
     }
   }
 
-  makeRequest(`semesters?limit=${defaultLimit}`, requestHandler)
+  makeRequest(`semesters?faculty=${FACULTY_ID}&limit=${defaultLimit}`, requestHandler)
 }
 
 const convertInterval = R.pipe(
