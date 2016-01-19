@@ -20,14 +20,6 @@
     }
   }
 
-  .view-date {
-    float: left;
-    position: relative;
-    margin-left: 15px;
-    color: $primary-color;
-    line-height: 35px;
-  }
-
   @media #{$large-up} {
     .week-toggle-dow {
       display: none;
