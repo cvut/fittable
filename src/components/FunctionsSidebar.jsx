@@ -53,7 +53,6 @@ class FunctionsSidebar extends React.Component {
     if (this.props.opened === 'filter') {
       functionToRender = (
         <FunctionFilter
-          ref="functionFilter"
           displayFilter={this.props.displayFilter}
           onFilterChange={this.props.onFilterChange}
         />

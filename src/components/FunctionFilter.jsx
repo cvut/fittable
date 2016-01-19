@@ -1,83 +1,46 @@
-/**
- * Function component, filtering function
- * Provides ability to filter out some types of events from timetable
- */
-
-import React, { PropTypes } from 'react'
+import React from 'react'
+import R from 'ramda'
 import CP from 'counterpart'
 
-const propTypes = {
-  displayFilter: PropTypes.objectOf(PropTypes.bool),
-  onFilterChange: PropTypes.func,
-}
+// Types of filterable events.
+const eventTypes = [
+  'lecture', 'tutorial', 'laboratory', 'exam', 'assessment', 'course_event', 'other',
+]
 
-class FunctionFilter extends React.Component {
+/**
+ * Provides ability to filter out some types of events from timetable.
+ *
+ * @param {Object} options.displayFilter State of the filters.
+ * @param {Function} options.onFilterChange Function to be called on a filter change.
+ */
+function FunctionFilter ({ displayFilter, onFilterChange }) {
 
-  /**
-   * Handles clicking on one filter item
-   * @param {string} filter Clicked filter item
-   */
-  handleToggleFilter (filter) {
-    const oldState = this.props.displayFilter[filter]
-    this.props.onFilterChange({[filter]: !oldState})
+  // Handles click on a filter button.
+  function handleToggleFilter (filterName) {
+    const oldState = displayFilter[filterName]
+    onFilterChange({ [filterName]: !oldState })
   }
 
-  render () {
+  const filterButton = (filterName) => (
+    <li
+      key={ filterName }
+      className={ displayFilter[filterName] ? 'active' : '' }
+      onClick={ () => handleToggleFilter(filterName) }
+    >
+      <i className="fa fa-check"></i> { CP.translate('event_type.' + filterName) }
+    </li>
+  )
 
-    return (
-      <div className="function function-filter" ref="rootEl">
-        <div className="clearfix" />
-        <h2>{CP.translate('functions.filter.heading')}</h2>
-        <ul className="filtering">
-          <li
-            className={ this.props.displayFilter['lecture'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'lecture')}
-          >
-            <i className="fa fa-check"></i> {CP.translate('event_type.lecture')}
-          </li>
-          <li
-            className={ this.props.displayFilter['tutorial'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'tutorial')}
-          >
-            <i className="fa fa-check"></i> {CP.translate('event_type.tutorial')}
-          </li>
-          <li
-            className={ this.props.displayFilter['laboratory'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'laboratory')}
-          >
-            <i className="fa fa-check"></i> {CP.translate('event_type.laboratory')}
-          </li>
-          <li
-            className={ this.props.displayFilter['exam'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'exam')}
-          >
-            <i className="fa fa-check"></i> {CP.translate('event_type.exam')}
-          </li>
-          <li
-            className={ this.props.displayFilter['assessment'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'assessment')}
-          >
-           <i className="fa fa-check"></i> {CP.translate('event_type.assessment')}
-          </li>
-          <li
-            className={ this.props.displayFilter['course_event'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'course_event')}
-          >
-           <i className="fa fa-check"></i> {CP.translate('event_type.course_event')}
-          </li>
-          <li
-            className={ this.props.displayFilter['other'] ? 'active' : '' }
-            onClick={this.handleToggleFilter.bind(this, 'other')}
-          >
-            <i className="fa fa-check"></i> {CP.translate('event_type.other')}
-          </li>
-        </ul>
-        <div className="clearfix" />
-        </div>
-    )
-  }
+  return (
+    <div className="function function-filter">
+      <div className="clearfix" />
+      <h2>{ CP.translate('functions.filter.heading') }</h2>
+      <ul className="filtering">
+        { R.map(filterButton, eventTypes) }
+      </ul>
+      <div className="clearfix" />
+    </div>
+  )
 }
-
-FunctionFilter.propTypes = propTypes
 
 export default FunctionFilter
