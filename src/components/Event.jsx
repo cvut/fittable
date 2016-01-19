@@ -40,27 +40,19 @@ class EventBox extends React.Component {
     // Forcing vertical on small screens
     const layoutCanBeHorizontal = isScreenLarge(props.screenSize)
     const limitMaximumWidth = !isScreenSmall(props.screenSize)
+    const isHorizontal = layoutCanBeHorizontal && props.layout === 'horizontal'
 
-    let positionProperties
-    if (layoutCanBeHorizontal && props.layout === 'horizontal') {
-      positionProperties = {
-        width: length,
-        left: position,
-      }
-    } else {
-      positionProperties = {
-        height: length,
-        top: position,
-      }
-    }
+    const positionProps = isHorizontal
+        ? { width: length, left: position }
+        : { height: length, top: position }
 
     if (limitMaximumWidth && props.showDetail) {
       return {
-        ...positionProperties,
+        ...positionProps,
         maxWidth: EVENT_MAX_WIDTH,
       }
     } else {
-      return positionProperties
+      return positionProps
     }
   }
 
