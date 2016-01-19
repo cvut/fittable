@@ -1,7 +1,7 @@
 {
   "week": "Week %(num)s",
-  "even": "Even",
-  "odd": "Odd",
+  "even": "even",
+  "odd": "odd",
   "summer_sem": "Summer %(year)s",
   "winter_sem": "Winter %(year)s",
 
@@ -40,6 +40,12 @@
     "next": "Next week",
     "selector": "Date selector",
     "unknown_semester": "unknown"
+  },
+
+  "semesterWeek": {
+    "teaching": "%(weekNum)s. teaching week (%(parity)s)",
+    "exams": "Exams period",
+    "holiday": "Holidays"
   },
 
   "functions": {

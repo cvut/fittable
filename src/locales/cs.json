@@ -1,7 +1,7 @@
 {
   "week": "Týden %(num)s",
-  "even": "Sudý",
-  "odd": "Lichý",
+  "even": "sudý",
+  "odd": "lichý",
   "summer_sem": "%(year)s Letní",
   "winter_sem": "%(year)s Zimní",
 
@@ -40,6 +40,12 @@
     "next": "Následující týden",
     "selector": "Výběr data",
     "unknown_semester": "neznámý"
+  },
+
+  "semesterWeek": {
+    "teaching": "%(weekNum)s. výukový týden (%(parity)s)",
+    "exams": "Zkouškové období",
+    "holiday": "Prázdniny"
   },
 
   "functions": {

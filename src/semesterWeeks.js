@@ -107,7 +107,7 @@ const periodsByWeeks = R.pipe(
  * Transforms the Periods of a single Semester into the Semester Weeks indexed
  * by a Weekstamp (number of weeks since the epoch).
  *
- * @sig [Period] -> {String: SemesterWeek}
+ * @sig [Period] -> SemesterWeeks
  */
 export const semesterPeriodsToWeeks = R.pipe(
   periodsByWeeks,
@@ -123,3 +123,13 @@ export const semesterPeriodsToWeeks = R.pipe(
     })
   ))
 )
+
+/**
+ * Finds Semester Week in the given Semester Weeks object for the
+ * specified date.
+ *
+ * @sig SemesterWeeks -> Moment | Date -> SemesterWeek
+ */
+export const findWeekByDate = R.curry((weeks, date) => {
+  return weeks[weeksSinceEpoch(date)]
+})

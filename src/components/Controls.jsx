@@ -6,6 +6,7 @@
 import React, { PropTypes } from 'react'
 import { isScreenMediumAndUp } from '../screen'
 
+import SemesterWeek from './SemesterWeek'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
@@ -78,6 +79,10 @@ class Controls extends React.Component {
           viewDate={this.props.viewDate}
           ref="weekSwitcher"
           onDateChange={this.props.onDateChange}
+          semester={this.props.semester}
+        />
+        <SemesterWeek
+          viewDate={this.props.viewDate}
           semester={this.props.semester}
         />
         <FunctionsBar onPanelToggle={this.props.onSettingsPanelChange} />

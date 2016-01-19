@@ -1,38 +1,34 @@
+import React from 'react'
+import R from 'ramda'
+import { findWeekByDate } from '../semesterWeeks'
+import { translate } from '../locale'
+
+// @sig Week -> String -> String
+const translateWeekName = R.curry((week, type) => {
+  return translate(`semesterWeek.${type}`, {
+    weekNum: week.teachingWeek || '?',
+    parity: translate(week.parity, { fallback: '' }),
+  })
+})
+
+// @sig Week -> String
+const displayName = (week) => {
+  if (!week) { return '' }
+  return R.map(translateWeekName(week), week.types).join(' / ')
+}
+
 /**
- * Week controller located in upper left corner, displaying actual week.
- * On click it toggles the WeekSwitcher component
+ * Displays properties of the specified semester week (period type, teching
+ * week number and parity).
  */
+const SemesterWeek = ({ semester, viewDate }) => {
+  const week = findWeekByDate(semester.weeks || [], viewDate)
 
-import React, { PropTypes } from 'react'
-import moment from 'moment'
-import CP from 'counterpart'
-import { weekRange, workWeekRange } from '../date'
-
-const propTypes = {
-  viewDate: PropTypes.instanceOf(Date),
+  return (
+    <div className="SemesterWeek-text">
+      {displayName(week)}
+    </div>
+  )
 }
-
-class SemesterWeek extends React.Component {
-
-  constructor (props) {
-    super(props)
-    this.state = { open: false }
-  }
-
-  weekNum () {
-    return moment(this.props.viewDate).format('Wo')
-  }
-
-  weekParity () {
-    const parity = moment(this.props.viewDate).isoWeek() % 2 === 0 ? 'even' : 'odd'
-    return CP.translate(parity)
-  }
-
-  render () {
-    return <div className="view-date">{CP.translate('weekNav.teachweek', { weeknum: this.weekNum() })} ({this.weekParity()})</div>
-  }
-}
-
-SemesterWeek.propTypes = propTypes
 
 export default SemesterWeek
