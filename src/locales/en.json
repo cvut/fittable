@@ -39,7 +39,6 @@
     "prev": "Previous week",
     "next": "Next week",
     "selector": "Date selector",
-    "teachweek": "%(weeknum)s week",
     "unknown_semester": "unknown"
   },
 
