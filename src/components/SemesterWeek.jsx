@@ -12,7 +12,7 @@ const propTypes = {
   viewDate: PropTypes.instanceOf(Date),
 }
 
-class ViewDate extends React.Component {
+class SemesterWeek extends React.Component {
 
   constructor (props) {
     super(props)
@@ -33,6 +33,6 @@ class ViewDate extends React.Component {
   }
 }
 
-ViewDate.propTypes = propTypes
+SemesterWeek.propTypes = propTypes
 
-export default ViewDate
+export default SemesterWeek

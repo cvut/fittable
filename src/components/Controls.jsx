@@ -6,7 +6,7 @@
 import React, { PropTypes } from 'react'
 import { isScreenMediumAndUp } from '../screen'
 
-import ViewDate from './ViewDate'
+import SemesterWeek from './SemesterWeek'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
