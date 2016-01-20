@@ -6,11 +6,10 @@
 import React, { PropTypes } from 'react'
 import { isScreenMediumAndUp } from '../screen'
 
-import ViewDate from './ViewDate'
 import WeekNav from './WeekNav'
 import FunctionsBar from './FunctionsBar'
 import WeekSwitcher from './WeekSwitcher'
-import { shiftDate, isWeekend } from '../date'
+import { shiftDate } from '../date'
 import { semester as semesterType } from '../constants/propTypes'
 
 const propTypes = {
