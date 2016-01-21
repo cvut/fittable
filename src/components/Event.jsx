@@ -106,6 +106,7 @@ class EventBox extends React.Component {
 
   render () {
     const onClickVal = this.props.showDetail ? null : this.props.data.id
+    const headSpaceStyle = this.props.showdetail ? {height: EVENT_HEAD_HEIGHT} : {}
 
     return (
       <div
@@ -116,7 +117,7 @@ class EventBox extends React.Component {
           <div
             className="head-space"
             onClick={this.props.onClick.bind(null, onClickVal)}
-            style={{height: EVENT_HEAD_HEIGHT}}>
+            style={headSpaceStyle}>
             <div className="head-name">
               {this.props.data.course}
             </div>
