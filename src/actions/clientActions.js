@@ -1,5 +1,8 @@
 import { CLIENT_CHANGE } from '../constants/actionTypes'
-import { SMALL_SCREEN, SMALL_SCREEN_BREAKPOINT, MEDIUM_SCREEN, MEDIUM_SCREEN_BREAKPOINT, LARGE_SCREEN } from '../constants/screenSizes'
+import {
+  SMALL_SCREEN, SMALL_SCREEN_BREAKPOINT, MEDIUM_SCREEN,
+  MEDIUM_SCREEN_BREAKPOINT, LARGE_SCREEN,
+} from '../constants/screenSizes'
 
 function isSmallScreen () {
   return global.window.innerWidth < SMALL_SCREEN_BREAKPOINT

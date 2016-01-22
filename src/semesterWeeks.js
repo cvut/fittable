@@ -5,7 +5,6 @@ import { forEachWithIndex, reduceBy } from './utils'
 // The reference point for weeks since the epoch.
 const referenceDate = fmoment(0).startOf('isoWeek').freeze()
 
-
 /**
  * Returns number of ISO weeks since the start of the Unix epoch. Note that the
  * week 1 starts on 1969-12-29.
@@ -112,7 +111,7 @@ const periodsByWeeks = R.pipe(
 export const semesterPeriodsToWeeks = R.pipe(
   periodsByWeeks,
   R.mapObjIndexed((periods, key) => {
-    return createWeek(key *1, periods)
+    return createWeek(key * 1, periods)
   }),
   R.tap(R.pipe(
     R.values,
