@@ -20,7 +20,7 @@ function className (componentName, descendent = null, modifiers = [], states = {
   const stateClasses = R.map(state => 'is-' + state, getKeysOfTruthyValues(states))
 
   // Join the element name with descendents and modifiers with states
-  return R.join(' ', R.prepend(elementName, R.concat(modifiersClasses, stateClasses)))
+  return R.prepend(elementName, modifiersClasses.concat(stateClasses)).join(' ')
 }
 
 export default className
