@@ -52,7 +52,8 @@ test('calculateEventPosition()', t => {
     const event = {startsAt: `1970-01-01 ${startsAt}`, endsAt: `1970-01-01 ${endsAt}`}
     const expected = {position, length}
 
-    t.deepEqual(tt.calculateEventPosition(event, timeline), expected, 'calculates correct event position')
+    t.deepEqual(tt.calculateEventPosition(event, timeline), expected,
+      'calculates correct event position')
   })
 
   t.end()
@@ -171,8 +172,11 @@ test('eventAppearance()', t => {
     {_overlaps: 3, _firstOverlapping: true},
     {_overlaps: 0, _firstOverlapping: false},
   ]
+  t.equal(tt.eventAppearance(events[0]),
+    'quarter-first', 'sets appearance to quarter-first on 3 overlaps')
 
-  t.equal(tt.eventAppearance(events[0]), 'quarter-first', 'sets appearance to quarter-first on 3 overlaps')
-  t.equal(tt.eventAppearance(events[1]), 'regular', 'sets regular on no overlaps')
+  t.equal(tt.eventAppearance(events[1]),
+    'regular', 'sets regular on no overlaps')
+
   t.end()
 })

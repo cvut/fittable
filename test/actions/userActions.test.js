@@ -20,16 +20,18 @@ test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
 
   t.test('fetchUserData() first dispatch', st => {
     const expectedArg = {type: USER_LOAD_STARTED}
-    const [actualArg,] = dispatch.firstCall.args
+    const [actualArg] = dispatch.firstCall.args
+
     st.deepEqual(actualArg, expectedArg, 'dispatches an USER_LOAD_STARTED')
     st.end()
   })
 
   t.test('fetchEvents() second dispatch', st => {
-    const [actualArg,] = dispatch.secondCall.args
+    const [actualArg] = dispatch.secondCall.args
 
     st.equal(actualArg.type, USER_LOAD_COMPLETED, 'dispatches USER_LOAD_COMPLETED')
-    st.equal(typeof actualArg.payload.publicAccessToken, 'string', 'dispatches payload with publicAccessToken')
+    st.equal(typeof actualArg.payload.publicAccessToken, 'string',
+      'dispatches payload with publicAccessToken')
     st.equal(typeof actualArg.payload.id, 'string', 'dispatches payload with user id')
     st.equal(typeof actualArg.payload.name, 'string', 'dispatches payload with user name')
     st.end()

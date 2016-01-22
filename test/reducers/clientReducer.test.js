@@ -3,7 +3,6 @@ import { CLIENT_CHANGE } from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers/clientReducer'
 import { SMALL_SCREEN, MEDIUM_SCREEN } from '../../src/constants/screenSizes'
 
-
 test('client reducer initial state', t => {
   const actual = reducer(undefined, {type: null})
   const expected = {

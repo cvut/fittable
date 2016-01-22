@@ -2,8 +2,7 @@ import test from 'blue-tape'
 import { spy } from 'sinon'
 import { CLIENT_CHANGE } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/clientActions'
-import { SMALL_SCREEN, SMALL_SCREEN_BREAKPOINT, MEDIUM_SCREEN, MEDIUM_SCREEN_BREAKPOINT, LARGE_SCREEN } from '../../src/constants/screenSizes'
-
+import { SMALL_SCREEN, LARGE_SCREEN } from '../../src/constants/screenSizes'
 
 test('detectScreenSize()', t => {
   const thunk = actions.detectScreenSize()
@@ -21,7 +20,7 @@ test('detectScreenSize()', t => {
   t.equal(dispatch.callCount, 1, 'dispatches only once if the current state is different')
 
   const expectedArg = {type: CLIENT_CHANGE, payload: {screenSize: LARGE_SCREEN}}
-  const [actualArg,] = dispatch.firstCall.args
+  const [actualArg] = dispatch.firstCall.args
   t.deepEqual(actualArg, expectedArg, 'dispatches CLIENT_CHANGE with smallScreen payload')
 
   t.end()

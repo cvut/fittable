@@ -39,8 +39,12 @@ test('semesterSeason()', t => {
 })
 
 test('semesterYears()', t => {
-  t.deepEqual(s.semesterYears('B142'), [2014, 2015], '?14? is a semester in 2014/2015 academic year')
-  t.deepEqual(s.semesterYears('B151'), [2015, 2016], '?15? is a semester in 2015/2016 academic year')
+  t.deepEqual(s.semesterYears('B142'), [2014, 2015],
+    '?14? is a semester in 2014/2015 academic year')
+
+  t.deepEqual(s.semesterYears('B151'), [2015, 2016],
+    '?15? is a semester in 2015/2016 academic year')
+
   t.end()
 })
 
@@ -84,7 +88,7 @@ test('convertRawSemester()', t => {
         parity: 'even',
         teachingWeek: 1,
         periods,
-      }
+      },
     },
     valid: true,
   }
@@ -102,8 +106,13 @@ test('dateInSemester()', t => {
 
   const dateIn = new Date('2015-03-01')
   const dateOut = new Date('2015-10-01')
-  t.equal(s.dateInSemester(semester, dateIn), true, 'returns true for date within the semester')
-  t.equal(s.dateInSemester(semester, dateOut), false, 'returns false for date outside of the semester')
+
+  t.equal(s.dateInSemester(semester, dateIn), true,
+    'returns true for date within the semester')
+
+  t.equal(s.dateInSemester(semester, dateOut), false,
+    'returns false for date outside of the semester')
+
   t.end()
 })
 
@@ -138,12 +147,20 @@ test('semesterName()', t => {
 
   const emptysemester = { }
 
-  t.deepEqual(dispatch.firstCall.args, ['winter_sem', {year: '2015/16'}], 'correctly recognize winter sem. 15/16')
-  t.deepEqual(dispatch.lastCall.args, ['summer_sem', {year: '2016/17'}], 'correctly recognize summer sem. 16/17')
+  t.deepEqual(dispatch.firstCall.args, ['winter_sem', {year: '2015/16'}],
+    'correctly recognize winter sem. 15/16')
 
-  t.equal(s.semesterName(translate, semester), 'translated-string', 'returns translated string from counterpart')
-  t.equal(s.semesterName(translate, invsemester), null, 'returns null on invalid semesters')
-  t.equal(s.semesterName(translate, emptysemester), null, 'returns null on semesters with missing data')
+  t.deepEqual(dispatch.lastCall.args, ['summer_sem', {year: '2016/17'}],
+    'correctly recognize summer sem. 16/17')
+
+  t.equal(s.semesterName(translate, semester), 'translated-string',
+    'returns translated string from counterpart')
+
+  t.equal(s.semesterName(translate, invsemester), null,
+    'returns null on invalid semesters')
+
+  t.equal(s.semesterName(translate, emptysemester), null,
+    'returns null on semesters with missing data')
 
   t.end()
 })

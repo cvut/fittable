@@ -8,22 +8,34 @@ const STATE = routerState()
 const FIXED_DATE = '2015-12-13'
 
 test('calendarId()', t => {
-  t.equal(sel.calendarId(STATE), 'MI-RUB', 'extracts calendarId from router')
-  t.equal(sel.calendarId(undefined), 'me', 'returns a fallback calendarId for undefined router state')
+  t.equal(sel.calendarId(STATE), 'MI-RUB',
+    'extracts calendarId from router')
+
+  t.equal(sel.calendarId(undefined), 'me',
+    'returns a fallback calendarId for undefined router state')
+
   t.end()
 })
 
 test('calendarType()', t => {
-  t.equal(sel.calendarType(STATE), 'courses', 'extracts calendarType from router')
-  t.equal(sel.calendarType(undefined), 'people', 'returns a fallback calendarType for undefined router state')
+  t.equal(sel.calendarType(STATE), 'courses',
+    'extracts calendarType from router')
+
+  t.equal(sel.calendarType(undefined), 'people',
+    'returns a fallback calendarType for undefined router state')
+
   t.end()
 })
 
 test('viewDate()', t => {
   t.equal(sel.viewDate(STATE), '2015-10-12', 'extracts date from query parameter')
+
   const d = Date.parse(FIXED_DATE)
   timekeeper.freeze(d)
-  t.equal(sel.viewDate(undefined), FIXED_DATE, 'returns a fallback value for undefined date query parameter')
+
+  t.equal(sel.viewDate(undefined), FIXED_DATE,
+    'returns a fallback value for undefined date query parameter')
+
   timekeeper.reset()
   t.end()
 })
