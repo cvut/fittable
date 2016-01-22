@@ -8,6 +8,7 @@ install:
   - npm install
 script:
   - npm run test:spec
+  - npm run lint
 after_success:
   - script/travis-deploy
 notifications:
