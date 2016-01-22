@@ -1,9 +1,9 @@
 import test from 'blue-tape'
-import { apply } from 'ramda'
+import R from 'ramda'
 import className from '../../src/utils/className'
 
 test('className()', t => {
-  const tests = [
+  ;[
     {
       args: ['ComponentName', 'descendent', ['modifier'], { states: true }],
       expected: 'ComponentName-descendent ComponentName-descendent--modifier is-states',
@@ -29,14 +29,12 @@ test('className()', t => {
       expected: 'Car-roof Car-roof--shiny Car-roof--large is-opened',
     },
     {
-      args: ['Selector', null, [], {}],
+      args: ['Selector'],
       expected: 'Selector',
     },
-  ]
-
-  tests.forEach(({args, expected}) =>
-      t.equal(apply(className, args), expected, 'returns ' + expected)
-  )
+  ].forEach(({args, expected}) => {
+    t.equal(R.apply(className, args), expected, 'returns ' + expected)
+  })
 
   t.end()
 })
