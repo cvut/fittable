@@ -1,6 +1,6 @@
 import { USER_LOAD_STARTED, USER_LOAD_COMPLETED } from '../constants/actionTypes'
 
-import { user as userCallback } from '../callbacks'
+import { fetchUser as userCallback } from '../callbacks'
 
 function startUserRequest () {
   return {

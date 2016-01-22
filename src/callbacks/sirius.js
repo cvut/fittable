@@ -304,7 +304,7 @@ const convertPeriod = R.pipe(
   convertInterval
 )
 
-function userCallback (cb) {
+function fetchUserCallback (cb) {
   function requestHandler (request) {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {
@@ -344,5 +344,5 @@ export {
   dataCallback as data,
   searchCallback as search,
   semesterDataCallback as semesterData,
-  userCallback as user,
+  fetchUserCallback as fetchUser,
 }
