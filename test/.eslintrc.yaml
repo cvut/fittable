@@ -1,4 +1,5 @@
 rules:
+  comma-spacing: [0]
   no-multi-spaces: [0]
   spaced-comment: [0]
   standard/array-bracket-even-spacing: [0]
