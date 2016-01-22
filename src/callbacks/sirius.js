@@ -121,10 +121,9 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {
         // Request successful
-        var ajaxresult = JSON.parse(request.responseText)
-        var itemCount = ajaxresult.meta.count
+        const ajaxresult = JSON.parse(request.responseText)
 
-        var linknames = { teachers: [], courses: [], exceptions: [] }
+        const linknames = { teachers: [], courses: [], exceptions: [] }
 
         const responseEvents = ajaxresult.events || []
         const data = responseEvents.map(event => {
@@ -155,9 +154,9 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
           // If the original data are present, insert one reverted event
           if (!emptyObject(event.original_data)) {
             // Convert times to milliseconds
-            var rangeFromMs = (new Date(dateFrom)).getMilliseconds()
-            var rangeToMs = (new Date(dateTo)).getMilliseconds()
-            var originalFromMs = (new Date(event.original_data.starts_at)).getMilliseconds()
+            const rangeFromMs = (new Date(dateFrom)).getMilliseconds()
+            const rangeToMs = (new Date(dateTo)).getMilliseconds()
+            const originalFromMs = (new Date(event.original_data.starts_at)).getMilliseconds()
 
             // Check if the original start is between the range
             if (rangeFromMs <= originalFromMs && originalFromMs >= rangeToMs) {

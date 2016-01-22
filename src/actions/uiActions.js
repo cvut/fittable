@@ -1,4 +1,4 @@
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY } from '../constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY } from '../constants/actionTypes'
 
 export function displaySidebar (sidebar) {
   return {

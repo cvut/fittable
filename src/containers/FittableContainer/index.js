@@ -1,1 +1,1 @@
-export default from './FittableContainer'
+export { default } from './FittableContainer'

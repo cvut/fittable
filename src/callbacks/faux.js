@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { fmoment } from '../date'
 
 var dataCallback = function(params, callback) {

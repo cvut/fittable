@@ -11,7 +11,7 @@ export function invertLinkNames (linksNames) {
   }
 
   if ('teachers' in linksNames) {
-    for (let tlinkname of linksNames.teachers) {
+    for (const tlinkname of linksNames.teachers) {
       addNewLinkName(tlinkname.id, tlinkname.name.cs, 'teachers', 'cs')
       addNewLinkName(tlinkname.id, tlinkname.name.en, 'teachers', 'en')
     }
@@ -19,7 +19,7 @@ export function invertLinkNames (linksNames) {
 
   // Save courses link names
   if ('courses' in linksNames) {
-    for (let clinkname of linksNames.courses) {
+    for (const clinkname of linksNames.courses) {
       addNewLinkName(clinkname.id, clinkname.name.cs, 'courses', 'cs')
       addNewLinkName(clinkname.id, clinkname.name.en, 'courses', 'en')
     }
@@ -27,7 +27,7 @@ export function invertLinkNames (linksNames) {
 
   // Save exceptions link names
   if ('exceptions' in linksNames) {
-    for (let clinkname of linksNames.exceptions) {
+    for (const clinkname of linksNames.exceptions) {
       addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'cs')
       addNewLinkName(clinkname.id, clinkname.name, 'exceptions', 'en')
     }

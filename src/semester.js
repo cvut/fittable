@@ -2,8 +2,6 @@ import R from 'ramda'
 import { withinDates } from './date'
 import { semesterPeriodsToWeeks } from './semesterWeeks'
 
-const toDate = d => new Date(d)
-
 const semesterInterval = R.props(['startsOn', 'endsOn'])
 export const dateInSemester = (semester, date) => withinDates(...semesterInterval(semester), date)
 
