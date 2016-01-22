@@ -9,7 +9,9 @@ test('search reducer initial state', t => {
     query: '',
     results: [],
   }
-  t.deepEqual(actual, expected, 'initialises empty structure with no results, query and not waiting')
+  t.deepEqual(actual, expected,
+    'initialises empty structure with no results, query and not waiting')
+
   t.end()
 })
 
@@ -17,6 +19,7 @@ test('search reducer SEARCH_REQUEST action', t => {
   const state = {waiting: false, query: 'meh', results: ['lorem', 'ipsum']}
   const expected = {waiting: true, query: 'my query', results: []}
   const actual = reducer(state, {type: SEARCH_REQUEST, payload: {query: 'my query'}})
+
   t.deepEqual(actual, expected, 'sets waiting to true, propagates the query and empties results')
   t.end()
 })

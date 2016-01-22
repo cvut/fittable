@@ -35,14 +35,16 @@ test('fetchSearchResults() dispatch', t => {
 
   t.test('fetchSearchResults() first dispatch', st => {
     const expectedArg = {type: SEARCH_REQUEST, payload: {query}}
-    const [actualArg,] = dispatch.firstCall.args
+    const [actualArg] = dispatch.firstCall.args
+
     st.deepEqual(actualArg, expectedArg, 'dispatches a SEARCH_REQUEST with query')
     st.end()
   })
 
   t.test('fetchSearchResults() second dispatch', st => {
     const expectedArg = {type: SEARCH_RESPONSE, payload: {results}}
-    const [actualArg,] = dispatch.secondCall.args
+    const [actualArg] = dispatch.secondCall.args
+
     st.deepEqual(actualArg, expectedArg, 'dispatches an SEARCH_RESPONSE with results')
     st.end()
   })
@@ -52,8 +54,10 @@ test('fetchSearchResults() dispatch', t => {
     thunk = actions.fetchSearchResults(callback, '')
     thunk(dispatch)
     st.equal(dispatch.callCount, 1, 'dispatch is called only once')
+
     const expectedArg = {type: SEARCH_RESPONSE, payload: {results: []}}
-    const [actualArg,] = dispatch.firstCall.args
+    const [actualArg] = dispatch.firstCall.args
+
     st.deepEqual(actualArg, expectedArg, 'returns SEARCH_RESPONSE with empty results')
     st.end()
   })

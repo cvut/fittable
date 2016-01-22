@@ -1,5 +1,4 @@
 import test from 'blue-tape'
-import tk from 'timekeeper'
 import * as screen from '../src/screen'
 import * as screenSizes from '../src/constants/screenSizes.js'
 

@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY } from '../../src/constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/uiActions'
 
 test('displaySidebar()', t => {

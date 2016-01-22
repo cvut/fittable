@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { SIDEBAR_DISPLAY, EVENT_DISPLAY, RESET_DISPLAY } from '../../src/constants/actionTypes'
+import { SIDEBAR_DISPLAY, EVENT_DISPLAY } from '../../src/constants/actionTypes'
 import reducer from '../../src/reducers/uiReducer'
 
 test('UI reducer initial state', t => {
@@ -20,7 +20,9 @@ test('ui reducer SIDEBAR_DISPLAY action', t => {
 
   t.test('ui reducer SIDEBAR_DISPLAY action with the same sidebar already opened', st => {
     const expected = null
-    const actual = reducer({sidebar: 'search', eventId: null}, {type: SIDEBAR_DISPLAY, payload: {sidebar: 'search'}})
+    const actual = reducer({sidebar: 'search', eventId: null},
+                           {type: SIDEBAR_DISPLAY, payload: {sidebar: 'search'}})
+
     st.deepEqual(actual.sidebar, expected, 'resets sidebar to null')
     st.end()
   })

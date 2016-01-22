@@ -55,7 +55,7 @@ test('fetchSemesterData() dispatch', t => {
   const callback = (cb) => cb(semesters)
   const callbackEmpty = (cb) => cb({})
 
-  let dispatch = spy()
+  const dispatch = spy()
   let expectedCalls = 1
 
   // fetch correct data
@@ -75,23 +75,29 @@ test('fetchSemesterData() dispatch', t => {
   t.equal(dispatch.callCount, ++expectedCalls, `dispatch has been called ${expectedCalls} times`)
 
   t.test('fetchSemesterData() dispatched action', st => {
-    const [actualArg,] = dispatch.firstCall.args
+    const [actualArg] = dispatch.firstCall.args
+
     st.equal(actualArg.type, SEMESTER_LOAD_COMPLETED, 'dispatches SEMESTER_LOAD_COMPLETED action')
     st.equal(actualArg.payload.id, '18000-B142', 'sends just the semester for a given date')
     st.equal(actualArg.payload.season, 'summer', 'calculates the semester season')
-    st.equal(actualArg.payload.valid, true, 'is valid when the data are complete and current semester')
-    st.equal(typeof actualArg.payload.grid, 'object', 'converts semester details for consumption by fittable')
+
+    st.equal(actualArg.payload.valid, true,
+      'is valid when the data are complete and current semester')
+
+    st.equal(typeof actualArg.payload.grid, 'object',
+      'converts semester details for consumption by fittable')
+
     st.end()
   })
 
   t.test('fetchSemesterData() dispatched with missing data', st => {
-    const [actualArg,] = dispatch.secondCall.args
+    const [actualArg] = dispatch.secondCall.args
     st.equal(actualArg.payload.valid, false, 'is invalid because of missing data')
     st.end()
   })
 
   t.test('fetchSemesterData() dispatched with out-of-semester date', st => {
-    const [actualArg,] = dispatch.thirdCall.args
+    const [actualArg] = dispatch.thirdCall.args
     st.equal(actualArg.payload.valid, false, 'is invalid because of wrong date')
     st.end()
   })
@@ -113,8 +119,13 @@ test('fetchSemesterData() dispatch with semester loaded', t => {
   const thunk = actions.fetchSemesterData(callback, date)
 
   thunk(dispatch, () => state)
-  t.equal(callback.callCount, 0, 'does not execute callback if the date is already within current semester')
-  t.equal(dispatch.callCount, 0, 'does not dispatches action if the date is already within current semester')
+
+  t.equal(callback.callCount, 0,
+    'does not execute callback if the date is already within current semester')
+
+  t.equal(dispatch.callCount, 0,
+    'does not dispatches action if the date is already within current semester')
+
   t.end()
 })
 
@@ -134,6 +145,8 @@ test('invalidateSemesterData()', t => {
   const invalidated = actions.invalidateSemesterData(semester)
 
   t.deepEqual(invalidated, expected, 'invalidate semester')
-  t.deepEqual(actions.invalidateSemesterData(invalidated), expected, 'invalidating invalidated semester does nothing')
+  t.deepEqual(actions.invalidateSemesterData(invalidated), expected,
+    'invalidating invalidated semester does nothing')
+
   t.end()
 })

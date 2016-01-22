@@ -19,7 +19,8 @@ test('fetchEvents() executes a given callback with a week range', t => {
   const expectedTo = '2015-09-13'
 
   const dataCallback = (actualParams, cb) => {
-    t.equal(actualParams.dateFrom, expectedFrom, 'callback receives dateFrom string for a week start')
+    t.equal(actualParams.dateFrom, expectedFrom,
+      'callback receives dateFrom string for a week start')
     t.equal(actualParams.dateTo, expectedTo, 'callback receives dateTo string for a week end')
     t.equal(typeof cb, 'function', 'callback receives a callback for response')
     t.end()
@@ -65,7 +66,8 @@ test('fetchEvents() dispatch', t => {
 
   t.test('fetchEvents() first dispatch', st => {
     const expectedArg = {type: EVENTS_LOAD_STARTED}
-    const [actualArg,] = dispatch.firstCall.args
+    const [actualArg] = dispatch.firstCall.args
+
     st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_LOAD_STARTED')
     st.end()
   })
@@ -89,8 +91,10 @@ test('fetchEvents() dispatch', t => {
     }
 
     const {events} = responseData
-    const expectedArg = {type: EVENTS_LOAD_COMPLETED, payload: {events, linkNames: expectedLinkNames}}
-    const [actualArg,] = dispatch.secondCall.args
+    const expectedArg = {type: EVENTS_LOAD_COMPLETED,
+                         payload: {events, linkNames: expectedLinkNames}}
+    const [actualArg] = dispatch.secondCall.args
+
     st.deepEqual(actualArg, expectedArg, 'dispatches an EVENTS_LOAD_COMPLETED')
     st.end()
   })
@@ -105,7 +109,7 @@ test('fetchEvents() dispatch', t => {
 
     thunk(dispatch)
 
-    const [actualArg,] = dispatch.secondCall.args
+    const [actualArg] = dispatch.secondCall.args
     const expectedArg = {
       type: EVENTS_LOAD_FAILED,
       payload: error,
@@ -119,6 +123,7 @@ test('fetchEvents() dispatch', t => {
 test('hideDataError()', t => {
   const expected = {type: DATA_ERROR_HIDE, payload: {}}
   const actual = actions.hideDataError()
+
   t.deepEqual(actual, expected, 'dispatches DATA_ERROR_HIDE with empty payload')
   t.end()
 })
