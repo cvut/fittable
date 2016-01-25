@@ -15,7 +15,7 @@ import camelize from 'camelize'
 import { fmoment } from '../date'
 import { renameKeys } from '../utils'
 
-import { FACULTY_ID, SIRIUS_PROXY_PATH } from '../config'
+import { FACULTY_ID, SIRIUS_PROXY_PATH, OAUTH_PROXY_PATH } from '../config'
 
 const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('length', 0))
 
@@ -24,11 +24,11 @@ const emptyObject = (obj) => R.is(Object, obj) && R.pipe(R.keys, R.propEq('lengt
  */
 const username = ReactCookie.load('oauth_username')
 
-/**
- * URL of proxy for Sirius API
- * @type {string}
- */
-const siriusAPIUrl = `${getBaseUri()}${SIRIUS_PROXY_PATH}/`
+// Base URI of proxy for Sirius API
+const siriusAPIUrl = `${getBaseUri()}${SIRIUS_PROXY_PATH}`
+
+// Base URI of OAuth proxy
+const oauthAPIUrl = `${getBaseUri()}${OAUTH_PROXY_PATH}`
 
 // TODO: This should be removed!
 const defaultLimit = 200
@@ -81,10 +81,9 @@ function isUserLoggedIn () {
   )
 }
 
-function makeRequest (parameters = '', requestHandler) {
-  const requestUrl = `${siriusAPIUrl}${parameters}`
-
+const makeRequest = R.curry((method, url, requestHandler) => {
   const request = new XMLHttpRequest()
+
   request.onreadystatechange = () => {
     if (request.readyState === 4) {
       // Bail out early on 401
@@ -96,11 +95,14 @@ function makeRequest (parameters = '', requestHandler) {
       requestHandler(request)
     }
   }
-  request.open('GET', encodeURI(requestUrl), true)
+  request.open(method, encodeURI(url), true)
   request.send(null)
 
   return request
-}
+})
+
+const ajaxGet = makeRequest('GET')
+const ajaxPost = makeRequest('POST')
 
 /**
  * Data callback, requesting the events from Sirius API, depending on view type and range.
@@ -226,7 +228,7 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
     }
   }
 
-  makeRequest(path, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/${path}`, requestHandler)
 }
 
 /**
@@ -251,7 +253,7 @@ function searchCallback (query, callback) {
     }
   }
 
-  makeRequest(`search?q=${query}&limit=${defaultLimit}`, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/search?q=${query}&limit=${defaultLimit}`, requestHandler)
 }
 
 function semesterDataCallback (callback) {
@@ -274,7 +276,7 @@ function semesterDataCallback (callback) {
     }
   }
 
-  makeRequest(`semesters?faculty=${FACULTY_ID}&limit=${defaultLimit}`, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/semesters?faculty=${FACULTY_ID}&limit=${defaultLimit}`, requestHandler)
 }
 
 const convertInterval = R.pipe(
@@ -304,7 +306,7 @@ const convertPeriod = R.pipe(
   convertInterval
 )
 
-function userCallback (cb) {
+function fetchUserCallback (cb) {
   function requestHandler (request) {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {
@@ -332,7 +334,7 @@ function userCallback (cb) {
     }
   }
 
-  makeRequest(`people/${username}`, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/people/${username}`, requestHandler)
 }
 
 // If the user is not logged in, redirect him to the landing page
@@ -344,5 +346,5 @@ export {
   dataCallback as data,
   searchCallback as search,
   semesterDataCallback as semesterData,
-  userCallback as user,
+  fetchUserCallback,
 }
