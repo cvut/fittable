@@ -1,0 +1,16 @@
+#fittable .LogoutButton {
+  background: $primary-color;
+  color: white;
+  @include upcase();
+  padding: .5rem 1rem;
+  float: right;
+
+  span {
+    display: none;
+  }
+
+  @media #{$medium-down} {
+    font-size: .8rem;
+    padding: .5rem 1rem;
+  }
+}

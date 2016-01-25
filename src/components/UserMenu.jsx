@@ -1,8 +1,8 @@
 import React from 'react'
 
-// import LogoutButton from './LogoutButton'
+import LogoutButton from './LogoutButton'
 
-export default function UserMenu ({userName}) {
+export default function UserMenu ({ userName, onLogout }) {
   return (
       <div className="header-usermenu">
         <div className="header-usermenu-username">
@@ -10,7 +10,7 @@ export default function UserMenu ({userName}) {
             <i className="fa fa-user"></i> <span>{userName}</span>
           </a>
         </div>
-        {/* <LogoutButton /> */}
+        <LogoutButton onClick={onLogout} />
       </div>
   )
 }

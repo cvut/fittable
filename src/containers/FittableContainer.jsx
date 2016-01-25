@@ -16,7 +16,7 @@ import { displaySidebar, displayEvent } from '../actions/uiActions'
 import { fetchSearchResults, clearSearchResults } from '../actions/searchActions'
 import { fetchSemesterData } from '../actions/semesterActions'
 import { detectScreenSize } from '../actions/clientActions'
-import { fetchUserData } from '../actions/userActions'
+import { fetchUserData, logoutUser } from '../actions/userActions'
 import { changeCalendar } from '../actions/linkActions'
 
 import { isoDate, strToDate } from '../date'
@@ -72,6 +72,7 @@ function mapDispatchToProps (dispatch) {
     onUserRequest: () => dispatch(fetchUserData()),
     changeCalendar: (calendar) => dispatch(changeCalendar(calendar)),
     onSearchClear: () => dispatch(clearSearchResults()),
+    onLogout: () => dispatch(logoutUser()),
   }
 }
 
@@ -167,7 +168,10 @@ const FittableContainer = React.createClass({
           calendar={props.calendar}
           semesterName={semesterName(CP.translate.bind(CP), props.semester)}
         >
-          <UserMenu userName={props.user.name || props.user.id} />
+          <UserMenu
+            userName={props.user.name || props.user.id}
+            onLogout={props.onLogout}
+          />
           <Search
             ref="functionSearch"
             onViewChange={this.handleChangeView}
@@ -221,7 +225,8 @@ const FittableContainer = React.createClass({
         />
         <Footer
           userName={props.user.name || this.props.user.id}
-          />
+          onLogout={props.onLogout}
+        />
 
         <Spinner show={waiting} />
       </div>
