@@ -35,3 +35,19 @@ test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
     st.end()
   })
 })
+
+
+test('logoutUser()', t => {
+  const thunk = actions.logoutUser()
+  const dispatch = spy()
+
+  global.location = { href: 'index.js' }
+
+  t.equal(typeof thunk, 'function', 'logoutUser returns a thunk function immediately')
+
+  thunk(dispatch)
+
+  t.equal(global.location.href, 'landing.html', 'redirects user to landing.html after logging out')
+
+  t.end()
+})

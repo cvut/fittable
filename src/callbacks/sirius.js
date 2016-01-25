@@ -341,6 +341,14 @@ function fetchUserCallback (cb) {
   makeRequest(siriusAPIUrl, `people/${username}`, requestHandler)
 }
 
+function logoutUserCallback (cb) {
+  makeRequest(oauthAPIUrl, 'logout', (request) => {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      cb(request.status !== 204, null)
+    }
+  })
+}
+
 // If the user is not logged in, redirect him to the landing page
 if (!isUserLoggedIn()) {
   redirectToLanding()
@@ -351,4 +359,5 @@ export {
   searchCallback as search,
   semesterDataCallback as semesterData,
   fetchUserCallback as fetchUser,
+  logoutUserCallback as logoutUser,
 }
