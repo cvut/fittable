@@ -35,3 +35,19 @@ test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
     st.end()
   })
 })
+
+
+test('logoutUser() dispatches USER_LOGGED_OUT', t => {
+  const thunk = actions.logoutUser()
+  const dispatch = spy()
+
+  t.equal(typeof thunk, 'function', 'fetchUserData returns a thunk function immediately')
+
+  thunk(dispatch)
+
+  const expectedArg = {type: USER_LOGGED_OUT}
+  const [actualArg] = dispatch.firstCall.args
+  t.deepEqual(actualArg, expectedArg, 'dispatches an USER_LOGGED_OUT')
+
+  t.end()
+})

@@ -228,6 +228,11 @@ function fetchUser (cb) {
   cb(null, { id: 'novacjos', name: 'Josef Nováček, MBA', publicAccessToken: 'asdasdasd1234' })
 }
 
+function logoutUser (cb) {
+  // assuming the http code received is 204 (1st arg inversed)
+  cb(false, null)
+}
+
 export {
     searchCallback as search,
     dataCallback as data,
@@ -235,4 +240,5 @@ export {
     dateChangeCallback as dateChange,
     viewChangeCallback as viewChange,
     fetchUser,
+    logoutUser,
 }
