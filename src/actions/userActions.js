@@ -1,6 +1,5 @@
 import { USER_LOAD_STARTED, USER_LOAD_COMPLETED } from '../constants/actionTypes'
-
-import { user as userCallback } from '../callbacks'
+import { fetchUser as userFetchCallback, logoutUser as userLogoutCallback } from '../callbacks'
 
 function startUserRequest () {
   return {
@@ -19,7 +18,7 @@ export function fetchUserData (dataCallback, weekDate) {
   return function thunk (dispatch) {
     dispatch(startUserRequest())
 
-    userCallback((error, result) => {
+    userFetchCallback((error, result) => {
       if (error) {
         return dispatch(receiveUser(null))
       }

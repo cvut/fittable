@@ -224,7 +224,7 @@ function dateChangeCallback (newdate, semester) {
  /* ... */
 }
 
-function user (cb) {
+function fetchUser (cb) {
   cb(null, { id: 'novacjos', name: 'Josef Nováček, MBA', publicAccessToken: 'asdasdasd1234' })
 }
 
@@ -234,5 +234,6 @@ export {
     semesterDataCallback as semesterData,
     dateChangeCallback as dateChange,
     viewChangeCallback as viewChange,
-    user,
+    fetchUser,
+    logoutUser,
 }
