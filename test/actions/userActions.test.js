@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { spy } from 'sinon'
-import { USER_LOAD_STARTED, USER_LOAD_COMPLETED } from '../../src/constants/actionTypes'
+import { USER_LOAD_STARTED, USER_LOAD_COMPLETED, USER_LOGGED_OUT } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/userActions'
 
 const getEmptyState = () => {

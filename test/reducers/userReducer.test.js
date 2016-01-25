@@ -9,6 +9,7 @@ test('user reducer initial state', t => {
     publicAccessToken: null,
     id: null,
     name: null,
+    invalid: false,
   }
 
   t.deepEqual(actual, expected, 'is not fetching and has an empty token')

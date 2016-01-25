@@ -80,6 +80,10 @@ function requestWeekEvents (props) {
   props.onEventsRequest(props.callbacks.data, props.calendar)
 }
 
+function redirectToLanding () {
+  window.location.href = 'landing.html'
+}
+
 const FittableContainer = React.createClass({
   componentDidMount () {
     this.props.onWindowResize()
@@ -155,6 +159,11 @@ const FittableContainer = React.createClass({
       hoursStartsAt1: facultyGrid, // TODO: Remove this one
       facultyHours: (this.props.grid.ends - this.props.grid.starts) / this.props.grid.lessonDuration,
       facultyGrid: facultyGrid,
+    }
+
+    // Refresh the page, when user object gets invalid
+    if (this.props.user.invalid) {
+      redirectToLanding()
     }
 
     return (
