@@ -16,7 +16,7 @@ import { displaySidebar, displayEvent } from '../actions/uiActions'
 import { fetchSearchResults } from '../actions/searchActions'
 import { fetchSemesterData } from '../actions/semesterActions'
 import { detectScreenSize } from '../actions/clientActions'
-import { fetchUserData } from '../actions/userActions'
+import { fetchUserData, logoutUser } from '../actions/userActions'
 import { changeCalendar } from '../actions/linkActions'
 
 import { isoDate, strToDate } from '../date'
@@ -69,6 +69,7 @@ function mapDispatchToProps (dispatch) {
     onErrorHide: () => dispatch(hideDataError()),
     onUserRequest: () => dispatch(fetchUserData()),
     changeCalendar: (calendar) => dispatch(changeCalendar(calendar)),
+    onLogoutButtonClick: () => dispatch(logoutUser()),
   }
 }
 
@@ -163,6 +164,7 @@ const FittableContainer = React.createClass({
           calendar={this.props.calendar}
           semesterName={semesterName(CP.translate.bind(CP), this.props.semester)}
           userName={this.props.user.name || this.props.user.id}
+          onLogoutButtonClick={this.props.onLogoutButtonClick}
         />
         {/* FIXME: we don't have the view name data inside fittable :( */}
         <Controls

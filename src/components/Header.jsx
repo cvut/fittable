@@ -12,7 +12,7 @@ function calendarHeader ({type, id}) {
   return `${CP.translate(cpKey)} ${id}`
 }
 
-export default function Header ({calendar, userName, semesterName}) {
+export default function Header ({calendar, userName, semesterName, onLogoutButtonClick}) {
   return (
     <header className="Header row">
       <h1>{calendarHeader(calendar)}</h1>
@@ -24,7 +24,7 @@ export default function Header ({calendar, userName, semesterName}) {
             <i className="fa fa-user"></i> <span>{userName}</span>
           </a>
         </div>
-        {/* <LogoutButton /> */}
+        <LogoutButton onClick={onLogoutButtonClick} />
       </div>
     </header>
   )
