@@ -3,9 +3,7 @@ import { spy } from 'sinon'
 import { USER_LOAD_STARTED, USER_LOAD_COMPLETED } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/userActions'
 
-const getEmptyState = () => {
-  return {user: {}}
-}
+const getEmptyState = () => ({ user: {} })
 
 test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
   const thunk = actions.fetchUserData()
@@ -34,4 +32,18 @@ test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
     st.equal(typeof actualArg.payload.name, 'string', 'dispatches payload with user name')
     st.end()
   })
+})
+
+test('logoutUser()', t => {
+  const thunk = actions.logoutUser()
+
+  global.location = { href: 'index.js' }
+
+  t.equal(typeof thunk, 'function', 'logoutUser returns a thunk function immediately')
+
+  thunk()
+
+  t.equal(global.location.href, 'landing.html', 'redirects user to landing.html after logging out')
+
+  t.end()
 })
