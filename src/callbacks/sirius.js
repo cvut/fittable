@@ -344,7 +344,11 @@ function fetchUserCallback (cb) {
 function logoutUserCallback (cb) {
   makeRequest(oauthAPIUrl, 'logout', (request) => {
     if (request.readyState === XMLHttpRequest.DONE) {
-      cb(request.status !== 204, null)
+      if (request.status === 204) {
+        cb()
+      } else {
+        console.error(generateError(request.status, 'Logout failed'))
+      }
     }
   })
 }

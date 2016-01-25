@@ -33,10 +33,6 @@ export function fetchUserData (dataCallback, weekDate) {
 
 export function logoutUser () {
   return function thunk (dispatch) {
-    userLogoutCallback((error, result) => {
-      if (!error) {
-        return dispatch(redirectToLanding())
-      }
-    })
+    userLogoutCallback(() => dispatch(redirectToLanding()))
   }
 }
