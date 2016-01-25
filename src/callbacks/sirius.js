@@ -28,13 +28,13 @@ const username = ReactCookie.load('oauth_username')
  * URL of proxy for Sirius API
  * @type {string}
  */
-const siriusAPIUrl = `${getBaseUri()}${SIRIUS_PROXY_PATH}/`
+const siriusAPIUrl = `${getBaseUri()}${SIRIUS_PROXY_PATH}`
 
 /**
  * URL of proxy for OAuth
  * @type {string}
  */
-const oauthAPIUrl = `${getBaseUri()}${OAUTH_PROXY_PATH}/`
+const oauthAPIUrl = `${getBaseUri()}${OAUTH_PROXY_PATH}`
 
 // TODO: This should be removed!
 const defaultLimit = 200
@@ -87,10 +87,9 @@ function isUserLoggedIn () {
   )
 }
 
-function makeRequest (url, parameters = '', requestHandler) {
-  const requestUrl = `${url}${parameters}`
-
+const makeRequest = R.curry((method, url, requestHandler) => {
   const request = new XMLHttpRequest()
+
   request.onreadystatechange = () => {
     if (request.readyState === 4) {
       // Bail out early on 401
@@ -102,11 +101,14 @@ function makeRequest (url, parameters = '', requestHandler) {
       requestHandler(request)
     }
   }
-  request.open('GET', encodeURI(requestUrl), true)
+  request.open(method, encodeURI(url), true)
   request.send(null)
 
   return request
-}
+})
+
+const ajaxGet = makeRequest('GET')
+const ajaxPost = makeRequest('POST')
 
 /**
  * Data callback, requesting the events from Sirius API, depending on view type and range.
@@ -232,7 +234,7 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
     }
   }
 
-  makeRequest(siriusAPIUrl, path, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/${path}`, requestHandler)
 }
 
 /**
@@ -257,7 +259,7 @@ function searchCallback (query, callback) {
     }
   }
 
-  makeRequest(siriusAPIUrl, `search?q=${query}&limit=${defaultLimit}`, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/search?q=${query}&limit=${defaultLimit}`, requestHandler)
 }
 
 function semesterDataCallback (callback) {
@@ -280,7 +282,7 @@ function semesterDataCallback (callback) {
     }
   }
 
-  makeRequest(siriusAPIUrl, `semesters?faculty=${FACULTY_ID}&limit=${defaultLimit}`, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/semesters?faculty=${FACULTY_ID}&limit=${defaultLimit}`, requestHandler)
 }
 
 const convertInterval = R.pipe(
@@ -338,11 +340,11 @@ function fetchUserCallback (cb) {
     }
   }
 
-  makeRequest(siriusAPIUrl, `people/${username}`, requestHandler)
+  ajaxGet(`${siriusAPIUrl}/people/${username}`, requestHandler)
 }
 
 function logoutUserCallback (cb) {
-  makeRequest(oauthAPIUrl, 'logout', (request) => {
+  ajaxPost(`${oauthAPIUrl}/logout`, (request) => {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 204) {
         cb()
