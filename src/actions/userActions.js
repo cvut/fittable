@@ -14,11 +14,7 @@ function receiveUser (payload) {
   }
 }
 
-function redirectToLanding () {
-  global.location.href = 'landing.html'
-}
-
-export function fetchUserData (dataCallback, weekDate) {
+export function fetchUserData () {
   return function thunk (dispatch) {
     dispatch(startUserRequest())
 
@@ -32,7 +28,14 @@ export function fetchUserData (dataCallback, weekDate) {
 }
 
 export function logoutUser () {
-  return function thunk (dispatch) {
-    userLogoutCallback(() => dispatch(redirectToLanding()))
+  return function thunk () {
+    userLogoutCallback(error => {
+      if (error) {
+        console.error(error)
+        global.alert(error.message)
+      } else {
+        global.location.href = 'landing.html'
+      }
+    })
   }
 }

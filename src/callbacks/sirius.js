@@ -347,9 +347,9 @@ function logoutUserCallback (cb) {
   ajaxPost(`${oauthAPIUrl}/logout`, (request) => {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 204) {
-        cb()
+        cb(null)
       } else {
-        console.error(generateError(request.status, 'Logout failed'))
+        cb(generateError(request.status, 'Logout failed'))
       }
     }
   })
