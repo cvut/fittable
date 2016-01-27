@@ -15,7 +15,7 @@ function receiveUser (payload) {
   }
 }
 
-export function fetchUserData (dataCallback, weekDate) {
+export function fetchUserData () {
   return function thunk (dispatch) {
     dispatch(startUserRequest())
 
