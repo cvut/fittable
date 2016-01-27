@@ -3,17 +3,13 @@ import { spy } from 'sinon'
 import { USER_LOAD_STARTED, USER_LOAD_COMPLETED } from '../../src/constants/actionTypes'
 import * as actions from '../../src/actions/userActions'
 
-const getEmptyState = () => {
-  return {user: {}}
-}
-
 test('fetchUserData() dispatches USER_LOAD_STARTED', t => {
   const thunk = actions.fetchUserData()
   const dispatch = spy()
 
   t.equal(typeof thunk, 'function', 'fetchUserData returns a thunk function immediately')
 
-  thunk(dispatch, getEmptyState)
+  thunk(dispatch)
 
   const expectedCalls = 2
   t.equal(dispatch.callCount, expectedCalls, `dispatch has been called ${expectedCalls} times`)
