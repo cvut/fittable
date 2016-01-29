@@ -12,6 +12,7 @@ import ReactCookie from 'react-cookie'
 import URL from 'url'
 import R from 'ramda'
 import camelize from 'camelize'
+import lru from 'lru-cache'
 import { fmoment } from '../date'
 import { renameKeys } from '../utils'
 
@@ -40,6 +41,14 @@ const STATUS_ERROR_TYPES = {
   404: 'notfound',
   500: 'servererror',
 }
+
+/**
+ * LRU cache for saving number of requests called
+ */
+const cache = lru({
+  max: 256,
+  maxAge: 60 * 1000,
+})
 
 function generateError (status, message = 'No message specified') {
   const error = new Error(message)
@@ -79,6 +88,10 @@ function isUserLoggedIn () {
     // TODO: Remove oauth_access_token once we implement OAuth for dev-server.
     ReactCookie.load('oauth_refresh_token') || ReactCookie.load('oauth_access_token')
   )
+}
+
+function cacheDataAvailable (requestUrl) {
+  return typeof cache.get(requestUrl) !== 'undefined'
 }
 
 function makeRequest (parameters = '', requestHandler) {
@@ -217,6 +230,9 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
           }
         }
 
+        // Cache generated data
+        cache.set(path, {events: data, linkNames: linknames})
+
         // Send data to fittable
         callback(null, {events: data, linkNames: linknames})
       } else {
@@ -226,7 +242,11 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
     }
   }
 
-  makeRequest(path, requestHandler)
+  if (cacheDataAvailable(path)) {
+    callback(null, R.clone(cache.get(path)))
+  } else {
+    makeRequest(path, requestHandler)
+  }
 }
 
 /**
