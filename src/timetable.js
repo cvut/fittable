@@ -106,11 +106,12 @@ export function calculateOverlap (events) {
 
   // Compares this event's start with the last end. If the start is after the last end,
   // set appropriate appearances for all events in queue.
-  R.forEach((event) => {
+  R.map((event) => {
+    const newEvent = R.clone(event)
     const start = moment(event.startsAt)
     const end = moment(event.endsAt)
-    event._overlaps = 0
-    event._firstOverlapping = false
+    newEvent._overlaps = 0
+    newEvent._firstOverlapping = false
 
     markOverlayedEvents(overlap)
 
@@ -118,11 +119,13 @@ export function calculateOverlap (events) {
       overlap = []
     }
 
-    overlap.push(event)
+    overlap.push(newEvent)
 
     if (end.isAfter(lastend)) {
       lastend = end
     }
+
+    return newEvent
   }, sortedevents)
 
   return sortedevents
