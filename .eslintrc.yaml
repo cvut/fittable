@@ -18,3 +18,4 @@ rules:
   no-extra-bind: [2]
   max-len: [2, 100, 2, {ignoreComments: true, ignoreUrls: true}]
   padded-blocks: [0]
+  react/prop-types: [0]
