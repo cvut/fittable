@@ -101,13 +101,18 @@ class WeekSwitcher extends Toggleable {
 
     const viewMoment = this.viewDateMoment()
     const monthEnd = viewMoment().endOf('month').endOf('isoWeek')
-    let weeks = [ [], [], [], [], [], [], [] ]
-    let moments = [ [], [], [], [], [], [], [] ]
+    const weeks = [ [], [], [], [], [], [], [] ]
+    const moments = [ [], [], [], [], [], [], [] ]
     let lastWeekIndex = 0
     let activeWeekIdx = -1
 
     // Create weeks of month array
-    for (let i = viewMoment().startOf('month').startOf('isoWeek'), weeki = 0; i.isBefore(monthEnd); i.add(1, 'day')) {
+    let weeki = 0
+    for (
+      const i = viewMoment().startOf('month').startOf('isoWeek');
+      i.isBefore(monthEnd);
+      i.add(1, 'day')
+    ) {
       weeks[weeki].push(i.date())
       if (i.isoWeekday() === 7) {
         moments[weeki] = moment(i).startOf('isoWeek')

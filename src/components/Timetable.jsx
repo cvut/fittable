@@ -7,7 +7,7 @@ import CSSTransitionGroup from 'react-addons-css-transition-group'
 import R from 'ramda'
 import { grid as gridPropType } from '../constants/propTypes'
 
-import { weekdayNum, shiftDate, weekStartDate, compareDate } from '../date'
+import { shiftDate, weekStartDate, compareDate } from '../date'
 import { classByScreenSize, isScreenLarge, isScreenSmall } from '../screen'
 import {
   createTimeline, calculateEventPosition, calculateHourLabels,

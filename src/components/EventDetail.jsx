@@ -117,10 +117,10 @@ class EventDetail extends React.Component {
   }
 
   eventExceptions () {
-    const {appliedExceptions} = this.props.data.details
-    if (appliedExceptions && appliedExceptions.length > 0) {
+    const { appliedExceptions } = this.props.data.details
 
-      const exceptionDesc = this.props.data.cancelled ? 'detail.cancelled' : 'detail.modified';
+    if (appliedExceptions && appliedExceptions.length > 0) {
+      const exceptionDesc = this.props.data.cancelled ? 'detail.cancelled' : 'detail.modified'
 
       return (
         <div className="prop-section exceptions">
@@ -150,21 +150,23 @@ class EventDetail extends React.Component {
   }
 
   eventNumericProps () {
-    const studentsCount = this.props.data.details.students ? this.props.data.details.students.length : '?'
+    const { details } = this.props.data
+
+    const studentsCount = details.students ? details.students.length : '?'
     const studentsPropField = this.numPropertyField(CP.translate('detail.students'), studentsCount)
 
     let capacityPropField = <div />
-    if (this.props.data.details.capacity) {
-      capacityPropField = this.numPropertyField(CP.translate('detail.capacity'),
-                                                this.props.data.details.capacity,
-                                                'center')
+    if (details.capacity) {
+      capacityPropField = this.numPropertyField(
+        CP.translate('detail.capacity'), details.capacity, 'center')
     }
 
     let parallelPropField = <div />
-    if (this.props.data.details.parallel) {
-      parallelPropField = this.numPropertyField(CP.translate('detail.parallel'),
-                                                CP.translate('detail.number', {num: this.props.data.details.parallel}),
-                                                'right')
+    if (details.parallel) {
+      parallelPropField = this.numPropertyField(
+        CP.translate('detail.parallel'),
+        CP.translate('detail.number', {num: details.parallel}),
+        'right')
     }
 
     return (
@@ -179,10 +181,9 @@ class EventDetail extends React.Component {
   eventTeachers () {
     return (
       <div className="prop-section teachers">
-        {this.props.data.teachers.map(function (teacher) {
-            return this.teacherField(teacher, this.getLinkName('teachers', teacher))
-          }.bind(this))
-        }
+        {this.props.data.teachers.map(
+          teacher => this.teacherField(teacher, this.getLinkName('teachers', teacher))
+        )}
         <div className="prop-title">
           {CP.translate('detail.teachers') }
         </div>

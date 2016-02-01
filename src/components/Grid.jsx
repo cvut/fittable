@@ -46,7 +46,10 @@ class Grid extends React.Component {
     const hours = Math.ceil(this.props.hours)
     const type = this.props.horizontal ? 'horizontal' : 'vertical'
 
-    return R.times(this.createLine(type, this.props.hours, this.props.offset, this.props.color), hours)
+    return R.times(
+      this.createLine(type, this.props.hours, this.props.offset, this.props.color),
+      hours
+    )
   }
 
   render () {

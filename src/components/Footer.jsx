@@ -1,18 +1,20 @@
 import React from 'react'
 import CP from 'counterpart'
 
-import LogoutButton from './LogoutButton'
+// import LogoutButton from './LogoutButton'
 
 export default function Footer ({userName}) {
   return (
     <footer className="row footer">
       <div className="footer-usermenu">
-        <span className="footer-usermenu-loggedas">{CP.translate('footer.loggedInAs')}{'\u0020'}</span>
+        <span className="footer-usermenu-loggedas">
+          {CP.translate('footer.loggedInAs')}{'\u0020'}
+        </span>
           <span className="footer-usermenu-username">
             <i className="fa fa-user"></i>
             <span>{userName}</span>
           </span>
-        { /*<LogoutButton />*/ }
+        { /* <LogoutButton /> */ }
       </div>
       <div className="footer-content">
         <div className="footer-content-buildinfo">

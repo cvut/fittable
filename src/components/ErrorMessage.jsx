@@ -47,7 +47,9 @@ class Error extends React.Component {
               {CP.translate('errors.access_desc2')}
               <br />
               {CP.translate('errors.access_try')}
-              <a href="javascript:window.location.back()">{CP.translate('errors.access_goback')}</a>.
+              <a href="javascript:window.location.back()">
+                {CP.translate('errors.access_goback')}
+              </a>.
               {this.renderHideButton(onErrorHide)}
             </p>
           </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import CP from 'counterpart'
 
-import LogoutButton from './LogoutButton'
+// import LogoutButton from './LogoutButton'
 
 function calendarHeader ({type, id}) {
   if (type === 'people' && id === 'me') {

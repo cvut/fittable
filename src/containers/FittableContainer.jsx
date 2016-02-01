@@ -137,81 +137,82 @@ const FittableContainer = React.createClass({
 
   render () {
     // FIXME: side effects!!!
-    const { locale, layout, fullWeek, eventsColors, facultyGrid } = this.props.settings
+
+    const props = this.props
+    const { locale, layout, fullWeek, eventsColors, facultyGrid } = props.settings
+    const { events, waiting, linkNames } = props.data
+    const { sidebar, eventId } = props.ui
+
     CP.setLocale(locale)
     moment.locale(locale)
 
-    const { events, waiting, linkNames } = this.props.data
-    const { sidebar, eventId } = this.props.ui
-
-    const error = this.props.error
-    const errorVisible = this.props.errorVisible
+    const facultyHours = (props.grid.ends - props.grid.starts) / props.grid.lessonDuration
 
     // FIXME: this should be replaced by Timeline object
     const gridsettings = {
-      starts: this.props.grid.starts,
-      ends: this.props.grid.ends,
-      lessonDuration: (!facultyGrid ? 1 : this.props.grid.lessonDuration),
+      starts: props.grid.starts,
+      ends: props.grid.ends,
+      lessonDuration: (!facultyGrid ? 1 : props.grid.lessonDuration),
       hoursStartsAt1: facultyGrid, // TODO: Remove this one
-      facultyHours: (this.props.grid.ends - this.props.grid.starts) / this.props.grid.lessonDuration,
-      facultyGrid: facultyGrid,
+      facultyHours,
+      facultyGrid,
     }
 
     return (
       <div className="fittable-container" ref="rootEl">
         <Header
-          calendar={this.props.calendar}
-          semesterName={semesterName(CP.translate.bind(CP), this.props.semester)}
-          userName={this.props.user.name || this.props.user.id}
+          calendar={props.calendar}
+          semesterName={semesterName(CP.translate.bind(CP), props.semester)}
+          userName={props.user.name || props.user.id}
         />
         {/* FIXME: we don't have the view name data inside fittable :( */}
         <Controls
-          viewDate={this.props.viewDate}
+          viewDate={props.viewDate}
           onWeekChange={this.handleChangeViewDate}
           onDateChange={this.handleChangeViewDate}
-          semester={this.props.semester}
-          onSettingsPanelChange={this.props.onSidebarDisplay}
+          semester={props.semester}
+          onSettingsPanelChange={props.onSidebarDisplay}
           days7={fullWeek}
-          screenSize={this.props.screenSize}
+          screenSize={props.screenSize}
         />
         <div className="clearfix"></div>
         <FunctionsSidebar
           ref="sidebar"
           opened={sidebar}
-          displayFilter={this.props.displayFilters}
-          onFilterChange={this.props.onDisplayFiltersChange}
-          onSettingChange={this.props.onSettingChange}
-          settings={this.props.settings}
+          displayFilter={props.displayFilters}
+          onFilterChange={props.onDisplayFiltersChange}
+          onSettingChange={props.onSettingChange}
+          settings={props.settings}
           onViewChange={this.handleChangeView}
           onSearch={this.handleSearch}
-          searchResults={this.props.search.results}
-          user={this.props.user}
+          searchResults={props.search.results}
+          user={props.user}
         />
         <div className="clearfix"></div>
         <Timetable
           grid={gridsettings}
-          viewDate={this.props.viewDate}
+          viewDate={props.viewDate}
           layout={layout}
           weekEvents={events}
-          displayFilter={this.props.displayFilters}
+          displayFilter={props.displayFilters}
           functionsOpened={sidebar}
           onViewChange={this.handleChangeView}
           linkNames={linkNames}
           colored={eventsColors}
           days7={fullWeek}
           onDateChange={this.handleChangeViewDate}
-          screenSize={this.props.screenSize}
+          screenSize={props.screenSize}
           ref="timetable"
           visible={!waiting}
           eventId={eventId}
-          onEventDisplay={this.props.onEventDisplay}
-          error={error}
-          errorVisible={errorVisible}
-          onErrorHide={this.props.onErrorHide}
-          onDetailShow={this.props.onEventDisplay}
+          onEventDisplay={props.onEventDisplay}
+          error={props.error}
+          errorVisible={props.errorVisible}
+          onErrorHide={props.onErrorHide}
+          onDetailShow={props.onEventDisplay}
         />
         <Footer
-          userName={this.props.user.name || this.props.user.id}
+          userName={props.user.name || this.props.user.id}
           />
 
         <Spinner show={waiting} />

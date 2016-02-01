@@ -33,14 +33,16 @@ class FunctionSettings extends React.Component {
                 className={ 'settings-toggle-btn ' + (layout === 'horizontal' ? ' active' : '') }
                 onClick={ handleSettingChange('layout', 'horizontal') }
               >
-                <i className="fa fa-fw fa-th-list"></i>{ CP.translate('functions.settings.layout_horizontal') }
+                <i className="fa fa-fw fa-th-list"></i>
+                { CP.translate('functions.settings.layout_horizontal') }
               </button>
               <button
                 type="button"
                 className={ 'settings-toggle-btn ' + (layout === 'vertical' ? ' active' : '') }
                 onClick={ handleSettingChange('layout', 'vertical') }
               >
-                <i className="fa fa-fw fa-th"></i>{ CP.translate('functions.settings.layout_vertical') }
+                <i className="fa fa-fw fa-th"></i>
+                { CP.translate('functions.settings.layout_vertical') }
               </button>
             </div>
           </div>
