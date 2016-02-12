@@ -97,6 +97,13 @@ function cacheDataAvailable (requestUrl) {
 function makeRequest (parameters = '', requestHandler) {
   const requestUrl = `${siriusAPIUrl}${parameters}`
 
+  if (cacheDataAvailable(requestUrl)) {
+    const request = R.clone(cache.get(requestUrl))
+
+    requestHandler(request)
+    return request
+  }
+
   const request = new XMLHttpRequest()
   request.onreadystatechange = () => {
     if (request.readyState === 4) {
@@ -105,6 +112,9 @@ function makeRequest (parameters = '', requestHandler) {
         redirectToLanding()
         return
       }
+
+      // Cache request
+      cache.set(requestUrl, R.clone(request))
 
       requestHandler(request)
     }
@@ -230,9 +240,6 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
           }
         }
 
-        // Cache generated data
-        cache.set(path, {events: data, linkNames: linknames})
-
         // Send data to fittable
         callback(null, {events: data, linkNames: linknames})
       } else {
@@ -242,11 +249,7 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
     }
   }
 
-  if (cacheDataAvailable(path)) {
-    callback(null, R.clone(cache.get(path)))
-  } else {
-    makeRequest(path, requestHandler)
-  }
+  makeRequest(path, requestHandler)
 }
 
 /**
