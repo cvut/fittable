@@ -6,7 +6,7 @@ import { is } from 'ramda'
  * string starts with 'cs', returns 'cs', otherwise 'en'.
  */
 export function browserLanguage (navigatorLanguage = 'cs') {
-  if (is(String, navigatorLanguage) && navigatorLanguage.toLowerCase().startsWith('cs')) {
+  if (is(String, navigatorLanguage) && navigatorLanguage.toLowerCase().substr(0, 2) === 'cs') {
     return 'cs'
   }
   return 'en'
