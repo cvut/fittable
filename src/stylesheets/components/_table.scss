@@ -75,7 +75,7 @@
     }
   }
 
-  &.is-7days .day {
+  &.is-7days:not(.table--horizontal) .day {
     width: 14.28%;
   }
 
