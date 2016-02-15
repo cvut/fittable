@@ -21,6 +21,7 @@ import ErrorMessage from './ErrorMessage'
 import Grid from './Grid'
 import EventBox from './Event'
 import HourLabel from './HourLabel'
+import PositionedExpander from './PositionedExpander'
 
 const propTypes = {
   grid: gridPropType,
@@ -92,19 +93,20 @@ function createDayEvents (props, animationDirection, events) {
 
   const eventComponents = events.map(event => (
     // FIXME: passing too many props to eventbox
-    <EventBox
-      key={event.id}
-      data={hideFilteredEvent(event)}
-      showDetail={event.id === props.eventId}
-      onClick={props.onDetailShow}
-      colored={props.colored}
-      onViewChange={props.onViewChange}
-      onDateChange={props.onDateChange}
-      onDetailShow={props.onDetailShow}
-      linkNames={props.linkNames}
-      layout={props.layout}
-      screenSize={props.screenSize}
-    />
+    <PositionedExpander expanded={event.id === props.eventId}>
+      <EventBox
+        key={event.id}
+        data={hideFilteredEvent(event)}
+        onClick={props.onDetailShow}
+        colored={props.colored}
+        onViewChange={props.onViewChange}
+        onDateChange={props.onDateChange}
+        onDetailShow={props.onDetailShow}
+        linkNames={props.linkNames}
+        layout={props.layout}
+        screenSize={props.screenSize}
+      />
+    </PositionedExpander>
   ))
 
   return (
