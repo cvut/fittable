@@ -4,9 +4,8 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import { isScreenLarge, isScreenSmall } from '../screen'
 import { tzMoment } from '../date'
-
+import { isScreenSmall, isScreenLarge } from '../screen'
 import { EVENT_MAX_WIDTH, EVENT_HEAD_HEIGHT } from '../constants/events'
 
 import EventDetail from './EventDetail'
@@ -25,44 +24,64 @@ const propTypes = {
     type: PropTypes.string,
   }),
   screenSize: PropTypes.number,
-  showDetail: PropTypes.bool,
+  expanded: PropTypes.bool,
+  horizontalAlign: PropTypes.number,
+  verticalAlign: PropTypes.number,
 }
 
 const defaultProps = {
-  showDetail: false,
+  expanded: false,
+}
+
+function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expanded, screenSize}) {
+  const length = data._length * 100 + '%'
+  const position = data._position * 100 + '%'
+
+  const isHorizontal = isScreenLarge(screenSize) && layout === 'horizontal'
+
+  // Set default positioning
+  let style = isHorizontal
+      ? { width: length, left: position }
+      : { height: length, top: position }
+
+  // Change alignment if it's different from default alignment (the values can be 1 or -1)
+  if (expanded && horizontalAlign === 1) {
+    style = {
+      ...style,
+      left: 'auto',
+      right: '0',
+    }
+  }
+  if (expanded && verticalAlign === 1) {
+    style = {
+      ...style,
+      top: 'auto',
+      bottom: (1 - data._position) * 100 + '%',  // inverse the percentage value (e.g. 20% -> 80%)
+      marginBottom: (-EVENT_HEAD_HEIGHT - 16) + 'px',  // shift element by head height and paddings (4 x 4px)
+    }
+  }
+
+  return style
 }
 
 class EventBox extends React.Component {
+
   style (props) {
-    const length = `${props.data._length * 100}%`
-    const position = `${props.data._position * 100}%`
+    const positionStyles = getPositionStyle(props)
 
-    let positionProperties = {}
-    if (props.layout === 'horizontal' && isScreenLarge(this.props.screenSize)) {
-      positionProperties = {
-        width: length,
-        left: position,
-      }
-    } else {
-      positionProperties = {
-        height: length,
-        top: position,
-      }
-    }
-
-    if (props.showDetail && !isScreenSmall(props.screenSize)) {
+    if (props.expanded && !isScreenSmall(props.screenSize)) {
       return {
-        ...positionProperties,
+        ...positionStyles,
         maxWidth: EVENT_MAX_WIDTH,
       }
     } else {
-      return positionProperties
+      return positionStyles
     }
   }
 
   classNames (props) {
     const cls = ['event', props.data._appear]
-    if (props.showDetail) {
+    if (props.expanded) {
       cls.push('is-opened')
     }
     if (props.data.cancelled) {
@@ -97,7 +116,7 @@ class EventBox extends React.Component {
   }
 
   eventDetail () {
-    if (this.props.showDetail) {
+    if (this.props.expanded) {
       return (
         <EventDetail
          ref="detail"
@@ -110,8 +129,8 @@ class EventBox extends React.Component {
   }
 
   render () {
-    const onClickVal = this.props.showDetail ? null : this.props.data.id
-    const headSpaceStyle = this.props.showdetail ? {height: EVENT_HEAD_HEIGHT} : {}
+    const onClickVal = this.props.expanded ? null : this.props.data.id
+    const headSpaceStyle = this.props.expanded ? {height: EVENT_HEAD_HEIGHT} : {}
 
     return (
       <div
