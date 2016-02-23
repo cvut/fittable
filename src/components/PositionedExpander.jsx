@@ -42,7 +42,7 @@ const PositionedExpander = createClass({
 
   componentWillReceiveProps ({ expanded }) {
     let expandingDirection = this.defaultExpanding
-    if (this.refs && this.refs.expandable && expanded) {
+    if (expanded && this.refs && this.refs.expandable) {
       expandingDirection = getExpandingDirection(this.refs.expandable, this.defaultExpanding)
     }
 
