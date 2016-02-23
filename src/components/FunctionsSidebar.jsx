@@ -6,7 +6,6 @@ import React, { PropTypes } from 'react'
 
 import { options as optionsType } from '../constants/propTypes'
 import FunctionSettings from './FunctionSettings'
-import FunctionSearch from './FunctionSearch'
 import FunctionFilter from './FunctionFilter'
 import SidebarIcal from './SidebarIcal'
 
@@ -14,9 +13,6 @@ const propTypes = {
   opened: PropTypes.oneOf(['settings', 'search', 'filter', 'ical']),
   onSettingsChange: PropTypes.func,
   settings: PropTypes.shape(optionsType),
-  onSearch: PropTypes.func,
-  searchResults: PropTypes.array, // FIXME: shared type
-  onViewChange: PropTypes.func,
   displayFilter: PropTypes.objectOf(PropTypes.bool), // FIXME: shared type
   onFilterChange: PropTypes.func,
   user: PropTypes.shape({
@@ -37,16 +33,6 @@ class FunctionsSidebar extends React.Component {
           ref="functionSettings"
           onSettingChange={this.props.onSettingChange}
           settings={this.props.settings}
-        />
-      )
-    }
-    if (this.props.opened === 'search') {
-      functionToRender = (
-        <FunctionSearch
-          ref="functionSearch"
-          onSearch={this.props.onSearch}
-          searchResults={this.props.searchResults}
-          onViewChange={this.props.onViewChange}
         />
       )
     }

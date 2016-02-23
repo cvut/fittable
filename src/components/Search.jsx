@@ -16,7 +16,7 @@ const propTypes = {
   })),
 }
 
-class FunctionSearch extends React.Component {
+class Search extends React.Component {
 
   constructor (props) {
 
@@ -62,9 +62,8 @@ class FunctionSearch extends React.Component {
   render () {
 
     return (
-      <div className="function function-search" ref="rootEl">
-        <div className="clearfix" />
-        <div className="search-form">
+      <div className="Search" ref="rootEl">
+        <div className="Search-input" ref="searchResults">
           <form name="search" onSubmit={this.handleSearch.bind(this)}>
             <input
               type="text"
@@ -74,25 +73,20 @@ class FunctionSearch extends React.Component {
               autoComplete="off"
               placeholder={CP.translate('functions.search.placeholder')}
             />
-            <button
-              type="submit"
-              className="search"
-              name="search"
-            >
+            <button type="submit" className="search" name="search">
               <i className="fa fa-search"></i>
             </button>
           </form>
         </div>
-        <div className="clearfix" />
-        <div className="search-results" ref="searchResults">
-          <ul className="search-results-list">
+        <div className="Search-results">
+          <ul>
             {this.props.searchResults.map(function (result) {
               return (
                 <li key={ 'result-' + result.id }>
                   <button
                     type="button"
                     onClick={this.handleResultClick.bind(this, result.type, result.id)}
-                    className="search-results-item"
+                    className="Search-result"
                   >
                     {'title' in result ? result.title : result.id}
                     <div className="subtext">
@@ -104,12 +98,11 @@ class FunctionSearch extends React.Component {
             }.bind(this)) }
            </ul>
          </div>
-         <div className="clearfix" />
        </div>
     )
   }
 }
 
-FunctionSearch.propTypes = propTypes
+Search.propTypes = propTypes
 
-export default FunctionSearch
+export default Search
