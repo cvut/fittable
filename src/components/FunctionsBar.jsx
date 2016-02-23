@@ -55,14 +55,6 @@ class FunctionsBar extends React.Component {
           <span className="tooltip">{ CP.translate('functions.settings.name') }</span>
           <i className="fa fa-cog"></i>
         </button>
-        <button
-          type="button"
-          className="function-btn search-function"
-          onClick={ this.handleSearchClick.bind(this) }
-        >
-          <span className="tooltip">{ CP.translate('functions.search.name') }</span>
-          <i className="fa fa-search"></i>
-        </button>
       </div>
 
     )

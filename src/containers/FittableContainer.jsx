@@ -28,6 +28,8 @@ import Controls from '../components/Controls'
 import Timetable from '../components/Timetable'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Search from '../components/Search'
+import UserMenu from '../components/UserMenu'
 
 // Which part of the Redux global state does our component want to receive as props?
 // FIXME: since the root component works with the whole global state, we may as well remove this
@@ -163,8 +165,15 @@ const FittableContainer = React.createClass({
         <Header
           calendar={props.calendar}
           semesterName={semesterName(CP.translate.bind(CP), props.semester)}
-          userName={props.user.name || props.user.id}
-        />
+        >
+          <Search
+            ref="functionSearch"
+            onViewChange={this.handleChangeView}
+            onSearch={this.handleSearch}
+            searchResults={props.search.results}
+          />
+          <UserMenu userName={props.user.name || props.user.id} />
+        </Header>
         {/* FIXME: we don't have the view name data inside fittable :( */}
         <Controls
           viewDate={props.viewDate}
@@ -183,9 +192,6 @@ const FittableContainer = React.createClass({
           onFilterChange={props.onDisplayFiltersChange}
           onSettingChange={props.onSettingChange}
           settings={props.settings}
-          onViewChange={this.handleChangeView}
-          onSearch={this.handleSearch}
-          searchResults={props.search.results}
           user={props.user}
         />
         <div className="clearfix"></div>
