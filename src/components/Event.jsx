@@ -52,7 +52,7 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
     }
   }
 
-  // Change alignment if it's different from default alignment
+  // Change alignment if it's different from default alignment (the values can be 1 or -1)
   if (horizontalAlign === 1 && expanded) {
     style = {
       ...style,
@@ -64,7 +64,7 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
     style = {
       ...style,
       top: 'auto',
-      bottom: (1 - data._position) * 100 + '%',
+      bottom: (1 - data._position) * 100 + '%', // inverse the percentage value (e.g. 20% -> 80%)
       marginBottom: (-EVENT_HEAD_HEIGHT - 17) + 'px', // todo: fix this magic 17px error
     }
   }
