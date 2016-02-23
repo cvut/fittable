@@ -9,45 +9,45 @@ test('safeExpandingDirection()', t => {
   // args: [left, top], [width, height]
   const testParams = [
     {
-      args: [[1266, 0], [200, 200]],
+      rect: {x: 1266, y: 0, width: 200, height: 200},
       expected: { horizontal: -1, vertical: 1 },
       desc: 'returns bottom-left when el exceeds on the right',
     },
     {
-      args: [[1266, 750], [200, 200]],
+      rect: {x: 1266, y: 750, width: 200, height: 200},
       expected: { horizontal: -1, vertical: -1 },
       desc: 'returns top-left when el exceeds right and bottom',
     },
     {
-      args: [[1266, -300], [200, 200]],
+      rect: {x: 1266, y: -300, width: 200, height: 200},
       expected: { horizontal: -1, vertical: 1 },
       desc: 'returns bottom-left when el exceeds right and top',
     },
     {
-      args: [[683, 384], [684, 385]],
+      rect: {x: 683, y: 384, width: 684, height: 385},
       expected: { horizontal: 0, vertical: 0 },
       desc: 'returns default when the el exceeds by 1 px in all directions',
     },
     {
-      args: [[684, 0], [683, 200]],
+      rect: {x: 684, y: 0, width: 683, height: 200},
       expected: { horizontal: -1, vertical: 1 },
       desc: 'returns bottom-left when the el exceeds only on the right by 1 px',
     },
     {
-      args: [[683, 384], [682, 383]],
+      rect: {x: 683, y: 384, width: 682, height: 383},
       expected: { horizontal: 0, vertical: 0 },
       desc: 'returns default when the el has 1 px space on the right and bottom',
     },
     {
-      args: [[683, 384], [200, 400]],
+      rect: {x: 683, y: 384, width: 200, height: 400},
       expected: { horizontal: 0, vertical: 0 },
       desc: 'returns default when the el is centered and doesn\'t exceeds',
     },
   ]
 
-  testParams.forEach(({args, expected, desc}) => {
-    args = [
-      ...args,
+  testParams.forEach(({rect, expected, desc}) => {
+    const args = [
+      rect,
       fakeWindow,
       defaultDirection,
     ]

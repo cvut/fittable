@@ -10,11 +10,11 @@ function whereExceedsLess (elementPosition, elementLength, axisLength) {
   return negativeExceed < positiveExceed ? -1 : 1
 }
 
-function safeExpandingDirection ([elementX, elementY], [elementW, elementH], window, defaultDir) {
+function safeExpandingDirection ({ x, y, width, height }, window, defaultDir) {
   const {innerWidth, innerHeight} = window
 
-  const bestHorizontal = whereExceedsLess(elementX, elementW, innerWidth)
-  const bestVertical = whereExceedsLess(elementY, elementH, innerHeight)
+  const bestHorizontal = whereExceedsLess(x, width, innerWidth)
+  const bestVertical = whereExceedsLess(y, height, innerHeight)
 
   // Set best directions, or leave the defaults
   const horizontal = bestHorizontal !== 0 ? bestHorizontal : defaultDir.horizontal
