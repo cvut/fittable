@@ -76,8 +76,9 @@ class EventBox extends React.Component {
 
   style (props) {
     const positionStyles = getPositionStyle(props)
+    const { expanded, screenSize } = props
 
-    if (props.expanded && !isScreenSmall(props.screenSize)) {
+    if (expanded && !isScreenSmall(screenSize)) {
       return {
         ...positionStyles,
         maxWidth: EVENT_MAX_WIDTH,
@@ -88,19 +89,21 @@ class EventBox extends React.Component {
   }
 
   classNames (props) {
-    const cls = ['event', props.data._appear]
-    if (props.expanded) {
+    const { data, expanded, colored } = props
+
+    const cls = ['event', data._appear]
+    if (expanded) {
       cls.push('is-opened')
     }
-    if (props.data.cancelled) {
+    if (data.cancelled) {
       cls.push('event--cancelled')
     }
-    if (props.data.replacement) {
+    if (data.replacement) {
       cls.push('event--replacement')
     }
 
-    if (props.colored) {
-      cls.push(`event--${props.data.type}`)
+    if (colored) {
+      cls.push(`event--${data.type}`)
     }
 
     return cls.join(' ')
