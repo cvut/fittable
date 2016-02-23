@@ -4,7 +4,6 @@ import R from 'ramda'
 import safeExpandingDirection from '../utils/safeExpandingDirection'
 
 import { EVENT_MAX_WIDTH, EVENT_MAX_HEIGHT } from '../constants/events'
-import { WrongChildren } from '../exceptions'
 
 function getExpandingDirection (ref, defaultDir) {
   const expandableDOM = findDOMNode(ref)
@@ -26,6 +25,7 @@ const PositionedExpander = createClass({
     expanded: PropTypes.bool,
     left: PropTypes.number,
     top: PropTypes.number,
+    children: PropTypes.element.isRequired,
   },
 
   displayName: 'PositionedExpander',
@@ -59,11 +59,7 @@ const PositionedExpander = createClass({
       ref: 'expandable',
     }
 
-    if (this.props.children !== 1) {
-      return cloneElement(this.props.children, childrenProps)
-    } else {
-      throw new WrongChildren('PositionedExpander component requires one children.')
-    }
+    return cloneElement(this.props.children, childrenProps)
   },
 })
 
