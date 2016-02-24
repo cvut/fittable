@@ -11,7 +11,7 @@ test('safeExpandingDirection()', t => {
     {
       rect: {x: 683, y: 384, width: 200, height: 400},
       expected: { horizontal: 0, vertical: 0 },
-      desc: 'returns default when the el is centered and doesn\'t overflows',
+      desc: 'returns default when the el is centered and doesn\'t overflow',
     },
     {
       rect: {x: 1266, y: 0, width: 200, height: 200},
