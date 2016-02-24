@@ -144,8 +144,9 @@ function dataCallback ({calendarType, dateFrom, dateTo, calendarId}, callback) {
             replacement: false,
             teachers: event.links.teachers,
             details: {
-              students: event.links.students,
+              students: event.links.students || [],  // this is null for students!
               capacity: event.capacity,
+              occupied: event.occupied,
               parallel: event.parallel,
               appliedExceptions: event.links.applied_exceptions,
             },

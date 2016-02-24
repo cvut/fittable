@@ -152,8 +152,8 @@ class EventDetail extends React.Component {
   eventNumericProps () {
     const { details } = this.props.data
 
-    const studentsCount = details.students ? details.students.length : '?'
-    const studentsPropField = this.numPropertyField(CP.translate('detail.students'), studentsCount)
+    const studentsPropField = this.numPropertyField(
+      CP.translate('detail.students'), details.occupied)
 
     let capacityPropField = <div />
     if (details.capacity) {
