@@ -1,21 +1,21 @@
 import { createClass, PropTypes, cloneElement } from 'react'
 import { findDOMNode } from 'react-dom'
 import safeExpandingDirection from '../utils/safeExpandingDirection'
+import R from 'ramda'
 
 import { EVENT_MAX_WIDTH, EVENT_MAX_HEIGHT } from '../constants/events'
 
 function getExpandingDirection (ref, defaultDir) {
   const expandableDOM = findDOMNode(ref)
-  const rect = { x: 0, y: 0, width: EVENT_MAX_WIDTH, height: EVENT_MAX_HEIGHT }
+  let point = [0, 0]
 
   if (expandableDOM) {
-    const boundingRect = expandableDOM.getBoundingClientRect()
-    rect.x = boundingRect.left
-    rect.y = boundingRect.top
+    point = R.props(['left', 'top'], expandableDOM.getBoundingClientRect())
   }
 
   return safeExpandingDirection(
-    rect,
+    point,
+    [EVENT_MAX_WIDTH, EVENT_MAX_HEIGHT],
     global,
     defaultDir)
 }
@@ -54,8 +54,8 @@ const PositionedExpander = createClass({
 
     const childrenProps = {
       expanded: this.props.expanded,
-      horizontalAlign: -expandingDirection.horizontal,
-      verticalAlign: -expandingDirection.vertical,
+      horizontalAlign: expandingDirection.horizontal,
+      verticalAlign: expandingDirection.vertical,
       ref: 'expandable',
     }
 
