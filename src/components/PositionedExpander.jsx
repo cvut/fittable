@@ -6,10 +6,10 @@ import { EVENT_MAX_WIDTH, EVENT_MAX_HEIGHT } from '../constants/events'
 
 function getExpandingDirection (ref, defaultDir) {
   const expandableDOM = findDOMNode(ref)
-  const boundingRect = expandableDOM.getBoundingClientRect()
   const rect = { x: 0, y: 0, width: EVENT_MAX_WIDTH, height: EVENT_MAX_HEIGHT }
 
   if (expandableDOM) {
+    const boundingRect = expandableDOM.getBoundingClientRect()
     rect.x = boundingRect.left
     rect.y = boundingRect.top
   }
