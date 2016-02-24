@@ -37,35 +37,26 @@ const defaultProps = {
 function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expanded}) {
   const length = data._length * 100 + '%'
   const position = data._position * 100 + '%'
-  let style
 
   // Set default positioning
-  if (layout === 'horizontal') {
-    style = {
-      width: length,
-      left: position,
-    }
-  } else {
-    style = {
-      height: length,
-      top: position,
-    }
-  }
+  let style = layout === 'horizontal'
+      ? { width: length, left: position }
+      : { height: length, top: position }
 
   // Change alignment if it's different from default alignment (the values can be 1 or -1)
-  if (horizontalAlign === 1 && expanded) {
+  if (expanded && horizontalAlign === 1) {
     style = {
       ...style,
       left: 'auto',
       right: '0',
     }
   }
-  if (verticalAlign === 1 && expanded) {
+  if (expanded && verticalAlign === 1) {
     style = {
       ...style,
       top: 'auto',
-      bottom: (1 - data._position) * 100 + '%', // inverse the percentage value (e.g. 20% -> 80%)
-      marginBottom: (-EVENT_HEAD_HEIGHT - 17) + 'px', // todo: fix this magic 17px error
+      bottom: (1 - data._position) * 100 + '%',  // inverse the percentage value (e.g. 20% -> 80%)
+      marginBottom: (-EVENT_HEAD_HEIGHT - 17) + 'px',  // todo: fix this magic 17px error
     }
   }
 
