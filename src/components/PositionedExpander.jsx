@@ -1,6 +1,5 @@
 import { createClass, PropTypes, cloneElement } from 'react'
 import { findDOMNode } from 'react-dom'
-import R from 'ramda'
 import safeExpandingDirection from '../utils/safeExpandingDirection'
 
 import { EVENT_MAX_WIDTH, EVENT_MAX_HEIGHT } from '../constants/events'
