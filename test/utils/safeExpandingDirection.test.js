@@ -15,17 +15,17 @@ test('safeExpandingDirection()', t => {
     },
     {
       rect: {x: 1266, y: 0, width: 200, height: 200},
-      expected: { horizontal: -1, vertical: 1 },
+      expected: { horizontal: 1, vertical: -1 },
       desc: 'returns bottom-left when el overflows on the right',
     },
     {
       rect: {x: 1266, y: 750, width: 200, height: 200},
-      expected: { horizontal: -1, vertical: -1 },
+      expected: { horizontal: 1, vertical: 1 },
       desc: 'returns top-left when el overflows right and bottom',
     },
     {
       rect: {x: 1266, y: -300, width: 200, height: 200},
-      expected: { horizontal: -1, vertical: 1 },
+      expected: { horizontal: 1, vertical: -1 },
       desc: 'returns bottom-left when el overflows right and top',
     },
     {
@@ -35,7 +35,7 @@ test('safeExpandingDirection()', t => {
     },
     {
       rect: {x: 684, y: 0, width: 683, height: 200},
-      expected: { horizontal: -1, vertical: 1 },
+      expected: { horizontal: 1, vertical: -1 },
       desc: 'returns bottom-left when the el overflows only on the right by 1 px',
     },
     {
@@ -47,7 +47,8 @@ test('safeExpandingDirection()', t => {
 
   testParams.forEach(({rect, expected, desc}) => {
     const args = [
-      rect,
+      [rect.x, rect.y],
+      [rect.width, rect.height],
       fakeWindow,
       defaultDirection,
     ]
