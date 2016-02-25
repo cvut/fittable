@@ -78,7 +78,7 @@
     },
     "search": {
       "name": "Vyhledávání",
-      "placeholder": "Hledat…",
+      "placeholder": "Hledat předměty, místnosti, osoby…",
       "subject": "Předmět",
       "person": "Osoba",
       "room": "Místnost"
