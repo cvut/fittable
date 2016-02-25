@@ -78,7 +78,7 @@
     },
     "search": {
       "name": "Search",
-      "placeholder": "Search…",
+      "placeholder": "Search courses, rooms, people…",
       "subject": "Subject",
       "person": "Person",
       "room": "Room"
