@@ -1,0 +1,114 @@
+#fittable {
+
+  $search-width: 360px;
+  $background: #fcfcfc;
+
+  .Search {
+    height: 32px;
+    color: white;
+    width: $search-width;
+    float: right;
+    position: relative;
+    z-index: 300;
+
+    @media #{$medium-down} {
+      position: absolute;
+      top: .5em;
+      right: 0;
+    }
+
+    @media #{$small-down} {
+      width: 100%;
+    }
+  }
+
+  .Search-icon {
+    display: block;
+    z-index: 320;
+    position: absolute;
+    line-height: 32px;
+    right: 1em;
+    color: $secondary-color;
+    cursor: text;
+  }
+
+  .Search-input input {
+    width: 85%;
+    float: right;
+    margin: 0;
+    background: $background;
+    color: $primary-color;
+    line-height: 32px;
+    height: 32px;
+    border: 0;
+    padding: 0 1em;
+    transition: width $default-anim-speed, color $default-anim-speed, background $default-anim-speed;
+    z-index: 310;
+
+    @media #{$medium-down} {
+      width: 3em;
+      text-indent: 9999em;
+      color: white;
+      background: $primary-color;
+    }
+
+    &:focus, &:active, &:valid {
+      outline: none;
+      text-indent: 0;
+      width: 100%;
+      box-shadow: 0 1em 3em rgba(black, .1);
+      background: $background;
+      color: $primary-color !important;
+    }
+  }
+
+  .Search-results {
+    @include disable-selection();
+    width: $search-width;
+    height: 240px;
+    position: absolute;
+    top: 32px;
+    background: white;
+    box-shadow: 0 1em 3em rgba(black, .1);
+    transition: opacity $default-anim-speed;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .Search-results:not(.is-active) {
+    opacity: 0;
+  }
+
+  .Search-results ul {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+
+  .Search-result {
+    display: block;
+    width: $search-width;
+    background: $light-secondary-color;
+    color: $primary-color;
+    font-size: $large-font-size;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 2px;
+    transition: color $default-anim-speed, background $default-anim-speed;
+    padding: 6px 1em;
+
+    .subtext {
+      font-size: $small-font-size;
+      color: #333;
+    }
+
+    &:hover {
+      background: $primary-color;
+
+      &, .subtext {
+        color: white;
+      }
+    }
+  }
+
+}

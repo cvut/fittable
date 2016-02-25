@@ -60,25 +60,28 @@ class Search extends React.Component {
   }
 
   render () {
+    const searchResultsClass = 'Search-results' +
+      (this.props.searchResults.length ? ' is-active' : '')
 
     return (
       <div className="Search" ref="rootEl">
         <div className="Search-input" ref="searchResults">
           <form name="search" onSubmit={this.handleSearch.bind(this)}>
+            <label className="Search-icon" htmlFor="searchinput">
+              <i className="fa fa-search"></i>
+            </label>
             <input
               type="text"
               id="searchinput"
               name="search"
               ref="searchquery"
               autoComplete="off"
+              required
               placeholder={CP.translate('functions.search.placeholder')}
             />
-            <button type="submit" className="search" name="search">
-              <i className="fa fa-search"></i>
-            </button>
           </form>
         </div>
-        <div className="Search-results">
+        <div className={searchResultsClass}>
           <ul>
             {this.props.searchResults.map(function (result) {
               return (
