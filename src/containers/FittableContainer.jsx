@@ -166,13 +166,13 @@ const FittableContainer = React.createClass({
           calendar={props.calendar}
           semesterName={semesterName(CP.translate.bind(CP), props.semester)}
         >
+          <UserMenu userName={props.user.name || props.user.id} />
           <Search
             ref="functionSearch"
             onViewChange={this.handleChangeView}
             onSearch={this.handleSearch}
             searchResults={props.search.results}
           />
-          <UserMenu userName={props.user.name || props.user.id} />
         </Header>
         {/* FIXME: we don't have the view name data inside fittable :( */}
         <Controls
