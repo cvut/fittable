@@ -31,6 +31,10 @@
     right: 1em;
     color: $secondary-color;
     cursor: text;
+
+    @media #{$medium-down} {
+      cursor: pointer;
+    }
   }
 
   .Search-input input {
@@ -45,6 +49,7 @@
     padding: 0 1em;
     transition: width $default-anim-speed, color $default-anim-speed, background $default-anim-speed;
     z-index: 310;
+    cursor: pointer;
 
     @media #{$medium-down} {
       width: 3em;
@@ -59,6 +64,7 @@
       width: 100%;
       background: $background;
       color: $primary-color !important;
+      cursor: text;
     }
 
     &:invalid {
