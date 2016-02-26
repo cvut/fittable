@@ -19,7 +19,9 @@
     }
 
     @media #{$small-down} {
-      width: 100%;
+      width: 96%;
+      right: 2%;
+      left: 2%;
     }
   }
 
