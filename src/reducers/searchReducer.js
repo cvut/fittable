@@ -1,4 +1,4 @@
-import { SEARCH_REQUEST, SEARCH_RESPONSE } from '../constants/actionTypes'
+import { SEARCH_REQUEST, SEARCH_RESPONSE, SEARCH_CLEAR } from '../constants/actionTypes'
 
 const initialState = {
   waiting: false,
@@ -19,6 +19,11 @@ export default function search (state = initialState, action) {
         ...state,
         waiting: false,
         results: action.payload.results,
+      }
+    case SEARCH_CLEAR:
+      return {
+        ...state,
+        results: [],
       }
     default:
       return state

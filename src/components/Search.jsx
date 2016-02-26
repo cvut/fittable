@@ -9,6 +9,7 @@ import CP from 'counterpart'
 const propTypes = {
   onSearch: PropTypes.func,
   onViewChange: PropTypes.func,
+  onClear: PropTypes.func,
   searchResults: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     type: PropTypes.string,
@@ -36,10 +37,11 @@ class Search extends React.Component {
 
   handleResultClick (type, id) {
     this.props.onViewChange(type, id)
+    this.props.onClear()
+    this.refs.searchquery.getDOMNode().value = ''
   }
 
   handleInputKeyup (e) {
-
     if (e.target.value.length >= 3) {
       if (this.autoSearchTimeout !== null) {
         clearTimeout(this.autoSearchTimeout)
@@ -48,6 +50,8 @@ class Search extends React.Component {
       this.autoSearchTimeout = setTimeout(() => {
         this.props.onSearch(this.refs.searchquery.value)
       }, 100)
+    } else {
+      this.props.onClear()
     }
   }
 
