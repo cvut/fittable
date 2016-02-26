@@ -125,6 +125,8 @@ export function calculateOverlap (events) {
     }
   }, sortedevents)
 
+  markOverlayedEvents(overlap)
+
   return sortedevents
 }
 
