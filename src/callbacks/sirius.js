@@ -288,19 +288,10 @@ const convertInterval = R.pipe(
 const convertSemester = R.pipe(
   (semester) => ({
     ...semester,
-    periods: R.map(convertPeriod, semester.periods),
+    periods: R.map(convertInterval, semester.periods),
     breakDuration: 15,  // FIXME: replace this and that two below with semester.hourStarts
     dayStartsAtHour: 7.5,
     dayEndsAtHour: 21.25,
-  }),
-  convertInterval
-)
-
-const convertPeriod = R.pipe(
-  // TODO: remove after resolving https://github.com/cvut/sirius/issues/172
-  (period) => ({
-    ...period,
-    irregular: !!period.firstDayOverride,
   }),
   convertInterval
 )
