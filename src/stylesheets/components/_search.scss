@@ -88,6 +88,10 @@
     overflow-x: hidden;
     padding: .25em;
     padding-bottom: 0;
+
+    @media #{$small-down} {
+      width: 100%;
+    }
   }
 
   .Search-results:not(.is-active) {
