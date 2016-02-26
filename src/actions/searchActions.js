@@ -1,4 +1,4 @@
-import { SEARCH_REQUEST, SEARCH_RESPONSE } from '../constants/actionTypes'
+import { SEARCH_REQUEST, SEARCH_RESPONSE, SEARCH_CLEAR } from '../constants/actionTypes'
 
 function startSearchRequest (query) {
   return {
@@ -11,6 +11,12 @@ function receiveSearchResults (results) {
   return {
     type: SEARCH_RESPONSE,
     payload: { results },
+  }
+}
+
+export function clearSearchResults () {
+  return {
+    type: SEARCH_CLEAR,
   }
 }
 

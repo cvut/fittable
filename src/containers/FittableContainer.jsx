@@ -13,7 +13,7 @@ import { changeSettings } from '../actions/settingsActions'
 import { changeDisplayFilters } from '../actions/filterActions'
 import { fetchEvents, hideDataError } from '../actions/dataActions'
 import { displaySidebar, displayEvent } from '../actions/uiActions'
-import { fetchSearchResults } from '../actions/searchActions'
+import { fetchSearchResults, clearSearchResults } from '../actions/searchActions'
 import { fetchSemesterData } from '../actions/semesterActions'
 import { detectScreenSize } from '../actions/clientActions'
 import { fetchUserData } from '../actions/userActions'
@@ -71,6 +71,7 @@ function mapDispatchToProps (dispatch) {
     onErrorHide: () => dispatch(hideDataError()),
     onUserRequest: () => dispatch(fetchUserData()),
     changeCalendar: (calendar) => dispatch(changeCalendar(calendar)),
+    onSearchClear: () => dispatch(clearSearchResults()),
   }
 }
 
@@ -171,6 +172,7 @@ const FittableContainer = React.createClass({
             ref="functionSearch"
             onViewChange={this.handleChangeView}
             onSearch={this.handleSearch}
+            onClear={props.onSearchClear}
             searchResults={props.search.results}
           />
         </Header>
