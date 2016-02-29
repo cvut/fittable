@@ -17,7 +17,7 @@
 
     .day {
       background: white !important;
-      width: 100%;
+      width: 100% !important; // table.is-7days has higher priority than this
     }
     .day:not(.selected) { display: none; }
     .day .label { display: none; }
