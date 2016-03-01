@@ -14,6 +14,10 @@ export function isoDate (date) {
   return moment.tz(date, TZ).format('YYYY-MM-DD')
 }
 
+export function tzMoment (date) {
+  return moment.tz(date, TZ)
+}
+
 function momentWeekRange (date) {
   const m = moment.tz(date, TZ)
 
