@@ -1,6 +1,6 @@
 import R from 'ramda'
-import moment from 'moment'
-import { setDateToZeroTime, weekdayNum } from './date'
+import moment from 'moment-timezone'
+import { weekdayNum, fmoment } from './date'
 
 /**
 * @typedef Grid
@@ -52,10 +52,10 @@ export function createTimeline (grid) {
 }
 
 export function calculateEventPosition (event, timeline) {
-  const eventStartDate = new Date(event.startsAt)
-  const eventStartTs = eventStartDate.getTime() / 1000
-  const eventEndTs = new Date(event.endsAt).getTime() / 1000
-  const dayStartTs = setDateToZeroTime(eventStartDate).getTime() / 1000
+  const eventStartDate = fmoment(event.startsAt)
+  const eventStartTs = eventStartDate.unix()
+  const eventEndTs = fmoment(event.endsAt).unix()
+  const dayStartTs = eventStartDate.startOf('day').unix()
   const timelineStartTs = dayStartTs + timeline.start
 
   return {

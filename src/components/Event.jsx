@@ -4,8 +4,8 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import Moment from 'moment'
 import { isScreenLarge, isScreenSmall } from '../screen'
+import { fmoment } from '../date'
 
 import { EVENT_MAX_WIDTH, EVENT_HEAD_HEIGHT } from '../constants/events'
 
@@ -76,8 +76,8 @@ class EventBox extends React.Component {
   }
 
   displayTime (props) {
-    const startsAt = new Moment(props.data.startsAt).format('LT')
-    const endsAt = new Moment(props.data.endsAt).format('LT')
+    const startsAt = fmoment(props.data.startsAt).format('LT')
+    const endsAt = fmoment(props.data.endsAt).format('LT')
 
     return `${startsAt}—${endsAt}`
   }
