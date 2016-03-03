@@ -131,8 +131,10 @@ class EventBox extends React.Component {
   }
 
   render () {
-    const onClickVal = this.props.expanded ? null : this.props.data.id
-    const headSpaceStyle = this.props.expanded ? {height: EVENT_HEAD_HEIGHT} : {}
+    const { expanded, data, colored, onClick } = this.props
+
+    const onClickVal = expanded ? null : data.id
+    const headSpaceStyle = expanded ? {height: EVENT_HEAD_HEIGHT} : {}
 
     return (
       <div
@@ -142,10 +144,10 @@ class EventBox extends React.Component {
         <div className="inner">
           <div
             className="head-space"
-            onClick={this.props.onClick.bind(null, onClickVal)}
+            onClick={onClick.bind(null, onClickVal)}
             style={headSpaceStyle}>
             <div className="head-name">
-              {this.props.data.course}
+              {data.course}
             </div>
             <div className="head-time">
               {this.displayTime(this.props)}
@@ -154,8 +156,8 @@ class EventBox extends React.Component {
               {this.displayRoom(this.props)}
             </div>
             <div className="head-type">
-              <span className={`short ${this.props.colored ? ' hide' : ''}`}>
-                {CP.translate('event_type_short.' + this.props.data.type)}
+              <span className={`short ${colored ? ' hide' : ''}`}>
+                {CP.translate('event_type_short.' + data.type)}
               </span>
             </div>
           </div>
