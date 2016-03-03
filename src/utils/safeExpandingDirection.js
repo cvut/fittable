@@ -1,13 +1,13 @@
-function whereExceedsLess (elementPosition, elementLength, axisLength) {
-  const negativeExceed = -1 * (elementPosition - elementLength)
-  const positiveExceed = elementPosition + elementLength - axisLength
+function whereOverflowLess (elementPosition, elementLength, axisLength) {
+  const negativeOverflow = -1 * (elementPosition - elementLength)
+  const positiveOverflow = elementPosition + elementLength - axisLength
 
-  // If exceeds are the same or both negative
-  if (negativeExceed === positiveExceed || !negativeExceed && !positiveExceed) {
+  // If overflows are the same or both negative
+  if (negativeOverflow === positiveOverflow || !negativeOverflow && !positiveOverflow) {
     return 0
   }
 
-  return negativeExceed < positiveExceed ? -1 : 1
+  return negativeOverflow < positiveOverflow ? -1 : 1
 }
 
 /**
@@ -29,8 +29,8 @@ function safeExpandingDirection ([x, y], [width, height], window, defaultCorner)
   const {innerWidth, innerHeight} = window
 
   // Gets best directions to place the rectangle
-  const bestHorizontal = whereExceedsLess(x, width, innerWidth)
-  const bestVertical = whereExceedsLess(y, height, innerHeight)
+  const bestHorizontal = whereOverflowLess(x, width, innerWidth)
+  const bestVertical = whereOverflowLess(y, height, innerHeight)
 
   // Set best corners (corner is negative direction), or leave the defaults
   const horizontal = bestHorizontal !== 0 ? -bestHorizontal : defaultCorner.horizontal
