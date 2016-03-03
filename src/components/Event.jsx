@@ -43,7 +43,7 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
       ? { width: length, left: position }
       : { height: length, top: position }
 
-  // Change alignment if it's different from default alignment (the values can be 1 or -1)
+  // Set alignment styles
   if (expanded && horizontalAlign === 1) {
     style = {
       ...style,
@@ -51,12 +51,24 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
       right: '0',
     }
   }
+
   if (expanded && verticalAlign === 1) {
+    let bottomPosition
+    let bottomMargin
+
+    if (layout === 'vertical') {
+      bottomPosition = (1 - data._position) * 100 + '%' // inverse the percentage value (e.g. 20% -> 80%)
+      bottomMargin = (-EVENT_HEAD_HEIGHT - 16) + 'px' // shift element by head height and paddings (4 x 4px)
+    } else {
+      bottomPosition = '0%' // just align to the bottom on horizontal layout
+      bottomMargin = 0
+    }
+
     style = {
       ...style,
       top: 'auto',
-      bottom: (1 - data._position) * 100 + '%',  // inverse the percentage value (e.g. 20% -> 80%)
-      marginBottom: (-EVENT_HEAD_HEIGHT - 16) + 'px',  // shift element by head height and paddings (4 x 4px)
+      bottom: bottomPosition,
+      marginBottom: bottomMargin,
     }
   }
 
