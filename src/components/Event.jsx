@@ -56,7 +56,7 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
       ...style,
       top: 'auto',
       bottom: (1 - data._position) * 100 + '%',  // inverse the percentage value (e.g. 20% -> 80%)
-      marginBottom: (-EVENT_HEAD_HEIGHT - 17) + 'px',  // todo: fix this magic 17px error
+      marginBottom: (-EVENT_HEAD_HEIGHT - 16) + 'px',  // shift element by head height and paddings (4 x 4px)
     }
   }
 
