@@ -3,7 +3,7 @@ function whereOverflowLess (elementPosition, elementLength, axisLength) {
   const positiveOverflow = elementPosition + elementLength - axisLength
 
   // If overflows are the same or both negative
-  if (negativeOverflow === positiveOverflow || !negativeOverflow && !positiveOverflow) {
+  if (negativeOverflow === positiveOverflow || negativeOverflow < 0 && positiveOverflow < 0) {
     return 0
   }
 
