@@ -25,7 +25,7 @@ function whereOverflowLess (elementPosition, elementLength, axisLength) {
  * @returns Corner to place rectangle at, object with properties "horizontal" and "vertical"
  *          with values -1 or 1.
  */
-function safeExpandingDirection ([x, y], [width, height], window, defaultCorner) {
+function safeExpandingCorner ([x, y], [width, height], window, defaultCorner) {
   const {innerWidth, innerHeight} = window
 
   // Gets best directions to place the rectangle
@@ -39,4 +39,4 @@ function safeExpandingDirection ([x, y], [width, height], window, defaultCorner)
   return {horizontal, vertical}
 }
 
-export default safeExpandingDirection
+export default safeExpandingCorner

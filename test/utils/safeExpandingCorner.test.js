@@ -1,9 +1,9 @@
 import test from 'blue-tape'
-import safeExpandingDirection from '../../src/utils/safeExpandingDirection'
+import safeExpandingCorner from '../../src/utils/safeExpandingCorner'
 import { apply } from 'ramda'
 
-test('safeExpandingDirection()', t => {
-  const defaultDirection = { horizontal: 0, vertical: 0 }
+test('safeExpandingCorner()', t => {
+  const defaultCorner = { horizontal: 0, vertical: 0 }
   const fakeWindow = { innerWidth: 1366, innerHeight: 768 }
 
   // args: [left, top], [width, height]
@@ -50,10 +50,10 @@ test('safeExpandingDirection()', t => {
       [rect.x, rect.y],
       [rect.width, rect.height],
       fakeWindow,
-      defaultDirection,
+      defaultCorner,
     ]
 
-    t.deepEqual(apply(safeExpandingDirection, args), expected, desc)
+    t.deepEqual(apply(safeExpandingCorner, args), expected, desc)
   })
 
   t.end()
