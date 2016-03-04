@@ -30,20 +30,20 @@ const PositionedExpander = createClass({
 
   displayName: 'PositionedExpander',
 
-  defaultExpanding: { horizontal: 1, vertical: 1 },
+  defaultCorner: { horizontal: -1, vertical: -1 },
 
   getDefaultProps: () => ({
     expanded: false,
   }),
 
   getInitialState () {
-    return { expandingDirection: this.defaultExpanding }
+    return { expandingDirection: this.defaultCorner }
   },
 
   componentWillReceiveProps ({ expanded }) {
-    let expandingDirection = this.defaultExpanding
+    let expandingDirection = this.defaultCorner
     if (expanded && this.refs && this.refs.expandable) {
-      expandingDirection = getExpandingCorner(this.refs.expandable, this.defaultExpanding)
+      expandingDirection = getExpandingCorner(this.refs.expandable, this.defaultCorner)
     }
 
     this.setState({ expandingDirection })
