@@ -83,10 +83,11 @@ class EventBox extends React.Component {
   }
 
   displayRoom (props) {
+    const roomCode = props.data.room || '?'
     return (
       <div>
         <i className="fa fa-map-marker"></i>
-        {props.data.room}
+        {roomCode}
       </div>
     )
   }
