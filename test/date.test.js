@@ -140,3 +140,15 @@ test('weekStartDate', t => {
 
   t.end()
 })
+
+test('fmoment', t => {
+  const d = new Date('2015-12-14 16:20:40')
+  const tz = 'CET'
+  const actual = date.fmoment(d, tz)
+
+  t.deepEqual(actual.toDate(), d, 'returns a moment with the specified date')
+  t.equal(actual.zoneName(), tz, 'returns a moment with the specified timezone')
+  t.assert(actual.isFrozen(), 'returns a frozen moment')
+
+  t.end()
+})

@@ -77,4 +77,6 @@ export function weekStartDate (date) {
   return moment(date).startOf('isoWeek').toDate()
 }
 
-export const fmoment = (date) => frozenMoment(date).freeze()
+export function fmoment (date, timezone = TZ) {
+  return frozenMoment(moment.tz(date, timezone)).freeze()
+}
