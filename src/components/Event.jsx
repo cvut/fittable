@@ -83,6 +83,10 @@ class EventBox extends React.Component {
   }
 
   displayRoom (props) {
+    if (!props.data.room) {
+      return ''
+    }
+
     return (
       <div>
         <i className="fa fa-map-marker"></i>
