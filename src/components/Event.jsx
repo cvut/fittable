@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import { isScreenSmall } from '../screen'
+import { isScreenSmall, isScreenLarge } from '../screen'
 import { tzMoment } from '../date'
 
 import { EVENT_MAX_WIDTH, EVENT_HEAD_HEIGHT } from '../constants/events'
@@ -34,12 +34,15 @@ const defaultProps = {
   expanded: false,
 }
 
-function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expanded}) {
+function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expanded, screenSize}) {
   const length = data._length * 100 + '%'
   const position = data._position * 100 + '%'
 
+  const layoutCanBeHorizontal = isScreenLarge(screenSize)
+  const isHorizontal = layoutCanBeHorizontal && layout === 'horizontal'
+
   // Set default positioning
-  let style = layout === 'horizontal'
+  let style = isHorizontal
       ? { width: length, left: position }
       : { height: length, top: position }
 
