@@ -79,23 +79,32 @@ class EventDetail extends React.Component {
   }
 
   eventBasicProps () {
-    const seqNumber = this.props.data.sequenceNumber || '?'
+    const { data } = this.props
+    const seqNumber = data.sequenceNumber || '?'
+
+    const nameButton = (
+      <button onClick={this.handleCourseClick.bind(this, data.course)}>
+        {this.getEventName()}
+      </button>
+    )
+
+    const locationButton = (
+      <button onClick={this.handleRoomClick.bind(this, data.room)}>
+        <i className="fa fa-map-marker"></i>
+        {data.room}
+      </button>
+    )
 
     return (
       <div className="prop-section basic-props">
         <div className="type-num">
-          {CP.translate(`event_type_num.${this.props.data.type}`, {seqnumber: seqNumber}) }
+          {CP.translate(`event_type_num.${data.type}`, {seqnumber: seqNumber})}
         </div>
         <div className="name">
-          <button onClick={this.handleCourseClick.bind(this, this.props.data.course) }>
-            {this.getEventName()}
-          </button>
+          {nameButton}
         </div>
         <div className="location">
-          <button onClick={this.handleRoomClick.bind(this, this.props.data.room) }>
-            <i className="fa fa-map-marker"></i>
-            {this.props.data.room}
-          </button>
+          {data.room ? locationButton : ''}
         </div>
       </div>
     )
