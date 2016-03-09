@@ -51,13 +51,13 @@
     padding: 0 1em;
     transition: width $default-anim-speed, color $default-anim-speed, background $default-anim-speed;
     z-index: 310;
-    cursor: pointer;
 
     @media #{$medium-down} {
       width: 3em;
       text-indent: 9999em;
       color: white;
       background: $primary-color;
+      cursor: pointer;
     }
 
     &:focus, &:active, &:valid {
