@@ -23,10 +23,6 @@ header {
     float: right;
 
     @media #{$medium-down} {
-      right: 20px;
-    }
-
-    @media #{$small-down} {
       display: none;
     }
   }
@@ -45,10 +41,6 @@ header {
     i.fa {
       color: $primary-color;
       margin-right: .7rem;
-    }
-
-    @media #{$medium-down} {
-      display: none;
     }
   }
 }
