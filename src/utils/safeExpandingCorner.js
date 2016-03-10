@@ -16,6 +16,9 @@ function whereOverflowLess (elementPosition, elementLength, axisLength) {
  * value. One of the rectangle's corner must be placed at the point; the function returns which
  * one. Returns the provided default, if fits. If not and a better option exists, then it returns
  * the better one.
+ * For example, if the inner rectangle doesn't fit the window and overflow on the right side,
+ * it will return { horizontal: 1, vertical: -1 }, which means it should stick to the upper right
+ * corner (expand to the bottom left).
  *
  * @param point
  * @param size
