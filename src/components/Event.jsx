@@ -4,7 +4,7 @@
 
 import React, { PropTypes } from 'react'
 import CP from 'counterpart'
-import { isScreenLarge, isScreenSmall } from '../screen'
+import { isScreenSmall, isScreenLarge } from '../screen'
 import { tzMoment } from '../date'
 
 import { EVENT_MAX_WIDTH, EVENT_HEAD_HEIGHT } from '../constants/events'
@@ -25,51 +25,91 @@ const propTypes = {
     type: PropTypes.string,
   }),
   screenSize: PropTypes.number,
-  showDetail: PropTypes.bool,
+  expanded: PropTypes.bool,
+  horizontalAlign: PropTypes.number,
+  verticalAlign: PropTypes.number,
 }
 
 const defaultProps = {
-  showDetail: false,
+  expanded: false,
+}
+
+function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expanded, screenSize}) {
+  const length = data._length * 100 + '%'
+  const position = data._position * 100 + '%'
+
+  const layoutCanBeHorizontal = isScreenLarge(screenSize)
+  const isHorizontal = layoutCanBeHorizontal && layout === 'horizontal'
+
+  // Set default positioning
+  let style = isHorizontal
+      ? { width: length, left: position }
+      : { height: length, top: position }
+
+  // Set alignment styles
+  if (expanded && horizontalAlign === 1) {
+    style = {
+      ...style,
+      left: 'auto',
+      right: '0',
+    }
+  }
+
+  if (expanded && verticalAlign === 1) {
+    let bottomPosition
+    let bottomMargin
+
+    if (layout === 'vertical') {
+      bottomPosition = (1 - data._position) * 100 + '%' // inverse the percentage value (e.g. 20% -> 80%)
+      bottomMargin = (-EVENT_HEAD_HEIGHT - 16) + 'px' // shift element by head height and paddings (4 x 4px)
+    } else {
+      bottomPosition = '0%' // just align to the bottom on horizontal layout
+      bottomMargin = 0
+    }
+
+    style = {
+      ...style,
+      top: 'auto',
+      bottom: bottomPosition,
+      marginBottom: bottomMargin,
+    }
+  }
+
+  return style
 }
 
 class EventBox extends React.Component {
+
   style (props) {
-    const length = `${props.data._length * 100}%`
-    const position = `${props.data._position * 100}%`
+    const positionStyles = getPositionStyle(props)
+    const { expanded, screenSize } = props
 
-    // Vertical layout is forced on small screens
-    const layoutCanBeHorizontal = isScreenLarge(props.screenSize)
-    const limitMaximumWidth = !isScreenSmall(props.screenSize)
-    const isHorizontal = layoutCanBeHorizontal && props.layout === 'horizontal'
-
-    const positionProps = isHorizontal
-        ? { width: length, left: position }
-        : { height: length, top: position }
-
-    if (limitMaximumWidth && props.showDetail) {
+    if (expanded && !isScreenSmall(screenSize)) {
       return {
-        ...positionProps,
+        ...positionStyles,
         maxWidth: EVENT_MAX_WIDTH,
       }
     } else {
-      return positionProps
+      return positionStyles
     }
   }
 
   classNames (props) {
-    const cls = ['event', props.data._appear]
-    if (props.showDetail) {
+    const { data, expanded, colored } = props
+
+    const cls = ['event', data._appear]
+    if (expanded) {
       cls.push('is-opened')
     }
-    if (props.data.cancelled) {
+    if (data.cancelled) {
       cls.push('event--cancelled')
     }
-    if (props.data.replacement) {
+    if (data.replacement) {
       cls.push('event--replacement')
     }
 
-    if (props.colored) {
-      cls.push(`event--${props.data.type}`)
+    if (colored) {
+      cls.push(`event--${data.type}`)
     }
 
     return cls.join(' ')
@@ -93,7 +133,7 @@ class EventBox extends React.Component {
   }
 
   eventDetail () {
-    if (this.props.showDetail) {
+    if (this.props.expanded) {
       return (
         <EventDetail
          ref="detail"
@@ -106,8 +146,10 @@ class EventBox extends React.Component {
   }
 
   render () {
-    const onClickVal = this.props.showDetail ? null : this.props.data.id
-    const headSpaceStyle = this.props.showdetail ? {height: EVENT_HEAD_HEIGHT} : {}
+    const { expanded, data, colored, onClick } = this.props
+
+    const onClickVal = expanded ? null : data.id
+    const headSpaceStyle = expanded ? {height: EVENT_HEAD_HEIGHT} : {}
 
     return (
       <div
@@ -117,10 +159,10 @@ class EventBox extends React.Component {
         <div className="inner">
           <div
             className="head-space"
-            onClick={this.props.onClick.bind(null, onClickVal)}
+            onClick={onClick.bind(null, onClickVal)}
             style={headSpaceStyle}>
             <div className="head-name">
-              {this.props.data.course}
+              {data.course}
             </div>
             <div className="head-time">
               {this.displayTime(this.props)}
@@ -129,8 +171,8 @@ class EventBox extends React.Component {
               {this.displayRoom(this.props)}
             </div>
             <div className="head-type">
-              <span className={`short ${this.props.colored ? ' hide' : ''}`}>
-                {CP.translate('event_type_short.' + this.props.data.type)}
+              <span className={`short ${colored ? ' hide' : ''}`}>
+                {CP.translate('event_type_short.' + data.type)}
               </span>
             </div>
           </div>
