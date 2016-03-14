@@ -30,7 +30,7 @@ const PositionedExpander = createClass({
 
   displayName: 'PositionedExpander',
 
-  defaultExpanding: { horizontal: 1, vertical: 1 },
+  defaultExpanding: { right: true, bottom: true },
 
   getDefaultProps: () => ({
     expanded: false,
@@ -50,12 +50,14 @@ const PositionedExpander = createClass({
   },
 
   render () {
-    const expandingDirection = this.state.expandingDirection
+    const expandingDir = this.state.expandingDirection
 
     const childrenProps = {
       expanded: this.props.expanded,
-      horizontalAlign: expandingDirection.horizontal,
-      verticalAlign: expandingDirection.vertical,
+      align: {
+        top: expandingDir.bottom,
+        left: expandingDir.right,
+      },
       ref: 'expandable',
     }
 

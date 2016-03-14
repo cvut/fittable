@@ -33,7 +33,7 @@ const defaultProps = {
   expanded: false,
 }
 
-function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expanded, screenSize}) {
+function getPositionStyle ({layout, align, data, expanded, screenSize}) {
   const length = data._length * 100 + '%'
   const position = data._position * 100 + '%'
 
@@ -45,7 +45,7 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
       : { height: length, top: position }
 
   // Set alignment styles
-  if (expanded && horizontalAlign === 1) {
+  if (expanded && !align.left) {
     style = {
       ...style,
       left: 'auto',
@@ -53,7 +53,7 @@ function getPositionStyle ({layout, horizontalAlign, verticalAlign, data, expand
     }
   }
 
-  if (expanded && verticalAlign === 1) {
+  if (expanded && !align.top) {
     style.top = 'auto'
 
     if (layout === 'vertical') {

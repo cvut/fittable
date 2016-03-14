@@ -21,33 +21,32 @@ function whereOverflowLess (position, innerLength, outerLength) {
  * This function receives a window (outer rectangle), coordinates of a point inside the
  * window, size of a rectangle that should fit into the window (if possible), and a default
  * value. One of the rectangle's corner must be placed at the point; the function returns which
- * one. Returns the provided default, if fits. If not and a better option exists, then it returns
- * the better one.
+ * one, but inverted. Returns the provided default, if fits. If not and a better option exists,
+ * then it returns the better one.
  *
  * For example, if the inner rectangle doesn't fit the window and overflows on the right side,
- * the function returns `{ horizontal: 1, vertical: -1 }`, which means it should stick to the upper
- * right corner (i.e. expand to the bottom left).
+ * the function returns `{ right: false, bottom: true }` (when `bottom: true` is the default),
+ * which means it should expand to the bottom-left.
  *
- * @param point
- * @param size
- * @param window Browser's window object
- * @param defaultCorner Default corner, expects object with properties "horizontal" and "vertical"
- *        with values -1 or 1.
- * @returns Corner to place rectangle at, object with properties "horizontal" and "vertical"
- *          with values -1 or 1.
+ * @param {Array} point A tuple with x and y coordinates.
+ * @param {Array} size A tuple with width and height.
+ * @param window The browser's window object.
+ * @param defaultDir The default direction; expects an object with boolean properties "bottom"
+ *        and "right".
+ * @returns A direction for expanding; an object with boolean properties "bottom" and "right".
  */
-function safeExpandingDirection ([x, y], [width, height], window, defaultCorner) {
+function safeExpandingDirection ([x, y], [width, height], window, defaultDir) {
   const { innerWidth, innerHeight } = window
 
-  // Gets best directions to place the rectangle
+  // Get best directions to place the rectangle.
   const bestHorizontal = whereOverflowLess(x, width, innerWidth)
   const bestVertical = whereOverflowLess(y, height, innerHeight)
 
-  // Set best corners (corner is negative direction), or leave the defaults
-  const horizontal = bestHorizontal !== 0 ? -bestHorizontal : defaultCorner.horizontal
-  const vertical = bestVertical !== 0 ? -bestVertical : defaultCorner.vertical
+  // Set best direction, or leave the defaults.
+  const right = bestHorizontal !== 0 ? bestHorizontal === 1 : defaultDir.right
+  const bottom = bestVertical !== 0 ? bestVertical === 1 : defaultDir.bottom
 
-  return { horizontal, vertical }
+  return { right, bottom }
 }
 
 export default safeExpandingDirection
