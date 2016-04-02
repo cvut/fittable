@@ -1,3 +1,9 @@
+import Raven from 'raven-js'
+
+if (process.env.SENTRY_DSN && process.env.NODE_ENV === 'production') {
+  Raven.config(process.env.SENTRY_DSN).install()
+}
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 

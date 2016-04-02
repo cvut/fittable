@@ -16,6 +16,7 @@ var definePlugin = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(config.NODE_ENV),
   'process.env.FITTABLE_SOURCE': JSON.stringify(config.FITTABLE_SOURCE),
   'process.env.SIRIUS_PROXY_PATH': JSON.stringify(config.SIRIUS_PROXY_PATH),
+  'process.env.SENTRY_DSN': JSON.stringify(config.SENTRY_DSN),
 })
 
 var sassLoader = '!sass?' +

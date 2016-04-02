@@ -20,9 +20,13 @@ var FITTABLE_SOURCE = process.env.FITTABLE_SOURCE || 'faux'
 // XXX: You need to keep this in sync with server configuration!
 var SIRIUS_PROXY_PATH = process.env.SIRIUS_PROXY_PATH || '/api/sirius'
 
+// Data Source Name with *public* client key for Sentry.
+var SENTRY_DSN = process.env.SENTRY_DSN
+
 module.exports = {
   NODE_ENV: NODE_ENV,
   FITTABLE_SOURCE: FITTABLE_SOURCE,
   SIRIUS_UPSTREAM_URL: SIRIUS_UPSTREAM_URL,
   SIRIUS_PROXY_PATH: SIRIUS_PROXY_PATH,
+  SENTRY_DSN: SENTRY_DSN,
 }

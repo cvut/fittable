@@ -40,6 +40,7 @@
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",
     "ramda": "^0.19.0",
+    "raven-js": "^2.3.0",
     "react": "^0.14.0",
     "react-addons-css-transition-group": "^0.14.3",
     "react-cookie": "^0.3.4",
