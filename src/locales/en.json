@@ -12,6 +12,7 @@
     "exam": "Exam",
     "assessment": "Assessment",
     "course_event": "One-off event",
+    "teacher_timetable_slot": "Teacher timetable slot",
     "other": "Other"
   },
 
@@ -22,6 +23,7 @@
     "exam": "Exam",
     "assessment": "As.",
     "course_event": "Event",
+    "teacher_timetable_slot": "TTS",
     "other": "Other"
   },
 
@@ -32,6 +34,7 @@
     "exam": "Exam no. %(seqnumber)s",
     "assessment": "Assessment no. %(seqnumber)s",
     "course_event": "One-off event no. %(seqnumber)s",
+    "teacher_timetable_slot": "",
     "other": "Other event no. %(seqnumber)s"
   },
 

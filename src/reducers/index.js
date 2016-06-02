@@ -21,6 +21,7 @@ const initialDisplayFilters = {
   exam: true,
   assessment: true,
   course_event: true,
+  teacher_timetable_slot: true,
   other: true,
 /*eslint-enable */
 }

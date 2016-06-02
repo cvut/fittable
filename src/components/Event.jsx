@@ -105,10 +105,18 @@ class EventBox extends React.Component {
     }
 
     if (colored) {
-      cls.push(`event--${data.type}`)
+      cls.push(`event--${data.type.replace(/_/g, '-')}`)
     }
 
     return cls.join(' ')
+  }
+
+  displayName (props) {
+    const { course, name, type } = props.data
+
+    return type === 'teacher_timetable_slot'
+        ? (name[CP.getLocale()] || name.cs)
+        : course
   }
 
   displayTime (props) {
@@ -158,7 +166,7 @@ class EventBox extends React.Component {
             onClick={onClick.bind(null, onClickVal)}
             style={headSpaceStyle}>
             <div className="head-name">
-              {data.course}
+              {this.displayName(this.props)}
             </div>
             <div className="head-time">
               {this.displayTime(this.props)}

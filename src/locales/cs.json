@@ -12,6 +12,7 @@
     "exam": "Zkouška",
     "assessment": "Zápočtový test",
     "course_event": "Jednorázová akce",
+    "teacher_timetable_slot": "Omezení učitele",
     "other": "Ostatní"
   },
 
@@ -22,6 +23,7 @@
     "exam": "Zk",
     "assessment": "Záp",
     "course_event": "Akc",
+    "teacher_timetable_slot": "OU",
     "other": "Jiné"
   },
 
@@ -32,6 +34,7 @@
     "exam": "%(seqnumber)s. zkouška",
     "assessment": "%(seqnumber)s. zápočtový test",
     "course_event": "%(seqnumber)s. jednorázová akce",
+    "teacher_timetable_slot": "",
     "other": "%(seqnumber)s. jiná událost"
   },
 

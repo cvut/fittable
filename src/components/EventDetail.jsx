@@ -101,7 +101,7 @@ class EventDetail extends React.Component {
           {CP.translate(`event_type_num.${data.type}`, {seqnumber: seqNumber})}
         </div>
         <div className="name">
-          {nameButton}
+          {data.course ? nameButton : this.getEventName()}
         </div>
         <div className="location">
           {data.room ? locationButton : ''}

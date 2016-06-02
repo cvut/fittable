@@ -4,7 +4,8 @@ import CP from 'counterpart'
 
 // Types of filterable events.
 const eventTypes = [
-  'lecture', 'tutorial', 'laboratory', 'exam', 'assessment', 'course_event', 'other',
+  'lecture', 'tutorial', 'laboratory', 'exam', 'assessment', 'course_event',
+  'teacher_timetable_slot', 'other',
 ]
 
 /**

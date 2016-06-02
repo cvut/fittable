@@ -4,6 +4,7 @@
   $tutorial: #64AA47;
   $laboratory: #DE5543;
   $exam: #9169B5;
+  $teacher-timetable-slot: #808A90;
 
   .event {
 
@@ -49,6 +50,17 @@
 
       &:hover .inner {
         background: lighten( $exam, 10% );
+      }
+    }
+
+    &--teacher-timetable-slot {
+
+      .inner {
+        background: $teacher-timetable-slot;
+      }
+
+      &:hover .inner {
+        background: lighten( $teacher-timetable-slot, 10% );
       }
     }
 
