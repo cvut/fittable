@@ -75,6 +75,8 @@
       font-weight: 300;
       text-align: right;
       margin-top: 5px;
+      white-space: nowrap;
+      overflow: hidden;
       @include disable-selection();
     }
 
