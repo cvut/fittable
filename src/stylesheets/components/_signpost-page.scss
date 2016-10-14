@@ -5,9 +5,14 @@
   margin: 0 auto;
   font-size: 16px;
 
+  p {
+    font-size: 16px;
+  }
+
   h1 {
     text-align: center;
     padding-bottom: 1em;
+    font-size: 2rem;
   }
 
   .langswitcher {
@@ -29,11 +34,14 @@
 
   .desc {
     padding-top: 1rem;
-    font-size: 16px;
   }
 
   .button small {
     display: block;
+  }
+
+  .rooms-link {
+    padding-top: 1rem;
   }
 
   @media #{$large-up} {
