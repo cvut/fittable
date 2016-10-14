@@ -9,7 +9,7 @@ var config = require('./webpack/config')
 
 var srcPath = path.resolve('./src')
 
-var proxyMatch = new RegExp(config.SIRIUS_PROXY_PATH + '/?(.*)')
+var proxyMatch = config.SIRIUS_PROXY_PATH + '/**'
 
 var definePlugin = new webpack.DefinePlugin({
   // Remember this will get replaced with literal contents of string, so we need extra quotes
