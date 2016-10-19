@@ -44,6 +44,11 @@ function getPositionStyle ({layout, align, data, expanded, screenSize}) {
       ? { width: length, left: position }
       : { height: length, top: position }
 
+  if (expanded) {
+    style.top = 'auto'
+    style.bottom = 'auto'
+  }
+
   // Set alignment styles
   if (expanded && !align.left) {
     style = {
@@ -54,8 +59,6 @@ function getPositionStyle ({layout, align, data, expanded, screenSize}) {
   }
 
   if (expanded && !align.top) {
-    style.top = 'auto'
-
     if (layout === 'vertical') {
       style = {
         ...style,
