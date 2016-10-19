@@ -47,29 +47,20 @@ function getPositionStyle ({layout, align, data, expanded, screenSize}) {
   if (expanded) {
     style.top = 'auto'
     style.bottom = 'auto'
-  }
 
-  // Set alignment styles
-  if (expanded && !align.left) {
-    style = {
-      ...style,
-      left: 'auto',
-      right: '0',
+    // Set alignment styles
+    if (!align.left) {
+      style.left = 'auto'
+      style.right = '0'
     }
-  }
 
-  if (expanded && !align.top) {
-    if (layout === 'vertical') {
-      style = {
-        ...style,
-        bottom: (1 - data._position) * 100 + '%',  // inverse the percentage value (e.g. 20% -> 80%)
-        marginBottom: (-EVENT_HEAD_HEIGHT - 16) + 'px',  // shift element by head height and paddings (4 x 4px)
-      }
-    } else {
-      style = {
-        ...style,
-        bottom: '0%',  // just align to the bottom on horizontal layout
-        marginBottom: 0,
+    if (!align.top) {
+      if (layout === 'vertical') {
+        style.bottom = (1 - data._position) * 100 + '%'  // inverse the percentage value (e.g. 20% -> 80%)
+        style.marginBottom = (-EVENT_HEAD_HEIGHT - 16) + 'px'  // shift element by head height and paddings (4 x 4px)
+      } else {
+        style.bottom = '0%'  // just align to the bottom on horizontal layout
+        style.marginBottom = 0
       }
     }
   }
