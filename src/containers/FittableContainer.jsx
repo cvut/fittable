@@ -21,6 +21,7 @@ import { changeCalendar } from '../actions/linkActions'
 
 import { isoDate, strToDate } from '../date'
 import { semesterName } from '../semester'
+import globalApi from '../globalApi'
 
 import FunctionsSidebar from '../components/FunctionsSidebar'
 import Spinner from '../components/Spinner'
@@ -94,10 +95,16 @@ const FittableContainer = React.createClass({
     this.props.onUserRequest()
     requestWeekEvents(this.props)
     requestSemesterData(this.props)
+
+    globalApi.register(window, {
+      changeDate: this.handleChangeViewDate,
+      getCurrentDate: () => this.props.viewDate,
+    })
   },
 
   componentWillUnmount () {
     global.window.removeEventListener('resize', this.props.onWindowResize)
+    globalApi.unregister(window)
   },
 
   componentWillReceiveProps (nextProps) {
