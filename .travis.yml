@@ -1,4 +1,6 @@
 language: node_js
+node_js:
+  - node
 sudo: false
 dist: trusty
 # Trusty builds don't have Yarn by default
