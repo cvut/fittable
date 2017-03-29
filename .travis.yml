@@ -9,10 +9,14 @@ before_script:
 script:
   - yarn run lint
   - yarn run test:spec
-after_success:
-  - script/travis-deploy
 notifications:
   email: false
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: script/travis-deploy
+  on:
+    branch: master
 env:
   global:
     - secure: UgTXgzJc9W9Ya3xH6N1jmRD7ojUOnWze5sNrr/7elAfC6asmERQJj9vK3A7Oby0DQekEB1WTH4iBA1uh8/cO/6G5GZqfoDq21acJVW5OtouPWwZSNc7/YUvMHiin7WlhBh9iGZBaZ0fzkaqrOv5daxhVApPwV3uFwECPey4HytA=  # NPM_TOKEN
@@ -22,3 +26,4 @@ cache:
   yarn: true
   directories:
     - node_modules
+
