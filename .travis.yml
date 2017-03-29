@@ -1,26 +1,26 @@
 language: node_js
 node_js:
-  - node
+- node
 sudo: false
 dist: trusty
-# Trusty builds don't have Yarn by default
-# https://github.com/travis-ci/travis-ci/issues/6720
 addons:
   apt:
     sources:
-      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
-        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
+    - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+      key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
     packages:
-      - yarn
+    - yarn
 install:
-  - yarn
+- yarn
 before_script:
-  - yarn run build
+- yarn run build
 script:
-  - yarn run lint
-  - yarn run test:spec
+- yarn run lint
+- yarn run test:spec
 notifications:
   email: false
+  slack:
+    secure: hgkORyT7J3El7oJWlyXcMj8/nB3Wamfq6VFUaGMW2UMuTcgar5DXKB/Awnz/Ish2klgYx4icxKUBquLoEFc5hF5dWh7HxRpXAQWztoLs0RLwGIE12h1su5bt1h5UN1pIqGey+g8B0DddooCz7o8M1vwTATWq5mK1aCrjV3evQ0M=
 deploy:
   skip_cleanup: true
   provider: script
@@ -29,11 +29,10 @@ deploy:
     branch: master
 env:
   global:
-    - secure: UgTXgzJc9W9Ya3xH6N1jmRD7ojUOnWze5sNrr/7elAfC6asmERQJj9vK3A7Oby0DQekEB1WTH4iBA1uh8/cO/6G5GZqfoDq21acJVW5OtouPWwZSNc7/YUvMHiin7WlhBh9iGZBaZ0fzkaqrOv5daxhVApPwV3uFwECPey4HytA=  # NPM_TOKEN
-    - secure: SxxazkZH7nRNwUgu+JtQCu41MJkwZYtIz8bgwMRceUudNS/u44qXtBuz64rExoV8NHska0ISls6JlB9ReqiwlGi5nbbW37OkSZ+CcbVAsPQ9+KKCngmgJlVXKkdPZ9tD1av2M1w681tNnRGAiMJTwSyjPm8C7VkPdcL8hLRgBOU=  # TRAVIS_TOKEN
-    - secure: iIC2f1+dO9EbXYAnwy9ffNRe0yfpJVHKGLTt7Dd1oxjm2BBPWdwLSrt3wpcJ/nqKVDbteC1Lfh7uiJnhcLOx56K4c5dpkJUSQGOx+kdlyHqFe7LAH6w9++IiOGvT8Ogqb+nA5j20HOkxoVHqgB+iiHNqNvpFxb/LoAEy1NWd3eA=  # REMOTE
+  - secure: UgTXgzJc9W9Ya3xH6N1jmRD7ojUOnWze5sNrr/7elAfC6asmERQJj9vK3A7Oby0DQekEB1WTH4iBA1uh8/cO/6G5GZqfoDq21acJVW5OtouPWwZSNc7/YUvMHiin7WlhBh9iGZBaZ0fzkaqrOv5daxhVApPwV3uFwECPey4HytA=
+  - secure: SxxazkZH7nRNwUgu+JtQCu41MJkwZYtIz8bgwMRceUudNS/u44qXtBuz64rExoV8NHska0ISls6JlB9ReqiwlGi5nbbW37OkSZ+CcbVAsPQ9+KKCngmgJlVXKkdPZ9tD1av2M1w681tNnRGAiMJTwSyjPm8C7VkPdcL8hLRgBOU=
+  - secure: iIC2f1+dO9EbXYAnwy9ffNRe0yfpJVHKGLTt7Dd1oxjm2BBPWdwLSrt3wpcJ/nqKVDbteC1Lfh7uiJnhcLOx56K4c5dpkJUSQGOx+kdlyHqFe7LAH6w9++IiOGvT8Ogqb+nA5j20HOkxoVHqgB+iiHNqNvpFxb/LoAEy1NWd3eA=
 cache:
   yarn: true
   directories:
-    - node_modules
-
+  - node_modules
