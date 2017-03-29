@@ -1,26 +1,24 @@
 language: node_js
-node_js:
-  - "4.2" # LTS version
 sudo: false
-before_install:
-  - npm install -g npm@3
+dist: trusty
+
 install:
-  - npm install
+  - yarn
+before_script:
+  - yarn run build
 script:
-  - npm run test:spec
-  - npm run lint
+  - yarn run lint
+  - yarn run test:spec
 after_success:
   - script/travis-deploy
 notifications:
   email: false
-  slack: rozvoj-fit:oIJm1tjEXhiJLDHvp2ATCZIT
 env:
   global:
     - secure: UgTXgzJc9W9Ya3xH6N1jmRD7ojUOnWze5sNrr/7elAfC6asmERQJj9vK3A7Oby0DQekEB1WTH4iBA1uh8/cO/6G5GZqfoDq21acJVW5OtouPWwZSNc7/YUvMHiin7WlhBh9iGZBaZ0fzkaqrOv5daxhVApPwV3uFwECPey4HytA=  # NPM_TOKEN
     - secure: SxxazkZH7nRNwUgu+JtQCu41MJkwZYtIz8bgwMRceUudNS/u44qXtBuz64rExoV8NHska0ISls6JlB9ReqiwlGi5nbbW37OkSZ+CcbVAsPQ9+KKCngmgJlVXKkdPZ9tD1av2M1w681tNnRGAiMJTwSyjPm8C7VkPdcL8hLRgBOU=  # TRAVIS_TOKEN
     - secure: iIC2f1+dO9EbXYAnwy9ffNRe0yfpJVHKGLTt7Dd1oxjm2BBPWdwLSrt3wpcJ/nqKVDbteC1Lfh7uiJnhcLOx56K4c5dpkJUSQGOx+kdlyHqFe7LAH6w9++IiOGvT8Ogqb+nA5j20HOkxoVHqgB+iiHNqNvpFxb/LoAEy1NWd3eA=  # REMOTE
 cache:
+  yarn: true
   directories:
-  - node_modules
-before_cache:
-  - npm prune
+    - node_modules
