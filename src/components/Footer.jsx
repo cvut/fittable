@@ -31,10 +31,6 @@ export default function Footer ({ userName, onLogout }) {
           {CP.translate('footer.reportBugPlead')}
           {'\u00a0'}
           <a href="mailto:helpdesk@fit.cvut.cz">helpdesk@fit.cvut.cz</a>.
-          {'\u0020'}
-          {CP.translate('footer.meanwhile')}
-          {'\u0020'}
-          <a href="https://timetable.fit.cvut.cz/old/">{CP.translate('footer.oldTimetable')}</a>
         </div>
       </div>
     </footer>

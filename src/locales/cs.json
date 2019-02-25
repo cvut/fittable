@@ -139,9 +139,7 @@
   "footer": {
     "loggedInAs": "Přihlášený uživatel",
     "reportBug": "Nahlásit chybu",
-    "reportBugPlead": "Narazili jste na chybu? Nahlašte nám ji prosím na",
-    "meanwhile": "Zatím můžete využít",
-    "oldTimetable": "původní Timetable"
+    "reportBugPlead": "Narazili jste na chybu? Nahlašte nám ji prosím na"
   },
 
   "logout": "Odhlásit se",

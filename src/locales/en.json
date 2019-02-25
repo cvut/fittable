@@ -139,9 +139,7 @@
   "footer": {
     "loggedInAs": "Logged in as",
     "reportBug": "Report bug",
-    "reportBugPlead": "Did you find a bug? Please, report it at",
-    "meanwhile": "In the meantime, use the",
-    "oldTimetable": "original timetable application"
+    "reportBugPlead": "Did you find a bug? Please, report it at"
   },
 
   "logout": "Log out",
