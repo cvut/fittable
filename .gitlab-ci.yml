@@ -1,0 +1,32 @@
+image: gitlab.fit.cvut.cz:5000/ict/alpine-docker-images/ci:3.8
+
+stages:
+  - build
+  - test
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"  # per-branch cache
+  paths:
+    - .cache/
+
+before_script:
+  - apk add build-base nodejs npm python2 yarn
+  - export PKG_CACHE_PATH=".cache/pkg-cache"
+  # GitLab CI does not cache anything outside the project directory.
+  - yarn config set cache-folder $(pwd)/.cache/yarn
+  - yarn install
+
+build:
+  stage: build
+  script:
+    - yarn run build
+  artifacts:
+    paths:
+      - dist/*
+    expire_in: 1 month
+
+test:
+  stage: test
+  script:
+    - yarn run lint
+    - yarn run test:spec
