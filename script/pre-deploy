@@ -1,0 +1,23 @@
+#!/bin/sh
+# This script is temporary ugly workaround.
+set -eu
+
+cd "$(dirname "$0")/.."
+
+mkdir -p public
+cp -a dist public/new
+
+cd public
+mv new/signpost.html index.html
+
+md5js=$(md5sum new/fittable.js | cut -d' ' -f1)
+mv new/fittable.js new/fittable-$md5js.js
+
+md5css=$(md5sum new/fittable.css | cut -d' ' -f1)
+mv new/fittable.css new/fittable-$md5css.css
+
+sed -i "s|fittable.js|fittable-$md5js.js|" new/index.html
+sed -i "s|fittable.css|fittable-$md5css.css|" new/*.html
+sed -i "s|fittable.css|new/fittable-$md5css.css|" index.html
+sed -i 's|"_oauth/login"|"/_oauth/login"|' new/landing.html
+sed -i 's|</head>|    <script>window.OAUTH_PROXY_PATH = "/../_oauth";</script>\n    </head>|g' new/index.html

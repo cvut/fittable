@@ -3,6 +3,7 @@ image: gitlab.fit.cvut.cz:5000/ict/alpine-docker-images/ci:3.8
 stages:
   - build
   - test
+  - deploy
 
 cache:
   key: "$CI_COMMIT_REF_SLUG"  # per-branch cache
@@ -30,3 +31,20 @@ test:
   script:
     - yarn run lint
     - yarn run test:spec
+
+fit-pages:
+  stage: deploy
+  only:
+    - master
+  dependencies:
+    - build
+  before_script: []
+  script:
+    - ./script/pre-deploy
+  environment:
+    name: production
+    url: https://timetable.fit.cvut.cz
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 hour
