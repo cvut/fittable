@@ -19,5 +19,5 @@ mv new/fittable.css new/fittable-$md5css.css
 sed -i "s|fittable.js|fittable-$md5js.js|" new/index.html
 sed -i "s|fittable.css|fittable-$md5css.css|" new/*.html
 sed -i "s|fittable.css|new/fittable-$md5css.css|" index.html
-sed -i 's|"_oauth/login"|"/_oauth/login"|' new/landing.html
+sed -i 's|"_oauth/login"|"/_oauth/login?original_uri=/new/"|' new/landing.html
 sed -i 's|</head>|    <script>window.OAUTH_PROXY_PATH = "/../_oauth";</script>\n    </head>|g' new/index.html

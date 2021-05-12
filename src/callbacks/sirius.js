@@ -332,7 +332,7 @@ function fetchUserCallback (cb) {
 function logoutUserCallback (cb) {
   ajaxPost(`${oauthAPIUrl}/logout`, (request) => {
     if (request.readyState === XMLHttpRequest.DONE) {
-      if (request.status === 204) {
+      if (request.status < 400) {
         cb(null)
       } else {
         cb(generateError(request.status, 'Logout failed'))
