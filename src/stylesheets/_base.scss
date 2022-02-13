@@ -67,7 +67,7 @@ $grid-line-width: 1.5px;
 
 // WP history swipe hack ( disable swiping right and left handling )
 * {
-  touch-action: pan-y;
+  touch-action: manipulation;
 }
 
 // Highlight color
@@ -84,6 +84,12 @@ $grid-line-width: 1.5px;
 
   .fittable-container {
     background: white;
+  }
+}
+
+@media #{$small-down} {
+  body {
+    font-size: 16px;
   }
 }
 
