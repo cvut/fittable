@@ -1,0 +1,23 @@
+// Based on https://github.com/hejny/Ukraine
+#ukraine-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-45%);
+
+  & > a {
+    display: block;
+    width: 100vw;
+    height: 3vw;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23005BBB'/%3E%3Crect width='1200' height='400' y='400' fill='%23FFD500'/%3E%3C/svg%3E");
+    background-size: auto;
+
+    @media #{$xxlarge-up} {
+      width: 1600px;
+      height: 48px;
+    }
+  }
+}
