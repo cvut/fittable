@@ -54,7 +54,7 @@ class WeekNav extends React.Component {
         // u2013 : &ndash; \u2009 : &thinsp;
         return `${weekStart.format('D.\u2009M. ')} \u2013 ${weekEnd.format('D.\u2009M.\u2009YYYY')}`
       } else {
-        return `${weekStart.format('M/D')} \u2013 ${weekEnd.format('M/D/YYYY')}`
+        return `${weekStart.format('YYYY-MM-DD')} \u2013 ${weekEnd.format('YYYY-MM-DD')}`
       }
     } else {
       return `${currDayM.format('dddd D.\u2009MMMM')}`

@@ -114,8 +114,8 @@ class EventBox extends React.Component {
   }
 
   displayTime (props) {
-    const startsAt = tzMoment(props.data.startsAt).format('LT')
-    const endsAt = tzMoment(props.data.endsAt).format('LT')
+    const startsAt = tzMoment(props.data.startsAt).format('HH:mm')
+    const endsAt = tzMoment(props.data.endsAt).format('HH:mm')
 
     return `${startsAt}—${endsAt}`
   }
