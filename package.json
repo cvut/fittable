@@ -76,7 +76,7 @@
     "redux-logger": "^2.1.3",
     "rimraf": "^2.4.3",
     "sass-loader": "^3.0.0",
-    "shelljs": "^0.5.3",
+    "shelljs": "^0.8.5",
     "sinon": "^1.17.2",
     "style-loader": "^0.13.0",
     "tap-bail": "0.0.0",
