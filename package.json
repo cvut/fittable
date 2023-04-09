@@ -37,7 +37,7 @@
     "hammerjs": "^2.0.4",
     "history": "^1.13.1",
     "moment": "^2.15.1",
-    "moment-timezone": "^0.5.6",
+    "moment-timezone": "^0.5.35",
     "ramda": "^0.19.0",
     "raven-js": "^2.3.0",
     "react": "^0.14.0",
